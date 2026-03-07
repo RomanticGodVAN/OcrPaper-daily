@@ -4,297 +4,49 @@
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-03-07 05:03:26`
+- 生成时间（UTC）：`2026-03-07 07:55:32`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日研究聚焦于文档解析与OCR技术的鲁棒性评估、多语言应用、系统集成与性能增强。核心进展包括：首个全尺度物理重建基准测试Real5-OmniDocBench，为现实世界文档解析的鲁棒性评估设定了新标准；僧伽罗语法律文本语料库SinhaLegal，填补了低资源语言NLP的数据空白；TextBoost方法通过OCR语义指导提升超低比特率图像压缩中的文本保真度；NGI方法通过n-gram注入实现手写文本识别的动态语言模型适应；Whisperer框架利用视觉提示增强冻结OCR模型性能；以及针对企业场景的LLM指令遵循基准FireBench。这些工作共同推动了文档智能系统在现实应用中的可靠性、适应性和效率。
+> 今日论文聚焦于通过视觉提示框架增强冻结OCR模型，提出Whisperer方法，利用扩散模型在像素空间调整输入，结合行为克隆课程训练，在合成数据集上实现字符错误率显著降低。该方法避免了模型权重调整，强调样本效率，为提升现有OCR系统性能提供了新思路，但依赖合成数据且计算成本较高，需进一步验证泛化性和优化效率。
 
 ## 二、今日趋势判断
 
-当前研究趋势呈现三个主要方向：一是强化现实世界鲁棒性，通过物理重建基准和视觉提示等方法应对扫描、扭曲等实际挑战；二是注重系统集成与优化，将OCR与图像压缩、语言模型等组件结合以提升整体性能；三是扩展应用场景与资源覆盖，包括低资源语言处理和企业级LLM评估，推动技术向更广泛、更专业的领域落地。
+研究趋势显示，OCR领域正从传统模型微调转向输入增强和视觉提示技术，利用扩散模型等生成方法适应冻结预训练模型，强调样本效率和无需权重调整的改进策略，以应对数据分布不匹配和资源受限挑战。
 
 ## 三、今日论文概览
 
-1. **Real5-OmniDocBench: A Full-Scale Physical Reconstruction Benchmark for Robust Document Parsing in the Wild** | 标签：文档解析基准、物理重建、视觉语言模型、鲁棒性评估
-2. **SinhaLegal: A Benchmark Corpus for Information Extraction and Analysis in Sinhala Legislative Texts** | 标签：法律文本语料库、僧伽罗语OCR、信息提取、低资源语言处理
-3. **TextBoost: Boosting Scene Text Fidelity in Ultra-low Bitrate Image Compression** | 标签：图像压缩、文本保真度、OCR集成、注意力机制
-4. **N-gram Injection into Transformers for Dynamic Language Model Adaptation in Handwritten Text Recognition** | 标签：手写文本识别、语言模型适应、n-gram注入、Transformer网络
-5. **Whispering to a Blackbox: Bootstrapping Frozen OCR with Visual Prompts** | 标签：视觉提示、扩散模型、行为克隆、冻结模型增强
-6. **FireBench: Evaluating Instruction Following in Enterprise and API-Driven LLM Applications** | 标签：LLM指令遵循、企业基准、信息提取、API驱动应用
+1. **Whispering to a Blackbox: Bootstrapping Frozen OCR with Visual Prompts** | 标签：视觉提示、扩散模型、行为克隆、OCR增强、冻结模型适配
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 通过基准测试或语料库构建，系统评估和解决特定场景下的性能瓶颈，如物理失真或语言偏移。
-- 集成外部组件（如OCR、语言模型）到现有流程中，以非侵入式方式增强系统能力。
-- 采用注意力机制或融合策略，优化多源信息（如文本引导与图像特征）的协同处理。
+- 视觉提示框架设计，利用扩散模型作为预处理器在像素空间适应输入
+- 训练范式创新，采用四阶段行为克隆课程，将随机发现的改进策略系统化
+- 方法强调样本效率，避免传统强化学习的复杂性
+- 任务定义为输入增强而非模型微调，适用于冻结预训练模型
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 开发自适应模型，动态调整以应对物理文档的几何失真、光照变化和光学伪影。
-- 扩展低资源语言OCR工具，特别是针对非拉丁语系和法律等专业领域，并优化后处理流程。
-- 将文本保真度优化技术从静态图像压缩扩展到视频流或动态文档捕获场景。
-- 探索神经语言模型或其他高级语言模型的注入方法，以提升手写或复杂文本识别的语言适应性。
-- 利用真实世界退化数据训练视觉提示框架，减少对合成数据的依赖并提升泛化能力。
-- 构建多模态企业文档解析基准，集成文本、表格、图表等元素，评估端到端信息提取的指令遵循能力。
+- 扩展到更多真实世界OCR数据集以提升泛化能力
+- 探索其他预训练模型或架构的适配性
+- 优化训练效率，减少计算资源需求
+- 结合多模态信息（如文本上下文）增强提示效果
 
 ## 六、工程落地启发
 
-- 采用Real5-OmniDocBench等物理重建基准，测试文档解析系统在扫描、摄影等现实场景中的鲁棒性。
-- 在图像压缩系统中集成类似TextBoost的OCR辅助模块，以提升超低带宽下文档图像的可读性。
-- 为手写OCR系统部署n-gram注入等动态语言适应工具，以快速适应新领域文本而不需重新训练。
-- 利用视觉提示框架如Whisperer，非侵入式地增强现有冻结OCR模型在退化图像上的性能。
-- 使用FireBench等企业基准评估LLM在文档信息提取任务中的指令遵循可靠性，优化API驱动工作流。
-- 在处理低资源语言文档时，参考SinhaLegal的OCR后处理流程，确保数据质量并支持下游NLP任务。
+- 提供了一种无需重新训练即可提升现有OCR系统性能的实用方法，适用于资源受限或稳定性要求高的场景
+- 依赖合成退化数据进行训练，可能未充分覆盖真实世界OCR场景的多样性
+- 方法基于特定下游模型（如EasyOCR），泛化性有待验证
+- 训练过程需60 GPU小时，计算成本较高
 
 ## 七、优先关注论文
 
-- **Real5-OmniDocBench: A Full-Scale Physical Reconstruction Benchmark for Robust Document Parsing in the Wild**：该基准首次实现物理世界文档解析性能下降的精确因素归因，为开发鲁棒系统提供关键诊断工具，可能成为行业评估新标准。
-- **TextBoost: Boosting Scene Text Fidelity in Ultra-low Bitrate Image Compression**：方法将OCR语义指导融入图像压缩，显著提升文本保真度而不损害全局质量，对移动通信和存储优化有直接工程价值。
-- **Whispering to a Blackbox: Bootstrapping Frozen OCR with Visual Prompts**：框架通过扩散模型预处理器非侵入式增强冻结OCR模型，为黑盒或资源受限部署场景提供高效性能提升方案。
+- **Whispering to a Blackbox: Bootstrapping Frozen OCR with Visual Prompts**：提出视觉提示框架增强冻结OCR模型，避免权重调整，具有高工程价值，但需关注泛化性和计算成本优化。
 
 ## 八、论文逐篇解析
 
-### 1. Real5-OmniDocBench: A Full-Scale Physical Reconstruction Benchmark for Robust Document Parsing in the Wild
-
-- arXiv: [2603.04205v1](https://arxiv.org/abs/2603.04205v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.04205v1)
-- 作者: Changda Zhou, Ziyue Gao, Xueqing Wang, Tingquan Gao, Cheng Cui, Jing Tang, Yi Liu
-- 发布时间: 2026-03-04T15:49:06Z
-- 分类: cs.CV
-- 相关性评分: 20
-- 主题标签: 文档解析基准、物理重建、视觉语言模型、鲁棒性评估
-
-**中文摘要**
-
-> 尽管视觉语言模型在数字文档基准测试中表现优异，但在物理世界中的性能仍未知。本文提出了Real5-OmniDocBench，这是首个对OmniDocBench v1.5进行全尺度物理重建的基准测试，覆盖扫描、扭曲、屏幕摄影、光照和倾斜五种关键场景。通过完整的地面真值映射，首次实现了性能下降的严格因素归因，帮助识别失败源于几何失真、光学伪影还是模型限制。该基准为社区设定了新标准，表明文档解析中的“现实差距”远未解决，并提供了诊断工具以指导开发真正鲁棒的文档智能系统。
-
-**核心创新概述**
-
-> 首次构建了全尺度物理重建的文档解析基准测试，实现性能下降的精确因素归因。
-
-**创新点拆解**
-
-- 全尺度物理重建方法
-- 完整地面真值映射设计
-- 多场景覆盖评估框架
-
-**当前局限**
-
-> 基准测试依赖于特定数据集重建，可能未涵盖所有现实世界变异；未提供直接解决方案，仅作为诊断工具。
-
-**后续可改进方向**
-
-- 扩展更多现实场景如遮挡或动态环境
-- 集成实时性能评估工具
-- 开发自适应模型以应对物理失真
-
-**工程启发**
-
-> 高，为文档解析系统在物理环境中的鲁棒性评估提供了标准化工具，支持实际应用如扫描仪或移动设备优化。
-
-**为什么值得关注**
-
-> 直接关联OCR在物理世界中的性能挑战，强调基准测试对推动鲁棒文档解析技术的重要性。
-
-**原始摘要**
-
-While Vision-Language Models (VLMs) achieve near-perfect scores on digital document benchmarks like
-OmniDocBench, their performance in the unpredictable physical world remains largely unknown due to
-the lack of controlled yet realistic evaluations. We introduce Real5-OmniDocBench, the first
-benchmark that performs a full-scale, one-to-one physical reconstruction of the entire OmniDocBench
-v1.5 (1,355 images) across five critical real-world scenarios: Scanning, Warping, Screen-
-Photography, Illumination, and Skew. Unlike prior benchmark that either lack digital correspondence
-or employ partial sampling, our complete ground-truth mapping enables, for the first time, rigorous
-factor-wise attribution of performance degradation-allowing us to pinpoint whether failures stem
-from geometric distortions, optical artifacts, or model limitations. Our benchmark establishes a
-challenging new standard for the community, demonstrating that the 'reality gap' in document parsing
-is far from closed, and provides a diagnostic tool to guide the development of truly resilient
-document intelligence.
-
----
-
-### 2. SinhaLegal: A Benchmark Corpus for Information Extraction and Analysis in Sinhala Legislative Texts
-
-- arXiv: [2603.04854v1](https://arxiv.org/abs/2603.04854v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.04854v1)
-- 作者: Minduli Lasandi, Nevidu Jayatilleke
-- 发布时间: 2026-03-05T06:13:44Z
-- 分类: cs.CL
-- 相关性评分: 16
-- 主题标签: 法律文本语料库、僧伽罗语OCR、信息提取、低资源语言处理
-
-**中文摘要**
-
-> SinhaLegal引入了僧伽罗语立法文本语料库，包含约200万词，覆盖1,206份法律文档，包括1981年至2014年的1,065项法案和2010年至2014年的141项法案。数据通过OCR提取并经过后处理和手动清理，确保高质量机器可读内容，附带专用元数据文件。评估包括语料统计、词汇多样性、词频分析、命名实体识别和主题建模，展示了语料的结构化和领域特定性。此外，使用大小语言模型进行困惑度分析，评估语言模型对领域特定文本的响应效果。该语料库旨在支持NLP任务如摘要、信息提取和分析，填补僧伽罗语法律研究的关键空白。
-
-**核心创新概述**
-
-> 首个大规模僧伽罗语立法文本语料库，结合OCR后处理和全面评估，支持法律NLP研究。
-
-**创新点拆解**
-
-- 僧伽罗语法律文本数据收集
-- OCR后处理与手动清理流程
-- 多维度语料评估方法
-
-**当前局限**
-
-> 语料库限于特定时间段和语言，可能未覆盖最新法律变化或其他语言；OCR提取可能引入错误。
-
-**后续可改进方向**
-
-- 扩展语料库以包括更多语言和更新文档
-- 开发更精确的僧伽罗语OCR工具
-- 集成多模态法律数据分析
-
-**工程启发**
-
-> 中等，为法律NLP应用提供基础数据资源，但需进一步工具开发以实现实际部署。
-
-**为什么值得关注**
-
-> 涉及OCR在低资源语言法律文本处理中的应用，强调数据质量对后续NLP任务的重要性。
-
-**原始摘要**
-
-SinhaLegal introduces a Sinhala legislative text corpus containing approximately 2 million words
-across 1,206 legal documents. The dataset includes two types of legal documents: 1,065 Acts dated
-from 1981 to 2014 and 141 Bills from 2010 to 2014, which were systematically collected from official
-sources. The texts were extracted using OCR with Google Document AI, followed by extensive post-
-processing and manual cleaning to ensure high-quality, machine-readable content, along with
-dedicated metadata files for each document. A comprehensive evaluation was conducted, including
-corpus statistics, lexical diversity, word frequency analysis, named entity recognition, and topic
-modelling, demonstrating the structured and domain-specific nature of the corpus. Additionally,
-perplexity analysis using both large and small language models was performed to assess how
-effectively language models respond to domain-specific texts. The SinhaLegal corpus represents a
-vital resource designed to support NLP tasks such as summarisation, information extraction, and
-analysis, thereby bridging a critical gap in Sinhala legal research.
-
----
-
-### 3. TextBoost: Boosting Scene Text Fidelity in Ultra-low Bitrate Image Compression
-
-- arXiv: [2603.04115v1](https://arxiv.org/abs/2603.04115v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.04115v1)
-- 作者: Bingxin Wang, Yuan Lan, Zhaoyi Sun, Yang Xiang, Jie Sun
-- 发布时间: 2026-03-04T14:35:10Z
-- 分类: cs.CV
-- 相关性评分: 13
-- 主题标签: 图像压缩、文本保真度、OCR集成、注意力机制
-
-**中文摘要**
-
-> 超低比特率图像压缩面临关键挑战：在保持整体视觉质量的同时保留小字体场景文本。区域兴趣比特分配可优先处理文本，但常损害全局保真度，导致局部精度与整体图像质量之间的权衡。本文提出TextBoost方法，不依赖ROI编码，而是通过OCR提取辅助文本信息并以可忽略开销传输，使解码器能利用语义指导。方法包括三个策略设计：自适应过滤OCR输出并渲染为引导图；通过注意力引导融合块校准整合引导与解码器特征；使用正则化损失在文本区域强制执行引导一致重建，促进与场景自然融合。在TextOCR和ICDAR 2015上的实验表明，TextBoost在可比PSNR和bpp下实现高达60.6%的文本识别F1提升，产生更清晰的小字体文本同时保持全局图像质量，有效将文本增强与全局率失真优化解耦。
-
-**核心创新概述**
-
-> 提出结合OCR语义指导的超低比特率图像压缩方法，实现文本保真度提升而不损害全局质量。
-
-**创新点拆解**
-
-- OCR辅助文本信息传输
-- 注意力引导融合架构
-- 正则化损失设计
-
-**当前局限**
-
-> 依赖于OCR准确性，可能受噪声影响；方法主要针对静态图像，未考虑视频或动态场景。
-
-**后续可改进方向**
-
-- 集成更鲁棒的OCR模型以减少错误传播
-- 扩展至视频压缩应用
-- 优化计算效率以支持实时处理
-
-**工程启发**
-
-> 高，直接应用于图像压缩系统，提升文本可读性，适用于移动通信或存储优化场景。
-
-**为什么值得关注**
-
-> 核心涉及OCR在图像压缩中的集成，展示如何利用文本信息增强压缩性能。
-
-**原始摘要**
-
-Ultra-low bitrate image compression faces a critical challenge: preserving small-font scene text
-while maintaining overall visual quality. Region-of-interest (ROI) bit allocation can prioritize
-text but often degrades global fidelity, leading to a trade-off between local accuracy and overall
-image quality. Instead of relying on ROI coding, we incorporate auxiliary textual information
-extracted by OCR and transmitted with negligible overhead, enabling the decoder to leverage this
-semantic guidance. Our method, TextBoost, operationalizes this idea through three strategic designs:
-(i) adaptively filtering OCR outputs and rendering them into a guidance map; (ii) integrating this
-guidance with decoder features in a calibrated manner via an attention-guided fusion block; and
-(iii) enforcing guidance-consistent reconstruction in text regions with a regularizing loss that
-promotes natural blending with the scene. Extensive experiments on TextOCR and ICDAR 2015
-demonstrate that TextBoost yields up to 60.6% higher text-recognition F1 at comparable Peak Signal-
-to-Noise Ratio (PSNR) and bits per pixel (bpp), producing sharper small-font text while preserving
-global image quality and effectively decoupling text enhancement from global rate-distortion
-optimization.
-
----
-
-### 4. N-gram Injection into Transformers for Dynamic Language Model Adaptation in Handwritten Text Recognition
-
-- arXiv: [2603.03930v1](https://arxiv.org/abs/2603.03930v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.03930v1)
-- 作者: Florent Meyer, Laurent Guichard, Denis Coquenet, Guillaume Gravier, Yann Soullard, Bertrand Coüasnon
-- 发布时间: 2026-03-04T10:39:08Z
-- 分类: cs.CV
-- 相关性评分: 10
-- 主题标签: 手写文本识别、语言模型适应、n-gram注入、Transformer网络
-
-**中文摘要**
-
-> 基于Transformer的编码器-解码器网络在手写文本识别中取得显著成果，部分归功于其自回归解码器隐式学习语言模型。然而，当评估目标语料库的语言分布与训练源文本发生偏移时，这些网络性能大幅下降。为在语言偏移下保持识别准确性，本文提出外部n-gram注入方法，用于在推理时动态适应网络的语言建模。方法允许切换到接近目标分布的n-gram语言模型，从而减轻偏差而无需额外目标图像-文本对训练。通过早期将n-gram注入Transformer解码器，网络学习充分利用纯文本数据，仅增加n-gram推理的低成本。在三个手写数据集上的实验表明，所提NGI显著缩小源和目标语料库之间的性能差距。
-
-**核心创新概述**
-
-> 提出外部n-gram注入方法，实现手写文本识别中语言模型的动态适应，无需额外图像训练。
-
-**创新点拆解**
-
-- n-gram语言模型注入策略
-- 动态适应推理框架
-- 早期注入设计以减少计算开销
-
-**当前局限**
-
-> 依赖于n-gram模型的准确性，可能不适用于高度复杂语言；方法主要针对手写文本，未评估打印或其他场景。
-
-**后续可改进方向**
-
-- 探索更高级语言模型如神经语言模型注入
-- 扩展至多语言或跨域手写识别
-- 优化实时推理速度
-
-**工程启发**
-
-> 中等，为手写OCR系统提供语言适应工具，但需结合具体应用场景进一步验证。
-
-**为什么值得关注**
-
-> 直接关联OCR中的语言模型适应问题，强调在分布偏移下保持性能的技术。
-
-**原始摘要**
-
-Transformer-based encoder-decoder networks have recently achieved impressive results in handwritten
-text recognition, partly thanks to their auto-regressive decoder which implicitly learns a language
-model. However, such networks suffer from a large performance drop when evaluated on a target corpus
-whose language distribution is shifted from the source text seen during training. To retain
-recognition accuracy despite this language shift, we propose an external n-gram injection (NGI) for
-dynamic adaptation of the network's language modeling at inference time. Our method allows switching
-to an n-gram language model estimated on a corpus close to the target distribution, therefore
-mitigating bias without any extra training on target image-text pairs. We opt for an early injection
-of the n-gram into the transformer decoder so that the network learns to fully leverage text-only
-data at the low additional cost of n-gram inference. Experiments on three handwritten datasets
-demonstrate that the proposed NGI significantly reduces the performance gap between source and
-target corpora.
-
----
-
-### 5. Whispering to a Blackbox: Bootstrapping Frozen OCR with Visual Prompts
+### 1. Whispering to a Blackbox: Bootstrapping Frozen OCR with Visual Prompts
 
 - arXiv: [2603.05276v1](https://arxiv.org/abs/2603.05276v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2603.05276v1)
@@ -302,39 +54,41 @@ target corpora.
 - 发布时间: 2026-03-05T15:22:51Z
 - 分类: cs.LG, cs.AI
 - 相关性评分: 9
-- 主题标签: 视觉提示、扩散模型、行为克隆、冻结模型增强
+- 主题标签: 视觉提示、扩散模型、行为克隆、OCR增强、冻结模型适配
 
 **中文摘要**
 
-> 在现代机器学习中，冻结预训练模型提供稳定性和效率，但常因数据分布不匹配而在特定任务上表现不佳。本文介绍Whisperer，一种新颖的视觉提示框架，学习基于扩散的预处理器以在像素空间适应输入，有效“低语”增强给冻结下游模型如EasyOCR。通过将过程框架为随机发现改进策略的行为克隆，方法在30万张退化合成文本图像的挑战数据集上实现8%绝对字符错误率降低，超越手工基线如CLAHE。关键创新是四阶段训练课程，使用行为克隆放大通过部分训练扩散模型随机探索发现的“幸运”改进。方法样本高效，避免传统强化学习的陷阱。通过向冻结OCR低语其输入，我们改进不完美分类器而不触及其权重。
+> 在现代机器学习中，冻结预训练模型提供了稳定性和效率，但由于数据分布不匹配，在特定任务上往往表现不佳。本文介绍了Whisperer，一种新颖的视觉提示框架，通过学习基于扩散的预处理器在像素空间调整输入，有效地“低语”增强冻结下游模型（如EasyOCR）。该方法将过程框架化为随机发现的改进策略的行为克隆，在一个包含30万张退化合成文本图像的挑战性数据集上，实现了字符错误率（CER）8%绝对（10.6%相对）的降低，超越了CLAHE等手工设计的基线。关键创新是一个四阶段训练课程，使用行为克隆来放大通过部分训练扩散模型的随机探索发现的“幸运”改进。这种方法样本效率高，避免了传统强化学习的缺陷。本质上，通过向冻结OCR的输入“低语”，我们改进了不完美的分类器，而无需调整其权重。
 
 **核心创新概述**
 
-> 提出视觉提示框架，通过扩散模型预处理器适应输入，提升冻结OCR模型性能，无需修改模型权重。
+> 提出了一种基于视觉提示的框架，通过扩散模型在像素空间调整输入来增强冻结OCR模型，避免了模型权重调整，并采用行为克隆课程来高效放大随机改进。
 
 **创新点拆解**
 
-- 扩散模型预处理器设计
-- 行为克隆训练课程
-- 随机探索策略放大
+- 视觉提示框架设计，利用扩散模型作为预处理器在像素空间适应输入
+- 训练范式创新，采用四阶段行为克隆课程，将随机发现的改进策略系统化
+- 方法强调样本效率，避免传统强化学习的复杂性
+- 任务定义为输入增强而非模型微调，适用于冻结预训练模型
 
 **当前局限**
 
-> 依赖于合成数据训练，可能泛化能力有限；方法计算成本较高，需60 GPU小时训练。
+> 依赖合成退化数据进行训练，可能未充分覆盖真实世界OCR场景的多样性；方法基于特定下游模型（如EasyOCR），泛化性有待验证；训练过程需60 GPU小时，计算成本较高。
 
 **后续可改进方向**
 
-- 使用真实世界数据增强泛化性
-- 优化训练效率以减少资源需求
-- 扩展至其他冻结模型或任务
+- 扩展到更多真实世界OCR数据集以提升泛化能力
+- 探索其他预训练模型或架构的适配性
+- 优化训练效率，减少计算资源需求
+- 结合多模态信息（如文本上下文）增强提示效果
 
 **工程启发**
 
-> 高，为现有OCR系统提供非侵入式性能提升方案，适用于资源受限或黑盒部署场景。
+> 高，提供了一种无需重新训练即可提升现有OCR系统性能的实用方法，适用于资源受限或稳定性要求高的场景，如边缘设备或大规模部署。
 
 **为什么值得关注**
 
-> 核心涉及OCR模型增强技术，展示如何通过输入预处理改进冻结模型，与OCR优化紧密相关。
+> 该研究直接针对OCR领域的核心挑战——如何高效适应预训练模型到特定任务，通过输入增强策略为文档解析和文本识别提供了新思路，具有实际应用潜力。
 
 **原始摘要**
 
@@ -354,63 +108,5 @@ stochastically sample intermediate diffusion outputs, select those that improve 
 then train the model to reproduce them. This bootstrapping curriculum (4 stages over 60 GPU-hours)
 amplifies random successes into a systematic strategy. In summary, by whispering to the frozen OCR
 through its inputs, we improve an imperfect classifier without touching its weights.
-
----
-
-### 6. FireBench: Evaluating Instruction Following in Enterprise and API-Driven LLM Applications
-
-- arXiv: [2603.04857v1](https://arxiv.org/abs/2603.04857v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.04857v1)
-- 作者: Yunfan Zhang, Yijie Bei, Jetashree Ravi, Pawel Garbacki
-- 发布时间: 2026-03-05T06:25:50Z
-- 分类: cs.CL, cs.SE
-- 相关性评分: 6
-- 主题标签: LLM指令遵循、企业基准、信息提取、API驱动应用
-
-**中文摘要**
-
-> 指令遵循对于部署在企业和API驱动设置中的LLM至关重要，其中严格遵守输出格式、内容约束和程序要求对实现可靠LLM辅助工作流必不可少。然而，现有指令遵循基准主要评估反映聊天助手需求的自然语言生成约束，而非企业用户需求。为填补这一空白，本文介绍FireBench，一个基于真实世界企业和API使用模式的LLM指令遵循基准。FireBench评估包括信息提取、客户支持和编码代理在内的多样化应用中的六个核心能力维度，包含超过2,400个样本。我们评估了11个LLM，并呈现了它们在企事业场景中指令遵循行为的关键发现。我们在fire-bench.com开源FireBench，以帮助用户评估模型适用性，支持模型开发者诊断性能，并邀请社区贡献。
-
-**核心创新概述**
-
-> 首个针对企业和API场景的LLM指令遵循基准，基于真实使用模式设计，填补现有评估空白。
-
-**创新点拆解**
-
-- 企业场景指令遵循评估框架
-- 多维度能力评估设计
-- 开源基准数据集
-
-**当前局限**
-
-> 基准可能未覆盖所有企业应用场景；评估依赖于人工构建样本，可能引入偏差。
-
-**后续可改进方向**
-
-- 扩展基准以包括更多行业或任务类型
-- 集成自动化评估工具以减少人工依赖
-- 开发自适应指令优化方法
-
-**工程启发**
-
-> 高，为企业LLM部署提供标准化评估工具，支持模型选择和优化，提升工作流可靠性。
-
-**为什么值得关注**
-
-> 间接关联OCR在信息提取等企业应用中的集成，强调指令遵循对自动化文档处理的重要性。
-
-**原始摘要**
-
-Instruction following is critical for LLMs deployed in enterprise and API-driven settings, where
-strict adherence to output formats, content constraints, and procedural requirements is essential
-for enabling reliable LLM-assisted workflows. However, existing instruction following benchmarks
-predominantly evaluate natural language generation constraints that reflect the needs of chat
-assistants rather than enterprise users. To bridge this gap, we introduce FireBench, an LLM
-instruction following benchmark grounded in real-world enterprise and API usage patterns. FireBench
-evaluates six core capability dimensions across diverse applications including information
-extraction, customer support, and coding agents, comprising over 2,400 samples. We evaluate 11 LLMs
-and present key findings on their instruction following behavior in enterprise scenarios. We open-
-source FireBench at fire-bench.com to help users assess model suitability, support model developers
-in diagnosing performance, and invite community contributions.
 
 ---
