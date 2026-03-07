@@ -1,0 +1,49 @@
+name: Daily OCR Research Report Pro
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '10 1 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  build-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -s requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Generate daily OCR research report
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DEEPSEEK_MODEL: deepseek-chat
+          ARXIV_MAX_RESULTS: '100'
+          ARXIV_DAYS_BACK: '3'
+          ARXIV_FINAL_LIMIT: '12'
+          FAIL_ON_LLM_ERROR: 'false'
+        run: |
+          python scripts/fetch_arxiv_daily_pro.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output/ scripts/ .github/workflows/ README.md requirements.txt || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: update daily ocr research report"
+          git push

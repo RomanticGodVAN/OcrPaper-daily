@@ -1,0 +1,2 @@
+# 当前脚本仅依赖 Python 标准库。
+# 如需后续接入 requests / openai / feedparser，可在这里追加。
