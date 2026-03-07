@@ -30,7 +30,7 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DEEPSEEK_MODEL: deepseek-chat
           ARXIV_MAX_RESULTS: '100'
-          ARXIV_DAYS_BACK: '3'
+          ARXIV_DAYS_BACK: '2'
           ARXIV_FINAL_LIMIT: '12'
           FAIL_ON_LLM_ERROR: 'false'
         run: |
