@@ -1,84 +1,27 @@
 {
   "meta": {
-    "report_date": "2026-03-07",
-    "generated_at_utc": "2026-03-07 07:55:32",
+    "report_date": "2026-03-08",
+    "generated_at_utc": "2026-03-08 03:38:06",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 1
+    "count": 0
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦于通过视觉提示框架增强冻结OCR模型，提出Whisperer方法，利用扩散模型在像素空间调整输入，结合行为克隆课程训练，在合成数据集上实现字符错误率显著降低。该方法避免了模型权重调整，强调样本效率，为提升现有OCR系统性能提供了新思路，但依赖合成数据且计算成本较高，需进一步验证泛化性和优化效率。",
-    "trend_summary": "研究趋势显示，OCR领域正从传统模型微调转向输入增强和视觉提示技术，利用扩散模型等生成方法适应冻结预训练模型，强调样本效率和无需权重调整的改进策略，以应对数据分布不匹配和资源受限挑战。",
-    "common_innovations": [
-      "视觉提示框架设计，利用扩散模型作为预处理器在像素空间适应输入",
-      "训练范式创新，采用四阶段行为克隆课程，将随机发现的改进策略系统化",
-      "方法强调样本效率，避免传统强化学习的复杂性",
-      "任务定义为输入增强而非模型微调，适用于冻结预训练模型"
-    ],
+    "executive_summary": "今日无新论文情报，研究进展暂缓，需关注现有技术优化和潜在创新方向。",
+    "trend_summary": "无近期趋势更新，建议基于历史研究保持对多模态、长文档和低资源场景的关注。",
+    "common_innovations": [],
     "future_directions": [
-      "扩展到更多真实世界OCR数据集以提升泛化能力",
-      "探索其他预训练模型或架构的适配性",
-      "优化训练效率，减少计算资源需求",
-      "结合多模态信息（如文本上下文）增强提示效果"
+      "探索结合视觉-语言模型提升复杂表格和图表解析精度",
+      "开发轻量级模型以支持移动端或边缘设备的实时OCR应用",
+      "研究跨语言文档解析技术，特别是针对低资源语言的适配方法"
     ],
     "engineering_takeaways": [
-      "提供了一种无需重新训练即可提升现有OCR系统性能的实用方法，适用于资源受限或稳定性要求高的场景",
-      "依赖合成退化数据进行训练，可能未充分覆盖真实世界OCR场景的多样性",
-      "方法基于特定下游模型（如EasyOCR），泛化性有待验证",
-      "训练过程需60 GPU小时，计算成本较高"
+      "优化现有OCR流水线以减少延迟和资源消耗",
+      "集成错误检测和校正机制以提高输出可靠性",
+      "加强数据预处理步骤以处理模糊或倾斜文档图像"
     ],
-    "watchlist": [
-      {
-        "title": "Whispering to a Blackbox: Bootstrapping Frozen OCR with Visual Prompts",
-        "watch_reason": "提出视觉提示框架增强冻结OCR模型，避免权重调整，具有高工程价值，但需关注泛化性和计算成本优化。"
-      }
-    ]
+    "watchlist": []
   },
-  "papers": [
-    {
-      "title": "Whispering to a Blackbox: Bootstrapping Frozen OCR with Visual Prompts",
-      "summary": "In the landscape of modern machine learning, frozen pre-trained models provide stability and efficiency but often underperform on specific tasks due to mismatched data distributions. This paper introduces the Whisperer, a novel visual prompting framework that learns diffusion-based preprocessors to adapt inputs in pixel space, effectively \"whispering\" enhancements to frozen downstream models like EasyOCR. By framing the process as behavioral cloning of stochastically discovered improvement policies, our method achieves an 8% absolute (10.6% relative) reduction in Character Error Rate (CER) on a challenging dataset of 300k degraded synthetic text images, surpassing hand-engineered baselines such as CLAHE. The key innovation is a four-stage training curriculum that uses behavioral cloning to amplify \"lucky\" improvements discovered through the stochastic exploration of a partially trained diffusion model. This approach is highly sample-efficient and avoids the pitfalls of traditional reinforcement learning. Crucially, we frame this not as naive reinforcement learning, but as behavioral cloning of an exploration policy: we stochastically sample intermediate diffusion outputs, select those that improve CER by chance, and then train the model to reproduce them. This bootstrapping curriculum (4 stages over 60 GPU-hours) amplifies random successes into a systematic strategy. In summary, by whispering to the frozen OCR through its inputs, we improve an imperfect classifier without touching its weights.",
-      "link": "https://arxiv.org/abs/2603.05276v1",
-      "pdf_url": "https://arxiv.org/pdf/2603.05276v1",
-      "authors": [
-        "Samandar Samandarov",
-        "Nazirjon Ismoiljonov",
-        "Abdullah Sattorov",
-        "Temirlan Sabyrbayev"
-      ],
-      "published": "2026-03-05T15:22:51Z",
-      "updated": "2026-03-05T15:22:51Z",
-      "categories": [
-        "cs.LG",
-        "cs.AI"
-      ],
-      "arxiv_id": "2603.05276v1",
-      "score": 9,
-      "topic_tags": [
-        "视觉提示",
-        "扩散模型",
-        "行为克隆",
-        "OCR增强",
-        "冻结模型适配"
-      ],
-      "zh_summary": "在现代机器学习中，冻结预训练模型提供了稳定性和效率，但由于数据分布不匹配，在特定任务上往往表现不佳。本文介绍了Whisperer，一种新颖的视觉提示框架，通过学习基于扩散的预处理器在像素空间调整输入，有效地“低语”增强冻结下游模型（如EasyOCR）。该方法将过程框架化为随机发现的改进策略的行为克隆，在一个包含30万张退化合成文本图像的挑战性数据集上，实现了字符错误率（CER）8%绝对（10.6%相对）的降低，超越了CLAHE等手工设计的基线。关键创新是一个四阶段训练课程，使用行为克隆来放大通过部分训练扩散模型的随机探索发现的“幸运”改进。这种方法样本效率高，避免了传统强化学习的缺陷。本质上，通过向冻结OCR的输入“低语”，我们改进了不完美的分类器，而无需调整其权重。",
-      "novelty": "提出了一种基于视觉提示的框架，通过扩散模型在像素空间调整输入来增强冻结OCR模型，避免了模型权重调整，并采用行为克隆课程来高效放大随机改进。",
-      "innovation_points": [
-        "视觉提示框架设计，利用扩散模型作为预处理器在像素空间适应输入",
-        "训练范式创新，采用四阶段行为克隆课程，将随机发现的改进策略系统化",
-        "方法强调样本效率，避免传统强化学习的复杂性",
-        "任务定义为输入增强而非模型微调，适用于冻结预训练模型"
-      ],
-      "limitations": "依赖合成退化数据进行训练，可能未充分覆盖真实世界OCR场景的多样性；方法基于特定下游模型（如EasyOCR），泛化性有待验证；训练过程需60 GPU小时，计算成本较高。",
-      "improvement_directions": [
-        "扩展到更多真实世界OCR数据集以提升泛化能力",
-        "探索其他预训练模型或架构的适配性",
-        "优化训练效率，减少计算资源需求",
-        "结合多模态信息（如文本上下文）增强提示效果"
-      ],
-      "engineering_value": "高，提供了一种无需重新训练即可提升现有OCR系统性能的实用方法，适用于资源受限或稳定性要求高的场景，如边缘设备或大规模部署。",
-      "why_relevant": "该研究直接针对OCR领域的核心挑战——如何高效适应预训练模型到特定任务，通过输入增强策略为文档解析和文本识别提供了新思路，具有实际应用潜力。"
-    }
-  ]
+  "papers": []
 }
