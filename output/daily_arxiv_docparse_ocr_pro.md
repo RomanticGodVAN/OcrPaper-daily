@@ -1,63 +1,64 @@
-# OCR / 文档解析研究日报（2026-03-11）
+# OCR / 文档解析研究日报（2026-03-12）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-03-11 03:35:46`
+- 生成时间（UTC）：`2026-03-12 03:42:28`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日OCR/文档解析研究呈现多领域融合与专业化趋势。核心进展包括：1）针对特定领域（物理、医疗、古籍）的本地化、高精度解析系统开发，强调数据隐私与专用流程；2）多模态与端到端任务（如文档图像翻译、数学表达式识别）的基准建立与模型创新，推动布局理解与内容识别协同；3）框架级探索，如统一多模态解析、领域自适应布局分析，旨在解决泛化性与结构化知识转换挑战。研究普遍关注大模型应用、计算效率与工程部署，为实际场景提供多样化解决方案。
+> 今日论文清单显示OCR和文档解析研究正朝多模态、领域专用、高效化和隐私保护方向快速发展。核心趋势包括：1）多模态模型融合视觉与语言处理，提升端到端理解能力（如GLM-OCR、Omni Parsing）；2）针对特定领域（金融、医疗、科学）的专用系统涌现，通过定制化算法解决布局不连续、隐私等挑战（Agentar-Fin-OCR、MITRA）；3）模型效率优化成为重点，通过紧凑架构、解码优化和边缘部署平衡性能与资源（GLM-OCR）；4）低资源语言和历史文档的OCR技术持续进步，结合专用管道和语料库发布推动基准建立（Patrologia Graeca、SiDiaC-v.2.0）；5）开源和本地化部署受关注，确保数据隐私和可复现性（MITRA、医疗LLM流水线）。这些进展为工程应用提供了更精准、高效和安全的解决方案。
 
 ## 二、今日趋势判断
 
-研究趋势聚焦于：1）领域专业化：从通用OCR转向物理、医疗、古籍等垂直场景，结合领域知识提升精度（如MITRA、Patrologia Graeca、医疗报告提取）；2）多模态集成：强化布局解析、图像翻译、数学符号识别等多模态任务，推动端到端学习（如ICDAR竞赛、数学表达式识别）；3）框架标准化：通过统一分类法、渐进式解析、共识机制等构建可泛化框架（如Omni Parsing、PromptDLA、多LLM管道）；4）工程友好性：强调本地化部署、开源模型、结构化输出，以平衡性能、隐私与成本（如MITRA、医疗管道、OfficeQA Pro）。
+当前研究呈现五大趋势：一、多模态整合深化，模型统一处理文档、图像和音视频，通过渐进式解析实现结构化知识提取（如Omni Parsing、文档图像翻译竞赛）。二、领域专用化加强，针对金融、医疗、科学等垂直场景开发定制系统，解决跨页解析、隐私保护等特定问题（Agentar-Fin-OCR、MITRA）。三、效率与性能平衡，紧凑模型和多令牌预测等技术创新优化解码速度和资源使用，支持边缘部署（GLM-OCR）。四、低资源语言和历史文档处理进步，通过专用OCR管道和语料库构建提升噪声文本识别能力（Patrologia Graeca、SiDiaC-v.2.0）。五、开源与隐私保护兴起，本地托管框架和开源LLM流水线促进可复现研究并满足敏感数据需求（医疗文本提取、MITRA）。
 
 ## 三、今日论文概览
 
-1. **MITRA: An AI Assistant for Knowledge Retrieval in Physics Collaborations** | 标签：检索增强生成、OCR布局解析、本地化部署、科学文档处理、向量数据库
-2. **ICDAR 2025 Competition on End-to-End Document Image Machine Translation Towards Complex Layouts** | 标签：文档图像翻译、多模态理解、ICDAR竞赛、端到端学习、布局建模
-3. **The Patrologia Graeca Corpus: OCR, Annotation, and Open Release of Noisy Nineteenth-Century Polytonic Greek Editions** | 标签：多调希腊语OCR、古文献数字化、布局检测、嘈杂文本识别、语料库构建
-4. **A Hybrid Vision Transformer Approach for Mathematical Expression Recognition** | 标签：数学表达式识别、视觉变换器、2D位置编码、覆盖注意力、文档分析
-5. **OfficeQA Pro: An Enterprise Benchmark for End-to-End Grounded Reasoning** | 标签：文档推理基准、大语言模型评估、表格数据处理、结构化表示、企级AI
-6. **PromptDLA: A Domain-aware Prompt Document Layout Analysis Framework with Descriptive Knowledge as a Cue** | 标签：文档布局分析、提示学习、领域自适应、多领域泛化、结构理解
-7. **Logics-Parsing-Omni Technical Report** | 标签：多模态解析、统一分类法、证据锚定、结构化知识转换、OCR
-8. **A Consensus-Driven Multi-LLM Pipeline for Missing-Person Investigations** | 标签：多LLM管道、共识机制、QLoRA微调、信息提取、结构化处理
-9. **Tracking Cancer Through Text: Longitudinal Extraction From Radiology Reports Using Open-Source Large Language Models** | 标签：开源LLM、纵向信息提取、医疗文本处理、结构化数据、隐私保护
+1. **MITRA: An AI Assistant for Knowledge Retrieval in Physics Collaborations** | 标签：检索增强生成、文档解析、隐私保护、科学协作、向量数据库
+2. **GLM-OCR Technical Report** | 标签：紧凑模型、多模态、解码优化、文档理解、边缘计算
+3. **Agentar-Fin-OCR** | 标签：金融文档、跨页解析、表格识别、课程学习、基准评估
+4. **ICDAR 2025 Competition on End-to-End Document Image Machine Translation Towards Complex Layouts** | 标签：文档图像翻译、多模态、竞赛组织、端到端学习、大模型
+5. **A Robust Deep Learning Framework for Bangla License Plate Recognition Using YOLO and Vision-Language OCR** | 标签：车牌识别、对象检测、序列生成、鲁棒性评估、孟加拉语OCR
+6. **The Patrologia Graeca Corpus: OCR, Annotation, and Open Release of Noisy Nineteenth-Century Polytonic Greek Editions** | 标签：历史文档OCR、多调希腊语、语料库发布、布局检测、噪声文本识别
+7. **SiDiaC-v.2.0: Sinhala Diachronic Corpus Version 2.0** | 标签：低资源语言、语料库构建、OCR后处理、历时分析、文本标注
+8. **PromptDLA: A Domain-aware Prompt Document Layout Analysis Framework with Descriptive Knowledge as a Cue** | 标签：文档布局分析、提示学习、领域自适应、多域泛化、计算机视觉
+9. **Logics-Parsing-Omni Technical Report** | 标签：多模态解析、统一分类法、证据锚定、OCR集成、结构化知识提取
+10. **Tracking Cancer Through Text: Longitudinal Extraction From Radiology Reports Using Open-Source Large Language Models** | 标签：临床文本提取、开源LLM、纵向分析、隐私保护、医疗文档解析
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 结合布局检测与文本识别的专用OCR流程以处理复杂或退化文档（如古籍、科学文档）。
-- 采用本地化或开源部署的RAG/LLM管道，确保数据隐私并支持敏感领域应用（如物理合作、医疗报告）。
-- 引入多模态或端到端学习框架，整合OCR、NLP与视觉理解以处理文档翻译、数学表达式等任务。
-- 设计领域自适应或提示学习机制，提升模型在多样化文档布局上的泛化性能。
-- 构建大规模基准或语料库，推动文档解析、推理任务的标准化评估与模型训练。
+- 结合多模态模型（如视觉编码器和语言解码器）实现端到端文档理解，提升OCR与布局分析的协同效率。
+- 采用领域自适应方法，如提示学习或课程学习，优化模型在特定场景（如金融或医疗文档）下的解析性能。
+- 引入高效解码机制，如多令牌预测，减少自回归模型的计算开销并提高吞吐量。
+- 设计专用管道处理复杂挑战，如跨页内容整合或噪声文本识别，通过算法改进提升精度。
+- 强调隐私保护，通过本地托管或开源框架确保敏感数据（如医疗或科学文档）的安全处理。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 开发更鲁棒的OCR模块，专门针对复杂科学符号、多调古文字或严重退化文本的识别。
-- 优化端到端文档图像翻译系统，集成布局建模与多语言支持，并研究小模型的高效替代方案。
-- 扩展多模态解析框架，支持图表、表格等非文本元素的自动化理解与结构化转换。
-- 研究自适应学习机制，使文档解析系统能动态处理数据更新或新领域，减少人工标注依赖。
-- 提升企级文档推理能力，通过增强表格数据处理、检索精度和结构化表示来支持大规模异构语料库。
+- 开发更高效的多模态端到端模型，专门针对文档图像翻译任务，降低计算成本并支持更多语言对。
+- 优化跨页解析算法，以处理金融、法律等文档中更复杂的布局不连续性和单元格引用问题。
+- 增强低资源语言OCR的鲁棒性，通过改进后处理流程和扩展语料库覆盖更多历史文档类型。
+- 探索轻量级布局分析框架，结合自动化提示生成，提升模型在边缘设备上的多域泛化能力。
+- 集成时序建模技术到文档解析中，支持从临床报告等文本中提取纵向信息并链接跨时间点数据。
 
 ## 六、工程落地启发
 
-- 在隐私敏感场景（如医疗、科研）优先采用本地化部署的RAG或开源LLM管道，确保数据安全。
-- 针对特定文档类型（如古籍、科学报告）设计专用OCR流程，结合布局解析以提升提取精度。
-- 利用领域自适应提示或共识机制，增强文档布局分析和信息提取系统在多场景下的泛化能力。
-- 集成结构化输出和证据锚定机制，提升文档解析结果的可靠性、可审计性和下游应用价值。
-- 参考现有基准（如OfficeQA Pro、ICDAR竞赛）评估系统性能，并优化计算效率以支持实时或大规模部署。
+- 采用双层向量数据库架构（如MITRA）可提高文档检索精度并减少歧义，适用于大型内部知识库。
+- 部署紧凑多模态模型（如GLM-OCR）结合多令牌预测，能在资源受限环境中实现高效的文档理解。
+- 实现跨页内容整合和标题重建模块（如Agentar-Fin-OCR）可显著提升金融文档的结构化解析质量。
+- 利用开源LLM本地流水线（如医疗文本提取）可在隐私敏感场景中安全提取临床数据，避免专有系统依赖。
+- 结合YOLO布局检测和CRNN文本识别的专用管道（如Patrologia Graeca）能有效处理噪声历史文档，降低错误率。
 
 ## 七、优先关注论文
 
-- **MITRA: An AI Assistant for Knowledge Retrieval in Physics Collaborations**：展示了本地化RAG系统在科学文档处理中的完整工程管道，包括自动化检索、OCR布局解析和双层向量数据库，对私有知识管理有借鉴意义。
-- **PromptDLA: A Domain-aware Prompt Document Layout Analysis Framework with Descriptive Knowledge as a Cue**：将提示学习引入文档布局分析，通过领域自适应提升泛化性能，为多样化文档处理提供可扩展的解决方案。
-- **Logics-Parsing-Omni Technical Report**：提出统一的多模态解析框架，通过证据锚定实现结构化知识转换，可能推动OCR与视频/音频解析的标准化集成。
-- **The Patrologia Graeca Corpus: OCR, Annotation, and Open Release of Noisy Nineteenth-Century Polytonic Greek Editions**：提供了嘈杂多调希腊语OCR的高质量语料库和低错误率流程，为古文献数字化和退化文本识别设立新基准。
-- **Tracking Cancer Through Text: Longitudinal Extraction From Radiology Reports Using Open-Source Large Language Models**：演示了开源LLM在医疗文本纵向提取中的高精度应用，强调隐私保护和可部署性，适合推广到其他文档OCR任务。
+- **GLM-OCR Technical Report**：紧凑多模态模型通过多令牌预测优化解码效率，适合边缘部署和大规模生产系统，可能成为工业OCR的新标准。
+- **Agentar-Fin-OCR**：针对金融文档的跨页解析和表格识别方法具有高精度和审计级可追溯性，对金融科技应用有直接工程价值。
+- **PromptDLA: A Domain-aware Prompt Document Layout Analysis Framework with Descriptive Knowledge as a Cue**：领域感知提示框架显著提升布局分析的跨域泛化性能，可优化多类型文档处理流水线。
+- **Logics-Parsing-Omni Technical Report**：统一多模态解析框架通过证据锚定机制实现结构化知识提取，为复杂文档和音视频分析提供端到端解决方案。
+- **Tracking Cancer Through Text: Longitudinal Extraction From Radiology Reports Using Open-Source Large Language Models**：开源本地部署流水线在医疗文本提取中实现高精度，同时确保隐私，可推广到其他敏感领域的数据处理。
 
 ## 八、论文逐篇解析
 
@@ -67,43 +68,41 @@
 - PDF: [下载链接](https://arxiv.org/pdf/2603.09800v1)
 - 作者: Abhishikth Mallampalli, Sridhara Dasu
 - 发布时间: 2026-03-10T15:28:35Z
-- 分类: cs.IR, cs.AI, cs.CL
+- 分类: cs.IR, cs.AI, cs.CL, cs.LG, hep-ex
 - 相关性评分: 29
-- 主题标签: 检索增强生成、OCR布局解析、本地化部署、科学文档处理、向量数据库
+- 主题标签: 检索增强生成、文档解析、隐私保护、科学协作、向量数据库
 
 **中文摘要**
 
-> 本文提出MITRA，一个基于检索增强生成（RAG）的系统，旨在为大型物理合作项目（如CERN的CMS）中的内部文档提供上下文感知问答。系统采用自动化流程，使用Selenium从内部数据库检索文档，并结合OCR与布局解析进行高保真文本提取。整个框架（包括嵌入模型和大语言模型）均部署在本地，确保敏感数据隐私。采用双层向量数据库架构，先通过摘要识别相关分析，再聚焦完整文档，以解决不同分析间的歧义。原型在真实查询中优于基于关键字的基线，并讨论了未来开发全面研究代理的方向。
+> 本文介绍了MITRA，一个基于检索增强生成（RAG）的系统原型，旨在为大型物理合作（如CERN的CMS）中的内部文档提供上下文感知问答。系统采用自动化管道，使用Selenium从内部数据库检索文档，并通过OCR和布局解析进行高保真文本提取。整个框架（包括嵌入模型和大语言模型）在本地托管，确保敏感数据隐私。引入双层向量数据库架构，先通过摘要识别相关分析，再聚焦完整文档，解决不同分析间的歧义。原型在真实查询中优于基于关键字的基线，并讨论了未来开发全面研究代理的方向。
 
 **核心创新概述**
 
-> 针对大规模科学合作中的内部文档导航挑战，提出首个专为物理分析设计的本地化RAG系统，结合自动化文档检索与OCR布局解析，并引入双层向量数据库以提升检索精度。
+> 针对大型科学合作中的文档导航挑战，提出一个端到端的RAG系统，结合自动化文档检索、OCR和布局解析，并采用本地托管和双层向量数据库架构以提高隐私和检索精度。
 
 **创新点拆解**
 
-- 自动化文档检索与OCR布局解析的集成管道
-- 完全本地化部署的RAG框架确保数据隐私
-- 双层向量数据库架构（先摘要后全文）以解决分析歧义
-- 针对物理合作场景的上下文感知问答设计
+- 自动化文档检索与OCR管道，使用Selenium和布局解析实现高保真文本提取
+- 双层向量数据库架构，先基于摘要筛选分析，再检索完整文档，减少歧义
+- 全本地托管框架，确保敏感数据隐私，适用于内部协作环境
 
 **当前局限**
 
-> 原型阶段，未全面评估在更广泛文档类型或动态更新数据上的性能；依赖特定内部数据库结构，可能限制泛化能力。
+> 系统为原型阶段，可能未完全覆盖所有文档类型或复杂查询场景；依赖内部数据库和特定OCR工具，可扩展性有待验证。
 
 **后续可改进方向**
 
-- 扩展支持更多文档格式和动态数据源
-- 优化OCR模块对复杂科学符号的识别
-- 集成多模态理解以处理图表等非文本内容
-- 开发自适应学习机制以应对文档更新
+- 扩展系统以处理更多文档格式和语言，提高通用性
+- 优化检索算法，支持更复杂的多模态查询和实时更新
+- 集成更多领域知识，增强问答的准确性和解释能力
 
 **工程启发**
 
-> 高，为大型科学合作提供可部署的私有知识检索工具，提升研究效率，具有实际应用潜力。
+> 高，为大型科学合作提供了实用的文档检索解决方案，隐私保护和检索效率优势明显，可直接应用于类似内部环境。
 
 **为什么值得关注**
 
-> 涉及OCR与布局解析用于文档文本提取，是文档理解的关键步骤；RAG系统依赖高质量OCR输出，直接影响检索性能。
+> 涉及OCR和布局解析技术，用于文档文本提取，是文档理解的关键组成部分，与OCR研究直接相关。
 
 **原始摘要**
 
@@ -125,7 +124,130 @@ experimental collaborations.
 
 ---
 
-### 2. ICDAR 2025 Competition on End-to-End Document Image Machine Translation Towards Complex Layouts
+### 2. GLM-OCR Technical Report
+
+- arXiv: [2603.10910v1](https://arxiv.org/abs/2603.10910v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2603.10910v1)
+- 作者: Shuaiqi Duan, Yadong Xue, Weihan Wang, Zhe Su, Huan Liu, Sheng Yang, Guobing Gan, Guo Wang, Zihan Wang, Shengdong Yan, Dexin Jin, Yuxuan Zhang, Guohong Wen, Yanfeng Wang, Yutao Zhang, Xiaohan Zhang, Wenyi Hong, Yukuo Cen, Da Yin, Bin Chen, Wenmeng Yu, Xiaotao Gu, Jie Tang
+- 发布时间: 2026-03-11T15:55:47Z
+- 分类: cs.CL
+- 相关性评分: 28
+- 主题标签: 紧凑模型、多模态、解码优化、文档理解、边缘计算
+
+**中文摘要**
+
+> 本文介绍了GLM-OCR，一个高效的0.9B参数紧凑多模态模型，专为现实世界文档理解设计。模型结合0.4B参数的CogViT视觉编码器和0.5B参数的GLM语言解码器，在计算效率和识别性能间取得平衡。针对确定性OCR任务中自回归解码的低效问题，引入多令牌预测机制，每步预测多个令牌，显著提高解码吞吐量，同时通过共享参数保持低内存开销。系统层面采用两阶段管道：PP-DocLayout-V3先进行布局分析，然后并行区域级识别。在公共基准和工业场景的广泛评估中，GLM-OCR在文档解析、文本和公式转录、表格结构恢复及关键信息提取方面达到竞争性或最先进性能，其紧凑架构和结构化生成适合资源受限的边缘部署和大规模生产系统。
+
+**核心创新概述**
+
+> 提出一个紧凑多模态模型，通过多令牌预测机制优化解码效率，结合两阶段管道实现高效的文档理解，在性能和资源使用间取得平衡。
+
+**创新点拆解**
+
+- 多令牌预测机制，提高自回归解码吞吐量，减少内存开销
+- 紧凑架构设计，结合CogViT视觉编码器和GLM语言解码器，参数仅0.9B
+- 两阶段管道，先布局分析后并行区域识别，提升系统效率
+
+**当前局限**
+
+> 模型可能对某些复杂布局或低质量图像的处理能力有限；紧凑架构可能在极端精度要求场景下性能不足。
+
+**后续可改进方向**
+
+- 进一步优化多令牌预测机制，适应更多OCR任务类型
+- 增强模型对噪声图像和多语言文档的鲁棒性
+- 探索更高效的训练策略，以降低计算成本
+
+**工程启发**
+
+> 高，紧凑设计和高效解码使其适合边缘部署和大规模应用，在工业场景中具有直接实用价值。
+
+**为什么值得关注**
+
+> 核心为OCR模型，专注于文档理解和文本提取，是OCR技术的前沿进展。
+
+**原始摘要**
+
+GLM-OCR is an efficient 0.9B-parameter compact multimodal model designed for real-world document
+understanding. It combines a 0.4B-parameter CogViT visual encoder with a 0.5B-parameter GLM language
+decoder, achieving a strong balance between computational efficiency and recognition performance. To
+address the inefficiency of standard autoregressive decoding in deterministic OCR tasks, GLM-OCR
+introduces a Multi-Token Prediction (MTP) mechanism that predicts multiple tokens per step,
+significantly improving decoding throughput while keeping memory overhead low through shared
+parameters. At the system level, a two-stage pipeline is adopted: PP-DocLayout-V3 first performs
+layout analysis, followed by parallel region-level recognition. Extensive evaluations on public
+benchmarks and industrial scenarios show that GLM-OCR achieves competitive or state-of-the-art
+performance in document parsing, text and formula transcription, table structure recovery, and key
+information extraction. Its compact architecture and structured generation make it suitable for both
+resource-constrained edge deployment and large-scale production systems.
+
+---
+
+### 3. Agentar-Fin-OCR
+
+- arXiv: [2603.11044v1](https://arxiv.org/abs/2603.11044v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2603.11044v1)
+- 作者: Siyi Qian, Xiongfei Bai, Bingtao Fu, Yichen Lu, Gaoyang Zhang, Xudong Yang, Peng Zhang
+- 发布时间: 2026-03-11T17:59:42Z
+- 分类: cs.CV
+- 相关性评分: 27
+- 主题标签: 金融文档、跨页解析、表格识别、课程学习、基准评估
+
+**中文摘要**
+
+> 本文提出Agentar-Fin-OCR，一个针对金融领域文档的解析系统，将超长金融PDF转换为语义一致、高精度、结构化的输出，并具备审计级可追溯性。为应对金融特定挑战（如复杂布局、跨页结构不连续和单元格级引用能力），系统结合（1）跨页内容整合算法以恢复页面间连续性，以及文档级标题层次重建模块以构建全局一致的内容目录树，支持结构感知检索；（2）难度自适应课程学习训练策略用于表格解析，以及CellBBoxRegressor模块，使用结构锚令牌从解码器隐藏状态定位表格单元格，无需外部检测器。实验表明，模型在OmniDocBench的表格解析指标上表现优异。为在金融垂直领域进行现实评估，进一步引入FinDocBench基准，包含六个金融文档类别，带有专家验证注释和评估指标（如基于编辑距离的内容目录相似性、跨页拼接TEDS和表格单元格交并比）。在FinDocBench上评估多种最先进模型，评估其在金融文档上的能力和剩余限制。总体而言，Agentar-Fin-OCR和FinDocBench为可靠的下游应用提供了实用基础。
+
+**核心创新概述**
+
+> 针对金融文档的特定挑战，提出跨页内容整合和文档级标题重建方法，结合难度自适应训练和无需外部检测器的单元格定位，实现高精度结构化解析。
+
+**创新点拆解**
+
+- 跨页内容整合算法和文档级标题层次重建模块，处理金融文档的布局不连续性
+- 难度自适应课程学习训练策略，优化表格解析性能
+- CellBBoxRegressor模块，利用结构锚令牌从解码器状态定位单元格，减少外部依赖
+
+**当前局限**
+
+> 系统可能对非金融文档或极不规则布局的泛化能力有限；FinDocBench基准覆盖范围可能不够全面。
+
+**后续可改进方向**
+
+- 扩展系统以处理更多文档类型和语言，提高通用性
+- 优化跨页整合算法，应对更复杂的文档结构
+- 增强基准的多样性和评估指标，促进更全面的模型比较
+
+**工程启发**
+
+> 高，为金融领域提供了专门的文档解析解决方案，审计级可追溯性和高精度使其在金融应用中具有重要价值。
+
+**为什么值得关注**
+
+> 涉及OCR和文档解析技术，特别是针对复杂金融文档的处理，是OCR在垂直领域的应用案例。
+
+**原始摘要**
+
+In this paper, we propose Agentar-Fin-OCR, a document parsing system tailored to financial-domain
+documents, transforming ultra-long financial PDFs into semantically consistent, highly accurate,
+structured outputs with auditing-grade provenance. To address finance-specific challenges such as
+complex layouts, cross-page structural discontinuities, and cell-level referencing capability,
+Agentar-Fin-OCR combines (1) a Cross-page Contents Consolidation algorithm to restore continuity
+across pages and a Document-level Heading Hierarchy Reconstruction (DHR) module to build a globally
+consistent Table of Contents (TOC) tree for structure-aware retrieval, and (2) a difficulty-adaptive
+curriculum learning training strategy for table parsing, together with a CellBBoxRegressor module
+that uses structural anchor tokens to localize table cells from decoder hidden states without
+external detectors. Experiments demonstrate that our model shows high performance on the table
+parsing metrics of OmniDocBench. To enable realistic evaluation in the financial vertical, we
+further introduce FinDocBench, a benchmark that includes six financial document categories with
+expert-verified annotations and evaluation metrics including Table of Contents edit-distance-based
+similarity (TocEDS), cross-page concatenated TEDS, and Table Cell Intersection over Union (C-IoU).
+We evaluate a wide range of state-of-the-art models on FinDocBench to assess their capabilities and
+remaining limitations on financial documents. Overall, Agentar-Fin-OCR and FinDocBench provide a
+practical foundation for reliable downstream financial document applications.
+
+---
+
+### 4. ICDAR 2025 Competition on End-to-End Document Image Machine Translation Towards Complex Layouts
 
 - arXiv: [2603.09392v1](https://arxiv.org/abs/2603.09392v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2603.09392v1)
@@ -133,41 +255,39 @@ experimental collaborations.
 - 发布时间: 2026-03-10T09:04:38Z
 - 分类: cs.CV, cs.AI
 - 相关性评分: 26
-- 主题标签: 文档图像翻译、多模态理解、ICDAR竞赛、端到端学习、布局建模
+- 主题标签: 文档图像翻译、多模态、竞赛组织、端到端学习、大模型
 
 **中文摘要**
 
-> 本文介绍ICDAR 2025文档图像机器翻译（DIMT）竞赛，旨在推动端到端文档图像翻译研究，该领域结合OCR与NLP以处理文本内容和页面布局。竞赛设OCR-free和OCR-based两个赛道，各包含小模型（<1B参数）和大模型（>1B参数）子任务，共吸引69支团队参与。报告概述挑战动机、数据集构建、任务定义、评估协议及结果总结，分析表明大模型方法为复杂布局文档图像翻译建立了新范式，并指出未来研究机会。
+> 本文介绍了ICDAR 2025文档图像机器翻译竞赛，该竞赛旨在通过联合建模文本内容和页面布局，将文档图像中的文本从一种语言翻译到另一种语言，桥接OCR和自然语言处理。DIMT 2025挑战赛推进了端到端文档图像翻译的研究，这是多模态文档理解中快速发展的领域。竞赛包含两个赛道（OCR-free和OCR-based），每个赛道有两个子任务（小模型和大模型）。参赛者提交统一的DIMT系统，可选择结合提供的OCR转录。竞赛从2024年12月10日运行至2025年4月20日，吸引了69个团队和27个有效提交。赛道1有34个团队和13个有效提交，赛道2有35个团队和14个有效提交。本报告介绍了挑战动机、数据集构建、任务定义、评估协议和结果总结。分析表明，大模型方法为翻译复杂布局文档图像建立了有前景的新范式，并突出了未来研究的重大机会。
 
 **核心创新概述**
 
-> 首个针对文档图像机器翻译的ICDAR竞赛，系统化定义OCR-free与OCR-based端到端任务，推动多模态文档理解研究，并展示大模型在该领域的潜力。
+> 组织首个专注于文档图像机器翻译的竞赛，定义OCR-free和OCR-based赛道，推动端到端多模态翻译研究，并总结大模型在该领域的潜力。
 
 **创新点拆解**
 
-- 端到端文档图像翻译的竞赛框架设计
-- OCR-free与OCR-based双赛道对比评估
-- 针对复杂布局的多模态任务定义
-- 大模型作为翻译新范式的实证分析
+- 定义文档图像机器翻译任务，桥接OCR和NLP，促进多模态研究
+- 设计双赛道竞赛结构，区分是否使用OCR，鼓励多样化方法
+- 提供大规模数据集和评估协议，为社区建立基准
 
 **当前局限**
 
-> 竞赛结果可能受数据集特定性和评估指标限制；未深入探讨模型在低资源语言或极端布局上的表现。
+> 竞赛结果可能受限于数据集规模和多样性；大模型方法可能计算成本高，不适合资源受限场景。
 
 **后续可改进方向**
 
-- 开发更鲁棒的布局建模方法以处理多样化文档格式
-- 优化OCR与翻译模块的协同训练策略
-- 扩展数据集涵盖更多语言和布局复杂度
-- 研究小模型的高效替代方案
+- 扩展数据集以包含更多语言和复杂布局类型
+- 开发更高效的端到端模型，降低计算需求
+- 探索小模型在文档图像翻译中的优化策略
 
 **工程启发**
 
-> 中高，竞赛推动实际DIMT系统开发，为多语言文档处理提供基准，促进工业应用。
+> 中，竞赛推动了技术前沿，但实际工程应用需进一步模型优化和部署。
 
 **为什么值得关注**
 
-> 直接关联OCR作为文档图像翻译的基础组件；竞赛任务强调布局与文本的联合建模，是OCR进阶应用。
+> 直接涉及OCR技术作为文档图像翻译的基础，是OCR在多模态任务中的关键应用。
 
 **原始摘要**
 
@@ -187,7 +307,74 @@ document images and highlight substantial opportunities for future research.
 
 ---
 
-### 3. The Patrologia Graeca Corpus: OCR, Annotation, and Open Release of Noisy Nineteenth-Century Polytonic Greek Editions
+### 5. A Robust Deep Learning Framework for Bangla License Plate Recognition Using YOLO and Vision-Language OCR
+
+- arXiv: [2603.10267v1](https://arxiv.org/abs/2603.10267v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2603.10267v1)
+- 作者: Nayeb Hasin, Md. Arafath Rahman Nishat, Mainul Islam, Khandakar Shakib Al Hasan, Asif Newaz
+- 发布时间: 2026-03-10T22:55:59Z
+- 分类: cs.CV
+- 相关性评分: 25
+- 主题标签: 车牌识别、对象检测、序列生成、鲁棒性评估、孟加拉语OCR
+
+**中文摘要**
+
+> 本文提出一个鲁棒的孟加拉车牌识别系统，集成基于深度学习的对象检测模型用于车牌定位和OCR用于文本提取。比较了多种对象检测架构（包括U-Net和多个YOLO变体）用于车牌定位。研究基于YOLOv8架构提出一种新颖的两阶段自适应训练策略，以提高定位性能。所提方法优于现有模型，达到97.83%的准确率和91.3%的交并比。文本识别问题被表述为序列生成问题，采用VisionEncoderDecoder架构，评估了多种编码器-解码器组合。结果表明，ViT + BanglaBERT模型在字符级别表现更好，字符错误率为0.1323，词错误率为0.1068。所提系统在外部数据集上测试也表现一致，该数据集具有与训练样本完全不同的环境和光照条件，表明框架的鲁棒性。总体而言，所提系统为孟加拉车牌识别提供了鲁棒可靠的解决方案。
+
+**核心创新概述**
+
+> 针对孟加拉车牌的复杂字符和布局挑战，提出两阶段自适应训练策略优化YOLOv8定位，并结合VisionEncoderDecoder架构进行文本识别，实现高精度和鲁棒性。
+
+**创新点拆解**
+
+- 两阶段自适应训练策略，基于YOLOv8优化车牌定位性能
+- 将文本识别建模为序列生成问题，评估多种编码器-解码器组合
+- 使用外部数据集验证鲁棒性，涵盖不同环境和光照条件
+
+**当前局限**
+
+> 系统可能对其他语言或车牌类型的泛化能力有限；依赖特定数据集，实际部署中可能需适应更多变体。
+
+**后续可改进方向**
+
+- 扩展系统以支持多语言车牌识别，提高通用性
+- 优化训练策略，减少对标注数据的依赖
+- 增强模型对极端天气或遮挡条件的鲁棒性
+
+**工程启发**
+
+> 高，为智能交通管理提供了实用的车牌识别解决方案，高精度和鲁棒性使其适合实际部署。
+
+**为什么值得关注**
+
+> 涉及OCR技术用于文本提取，是OCR在特定垂直领域（车牌识别）的应用案例。
+
+**原始摘要**
+
+An Automatic License Plate Recognition (ALPR) system constitutes a crucial element in an intelligent
+traffic management system. However, the detection of Bangla license plates remains challenging
+because of the complicated character scheme and uneven layouts. This paper presents a robust Bangla
+License Plate Recognition system that integrates a deep learning-based object detection model for
+license plate localization with Optical Character Recognition for text extraction. Multiple object
+detection architectures, including U-Net and several YOLO (You Only Look Once) variants, are
+compared for license plate localization. This study proposes a novel two-stage adaptive training
+strategy built upon the YOLOv8 architecture to improve localization performance. The proposed
+approach outperforms the established models, achieving an accuracy of 97.83% and an Intersection
+over Union (IoU) of 91.3%. The text recognition problem is phrased as a sequence generation problem
+with a VisionEncoderDecoder architecture, with a combination of encoder-decoders evaluated. It was
+demonstrated that the ViT + BanglaBERT model gives better results at the character level, with a
+Character Error Rate of 0.1323 and Word Error Rate of 0.1068. The proposed system also shows a
+consistent performance when tested on an external dataset that has been curated for this study
+purpose. The dataset offers completely different environment and lighting conditions compared to the
+training sample, indicating the robustness of the proposed framework. Overall, our proposed system
+provides a robust and reliable solution for Bangla license plate recognition and performs
+effectively across diverse real-world scenarios, including variations in lighting, noise, and plate
+styles. These strengths make it well suited for deployment in intelligent transportation
+applications such as automated law enforcement and access control.
+
+---
+
+### 6. The Patrologia Graeca Corpus: OCR, Annotation, and Open Release of Noisy Nineteenth-Century Polytonic Greek Editions
 
 - arXiv: [2603.09470v1](https://arxiv.org/abs/2603.09470v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2603.09470v1)
@@ -195,41 +382,39 @@ document images and highlight substantial opportunities for future research.
 - 发布时间: 2026-03-10T10:21:54Z
 - 分类: cs.CV
 - 相关性评分: 18
-- 主题标签: 多调希腊语OCR、古文献数字化、布局检测、嘈杂文本识别、语料库构建
+- 主题标签: 历史文档OCR、多调希腊语、语料库发布、布局检测、噪声文本识别
 
 **中文摘要**
 
-> 本文发布Patrologia Graeca Corpus，首个针对19世纪古希腊语版本的大规模开放OCR与语言资源。该语料库覆盖Patrologia Graeca未数字化卷册，包含复杂双语（希腊语-拉丁语）布局和高度退化的多调希腊语排版。通过结合YOLO布局检测与CRNN文本识别的专用流程，实现1.05%字符错误率和4.69%词错误率，显著优于现有多调希腊语OCR系统。语料库包含约六百万词元化和词性标注的词汇，对齐完整OCR与布局注释，为嘈杂多调希腊语OCR设立新基准，并提供未来模型训练材料。
+> 本文介绍了Patrologia Graeca语料库，首个针对19世纪古希腊版本的大规模开放OCR和语言资源。该集合覆盖了Patrologia Graeca剩余未数字化的卷册，这些卷册以复杂的双语（希腊语-拉丁语）布局印刷，并具有高度退化的多调希腊语排版。通过专用管道结合基于YOLO的布局检测和基于CRNN的文本识别，实现了1.05%的字符错误率和4.69%的词错误率，大幅优于现有的多调希腊语OCR系统。所得语料库包含约六百万个词元化和词性标注的令牌，与完整的OCR和布局注释对齐。除了其文献学价值外，该语料库为噪声多调希腊语OCR建立了新基准，并为未来模型（包括大语言模型）提供了训练材料。
 
 **核心创新概述**
 
-> 首个针对嘈杂多调希腊语的大规模开放OCR语料库，采用专用布局检测与文本识别流程，在退化排版上实现低错误率，为古文献数字化设立新标准。
+> 针对高度退化的多调希腊语文档，提出专用OCR管道，结合YOLO布局检测和CRNN文本识别，实现低错误率，并发布首个大规模开放语料库。
 
 **创新点拆解**
 
-- YOLO与CRNN结合的专用OCR流程用于嘈杂多调希腊语
-- 大规模双语布局文档的完整OCR与标注发布
-- 极低错误率（CER 1.05%, WER 4.69%）在退化文本上
-- 语料库包含词元化和词性标注，支持语言学与OCR研究
+- 专用OCR管道，结合YOLO和CRNN，优化对噪声多调希腊语文档的处理
+- 发布大规模开放语料库，包含OCR、布局和语言注释，促进研究
+- 为多调希腊语OCR建立新基准，推动技术进展
 
 **当前局限**
 
-> 流程可能依赖特定排版特征，泛化到其他古语言或更严重退化文本时性能未知；未评估实时处理能力。
+> 语料库可能覆盖文档类型有限；管道可能对其他语言或布局的泛化能力不足。
 
 **后续可改进方向**
 
-- 扩展流程支持更多古语言和排版风格
-- 集成深度学习增强的图像预处理以处理更严重退化
-- 开发端到端模型以减少流程复杂性
-- 优化布局检测对非标准文档结构的适应性
+- 扩展语料库以包含更多历史文档类型和语言
+- 优化OCR管道，提高对极端退化文本的识别精度
+- 探索利用语料库训练更高效的多模态模型
 
 **工程启发**
 
-> 高，为古文献数字化提供可靠工具和基准数据集，促进文化遗产保存与学术研究。
+> 中，语料库和基准对学术研究有价值，但实际工程应用需进一步模型优化。
 
 **为什么值得关注**
 
-> 核心聚焦OCR技术，特别是针对嘈杂、多调文本的识别，是OCR在挑战性场景下的前沿应用。
+> 核心为OCR技术，专注于噪声文档的文本提取和布局分析，是OCR在历史文档处理中的前沿应用。
 
 **原始摘要**
 
@@ -246,128 +431,75 @@ including LLMs.
 
 ---
 
-### 4. A Hybrid Vision Transformer Approach for Mathematical Expression Recognition
+### 7. SiDiaC-v.2.0: Sinhala Diachronic Corpus Version 2.0
 
-- arXiv: [2603.07929v1](https://arxiv.org/abs/2603.07929v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.07929v1)
-- 作者: Anh Duy Le, Van Linh Pham, Vinh Loi Ly, Nam Quan Nguyen, Huu Thang Nguyen, Tuan Anh Tran
-- 发布时间: 2026-03-09T03:49:57Z
-- 分类: cs.CV
-- 相关性评分: 17
-- 主题标签: 数学表达式识别、视觉变换器、2D位置编码、覆盖注意力、文档分析
-
-**中文摘要**
-
-> 本文提出一种混合视觉变换器方法用于数学表达式识别，该任务因二维结构和符号尺寸差异而比文本识别更复杂。方法使用带2D位置编码的混合视觉变换器作为编码器，以提取图像中符号间的复杂关系，并采用覆盖注意力解码器以更好跟踪注意力历史，处理解析不足和过度解析问题。实验在IM2LATEX-100K数据集上进行，显示方法有效性，达到89.94 BLEU分数，优于当前最先进方法。
-
-**核心创新概述**
-
-> 首次将混合视觉变换器与2D位置编码结合用于数学表达式识别，引入覆盖注意力解码器以改善解析问题，在标准数据集上实现SOTA性能。
-
-**创新点拆解**
-
-- 混合视觉变换器编码器结合2D位置编码以捕捉二维结构
-- 覆盖注意力解码器用于管理注意力历史
-- 利用ViT的[CLS]令牌作为解码器初始嵌入
-- 在数学表达式识别任务上达到SOTA BLEU分数
-
-**当前局限**
-
-> 方法在更复杂或手写数学表达式上的泛化能力未验证；计算成本可能较高，适合实时应用。
-
-**后续可改进方向**
-
-- 优化模型效率以支持实时或移动端部署
-- 扩展数据集涵盖手写和更复杂表达式
-- 研究多模态输入（如结合LaTeX序列）以提升准确性
-- 增强对模糊或低质量图像的鲁棒性
-
-**工程启发**
-
-> 中高，为数学文档自动化处理提供先进识别技术，适用于教育、科研和出版领域。
-
-**为什么值得关注**
-
-> 数学表达式识别是文档分析的重要子任务，依赖OCR式图像到序列转换，是OCR在结构化内容识别上的延伸。
-
-**原始摘要**
-
-One of the crucial challenges taken in document analysis is mathematical expression recognition.
-Unlike text recognition which only focuses on one-dimensional structure images, mathematical
-expression recognition is a much more complicated problem because of its two-dimensional structure
-and different symbol size. In this paper, we propose using a Hybrid Vision Transformer (HVT) with 2D
-positional encoding as the encoder to extract the complex relationship between symbols from the
-image. A coverage attention decoder is used to better track attention's history to handle the under-
-parsing and over-parsing problems. We also showed the benefit of using the [CLS] token of ViT as the
-initial embedding of the decoder. Experiments performed on the IM2LATEX-100K dataset have shown the
-effectiveness of our method by achieving a BLEU score of 89.94 and outperforming current state-of-
-the-art methods.
-
----
-
-### 5. OfficeQA Pro: An Enterprise Benchmark for End-to-End Grounded Reasoning
-
-- arXiv: [2603.08655v1](https://arxiv.org/abs/2603.08655v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.08655v1)
-- 作者: Krista Opsahl-Ong, Arnav Singhvi, Jasmine Collins, Ivan Zhou, Cindy Wang, Ashutosh Baheti, Owen Oertell, Jacob Portes, Sam Havens, Erich Elsen, Michael Bendersky, Matei Zaharia, Xing Chen
-- 发布时间: 2026-03-09T17:34:53Z
-- 分类: cs.AI, cs.CL, cs.IR
-- 相关性评分: 15
-- 主题标签: 文档推理基准、大语言模型评估、表格数据处理、结构化表示、企级AI
+- arXiv: [2603.10861v1](https://arxiv.org/abs/2603.10861v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2603.10861v1)
+- 作者: Nevidu Jayatilleke, Nisansa de Silva, Uthpala Nimanthi, Gagani Kulathilaka, Azra Safrullah, Johan Sofalas
+- 发布时间: 2026-03-11T15:10:32Z
+- 分类: cs.CL
+- 相关性评分: 13
+- 主题标签: 低资源语言、语料库构建、OCR后处理、历时分析、文本标注
 
 **中文摘要**
 
-> 本文介绍OfficeQA Pro，一个用于评估AI代理在大型异构文档语料库上进行基于文档的推理的基准。语料库包含近100年的美国财政部公报，共89,000页和超过2600万个数值。基准包含133个需要精确文档解析、检索和分析推理的问题，涉及非结构化文本和表格数据。前沿大语言模型在仅依赖参数知识时准确率低于5%，附加网络访问后低于12%，即使直接访问文档语料库，平均准确率也仅34.1%。提供由Databricks ai_parse_document生成的结构化文档表示可使性能相对提升16.1%。分析表明，在企级基于文档的推理任务上，代理可靠性仍有显著提升空间。
+> SiDiaC-v.2.0 是目前最大的僧伽罗语历时语料库，覆盖出版日期从公元1800年到1955年，书写日期从公元5世纪到20世纪。该语料库包含185部文学作品中的24.4万个单词，经过严格筛选、预处理和版权合规检查，并进行广泛后处理。此外，一个包含59份文档、总计7万个单词的子集根据书写日期进行了标注。文本选自斯里兰卡国家图书馆的SiDiaC-v.1.0未筛选列表，使用Google Document AI OCR进行数字化，后处理包括纠正格式问题、处理代码混合、添加特殊标记和修复错误标记。语料库构建借鉴了其他语料库（如FarPaHC、SiDiaC-v.1.0和CCOHA）的做法，特别是在句法标注和文本规范化策略方面，考虑到法罗语和僧伽罗语同为低资源语言的相似性。语料库按体裁分为两层：主要分类为二元（非虚构或虚构），次要分类更详细，包括宗教、历史、诗歌、语言和医学等具体体裁。尽管面临资源有限的挑战，SiDiaC-v.2.0为僧伽罗语NLP提供了全面资源。
 
 **核心创新概述**
 
-> 首个针对企级多文档推理的基准，聚焦大规模数值和表格数据，系统评估前沿大语言模型在基于文档任务上的局限性，并量化结构化表示的价值。
+> 构建了目前最大的僧伽罗语历时语料库，覆盖广泛历史时期，并引入基于书写日期的标注子集，结合OCR数字化和后处理流程，为低资源语言NLP研究提供标准化数据。
 
 **创新点拆解**
 
-- 大规模异构文档语料库的构建与基准设计
-- 针对数值和表格数据的精确推理问题
-- 实证展示大语言模型在基于文档任务上的性能瓶颈
-- 结构化文档表示对性能提升的量化分析
+- 大规模历时语料库构建，涵盖多个世纪的历史跨度
+- 基于书写日期的标注子集，支持时间序列分析
+- 利用Google Document AI OCR进行数字化，结合后处理纠正格式和标记问题
+- 借鉴其他低资源语料库的标注和规范化策略，提升数据质量
+- 按体裁分层分类，支持多领域NLP任务
 
 **当前局限**
 
-> 基准规模相对较小（133问题），可能未覆盖所有推理类型；依赖特定文档源（财政部公报），泛化性待验证。
+> 语料库规模相对较小（24.4万单词），覆盖时期可能不完整，后处理可能引入人为错误，且依赖特定OCR工具（Google Document AI），通用性受限。
 
 **后续可改进方向**
 
-- 开发更高效的文档解析与检索模块以支持大规模语料库
-- 优化表格数据表示与推理方法
-- 集成多模态理解以处理图表等非文本元素
-- 研究小样本或零样本学习以降低标注成本
+- 扩展语料库规模，纳入更多历史时期和体裁
+- 开发更鲁棒的OCR后处理算法，减少人工干预
+- 探索多语言OCR工具比较，提升数字化效率
+- 增强标注深度，如句法或语义层面
+- 集成更多低资源语言语料库构建最佳实践
 
 **工程启发**
 
-> 高，为企级文档AI系统提供评估标准，推动自动化决策和数据分析工具开发。
+> 为僧伽罗语NLP任务（如文本分类、语言建模）提供基准数据集，支持低资源语言研究，可应用于历史文献数字化和文化遗产保护。
 
 **为什么值得关注**
 
-> 基准依赖文档解析作为基础步骤，涉及OCR或类似技术用于文本提取；结构化表示生成可借鉴OCR布局分析。
+> 涉及OCR技术在低资源语言文档数字化中的应用，后处理流程对OCR错误纠正有参考价值，语料库构建方法可推广到其他语言。
 
 **原始摘要**
 
-We introduce OfficeQA Pro, a benchmark for evaluating AI agents on grounded, multi-document
-reasoning over a large and heterogeneous document corpus. The corpus consists of U.S. Treasury
-Bulletins spanning nearly 100 years, comprising 89,000 pages and over 26 million numerical values.
-OfficeQA Pro consists of 133 questions that require precise document parsing, retrieval, and
-analytical reasoning across both unstructured text and tabular data. Frontier LLMs including Claude
-Opus 4.6, GPT-5.4, and Gemini 3.1 Pro Preview achieve less than 5% accuracy on OfficeQA Pro when
-relying on parametric knowledge, and less than 12% with additional access to the web. When provided
-directly with the document corpus, frontier agents still struggle on over half of questions, scoring
-34.1% on average. We find that providing agents with a structured document representation produced
-by Databricks' ai_parse_document yields a 16.1% average relative performance gain across agents. We
-conduct additional ablations to study the effects of model selection, table representation,
-retrieval strategy, and test-time scaling on performance. Despite these improvements, significant
-headroom remains before agents can be considered reliable at enterprise-grade grounded reasoning.
+SiDiaC-v.2.0 is the largest comprehensive Sinhala Diachronic Corpus to date, covering a period from
+1800 CE to 1955 CE in terms of publication dates, and a historical span from the 5th to the 20th
+century CE in terms of written dates. The corpus consists of 244k words across 185 literary works
+that underwent thorough filtering, preprocessing, and copyright compliance checks, followed by
+extensive post-processing. Additionally, a subset of 59 documents totalling 70k words was annotated
+based on their written dates. Texts from the National Library of Sri Lanka were selected from the
+SiDiaC-v.1.0 non-filtered list, which was digitised using Google Document AI OCR. This was followed
+by post-processing to correct formatting issues, address code-mixing, include special tokens, and
+fix malformed tokens. The construction of SiDiaC-v.2.0 was informed by practices from other corpora,
+such as FarPaHC, SiDiaC-v.1.0, and CCOHA. This was particularly relevant for syntactic annotation
+and text normalisation strategies, given the shared characteristics of low-resource language status
+between Faroese and the similar cleaning strategies utilised in CCOHA. This corpus is categorised
+into two layers based on genres: primary and secondary. The primary categorisation is binary,
+assigning each book to either Non-Fiction or Fiction. The secondary categorisation is more detailed,
+grouping texts under specific genres such as Religious, History, Poetry, Language, and Medical.
+Despite facing challenges due to limited resources, SiDiaC-v.2.0 serves as a comprehensive resource
+for Sinhala NLP, building upon the work previously done in SiDiaC-v.1.0.
 
 ---
 
-### 6. PromptDLA: A Domain-aware Prompt Document Layout Analysis Framework with Descriptive Knowledge as a Cue
+### 8. PromptDLA: A Domain-aware Prompt Document Layout Analysis Framework with Descriptive Knowledge as a Cue
 
 - arXiv: [2603.09414v1](https://arxiv.org/abs/2603.09414v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2603.09414v1)
@@ -375,41 +507,43 @@ headroom remains before agents can be considered reliable at enterprise-grade gr
 - 发布时间: 2026-03-10T09:30:00Z
 - 分类: cs.CV, cs.AI
 - 相关性评分: 11
-- 主题标签: 文档布局分析、提示学习、领域自适应、多领域泛化、结构理解
+- 主题标签: 文档布局分析、提示学习、领域自适应、多域泛化、计算机视觉
 
 **中文摘要**
 
-> 本文提出PromptDLA，一个领域感知的提示文档布局分析框架，利用描述性知识作为线索整合领域先验。现有工作常合并不同领域数据以提升DLA泛化，但忽略布局结构差异，导致次优性能。PromptDLA采用独特领域感知提示器，根据数据域特定属性定制提示，作为线索引导DLA关注关键特征和结构。大量实验显示，在DocLayNet、PubLayNet、M6Doc和D$^4$LA数据集上达到最先进性能。
+> 文档布局分析（DLA）对文档人工智能至关重要，近年来受到关注，涌现了大量公共DLA数据集。现有工作常结合不同领域的数据集以提升DLA泛化能力，但直接合并训练往往导致性能次优，因为忽略了不同领域固有的布局结构差异，如标注风格、文档类型和语言。本文提出PromptDLA，一个领域感知的提示文档布局分析框架，有效利用描述性知识作为线索，将领域先验集成到DLA中。创新的PromptDLA具有独特的领域感知提示器，根据数据域特定属性定制提示，这些提示作为线索引导DLA关注关键特征和结构，增强模型跨域泛化能力。大量实验表明，该方法在DocLayNet、PubLayNet、M6Doc和D$^4$LA数据集上达到最先进性能。
 
 **核心创新概述**
 
-> 首次将提示学习引入文档布局分析，设计领域感知提示器以自适应整合领域知识，解决多领域数据合并时的性能下降问题，在多个基准上实现SOTA。
+> 提出首个领域感知提示框架PromptDLA，通过定制化提示整合领域先验，解决多域DLA数据集合并训练时的布局结构差异问题，显著提升跨域泛化性能。
 
 **创新点拆解**
 
-- 领域感知提示器用于定制化提示生成
-- 利用描述性知识作为线索引导布局分析
-- 自适应整合多领域先验以提升泛化
-- 在多个公共DLA数据集上达到SOTA性能
+- 领域感知提示器设计，基于数据属性动态生成提示
+- 利用描述性知识作为线索，引导模型关注关键布局特征
+- 集成领域先验到DLA任务，减少多域数据冲突
+- 在多个公共数据集上验证SOTA性能
+- 开源代码促进可复现性
 
 **当前局限**
 
-> 提示设计可能依赖领域标注，在无标签或新领域上应用受限；未深入探讨计算开销与实时性能。
+> 提示设计可能依赖手动领域知识定义，泛化到未见领域有限，实验数据集主要为英文文档，多语言支持未充分验证。
 
 **后续可改进方向**
 
-- 开发自动化提示生成以减少人工干预
-- 扩展框架支持更多文档类型和语言
-- 优化模型效率以用于大规模部署
-- 研究零样本或小样本迁移学习能力
+- 自动化提示生成，减少人工干预
+- 扩展多语言和低资源文档评估
+- 集成更复杂的领域自适应技术
+- 探索提示与模型架构的协同优化
+- 增强对非标准布局（如手写文档）的处理能力
 
 **工程启发**
 
-> 高，为文档AI提供可泛化的布局分析工具，适用于多样化文档处理场景，如出版、法律和金融。
+> 提升文档AI系统的布局分析准确性和泛化能力，适用于多领域文档处理（如学术论文、商业报告），支持下游任务如OCR和内容提取。
 
 **为什么值得关注**
 
-> 文档布局分析是OCR后处理的关键步骤，直接影响文本提取和结构理解；提示学习为DLA提供新范式。
+> 直接针对文档布局分析任务，与OCR紧密相关，提示方法可迁移到其他文档解析任务，为多域OCR系统提供新思路。
 
 **原始摘要**
 
@@ -430,7 +564,7 @@ https://github.com/Zirui00/PromptDLA.
 
 ---
 
-### 7. Logics-Parsing-Omni Technical Report
+### 9. Logics-Parsing-Omni Technical Report
 
 - arXiv: [2603.09677v1](https://arxiv.org/abs/2603.09677v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2603.09677v1)
@@ -438,42 +572,43 @@ https://github.com/Zirui00/PromptDLA.
 - 发布时间: 2026-03-10T13:46:32Z
 - 分类: cs.AI
 - 相关性评分: 10
-- 主题标签: 多模态解析、统一分类法、证据锚定、结构化知识转换、OCR
+- 主题标签: 多模态解析、统一分类法、证据锚定、OCR集成、结构化知识提取
 
 **中文摘要**
 
-> 针对多模态解析中任务定义碎片化和非结构化数据异质性的挑战，本文提出了Omni Parsing框架。该框架建立了一个涵盖文档、图像和音视频流的统一分类法，引入了一种连接感知与认知的渐进式解析范式。具体包括三个层次：1）整体检测，实现对象或事件的精确时空定位，为感知建立几何基线；2）细粒度识别，对定位对象进行符号化（如OCR/ASR）和属性提取，完成结构化实体解析；3）多级解释，构建从局部语义到全局逻辑的推理链。框架的关键优势是证据锚定机制，强制高层语义描述与低层事实严格对齐，实现基于证据的逻辑归纳，将非结构化信号转化为可定位、可枚举、可追溯的标准化知识。在此基础上，构建了标准化数据集并发布了Logics-Parsing-Omni模型，成功将复杂音视频信号转换为机器可读的结构化知识。实验表明细粒度感知与高层认知协同作用，有效提升模型可靠性。此外，引入OmniParsingBench进行定量评估。
+> 针对多模态解析中任务定义碎片化和非结构化数据异质性的挑战，本文提出Omni Parsing框架。该框架建立了一个覆盖文档、图像和音视频流的统一分类法，引入渐进式解析范式，连接感知和认知。具体包括三个层次：1）整体检测，实现对象或事件的精确时空定位，为感知建立几何基线；2）细粒度识别，对局部对象进行符号化（如OCR/ASR）和属性提取，完成结构化实体解析；3）多级解释，构建从局部语义到全局逻辑的推理链。关键优势是证据锚定机制，强制高层语义描述与低层事实严格对齐，实现“基于证据”的逻辑归纳，将非结构化信号转换为可定位、可枚举和可追溯的标准化知识。基于此，构建了标准化数据集并发布Logics-Parsing-Omni模型，成功将复杂音视频信号转换为机器可读结构化知识。实验表明细粒度感知与高层认知协同，有效提升模型可靠性。此外，引入OmniParsingBench进行定量评估。
 
 **核心创新概述**
 
-> 提出统一的多模态解析框架，通过渐进式解析范式连接感知与认知，并引入证据锚定机制确保语义与事实对齐，实现非结构化数据的标准化知识转换。
+> 提出统一的多模态解析框架Omni Parsing，整合文档、图像和音视频流，通过渐进式解析和证据锚定机制，实现从低层感知到高层认知的端到端结构化知识转换。
 
 **创新点拆解**
 
-- 统一分类法覆盖文档、图像和音视频流
-- 渐进式解析范式连接感知与认知
-- 证据锚定机制强制语义与事实对齐
-- 构建标准化数据集和模型Logics-Parsing-Omni
-- 引入OmniParsingBench进行定量评估
+- 统一分类法覆盖多模态数据，减少任务碎片化
+- 渐进式解析范式，分层处理从检测到解释
+- 证据锚定机制，确保语义与事实对齐
+- 集成OCR/ASR作为符号化步骤，支持结构化实体解析
+- 发布标准化数据集和模型，促进可复现研究
 
 **当前局限**
 
-> 未具体讨论框架在不同领域或低资源场景下的泛化能力，以及计算开销和实时性限制。
+> 框架复杂度高，可能计算开销大；证据锚定依赖精确的低层检测，错误传播风险；多模态数据融合挑战未完全解决。
 
 **后续可改进方向**
 
-- 扩展框架到更多模态或跨语言任务
-- 优化计算效率以支持实时应用
-- 增强在噪声数据或小样本下的鲁棒性
-- 探索与其他AI技术（如强化学习）的集成
+- 优化计算效率，适用于实时应用
+- 增强错误容忍机制，减少传播影响
+- 扩展更多模态（如3D数据）支持
+- 开发更鲁棒的证据对齐算法
+- 探索轻量级模型变体
 
 **工程启发**
 
-> 高，框架提供标准化解析流程，可应用于文档OCR、视频分析等领域，提升数据处理的自动化和可靠性。
+> 为多模态AI系统提供统一解析框架，适用于文档分析、视频理解和知识图谱构建，提升自动化处理能力。
 
 **为什么值得关注**
 
-> 直接涉及OCR作为细粒度识别的一部分，强调符号化和结构化解析，对文档处理技术有重要参考价值。
+> 直接集成OCR作为关键组件，用于文档符号化，框架方法可提升OCR在复杂多模态环境中的性能，支持端到端文档解析。
 
 **原始摘要**
 
@@ -498,107 +633,51 @@ https://github.com/alibaba/Logics-Parsing/tree/master/Logics-Parsing-Omni.
 
 ---
 
-### 8. A Consensus-Driven Multi-LLM Pipeline for Missing-Person Investigations
+### 10. Tracking Cancer Through Text: Longitudinal Extraction From Radiology Reports Using Open-Source Large Language Models
 
-- arXiv: [2603.08954v1](https://arxiv.org/abs/2603.08954v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.08954v1)
-- 作者: Joshua Castillo, Ravi Mukkamala
-- 发布时间: 2026-03-09T21:40:17Z
-- 分类: cs.AI, cs.CL, cs.DC, cs.IR, cs.LG
-- 相关性评分: 9
-- 主题标签: 多LLM管道、共识机制、QLoRA微调、信息提取、结构化处理
-
-**中文摘要**
-
-> 失踪人员调查的前72小时对成功找回至关重要。Guardian是一个端到端系统，旨在支持失踪儿童调查和早期搜索规划。本文介绍了Guardian LLM Pipeline，一个多模型系统，其中LLMs用于智能信息提取和处理与失踪人员搜索操作相关的信息。该管道协调跨任务专用LLM模型的端到端执行，并调用共识LLM引擎比较多个模型输出并解决分歧。通过使用精心策划的数据集进行QLoRA微调，进一步强化管道。设计符合先前关于弱监督和LLM辅助标注的工作，强调保守、可审计地使用LLMs作为结构化提取器和标注器，而非不受约束的端到端决策者。
-
-**核心创新概述**
-
-> 提出基于共识驱动的多LLM管道，用于失踪人员调查的信息提取，结合QLoRA微调和共识机制提升系统可靠性和可审计性。
-
-**创新点拆解**
-
-- 多LLM管道协调任务专用模型
-- 共识LLM引擎解决输出分歧
-- QLoRA微调优化模型性能
-- 强调LLMs作为结构化提取器和标注器的保守使用
-
-**当前局限**
-
-> 系统依赖高质量标注数据，可能在实际应用中面临数据稀缺或隐私限制；共识机制可能增加计算开销。
-
-**后续可改进方向**
-
-- 集成更多模态数据（如图像或视频）
-- 开发自适应微调方法以减少数据依赖
-- 优化共识算法以提高效率
-- 扩展应用到其他紧急响应场景
-
-**工程启发**
-
-> 中高，系统在失踪人员调查中提供自动化信息处理，但需确保数据隐私和实时性，适合特定领域部署。
-
-**为什么值得关注**
-
-> 涉及LLMs在信息提取和结构化处理中的应用，与OCR相关任务（如文档解析）有间接关联，强调可审计性和可靠性。
-
-**原始摘要**
-
-The first 72 hours of a missing-person investigation are critical for successful recovery. Guardian
-is an end-to-end system designed to support missing-child investigation and early search planning.
-This paper presents the Guardian LLM Pipeline, a multi-model system in which LLMs are used for
-intelligent information extraction and processing related to missing-person search operations. The
-pipeline coordinates end-to-end execution across task-specialized LLM models and invokes a consensus
-LLM engine that compares multiple model outputs and resolves disagreements. The pipeline is further
-strengthened by QLoRA-based fine-tuning, using curated datasets. The presented design aligns with
-prior work on weak supervision and LLM-assisted annotation, emphasizing conservative, auditable use
-of LLMs as structured extractors and labelers rather than unconstrained end-to-end decision makers.
-
----
-
-### 9. Tracking Cancer Through Text: Longitudinal Extraction From Radiology Reports Using Open-Source Large Language Models
-
-- arXiv: [2603.09638v1](https://arxiv.org/abs/2603.09638v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.09638v1)
+- arXiv: [2603.09638v2](https://arxiv.org/abs/2603.09638v2)
+- PDF: [下载链接](https://arxiv.org/pdf/2603.09638v2)
 - 作者: Luc Builtjes, Alessa Hering
 - 发布时间: 2026-03-10T13:13:43Z
 - 分类: cs.CL
 - 相关性评分: 6
-- 主题标签: 开源LLM、纵向信息提取、医疗文本处理、结构化数据、隐私保护
+- 主题标签: 临床文本提取、开源LLM、纵向分析、隐私保护、医疗文档解析
 
 **中文摘要**
 
-> 放射学报告捕获了肿瘤负荷、治疗反应和疾病进展的关键纵向信息，但其非结构化叙述格式使自动化分析复杂化。尽管大语言模型（LLMs）在临床文本处理方面取得进展，但大多数最先进系统仍是专有的，限制了在隐私敏感的医疗环境中的适用性。我们提出了一个完全开源、可本地部署的管道，用于从放射学报告中提取纵向信息，使用\texttt{llm\_extractinator}框架实现。该系统应用\texttt{qwen2.5-72b}模型根据RECIST标准提取和链接目标、非目标和新病灶数据跨时间点。在50对荷兰CT胸腹报告上的评估显示高提取性能，属性级准确度为目标病灶93.7%、非目标病灶94.9%、新病灶94.0%。该方法证明开源LLMs可以在多时间点肿瘤学任务中实现临床有意义的性能，同时确保数据隐私和可重复性。这些结果突显了可本地部署LLMs在从常规临床文本中提取结构化纵向数据的可扩展潜力。
+> 放射学报告捕获了肿瘤负荷、治疗反应和疾病进展的关键纵向信息，但其非结构化叙述格式使自动化分析复杂化。尽管大语言模型（LLMs）推进了临床文本处理，但大多数最先进系统是专有的，限制了在隐私敏感医疗环境中的应用。我们提出一个完全开源、可本地部署的流水线，用于从放射学报告中提取纵向信息，使用llm_extractinator框架实现。系统应用qwen2.5-72b模型，根据RECIST标准提取和链接目标、非目标和新病灶数据跨时间点。在50对荷兰CT胸腹报告对上评估，提取性能高，属性级准确度为目标病灶93.7%、非目标病灶94.9%、新病灶94.0%。该方法表明开源LLMs能在多时间点肿瘤学任务中实现临床意义性能，同时确保数据隐私和可复现性。结果突显了可本地部署LLMs在从常规临床文本中提取结构化纵向数据方面的潜力。
 
 **核心创新概述**
 
-> 开发开源、可本地部署的LLM管道，用于从放射学报告中提取结构化纵向数据，在隐私敏感医疗环境中实现高精度信息提取。
+> 开发首个完全开源、可本地部署的流水线，利用开源LLM（qwen2.5-72b）从放射学报告中提取纵向信息，实现高精度临床数据提取，同时解决医疗隐私问题。
 
 **创新点拆解**
 
-- 完全开源和可本地部署的管道
-- 使用\texttt{qwen2.5-72b}模型进行多时间点提取
-- 基于RECIST标准的结构化数据链接
-- 高属性级准确度（>93%）
+- 开源本地部署流水线，避免专有系统限制
+- 使用qwen2.5-72b模型，实现高精度多时间点提取
+- 遵循RECIST标准，确保临床相关性
+- 在隐私敏感环境中验证性能
+- 促进可复现和可扩展的医疗文本分析
 
 **当前局限**
 
-> 评估数据规模较小（50对报告），可能限制泛化性；未讨论模型在不同语言或医疗中心间的适应性。
+> 评估数据集较小（50对报告），可能泛化性有限；模型依赖特定LLM，未比较其他开源模型；多语言支持（如荷兰语）未广泛测试。
 
 **后续可改进方向**
 
-- 扩大数据集以增强模型鲁棒性
-- 探索多语言或跨机构适配
-- 集成更多临床模态（如影像数据）
-- 优化管道以降低计算资源需求
+- 扩大数据集规模和多样性，提升泛化能力
+- 比较不同开源LLMs的性能
+- 扩展多语言和跨机构验证
+- 集成更复杂的时序建模技术
+- 优化本地部署效率
 
 **工程启发**
 
-> 高，管道在医疗领域提供隐私保护的数据提取方案，可推广到其他文档OCR任务，促进自动化临床分析。
+> 为医疗AI提供隐私安全的文本提取工具，支持肿瘤学研究和临床决策，降低数据共享风险。
 
 **为什么值得关注**
 
-> 直接涉及LLMs在文本提取和结构化处理中的应用，与OCR技术（如从文档中提取信息）高度相关，强调开源和可部署性。
+> 涉及文档解析（放射学报告）和OCR后文本处理，开源方法可迁移到其他文档类型，为OCR系统在医疗领域的应用提供案例。
 
 **原始摘要**
 
@@ -607,14 +686,13 @@ disease progression, yet their unstructured narrative format complicates automat
 large language models (LLMs) have advanced clinical text processing, most state-of-the-art systems
 remain proprietary, limiting their applicability in privacy-sensitive healthcare environments. We
 present a fully open-source, locally deployable pipeline for longitudinal information extraction
-from radiology reports, implemented using the \texttt{llm\_extractinator} framework. The system
-applies the \texttt{qwen2.5-72b} model to extract and link target, non-target, and new lesion data
-across time points in accordance with RECIST criteria. Evaluation on 50 Dutch CT Thorax/Abdomen
-report pairs yielded high extraction performance, with attribute-level accuracies of 93.7\% for
-target lesions, 94.9\% for non-target lesions, and 94.0\% for new lesions. The approach demonstrates
-that open-source LLMs can achieve clinically meaningful performance in multi-timepoint oncology
-tasks while ensuring data privacy and reproducibility. These results highlight the potential of
-locally deployable LLMs for scalable extraction of structured longitudinal data from routine
-clinical text.
+from radiology reports, implemented using the llm_extractinator framework. The system applies the
+qwen2.5-72b model to extract and link target, non-target, and new lesion data across time points in
+accordance with RECIST criteria. Evaluation on 50 Dutch CT Thorax/Abdomen report pairs yielded high
+extraction performance, with attribute-level accuracies of 93.7% for target lesions, 94.9% for non-
+target lesions, and 94.0% for new lesions. The approach demonstrates that open-source LLMs can
+achieve clinically meaningful performance in multi-timepoint oncology tasks while ensuring data
+privacy and reproducibility. These results highlight the potential of locally deployable LLMs for
+scalable extraction of structured longitudinal data from routine clinical text.
 
 ---
