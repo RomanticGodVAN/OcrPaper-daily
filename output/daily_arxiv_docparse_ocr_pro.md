@@ -1,10 +1,299 @@
-# OCR / 文档解析研究日报（2026-03-16）
+# OCR / 文档解析研究日报（2026-03-17）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-03-16 04:11:21`
+- 生成时间（UTC）：`2026-03-17 03:43:28`
 - 大模型综合分析：`开启`
 
-今天没有筛到符合条件的新论文。
+## 一、今日执行摘要
+
+> 今日论文聚焦于OCR和文档解析的多语言基准、文本超分辨率、并行解码和字形渲染等关键领域。SEA-Vision基准突出了低资源语言文档理解的挑战，DualTSR简化了文本超分辨率流程，PTP方法加速了文档解析，GlyphPrinter提升了字形准确性。这些研究共同推动了模型效率、多语言支持和渲染质量的进步，为工程应用提供了新工具和方法。
+
+## 二、今日趋势判断
+
+当前研究趋势强调多语言和低资源环境下的文档理解，通过基准构建和混合标注流程应对多样性挑战；同时，模型优化方向包括简化架构（如统一扩散框架）、加速推理（如并行解码）和提升精度（如区域偏好优化），以减少外部依赖并增强实际部署能力。
+
+## 三、今日论文概览
+
+1. **SEA-Vision: A Multilingual Benchmark for Comprehensive Document and Scene Text Understanding in Southeast Asia** | 标签：多语言基准、文档解析、视觉问答、低资源语言、混合标注
+2. **DualTSR: Unified Dual-Diffusion Transformer for Scene Text Image Super-Resolution** | 标签：文本超分辨率、双重扩散、Transformer、端到端学习、图像增强
+3. **Efficient Document Parsing via Parallel Token Prediction** | 标签：并行解码、视觉语言模型、文档解析、数据生成、速度优化
+4. **GlyphPrinter: Region-Grouped Direct Preference Optimization for Glyph-Accurate Visual Text Rendering** | 标签：字形渲染、偏好优化、区域标注、文本生成、视觉质量
+
+## 四、今天 OCR / 文档解析论文里的主要创新点
+
+- 开发混合标注流程结合自动过滤和MLLM辅助，降低多语言数据标注成本。
+- 使用双重扩散目标整合连续和离散分布建模，实现端到端文本超分辨率。
+- 设计并行令牌预测机制，使视觉语言模型能并行解码以加速文档解析。
+- 提出区域分组直接偏好优化，针对局部字形错误提升文本渲染精度。
+
+## 五、后续 OCR 领域值得推进的改进方向
+
+- 扩展多语言基准至全球更多低资源语言和文档类型，以提升模型泛化能力。
+- 优化文本超分辨率方法，支持多语言场景并提高训练和推理效率。
+- 改进并行解码策略，减少错误累积并适配多样化文档格式和语言。
+- 开发自动化区域标注流程，降低字形渲染数据依赖并扩展至复杂字符集。
+
+## 六、工程落地启发
+
+- SEA-Vision基准可作为多语言OCR评估工具，支持跨境文档处理应用。
+- DualTSR框架简化文本图像增强流程，适用于OCR预处理和文档质量提升。
+- PTP方法可集成到现有视觉语言模型中，显著加速大规模文档解析任务。
+- GlyphPrinter技术能提高文本渲染准确性，适用于字体设计和广告生成场景。
+
+## 七、优先关注论文
+
+- **SEA-Vision: A Multilingual Benchmark for Comprehensive Document and Scene Text Understanding in Southeast Asia**：提供首个东南亚多语言文档解析基准，有助于评估和提升低资源语言模型性能。
+- **DualTSR: Unified Dual-Diffusion Transformer for Scene Text Image Super-Resolution**：简化文本超分辨率架构，减少外部OCR依赖，可能推动更高效的图像预处理技术。
+- **Efficient Document Parsing via Parallel Token Prediction**：提出并行解码方法，显著加速文档解析，适用于实时或高吞吐量应用场景。
+- **GlyphPrinter: Region-Grouped Direct Preference Optimization for Glyph-Accurate Visual Text Rendering**：引入区域偏好优化，提升字形渲染精度，对字体和文档美化应用有潜在价值。
+
+## 八、论文逐篇解析
+
+### 1. SEA-Vision: A Multilingual Benchmark for Comprehensive Document and Scene Text Understanding in Southeast Asia
+
+- arXiv: [2603.15409v1](https://arxiv.org/abs/2603.15409v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2603.15409v1)
+- 作者: Pengfei Yue, Xingran Zhao, Juntao Chen, Peng Hou, Wang Longchao, Jianghang Lin, Shengchuan Zhang, Anxiang Zeng, Liujuan Cao
+- 发布时间: 2026-03-16T15:21:12Z
+- 分类: cs.CL
+- 相关性评分: 21
+- 主题标签: 多语言基准、文档解析、视觉问答、低资源语言、混合标注
+
+**中文摘要**
+
+> 多语言文档和场景文本理解在搜索、金融和公共服务等应用中至关重要，但现有基准大多关注高资源语言，难以评估现实多语言环境中的模型。东南亚地区语言多样、书写系统复杂、文档类型多变，挑战更大。本文介绍SEA-Vision基准，联合评估11种东南亚语言的文档解析和以文本为中心的视觉问答（TEC-VQA）。SEA-Vision包含15,234页文档解析数据，涵盖九种代表性文档类型，标注有页面、块和行级层次标签，并提供7,496个TEC-VQA问答对，涉及文本识别、数值计算、比较分析、逻辑推理和空间理解。为实现多语言多任务标注，设计混合流程，结合自动过滤与评分、MLLM辅助标注和轻量级母语者验证，大幅减少人工标注同时保持高质量。评估多个领先多模态模型，发现在低资源东南亚语言上性能显著下降，突显多语言文档和场景文本理解仍存在较大差距。SEA-Vision有望推动全球文档和场景文本理解进展。
+
+**核心创新概述**
+
+> 提出首个专注于东南亚多语言环境的文档解析和视觉问答基准，覆盖11种语言和多种文档类型，通过混合标注流程高效处理多语言多任务数据。
+
+**创新点拆解**
+
+- 方法设计：开发混合标注流程，结合自动过滤、MLLM辅助标注和母语者验证，降低人工成本并保证质量。
+- 数据：构建大规模多语言基准SEA-Vision，包含文档解析和TEC-VQA任务，覆盖东南亚低资源语言。
+- 任务定义：联合评估文档解析和TEC-VQA，强调文本理解的多方面能力，如逻辑推理和空间理解。
+
+**当前局限**
+
+> 基准主要针对东南亚语言，可能未充分覆盖其他低资源区域；标注流程虽高效，但依赖MLLM和母语者，可能引入偏差或可扩展性限制。
+
+**后续可改进方向**
+
+- 扩展基准至更多全球低资源语言和文档类型，以提升泛化能力。
+- 优化标注流程，减少对特定工具或人员的依赖，提高自动化程度。
+- 探索更高效的多语言模型训练方法，以缓解低资源语言性能下降问题。
+
+**工程启发**
+
+> 高，为多语言OCR和文档理解提供标准化评估工具，支持实际应用如跨境文档处理和公共服务自动化。
+
+**为什么值得关注**
+
+> 直接涉及多语言OCR基准构建和评估，对文档解析和场景文本理解研究有重要参考价值。
+
+**原始摘要**
+
+Multilingual document and scene text understanding plays an important role in applications such as
+search, finance, and public services. However, most existing benchmarks focus on high-resource
+languages and fail to evaluate models in realistic multilingual environments. In Southeast Asia, the
+diversity of languages, complex writing systems, and highly varied document types make this
+challenge even greater. We introduce SEA-Vision, a benchmark that jointly evaluates Document Parsing
+and Text-Centric Visual Question Answering (TEC-VQA) across 11 Southeast Asian languages. SEA-Vision
+contains 15,234 document parsing pages from nine representative document types, annotated with
+hierarchical page-, block-, and line-level labels. It also provides 7,496 TEC-VQA question-answer
+pairs that probe text recognition, numerical calculation, comparative analysis, logical reasoning,
+and spatial understanding. To make such multilingual, multi-task annotation feasible, we design a
+hybrid pipeline for Document Parsing and TEC-VQA. It combines automated filtering and scoring with
+MLLM-assisted labeling and lightweight native-speaker verification, greatly reducing manual labeling
+while maintaining high quality. We evaluate several leading multimodal models and observe pronounced
+performance degradation on low-resource Southeast Asian languages, highlighting substantial
+remaining gaps in multilingual document and scene text understanding. We believe SEA-Vision will
+help drive global progress in document and scene text understanding.
+
+---
+
+### 2. DualTSR: Unified Dual-Diffusion Transformer for Scene Text Image Super-Resolution
+
+- arXiv: [2603.14207v1](https://arxiv.org/abs/2603.14207v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2603.14207v1)
+- 作者: Axi Niu, Kang Zhang, Qingsen Yan, Hao Jin, Jinqiu Sun, Yanning Zhang
+- 发布时间: 2026-03-15T03:50:47Z
+- 分类: cs.CV, cs.AI
+- 相关性评分: 20
+- 主题标签: 文本超分辨率、双重扩散、Transformer、端到端学习、图像增强
+
+**中文摘要**
+
+> 场景文本图像超分辨率（STISR）旨在恢复低分辨率文本图像的高分辨率细节，对人工可读性和机器识别至关重要。现有方法常依赖外部OCR模型获取文本先验或使用复杂多组件架构，难以训练和复现。本文提出DualTSR，统一端到端框架解决这两个问题。DualTSR采用单一多模态Transformer主干，通过双重扩散目标训练，同时通过条件流匹配建模高分辨率图像的连续分布，通过离散扩散建模文本内容的离散分布。这种共享设计使视觉和文本信息在每层交互，模型内部推断文本先验，而非依赖外部OCR模块。相比先前多分支扩散系统，DualTSR提供更简单的端到端公式，减少手工组件。在合成中文基准和定制真实世界评估协议上的实验显示，DualTSR实现强感知质量和文本保真度。
+
+**核心创新概述**
+
+> 提出首个统一双重扩散Transformer框架，将连续图像分布和离散文本分布建模结合，无需外部OCR，简化STISR任务。
+
+**创新点拆解**
+
+- 方法设计：开发双重扩散目标，整合条件流匹配和离散扩散，实现端到端训练。
+- 架构：使用单一多模态Transformer主干，促进视觉-文本交互，减少外部依赖。
+- 训练范式：通过共享设计内部推断文本先验，降低复杂性和计算成本。
+
+**当前局限**
+
+> 方法主要针对中文文本，可能未充分验证在其他语言或复杂场景下的泛化能力；双重扩散训练可能增加计算开销。
+
+**后续可改进方向**
+
+- 扩展方法至多语言文本超分辨率，增强跨语言适用性。
+- 优化扩散过程，提高训练效率和推理速度。
+- 探索更轻量级架构，以适配资源受限环境。
+
+**工程启发**
+
+> 高，简化STISR流程，提升文本图像质量，适用于OCR预处理、文档增强等实际场景。
+
+**为什么值得关注**
+
+> 涉及OCR相关图像处理技术，通过超分辨率改善文本识别输入，对文档解析有辅助作用。
+
+**原始摘要**
+
+Scene Text Image Super-Resolution (STISR) aims to restore high-resolution details in low-resolution
+text images, which is crucial for both human readability and machine recognition. Existing methods,
+however, often depend on external Optical Character Recognition (OCR) models for textual priors or
+rely on complex multi-component architectures that are difficult to train and reproduce. In this
+paper, we introduce DualTSR, a unified end-to-end framework that addresses both issues. DualTSR
+employs a single multimodal transformer backbone trained with a dual diffusion objective. It
+simultaneously models the continuous distribution of high-resolution images via Conditional Flow
+Matching and the discrete distribution of textual content via discrete diffusion. This shared design
+enables visual and textual information to interact at every layer, allowing the model to infer text
+priors internally instead of relying on an external OCR module. Compared with prior multi-branch
+diffusion systems, DualTSR offers a simpler end-to-end formulation with fewer hand-crafted
+components. Experiments on synthetic Chinese benchmarks and a curated real-world evaluation protocol
+show that DualTSR achieves strong perceptual quality and text fidelity.
+
+---
+
+### 3. Efficient Document Parsing via Parallel Token Prediction
+
+- arXiv: [2603.15206v1](https://arxiv.org/abs/2603.15206v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2603.15206v1)
+- 作者: Lei Li, Ze Zhao, Meng Li, Zhongwang Lun, Yi Yuan, Xingjing Lu, Zheng Wei, Jiang Bian, Zang Li
+- 发布时间: 2026-03-16T12:45:34Z
+- 分类: cs.CL, cs.CV
+- 相关性评分: 15
+- 主题标签: 并行解码、视觉语言模型、文档解析、数据生成、速度优化
+
+**中文摘要**
+
+> 文档解析作为基础而关键的视觉任务，正被视觉语言模型（VLMs）革新。然而，VLMs固有的自回归解码造成显著瓶颈，严重限制解析速度。本文提出并行令牌预测（PTP），一种可插拔、模型无关且简单有效的方法，使VLMs能并行生成多个未来令牌，提高样本效率。具体地，在输入序列中插入可学习令牌，并设计相应训练目标，赋予模型文档解析的并行解码能力。此外，为支持有效训练，开发全面数据生成流程，高效为VLMs生产大规模高质量文档解析训练数据。在OmniDocBench和olmOCR-bench上的大量实验表明，该方法不仅显著提升解码速度（1.6倍-2.2倍），还减少模型幻觉并展示强泛化能力。
+
+**核心创新概述**
+
+> 提出并行令牌预测方法，通过插入可学习令牌和定制训练目标，实现VLMs在文档解析中的并行解码，突破自回归瓶颈。
+
+**创新点拆解**
+
+- 方法设计：开发PTP机制，使VLMs能并行预测多个令牌，加速推理。
+- 训练范式：设计数据生成流程，自动化生产高质量训练数据，支持模型训练。
+- 架构：方法模型无关，可轻松集成到现有VLMs中，提升灵活性。
+
+**当前局限**
+
+> 方法可能增加训练复杂度，且对特定文档类型或语言的泛化性需进一步验证；并行解码可能引入额外误差风险。
+
+**后续可改进方向**
+
+- 优化并行解码策略，减少潜在错误累积，提高准确性。
+- 扩展数据生成流程至更多样化文档格式和语言，增强模型鲁棒性。
+- 研究更高效的训练方法，降低计算资源需求。
+
+**工程启发**
+
+> 高，显著提升文档解析速度，适用于实时或大规模文档处理应用，如自动化办公和数字图书馆。
+
+**为什么值得关注**
+
+> 直接针对文档解析任务优化VLMs解码效率，对OCR和文档理解系统性能提升有直接影响。
+
+**原始摘要**
+
+Document parsing, as a fundamental yet crucial vision task, is being revolutionized by vision-
+language models (VLMs). However, the autoregressive (AR) decoding inherent to VLMs creates a
+significant bottleneck, severely limiting parsing speed. In this paper, we propose Parallel-Token
+Prediction (PTP), a plugable, model-agnostic and simple-yet-effective method that enables VLMs to
+generate multiple future tokens in parallel with improved sample efficiency. Specifically, we insert
+some learnable tokens into the input sequence and design corresponding training objectives to equip
+the model with parallel decoding capabilities for document parsing. Furthermore, to support
+effective training, we develop a comprehensive data generation pipeline that efficiently produces
+large-scale, high-quality document parsing training data for VLMs. Extensive experiments on
+OmniDocBench and olmOCR-bench demonstrate that our method not only significantly improves decoding
+speed (1.6x-2.2x) but also reduces model hallucinations and exhibits strong generalization
+abilities.
+
+---
+
+### 4. GlyphPrinter: Region-Grouped Direct Preference Optimization for Glyph-Accurate Visual Text Rendering
+
+- arXiv: [2603.15616v1](https://arxiv.org/abs/2603.15616v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2603.15616v1)
+- 作者: Xincheng Shuai, Ziye Li, Henghui Ding, Dacheng Tao
+- 发布时间: 2026-03-16T17:59:31Z
+- 分类: cs.CV
+- 相关性评分: 12
+- 主题标签: 字形渲染、偏好优化、区域标注、文本生成、视觉质量
+
+**中文摘要**
+
+> 生成准确的字形对于视觉文本渲染至关重要但具挑战性。现有方法通常通过大量高质量场景文本图像训练来增强文本渲染，但字形变体覆盖有限和过度风格化常损害字形准确性，特别是复杂或域外字符。一些方法利用强化学习缓解此问题，但其奖励模型通常依赖对细粒度字形错误不敏感的文本识别系统，因此字形错误的图像仍可能获得高奖励。受直接偏好优化（DPO）启发，提出GlyphPrinter，一种基于偏好的文本渲染方法，消除对显式奖励模型的依赖。然而，标准DPO目标仅建模两个样本的整体偏好，对视觉文本渲染不足，因为字形错误通常发生在局部区域。为解决此问题，构建GlyphCorrector数据集，带有区域级字形偏好标注，并提出区域分组DPO（R-GDPO），基于区域的目标，优化标注区域的样本间和样本内偏好，显著提升字形准确性。此外，引入区域奖励指导，一种推理策略，从可控字形准确性的最优分布中采样。大量实验表明，GlyphPrinter在字形准确性上优于现有方法，同时在风格化和精度间保持良好平衡。
+
+**核心创新概述**
+
+> 提出首个基于区域偏好优化的文本渲染方法，通过R-GDPO和区域奖励指导，精准控制字形准确性，减少对奖励模型的依赖。
+
+**创新点拆解**
+
+- 方法设计：开发R-GDPO目标，针对局部区域优化偏好，提升字形渲染精度。
+- 数据：构建GlyphCorrector数据集，提供区域级标注，支持细粒度训练。
+- 训练范式：采用偏好优化替代强化学习，简化流程并提高错误敏感性。
+
+**当前局限**
+
+> 方法依赖高质量区域标注数据，可能限制可扩展性；区域奖励指导在推理时可能增加计算复杂度。
+
+**后续可改进方向**
+
+- 扩展数据集至更多语言和字形变体，提高方法泛化能力。
+- 优化区域标注流程，降低人工成本，实现半自动化或自动化标注。
+- 研究更高效的推理策略，减少实时渲染延迟。
+
+**工程启发**
+
+> 中高，提升文本渲染质量，适用于字体设计、广告生成和文档美化等场景，但需平衡精度和风格化需求。
+
+**为什么值得关注**
+
+> 涉及OCR相关文本生成和渲染技术，对文档视觉质量和可读性有影响，间接支持文档解析任务。
+
+**原始摘要**
+
+Generating accurate glyphs for visual text rendering is essential yet challenging. Existing methods
+typically enhance text rendering by training on a large amount of high-quality scene text images,
+but the limited coverage of glyph variations and excessive stylization often compromise glyph
+accuracy, especially for complex or out-of-domain characters. Some methods leverage reinforcement
+learning to alleviate this issue, yet their reward models usually depend on text recognition systems
+that are insensitive to fine-grained glyph errors, so images with incorrect glyphs may still receive
+high rewards. Inspired by Direct Preference Optimization (DPO), we propose GlyphPrinter, a
+preference-based text rendering method that eliminates reliance on explicit reward models. However,
+the standard DPO objective only models overall preference between two samples, which is insufficient
+for visual text rendering where glyph errors typically occur in localized regions. To address this
+issue, we construct the GlyphCorrector dataset with region-level glyph preference annotations and
+propose Region-Grouped DPO (R-GDPO), a region-based objective that optimizes inter- and intra-sample
+preferences over annotated regions, substantially enhancing glyph accuracy. Furthermore, we
+introduce Regional Reward Guidance, an inference strategy that samples from an optimal distribution
+with controllable glyph accuracy. Extensive experiments demonstrate that the proposed GlyphPrinter
+outperforms existing methods in glyph accuracy while maintaining a favorable balance between
+stylization and precision.
+
+---
