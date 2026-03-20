@@ -1,309 +1,173 @@
-# OCR / 文档解析研究日报（2026-03-19）
+# OCR / 文档解析研究日报（2026-03-20）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-03-19 03:50:17`
+- 生成时间（UTC）：`2026-03-20 03:39:26`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日研究聚焦于提升OCR与文档解析系统的泛化能力、结构理解、多模态集成及评估方法。HopChain通过合成多跳视觉语言推理数据增强VLMs的复杂推理能力，在多个基准上取得广泛增益。KidsNanny提出两阶段多模态内容审核架构，集成OCR与视觉分类实现低延迟高召回率的儿童安全应用。LED基准专注于文档布局错误检测，提供标准化评估框架以诊断结构推理弱点。跨模态浮游生物识别研究展示了自监督学习在减少标注依赖方面的潜力，其方法可借鉴于OCR多模态融合。整体趋势表明，数据合成、多模态集成和细粒度评估正成为提升文档解析鲁棒性与泛化性的关键方向。
+> 今日论文聚焦于OCR/文档解析在垂直领域和开放网络数据提取的应用创新。论文1提出垂直集成的AI范式，结合Transformer架构和多模态文档智能，实现汽车保险文档的端到端自动化处理，强调领域适应和MLOps实践。论文2形式化SODIUM任务，开发多代理系统从开放网络提取结构化数据，提升自动化查询能力。整体趋势显示，研究正从通用模型转向特定领域优化，并强化生产部署和实际约束集成。
 
 ## 二、今日趋势判断
 
-研究趋势显示：1）数据合成与增强成为提升模型泛化能力的重要手段，如HopChain的多跳数据合成；2）多模态架构设计注重效率与准确性平衡，如KidsNanny的两阶段管道；3）评估方法从表面指标转向结构错误检测，如LED基准；4）跨模态自监督学习减少对标注数据的依赖，如浮游生物识别应用。这些趋势共同推动OCR/文档解析向更鲁棒、高效和可解释的方向发展。
+当前OCR/文档解析研究呈现两大趋势：一是垂直领域深度集成，如汽车保险中结合感知、推理和基础设施的智能栈；二是开放网络数据提取的自动化，通过多代理系统和算法优化提升结构化信息获取效率。两者均强调实际应用约束，如部署环境、基准评估和工程可扩展性，推动技术从实验室向工业级系统演进。
 
 ## 三、今日论文概览
 
-1. **HopChain: Multi-Hop Data Synthesis for Generalizable Vision-Language Reasoning** | 标签：视觉语言模型、多跳推理、数据合成、强化学习、文档理解
-2. **KidsNanny: A Two-Stage Multimodal Content Moderation Pipeline Integrating Visual Classification, Object Detection, OCR, and Contextual Reasoning for Child Safety** | 标签：多模态内容审核、OCR、儿童安全、低延迟架构、文本检测
-3. **LED: A Benchmark for Evaluating Layout Error Detection in Document Analysis** | 标签：文档布局分析、错误检测、基准测试、结构推理、多模态评估
-4. **Cross-modal learning for plankton recognition** | 标签：跨模态学习、自监督学习、浮游生物识别、图像分析、数据融合
+1. **Foundations and Architectures of Artificial Intelligence for Motor Insurance** | 标签：汽车保险、Transformer架构、多模态AI、MLOps、生产系统
+2. **SODIUM: From Open Web Data to Queryable Databases** | 标签：网络数据提取、多代理系统、信息整合、基准评估、自动化查询
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 通过数据合成方法生成逻辑依赖的多跳推理链以增强模型泛化能力。
-- 设计两阶段或多阶段架构分离视觉与文本处理以优化计算效率和准确性。
-- 利用自监督跨模态学习结合不同数据类型减少对标注数据的依赖。
-- 开发标准化错误类型和注入算法构建细粒度评估基准以诊断结构推理弱点。
+- 采用领域适应的架构（如Transformer）来优化特定任务（如车辆损伤分析或网络数据提取）的文档理解能力。
+- 集成多模态或结构化方法（如视觉理解和信息整合）以提升文档解析的准确性和连贯性。
+- 强调生产级部署框架，结合MLOps实践或缓存管理，确保系统在高风险或动态环境中的可靠运行。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 扩展多跳数据合成覆盖更多文档解析任务，如表格理解和公式识别中的链式推理。
-- 优化OCR模块以实时处理低质量文档图像中的多语言和艺术字体文本。
-- 开发端到端训练方法融合视觉、文本和布局信息提升文档结构解析的准确性。
-- 构建大规模真实世界文档数据集注入标准化结构错误以增强评估基准的泛化性。
-- 探索自适应跳链长度合成策略针对不同复杂度的文档理解任务动态调整推理深度。
+- 开发针对罕见或边缘案例（如复杂事故文档或动态网络内容）的鲁棒性增强技术，以改进模型泛化能力。
+- 扩展多语言和文化适应性模块，使OCR系统能处理全球化保险文档或多样化网络数据源。
+- 优化实时处理速度和资源效率算法，例如通过轻量化模型或并行计算，满足工业级应用的高吞吐需求。
+- 构建更全面的基准数据集，覆盖极端场景和隐私限制，以更准确评估文档解析系统的性能。
 
 ## 六、工程落地启发
 
-- 采用多跳数据合成框架可提升视觉语言模型在文档理解任务上的泛化性能。
-- 两阶段内容审核架构结合OCR和视觉分类能实现低延迟高召回率的文本威胁检测。
-- 集成标准化错误检测基准有助于评估和改进文档布局分析系统的结构鲁棒性。
-- 跨模态自监督学习方法可减少OCR系统中对标注数据的依赖并提升多模态融合效果。
+- 在汽车保险领域，可借鉴垂直集成范式，将文档解析模块嵌入端到端管道，结合MLOps实现可靠生产部署。
+- 对于网络数据提取任务，采用多代理系统和缓存优化策略（如ATP-BFS算法）能提升探索效率和结构化输出质量。
+- 工程实施中需关注模型在罕见案例下的性能监控，并设计适应性机制以应对不同国家或文化背景的文档变体。
 
 ## 七、优先关注论文
 
-- **HopChain: Multi-Hop Data Synthesis for Generalizable Vision-Language Reasoning**：其多跳数据合成方法显著提升多个基准性能，可应用于复杂文档推理任务以增强OCR系统泛化能力。
-- **KidsNanny: A Two-Stage Multimodal Content Moderation Pipeline Integrating Visual Classification, Object Detection, OCR, and Contextual Reasoning for Child Safety**：低延迟架构和OCR集成策略为实时文档审核提供高效解决方案，适用于需要快速文本检测的应用场景。
-- **LED: A Benchmark for Evaluating Layout Error Detection in Document Analysis**：标准化错误检测基准有助于量化文档解析系统的结构推理弱点，指导工程优化和质量控制。
+- **Foundations and Architectures of Artificial Intelligence for Motor Insurance**：其垂直集成AI范式和领域适应Transformer架构为高风险工业环境（如保险）的文档解析提供了完整生产框架，具有高工程价值。
+- **SODIUM: From Open Web Data to Queryable Databases**：SODIUM任务定义和多代理系统展示了从开放网络自动化提取结构化数据的创新方法，适用于研究数据收集，但需进一步优化工业级可扩展性。
 
 ## 八、论文逐篇解析
 
-### 1. HopChain: Multi-Hop Data Synthesis for Generalizable Vision-Language Reasoning
+### 1. Foundations and Architectures of Artificial Intelligence for Motor Insurance
 
-- arXiv: [2603.17024v1](https://arxiv.org/abs/2603.17024v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.17024v1)
-- 作者: Shenzhi Wang, Shixuan Liu, Jing Zhou, Chang Gao, Xiong-Hui Chen, Binghai Wang, An Yang, Shiji Song, Bowen Yu, Gao Huang, Junyang Lin
-- 发布时间: 2026-03-17T18:04:58Z
-- 分类: cs.CV, cs.AI, cs.CL
-- 相关性评分: 15
-- 主题标签: 视觉语言模型、多跳推理、数据合成、强化学习、文档理解
+- arXiv: [2603.18508v1](https://arxiv.org/abs/2603.18508v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2603.18508v1)
+- 作者: Teerapong Panboonyuen
+- 发布时间: 2026-03-19T05:30:49Z
+- 分类: cs.CV, cs.AI
+- 相关性评分: 17
+- 主题标签: 汽车保险、Transformer架构、多模态AI、MLOps、生产系统
 
 **中文摘要**
 
-> VLMs在细粒度视觉语言推理方面存在困难，长链推理会暴露感知、推理、知识和幻觉等多种错误，这些错误可能在中间步骤中累积。现有视觉语言数据缺乏依赖视觉证据的复杂推理链，导致这些弱点未被充分暴露。为此，我们提出HopChain，一个可扩展的框架，用于合成多跳视觉语言推理数据，专门用于VLMs的RLVR训练。每个合成的多跳查询形成一个逻辑依赖的实例接地跳链，早期跳建立后期跳所需的实例、集合或条件，最终答案保持为特定、明确的数字，适合可验证奖励。我们将HopChain合成的多跳数据添加到用于训练Qwen3.5-35B-A3B和Qwen3.5-397B-A17B的原始RLVR数据中，并在24个基准测试（涵盖STEM和谜题、通用VQA、文本识别和文档理解、视频理解）上进行比较。尽管多跳数据未针对任何特定基准合成，但添加后改善了20个基准测试，表明广泛且可泛化的增益。为证明完整链式查询的重要性，我们将其替换为半多跳或单跳变体，分别使24个基准测试的平均准确率降低5.3和7.0点。
+> 本手册系统性地阐述了面向汽车保险的人工智能基础与架构，基于大规模实际部署。它形式化了一个垂直集成的AI范式，将感知、多模态推理和生产基础设施统一为一个用于汽车风险评估和理赔处理的智能栈。核心内容包括开发领域适应的Transformer架构，用于结构化视觉理解、关系车辆表示学习和多模态文档智能，实现车辆损伤分析、理赔评估和承保工作流的端到端自动化。这些组件被组合成一个可扩展的管道，在泰国全国汽车保险系统的实际约束下运行。除了模型设计，手册还强调学习算法与MLOps实践的协同演化，建立了一个将现代人工智能转化为高风险工业环境中可靠、生产级系统的原则框架。
 
 **核心创新概述**
 
-> 提出HopChain框架，通过合成多跳视觉语言推理数据来增强VLMs的推理能力，强调逻辑依赖的实例接地跳链，以暴露和解决长链推理中的复合错误。
+> 提出垂直集成的AI范式，将感知、多模态推理和生产基础设施统一为智能栈，应用于汽车保险领域，强调领域适应和实际部署约束。
 
 **创新点拆解**
 
-- 多跳数据合成方法，生成逻辑依赖的实例接地跳链
-- 训练范式：将合成数据融入RLVR训练，提升泛化能力
-- 数据设计：确保最终答案为明确数字，便于奖励验证
+- 垂直集成的AI范式设计
+- 领域适应的Transformer架构
+- 结构化视觉理解和多模态文档智能方法
+- 学习算法与MLOps实践的协同演化框架
 
 **当前局限**
 
-> 多跳数据合成可能未覆盖所有推理错误类型，且依赖于特定模型架构（如Qwen3.5），泛化性需进一步验证。
+> 未明确讨论模型在极端或罕见案例（如复杂事故场景）下的泛化能力，以及在不同国家或文化背景保险系统中的适应性限制。
 
 **后续可改进方向**
 
-- 扩展多跳数据以覆盖更多错误类型和任务领域
-- 探索自适应跳链长度和复杂度的合成策略
-- 集成更多模态（如音频）以增强推理链的多样性
+- 增强模型对罕见或边缘案例的鲁棒性
+- 扩展多语言和文化适应性
+- 优化实时处理速度和资源效率
 
 **工程启发**
 
-> 高，提供可扩展的数据合成框架，能显著提升VLMs在多个基准测试上的性能，适用于需要复杂视觉语言推理的实际应用。
+> 高，提供了从模型设计到生产部署的完整框架，适用于高风险工业环境，具有实际应用潜力。
 
 **为什么值得关注**
 
-> 涉及视觉语言推理和文档理解，与OCR相关任务（如文本识别）有交叉，多跳推理可能改善文档分析中的结构化错误检测。
+> 涉及OCR和多模态文档智能，用于车辆损伤分析和理赔处理，与文档解析和视觉理解任务相关。
 
 **原始摘要**
 
-VLMs show strong multimodal capabilities, but they still struggle with fine-grained vision-language
-reasoning. We find that long CoT reasoning exposes diverse failure modes, including perception,
-reasoning, knowledge, and hallucination errors, which can compound across intermediate steps.
-However, most existing vision-language data used for RLVR does not involve complex reasoning chains
-that rely on visual evidence throughout, leaving these weaknesses largely unexposed. We therefore
-propose HopChain, a scalable framework for synthesizing multi-hop vision-language reasoning data
-specifically for RLVR training of VLMs. Each synthesized multi-hop query forms a logically dependent
-chain of instance-grounded hops, where earlier hops establish the instances, sets, or conditions
-needed for later hops, while the final answer remains a specific, unambiguous number suitable for
-verifiable rewards. We add the multi-hop data synthesized by HopChain to the original RLVR data used
-to train Qwen3.5-35B-A3B and Qwen3.5-397B-A17B, and compare against RLVR on the original RLVR data
-alone across 24 benchmarks spanning STEM and Puzzle, General VQA, Text Recognition and Document
-Understanding, and Video Understanding. Although this multi-hop data is not synthesized to target
-any specific benchmark, adding it improves 20 out of 24 benchmarks on both models, indicating broad
-and generalizable gains. To demonstrate that full chained queries are important, we replace them
-with half-multi-hop or single-hop variants, reducing the 24-benchmark average accuracy by 5.3 and
-7.0 points, respectively. Multi-hop training also strengthens long-CoT vision-language reasoning,
-with gains peaking at more than 50 accuracy points in the ultra-long-CoT regime. These experiments
-establish HopChain as an effective, scalable framework for synthesizing multi-hop data that improves
-generalizable vision-language reasoning.
+This handbook presents a systematic treatment of the foundations and architectures of artificial
+intelligence for motor insurance, grounded in large-scale real-world deployment. It formalizes a
+vertically integrated AI paradigm that unifies perception, multimodal reasoning, and production
+infrastructure into a cohesive intelligence stack for automotive risk assessment and claims
+processing. At its core, the handbook develops domain-adapted transformer architectures for
+structured visual understanding, relational vehicle representation learning, and multimodal document
+intelligence, enabling end-to-end automation of vehicle damage analysis, claims evaluation, and
+underwriting workflows. These components are composed into a scalable pipeline operating under
+practical constraints observed in nationwide motor insurance systems in Thailand. Beyond model
+design, the handbook emphasizes the co-evolution of learning algorithms and MLOps practices,
+establishing a principled framework for translating modern artificial intelligence into reliable,
+production-grade systems in high-stakes industrial environments.
 
 ---
 
-### 2. KidsNanny: A Two-Stage Multimodal Content Moderation Pipeline Integrating Visual Classification, Object Detection, OCR, and Contextual Reasoning for Child Safety
+### 2. SODIUM: From Open Web Data to Queryable Databases
 
-- arXiv: [2603.16181v1](https://arxiv.org/abs/2603.16181v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.16181v1)
-- 作者: Viraj Panchal, Tanmay Talsaniya, Parag Patel, Meet Patel
-- 发布时间: 2026-03-17T07:00:43Z
-- 分类: cs.CV, cs.CR
-- 相关性评分: 13
-- 主题标签: 多模态内容审核、OCR、儿童安全、低延迟架构、文本检测
-
-**中文摘要**
-
-> 我们提出KidsNanny，一个两阶段多模态内容审核架构，用于儿童安全。第一阶段结合视觉Transformer和对象检测器进行视觉筛选（11.7毫秒）；输出作为文本而非原始像素路由到第二阶段，第二阶段应用OCR和基于文本的7B语言模型进行上下文推理（总管道120毫秒）。我们在UnsafeBench性类别（1,054张图像）下评估两种机制：仅视觉（隔离第一阶段）和多模态（评估完整的第一阶段+第二阶段管道）。第一阶段达到80.27%准确率和85.39% F1，耗时11.7毫秒；仅视觉基线准确率从59.01%到77.04%。完整管道达到81.40%准确率和86.16% F1，耗时120毫秒，相比ShieldGemma-2（64.80%准确率，1,136毫秒）和LlavaGuard（80.36%准确率，4,138毫秒）。为评估文本感知，我们过滤两个子集：文本+视觉子集（257张图像）和仅文本子集（44张图像，其中安全性主要依赖于嵌入文本）。在仅文本图像上，KidsNanny达到100%召回率（25/25正例；小样本）和75.76%精确率；ShieldGemma-2达到84%召回率和60%精确率，耗时1,136毫秒。结果表明，专用基于OCR的推理可能在文本嵌入威胁上提供召回-精确率优势，且延迟更低，但仅文本子集小限制了泛化性。通过记录此架构和评估方法，我们旨在为儿童安全的高效多模态内容审核研究做出贡献。
-
-**核心创新概述**
-
-> 设计两阶段多模态内容审核架构，将视觉分类、对象检测、OCR和上下文推理集成，实现低延迟和高准确率，专门针对儿童安全应用。
-
-**创新点拆解**
-
-- 两阶段架构：第一阶段视觉筛选，第二阶段OCR和语言模型推理
-- 数据路由：输出作为文本而非像素，减少计算开销
-- 任务定义：专注于文本嵌入威胁的检测，提升召回率
-
-**当前局限**
-
-> 仅文本子集样本量小，可能影响泛化性；架构依赖于特定模型（如7B语言模型），可扩展性需验证。
-
-**后续可改进方向**
-
-- 扩大文本嵌入威胁的数据集以增强泛化能力
-- 优化OCR模块以处理更多语言和字体样式
-- 探索端到端训练以提升整体管道效率
-
-**工程启发**
-
-> 高，提供高效、低延迟的内容审核解决方案，适用于实时儿童安全监控，OCR集成增强了文本威胁检测能力。
-
-**为什么值得关注**
-
-> 直接集成OCR进行文本提取和推理，是OCR在内容审核中的实际应用案例，涉及文档分析和多模态处理。
-
-**原始摘要**
-
-We present KidsNanny, a two-stage multimodal content moderation architecture for child safety. Stage
-1 combines a vision transformer (ViT) with an object detector for visual screening (11.7 ms);
-outputs are routed as text not raw pixels to Stage 2, which applies OCR and a text based 7B language
-model for contextual reasoning (120 ms total pipeline). We evaluate on the UnsafeBench Sexual
-category (1,054 images) under two regimes: vision-only, isolating Stage 1, and multimodal,
-evaluating the full Stage 1+2 pipeline. Stage 1 achieves 80.27% accuracy and 85.39% F1 at 11.7 ms;
-vision-only baselines range from 59.01% to 77.04% accuracy. The full pipeline achieves 81.40%
-accuracy and 86.16% F1 at 120 ms, compared to ShieldGemma-2 (64.80% accuracy, 1,136 ms) and
-LlavaGuard (80.36% accuracy, 4,138 ms). To evaluate text-awareness, we filter two subsets: a
-text+visual subset (257 images) and a text-only subset (44 images where safety depends primarily on
-embedded text). On text-only images, KidsNanny achieves 100% recall (25/25 positives; small sample)
-and 75.76% precision; ShieldGemma-2 achieves 84% recall and 60% precision at 1,136 ms. Results
-suggest that dedicated OCR-based reasoning may offer recall-precision advantages on text-embedded
-threats at lower latency, though the small text-only subset limits generalizability. By documenting
-this architecture and evaluation methodology, we aim to contribute to the broader research effort on
-efficient multimodal content moderation for child safety.
-
----
-
-### 3. LED: A Benchmark for Evaluating Layout Error Detection in Document Analysis
-
-- arXiv: [2603.17265v1](https://arxiv.org/abs/2603.17265v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.17265v1)
-- 作者: Inbum Heo, Taewook Hwang, Jeesu Jung, Sangkeun Jung
-- 发布时间: 2026-03-18T01:45:31Z
-- 分类: cs.CV, cs.CL
-- 相关性评分: 11
-- 主题标签: 文档布局分析、错误检测、基准测试、结构推理、多模态评估
+- arXiv: [2603.18447v1](https://arxiv.org/abs/2603.18447v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2603.18447v1)
+- 作者: Chuxuan Hu, Philip Li, Maxwell Yang, Daniel Kang
+- 发布时间: 2026-03-19T03:17:56Z
+- 分类: cs.DB, cs.AI, cs.CL, cs.CV, cs.IR
+- 相关性评分: 9
+- 主题标签: 网络数据提取、多代理系统、信息整合、基准评估、自动化查询
 
 **中文摘要**
 
-> LLMs和LMMs的进展改善了文档布局分析，但区域合并、分割和遗漏等结构错误仍然存在。传统的基于重叠的指标（如IoU、mAP）无法捕捉此类逻辑不一致性。为克服此限制，我们提出布局错误检测基准，评估DLA预测中的结构推理能力，超越表面准确性。LED定义了八种标准化错误类型（缺失、幻觉、大小错误、分割、合并、重叠、重复和误分类），并提供定量规则和注入算法以进行真实错误模拟。使用这些定义，我们构建LED-Dataset并设计三个评估任务：文档级错误检测、文档级错误类型分类和元素级错误类型分类。与最先进多模态模型的实验表明，LED支持细粒度和可解释的结构理解评估，揭示了跨模态和架构的明显弱点。总体而言，LED为诊断文档理解模型的结构鲁棒性和推理能力建立了统一且可解释的基准。
+> 在研究中，领域专家常提出需要整合广泛网络数据源的分析问题，因此必须在分析前花费大量精力搜索、提取和组织原始数据。我们将此过程形式化为SODIUM任务，将开放域（如网络）概念化为潜在数据库，必须系统实例化以支持下游查询。解决SODIUM需要（1）对开放网络进行深入和专业探索，（2）利用结构相关性进行系统信息提取，（3）将收集信息整合为连贯、可查询的数据库实例。为量化自动化SODIUM的挑战，我们构建了SODIUM-Bench基准，包含来自6个领域已发表学术论文的105个任务，系统需探索开放网络，从多样源收集数据并聚合为结构化表。现有系统在SODIUM任务上表现不佳：我们评估了6个先进AI代理在SODIUM-Bench上，最强基线仅达到46.5%准确率。为弥补差距，我们开发了SODIUM-Agent，一个由网络探索器和缓存管理器组成的多代理系统。通过提出的ATP-BFS算法和优化缓存源及导航路径管理，SODIUM-Agent进行深度全面网络探索，并执行结构一致的信息提取。SODIUM-Agent在SODIUM-Bench上达到91.1%准确率，优于基线。
 
 **核心创新概述**
 
-> 提出LED基准，专注于文档布局分析中的结构错误检测，通过标准化错误类型和注入算法，提供超越传统指标的细粒度评估框架。
+> 形式化SODIUM任务，将开放网络视为潜在数据库，开发多代理系统SODIUM-Agent，结合ATP-BFS算法和缓存优化，实现高效网络探索和信息提取。
 
 **创新点拆解**
 
-- 错误类型定义：八种标准化结构错误，覆盖常见DLA问题
-- 评估任务设计：文档级和元素级错误检测与分类
-- 数据合成：注入算法模拟真实错误，增强基准实用性
+- SODIUM任务定义和基准构建
+- 多代理系统架构设计
+- ATP-BFS算法用于网络探索
+- 缓存管理和导航路径优化策略
 
 **当前局限**
 
-> 错误类型可能未涵盖所有结构问题；基准依赖于模拟数据，真实世界泛化性需进一步测试。
+> 基准任务可能未覆盖所有网络数据复杂性，如动态内容或隐私限制；系统在实时或大规模网络环境中的可扩展性未充分验证。
 
 **后续可改进方向**
 
-- 扩展错误类型以包括更多复杂结构不一致性
-- 集成真实世界文档数据以减少模拟偏差
-- 开发自适应评估方法以处理动态文档布局
+- 扩展基准以包括更多样化网络数据源
+- 增强系统对动态和交互式内容的处理能力
+- 提高提取精度和减少错误传播
 
 **工程启发**
 
-> 中高，为文档分析模型提供标准化评估工具，有助于改进OCR和DLA系统的结构推理能力，适用于文档数字化和质量控制。
+> 中高，提供了自动化网络数据提取和整合的解决方案，适用于研究数据收集，但需进一步优化以适应工业级应用。
 
 **为什么值得关注**
 
-> 直接针对文档布局分析，是OCR和文档理解的核心任务，错误检测基准可指导后续OCR研究提升准确性。
+> 涉及信息提取、文档解析和结构化数据生成，与OCR和文档智能任务在数据整合方面有交叉。
 
 **原始摘要**
 
-Recent advances in Large Language Models (LLMs) and Large Multimodal Models (LMMs) have improved
-Document Layout Analysis (DLA), yet structural errors such as region merging, splitting, and
-omission remain persistent. Conventional overlap-based metrics (e.g., IoU, mAP) fail to capture such
-logical inconsistencies. To overcome this limitation, we propose Layout Error Detection (LED), a
-benchmark that evaluates structural reasoning in DLA predictions beyond surface-level accuracy. LED
-defines eight standardized error types (Missing, Hallucination, Size Error, Split, Merge, Overlap,
-Duplicate, and Misclassification) and provides quantitative rules and injection algorithms for
-realistic error simulation. Using these definitions, we construct LED-Dataset and design three
-evaluation tasks: document-level error detection, document-level error-type classification, and
-element-level error-type classification. Experiments with state-of-the-art multimodal models show
-that LED enables fine-grained and interpretable assessment of structural understanding, revealing
-clear weaknesses across modalities and architectures. Overall, LED establishes a unified and
-explainable benchmark for diagnosing the structural robustness and reasoning capability of document
-understanding models.
-
----
-
-### 4. Cross-modal learning for plankton recognition
-
-- arXiv: [2603.16427v1](https://arxiv.org/abs/2603.16427v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2603.16427v1)
-- 作者: Joona Kareinen, Veikka Immonen, Tuomas Eerola, Lumi Haraguchi, Lasse Lensu, Kaisa Kraft, Sanna Suikkanen, Heikki Kälviäinen
-- 发布时间: 2026-03-17T12:04:52Z
-- 分类: cs.CV
-- 相关性评分: 3
-- 主题标签: 跨模态学习、自监督学习、浮游生物识别、图像分析、数据融合
-
-**中文摘要**
-
-> 本文考虑自监督跨模态协调作为策略，利用多模态和大规模未标记浮游生物数据构建浮游生物识别模型。自动化成像仪器促进大规模连续收集浮游生物图像数据。当前自动浮游生物图像识别方法主要依赖监督方法，需要标记训练集，收集劳动密集。另一方面，一些现代浮游生物成像仪器补充图像信息与光学测量数据，如散射和荧光剖面，这些数据目前在浮游生物识别中未广泛利用。在这项工作中，我们探索使用此类测量数据指导学习过程而无需手动标记的可能性。受对比语言-图像预训练概念的启发，我们训练两种模态的编码器，仅使用二进制监督信息指示给定图像和剖面是否来自同一粒子或不同粒子。对于浮游生物识别，我们使用已知浮游生物物种的小标记库结合k-NN分类器。此方法产生一个固有地多模态的识别模型，即能够利用从图像和剖面数据提取的信息。我们证明所提方法实现高识别准确率，同时仅需最小数量的标记图像。此外，我们展示该方法优于仅图像自监督...
-
-**核心创新概述**
-
-> 提出自监督跨模态协调方法，利用未标记的光学测量数据（如散射和荧光剖面）增强浮游生物图像识别，减少对标记数据的依赖。
-
-**创新点拆解**
-
-- 跨模态学习：结合图像和光学测量数据，提升识别性能
-- 训练范式：自监督对比学习，仅需二进制配对信息
-- 数据利用：大规模未标记数据，降低标注成本
-
-**当前局限**
-
-> 依赖于特定仪器提供的光学测量数据，可能不适用于所有浮游生物识别场景；k-NN分类器可能限制模型复杂度。
-
-**后续可改进方向**
-
-- 扩展跨模态方法以处理更多类型的环境数据
-- 优化编码器架构以更好地融合多模态特征
-- 探索端到端深度学习模型替代k-NN以提升准确性
-
-**工程启发**
-
-> 中，提供低标注成本的浮游生物识别解决方案，适用于环境监测和海洋研究，跨模态方法可借鉴于OCR中的多模态数据融合。
-
-**为什么值得关注**
-
-> 涉及图像识别和跨模态学习，与OCR中的多模态文档分析（如结合文本和图像）有相似性，自监督策略可应用于OCR数据增强。
-
-**原始摘要**
-
-This paper considers self-supervised cross-modal coordination as a strategy enabling utilization of
-multiple modalities and large volumes of unlabeled plankton data to build models for plankton
-recognition. Automated imaging instruments facilitate the continuous collection of plankton image
-data on a large scale. Current methods for automatic plankton image recognition rely primarily on
-supervised approaches, which require labeled training sets that are labor-intensive to collect. On
-the other hand, some modern plankton imaging instruments complement image information with optical
-measurement data, such as scatter and fluorescence profiles, which currently are not widely utilized
-in plankton recognition. In this work, we explore the possibility of using such measurement data to
-guide the learning process without requiring manual labeling. Inspired by the concepts behind
-Contrastive Language-Image Pre-training, we train encoders for both modalities using only binary
-supervisory information indicating whether a given image and profile originate from the same
-particle or from different particles. For plankton recognition, we employ a small labeled gallery of
-known plankton species combined with a $k$-NN classifier. This approach yields a recognition model
-that is inherently multimodal, i.e., capable of utilizing information extracted from both image and
-profile data. We demonstrate that the proposed method achieves high recognition accuracy while
-requiring only a minimal number of labeled images. Furthermore, we show that the approach
-outperforms an image-only self-supervised baseline. Code available at
-https://github.com/Jookare/cross-modal-plankton.
+During research, domain experts often ask analytical questions whose answers require integrating
+data from a wide range of web sources. Thus, they must spend substantial effort searching,
+extracting, and organizing raw data before analysis can begin. We formalize this process as the
+SODIUM task, where we conceptualize open domains such as the web as latent databases that must be
+systematically instantiated to support downstream querying. Solving SODIUM requires (1) conducting
+in-depth and specialized exploration of the open web, which is further strengthened by (2)
+exploiting structural correlations for systematic information extraction and (3) integrating
+collected information into coherent, queryable database instances. To quantify the challenges in
+automating SODIUM, we construct SODIUM-Bench, a benchmark of 105 tasks derived from published
+academic papers across 6 domains, where systems are tasked with exploring the open web to collect
+and aggregate data from diverse sources into structured tables. Existing systems struggle with
+SODIUM tasks: we evaluate 6 advanced AI agents on SODIUM-Bench, with the strongest baseline
+achieving only 46.5% accuracy. To bridge this gap, we develop SODIUM-Agent, a multi-agent system
+composed of a web explorer and a cache manager. Powered by our proposed ATP-BFS algorithm and
+optimized through principled management of cached sources and navigation paths, SODIUM-Agent
+conducts deep and comprehensive web exploration and performs structurally coherent information
+extraction. SODIUM-Agent achieves 91.1% accuracy on SODIUM-Bench, outperforming the strongest
+baseline by approximately 2 times and the weakest by up to 73 times.
 
 ---
