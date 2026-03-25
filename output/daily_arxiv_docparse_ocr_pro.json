@@ -1,44 +1,97 @@
 {
   "meta": {
-    "report_date": "2026-03-24",
-    "generated_at_utc": "2026-03-24 03:43:40",
+    "report_date": "2026-03-25",
+    "generated_at_utc": "2026-03-25 03:47:10",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 2
+    "count": 6
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦于多模态大语言模型在布局生成中的视觉反馈优化和事件因果推理的基准构建。VFLM通过整合视觉反馈和OCR准确性奖励，提升布局可读性和美观性，具有高工程价值；AER任务为因果推理提供新基准，但工程价值中等，主要面向NLP研究。整体趋势显示，OCR/文档解析领域正从纯文本处理向视觉-文本多模态融合演进，强调迭代优化和现实世界推理能力。",
-    "trend_summary": "OCR/文档解析研究正加速融合多模态大语言模型，从传统文本提取转向布局生成和视觉反馈优化，同时扩展至事件推理等高级理解任务。视觉反馈机制和迭代自我改进成为提升生成质量的关键创新点，而基准测试如AER推动现实世界因果推理的探索。",
+    "executive_summary": "今日OCR/文档解析研究日报综合结论显示，研究趋势正从传统序列生成转向更高效的并行处理和视觉条件化方法。MinerU-Diffusion通过扩散解码提升长文档处理速度，VFLM引入视觉反馈优化布局生成，PaperVoyager推动交互式文档转换，TDATR改进表格识别，多智能体LLM基准测试指导金融文档处理，SemEval任务促进事件推理。这些工作共同强调视觉对齐、并行化和多模态集成，为工程应用提供速度、准确性和适应性提升方向。",
+    "trend_summary": "当前研究趋势聚焦于：1) 替代自回归解码，如扩散模型并行处理以减少延迟；2) 强化视觉条件化和反馈，如逆渲染和布局迭代优化；3) 端到端和结构化生成，如表格识别和交互式网页转换；4) 多智能体架构和基准测试，以平衡成本与准确性；5) 扩展任务定义至因果推理和多文档理解。整体向更高效、鲁棒和交互式方向发展。",
     "common_innovations": [
-      "整合多模态大语言模型与视觉反馈系统，增强布局生成的可解释性和可控性。",
-      "采用基于证据的多选择框架，促进系统在证据丰富环境中的推理能力评估。",
-      "引入强化学习结合OCR准确性奖励模型，实现迭代优化生成布局。"
+      "采用扩散解码或视觉反馈机制替代传统序列生成方法，提升处理效率或生成质量。",
+      "引入端到端或结构化框架，如表格细节感知学习或交互式系统建模，优化任务整合。",
+      "利用强化学习、课程学习或多任务学习策略，增强训练稳定性和模型鲁棒性。",
+      "设计基准测试或评估指标，如多智能体架构比较或溯因推理任务，推动实证研究。"
     ],
     "future_directions": [
-      "开发更高效的迭代优化算法，减少视觉反馈布局模型的计算开销，适用于实时文档生成应用。",
-      "扩展奖励模型以整合更多视觉指标如色彩平衡和空间协调性，提升布局美观性评估的全面性。",
-      "构建包含复杂动态布局场景的基准测试，评估模型在多变文档结构中的鲁棒性。",
-      "探索多模态数据在事件因果推理中的应用，结合图像或表格信息增强文档理解能力。",
-      "优化多文档理解系统，处理分布式证据和间接背景因素，提高OCR后的事件推理准确性。"
+      "开发更高效的扩散解码算法，减少高分辨率或复杂布局文档的计算开销。",
+      "增强模型对低质量图像、噪声或非标准文档格式的鲁棒性，扩展至手写体或历史文档处理。",
+      "优化迭代优化策略或单元格定位模块，以降低推理延迟并提升计算效率。",
+      "扩展奖励模型或多模态反馈融合，纳入更多视觉评估指标如美观性，提升布局生成质量。",
+      "探索多智能体架构的混合配置，如语义缓存和自适应重试，以平衡成本与准确性在更多文档类型中的应用。",
+      "构建更大规模数据集，涵盖多样化事件类型和证据来源，以改进溯因推理和因果推断模型。"
     ],
     "engineering_takeaways": [
-      "VFLM的视觉反馈机制可集成到自动化文档设计工具中，提升布局可读性和用户满意度。",
-      "AER任务的基准测试方法可用于评估文档解析系统的因果推理能力，支持智能决策功能开发。",
-      "强化学习结合OCR奖励的策略可应用于其他文档处理任务，如表格识别或图表生成优化。"
+      "MinerU-Diffusion的解码速度提升3.2倍，适用于大规模文档处理系统以降低延迟和错误率。",
+      "VFLM的视觉反馈迭代优化能提升布局可读性，适用于自动化设计工具但需管理迭代成本。",
+      "PaperVoyager的交互式网页转换框架可增强教育或科研平台的用户体验，需确保转换准确性。",
+      "TDATR的表格细节感知学习在数据有限环境中提高识别准确性，适用于财务报告等文档分析。",
+      "多智能体LLM基准测试为金融文档处理提供架构选择指导，帮助优化资源分配和性能。",
+      "SemEval任务为事件推理系统提供基准，关联文档理解任务以支持决策支持应用。"
     ],
     "watchlist": [
       {
-        "title": "Seeing is Improving: Visual Feedback for Iterative Text Layout Refinement",
-        "watch_reason": "该论文提出的视觉反馈布局模型（VFLM）通过迭代优化和OCR准确性奖励，显著提升布局生成质量，对文档设计和OCR应用有直接工程价值，值得跟踪其效率优化和扩展应用。"
+        "title": "MinerU-Diffusion: Rethinking Document OCR as Inverse Rendering via Diffusion Decoding",
+        "watch_reason": "首次将扩散模型引入OCR并行解码，显著提升长文档处理速度，可能引领解码方法革新。"
       },
       {
-        "title": "SemEval-2026 Task 12: Abductive Event Reasoning: Towards Real-World Event Causal Inference for Large Language Models",
-        "watch_reason": "AER任务为事件因果推理提供新基准，虽工程价值中等，但可能启发文档解析中多文档理解和证据处理技术的改进，需关注其数据集扩展和开放式推理进展。"
+        "title": "TDATR: Improving End-to-End Table Recognition via Table Detail-Aware Learning and Cell-Level Visual Alignment",
+        "watch_reason": "通过细节感知学习和视觉对齐优化表格识别，在数据稀缺场景下表现优异，适用于复杂文档分析。"
+      },
+      {
+        "title": "Benchmarking Multi-Agent LLM Architectures for Financial Document Processing: A Comparative Study of Orchestration Patterns, Cost-Accuracy Tradeoffs and Production Scaling Strategies",
+        "watch_reason": "系统比较多智能体架构，提供成本-准确性权衡的实证指导，对生产部署有直接工程价值。"
       }
     ]
   },
   "papers": [
+    {
+      "title": "MinerU-Diffusion: Rethinking Document OCR as Inverse Rendering via Diffusion Decoding",
+      "summary": "Optical character recognition (OCR) has evolved from line-level transcription to structured document parsing, requiring models to recover long-form sequences containing layout, tables, and formulas. Despite recent advances in vision-language models, most existing systems rely on autoregressive decoding, which introduces sequential latency and amplifies error propagation in long documents. In this work, we revisit document OCR from an inverse rendering perspective, arguing that left-to-right causal generation is an artifact of serialization rather than an intrinsic property of the task. Motivated by this insight, we propose MinerU-Diffusion, a unified diffusion-based framework that replaces autoregressive sequential decoding with parallel diffusion denoising under visual conditioning. MinerU-Diffusion employs a block-wise diffusion decoder and an uncertainty-driven curriculum learning strategy to enable stable training and efficient long-sequence inference. Extensive experiments demonstrate that MinerU-Diffusion consistently improves robustness while achieving up to 3.2x faster decoding compared to autoregressive baselines. Evaluations on the proposed Semantic Shuffle benchmark further confirm its reduced dependence on linguistic priors and stronger visual OCR capability.",
+      "link": "https://arxiv.org/abs/2603.22458v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.22458v1",
+      "authors": [
+        "Hejun Dong",
+        "Junbo Niu",
+        "Bin Wang",
+        "Weijun Zeng",
+        "Wentao Zhang",
+        "Conghui He"
+      ],
+      "published": "2026-03-23T18:25:17Z",
+      "updated": "2026-03-23T18:25:17Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2603.22458v1",
+      "score": 32,
+      "topic_tags": [
+        "OCR",
+        "扩散模型",
+        "逆渲染",
+        "并行解码",
+        "文档解析"
+      ],
+      "zh_summary": "本文提出MinerU-Diffusion，将文档OCR重新定义为逆渲染问题，采用扩散解码替代自回归解码，以解决长文档处理中的序列延迟和错误传播问题。该框架包括块状扩散解码器和不确定性驱动的课程学习策略，实验表明其在鲁棒性和解码速度上优于基线方法，并在语义洗牌基准测试中展示了对语言先验的依赖性降低和更强的视觉OCR能力。",
+      "novelty": "将文档OCR任务从传统的自回归序列生成视角转变为逆渲染问题，首次引入扩散模型进行并行解码，减少了长文档处理中的延迟和错误累积。",
+      "innovation_points": [
+        "方法设计：采用扩散解码替代自回归解码，实现并行处理",
+        "训练范式：引入不确定性驱动的课程学习策略，提升训练稳定性",
+        "架构：设计块状扩散解码器，优化长序列推理效率",
+        "任务定义：将OCR重新定义为逆渲染问题，强调视觉条件化"
+      ],
+      "limitations": "扩散模型可能在高分辨率或复杂布局文档中面临计算资源需求较高的问题，且对视觉条件的依赖性可能在某些低质量图像场景下受限。",
+      "improvement_directions": [
+        "探索更高效的扩散解码算法以减少计算开销",
+        "增强模型对低质量或噪声图像的鲁棒性",
+        "扩展框架以处理更多文档类型如手写体或历史文档"
+      ],
+      "engineering_value": "高，解码速度提升3.2倍，适用于大规模文档处理场景，如数字图书馆或自动化办公系统，能显著降低延迟和错误率。",
+      "why_relevant": "直接针对OCR核心问题，提出新颖的并行解码方法，对提升文档解析效率和准确性有重要贡献。"
+    },
     {
       "title": "Seeing is Improving: Visual Feedback for Iterative Text Layout Refinement",
       "summary": "Recent advances in Multimodal Large Language Models (MLLMs) have enabled automated generation of structured layouts from natural language descriptions. Existing methods typically follow a code-only paradigm that generates code to represent layouts, which are then rendered by graphic engines to produce final images. However, they are blind to the rendered visual outcome, making it difficult to guarantee readability and aesthetics. In this paper, we identify visual feedback as a critical factor in layout generation and propose Visual Feedback Layout Model (VFLM), a self-improving framework that leverages visual feedback iterative refinement. VFLM is capable of performing adaptive reflective generation, which leverages visual information to reflect on previous issues and iteratively generates outputs until satisfactory quality is achieved. It is achieved through reinforcement learning with a visually grounded reward model that incorporates OCR accuracy. By rewarding only the final generated outcome, we can effectively stimulate the model's iterative and reflective generative capabilities. Experiments across multiple benchmarks show that VFLM consistently outperforms advanced MLLMs, existing layout models, and code-only baselines, establishing visual feedback as critical for design-oriented MLLMs. Our code and data are available at https://github.com/FolSpark/VFLM.",
@@ -59,28 +112,158 @@
       "arxiv_id": "2603.22187v1",
       "score": 13,
       "topic_tags": [
-        "多模态大语言模型",
         "布局生成",
         "视觉反馈",
-        "迭代优化",
-        "OCR准确性",
-        "强化学习"
+        "强化学习",
+        "MLLM",
+        "OCR评估"
       ],
-      "zh_summary": "近期多模态大语言模型（MLLMs）的进展使得从自然语言描述自动生成结构化布局成为可能。现有方法通常采用仅代码范式，生成代码表示布局，然后通过图形引擎渲染生成最终图像。然而，这些方法对渲染后的视觉结果视而不见，难以保证可读性和美观性。本文识别视觉反馈为布局生成中的关键因素，并提出视觉反馈布局模型（VFLM），一种利用视觉反馈进行迭代优化的自我改进框架。VFLM能够执行自适应反思生成，利用视觉信息反思先前问题并迭代生成输出直至达到满意质量。这是通过强化学习实现的，使用基于视觉的奖励模型，该模型结合了OCR准确性。通过仅奖励最终生成结果，我们能够有效激发模型的迭代和反思生成能力。在多个基准测试中的实验表明，VFLM始终优于先进的MLLMs、现有布局模型和仅代码基线，确立了视觉反馈对于设计导向MLLMs的重要性。",
-      "novelty": "本文提出视觉反馈布局模型（VFLM），首次将视觉反馈整合到布局生成过程中，通过迭代优化和自适应反思生成，解决了现有方法忽视视觉结果导致可读性和美观性不足的问题。",
+      "zh_summary": "本文提出视觉反馈布局模型（VFLM），通过视觉反馈迭代优化布局生成，解决现有代码生成方法忽略渲染结果可读性和美观性的问题。VFLM采用强化学习结合基于OCR准确率的奖励模型，实现自适应反射生成，实验表明其在多个基准测试中优于先进MLLM和布局模型。",
+      "novelty": "首次将视觉反馈机制引入布局生成任务，通过迭代优化和OCR奖励模型，提升生成布局的可读性和美观性。",
       "innovation_points": [
-        "方法设计：引入视觉反馈机制，通过强化学习结合OCR准确性奖励模型，实现迭代优化生成布局。",
-        "训练范式：采用自我改进框架，利用视觉信息进行反思和自适应生成，提升模型生成质量。",
-        "架构：整合多模态大语言模型与视觉反馈系统，增强布局生成的可解释性和可控性。"
+        "方法设计：引入视觉反馈迭代优化框架",
+        "训练范式：采用强化学习结合OCR奖励模型",
+        "数据：利用视觉信息进行自适应反射生成",
+        "任务定义：将布局生成与视觉评估紧密结合"
       ],
-      "limitations": "VFLM依赖于视觉反馈的迭代过程，可能导致计算开销增加；奖励模型基于OCR准确性，可能未充分覆盖其他美学或设计标准；实验基准可能未涵盖所有实际应用场景。",
+      "limitations": "迭代优化可能增加推理时间，且奖励模型的设计依赖于OCR准确率，可能在其他视觉指标如美观性上不够全面。",
       "improvement_directions": [
-        "优化迭代过程的效率，减少计算资源消耗。",
-        "扩展奖励模型以包含更多视觉和设计指标，如色彩平衡或空间协调性。",
-        "探索更广泛的基准测试，包括复杂或动态布局场景。"
+        "优化迭代策略以减少推理延迟",
+        "扩展奖励模型以纳入更多视觉评估指标",
+        "探索多模态反馈融合以提升生成质量"
       ],
-      "engineering_value": "高，VFLM通过视觉反馈提升布局生成的可读性和美观性，适用于文档设计、用户界面生成等实际应用，增强自动化布局系统的实用性和可靠性。",
-      "why_relevant": "该研究直接关联OCR领域，通过结合OCR准确性奖励模型优化布局生成，有助于提高文档解析和文本识别的质量，对OCR技术在多模态环境下的应用有重要启示。"
+      "engineering_value": "中高，适用于自动化设计工具或文档生成系统，能提升布局的可读性和用户体验，但需平衡迭代成本。",
+      "why_relevant": "涉及OCR在布局评估中的应用，对文档解析和生成任务有交叉贡献，强调视觉反馈的重要性。"
+    },
+    {
+      "title": "PaperVoyager : Building Interactive Web with Visual Language Models",
+      "summary": "Recent advances in visual language models have enabled autonomous agents for complex reasoning, tool use, and document understanding. However, existing document agents mainly transform papers into static artifacts such as summaries, webpages, or slides, which are insufficient for technical papers involving dynamic mechanisms and state transitions. In this work, we propose a Paper-to-Interactive-System Agent that converts research papers into executable interactive web systems. Given a PDF paper, the agent performs end-to-end processing without human intervention, including paper understanding, system modeling, and interactive webpage synthesis, enabling users to manipulate inputs and observe dynamic behaviors. To evaluate this task, we introduce a benchmark of 19 research papers paired with expert-built interactive systems as ground truth. We further propose PaperVoyager, a structured generation framework that explicitly models mechanisms and interaction logic during synthesis. Experiments show that PaperVoyager significantly improves the quality of generated interactive systems, offering a new paradigm for interactive scientific paper understanding.",
+      "link": "https://arxiv.org/abs/2603.22999v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.22999v1",
+      "authors": [
+        "Dasen Dai",
+        "Biao Wu",
+        "Meng Fang",
+        "Wenhao Wang"
+      ],
+      "published": "2026-03-24T09:42:27Z",
+      "updated": "2026-03-24T09:42:27Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2603.22999v1",
+      "score": 12,
+      "topic_tags": [
+        "文档理解",
+        "交互式系统",
+        "视觉语言模型",
+        "论文转换",
+        "端到端处理"
+      ],
+      "zh_summary": "本文提出PaperVoyager，一个将研究论文转换为可执行交互式网页系统的代理，通过端到端处理包括论文理解、系统建模和网页合成，实现用户交互和动态行为观察。实验表明该框架显著提升生成交互系统的质量，为交互式科学论文理解提供新范式。",
+      "novelty": "首次将研究论文自动转换为交互式网页系统，引入结构化生成框架，明确建模机制和交互逻辑，突破传统静态文档转换的限制。",
+      "innovation_points": [
+        "方法设计：端到端代理处理PDF到交互网页的转换",
+        "架构：结构化生成框架建模机制和交互逻辑",
+        "任务定义：定义交互式论文理解新任务",
+        "数据：引入包含专家构建系统的基准测试"
+      ],
+      "limitations": "系统可能对复杂或非标准论文格式处理能力有限，且交互逻辑建模依赖于论文内容的明确描述。",
+      "improvement_directions": [
+        "增强对多样化论文格式和内容的适应性",
+        "优化交互逻辑推理以处理更复杂的动态机制",
+        "扩展应用场景到其他文档类型如技术手册"
+      ],
+      "engineering_value": "高，适用于教育、科研或技术演示平台，能提升论文理解和交互体验，但需确保转换准确性和用户友好性。",
+      "why_relevant": "涉及文档理解和转换，与OCR相关任务如PDF解析有间接联系，强调交互式处理的新方向。"
+    },
+    {
+      "title": "TDATR: Improving End-to-End Table Recognition via Table Detail-Aware Learning and Cell-Level Visual Alignment",
+      "summary": "Tables are pervasive in diverse documents, making table recognition (TR) a fundamental task in document analysis. Existing modular TR pipelines separately model table structure and content, leading to suboptimal integration and complex workflows. End-to-end approaches rely heavily on large-scale TR data and struggle in data-constrained scenarios. To address these issues, we propose TDATR (Table Detail-Aware Table Recognition) improves end-to-end TR through table detail-aware learning and cell-level visual alignment. TDATR adopts a ``perceive-then-fuse'' strategy. The model first performs table detail-aware learning to jointly perceive table structure and content through multiple structure understanding and content recognition tasks designed under a language modeling paradigm. These tasks can naturally leverage document data from diverse scenarios to enhance model robustness. The model then integrates implicit table details to generate structured HTML outputs, enabling more efficient TR modeling when trained with limited data. Furthermore, we design a structure-guided cell localization module integrated into the end-to-end TR framework, which efficiently locates cell and strengthens vision-language alignment. It enhances the interpretability and accuracy of TR. We achieve state-of-the-art or highly competitive performance on seven benchmarks without dataset-specific fine-tuning.",
+      "link": "https://arxiv.org/abs/2603.22819v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.22819v1",
+      "authors": [
+        "Chunxia Qin",
+        "Chenyu Liu",
+        "Pengcheng Xia",
+        "Jun Du",
+        "Baocai Yin",
+        "Bing Yin",
+        "Cong Liu"
+      ],
+      "published": "2026-03-24T05:45:02Z",
+      "updated": "2026-03-24T05:45:02Z",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "arxiv_id": "2603.22819v1",
+      "score": 10,
+      "topic_tags": [
+        "表格识别",
+        "端到端学习",
+        "视觉对齐",
+        "细节感知",
+        "文档分析"
+      ],
+      "zh_summary": "本文提出TDATR，通过表格细节感知学习和单元格级视觉对齐改进端到端表格识别。采用“感知后融合”策略，联合感知表格结构和内容，并集成结构引导的单元格定位模块，在有限数据下实现高效建模，在多个基准测试中达到先进性能。",
+      "novelty": "首次在端到端表格识别中引入表格细节感知学习和单元格级视觉对齐，优化结构和内容整合，减少对大规模数据的依赖。",
+      "innovation_points": [
+        "方法设计：表格细节感知学习联合感知结构和内容",
+        "训练范式：语言建模范式下的多任务学习",
+        "架构：结构引导的单元格定位模块增强视觉对齐",
+        "数据：利用多样化文档数据提升鲁棒性"
+      ],
+      "limitations": "在极端复杂或非标准表格布局中可能表现下降，且单元格定位模块的计算效率需进一步优化。",
+      "improvement_directions": [
+        "提升对复杂表格布局的泛化能力",
+        "优化单元格定位模块以减少计算开销",
+        "探索更多数据增强策略以应对数据稀缺场景"
+      ],
+      "engineering_value": "高，适用于文档分析系统如财务报告或学术论文处理，能提高表格识别准确性和效率，尤其在数据有限环境中。",
+      "why_relevant": "直接针对表格识别这一OCR子任务，提出新颖的端到端方法，对文档解析有重要应用价值。"
+    },
+    {
+      "title": "Benchmarking Multi-Agent LLM Architectures for Financial Document Processing: A Comparative Study of Orchestration Patterns, Cost-Accuracy Tradeoffs and Production Scaling Strategies",
+      "summary": "The adoption of large language models (LLMs) for structured information extraction from financial documents has accelerated rapidly, yet production deployments face fundamental architectural decisions with limited empirical guidance. We present a systematic benchmark comparing four multi-agent orchestration architectures: sequential pipeline, parallel fan-out with merge, hierarchical supervisor-worker and reflexive self-correcting loop. These are evaluated across five frontier and open-weight LLMs on a corpus of 10,000 SEC filings (10-K, 10-Q and 8-K forms). Our evaluation spans 25 extraction field types covering governance structures, executive compensation and financial metrics, measured along five axes: field-level F1, document-level accuracy, end-to-end latency, cost per document and token efficiency. We find that reflexive architectures achieve the highest field-level F1 (0.943) but at 2.3x the cost of sequential baselines, while hierarchical architectures occupy the most favorable position on the cost-accuracy Pareto frontier (F1 0.921 at 1.4x cost). We further present ablation studies on semantic caching, model routing and adaptive retry strategies, demonstrating that hybrid configurations can recover 89\\% of the reflexive architecture's accuracy gains at only 1.15x baseline cost. Our scaling analysis from 1K to 100K documents per day reveals non-obvious throughput-accuracy degradation curves that inform capacity planning. These findings provide actionable guidance for practitioners deploying multi-agent LLM systems in regulated financial environments.",
+      "link": "https://arxiv.org/abs/2603.22651v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.22651v1",
+      "authors": [
+        "Siddhant Kulkarni",
+        "Yukta Kulkarni"
+      ],
+      "published": "2026-03-24T00:02:47Z",
+      "updated": "2026-03-24T00:02:47Z",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "arxiv_id": "2603.22651v1",
+      "score": 10,
+      "topic_tags": [
+        "多智能体系统",
+        "LLM",
+        "金融文档",
+        "基准测试",
+        "信息提取"
+      ],
+      "zh_summary": "本文系统比较四种多智能体LLM架构在金融文档处理中的性能，包括顺序管道、并行扇出合并、分层监督-工作者和反射自校正循环。评估基于SEC文件，涵盖准确性、延迟、成本和令牌效率，发现反射架构准确性最高但成本较高，分层架构在成本-准确性帕累托前沿表现最优，并提供可扩展性分析指导生产部署。",
+      "novelty": "首次对多智能体LLM架构在金融文档处理中进行系统基准测试，量化不同架构在准确性、成本和延迟等方面的权衡，为生产部署提供实证指导。",
+      "innovation_points": [
+        "方法设计：比较四种多智能体架构的性能",
+        "训练范式：评估混合配置如语义缓存和自适应重试策略",
+        "数据：基于大规模SEC文件数据集",
+        "任务定义：聚焦金融文档结构化信息提取"
+      ],
+      "limitations": "研究主要针对金融文档，可能在其他文档类型或领域泛化性有限，且成本分析依赖于特定LLM定价模型。",
+      "improvement_directions": [
+        "扩展基准测试到更多文档类型和领域",
+        "优化架构以进一步平衡成本与准确性",
+        "探索更高效的令牌使用和缓存策略"
+      ],
+      "engineering_value": "高，为金融行业文档处理系统提供具体架构选择建议，能指导实际部署中的资源分配和性能优化。",
+      "why_relevant": "涉及文档解析和信息提取，与OCR任务紧密相关，强调多智能体系统在复杂文档处理中的应用。"
     },
     {
       "title": "SemEval-2026 Task 12: Abductive Event Reasoning: Towards Real-World Event Causal Inference for Large Language Models",
@@ -106,27 +289,27 @@
       "score": 7,
       "topic_tags": [
         "溯因推理",
-        "事件因果推断",
+        "事件因果",
         "多文档理解",
-        "自然语言处理",
         "基准测试",
-        "证据处理"
+        "SemEval"
       ],
-      "zh_summary": "理解现实世界事件发生的原因对于自然语言处理和实际决策制定都很重要，但在证据丰富的环境中，直接原因推断仍未被充分探索。为填补这一空白，我们组织了SemEval-2026任务12：溯因事件推理（AER）。该任务要求系统从支持证据中识别目标事件的最可能直接原因。我们将AER制定为一个基于证据的多选择基准，捕捉现实世界因果推理的关键挑战，包括分布式证据、间接背景因素和语义相关但非因果的干扰项。共享任务吸引了122名参与者并收到518份提交。本文介绍了任务制定、数据集构建流程、评估设置和系统结果。AER为现实世界事件的溯因推理提供了一个聚焦基准，并突出了未来因果推理和多文档理解工作的挑战。",
-      "novelty": "本文提出SemEval-2026任务12：溯因事件推理（AER），首次构建一个基于证据的多选择基准，专注于现实世界事件的直接原因推断，填补了证据丰富环境中因果推理研究的空白。",
+      "zh_summary": "本文介绍SemEval-2026任务12：溯因事件推理（AER），旨在从证据中识别目标事件的最可能直接原因，作为证据基础的多选基准测试。任务吸引了122名参与者，提交518份系统，突出真实世界因果推理的挑战，并为未来工作提供方向。",
+      "novelty": "首次在SemEval中组织溯因事件推理任务，聚焦真实世界事件的直接原因推断，引入分布式证据和语义干扰等挑战。",
       "innovation_points": [
-        "任务定义：设计一个聚焦于溯因事件推理的共享任务，强调直接原因推断在现实世界场景中的应用。",
-        "数据：构建包含分布式证据、间接背景因素和语义干扰项的数据集，模拟复杂因果推理环境。",
-        "方法设计：采用基于证据的多选择框架，促进系统在证据丰富环境中的推理能力评估。"
+        "方法设计：证据基础的多选基准测试形式",
+        "数据：构建包含真实世界事件的数据集",
+        "任务定义：定义溯因事件推理新任务",
+        "架构：促进多文档理解和因果推理研究"
       ],
-      "limitations": "AER任务可能局限于特定事件类型或数据源，未覆盖所有现实世界场景；评估基于多选择格式，可能未充分测试开放式推理能力；数据集规模或多样性可能有限。",
+      "limitations": "任务可能受限于数据集规模和事件类型覆盖，且因果推理的复杂性可能导致系统性能波动。",
       "improvement_directions": [
-        "扩展数据集以包括更多样化的事件类型和证据来源。",
-        "探索开放式推理评估方法，超越多选择框架。",
-        "整合多模态数据或跨语言信息，增强任务的泛化能力。"
+        "扩展数据集以涵盖更多事件类型和证据来源",
+        "开发更鲁棒的因果推理模型以处理间接因素",
+        "探索多模态证据融合以提升推理准确性"
       ],
-      "engineering_value": "中等，AER任务为因果推理系统提供了基准测试，有助于开发更智能的决策支持工具，但直接应用于OCR或文档解析的工程价值有限，更多侧重于自然语言处理领域。",
-      "why_relevant": "该研究间接关联OCR领域，通过事件推理任务促进多文档理解和证据处理，可能对OCR系统中的信息提取和上下文分析有启发作用，但非直接核心。"
+      "engineering_value": "中，为事件理解和决策支持系统提供基准，但直接应用到OCR场景有限，更多关联文档理解任务。",
+      "why_relevant": "涉及多文档理解和因果推理，与OCR任务中的信息提取和语义分析有交叉，强调事件级文档处理。"
     }
   ]
 }
