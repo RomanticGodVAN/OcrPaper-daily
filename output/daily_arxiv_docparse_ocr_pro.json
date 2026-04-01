@@ -1,62 +1,56 @@
 {
   "meta": {
-    "report_date": "2026-03-31",
-    "generated_at_utc": "2026-03-31 04:09:57",
+    "report_date": "2026-04-01",
+    "generated_at_utc": "2026-04-01 04:22:52",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 9
+    "count": 12
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦于OCR与文档解析的多个前沿方向，核心趋势是利用视觉语言模型（VLMs）增强复杂文档的理解能力，并通过模块化、解耦架构提升效率与泛化性。研究重点包括：1）历史文档与多语言场景的语义化处理（如议会演讲转录、日语基准、多语言解析基准）；2）高效领域自适应与训练策略优化（如解耦语言模型、数据组织研究）；3）特定领域（如化学结构）与挑战性任务（如误导性图表问答）的多模态解析；4）统一框架与工程优化（如模块化数字化框架、检索生成统一模型）。这些工作共同推动文档解析从单纯转录向结构化、语义化、高效化的方向发展，并为实际部署提供了重要工具与洞见。",
-    "trend_summary": "当前研究呈现三大趋势：一是视觉语言模型（VLMs）成为文档解析的核心技术，广泛应用于转录精炼、语义分析、多模态理解等任务，强调视觉与文本的联合推理；二是模块化与解耦架构兴起，通过分离视觉检测、语言校正、检索生成等组件，提升计算效率、领域适应性和系统灵活性；三是基准与数据驱动研究加强，针对日语、多语言、化学结构等特定领域构建高质量数据集与评估工具，以解决性能不平衡、数据稀缺等实际问题。",
+    "executive_summary": "今日论文显示OCR与文档解析研究正朝多模态融合、高效自适应和标准化评估方向发展。视觉语言模型被广泛用于提升转录精度和语义理解，尤其在历史文档和复杂结构（如化学图表）中表现突出。模块化设计和领域自适应方法显著降低计算成本，促进资源受限环境的应用。同时，新基准和数据集（如MDPBench、AutoFormBench）推动模型公平性和现实世界性能评估。工业级模型优化（如Xuanwu）和代理框架（如ChartCynics）增强对抗场景下的鲁棒性。整体趋势强调平衡性能与效率，支持低资源语言和文化遗产数字化。",
+    "trend_summary": "研究趋势聚焦于多模态集成（视觉、文本、布局联合推理）、轻量级自适应（少样本学习、模块化解耦）和标准化基准构建（多语言、真实场景）。视觉语言模型成为核心，用于端到端任务如转录、实体链接和图表理解。领域自适应通过合成噪声或上下文学习减少标注依赖，提高计算效率。基准数据集推动模型在非拉丁脚本、拍摄文档和表单元素上的公平评估。工业应用注重紧凑架构和对抗训练，以优化部署成本与鲁棒性。",
     "common_innovations": [
-      "采用视觉语言模型进行视觉与文本的联合推理，以提升转录质量和语义分析能力。",
-      "设计模块化或解耦架构，分离不同处理阶段（如检测、校正、检索），优化计算效率和任务适应性。",
-      "构建针对特定语言、领域或挑战（如日语、多语言、化学结构、误导性图表）的基准数据集，推动标准化评估。",
-      "集成知识库链接或语义增强步骤，将文档解析扩展为端到端的结构化信息提取工作流。",
-      "探索高效训练策略，如合成噪声训练、课程学习或LoRA适配器，以减少标注依赖或平衡多任务能力。"
+      "使用视觉语言模型联合推理视觉布局和文本内容，提升转录和分类精度。",
+      "采用模块化或解耦架构分离视觉检测与语言校正，实现高效领域自适应。",
+      "构建多语言或特定领域基准数据集，系统评估模型在真实场景下的性能。",
+      "集成OCR与后期处理流程，为低资源语言或历史文档创建结构化数据集。",
+      "通过紧凑模型设计和渐进训练，在有限参数下平衡业务对齐与通用能力。"
     ],
     "future_directions": [
-      "开发针对非拉丁脚本（如汉字、阿拉伯文）和垂直书写文本的专用OCR模型或训练策略，以弥补开源模型性能差距。",
-      "扩展视觉语言模型在历史文档处理中的应用，优化对褪色、污损、多语言变体等退化情况的鲁棒性。",
-      "研究动态数据组织或自适应课程学习策略，以优化多模态模型在通用理解、结构化推理与细粒度OCR之间的能力权衡。",
-      "构建更大规模的多语言文档解析基准，覆盖更多低资源语言和真实拍摄条件，以系统评估模型泛化能力。",
-      "探索轻量化或边缘部署的文档解析方案，通过模型压缩、架构优化减少计算开销，适合资源受限环境。",
-      "将化学结构识别等多模态方法扩展到其他科学领域（如生物图表、物理公式），解决领域特定数据稀缺问题。",
-      "增强文档解析系统对误导性视觉元素（如图表轴倒置）的检测能力，结合对抗训练提升逻辑一致性。",
-      "优化模块化框架以支持更多文档类型（如表格、图像丰富文档），减少对人工校正的依赖，实现全自动化处理。"
+      "开发轻量级视觉语言模型，减少计算开销，适用于移动或边缘设备部署。",
+      "优化合成噪声生成方法，以更好模拟真实文档退化，提升领域自适应泛化能力。",
+      "扩展多语言基准至更多低资源语言和方言，覆盖非拉丁脚本的复杂拍摄条件。",
+      "探索多模态融合机制，高效整合视觉、文本和布局信息，用于化学结构或图表识别。",
+      "研究实时少样本自适应技术，支持手写文本识别在动态环境中的快速部署。"
     ],
     "engineering_takeaways": [
-      "采用解耦架构（如视觉检测+语言校正）可大幅降低计算成本（约95%），适合领域自适应和资源有限部署。",
-      "课程训练策略在多模态指令调优中有利于平衡结构化推理与OCR能力，提升模型整体性能。",
-      "模块化框架（如VERITAS）允许声明式任务定义，支持灵活定制历史文档数字化工作流，减少端到端处理时间。",
-      "使用LoRA适配器等参数高效方法可在单一模型中统一检索与生成功能，降低内存占用（减少41%峰值GPU内存）。",
-      "构建针对特定语言（如日语）或场景（如拍摄文档）的基准有助于识别模型弱点，指导工程优化方向。",
-      "集成知识库链接（如SPARQL查询）可增强文档解析的语义输出，支持下游应用如查询和分析。",
-      "合成噪声训练可实现无标注领域自适应，减少对昂贵标注数据的依赖，加速模型迭代。",
-      "代理双路径框架（如ChartCynics）通过解耦感知与验证提升对误导性图表的鲁棒性，适用于高准确性要求的场景。"
+      "采用模块化框架（如VERITAS）可灵活集成转录、布局分析和语义增强，提升历史文档数字化效率。",
+      "利用合成噪声训练校正器，实现无标注领域自适应，降低OCR系统在资源受限环境中的部署成本。",
+      "集成SPARQL查询和模糊匹配进行实体链接，增强文档解析的语义分析能力，适用于知识库应用。",
+      "使用紧凑模型架构（如Xuanwu）和LoRA适配器，在工业场景中平衡性能与内存开销，优化内容审核任务。",
+      "构建标准化基准数据集（如AutoFormBench）可系统评估表单元素检测模型，促进业务流程自动化。"
     ],
     "watchlist": [
       {
         "title": "Transcription and Recognition of Italian Parliamentary Speeches Using Vision-Language Models",
-        "watch_reason": "展示了VLM在历史文档端到端语义处理（转录、分类、实体链接）的完整管道，具有高工程价值，可借鉴于其他领域文档数字化。"
-      },
-      {
-        "title": "JaWildText: A Benchmark for Vision-Language Models on Japanese Scene Text Understanding",
-        "watch_reason": "首个日语场景文本理解基准，揭示了汉字识别等语言特定挑战，对多语言OCR开发有重要参考意义。"
+        "watch_reason": "结合视觉语言模型进行端到端转录和实体链接，为历史文档数字化提供高性能解决方案，可能推动语义分析应用。"
       },
       {
         "title": "Efficient Domain Adaptation for Text Line Recognition via Decoupled Language Models",
-        "watch_reason": "提出计算高效的解耦领域自适应方法，减少95%计算需求，适合资源受限环境，工程部署潜力大。"
+        "watch_reason": "模块化检测-校正框架大幅降低计算需求，适合资源受限环境，可能促进OCR在数字人文等领域的普及。"
       },
       {
         "title": "MDPBench: A Benchmark for Multilingual Document Parsing in Real-World Scenarios",
-        "watch_reason": "系统评估多语言文档解析性能差距，突出开源模型在非拉丁脚本上的弱点，指导模型优化方向。"
+        "watch_reason": "首个多语言文档解析基准，揭示开源模型在非拉丁脚本上的性能瓶颈，对推动模型公平性和包容性有重要影响。"
       },
       {
-        "title": "Data Organization Matters in Multimodal Instruction Tuning: A Controlled Study of Capability Trade-offs",
-        "watch_reason": "实证研究数据组织对多模态能力权衡的影响，课程训练策略可提升结构化推理，对模型训练有直接指导作用。"
+        "title": "Xuanwu: Evolving General Multimodal Models into an Industrial-Grade Foundation for Content Ecosystems",
+        "watch_reason": "紧凑架构在对抗OCR场景中表现优异，为工业应用提供高效多模态基础，可能优化内容审核和部署策略。"
+      },
+      {
+        "title": "Navigating the Mirage: A Dual-Path Agentic Framework for Robust Misleading Chart Question Answering",
+        "watch_reason": "代理框架通过双路径解耦增强图表理解鲁棒性，在对抗场景中提升性能，适用于数据可视化和信息验证任务。"
       }
     ]
   },
@@ -83,70 +77,26 @@
       "score": 27,
       "topic_tags": [
         "视觉语言模型",
-        "历史文档OCR",
-        "语义分割",
+        "OCR",
         "实体链接",
-        "议会演讲"
+        "语义分割",
+        "议会文档"
       ],
-      "zh_summary": "本文提出了一种基于视觉语言模型的管道，用于意大利议会演讲的自动转录、语义分割和实体链接。该管道采用专门的OCR模型提取文本并保持阅读顺序，然后利用大规模视觉语言模型通过联合推理视觉布局和文本内容进行转录精炼、元素分类和发言人识别。提取的发言人通过SPARQL查询和多策略模糊匹配程序链接到众议院知识库。评估显示，在转录质量和发言人标记方面均有显著提升。",
-      "novelty": "将视觉语言模型应用于历史议会文档的转录和语义分析，结合OCR和语义推理，实现端到端的处理，并集成知识库链接。",
+      "zh_summary": "本文提出了一种基于视觉语言模型的管道，用于意大利议会演讲的自动转录、语义分割和实体链接。该管道采用专门的OCR模型提取文本并保持阅读顺序，随后使用大规模视觉语言模型通过联合推理视觉布局和文本内容进行转录精炼、元素分类和发言人识别。提取的发言人通过SPARQL查询和多策略模糊匹配程序链接到众议院知识库。评估显示在转录质量和发言人标记方面有显著改进。",
+      "novelty": "将视觉语言模型应用于议会演讲转录，结合OCR和语义分析，实现端到端的转录、分类和实体链接，超越传统OCR方法。",
       "innovation_points": [
-        "方法设计：结合专用OCR和视觉语言模型进行转录精炼和语义分析",
-        "训练范式：利用视觉布局和文本内容的联合推理",
-        "数据：针对意大利议会演讲的历史扫描文档",
-        "架构：模块化管道，包括提取、精炼和链接阶段",
-        "任务定义：集成转录、分类、发言人识别和实体链接"
+        "使用视觉语言模型联合推理视觉布局和文本内容进行转录精炼和元素分类",
+        "集成SPARQL查询和多策略模糊匹配进行实体链接",
+        "专门OCR模型提取文本并保持阅读顺序"
       ],
-      "limitations": "依赖于特定知识库（众议院知识库），可能在其他领域泛化能力有限；评估基准可能未覆盖所有历史文档类型。",
+      "limitations": "依赖大规模视觉语言模型，计算资源需求较高；实体链接可能受知识库覆盖范围限制。",
       "improvement_directions": [
-        "扩展知识库链接到更广泛的实体类型",
-        "增强模型对多语言和历史变体的处理能力",
-        "优化模糊匹配算法以提高链接准确性"
+        "优化模型以减少计算开销",
+        "扩展知识库以提高实体链接覆盖率",
+        "探索更多语言或文档类型的应用"
       ],
-      "engineering_value": "高，为历史文档数字化提供了可部署的端到端解决方案，减少人工转录成本，支持语义查询和分析。",
-      "why_relevant": "涉及OCR、视觉语言模型和文档解析，直接关联OCR技术在实际历史文档处理中的应用。"
-    },
-    {
-      "title": "JaWildText: A Benchmark for Vision-Language Models on Japanese Scene Text Understanding",
-      "summary": "Japanese scene text poses challenges that multilingual benchmarks often fail to capture, including mixed scripts, frequent vertical writing, and a character inventory far larger than the Latin alphabet. Although Japanese is included in several multilingual benchmarks, these resources do not adequately capture the language-specific complexities. Meanwhile, existing Japanese visual text datasets have primarily focused on scanned documents, leaving in-the-wild scene text underexplored. To fill this gap, we introduce JaWildText, a diagnostic benchmark for evaluating vision-language models (VLMs) on Japanese scene text understanding. JaWildText contains 3,241 instances from 2,961 images newly captured in Japan, with 1.12 million annotated characters spanning 3,643 unique character types. It comprises three complementary tasks that vary in visual organization, output format, and writing style: (i) Dense Scene Text Visual Question Answering (STVQA), which requires reasoning over multiple pieces of visual text evidence; (ii) Receipt Key Information Extraction (KIE), which tests layout-aware structured extraction from mobile-captured receipts; and (iii) Handwriting OCR, which evaluates page-level transcription across various media and writing directions. We evaluate 14 open-weight VLMs and find that the best model achieves an average score of 0.64 across the three tasks. Error analyses show recognition remains the dominant bottleneck, especially for kanji. JaWildText enables fine-grained, script-aware diagnosis of Japanese scene text capabilities, and will be released with evaluation code.",
-      "link": "https://arxiv.org/abs/2603.27942v1",
-      "pdf_url": "https://arxiv.org/pdf/2603.27942v1",
-      "authors": [
-        "Koki Maeda",
-        "Naoaki Okazaki"
-      ],
-      "published": "2026-03-30T01:36:16Z",
-      "updated": "2026-03-30T01:36:16Z",
-      "categories": [
-        "cs.CV",
-        "cs.AI"
-      ],
-      "arxiv_id": "2603.27942v1",
-      "score": 26,
-      "topic_tags": [
-        "日语OCR",
-        "场景文本理解",
-        "视觉语言模型基准",
-        "多脚本处理",
-        "垂直书写"
-      ],
-      "zh_summary": "本文介绍了JaWildText，一个用于评估视觉语言模型在日语场景文本理解上的诊断基准。该基准包含3,241个实例，来自2,961张在日本新拍摄的图像，标注了112万个字符，涵盖3,643个独特字符类型。它包括三个互补任务：密集场景文本视觉问答、收据关键信息提取和手写OCR。评估14个开放权重视觉语言模型，最佳模型平均得分为0.64。错误分析显示识别仍是主要瓶颈，尤其是汉字。",
-      "novelty": "首个专注于日语场景文本理解的基准，涵盖混合脚本、垂直书写和大字符集等语言特定复杂性，填补了现有资源空白。",
-      "innovation_points": [
-        "方法设计：设计多任务基准以评估视觉语言模型在不同场景下的表现",
-        "训练范式：基于真实世界图像构建数据集，强调语言特定挑战",
-        "数据：大规模标注日语场景文本，包括多样书写风格和媒体类型",
-        "架构：基准包含视觉问答、信息提取和OCR任务",
-        "任务定义：针对日语文本的密集推理、结构化提取和转录"
-      ],
-      "limitations": "基准规模相对较小（3,241实例），可能未覆盖所有日语文本变体；模型性能仍有提升空间，尤其是汉字识别。",
-      "improvement_directions": [
-        "扩展数据集以包含更多日语方言和书写变体",
-        "开发针对汉字识别的专用模型或训练策略",
-        "优化视觉语言模型在垂直文本和混合脚本上的处理能力"
-      ],
-      "engineering_value": "中高，为日语OCR和场景文本理解提供了标准化评估工具，推动模型优化和实际应用。",
-      "why_relevant": "直接涉及OCR和视觉语言模型在非拉丁脚本和多语言场景下的挑战，是文档解析领域的重要扩展。"
+      "engineering_value": "高，为历史文档数字化提供自动化解决方案，提升转录准确性和语义分析能力。",
+      "why_relevant": "涉及OCR、视觉语言模型和文档解析，对多模态文档处理有直接贡献。"
     },
     {
       "title": "Efficient Domain Adaptation for Text Line Recognition via Decoupled Language Models",
@@ -167,28 +117,26 @@
       "score": 20,
       "topic_tags": [
         "领域自适应",
-        "解耦架构",
-        "文本行识别",
+        "OCR",
+        "模块化架构",
         "计算效率",
-        "合成训练"
+        "手写体识别"
       ],
-      "zh_summary": "本文提出了一种解耦语言模型的高效领域自适应方法，用于文本行识别。该方法将轻量级视觉字符检测（领域无关）与使用预训练序列模型（如T5、ByT5和BART）的领域特定语言校正解耦。通过在合成噪声上训练校正器，实现无需标注目标图像的领域自适应。评估显示，该方法在现代清洁手写、草书和历史文档上匹配端到端Transformer的准确性，同时减少约95%的计算需求。",
-      "novelty": "采用解耦架构，分离视觉检测和语言校正，实现高效领域自适应，显著降低计算成本，同时保持高准确性。",
+      "zh_summary": "本文提出了一种模块化的检测-校正框架，用于文本行识别的高效领域自适应。该方法将轻量级视觉字符检测（领域无关）与使用预训练序列模型（如T5、ByT5、BART）的领域特定语言校正解耦。通过在合成噪声上训练校正器，实现无需标注目标图像的领域自适应。评估显示，该框架在保持接近SOTA准确性的同时，将计算需求减少约95%。",
+      "novelty": "通过解耦视觉检测和语言校正，实现资源高效的领域自适应，减少计算开销，同时保持高准确性。",
       "innovation_points": [
-        "方法设计：解耦视觉检测和语言校正的模块化框架",
-        "训练范式：使用合成噪声进行无标注领域自适应",
-        "数据：利用预训练模型，减少对标注数据的依赖",
-        "架构：轻量检测器与强大校正器的组合",
-        "任务定义：针对文本行识别的资源高效优化"
+        "模块化检测-校正框架，解耦视觉和语言组件",
+        "使用合成噪声训练校正器，实现无标注领域自适应",
+        "识别T5和ByT5在不同文档类型上的Pareto前沿"
       ],
-      "limitations": "依赖于预训练语言模型的质量，可能在低资源语言或特殊字符集上表现受限；合成噪声可能无法完全模拟真实世界变异。",
+      "limitations": "合成噪声可能无法完全模拟真实文档复杂性；对预训练模型依赖较强。",
       "improvement_directions": [
-        "探索更多预训练模型以覆盖更广泛的语言和领域",
-        "改进合成噪声生成以更好地模拟真实文档退化",
-        "扩展方法到多模态或布局感知任务"
+        "改进合成噪声生成以更好模拟真实场景",
+        "探索更多轻量级模型以进一步降低计算成本",
+        "扩展到更多低资源语言或手写体"
       ],
-      "engineering_value": "高，为OCR领域自适应提供了计算高效的解决方案，降低部署门槛，适合资源有限的环境。",
-      "why_relevant": "涉及OCR方法优化、领域自适应和计算效率，是文档解析技术的重要进展。"
+      "engineering_value": "高，为资源受限环境提供可行的OCR解决方案，促进数字人文等领域的应用。",
+      "why_relevant": "涉及OCR领域自适应、计算效率优化和模块化架构，对实际部署有重要意义。"
     },
     {
       "title": "MDPBench: A Benchmark for Multilingual Document Parsing in Real-World Scenarios",
@@ -216,29 +164,27 @@
       "arxiv_id": "2603.28130v1",
       "score": 18,
       "topic_tags": [
-        "多语言文档解析",
-        "基准评估",
-        "开源vs闭源",
-        "非拉丁脚本",
-        "拍摄文档"
+        "文档解析基准",
+        "多语言处理",
+        "开源模型",
+        "拍摄文档",
+        "性能评估"
       ],
-      "zh_summary": "本文介绍了多语言文档解析基准（MDPBench），首个针对多语言数字和拍摄文档解析的基准。该基准包含3,400张文档图像，涵盖17种语言、多样脚本和不同拍摄条件。评估显示，闭源模型相对稳健，而开源模型在非拉丁脚本和真实世界拍摄文档上性能显著下降，平均下降17.8%和14.0%。结果揭示了跨语言和条件的性能不平衡。",
-      "novelty": "首个系统评估多语言文档解析在真实世界条件下的基准，突出开源与闭源模型之间的性能差距，推动更包容的解析系统发展。",
+      "zh_summary": "本文介绍了多语言文档解析基准MDPBench，首个针对多语言数字和拍摄文档解析的基准。该基准包含3,400张文档图像，覆盖17种语言、多样脚本和不同拍摄条件。评估显示，开源模型在非拉丁脚本和真实拍摄文档上性能显著下降，而闭源模型相对稳健。结果揭示了跨语言和条件的性能不平衡。",
+      "novelty": "创建首个多语言文档解析基准，系统评估模型在多样脚本和拍摄条件下的性能，揭示开源与闭源模型的差距。",
       "innovation_points": [
-        "方法设计：构建多语言、多脚本文档解析基准",
-        "训练范式：基于专家模型标注和人工验证的高质量数据",
-        "数据：涵盖数字和拍摄文档，强调语言多样性和真实条件",
-        "架构：基准设计防止数据泄露，支持公平比较",
-        "任务定义：评估模型在多样语言和拍摄条件下的泛化能力"
+        "构建包含多语言、多脚本和拍摄条件的文档解析基准",
+        "采用专家模型标注、人工校正和验证的高质量标注流程",
+        "揭示开源模型在非拉丁脚本和拍摄文档上的性能瓶颈"
       ],
-      "limitations": "基准规模有限（3,400图像），可能未覆盖所有低资源语言；性能差距可能部分源于模型架构而非数据。",
+      "limitations": "基准规模有限，可能未覆盖所有低资源语言；闭源模型细节不透明，影响可复现性。",
       "improvement_directions": [
         "扩展基准以包含更多低资源语言和文档类型",
-        "开发针对非拉丁脚本和拍摄条件的专用训练数据",
-        "优化开源模型架构以提高多语言性能"
+        "推动开源模型在非拉丁脚本和拍摄文档上的优化",
+        "开发更公平的评估指标以减少数据泄露风险"
       ],
-      "engineering_value": "高，为文档解析社区提供了关键评估工具，帮助识别和解决部署中的性能不平衡问题。",
-      "why_relevant": "直接涉及OCR和文档解析在多语言和真实世界场景下的挑战，是技术实用化的重要参考。"
+      "engineering_value": "中高，为文档解析研究提供标准化评估工具，促进模型公平性和包容性。",
+      "why_relevant": "涉及文档解析基准、多语言处理和模型评估，对OCR系统部署有指导作用。"
     },
     {
       "title": "MarkushGrapher-2: End-to-end Multimodal Recognition of Chemical Structures",
@@ -262,28 +208,26 @@
       "score": 17,
       "topic_tags": [
         "化学结构识别",
-        "多模态OCR",
-        "端到端学习",
-        "科学文档解析",
-        "数据集构建"
+        "多模态融合",
+        "OCR",
+        "数据集构建",
+        "端到端学习"
       ],
-      "zh_summary": "本文提出了MarkushGrapher-2，一种用于文档中化学结构多模态识别的端到端方法。该方法首先使用专用OCR模型从化学图像中提取文本，然后通过视觉-文本-布局编码器和光学化学结构识别视觉编码器联合编码文本、图像和布局信息，最后通过两阶段训练策略融合编码并自回归生成Markush结构表示。为解决训练数据缺乏，引入了自动构建大规模真实世界Markush结构数据集的管道，并提出了IP5-M手动标注基准。实验显示，该方法在多模态Markush结构识别上大幅优于现有模型。",
-      "novelty": "端到端多模态方法，结合OCR、视觉和布局信息进行化学结构识别，并引入大规模数据集和基准，推动该领域研究。",
+      "zh_summary": "本文提出MarkushGrapher-2，一种用于文档中化学结构多模态识别的端到端方法。该方法使用专用OCR模型提取文本，通过视觉-文本-布局编码器和光学化学结构识别视觉编码器联合编码文本、图像和布局信息，并采用两阶段训练策略融合编码以自回归生成Markush结构表示。为解决数据缺乏问题，引入了自动构建大规模真实世界Markush结构数据集的管道。",
+      "novelty": "端到端多模态化学结构识别方法，结合视觉、文本和布局信息，并构建大规模数据集和基准。",
       "innovation_points": [
-        "方法设计：集成OCR、视觉和布局编码的多模态架构",
-        "训练范式：两阶段训练策略以有效融合多模态信息",
-        "数据：自动构建大规模真实世界数据集，解决数据稀缺问题",
-        "架构：视觉-文本-布局编码器与专用化学识别编码器的组合",
-        "任务定义：针对化学结构的多模态识别和表示生成"
+        "视觉-文本-布局编码器联合编码多模态信息",
+        "两阶段训练策略有效融合编码",
+        "自动构建大规模真实世界Markush结构数据集"
       ],
-      "limitations": "方法可能依赖于特定化学领域知识，泛化到其他类型结构（如生物或物理图表）可能有限；计算需求较高。",
+      "limitations": "多模态融合可能增加模型复杂性；数据集构建依赖自动流程，可能存在噪声。",
       "improvement_directions": [
-        "扩展方法到其他科学领域的多模态文档解析",
-        "优化模型以减少计算开销，提高部署效率",
-        "增强对复杂或模糊化学结构的识别能力"
+        "优化多模态融合机制以提高效率",
+        "扩展数据集以覆盖更多化学结构类型",
+        "探索轻量级模型部署"
       ],
-      "engineering_value": "高，为化学文献分析提供了自动化工具，支持大规模数据处理和知识提取。",
-      "why_relevant": "涉及OCR、多模态学习和文档解析在特定科学领域的应用，是OCR技术扩展的重要案例。"
+      "engineering_value": "高，为化学文献分析提供自动化工具，提升化学结构识别精度。",
+      "why_relevant": "涉及OCR、多模态融合和化学文档解析，对特定领域OCR应用有贡献。"
     },
     {
       "title": "Quid est VERITAS? A Modular Framework for Archival Document Analysis",
@@ -308,68 +252,235 @@
       "arxiv_id": "2603.28108v1",
       "score": 17,
       "topic_tags": [
-        "历史文档数字化",
         "模块化框架",
-        "语义增强",
+        "历史文档数字化",
         "布局分析",
-        "检索增强生成"
+        "语义增强",
+        "工作流设计"
       ],
-      "zh_summary": "本文提出了VERITAS，一个模块化、模型无关的框架，用于重新概念化历史文档数字化为涵盖转录、布局分析和语义增强的集成工作流。管道分为四个阶段——预处理、提取、精炼和增强——并采用模式驱动架构，允许研究者声明式指定提取目标。在Bernardino Corio的《Storia di Milano》上评估，结果显示与商业OCR基线相比，词错误率相对减少67.6%，端到端处理时间考虑手动校正后减少三倍。下游应用展示了通过检索增强生成系统查询转录语料库的能力。",
-      "novelty": "模块化框架将文档数字化从单纯转录扩展为结构化语义工作流，支持灵活的任务定义和高效处理，提升历史文档分析质量。",
+      "zh_summary": "本文提出VERITAS，一种模块化、模型无关的框架，将历史文档数字化重新概念化为包含转录、布局分析和语义增强的集成工作流。管道分为预处理、提取、精炼和增强四个阶段，采用模式驱动架构允许研究者声明式指定提取目标。评估显示，在转录错误率和处理时间方面相比商业OCR基线有显著改进。",
+      "novelty": "模块化框架整合转录、布局分析和语义增强，采用模式驱动架构提供灵活性和可扩展性。",
       "innovation_points": [
-        "方法设计：模块化、模型无关的框架设计，支持自定义工作流",
-        "训练范式：模式驱动架构，允许声明式任务规范",
-        "数据：针对历史文档，集成转录和语义分析",
-        "架构：四阶段管道（预处理、提取、精炼、增强）",
-        "任务定义：从字符级转录到布局和语义增强的全面数字化"
+        "四阶段模块化工作流涵盖文档数字化全流程",
+        "模式驱动架构支持声明式提取目标指定",
+        "集成检索增强生成系统支持下游历史查询"
       ],
-      "limitations": "框架可能依赖于特定文档类型（如历史书籍），在其他领域（如现代表格或图像丰富文档）可能需要调整；手动校正仍部分必要。",
+      "limitations": "框架通用性可能受特定文档类型限制；语义增强依赖外部知识源。",
       "improvement_directions": [
-        "扩展框架以支持更多文档类型和格式",
-        "集成更先进的AI模型以自动化语义增强步骤",
-        "优化管道以减少对人工干预的依赖"
+        "扩展框架以支持更多文档类型和语言",
+        "优化语义增强模块以提高准确性",
+        "降低部署复杂度以促进广泛应用"
       ],
-      "engineering_value": "高，为历史文档数字化提供了可定制和高效的解决方案，支持学术研究和文化遗产保护。",
-      "why_relevant": "涉及OCR、文档解析和语义分析，是历史文档处理领域的技术创新，直接关联OCR应用。"
+      "engineering_value": "高，为历史文档数字化提供系统化解决方案，提升转录质量和分析能力。",
+      "why_relevant": "涉及OCR、布局分析和语义增强，对文档解析工作流设计有参考价值。"
     },
     {
-      "title": "Data Organization Matters in Multimodal Instruction Tuning: A Controlled Study of Capability Trade-offs",
-      "summary": "Recent multimodal large language models (MLLMs) perform strongly on general visual understanding, diagram and chart reasoning, and document-centric perception. However, these abilities are learned from heterogeneous supervision sources with very different task structures and learning demands, and the effect of their temporal organization during training remains underexplored. We study whether data organization affects the trade-off among general understanding, structured reasoning, and fine-grained OCR/document understanding in multimodal instruction tuning. To isolate this factor, we use a controlled three-stage training framework in which the backbone, trainable modules, and optimization pipeline are fixed across all runs, and only the temporal arrangement of post-alignment supervision is changed. We compare four strategies: direct mixture, curriculum training, balanced sampling, and reverse curriculum. Experiments on general visual instruction following, diagram reasoning, chart reasoning, scene-text question answering, and document question answering show that data organization is a first-order design variable in multimodal adaptation. Curriculum training gives the best overall trade-off and the strongest structured reasoning performance. Balanced sampling is better for OCR-oriented capability but weakens the broader capability balance. Reverse curriculum performs worst in both final performance and optimization stability. Training-dynamics analysis further suggests that building general understanding and reasoning before introducing OCR-intensive supervision leads to smoother optimization and faster convergence. These findings highlight data scheduling as an explicit design dimension for multimodal model adaptation.",
-      "link": "https://arxiv.org/abs/2603.27744v1",
-      "pdf_url": "https://arxiv.org/pdf/2603.27744v1",
+      "title": "Few-shot Writer Adaptation via Multimodal In-Context Learning",
+      "summary": "While state-of-the-art Handwritten Text Recognition (HTR) models perform well on standard benchmarks, they frequently struggle with writers exhibiting highly specific styles that are underrepresented in the training data. To handle unseen and atypical writers, writer adaptation techniques personalize HTR models to individual handwriting styles. Leading writer adaptation methods require either offline fine-tuning or parameter updates at inference time, both involving gradient computation and backpropagation, which increase computational costs and demand careful hyperparameter tuning. In this work, we propose a novel context-driven HTR framework3 inspired by multimodal in-context learning, enabling inference-time writer adaptation using only a few examples from the target writer without any parameter updates. We further demonstrate the impact of context length, design a compact 8M-parameter CNN-Transformer that enables few-shot in-context adaptation, and show that combining context-driven and standard OCR training strategies leads to complementary improvements. Experiments on IAM and RIMES validate our approach with Character Error Rates of 3.92% and 2.34%, respectively, surpassing all writer-independent HTR models without requiring any parameter updates at inference time.",
+      "link": "https://arxiv.org/abs/2603.29450v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.29450v1",
       "authors": [
-        "Guowei Tang"
+        "Tom Simon",
+        "Stephane Nicolas",
+        "Pierrick Tranouez",
+        "Clement Chatelain",
+        "Thierry Paquet"
       ],
-      "published": "2026-03-29T15:54:06Z",
-      "updated": "2026-03-29T15:54:06Z",
+      "published": "2026-03-31T08:55:11Z",
+      "updated": "2026-03-31T08:55:11Z",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "arxiv_id": "2603.29450v1",
+      "score": 16,
+      "topic_tags": [
+        "手写文本识别",
+        "少样本学习",
+        "上下文学习",
+        "写作者自适应",
+        "轻量级模型"
+      ],
+      "zh_summary": "本文提出一种基于多模态上下文学习的新型手写文本识别框架，实现无需参数更新的少样本写作者自适应。该框架设计紧凑的8M参数CNN-Transformer，结合上下文驱动和标准OCR训练策略。实验显示，在IAM和RIMES数据集上达到低字符错误率，超越所有写作者无关HTR模型。",
+      "novelty": "利用多模态上下文学习实现少样本写作者自适应，无需推理时参数更新，降低计算成本。",
+      "innovation_points": [
+        "多模态上下文学习框架实现少样本自适应",
+        "紧凑CNN-Transformer设计降低模型复杂度",
+        "结合上下文驱动和标准训练策略获得互补改进"
+      ],
+      "limitations": "上下文长度可能影响自适应效果；对少数样本的依赖可能导致泛化能力有限。",
+      "improvement_directions": [
+        "优化上下文选择策略以提高自适应效率",
+        "扩展框架到更多手写风格或语言",
+        "探索实时自适应应用场景"
+      ],
+      "engineering_value": "中高，为手写文本识别提供轻量级自适应方案，适合资源受限环境。",
+      "why_relevant": "涉及手写文本识别、少样本学习和上下文学习，对OCR个性化应用有推进作用。"
+    },
+    {
+      "title": "L-ReLF: A Framework for Lexical Dataset Creation",
+      "summary": "This paper introduces the L-ReLF (Low-Resource Lexical Framework), a novel, reproducible methodology for creating high-quality, structured lexical datasets for underserved languages. The lack of standardized terminology, exemplified by Moroccan Darija, poses a critical barrier to knowledge equity in platforms like Wikipedia, often forcing editors to rely on inconsistent, ad-hoc methods to create new words in their language. Our research details the technical pipeline developed to overcome these challenges. We systematically address the difficulties of working with low-resource data, including source identification, utilizing Optical Character Recognition (OCR) despite its bias towards Modern Standard Arabic, and rigorous post-processing to correct errors and standardize the data model. The resulting structured dataset is fully compatible with Wikidata Lexemes, serving as a vital technical resource. The L-ReLF methodology is designed for generalizability, offering other language communities a clear path to build foundational lexical data for downstream NLP applications, such as Machine Translation and morphological analysis.",
+      "link": "https://arxiv.org/abs/2603.29346v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.29346v1",
+      "authors": [
+        "Anass Sedrati",
+        "Mounir Afifi",
+        "Reda Benkhadra"
+      ],
+      "published": "2026-03-31T07:19:00Z",
+      "updated": "2026-03-31T07:19:00Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2603.29346v1",
+      "score": 16,
+      "topic_tags": [
+        "低资源语言",
+        "词汇数据集",
+        "OCR",
+        "数据标准化",
+        "NLP应用"
+      ],
+      "zh_summary": "本文介绍了L-ReLF（低资源词汇框架），一种新颖、可重复的方法，用于为资源不足的语言创建高质量、结构化的词汇数据集。以摩洛哥达里语为例，标准化术语的缺乏在维基百科等平台中构成了知识公平的关键障碍，常迫使编辑依赖不一致的临时方法创建新词。研究详细阐述了克服这些挑战的技术流程，系统解决了低资源数据处理的困难，包括源识别、利用光学字符识别（OCR）尽管其偏向现代标准阿拉伯语，以及严格的后期处理以纠正错误和标准化数据模型。生成的结构化数据集完全兼容Wikidata Lexemes，作为重要的技术资源。L-ReLF方法设计具有通用性，为其他语言社区提供了构建下游NLP应用（如机器翻译和形态分析）基础词汇数据的清晰路径。",
+      "novelty": "提出了一种针对低资源语言的词汇数据集创建框架，强调可重复性和通用性，通过结合OCR和后期处理解决数据标准化问题。",
+      "innovation_points": [
+        "方法设计：开发了系统化的技术流程，包括源识别、OCR处理和后期标准化",
+        "数据：专注于资源不足语言（如摩洛哥达里语）的词汇数据创建",
+        "架构：生成的结构化数据集兼容Wikidata Lexemes，便于集成和扩展"
+      ],
+      "limitations": "OCR处理可能受限于对现代标准阿拉伯语的偏见，影响低资源语言的准确性；框架在通用性方面可能需针对不同语言特性进行定制调整。",
+      "improvement_directions": [
+        "优化OCR算法以减少对特定语言的偏见，提高低资源语言的识别精度",
+        "扩展框架以支持更多语言类型和方言，增强适应性",
+        "集成更多自动化工具以减少手动后期处理需求"
+      ],
+      "engineering_value": "高，为低资源语言社区提供了实用的词汇数据创建工具，可促进NLP应用开发，支持知识公平。",
+      "why_relevant": "涉及OCR在低资源语言数据处理中的应用，对文档解析和语言资源构建有直接贡献。"
+    },
+    {
+      "title": "AutoFormBench: Benchmark Dataset for Automating Form Understanding",
+      "summary": "Automated processing of structured documents such as government forms, healthcare records, and enterprise invoices remains a persistent challenge due to the high degree of layout variability encountered in real-world settings. This paper introduces AutoFormBench, a benchmark dataset of 407 annotated real-world forms spanning government, healthcare, and enterprise domains, designed to train and evaluate form element detection models. We present a systematic comparison of classical OpenCV approaches and four YOLO architectures (YOLOv8, YOLOv11, YOLOv26-s, and YOLOv26-l) for localizing and classifying fillable form elements. specifically checkboxes, input lines, and text boxes across diverse PDF document types. YOLOv11 demonstrates consistently superior performance in both F1 score and Jaccard accuracy across all element classes and tolerance levels.",
+      "link": "https://arxiv.org/abs/2603.29832v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.29832v1",
+      "authors": [
+        "Gaurab Baral",
+        "Junxiu Zhou"
+      ],
+      "published": "2026-03-31T14:53:26Z",
+      "updated": "2026-03-31T14:53:26Z",
       "categories": [
         "cs.CV"
       ],
-      "arxiv_id": "2603.27744v1",
+      "arxiv_id": "2603.29832v1",
+      "score": 15,
+      "topic_tags": [
+        "表单理解",
+        "目标检测",
+        "基准数据集",
+        "YOLO",
+        "结构化文档"
+      ],
+      "zh_summary": "本文介绍了AutoFormBench，一个包含407个标注真实世界表单的基准数据集，涵盖政府、医疗和企业领域，用于训练和评估表单元素检测模型。研究系统比较了经典OpenCV方法和四种YOLO架构（YOLOv8、YOLOv11、YOLOv26-s和YOLOv26-l）在定位和分类可填写表单元素（特别是复选框、输入线和文本框）方面的性能。YOLOv11在所有元素类别和容忍度级别上均表现出一致的优越性能，在F1分数和Jaccard准确度方面领先。",
+      "novelty": "创建了一个多领域真实世界表单的基准数据集，并系统评估了不同目标检测方法在表单元素识别任务上的表现。",
+      "innovation_points": [
+        "数据：构建了涵盖政府、医疗和企业领域的标注表单数据集，增强现实世界适用性",
+        "方法设计：系统比较了经典计算机视觉方法和多种YOLO架构",
+        "任务定义：专注于表单元素（如复选框、输入线）的检测和分类，针对结构化文档处理"
+      ],
+      "limitations": "数据集规模相对较小（407个表单），可能不足以覆盖所有表单变体；评估主要基于YOLO架构，未广泛涵盖其他先进检测方法。",
+      "improvement_directions": [
+        "扩展数据集以包含更多表单类型和布局变体，提高模型泛化能力",
+        "探索更多检测架构（如Transformer-based模型）以全面评估性能",
+        "集成上下文理解以处理复杂表单逻辑和关系"
+      ],
+      "engineering_value": "高，为表单自动化处理提供了基准和实用模型，可应用于文档数字化和业务流程优化。",
+      "why_relevant": "直接涉及文档解析中的表单元素检测，对OCR和视觉文档理解有重要应用价值。"
+    },
+    {
+      "title": "SiPaKosa: A Comprehensive Corpus of Canonical and Classical Buddhist Texts in Sinhala and Pali",
+      "summary": "SiPaKosa is a comprehensive corpus of Sinhala and Pali doctrinal texts comprising approximately 786K sentences and 9.25M words, incorporating 16 copyright-cleared historical Buddhist documents alongside the complete web-scraped Tripitaka canonical texts. The corpus was created through high-quality OCR using Google Document AI on historical manuscripts, combined with systematic web scraping of canonical repositories, followed by rigorous quality control and metadata annotation. The corpus is organised into language-specific subcorpora: Sinhala and Mixed Sinhala-Pali. We evaluate the performance of language models using ten pretrained models, with perplexity scores ranging from 1.09 to 189.67 on our corpus. This analysis shows that proprietary models significantly outperform open-source alternatives by factors of three to six times. This corpus supports the pretraining of domain-adapted language models, facilitates historical language analysis, and aids in the development of information retrieval systems for Buddhist scholarship while preserving Sinhala cultural heritage.",
+      "link": "https://arxiv.org/abs/2603.29221v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.29221v1",
+      "authors": [
+        "Ranidu Gurusinghe",
+        "Nevidu Jayatilleke"
+      ],
+      "published": "2026-03-31T03:36:46Z",
+      "updated": "2026-03-31T03:36:46Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2603.29221v1",
       "score": 13,
       "topic_tags": [
-        "多模态学习",
-        "指令调优",
-        "数据组织",
+        "历史文档",
         "OCR",
-        "文档理解",
-        "课程训练"
+        "多语言语料库",
+        "文化遗产",
+        "语言模型"
       ],
-      "zh_summary": "本文研究了多模态大型语言模型（MLLMs）中数据组织对能力权衡的影响，特别是通用视觉理解、结构化推理和细粒度OCR/文档理解之间的平衡。通过一个受控的三阶段训练框架，比较了四种数据组织策略：直接混合、课程训练、平衡采样和反向课程。实验表明，数据组织是多模态适应中的一阶设计变量，课程训练在整体权衡和结构化推理性能上表现最佳，而平衡采样更有利于OCR导向能力但削弱了更广泛的能力平衡。训练动态分析进一步表明，在引入OCR密集型监督之前建立通用理解和推理能力是关键。",
-      "novelty": "本研究首次系统性地探讨了多模态指令调优中数据组织对能力权衡的影响，通过受控实验隔离了其他变量，揭示了数据组织作为关键设计因素的重要性，并提供了课程训练策略的实证支持。",
+      "zh_summary": "本文介绍了SiPaKosa，一个包含僧伽罗语和巴利语教义文本的综合语料库，约78.6万句子和925万词，整合了16个版权清晰的历史佛教文档以及完整的网络爬取三藏经典文本。语料库通过使用Google Document AI对历史手稿进行高质量OCR创建，结合系统网络爬取经典库，并进行严格质量控制和元数据标注。语料库按语言特定子库组织：僧伽罗语和混合僧伽罗-巴利语。研究评估了十种预训练语言模型的性能，困惑度分数在1.09到189.67之间，显示专有模型显著优于开源替代品三到六倍。该语料库支持领域适应语言模型的预训练，促进历史语言分析，并有助于佛教学术信息检索系统的开发，同时保护僧伽罗文化遗产。",
+      "novelty": "构建了一个大规模、多语言的佛教文本语料库，结合OCR和网络爬取技术，专注于低资源语言和文化遗产保护。",
       "innovation_points": [
-        "方法设计：采用受控三阶段训练框架，固定主干网络、可训练模块和优化流程，仅改变后对齐监督的时间安排，以隔离数据组织的影响。",
-        "训练范式：比较四种数据组织策略（直接混合、课程训练、平衡采样、反向课程），量化其对不同能力（通用理解、结构化推理、OCR理解）的权衡效果。",
-        "任务定义：聚焦于多模态指令调优中的能力平衡问题，特别是OCR/文档理解与更广泛视觉任务的交互。"
+        "数据：整合历史手稿OCR和网络爬取数据，创建大规模多语言语料库",
+        "方法设计：采用高质量OCR和系统质量控制流程",
+        "任务定义：支持语言模型预训练和历史语言分析，针对特定领域（佛教）"
       ],
-      "limitations": "研究主要基于特定训练框架和数据集，可能未覆盖所有多模态场景；实验规模有限，需要更多种子实验验证结果的稳健性；未深入探讨数据组织对模型泛化能力的影响。",
+      "limitations": "OCR质量可能受历史手稿条件限制；语料库主要聚焦佛教文本，泛化到其他领域可能有限；专有模型性能优势可能源于数据或计算资源差异。",
       "improvement_directions": [
-        "扩展实验到更多多模态任务和数据集，以验证数据组织策略的普适性。",
-        "研究动态数据组织策略，如自适应课程学习，以优化能力平衡。",
-        "结合模型架构调整，探索数据组织与模型设计之间的协同效应。"
+        "优化OCR技术以提高历史文档的识别准确率，特别是对退化文本",
+        "扩展语料库以涵盖更多语言和领域，增强通用性",
+        "开发开源模型以缩小与专有模型的性能差距"
       ],
-      "engineering_value": "高。研究结果为多模态模型训练中的数据组织提供了实用指导，课程训练策略可提升结构化推理性能，平衡采样策略有助于优化OCR能力，有助于在实际应用中平衡不同任务需求。",
-      "why_relevant": "直接涉及OCR/文档理解在多模态模型中的角色，探讨了数据组织如何影响OCR能力与其他视觉任务的权衡，对文档解析系统的训练优化有重要启示。"
+      "engineering_value": "高，为低资源语言和文化遗产数字化提供了实用资源，支持NLP研究和应用开发。",
+      "why_relevant": "涉及OCR在历史文档处理中的应用，对文档解析和语料库构建有直接贡献。"
+    },
+    {
+      "title": "Xuanwu: Evolving General Multimodal Models into an Industrial-Grade Foundation for Content Ecosystems",
+      "summary": "In recent years, multimodal large models have continued to improve on general benchmarks. However, in real-world content moderation and adversarial settings, mainstream models still suffer from degraded generalization and catastrophic forgetting because of limited fine-grained visual perception and insufficient modeling of long-tail noise. In this paper, we present Xuanwu VL-2B as a case study of how general multimodal models can be developed into an industrial-grade foundation model for content ecosystems. The model adopts a compact InternViT-300M + MLP + Qwen3 1.7B architecture, balancing fine-grained visual perception, language-semantic alignment, and deployment cost within an approximately 2B-parameter budget. To balance business specialization with the retention of general capabilities, we developed a data iteration and curation mechanism and trained the model through a progressive three-stage pipeline: pre-training, mid-training, and post-training. Ablation studies and offline business evaluations show that Xuanwu VL-2B achieves an average score of 67.90 across seven OpenCompass multimodal metrics (vs. 64.27 for InternVL 3.5 2B), an average recall of 94.38% over seven independent business moderation tasks, and a weighted overall recall of 82.82% on policy-violating text in challenging adversarial OCR scenarios, outperforming Gemini-2.5-Pro (76.72%). These results show that, under a limited parameter budget, Xuanwu VL-2B achieves a practical balance among business alignment, visual perception, general capability retention, and deployment cost.",
+      "link": "https://arxiv.org/abs/2603.29211v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.29211v1",
+      "authors": [
+        "Zhiqian Zhang",
+        "Xu Zhao",
+        "Xiaoqing Xu",
+        "Guangdong Liang",
+        "Weijia Wang",
+        "Xiaolei Lv",
+        "Bo Li",
+        "Jun Gao"
+      ],
+      "published": "2026-03-31T03:27:49Z",
+      "updated": "2026-03-31T03:27:49Z",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "arxiv_id": "2603.29211v1",
+      "score": 9,
+      "topic_tags": [
+        "多模态模型",
+        "工业应用",
+        "对抗OCR",
+        "内容审核",
+        "紧凑架构"
+      ],
+      "zh_summary": "本文介绍了Xuanwu VL-2B作为一个案例研究，展示如何将通用多模态模型发展为内容生态系统的工业级基础模型。模型采用紧凑的InternViT-300M + MLP + Qwen3 1.7B架构，在约20亿参数预算内平衡细粒度视觉感知、语言语义对齐和部署成本。为平衡业务专业化与通用能力保留，开发了数据迭代和筛选机制，并通过渐进式三阶段流程（预训练、中训练和后训练）训练模型。消融研究和离线业务评估显示，Xuanwu VL-2B在七个OpenCompass多模态指标上平均得分67.90（对比InternVL 3.5 2B的64.27），在七个独立业务审核任务上平均召回率94.38%，在挑战性对抗OCR场景中政策违规文本的加权总体召回率82.82%，优于Gemini-2.5-Pro（76.72%）。结果表明，在有限参数预算下，Xuanwu VL-2B在业务对齐、视觉感知、通用能力保留和部署成本间实现了实用平衡。",
+      "novelty": "提出了一种工业级多模态模型优化方法，通过紧凑架构和渐进训练流程，在对抗场景中实现高性能。",
+      "innovation_points": [
+        "架构设计：采用紧凑模型组合（InternViT-300M + MLP + Qwen3 1.7B）以平衡性能和成本",
+        "训练范式：开发渐进式三阶段训练流程和数据迭代机制",
+        "任务定义：针对内容审核和对抗OCR场景进行优化，强调业务对齐"
+      ],
+      "limitations": "模型性能可能受限于参数预算，在更复杂任务上可能不如更大模型；评估主要基于特定业务场景，泛化到其他领域需验证。",
+      "improvement_directions": [
+        "探索更高效的架构以在相同参数下提升性能",
+        "扩展训练数据以覆盖更多对抗场景和长尾噪声",
+        "优化部署策略以减少推理开销，提高实时性"
+      ],
+      "engineering_value": "高，为工业应用提供了高效的多模态解决方案，特别适用于内容审核和OCR相关任务。",
+      "why_relevant": "涉及多模态模型在OCR和文档解析中的应用，对视觉文档理解和业务部署有重要价值。"
     },
     {
       "title": "Navigating the Mirage: A Dual-Path Agentic Framework for Robust Misleading Chart Question Answering",
@@ -396,28 +507,27 @@
       "arxiv_id": "2603.28583v1",
       "score": 9,
       "topic_tags": [
-        "图表问答",
-        "误导性图表",
+        "图表理解",
         "代理框架",
         "OCR",
-        "对抗学习",
-        "视觉语言模型"
+        "对抗训练",
+        "视觉欺骗"
       ],
-      "zh_summary": "本文提出ChartCynics，一个代理双路径框架，用于鲁棒的误导性图表问答。该框架通过“怀疑”推理范式解耦感知与验证：诊断视觉路径通过战略ROI裁剪捕捉结构异常（如倒置轴），而OCR驱动数据路径确保数值基础。为解决跨模态冲突，引入代理总结器，通过两阶段协议优化：Oracle-Informed SFT用于推理蒸馏和Deception-Aware GRPO用于对抗对齐。评估显示，ChartCynics在基准测试中达到74.43%和64.55%的准确率，相比Qwen3-VL-8B主干模型提升约29%，优于最先进的专有模型。",
-      "novelty": "首次提出专门针对误导性图表问答的代理双路径框架，通过解耦感知与验证、引入对抗对齐机制，显著提升了模型在欺骗性视觉结构下的鲁棒性和准确性。",
+      "zh_summary": "本文介绍了ChartCynics，一个代理双路径框架，旨在通过“怀疑”推理范式揭示误导性图表的视觉欺骗。与整体模型不同，ChartCynics将感知与验证解耦：诊断视觉路径通过战略ROI裁剪捕捉结构异常（如倒置轴），而OCR驱动数据路径确保数值基础。为解决跨模态冲突，引入了代理总结器，通过两阶段协议优化：Oracle-Informed SFT用于推理蒸馏和Deception-Aware GRPO用于对抗对齐。该流程有效惩罚视觉陷阱并强制逻辑一致性。在两个基准上的评估显示，ChartCynics达到74.43%和64.55%准确率，相比Qwen3-VL-8B骨干提供约29%的绝对性能提升，优于最先进的专有模型。结果表明，专业化代理工作流可以使较小开源模型获得优越鲁棒性，为可信图表解释建立新基础。",
+      "novelty": "提出了一种针对误导性图表的代理框架，通过双路径解耦和对抗训练增强模型鲁棒性。",
       "innovation_points": [
-        "方法设计：采用双路径架构（诊断视觉路径和OCR驱动数据路径），解耦视觉感知与数据验证，以处理误导性图表。",
-        "训练范式：引入两阶段优化协议（Oracle-Informed SFT和Deception-Aware GRPO），强化推理蒸馏和对抗对齐。",
-        "任务定义：专注于误导性图表问答这一特定挑战，强调视觉欺骗的检测和逻辑一致性。"
+        "方法设计：开发双路径架构（诊断视觉路径和OCR驱动数据路径）以解耦感知和验证",
+        "训练范式：引入两阶段优化协议（Oracle-Informed SFT和Deception-Aware GRPO）",
+        "任务定义：专注于误导性图表理解，强调对抗场景下的鲁棒性"
       ],
-      "limitations": "框架依赖于特定基准测试，可能未覆盖所有类型的误导性图表；代理机制可能增加计算开销；未充分评估在更广泛文档场景中的泛化能力。",
+      "limitations": "框架可能依赖于特定图表类型，泛化到其他视觉欺骗形式需调整；OCR路径的准确性可能受图表质量影响。",
       "improvement_directions": [
-        "扩展框架到其他文档类型（如表格、图像），以提升通用性。",
-        "优化代理总结器的效率，减少推理延迟。",
-        "研究更多对抗训练策略，以增强对复杂视觉欺骗的鲁棒性。"
+        "扩展框架以处理更多图表类型和视觉欺骗模式",
+        "优化OCR组件以提高数值提取的准确性和鲁棒性",
+        "集成更多上下文信息以增强逻辑推理能力"
       ],
-      "engineering_value": "高。ChartCynics框架为图表问答系统提供了鲁棒解决方案，特别是在处理误导性数据时，可提升实际应用中的准确性和可信度，适用于金融、新闻等领域的文档解析。",
-      "why_relevant": "直接涉及OCR在图表理解中的关键作用，通过OCR驱动数据路径确保数值基础，对文档解析中的图表处理有重要应用价值。"
+      "engineering_value": "高，为图表解释提供了鲁棒解决方案，可应用于数据可视化和信息验证场景。",
+      "why_relevant": "涉及OCR在图表数据提取中的应用，对文档解析和视觉理解有直接贡献。"
     },
     {
       "title": "Hydra: Unifying Document Retrieval and Generation in a Single Vision-Language Model",
@@ -437,28 +547,27 @@
       "arxiv_id": "2603.28554v1",
       "score": 3,
       "topic_tags": [
-        "文档检索",
-        "文档生成",
         "视觉语言模型",
+        "检索生成统一",
         "LoRA",
-        "统一模型",
-        "工程优化"
+        "文档理解",
+        "系统优化"
       ],
-      "zh_summary": "本文提出Hydra，一种双头方法，在单一视觉语言模型（VLM）中统一文档检索和生成。通过单个LoRA适配器，在推理时切换：启用时产生多向量嵌入用于ColBERT风格检索，禁用时恢复基础模型的生成质量。实验显示，Hydra在检索和生成任务上表现接近独立基线，同时减少41%的峰值GPU内存，但适配器切换在并发服务负载下引入吞吐量开销。扩展实验表明该机制可泛化到音频检索。",
-      "novelty": "首次在单一VLM中实现检索和生成功能的统一，通过LoRA适配器切换机制，避免了传统分离模型的内存和复杂度问题，同时保持生成质量。",
+      "zh_summary": "视觉文档理解通常需要独立的检索和生成模型，增加内存和系统复杂性。本文介绍了Hydra，一种双头方法，从单一视觉语言模型（VLM）提供ColBERT风格后期交互检索和自回归生成。单一LoRA适配器仅训练用于检索，在推理时切换：启用时产生多向量嵌入；禁用时恢复基础模型的生成质量——在10,500个贪婪和随机样本中100%字节相同输出，在四个VQA基准（三个信息性；ChartQA在贪婪解码下对两个模型均接近零）上15,301个样本的最大delta-ANLS = 0.0044，与独立基础模型流程相比。识别了三个工程要求（注意力模式恢复、lm_head保留、KV缓存感知解码），其省略会无声破坏生成尽管权重恢复正确。在ViDoRe V1上，Hydra（4B）在单次训练运行中与受控单头基线相差1个百分点以内，在V2和V3上具有更高聚合分数，集中在子集任务上；需要多种子实验确认这些趋势。单模型设计将峰值GPU内存减少41%，尽管适配器切换在并发服务负载下引入吞吐量开销。消融显示，GritLM风格联合训练在LoRA基础（r=16）训练机制内无益。对Qwen2.5-Omni-3B的概念验证扩展表明机制泛化到音频检索...",
+      "novelty": "提出了一种单模型双头架构，通过LoRA适配器切换实现检索和生成功能的统一，减少系统复杂性。",
       "innovation_points": [
-        "方法设计：采用双头架构，结合检索头（基于LoRA适配器）和生成头，在单一模型中支持两种功能。",
-        "训练范式：仅训练检索适配器，通过切换机制在推理时动态调整，无需联合训练。",
-        "架构：识别并解决工程需求（如注意力模式恢复、lm_head保留、KV缓存感知解码），确保生成功能不受损。"
+        "架构设计：开发单模型双头方法，结合检索和生成功能",
+        "训练范式：使用LoRA适配器进行高效训练和切换",
+        "工程优化：识别关键工程要求以确保生成质量恢复"
       ],
-      "limitations": "适配器切换在并发服务中可能引入性能开销；实验基于特定模型和数据集，需要更多验证以确认泛化性；未深入探讨检索与生成任务之间的潜在冲突。",
+      "limitations": "适配器切换可能引入推理延迟，影响实时性能；机制在更复杂任务或模型上的泛化性需进一步验证。",
       "improvement_directions": [
-        "优化适配器切换机制，减少推理延迟和内存开销。",
-        "研究更高效的训练策略，以提升检索和生成的协同性能。",
-        "扩展应用到更多模态（如视频、音频），验证统一框架的普适性。"
+        "优化适配器切换机制以减少吞吐量开销，提高推理效率",
+        "扩展架构以支持更多任务类型（如分类、摘要）",
+        "探索更高效的训练方法以进一步提升性能"
       ],
-      "engineering_value": "高。Hydra通过单一模型减少系统复杂性和内存占用，适用于资源受限环境，如边缘计算或大规模文档处理系统，提升部署效率。",
-      "why_relevant": "涉及文档检索和生成，与OCR/文档解析相关，统一模型设计可简化文档理解流程，提高处理效率。"
+      "engineering_value": "高，为文档理解提供了紧凑的解决方案，降低部署成本，适用于资源受限环境。",
+      "why_relevant": "涉及视觉文档理解中的检索和生成任务，对OCR和文档解析系统集成有应用价值。"
     }
   ]
 }
