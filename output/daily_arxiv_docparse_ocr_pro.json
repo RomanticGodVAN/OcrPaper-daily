@@ -1,145 +1,39 @@
 {
   "meta": {
-    "report_date": "2026-04-03",
-    "generated_at_utc": "2026-04-03 04:04:03",
+    "report_date": "2026-04-04",
+    "generated_at_utc": "2026-04-04 03:42:44",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 5
+    "count": 1
   },
   "synthesis": {
-    "executive_summary": "今日研究聚焦于提升OCR与文档解析系统的效率、准确性与实际部署能力。核心进展包括：采用状态空间模型（SSMs）替代Transformer以线性时间处理长文本序列，显著提升历史OCR的计算效率；提出基于角色的LLM框架和NED-Tree系统，分别增强政策文档信息提取的可靠性和非线性运筹学问题建模的语义对齐；引入PixelPrune方法在像素级修剪冗余视觉令牌，大幅加速视觉语言模型推理；以及开发ROS 2包装器促进多模态模型在机器人系统中的本地集成。整体趋势显示，研究正从追求单一准确度转向优化计算效率、增强领域适应性和简化实际部署。",
-    "trend_summary": "当前研究呈现三大趋势：一是效率优先，通过新架构（如SSMs）和压缩技术（如PixelPrune）降低计算成本，应对长序列和高分辨率输入挑战；二是领域深化，针对历史文档、政策文本、运筹学等特定场景设计专用框架，提升任务准确性和可靠性；三是部署导向，关注模型集成到实际系统（如机器人中间件），强调可复现性和本地执行能力。这些趋势共同推动OCR/文档解析向更高效、更专业、更实用的方向发展。",
+    "executive_summary": "今日论文聚焦于NED-Tree框架，它通过非线性元素分解树和逐句提取策略，系统性解决了LLM在非线性运筹学建模中的语义鸿沟问题，以72.51%的平均准确率在NEXTOR基准上达到新SOTA，提升了自动化建模的鲁棒性和效率。",
+    "trend_summary": "研究趋势显示，OCR/文档解析领域正从通用文本提取向复杂结构化任务（如非线性优化建模）深化，强调语义对齐和基准构建，以应对现实世界应用中的不稳定性和领域特异性挑战。",
     "common_innovations": [
-      "结合CNN视觉编码器与双向自回归Mamba序列建模，形成端到端OCR框架以线性时间处理长文本。",
-      "设计多角色LLM系统分工处理信息提取子任务，通过结构化知识注入提示提升政策文档IE准确性。",
-      "采用逐句提取和递归树分解将复杂非线性问题结构化映射到求解器代码，解决语义对齐挑战。",
-      "基于预测编码在像素级识别并去除重复图像块，以训练无关方式加速视觉语言模型推理。",
-      "开发ROS 2包装器提供主题、服务和动作三种交互模式，实现多模态模型在机器人系统中的灵活集成。"
+      "采用逐句提取策略增强参数映射的稳健性和可追溯性，减少信息提取不稳定性。",
+      "引入递归树结构自适应分解复杂非线性项为求解器兼容子元素，实现建模与代码语义对齐。",
+      "提出专门针对复杂非线性、多约束运筹学问题的NEXTOR基准，填补现有空白。"
     ],
     "future_directions": [
-      "优化状态空间模型在极端退化文本（如严重污损历史文档）上的准确度，通过混合架构或针对性数据增强。",
-      "扩展基于角色的LLM框架到医疗报告或法律合同等其他文档类型，测试其跨领域信息提取的泛化能力。",
-      "将NED-Tree框架应用于金融建模或物理仿真等非线性问题，验证其超越运筹学的通用性。",
-      "研究自适应阈值机制动态调整PixelPrune压缩级别，基于图像内容平衡文档理解任务的速度与准确度。",
-      "集成模型量化或蒸馏技术到ROS 2包装器，优化视觉语言模型在资源受限边缘机器人上的部署效率。"
+      "将NED-Tree框架扩展到其他非线性任务领域，如自然语言处理中的语义解析或计算机视觉中的图像优化问题。",
+      "优化递归分解算法以减少计算开销，提升框架在实时或资源受限环境中的适用性。",
+      "集成多模态数据（如图表或公式图像）以增强信息提取能力，弥补纯文本输入的不足。",
+      "开发自适应学习机制，使框架能动态调整分解策略以适应不同非线性复杂度。"
     ],
     "engineering_takeaways": [
-      "采用Mamba等状态空间模型可显著降低历史文档OCR的推理时间和内存占用，适合大规模数字化项目。",
-      "基于角色的LLM框架可自动化政策分析流程，但需定制领域知识库以保障信息提取的准确性。",
-      "NED-Tree系统能自动化运筹学建模，减少人工错误，可集成到商业求解器提升决策支持效率。",
-      "部署PixelPrune方法能加速高分辨率文档处理，降低视觉语言模型的计算成本，适用于实时应用。",
-      "使用ROS 2包装器可简化多模态模型在机器人系统的集成，促进原型开发和工业部署。"
+      "NED-Tree框架可自动化非线性运筹学建模，降低人工成本，适用于金融、物流等领域的优化问题部署。",
+      "开源框架和基准促进了社区研究和应用，但需注意计算复杂度可能影响实时性能。",
+      "逐句提取策略可借鉴用于其他文档解析任务，以提高参数映射的准确性和可追溯性。"
     ],
     "watchlist": [
       {
-        "title": "A Benchmark of State-Space Models vs. Transformers and BiLSTM-based Models for Historical Newspaper OCR",
-        "watch_reason": "首次将状态空间模型应用于OCR，在保持低错误率的同时实现推理时间减半，可能引领高效序列建模新方向。"
-      },
-      {
-        "title": "PixelPrune: Pixel-Level Adaptive Visual Token Reduction via Predictive Coding",
-        "watch_reason": "通过像素级冗余修剪提供高达4.2倍推理加速，无需训练即可优化文档理解任务的计算效率，具有高工程价值。"
-      },
-      {
         "title": "NED-Tree: Bridging the Semantic Gap with Nonlinear Element Decomposition Tree for LLM Nonlinear Optimization Modeling",
-        "watch_reason": "系统解决非线性建模的语义对齐问题，在复杂运筹学任务中达到72.51%准确度，可能推动自动化建模工具发展。"
+        "watch_reason": "该框架首次系统性解决非线性建模中的语义鸿沟，结合递归树和逐句提取，在NEXTOR基准上达到高准确率，对自动化优化建模有重要工程价值。"
       }
     ]
   },
   "papers": [
-    {
-      "title": "A Benchmark of State-Space Models vs. Transformers and BiLSTM-based Models for Historical Newspaper OCR",
-      "summary": "End-to-end OCR for historical newspapers remains challenging, as models must handle long text sequences, degraded print quality, and complex layouts. While Transformer-based recognizers dominate current research, their quadratic complexity limits efficient paragraph-level transcription and large-scale deployment. We investigate linear-time State-Space Models (SSMs), specifically Mamba, as a scalable alternative to Transformer-based sequence modeling for OCR. We present to our knowledge, the first OCR architecture based on SSMs, combining a CNN visual encoder with bi-directional and autoregressive Mamba sequence modeling, and conduct a large-scale benchmark comparing SSMs with Transformer- and BiLSTM-based recognizers. Multiple decoding strategies (CTC, autoregressive, and non-autoregressive) are evaluated under identical training conditions alongside strong neural baselines (VAN, DAN, DANIEL) and widely used off-the-shelf OCR engines (PERO-OCR, Tesseract OCR, TrOCR, Gemini). Experiments on historical newspapers from the Bibliothèque nationale du Luxembourg, with newly released >99% verified gold-standard annotations, and cross-dataset tests on Fraktur and Antiqua lines, show that all neural models achieve low error rates (~2% CER), making computational efficiency the main differentiator. Mamba-based models maintain competitive accuracy while halving inference time and exhibiting superior memory scaling (1.26x vs 2.30x growth at 1000 chars), reaching 6.07% CER at the severely degraded paragraph level compared to 5.24% for DAN, while remaining 2.05x faster. We release code, trained models, and standardized evaluation protocols to enable reproducible research and guide practitioners in large-scale cultural heritage OCR.",
-      "link": "https://arxiv.org/abs/2604.00725v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.00725v1",
-      "authors": [
-        "Merveilles Agbeti-messan",
-        "Thierry Paquet",
-        "Clément Chatelain",
-        "Pierrick Tranouez",
-        "Stéphane Nicolas"
-      ],
-      "published": "2026-04-01T10:33:33Z",
-      "updated": "2026-04-01T10:33:33Z",
-      "categories": [
-        "cs.CV",
-        "cs.LG"
-      ],
-      "arxiv_id": "2604.00725v1",
-      "score": 13,
-      "topic_tags": [
-        "状态空间模型",
-        "历史OCR",
-        "计算效率",
-        "序列建模",
-        "基准测试"
-      ],
-      "zh_summary": "历史报纸端到端OCR面临长文本序列、印刷质量退化和复杂版式等挑战。Transformer模型虽占主导，但二次复杂度限制了段落级转录和大规模部署的效率。本研究探索线性时间状态空间模型（SSMs），特别是Mamba，作为OCR中Transformer序列建模的可扩展替代方案。我们提出了首个基于SSMs的OCR架构，结合CNN视觉编码器和双向自回归Mamba序列建模，并进行了大规模基准测试，比较SSMs与Transformer和BiLSTM识别器。在相同训练条件下评估了多种解码策略（CTC、自回归和非自回归），并与强神经基线（VAN、DAN、DANIEL）和广泛使用的现成OCR引擎（PERO-OCR、Tesseract OCR、TrOCR、Gemini）对比。在卢森堡国家图书馆历史报纸数据集（新发布>99%验证金标准标注）和跨数据集测试（Fraktur和Antiqua行）中，所有神经模型均实现低错误率（约2% CER），计算效率成为主要区分因素。基于Mamba的模型在保持竞争性准确度的同时，推理时间减半，内存扩展性更优（1000字符时增长1.26倍 vs 2.30倍），在严重退化段落级达到6.07% CER（DAN为5.24%），同时快2.05倍。代码已发布。",
-      "novelty": "首次将状态空间模型（SSMs）应用于OCR架构，替代Transformer进行序列建模，以线性时间处理长文本序列，提升计算效率。",
-      "innovation_points": [
-        "方法设计：结合CNN视觉编码器与双向和自回归Mamba序列建模，形成端到端OCR框架。",
-        "训练范式：在统一训练条件下评估多种解码策略（CTC、自回归、非自回归），提供全面基准。",
-        "数据：使用新发布的高质量历史报纸数据集（>99%验证金标准标注），增强模型可靠性。",
-        "架构：采用SSMs替代Transformer，降低二次复杂度，实现线性时间推理和内存高效扩展。",
-        "任务定义：专注于历史报纸OCR，处理退化印刷和复杂版式等现实挑战。"
-      ],
-      "limitations": "在严重退化段落级，Mamba模型的CER（6.07%）略高于DAN（5.24%），表明在极端退化条件下准确度仍有提升空间；模型主要针对历史报纸，泛化到其他文档类型（如手写或现代印刷）需进一步验证。",
-      "improvement_directions": [
-        "优化SSMs在极端退化文本上的表现，例如通过数据增强或混合模型架构。",
-        "扩展模型到多语言或跨领域OCR任务，验证其泛化能力。",
-        "探索SSMs与其他视觉编码器（如Vision Transformer）的结合，进一步提升准确度。",
-        "研究实时或边缘设备部署，利用其低内存特性优化推理速度。"
-      ],
-      "engineering_value": "高：Mamba模型在保持低错误率的同时，显著提升推理速度和内存效率，适合大规模历史文档数字化和实时OCR应用，降低部署成本。",
-      "why_relevant": "直接针对OCR核心挑战（长序列、计算效率），提出新型架构替代主流Transformer，对历史文档处理和工业部署有重要参考价值。"
-    },
-    {
-      "title": "A Role-Based LLM Framework for Structured Information Extraction from Healthy Food Policies",
-      "summary": "Current Large Language Model (LLM) approaches for information extraction (IE) in the healthy food policy domain are often hindered by various factors, including misinformation, specifically hallucinations, misclassifications, and omissions that result from the structural diversity and inconsistency of policy documents. To address these limitations, this study proposes a role-based LLM framework that automates the IE from unstructured policy data by assigning specialized roles: an LLM policy analyst for metadata and mechanism classification, an LLM legal strategy specialist for identifying complex legal approaches, and an LLM food system expert for categorizing food system stages. This framework mimics expert analysis workflows by incorporating structured domain knowledge, including explicit definitions of legal mechanisms and classification criteria, into role-specific prompts. We evaluate the framework using 608 healthy food policies from the Healthy Food Policy Project (HFPP) database, comparing its performance against zero-shot, few-shot, and chain-of-thought (CoT) baselines using Llama-3.3-70B. Our proposed framework demonstrates superior performance in complex reasoning tasks, offering a reliable and transparent methodology for automating IE from health policies.",
-      "link": "https://arxiv.org/abs/2604.01529v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.01529v1",
-      "authors": [
-        "Congjing Zhang",
-        "Ruoxuan Bao",
-        "Jingyu Li",
-        "Yoav Ackerman",
-        "Shuai Huang",
-        "Yanfang Su"
-      ],
-      "published": "2026-04-02T01:58:37Z",
-      "updated": "2026-04-02T01:58:37Z",
-      "categories": [
-        "cs.AI",
-        "cs.MA"
-      ],
-      "arxiv_id": "2604.01529v1",
-      "score": 10,
-      "topic_tags": [
-        "角色LLM",
-        "信息提取",
-        "政策文档",
-        "结构化知识",
-        "零样本学习"
-      ],
-      "zh_summary": "当前大语言模型（LLM）在健康食品政策信息提取（IE）中常受错误信息（如幻觉、误分类和遗漏）困扰，源于政策文档结构多样性和不一致性。本研究提出一个基于角色的LLM框架，通过分配专门角色自动化非结构化政策数据IE：LLM政策分析师负责元数据和机制分类，LLM法律策略专家识别复杂法律方法，LLM食品系统专家分类食品系统阶段。该框架模仿专家分析工作流，将结构化领域知识（如法律机制定义和分类标准）融入角色特定提示。使用健康食品政策项目（HFPP）数据库的608条政策评估框架性能，与零样本、少样本和思维链（CoT）基线（基于Llama-3.3-70B）比较。所提框架在复杂推理任务中表现优异，为健康政策IE自动化提供可靠透明方法。",
-      "novelty": "提出基于角色的LLM框架，通过模拟专家分工和结构化知识注入，提升政策文档信息提取的准确性和可靠性。",
-      "innovation_points": [
-        "方法设计：设计多角色LLM系统（政策分析师、法律策略专家、食品系统专家），分工处理不同IE子任务。",
-        "训练范式：结合结构化领域知识（如定义和标准）到提示中，无需额外训练，实现零样本或少量样本学习。",
-        "数据：使用健康食品政策领域特定数据集，针对结构不一致文档优化IE。",
-        "架构：框架化工作流，增强透明度和可解释性，减少LLM幻觉。",
-        "任务定义：专注于政策文档IE，解决法律和健康领域的复杂语义提取问题。"
-      ],
-      "limitations": "框架依赖于预定义角色和知识，可能不适用于其他领域或动态政策变化；评估基于单一模型（Llama-3.3-70B），泛化到其他LLM需验证；未量化计算效率或部署成本。",
-      "improvement_directions": [
-        "扩展角色框架到其他文档类型（如医疗或法律合同），测试跨领域适应性。",
-        "集成自适应知识更新机制，以处理政策演变和新术语。",
-        "优化提示工程，减少对人工定义知识的依赖，提升自动化程度。",
-        "结合多模态数据（如图表或表格），增强政策文档的全面理解。"
-      ],
-      "engineering_value": "中：提供结构化IE方法，可自动化政策分析流程，减少人工干预，适用于政府或研究机构政策监控，但需定制角色和知识库。",
-      "why_relevant": "涉及文档解析和信息提取，与OCR后处理任务相关，展示了LLM在结构化数据提取中的应用潜力。"
-    },
     {
       "title": "NED-Tree: Bridging the Semantic Gap with Nonlinear Element Decomposition Tree for LLM Nonlinear Optimization Modeling",
       "summary": "Automating the translation of Operations Research (OR) problems from natural language to executable models is a critical challenge. While Large Language Models (LLMs) have shown promise in linear tasks, they suffer from severe performance degradation in real-world nonlinear scenarios due to semantic misalignment between mathematical formulations and solver codes, as well as unstable information extraction. In this study, we introduce NED-Tree, a systematic framework designed to bridge the semantic gap. NED-Tree employs (a) a sentence-by-sentence extraction strategy to ensure robust parameter mapping and traceability; and (b) a recursive tree-based structure that adaptively decomposes complex nonlinear terms into solver-compatible sub-elements. Additionally, we present NEXTOR, a novel benchmark specifically designed for complex nonlinear, extensive-constraint OR problems. Experiments across 10 benchmarks demonstrate that NED-Tree establishes a new state-of-the-art with 72.51% average accuracy, NED-Tree is the first framework that drives LLMs to resolve nonlinear modeling difficulties through element decomposition, achieving alignment between modeling semantics and code semantics. The NED-Tree framework and benchmark are accessible in the anonymous repository https://anonymous.4open.science/r/NORA-NEXTOR.",
@@ -159,119 +53,29 @@
       "arxiv_id": "2604.01588v1",
       "score": 9,
       "topic_tags": [
-        "非线性建模",
         "语义对齐",
-        "运筹学",
-        "递归分解",
+        "非线性优化",
+        "运筹学建模",
+        "信息提取",
         "基准测试"
       ],
-      "zh_summary": "将运筹学（OR）问题从自然语言自动翻译为可执行模型是关键挑战。LLM在线性任务中表现良好，但在现实非线性场景中因数学公式与求解器代码语义不对齐及不稳定信息提取而性能严重下降。本研究引入NED-Tree系统框架以弥合语义鸿沟。NED-Tree采用（a）逐句提取策略确保稳健参数映射和可追溯性；（b）递归树结构自适应分解复杂非线性项为求解器兼容子元素。此外，我们提出NEXTOR基准，专门针对复杂非线性、多约束OR问题。在10个基准测试中，NED-Tree以72.51%平均准确度建立新SOTA，是首个通过元素分解驱动LLM解决非线性建模困难的框架，实现建模语义与代码语义对齐。NED-Tree框架和基准可在匿名仓库访问。",
-      "novelty": "提出NED-Tree框架，通过递归树分解和逐句提取，首次系统解决LLM在非线性运筹学问题建模中的语义对齐挑战。",
+      "zh_summary": "自动化将运筹学问题从自然语言翻译为可执行模型是一个关键挑战。虽然大型语言模型在线性任务中表现出潜力，但在现实世界非线性场景中，由于数学公式与求解器代码之间的语义不对齐以及信息提取不稳定，性能严重下降。本研究引入NED-Tree，一个旨在弥合语义鸿沟的系统性框架。NED-Tree采用（a）逐句提取策略以确保稳健的参数映射和可追溯性；（b）基于递归树的结构，自适应地将复杂非线性项分解为求解器兼容的子元素。此外，我们提出了NEXTOR，一个专门为复杂非线性、多约束运筹学问题设计的新基准。在10个基准测试中的实验表明，NED-Tree以72.51%的平均准确率建立了新的最先进水平，是首个通过元素分解驱动LLM解决非线性建模困难的框架，实现了建模语义与代码语义的对齐。NED-Tree框架和基准可在匿名仓库https://anonymous.4open.science/r/NORA-NEXTOR访问。",
+      "novelty": "NED-Tree是首个通过非线性元素分解树结构，系统性解决LLM在非线性运筹学建模中语义鸿沟问题的框架，结合逐句提取和递归分解策略，显著提升了模型准确率和鲁棒性。",
       "innovation_points": [
-        "方法设计：结合逐句提取和递归树分解，将复杂非线性问题结构化映射到求解器代码。",
-        "训练范式：引入NEXTOR基准，专注于非线性多约束OR问题，提供标准化评估。",
-        "数据：创建专门数据集，涵盖广泛非线性场景，支持模型泛化测试。",
-        "架构：树形结构自适应处理语义复杂性，提升信息提取稳定性和准确性。",
-        "任务定义：针对OR领域，自动化自然语言到可执行模型的翻译，减少人工建模错误。"
+        "方法设计：采用逐句提取策略，增强参数映射的稳健性和可追溯性，减少信息提取不稳定性。",
+        "架构创新：引入递归树结构，自适应分解复杂非线性项为求解器兼容子元素，实现建模与代码语义对齐。",
+        "数据贡献：提出NEXTOR基准，专门针对复杂非线性、多约束运筹学问题，填补了现有基准的空白。",
+        "任务定义：专注于非线性运筹学建模的自动化翻译任务，扩展了LLM在非线性领域的应用范围。"
       ],
-      "limitations": "框架主要针对OR问题，可能不适用于其他领域（如物理或金融建模）；依赖于预定义分解规则，对极端复杂非线性项处理可能有限；未讨论实时性能或计算开销。",
+      "limitations": "框架可能依赖于特定领域（如运筹学）的语义结构，泛化到其他非线性任务（如图像或文本处理）时效果未知；基准测试虽广泛，但未涵盖所有可能的非线性场景；递归分解过程可能增加计算复杂度，影响实时应用性能。",
       "improvement_directions": [
-        "扩展NED-Tree到其他科学或工程领域，验证其通用性。",
-        "集成机器学习组件优化分解过程，减少规则依赖。",
-        "研究多语言支持，处理非英语OR问题描述。",
-        "优化框架效率，适用于大规模或实时建模应用。"
+        "扩展框架到更广泛的非线性任务领域，如自然语言处理或计算机视觉中的非线性优化问题。",
+        "优化递归分解算法以减少计算开销，提升框架在实时或资源受限环境中的适用性。",
+        "集成多模态数据（如图表或公式图像）以增强信息提取能力，弥补纯文本输入的不足。",
+        "开发自适应学习机制，使框架能动态调整分解策略以适应不同非线性复杂度。"
       ],
-      "engineering_value": "高：自动化OR建模流程，可集成到商业求解器或决策支持系统，提升建模效率和准确性，适用于工业优化和规划。",
-      "why_relevant": "涉及文档解析（自然语言处理）和结构化信息提取，与OCR后语义理解任务有交叉，展示了复杂文本到代码的转换技术。"
-    },
-    {
-      "title": "PixelPrune: Pixel-Level Adaptive Visual Token Reduction via Predictive Coding",
-      "summary": "Document understanding and GUI interaction are among the highest-value applications of Vision-Language Models (VLMs), yet they impose exceptionally heavy computational burden: fine-grained text and small UI elements demand high-resolution inputs that produce tens of thousands of visual tokens. We observe that this cost is largely wasteful -- across document and GUI benchmarks, only 22--71\\% of image patches are pixel-unique, the rest being exact duplicates of another patch in the same image. We propose \\textbf{PixelPrune}, which exploits this pixel-level redundancy through predictive-coding-based compression, pruning redundant patches \\emph{before} the Vision Transformer (ViT) encoder. Because it operates in pixel space prior to any neural computation, PixelPrune accelerates both the ViT encoder and the downstream LLM, covering the full inference pipeline. The method is training-free, requires no learnable parameters, and supports pixel-lossless compression ($τ{=}0$) as well as controlled lossy compression ($τ{>}0$). Experiments across three model scales and document and GUI benchmarks show that PixelPrune maintains competitive task accuracy while delivering up to 4.2$\\times$ inference speedup and 1.9$\\times$ training acceleration. Code is available at https://github.com/OPPO-Mente-Lab/PixelPrune.",
-      "link": "https://arxiv.org/abs/2604.00886v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.00886v1",
-      "authors": [
-        "Nan Wang",
-        "Zhiwei Jin",
-        "Chen Chen",
-        "Haonan Lu"
-      ],
-      "published": "2026-04-01T13:33:27Z",
-      "updated": "2026-04-01T13:33:27Z",
-      "categories": [
-        "cs.CV",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "arxiv_id": "2604.00886v1",
-      "score": 7,
-      "topic_tags": [
-        "视觉令牌修剪",
-        "预测编码",
-        "计算效率",
-        "文档理解",
-        "训练无关加速"
-      ],
-      "zh_summary": "文档理解和GUI交互是视觉语言模型（VLMs）最高价值应用之一，但计算负担极重：细粒度文本和小UI元素需要高分辨率输入，产生数万视觉令牌。我们观察到这种成本大多浪费——在文档和GUI基准中，仅22-71%图像块是像素唯一，其余为同一图像中其他块的精确副本。我们提出PixelPrune，通过基于预测编码的压缩利用像素级冗余，在Vision Transformer（ViT）编码器之前修剪冗余块。由于在像素空间操作且无需神经计算，PixelPrune加速ViT编码器和下游LLM，覆盖全推理流程。该方法无需训练、无学习参数，支持像素无损压缩（τ=0）和可控有损压缩（τ>0）。在三个模型规模和文档及GUI基准实验中，PixelPrune保持竞争性任务准确度，同时提供高达4.2倍推理加速和1.9倍训练加速。代码已发布。",
-      "novelty": "提出PixelPrune方法，首次在像素级利用冗余性进行视觉令牌修剪，以训练无关方式显著加速VLMs推理和训练。",
-      "innovation_points": [
-        "方法设计：基于预测编码压缩，在ViT编码前直接操作像素空间，识别并去除重复图像块。",
-        "训练范式：无需训练或额外参数，实现即插即用加速，支持无损和有损压缩模式。",
-        "数据：分析文档和GUI图像中像素冗余模式（22-71%唯一性），驱动方法设计。",
-        "架构：集成到标准VLM流程，兼容不同模型规模，优化端到端效率。",
-        "任务定义：针对高分辨率文档和GUI理解任务，解决计算瓶颈问题。"
-      ],
-      "limitations": "方法依赖于图像中像素重复性，在高度多样或动态内容（如视频）中效果可能下降；有损压缩可能影响细粒度细节识别，需权衡准确度与速度。",
-      "improvement_directions": [
-        "扩展PixelPrune到其他视觉任务（如目标检测或分割），验证泛化能力。",
-        "研究自适应阈值机制，动态调整压缩级别基于图像内容。",
-        "结合硬件优化（如GPU加速），进一步提升实时性能。",
-        "探索多模态冗余（如文本-图像对齐），增强压缩效率。"
-      ],
-      "engineering_value": "高：显著降低VLMs计算成本，适用于大规模文档处理、实时GUI交互和边缘部署，提升资源效率。",
-      "why_relevant": "直接优化文档理解中的视觉处理效率，与OCR前处理（图像预处理）相关，可减少输入数据量，加速整体流程。"
-    },
-    {
-      "title": "A ROS 2 Wrapper for Florence-2: Multi-Mode Local Vision-Language Inference for Robotic Systems",
-      "summary": "Foundation vision-language models are becoming increasingly relevant to robotics because they can provide richer semantic perception than narrow task-specific pipelines. However, their practical adoption in robot software stacks still depends on reproducible middleware integrations rather than on model quality alone. Florence-2 is especially attractive in this regard because it unifies captioning, optical character recognition, open-vocabulary detection, grounding and related vision-language tasks within a comparatively manageable model size. This article presents a ROS 2 wrapper for Florence-2 that exposes the model through three complementary interaction modes: continuous topic-driven processing, synchronous service calls and asynchronous actions. The wrapper is designed for local execution and supports both native installation and Docker container deployment. It also combines generic JSON outputs with standard ROS 2 message bindings for detection-oriented tasks. A functional validation is reported together with a throughput study on several GPUs, showing that local deployment is feasible with consumer grade hardware. The repository is publicly available here: https://github.com/JEDominguezVidal/florence2_ros2_wrapper",
-      "link": "https://arxiv.org/abs/2604.01179v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.01179v1",
-      "authors": [
-        "J. E. Domínguez-Vidal"
-      ],
-      "published": "2026-04-01T17:29:59Z",
-      "updated": "2026-04-01T17:29:59Z",
-      "categories": [
-        "cs.RO",
-        "cs.AI",
-        "cs.CV"
-      ],
-      "arxiv_id": "2604.01179v1",
-      "score": 5,
-      "topic_tags": [
-        "ROS 2集成",
-        "机器人视觉",
-        "多模态模型",
-        "本地部署",
-        "中间件"
-      ],
-      "zh_summary": "基础视觉语言模型因能提供比狭窄任务特定流程更丰富语义感知而日益与机器人相关。然而，其在机器人软件栈中的实际采用仍依赖于可复现中间件集成而非仅模型质量。Florence-2在这方面尤其有吸引力，因为它统一了字幕生成、光学字符识别、开放词汇检测、接地和相关视觉语言任务，且模型尺寸相对可控。本文提出Florence-2的ROS 2包装器，通过三种互补交互模式暴露模型：连续主题驱动处理、同步服务调用和异步动作。包装器设计用于本地执行，支持原生安装和Docker容器部署，并组合通用JSON输出与标准ROS 2消息绑定以用于检测导向任务。报告功能验证和多个GPU上的吞吐量研究，显示本地部署在消费级硬件上可行。仓库公开可用。",
-      "novelty": "首次为Florence-2模型开发ROS 2包装器，实现多模式本地视觉语言推理集成到机器人系统，促进实际部署。",
-      "innovation_points": [
-        "方法设计：设计三种交互模式（主题、服务、动作），灵活适应不同机器人应用场景。",
-        "训练范式：无需模型修改，直接包装预训练Florence-2，简化集成流程。",
-        "数据：支持标准ROS 2消息格式，确保与现有机器人软件栈兼容。",
-        "架构：提供本地部署选项（原生和Docker），增强可移植性和可复现性。",
-        "任务定义：针对机器人感知任务，统一多视觉语言功能（如OCR和检测），减少系统复杂性。"
-      ],
-      "limitations": "包装器依赖于特定模型（Florence-2），可能不适用于其他VLMs；性能受本地硬件限制，在资源受限设备上可能不足；未深入评估长期稳定性或实时延迟。",
-      "improvement_directions": [
-        "扩展包装器支持其他VLMs或自定义模型，提升灵活性。",
-        "优化资源使用，例如通过模型量化或蒸馏，以适应边缘机器人。",
-        "集成传感器融合或多模态输入处理，增强机器人环境理解。",
-        "开发标准化评估协议，量化机器人任务中的模型贡献。"
-      ],
-      "engineering_value": "中：促进VLMs在机器人领域的实际应用，降低集成门槛，适用于研究原型和工业机器人系统，但需硬件支持和定制开发。",
-      "why_relevant": "涉及OCR作为机器人视觉语言任务的一部分，展示了多模态模型在文档解析相关应用（如场景文本识别）中的集成潜力。"
+      "engineering_value": "高，NED-Tree通过自动化非线性运筹学建模，可降低人工建模成本，提高求解效率，适用于金融、物流等领域的优化问题；开源框架和基准促进了社区研究和应用部署。",
+      "why_relevant": "该研究涉及文档解析中的语义对齐和信息提取任务，与OCR技术在处理复杂结构化文本（如数学公式）时面临的挑战相关，为OCR系统在非线性内容理解方面提供了方法借鉴。"
     }
   ]
 }
