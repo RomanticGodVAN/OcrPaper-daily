@@ -1,61 +1,105 @@
 {
   "meta": {
-    "report_date": "2026-04-08",
-    "generated_at_utc": "2026-04-08 04:09:54",
+    "report_date": "2026-04-09",
+    "generated_at_utc": "2026-04-09 04:05:07",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 9
+    "count": 7
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦于OCR与文档解析的核心挑战：评估、效率、数据驱动优化及多模态理解。核心进展包括：提出可分解的页面级OCR评估指标CEV以诊断错误源；揭示视觉文档理解模型中内部表示与响应的差距并提供微调策略；通过编译AI范式实现确定性工作流自动化；采用数据中心方法显著提升解析性能；引入线性复杂度机制PoM替代自注意力以提升效率；发布集成细粒度车辆分类与车牌识别的数据集；推出增强版多模态医学模型MedGemma 1.5；设计高效视觉语言模型Firebolt-VL用于资源受限场景；提出多阶段验证框架确保临床信息提取的可信度。整体趋势强调从粗粒度评估转向细粒度错误分析、从架构创新转向数据与训练策略优化、从通用模型转向领域特定高效解决方案，并关注可信性与部署可行性。",
-    "trend_summary": "研究趋势呈现四大方向：1) 评估精细化：从整体准确率转向可分解的错误分析（如CEV）和多阶段验证，以诊断系统瓶颈并提升可信度。2) 效率优先：通过线性复杂度替代注意力（PoM）、高效架构（Firebolt-VL）和编译AI范式，降低计算成本，适应资源受限或实时场景。3) 数据驱动优化：强调数据工程（如MinerU2.5-Pro的数据引擎）和训练策略（如渐进训练、中间层微调）对性能的关键作用，而非单纯扩大模型规模。4) 领域深化与多模态整合：聚焦特定领域（如医学、交通）的文档解析，整合文本、图像、3D数据等多模态信息，并开发专用数据集与模型（如MedGemma 1.5、UFPR-VeSV）。",
+    "executive_summary": "今日研究聚焦于提升OCR与文档解析的准确性、效率及可信度。核心进展包括：通过多阶段验证框架与LLM辅助路径显著提升提取质量（如临床信息提取F1达0.80，失踪人员案例F1达0.8664）；引入字符错误向量（CEV）实现错误源分解，为评估提供新视角；通过查询感知自适应（Q-Zoom）和线性复杂度机制（PoM）优化计算效率，推理加速最高达4.39倍。同时，对抗性走私攻击研究揭示了OCR在安全审核中的脆弱性（攻击成功率>90%），凸显鲁棒性增强的紧迫性。整体趋势显示，研究正从单一精度提升转向精度、效率、可信度与安全的协同优化，并积极探索弱监督与多模态集成方法。",
+    "trend_summary": "当前研究呈现四大趋势：1）精度与可信度并重：通过多阶段验证、LLM辅助提取与模式验证框架（如Guardian Parser、临床提取框架）提升复杂场景下的提取可靠性与可解释性，减少对人工标注的依赖。2）效率优化成为焦点：采用查询感知自适应（Q-Zoom）、线性复杂度替代注意力（PoM）及动态门控机制，针对长文档或高分辨率输入减少冗余计算，平衡速度与精度。3）评估指标细化：突破传统CER局限，引入可分解错误源的CEV指标，助力定位解析、OCR及交互错误，优化文档理解流水线。4）安全与鲁棒性受关注：对抗性攻击研究（如走私攻击）暴露OCR/MLLM在内容审核中的漏洞，推动防御机制如对抗训练与多模态分析的发展。",
     "common_innovations": [
-      "引入可分解的评估指标（如CEV）或验证框架（如多阶段临床验证）以诊断错误源并提升系统可信度。",
-      "采用数据工程策略（如多样性-难度感知采样、一致性验证）和渐进训练方法优化模型性能。",
-      "设计高效计算机制（如PoM、LFM解码器）或工作流范式（如编译AI）以降低资源消耗并提升部署可行性。",
-      "整合多模态数据（如医学影像、车辆属性）和细粒度任务定义以增强文档理解的全面性与准确性。"
+      "集成LLM辅助提取与规则验证，提升复杂文档的提取精度和模式一致性。",
+      "采用动态门控或区域提议网络，实现查询感知的自适应处理以减少计算冗余。",
+      "引入可分解错误源的评估指标（如CEV），细化OCR与解析错误分析。",
+      "构建多阶段验证框架，结合规则过滤、语义评估和LLM法官降低人工标注需求。",
+      "探索线性复杂度机制（如PoM）作为自注意力替代，优化长序列处理效率。"
     ],
     "future_directions": [
-      "开发自适应阈值或自动化校准方法，用于可分解OCR评估指标（如CEV）以减少人工干预并提升泛化能力。",
-      "研究混合编译与运行时推理的框架，以平衡文档智能工作流的确定性与动态任务适应性。",
-      "探索少样本或弱监督下的硬样本识别与标注技术，降低数据中心文档解析方法的数据依赖与成本。",
-      "优化线性复杂度机制（如PoM）在复杂文档布局分析或手写文本识别任务中的表示能力与稳定性。",
-      "扩展多模态验证框架（如临床信息提取框架）至通用OCR任务，集成规则过滤、语义接地等技术以提升信息提取可信度。",
-      "设计针对低资源语言或领域特定文档（如法律合同）的数据增强与迁移学习策略，提升解析模型的普适性。"
+      "开发轻量化LLM路径优化技术，如模型压缩或并行处理，以降低高精度提取的时间开销。",
+      "扩展CEV指标到多语言、手写文本或低质量图像场景，提升错误分解的泛化能力。",
+      "集成对抗训练或测试时增强到OCR模型中，防御针对文本识别的感知盲区攻击。",
+      "研究实时自适应机制，动态调整文档解析的分辨率或处理区域以减少延迟。",
+      "探索多模态数据（如时间序列或图像特征）与文本的语义基础融合，增强临床等领域的提取可信度。",
+      "优化机载处理算法，将其应用于文档图像分析以实现边缘设备的快速OCR。",
+      "开发自适应规则生成方法，减少多阶段验证框架中的人工规则设计偏差。"
     ],
     "engineering_takeaways": [
-      "在OCR流水线中集成CEV等可分解评估工具，以定位解析、OCR或交互错误，并针对性优化组件。",
-      "采用编译AI范式生成可审计代码工件，用于高风险企业文档处理工作流（如发票审核），以提升可靠性并降低成本。",
-      "实施数据引擎策略（如多样性采样、一致性验证）迭代改进训练数据质量，尤其针对复杂布局文档解析任务。",
-      "在资源受限环境（如移动设备）部署高效模型（如Firebolt-VL、PoM）以支持实时文档理解或手写文本识别。",
-      "利用多阶段验证框架（如临床信息提取框架）增强LLM基信息提取的可信度，减少对全标注数据的依赖。",
-      "集成领域特定多模态模型（如MedGemma 1.5）处理医学文档或影像，提升自动化信息提取与分析的准确性。"
+      "在执法或医疗文档处理中，可部署多阶段验证框架或LLM辅助路径，以高精度提取关键字段（如失踪人员信息或临床诊断）。",
+      "采用Q-Zoom或类似查询感知机制，优化MLLMs在文档OCR任务中的推理速度，适用于资源受限环境。",
+      "将CEV集成到OCR评估流水线，帮助识别和优先修复解析或OCR错误，提升整体文档理解质量。",
+      "在内容审核系统中，加强OCR模型鲁棒性并集成多模态防御，以抵抗对抗性走私攻击。",
+      "考虑用PoM等线性复杂度机制替换自注意力，降低长文档处理的计算成本，适用于大规模批量处理。"
     ],
     "watchlist": [
       {
+        "title": "LLM-based Schema-Guided Extraction and Validation of Missing-Person Intelligence from Heterogeneous Data Sources",
+        "watch_reason": "系统集成多引擎提取与LLM辅助路径，在失踪人员调查中实现高精度提取（F1=0.8664），可直接应用于执法机构提升效率。"
+      },
+      {
         "title": "The Character Error Vector: Decomposable errors for page-level OCR evaluation",
-        "watch_reason": "CEV指标可操作性强，能直接诊断OCR系统错误源，适用于优化复杂布局文档处理流水线。"
+        "watch_reason": "CEV指标可分解解析、OCR和交互错误，为评估文档理解流水线提供新工具，有助于针对性优化。"
       },
       {
-        "title": "Compiled AI: Deterministic Code Generation for LLM-Based Workflow Automation",
-        "watch_reason": "编译AI范式提供可审计、低成本的自动化方案，对高风险企业文档处理（如合规检查）有高工程价值。"
+        "title": "Q-Zoom: Query-Aware Adaptive Perception for Efficient Multimodal Large Language Models",
+        "watch_reason": "框架通过自适应感知加速MLLMs推理达4.39倍，在文档OCR任务中平衡速度与精度，适合集成到实时系统。"
       },
       {
-        "title": "MinerU2.5-Pro: Pushing the Limits of Data-Centric Document Parsing at Scale",
-        "watch_reason": "数据中心方法通过数据工程显著提升性能，框架可扩展，适用于大规模文档解析系统的优化。"
-      },
-      {
-        "title": "MedGemma 1.5 Technical Report",
-        "watch_reason": "模型在医学多模态理解上性能突出，作为开源资源可直接用于临床文档解析与影像分析，工程价值高。"
+        "title": "Making MLLMs Blind: Adversarial Smuggling Attacks in MLLM Content Moderation",
+        "watch_reason": "揭示OCR鲁棒性差距导致的高成功率攻击（>90%），对安全关键应用（如内容审核）有直接警示，需优先防御。"
       },
       {
         "title": "A Multi-Stage Validation Framework for Trustworthy Large-scale Clinical Information Extraction using Large Language Models",
-        "watch_reason": "验证框架减少对标注数据的依赖，提升LLM基信息提取的可信度，可适配至其他敏感领域OCR任务。"
+        "watch_reason": "框架通过弱监督验证实现大规模临床提取（F1=0.80），减少人工标注，可扩展至其他OCR任务提升可信度。"
       }
     ]
   },
   "papers": [
+    {
+      "title": "LLM-based Schema-Guided Extraction and Validation of Missing-Person Intelligence from Heterogeneous Data Sources",
+      "summary": "Missing-person and child-safety investigations rely on heterogeneous case documents, including structured forms, bulletin-style posters, and narrative web profiles. Variations in layout, terminology, and data quality impede rapid triage, large-scale analysis, and search-planning workflows. This paper introduces the Guardian Parser Pack, an AI-driven parsing and normalization pipeline that transforms multi-source investigative documents into a unified, schema-compliant representation suitable for operational review and downstream spatial modeling. The proposed system integrates (i) multi-engine PDF text extraction with Optical Character Recognition (OCR) fallback, (ii) rule-based source identification with source-specific parsers, (iii) schema-first harmonization and validation, and (iv) an optional Large Language Model (LLM)-assisted extraction pathway incorporating validator-guided repair and shared geocoding services. We present the system architecture, key implementation decisions, and output design, and evaluate performance using both gold-aligned extraction metrics and corpus-level operational indicators. On a manually aligned subset of 75 cases, the LLM-assisted pathway achieved substantially higher extraction quality than the deterministic comparator (F1 = 0.8664 vs. 0.2578), while across 517 parsed records per pathway it also improved aggregate key-field completeness (96.97\\% vs. 93.23\\%). The deterministic pathway remained much faster (mean runtime 0.03 s/record vs. 3.95 s/record for the LLM pathway). In the evaluated run, all LLM outputs passed initial schema validation, so validator-guided repair functioned as a built-in safeguard rather than a contributor to the observed gains. These results support controlled use of probabilistic AI within a schema-first, auditable pipeline for high-stakes investigative settings.",
+      "link": "https://arxiv.org/abs/2604.06571v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.06571v1",
+      "authors": [
+        "Joshua Castillo",
+        "Ravi Mukkamala"
+      ],
+      "published": "2026-04-08T01:35:56Z",
+      "updated": "2026-04-08T01:35:56Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.IR",
+        "cs.LG"
+      ],
+      "arxiv_id": "2604.06571v1",
+      "score": 34,
+      "topic_tags": [
+        "文档解析",
+        "模式验证",
+        "LLM辅助提取",
+        "多源数据集成",
+        "OCR备用"
+      ],
+      "zh_summary": "失踪人员调查依赖异构文档，如结构化表格和海报，其布局和术语差异阻碍分析。本文提出Guardian Parser Pack，一个AI驱动的解析和归一化流水线，将多源文档转换为统一表示。系统集成多引擎PDF文本提取（含OCR备用）、基于规则的源识别、模式优先协调验证，以及可选的LLM辅助提取路径。在75个案例子集上，LLM路径提取质量显著高于确定性路径（F1=0.8664 vs. 0.2578），在517条记录中提高关键字段完整性（96.97% vs. 93.23%），但确定性路径更快（0.03秒/记录 vs. 3.95秒/记录）。",
+      "novelty": "提出一个集成多源异构文档解析的系统，结合确定性规则和LLM辅助路径，实现高精度提取和模式验证，特别针对失踪人员调查场景。",
+      "innovation_points": [
+        "多引擎PDF文本提取与OCR备用机制",
+        "基于规则的源识别与源特定解析器",
+        "模式优先的协调和验证框架",
+        "LLM辅助提取路径，结合验证器引导修复和共享地理编码服务"
+      ],
+      "limitations": "LLM辅助路径运行时间较长，可能不适合实时或大规模处理；系统依赖手动对齐子集进行评估，泛化性未充分验证。",
+      "improvement_directions": [
+        "优化LLM路径的效率，如通过模型压缩或并行处理",
+        "扩展系统到更多文档类型和语言，增强泛化能力",
+        "集成更先进的OCR技术以减少解析错误"
+      ],
+      "engineering_value": "高，系统可直接应用于执法或救援机构的文档处理流程，提高失踪人员调查效率，支持下游空间建模。",
+      "why_relevant": "涉及OCR作为备用文本提取方法，强调文档解析和归一化，对OCR在异构数据源处理中的应用有参考价值。"
+    },
     {
       "title": "The Character Error Vector: Decomposable errors for page-level OCR evaluation",
       "summary": "The Character Error Rate (CER) is a key metric for evaluating the quality of Optical Character Recognition (OCR). However, this metric assumes that text has been perfectly parsed, which is often not the case. Under page-parsing errors, CER becomes undefined, limiting its use as a metric and making evaluating page-level OCR challenging, particularly when using data that do not share a labelling schema. We introduce the Character Error Vector (CEV), a bag-of-characters evaluator for OCR. The CEV can be decomposed into parsing and OCR, and interaction error components. This decomposability allows practitioners to focus on the part of the Document Understanding pipeline that will have the greatest impact on overall text extraction quality. The CEV can be implemented using a variety of methods, of which we demonstrate SpACER (Spatially Aware Character Error Rate) and a Character distribution method using the Jensen-Shannon Distance. We validate the CEV's performance against other metrics: first, the relationship with CER; then, parse quality; and finally, as a direct measure of page-level OCR quality. The validation process shows that the CEV is a valuable bridge between parsing metrics and local metrics like CER. We analyse a dataset of archival newspapers made of degraded images with complex layouts and find that state-of-the-art end-to-end models are outperformed by more traditional pipeline approaches. Whilst the CEV requires character-level positioning for optimal triage, thresholding on easily available values can predict the main error source with an F1 of 0.91. We provide the CEV as part of a Python library to support Document understanding research.",
@@ -76,191 +120,71 @@
       "score": 29,
       "topic_tags": [
         "OCR评估",
+        "字符错误向量",
         "页面解析",
-        "错误分析",
+        "错误分解",
         "文档理解"
       ],
-      "zh_summary": "本文提出字符错误向量（CEV），一种用于页面级OCR评估的袋字符评估器。CEV可分解为解析错误、OCR错误和交互错误分量，弥补了字符错误率（CER）在页面解析错误下未定义的局限性，并可作为解析指标与局部指标之间的桥梁。通过SpACER和Jensen-Shannon距离等方法实现，验证表明CEV能有效预测主要错误源，并在复杂布局的档案报纸数据集上评估了端到端模型与传统流水线方法的性能。",
-      "novelty": "引入CEV作为可分解的页面级OCR评估指标，解决了CER在页面解析错误下的未定义问题，并支持错误源分析。",
+      "zh_summary": "字符错误率（CER）是评估OCR质量的关键指标，但假设文本完美解析，在页面解析错误时未定义，限制了其使用。本文引入字符错误向量（CEV），一个用于OCR的字符袋评估器，可分解为解析、OCR和交互错误组件。这种可分解性允许从业者关注文档理解流水线中对整体提取质量影响最大的部分。CEV可通过多种方法实现，如SpACER和基于Jensen-Shannon距离的字符分布方法。验证显示CEV是解析指标与CER等局部指标之间的有价值桥梁。在归档报纸数据集上分析发现，传统流水线方法优于端到端模型。CEV需要字符级定位以优化分类，但基于阈值可预测主要错误源（F1=0.91）。",
+      "novelty": "提出CEV作为页面级OCR评估的新指标，可分解错误来源，弥补CER在解析错误下的不足，提供更全面的质量分析。",
       "innovation_points": [
-        "设计CEV作为袋字符评估器，可分解为解析、OCR和交互错误分量",
-        "提出SpACER和Jensen-Shannon距离等实现方法，增强评估灵活性",
-        "通过验证过程展示CEV作为解析与局部指标桥梁的价值"
+        "字符错误向量（CEV）作为可分解的页面级评估指标",
+        "错误分解为解析、OCR和交互组件",
+        "实现方法如SpACER和字符分布方法",
+        "验证CEV作为解析与局部指标之间的桥梁"
       ],
-      "limitations": "CEV需要字符级定位以实现最优分类，可能增加计算复杂度；在阈值设置上依赖经验值，可能影响错误源预测的普适性。",
+      "limitations": "CEV需要字符级定位数据，可能增加标注成本；在复杂布局或低质量图像上性能未充分测试。",
       "improvement_directions": [
-        "探索更高效的字符定位方法以降低计算成本",
-        "研究自适应阈值算法以提高错误源预测的鲁棒性",
-        "扩展CEV到多语言或手写文本OCR评估场景"
+        "开发更高效的CEV计算算法，减少计算开销",
+        "扩展CEV到多语言或手写文本场景",
+        "集成CEV到OCR训练流程，以端到端优化模型"
       ],
-      "engineering_value": "高，CEV为文档理解流水线提供了可操作的错误分析工具，有助于优化OCR系统组件，提升整体文本提取质量，适用于复杂布局文档处理。",
-      "why_relevant": "直接针对OCR评估指标进行创新，解决了页面级评估的挑战，对文档解析和OCR系统优化有重要参考价值。"
+      "engineering_value": "中等，CEV可作为OCR系统评估工具，帮助识别和修复解析与OCR错误，提升文档理解流水线质量。",
+      "why_relevant": "直接针对OCR评估问题，提出新指标以改进页面级性能分析，对OCR研究和应用有重要意义。"
     },
     {
-      "title": "Responses Fall Short of Understanding: Revealing the Gap between Internal Representations and Responses in Visual Document Understanding",
-      "summary": "Visual document understanding (VDU) is a challenging task for large vision language models (LVLMs), requiring the integration of visual perception, text recognition, and reasoning over structured layouts. Although recent LVLMs have shown progress on VDU benchmarks, their performance is typically evaluated based on generated responses, which may not necessarily reflect whether the model has actually captured the required information internally. In this paper, we investigate how information required to solve VDU tasks is represented across different layers of LLMs within LVLMs using linear probing. Our study reveals that (1) there is a clear gap between internal representations and generated responses, and (2) information required to solve the task is often encoded more linearly from intermediate layers than from the final layer. Motivated by these findings, we explore fine-tuning strategies that target intermediate layers. Experiments show that fine-tuning intermediate layers improves both linear probing accuracy and response accuracy while narrowing the gap.",
-      "link": "https://arxiv.org/abs/2604.04411v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.04411v1",
+      "title": "Q-Zoom: Query-Aware Adaptive Perception for Efficient Multimodal Large Language Models",
+      "summary": "MLLMs require high-resolution visual inputs for fine-grained tasks like document understanding and dense scene perception. However, current global resolution scaling paradigms indiscriminately flood the quadratic self-attention mechanism with visually redundant tokens, severely bottlenecking inference throughput while ignoring spatial sparsity and query intent. To overcome this, we propose Q-Zoom, a query-aware adaptive high-resolution perception framework that operates in an efficient coarse-to-fine manner. First, a lightweight Dynamic Gating Network safely bypasses high-resolution processing when coarse global features suffice. Second, for queries demanding fine-grained perception, a Self-Distilled Region Proposal Network (SD-RPN) precisely localizes the task-relevant Region-of-Interest (RoI) directly from intermediate feature spaces. To optimize these modules efficiently, the gating network uses a consistency-aware generation strategy to derive deterministic routing labels, while the SD-RPN employs a fully self-supervised distillation paradigm. A continuous spatio-temporal alignment scheme and targeted fine-tuning then seamlessly fuse the dense local RoI with the coarse global layout. Extensive experiments demonstrate that Q-Zoom establishes a dominant Pareto frontier. Using Qwen2.5-VL-7B as a primary testbed, Q-Zoom accelerates inference by 2.52 times on Document & OCR benchmarks and 4.39 times in High-Resolution scenarios while matching the baseline's peak accuracy. Furthermore, when configured for maximum perceptual fidelity, Q-Zoom surpasses the baseline's peak performance by 1.1% and 8.1% on these respective benchmarks. These robust improvements transfer seamlessly to Qwen3-VL, LLaVA, and emerging RL-based thinking-with-image models. Project page is available at https://yuhengsss.github.io/Q-Zoom/.",
+      "link": "https://arxiv.org/abs/2604.06912v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.06912v1",
       "authors": [
-        "Haruka Kawasaki",
-        "Ryota Tanaka",
-        "Kyosuke Nishida"
+        "Yuheng Shi",
+        "Xiaohuan Pei",
+        "Linfeng Wen",
+        "Minjing Dong",
+        "Chang Xu"
       ],
-      "published": "2026-04-06T04:25:52Z",
-      "updated": "2026-04-06T04:25:52Z",
-      "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.CV"
-      ],
-      "arxiv_id": "2604.04411v1",
-      "score": 16,
-      "topic_tags": [
-        "视觉文档理解",
-        "大型视觉语言模型",
-        "内部表示分析",
-        "微调策略"
-      ],
-      "zh_summary": "本文研究视觉文档理解（VDU）任务中大型视觉语言模型（LVLM）的内部表示与生成响应之间的差距。通过线性探测分析，发现任务所需信息在中间层更线性编码，而非最终层，且内部表示与响应存在明显差距。基于此，探索针对中间层的微调策略，实验表明微调中间层能同时提高线性探测准确率和响应准确率，并缩小差距。",
-      "novelty": "揭示LVLM在VDU任务中内部表示与响应之间的差距，并提出通过微调中间层来改善性能的方法。",
-      "innovation_points": [
-        "使用线性探测分析LVLM内部表示，识别信息编码的层次特性",
-        "提出微调中间层的策略，以缩小表示与响应差距并提升任务性能"
-      ],
-      "limitations": "研究基于特定LVLM和任务，可能不泛化到其他模型或文档类型；线性探测方法可能无法完全捕捉复杂表示结构。",
-      "improvement_directions": [
-        "扩展分析到更多LVLM架构和VDU任务以验证普适性",
-        "结合更先进的探测技术（如非线性方法）深入理解表示机制",
-        "探索多模态对齐策略以进一步优化内部表示"
-      ],
-      "engineering_value": "中等，通过微调中间层可提升VDU模型性能，但需针对具体应用调整；对OCR相关任务如文档问答有间接价值。",
-      "why_relevant": "涉及文档理解中模型内部机制分析，为OCR和VDU任务提供模型优化见解，但非直接针对OCR技术。"
-    },
-    {
-      "title": "Compiled AI: Deterministic Code Generation for LLM-Based Workflow Automation",
-      "summary": "We study compiled AI, a paradigm in which large language models generate executable code artifacts during a compilation phase, after which workflows execute deterministically without further model invocation. This paradigm has antecedents in prior work on declarative pipeline optimization (DSPy) and hybrid neural-symbolic planning (LLM+P); our contribution is a systems-oriented study of its application to high-stakes enterprise workflows, with particular emphasis on healthcare settings where reliability and auditability are critical. By constraining generation to narrow business-logic functions embedded in validated templates, compiled AI trades runtime flexibility for predictability, auditability, cost efficiency, and reduced security exposure. We introduce (i) a system architecture for constrained LLM-based code generation, (ii) a four-stage generation-and-validation pipeline that converts probabilistic model output into production-ready code artifacts, and (iii) an evaluation framework measuring operational metrics including token amortization, determinism, reliability, security, and cost. We evaluate on two task types: function-calling (BFCL, n=400) and document intelligence (DocILE, n=5,680 invoices). On function-calling, compiled AI achieves 96% task completion with zero execution tokens, breaking even with runtime inference at approximately 17 transactions and reducing token consumption by 57x at 1,000 transactions. On document intelligence, our Code Factory variant matches Direct LLM on key field extraction (KILE: 80.0%) while achieving the highest line item recognition accuracy (LIR: 80.4%). Security evaluation across 135 test cases demonstrates 96.7% accuracy on prompt injection detection and 87.5% on static code safety analysis with zero false positives.",
-      "link": "https://arxiv.org/abs/2604.05150v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.05150v1",
-      "authors": [
-        "Geert Trooskens",
-        "Aaron Karlsberg",
-        "Anmol Sharma",
-        "Lamara De Brouwer",
-        "Max Van Puyvelde",
-        "Matthew Young",
-        "John Thickstun",
-        "Gil Alterovitz",
-        "Walter A. De Brouwer"
-      ],
-      "published": "2026-04-06T20:25:20Z",
-      "updated": "2026-04-06T20:25:20Z",
-      "categories": [
-        "cs.SE",
-        "cs.AI"
-      ],
-      "arxiv_id": "2604.05150v1",
-      "score": 14,
-      "topic_tags": [
-        "编译AI",
-        "工作流自动化",
-        "文档智能",
-        "企业应用"
-      ],
-      "zh_summary": "本文研究编译AI范式，其中大型语言模型在编译阶段生成可执行代码工件，之后工作流无需进一步模型调用即可确定性执行。贡献包括系统架构、四阶段生成验证流水线以及评估框架，应用于高风险企业工作流（如医疗保健），强调可靠性、可审计性和成本效率。在函数调用和文档智能任务上评估，显示编译AI在任务完成率和令牌消耗方面优于运行时推理。",
-      "novelty": "提出编译AI范式，将LLM代码生成约束于验证模板，以实现确定性、可审计的工作流自动化，特别针对高风险场景。",
-      "innovation_points": [
-        "设计编译AI系统架构，支持约束LLM代码生成",
-        "开发四阶段生成验证流水线，将概率输出转化为生产就绪代码",
-        "引入评估框架，衡量操作指标如令牌摊销、确定性和安全性"
-      ],
-      "limitations": "编译AI牺牲运行时灵活性，可能不适用于动态或未知任务；依赖于预定义模板，限制了适应性。",
-      "improvement_directions": [
-        "探索自适应模板生成以增强灵活性",
-        "研究混合方法结合编译与运行时推理应对复杂场景",
-        "扩展应用到更多文档类型（如手写或多语言文档）"
-      ],
-      "engineering_value": "高，编译AI提供可审计、低成本的文档智能解决方案，适用于企业级OCR工作流，如发票处理，提升可靠性和效率。",
-      "why_relevant": "直接涉及文档智能任务，如发票提取，对OCR工作流自动化和企业应用有重要工程价值。"
-    },
-    {
-      "title": "MinerU2.5-Pro: Pushing the Limits of Data-Centric Document Parsing at Scale",
-      "summary": "Current document parsing methods compete primarily on model architecture innovation, while systematic engineering of training data remains underexplored. Yet SOTA models of different architectures and parameter scales exhibit highly consistent failure patterns on the same set of hard samples, suggesting that the performance bottleneck stems from shared deficiencies in training data rather than architecture itself. Building on this finding, we present \\minerupro, which advances the state of the art solely through data engineering and training strategy optimization while keeping the 1.2B-parameter architecture of \\mineru completely fixed. At its core is a Data Engine co-designed around coverage, informativeness, and annotation accuracy: Diversity-and-Difficulty-Aware Sampling expands training data from under 10M to 65.5M samples while correcting distribution shift; Cross-Model Consistency Verification leverages output agreement among heterogeneous models to assess sample difficulty and generate reliable annotations; the Judge-and-Refine pipeline improves annotation quality for hard samples through render-then-verify iterative correction. A three-stage progressive training strategy -- large-scale pre-training, hard sample fine-tuning, and GRPO alignment -- sequentially exploits these data at different quality tiers. On the evaluation front, we fix element-matching biases in OmniDocBench~v1.5 and introduce a Hard subset, establishing the more discriminative OmniDocBench~v1.6 protocol. Without any architectural modification, \\minerupro achieves 95.69 on OmniDocBench~v1.6, improving over the same-architecture baseline by 2.71 points and surpassing all existing methods including models with over 200$\\times$ more parameters.",
-      "link": "https://arxiv.org/abs/2604.04771v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.04771v1",
-      "authors": [
-        "Bin Wang",
-        "Tianyao He",
-        "Linke Ouyang",
-        "Fan Wu",
-        "Zhiyuan Zhao",
-        "Tao Chu",
-        "Yuan Qu",
-        "Zhenjiang Jin",
-        "Weijun Zeng",
-        "Ziyang Miao",
-        "Bangrui Xu",
-        "Junbo Niu",
-        "Mengzhang Cai",
-        "Jiantao Qiu",
-        "Qintong Zhang",
-        "Dongsheng Ma",
-        "Yuefeng Sun",
-        "Hejun Dong",
-        "Wenzheng Zhang",
-        "Jutao Xiao",
-        "Jiayong Shi",
-        "Pengyu Liao",
-        "Xiaomeng Zhao",
-        "Huaping Zhong",
-        "Liqun Wei",
-        "Jing Yu",
-        "Jie Yang",
-        "Wei Li",
-        "Shasha Wang",
-        "Qianqian Wu",
-        "Xuanhe Zhou",
-        "Weijia Li",
-        "Zhenxiang Li",
-        "Zhongying Tu",
-        "Jiang Wu",
-        "Lijun Wu",
-        "Chao Xu",
-        "Kai Chen",
-        "Wentao Zhang",
-        "Yu Qiao",
-        "Bowen Zhou",
-        "Dahua Lin",
-        "Conghui He"
-      ],
-      "published": "2026-04-06T15:44:18Z",
-      "updated": "2026-04-06T15:44:18Z",
+      "published": "2026-04-08T10:12:30Z",
+      "updated": "2026-04-08T10:12:30Z",
       "categories": [
         "cs.CV",
-        "cs.CL"
+        "cs.AI"
       ],
-      "arxiv_id": "2604.04771v1",
-      "score": 12,
+      "arxiv_id": "2604.06912v1",
+      "score": 17,
       "topic_tags": [
-        "文档解析",
-        "数据工程",
-        "训练策略",
-        "评估协议"
+        "MLLMs",
+        "自适应感知",
+        "查询感知",
+        "文档理解",
+        "OCR优化"
       ],
-      "zh_summary": "本文提出MinerU2.5-Pro，通过数据工程和训练策略优化推动文档解析性能，同时保持1.2B参数架构不变。核心是围绕覆盖性、信息量和标注准确性共同设计的数据引擎，包括多样性-难度感知采样、跨模型一致性验证和判断-精炼流水线。采用三阶段渐进训练策略，并在OmniDocBench v1.6协议上评估，实现SOTA性能。",
-      "novelty": "强调数据中心方法，通过系统数据工程而非架构创新提升文档解析性能，并引入改进的评估协议。",
+      "zh_summary": "MLLMs需要高分辨率视觉输入以进行细粒度任务，但当前全局分辨率缩放范式在自注意力机制中引入冗余令牌，降低推理吞吐量。本文提出Q-Zoom，一个查询感知的自适应高分辨率感知框架，以粗到细方式操作。首先，轻量级动态门控网络在粗全局特征足够时绕过高分辨率处理；其次，对于需要细粒度感知的查询，自蒸馏区域提议网络从中间特征空间精确定位任务相关区域。通过一致性感知生成策略和自监督蒸馏优化模块。实验显示，在文档和OCR基准上，Q-Zoom加速推理2.52倍，在高分辨率场景加速4.39倍，同时匹配基线峰值精度。",
+      "novelty": "提出Q-Zoom框架，通过查询感知自适应机制，动态选择高分辨率处理区域，减少冗余计算，提升MLLMs在文档理解等任务中的效率。",
       "innovation_points": [
-        "设计数据引擎，集成多样性-难度感知采样和跨模型一致性验证",
-        "开发判断-精炼流水线迭代提升硬样本标注质量",
-        "实施三阶段渐进训练策略（大规模预训练、硬样本微调、GRPO对齐）"
+        "查询感知自适应高分辨率感知框架",
+        "动态门控网络用于安全绕过高分辨率处理",
+        "自蒸馏区域提议网络精确定位感兴趣区域",
+        "一致性感知生成和自监督蒸馏优化策略"
       ],
-      "limitations": "方法依赖高质量数据收集和标注，可能成本较高；评估协议改进可能引入新偏差，需进一步验证。",
+      "limitations": "框架可能增加模型复杂度，需要额外训练；在极端稀疏或密集场景下自适应性能未充分验证。",
       "improvement_directions": [
-        "探索自动化数据增强技术以降低标注成本",
-        "研究更高效的硬样本识别和利用方法",
-        "扩展应用到低资源语言或领域特定文档解析"
+        "进一步优化门控网络和区域提议网络的轻量化设计",
+        "扩展框架到更多MLLM架构和任务类型",
+        "研究实时自适应机制以减少延迟"
       ],
-      "engineering_value": "高，提供可扩展的数据驱动框架，适用于大规模文档解析任务，能显著提升OCR系统性能，尤其对复杂布局文档。",
-      "why_relevant": "直接针对文档解析的数据工程，对OCR训练和评估有核心影响，推动数据中心研究范式。"
+      "engineering_value": "高，Q-Zoom可集成到现有MLLMs中，显著提升文档OCR等任务的推理速度，适用于资源受限环境。",
+      "why_relevant": "涉及文档理解和OCR任务，通过自适应感知减少计算开销，对OCR在MLLMs中的应用有直接优化意义。"
     },
     {
       "title": "PoM: A Linear-Time Replacement for Attention with the Polynomial Mixer",
@@ -295,193 +219,122 @@
       "arxiv_id": "2604.06129v1",
       "score": 10,
       "topic_tags": [
-        "多项式混合器",
         "自注意力替代",
-        "计算效率",
-        "手写文本识别"
+        "多项式混合器",
+        "线性复杂度",
+        "手写文本识别",
+        "令牌混合"
       ],
-      "zh_summary": "本文介绍多项式混合器（PoM），一种线性复杂度的令牌混合机制，可作为自注意力的即插即用替代品。PoM通过学习多项式函数将输入令牌聚合为紧凑表示，从中每个令牌检索上下文信息。证明PoM满足上下文映射属性，确保配备PoM的Transformer保持通用序列到序列近似能力。在多个领域（包括手写文本识别）替换标准自注意力，PoM匹配基于注意力的模型性能，同时大幅降低长序列计算成本。",
-      "novelty": "提出PoM作为线性复杂度替代自注意力的机制，保持模型表达能力的同时提升计算效率。",
+      "zh_summary": "本文介绍多项式混合器（PoM），一种具有线性复杂度的新颖令牌混合机制，可作为自注意力的即插即用替代品。PoM通过学习多项式函数将输入令牌聚合为紧凑表示，从中每个令牌检索上下文信息。证明PoM满足上下文映射属性，确保配备PoM的Transformer保持通用序列到序列近似能力。在五个领域替换标准自注意力：文本生成、手写文本识别、图像生成、3D建模和地球观测。PoM匹配基于注意力的模型性能，同时大幅减少长序列的计算成本。",
+      "novelty": "提出PoM作为线性复杂度的自注意力替代机制，通过多项式聚合实现高效上下文建模，在多个领域验证其性能与注意力相当。",
       "innovation_points": [
-        "设计PoM机制，通过多项式函数实现令牌混合，降低计算复杂度",
-        "证明PoM满足上下文映射属性，确保模型通用近似能力",
-        "在多个领域验证PoM性能，包括手写文本识别等OCR相关任务"
+        "多项式混合器（PoM）作为线性复杂度的令牌混合机制",
+        "证明PoM满足上下文映射属性，保持模型通用性",
+        "在多个领域（包括手写文本识别）作为自注意力替代品验证性能"
       ],
-      "limitations": "PoM可能在某些复杂任务或小规模数据上表现不如注意力机制；多项式函数学习可能增加训练难度。",
+      "limitations": "PoM可能在某些复杂序列任务上性能略低于注意力；多项式函数的学习和优化需要进一步研究。",
       "improvement_directions": [
-        "优化多项式函数设计以提高表示能力",
-        "研究PoM与其他高效注意力机制的混合使用",
-        "扩展应用到更多OCR子任务如文档布局分析"
+        "探索更高效的多项式函数设计和训练策略",
+        "扩展PoM到更多OCR相关任务，如文档布局分析",
+        "集成PoM到端到端OCR模型以提升效率"
       ],
-      "engineering_value": "中等，PoM为OCR模型（如手写文本识别）提供高效替代方案，降低计算成本，适用于资源受限环境，但需进一步验证在复杂文档上的性能。",
-      "why_relevant": "涉及手写文本识别等OCR任务，提供模型架构创新，对高效OCR系统开发有参考价值。"
+      "engineering_value": "中等，PoM可降低OCR模型在长文档处理时的计算成本，适用于大规模或实时应用，但需验证在特定OCR任务上的泛化性。",
+      "why_relevant": "涉及手写文本识别作为应用领域，PoM的线性复杂度对OCR模型效率提升有潜在价值，尤其处理长文本序列时。"
     },
     {
-      "title": "Toward Unified Fine-Grained Vehicle Classification and Automatic License Plate Recognition",
-      "summary": "Extracting vehicle information from surveillance images is essential for intelligent transportation systems, enabling applications such as traffic monitoring and criminal investigations. While Automatic License Plate Recognition (ALPR) is widely used, Fine-Grained Vehicle Classification (FGVC) offers a complementary approach by identifying vehicles based on attributes such as color, make, model, and type. Although there have been advances in this field, existing studies often assume well-controlled conditions, explore limited attributes, and overlook FGVC integration with ALPR. To address these gaps, we introduce UFPR-VeSV, a dataset comprising 24,945 images of 16,297 unique vehicles with annotations for 13 colors, 26 makes, 136 models, and 14 types. Collected from the Military Police of Paraná (Brazil) surveillance system, the dataset captures diverse real-world conditions, including partial occlusions, nighttime infrared imaging, and varying lighting. All FGVC annotations were validated using license plate information, with text and corner annotations also being provided. A qualitative and quantitative comparison with established datasets confirmed the challenging nature of our dataset. A benchmark using five deep learning models further validated this, revealing specific challenges such as handling multicolored vehicles, infrared images, and distinguishing between vehicle models that share a common platform. Additionally, we apply two optical character recognition models to license plate recognition and explore the joint use of FGVC and ALPR. The results highlight the potential of integrating these complementary tasks for real-world applications. The UFPR-VeSV dataset is publicly available at: https://github.com/Lima001/UFPR-VeSV-Dataset.",
-      "link": "https://arxiv.org/abs/2604.05271v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.05271v1",
+      "title": "Assessing the Added Value of Onboard Earth Observation Processing with the IRIDE HEO Service Segment",
+      "summary": "Current operational Earth Observation (EO) services, including the Copernicus Emergency Management Service (CEMS), the European Forest Fire Information System (EFFIS), and the Copernicus Land Monitoring Service (CLMS), rely primarily on ground-based processing pipelines. While these systems provide mature large-scale information products, they remain constrained by downlink latency, bandwidth limitations, and limited capability for autonomous observation prioritisation. The International Report for an Innovative Defence of Earth (IRIDE) programme is a national Earth observation initiative led by the Italian government to support public authorities through timely, objective information derived from spaceborne data. Rather than a single constellation, IRIDE is designed as a constellation of constellations, integrating heterogeneous sensing technologies within a unified service-oriented architecture. Within this framework, Hawk for Earth Observation (HEO) enables onboard generation of data products, allowing information extraction earlier in the processing chain. This paper examines the limitations of ground-only architectures and evaluates the added value of onboard processing at the operational service level. The IRIDE burnt-area mapping service is used as a representative case study to demonstrate how onboard intelligence can support higher spatial detail (sub-three-metre ground sampling distance), smaller detectable events (minimum mapping unit of three hectares), and improved system responsiveness. Rather than replacing existing Copernicus services, the IRIDE HEO capability is positioned as a complementary layer providing image-driven pre-classification to support downstream emergency and land-management workflows. This work highlights the operational value of onboard intelligence for emerging low-latency EO service architectures.",
+      "link": "https://arxiv.org/abs/2604.07120v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.07120v1",
       "authors": [
-        "Gabriel E. Lima",
-        "Valfride Nascimento",
-        "Eduardo Santos",
-        "Eduil Nascimento",
-        "Rayson Laroca",
-        "David Menotti"
+        "Parampuneet Kaur Thind",
+        "Charles Mwangi",
+        "Giovanni Varetto",
+        "Lorenzo Sarti",
+        "Andrea Papa",
+        "Andrea Taramelli"
       ],
-      "published": "2026-04-07T00:10:56Z",
-      "updated": "2026-04-07T00:10:56Z",
+      "published": "2026-04-08T14:14:43Z",
+      "updated": "2026-04-08T14:14:43Z",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.AR",
+        "cs.ET"
+      ],
+      "arxiv_id": "2604.07120v1",
+      "score": 9,
+      "topic_tags": [
+        "地球观测",
+        "机载处理",
+        "服务导向架构",
+        "图像分析",
+        "遥感"
+      ],
+      "zh_summary": "当前地球观测服务依赖地面处理流水线，受下行链路延迟和带宽限制。IRIDE计划是一个国家地球观测倡议，集成异构传感技术于统一服务导向架构。其中，HEO支持机载数据产品生成，允许在处理链早期提取信息。本文以IRIDE烧毁区域映射服务为例，评估机载处理在操作服务层面的附加值，展示其支持更高空间细节、更小可检测事件和改进系统响应性。",
+      "novelty": "评估机载处理在地球观测服务中的附加值，通过IRIDE HEO能力展示其在空间细节和响应性方面的改进，而非替代现有服务。",
+      "innovation_points": [
+        "机载数据产品生成，减少地面处理依赖",
+        "统一服务导向架构集成异构传感技术",
+        "以烧毁区域映射服务为例展示操作优势"
+      ],
+      "limitations": "机载处理可能受硬件限制，成本较高；泛化到其他地球观测任务未充分讨论。",
+      "improvement_directions": [
+        "开发更高效的机载处理算法，减少计算和存储需求",
+        "扩展机载处理到更多OCR相关应用，如文档图像分析",
+        "研究机载与地面处理的协同优化策略"
+      ],
+      "engineering_value": "中等，机载处理可提升地球观测服务的实时性，对OCR在遥感图像文本提取中的应用有间接启发，但直接关联较弱。",
+      "why_relevant": "涉及图像处理和数据分析，机载处理技术可能启发OCR在边缘计算或实时场景的应用，但论文未直接讨论OCR。"
+    },
+    {
+      "title": "Making MLLMs Blind: Adversarial Smuggling Attacks in MLLM Content Moderation",
+      "summary": "Multimodal Large Language Models (MLLMs) are increasingly being deployed as automated content moderators. Within this landscape, we uncover a critical threat: Adversarial Smuggling Attacks. Unlike adversarial perturbations (for misclassification) and adversarial jailbreaks (for harmful output generation), adversarial smuggling exploits the Human-AI capability gap. It encodes harmful content into human-readable visual formats that remain AI-unreadable, thereby evading automated detection and enabling the dissemination of harmful content. We classify smuggling attacks into two pathways: (1) Perceptual Blindness, disrupting text recognition; and (2) Reasoning Blockade, inhibiting semantic understanding despite successful text recognition. To evaluate this threat, we constructed SmuggleBench, the first comprehensive benchmark comprising 1,700 adversarial smuggling attack instances. Evaluations on SmuggleBench reveal that both proprietary (e.g., GPT-5) and open-source (e.g., Qwen3-VL) state-of-the-art models are vulnerable to this threat, producing Attack Success Rates (ASR) exceeding 90%. By analyzing the vulnerability through the lenses of perception and reasoning, we identify three root causes: the limited capabilities of vision encoders, the robustness gap in OCR, and the scarcity of domain-specific adversarial examples. We conduct a preliminary exploration of mitigation strategies, investigating the potential of test-time scaling (via CoT) and adversarial training (via SFT) to mitigate this threat. Our code is publicly available at https://github.com/zhihengli-casia/smugglebench.",
+      "link": "https://arxiv.org/abs/2604.06950v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.06950v1",
+      "authors": [
+        "Zhiheng Li",
+        "Zongyang Ma",
+        "Yuntong Pan",
+        "Ziqi Zhang",
+        "Xiaolei Lv",
+        "Bo Li",
+        "Jun Gao",
+        "Jianing Zhang",
+        "Chunfeng Yuan",
+        "Bing Li",
+        "Weiming Hu"
+      ],
+      "published": "2026-04-08T11:13:16Z",
+      "updated": "2026-04-08T11:13:16Z",
       "categories": [
         "cs.CV"
       ],
-      "arxiv_id": "2604.05271v1",
-      "score": 10,
-      "topic_tags": [
-        "细粒度车辆分类",
-        "自动车牌识别",
-        "数据集构建",
-        "智能交通系统"
-      ],
-      "zh_summary": "本文引入UFPR-VeSV数据集，包含24,945张图像，标注了13种颜色、26个品牌、136个型号和14种类型的细粒度车辆分类（FGVC）信息，并结合自动车牌识别（ALPR）。数据集从真实监控系统收集，涵盖部分遮挡、夜间红外成像等多样条件。通过基准测试验证数据集的挑战性，并探索FGVC与ALPR的联合使用，结果突显了处理多色车辆、红外图像和区分共享平台车型等具体挑战。",
-      "novelty": "提出大规模、多属性FGVC数据集，并集成ALPR，填补了现有研究在真实条件、多属性集成和FGVC-ALPR联合使用方面的空白。",
-      "innovation_points": [
-        "构建UFPR-VeSV数据集，涵盖多样真实世界条件和多维度车辆属性",
-        "通过车牌信息验证FGVC标注，确保数据质量",
-        "探索FGVC与ALPR的联合应用，提供互补车辆信息提取方法"
-      ],
-      "limitations": "数据集基于特定地区监控系统，可能不泛化到其他地理或文化背景；ALPR模型性能受图像质量影响，在极端条件下可能下降。",
-      "improvement_directions": [
-        "扩展数据集到更多车辆类型和场景以提高普适性",
-        "研究鲁棒性更强的ALPR模型以应对低光照或遮挡",
-        "开发端到端框架统一FGVC和ALPR任务优化"
-      ],
-      "engineering_value": "高，数据集和基准为智能交通系统中的OCR应用（如车牌识别和车辆分析）提供实用资源，支持犯罪调查和交通监控等实际场景。",
-      "why_relevant": "直接涉及ALPR作为OCR子任务，并对车辆相关文档解析（如车牌图像）有直接应用价值。"
-    },
-    {
-      "title": "MedGemma 1.5 Technical Report",
-      "summary": "We introduce MedGemma 1.5 4B, the latest model in the MedGemma collection. MedGemma 1.5 expands on MedGemma 1 by integrating additional capabilities: high-dimensional medical imaging (CT/MRI volumes and histopathology whole slide images), anatomical localization via bounding boxes, multi-timepoint chest X-ray analysis, and improved medical document understanding (lab reports, electronic health records). We detail the innovations required to enable these modalities within a single architecture, including new training data, long-context 3D volume slicing, and whole-slide pathology sampling. Compared to MedGemma 1 4B, MedGemma 1.5 4B demonstrates significant gains in these new areas, improving 3D MRI condition classification accuracy by 11% and 3D CT condition classification by 3% (absolute improvements). In whole slide pathology imaging, MedGemma 1.5 4B achieves a 47% macro F1 gain. Additionally, it improves anatomical localization with a 35% increase in Intersection over Union on chest X-rays and achieves a 4% macro accuracy for longitudinal (multi-timepoint) chest x-ray analysis. Beyond its improved multimodal performance over MedGemma 1, MedGemma 1.5 improves on text-based clinical knowledge and reasoning, improving by 5% on MedQA accuracy and 22% on EHRQA accuracy. It also achieves an average of 18% macro F1 on 4 different lab report information extraction datasets (EHR Datasets 2, 3, 4, and Mendeley Clinical Laboratory Test Reports). Taken together, MedGemma 1.5 serves as a robust, open resource for the community, designed as an improved foundation on which developers can create the next generation of medical AI systems. Resources and tutorials for building upon MedGemma 1.5 can be found at https://goo.gle/MedGemma.",
-      "link": "https://arxiv.org/abs/2604.05081v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.05081v1",
-      "authors": [
-        "Andrew Sellergren",
-        "Chufan Gao",
-        "Fereshteh Mahvar",
-        "Timo Kohlberger",
-        "Fayaz Jamil",
-        "Madeleine Traverse",
-        "Alberto Tono",
-        "Bashir Sadjad",
-        "Lin Yang",
-        "Charles Lau",
-        "Liron Yatziv",
-        "Tiffany Chen",
-        "Bram Sterling",
-        "Kenneth Philbrick",
-        "Richa Tiwari",
-        "Yun Liu",
-        "Madhuram Jajoo",
-        "Chandrashekar Sankarapu",
-        "Swapnil Vispute",
-        "Harshad Purandare",
-        "Abhishek Bijay Mishra",
-        "Sam Schmidgall",
-        "Tao Tu",
-        "Anil Palepu",
-        "Chunjong Park",
-        "Tim Strother",
-        "Rahul Thapa",
-        "Yong Cheng",
-        "Preeti Singh",
-        "Kat Black",
-        "Yossi Matias",
-        "Katherine Chou",
-        "Avinatan Hassidim",
-        "Kavi Goel",
-        "Joelle Barral",
-        "Tris Warkentin",
-        "Shravya Shetty",
-        "Dale Webster",
-        "Sunny Virmani",
-        "David F. Steiner",
-        "Can Kirmizibayrak",
-        "Daniel Golden"
-      ],
-      "published": "2026-04-06T18:35:57Z",
-      "updated": "2026-04-06T18:35:57Z",
-      "categories": [
-        "cs.AI"
-      ],
-      "arxiv_id": "2604.05081v1",
-      "score": 10,
-      "topic_tags": [
-        "医学文档理解",
-        "多模态学习",
-        "医学影像分析",
-        "信息提取",
-        "Gemma模型"
-      ],
-      "zh_summary": "本文介绍了MedGemma 1.5 4B模型，作为MedGemma系列的最新版本，它在MedGemma 1的基础上扩展了多模态能力，包括高维医学影像（如CT/MRI体积数据和病理全切片图像）、通过边界框进行解剖定位、多时间点胸部X光分析，以及改进的医学文档理解（如实验室报告和电子健康记录）。模型通过新训练数据、长上下文3D体积切片和全切片病理采样等创新方法，将这些模态整合到单一架构中。与MedGemma 1 4B相比，MedGemma 1.5 4B在新领域表现出显著提升，例如3D MRI条件分类准确率提高11%，3D CT条件分类提高3%，全切片病理成像的宏F1增益达47%。此外，解剖定位在胸部X光上的IoU提高35%，多时间点胸部X光分析的宏准确率提高4%。模型在文本临床知识和推理方面也有改进，MedQA准确率提高5%，EHRQA准确率提高22%，并在四个实验室报告信息提取数据集上平均宏F1达18%。",
-      "novelty": "MedGemma 1.5 4B在单一架构中整合了高维医学影像、解剖定位和多时间点分析等新模态，通过创新的训练数据和采样技术实现多模态扩展，显著提升了医学文档理解和影像分析的性能。",
-      "innovation_points": [
-        "方法设计：采用长上下文3D体积切片和全切片病理采样技术，处理高维医学影像数据。",
-        "训练范式：整合多模态训练数据，包括CT/MRI、病理图像和文本文档，以增强模型泛化能力。",
-        "数据：引入新的医学影像和文档数据集，支持多任务学习。",
-        "架构：在Gemma基础上优化，支持3D体积和边界框处理，实现解剖定位功能。",
-        "任务定义：扩展任务范围至多时间点分析和精细医学文档理解，如实验室报告提取。"
-      ],
-      "limitations": "模型主要针对医学领域，可能在其他OCR或文档解析任务中泛化能力有限；依赖大量标注医学数据，训练成本较高；未详细讨论实时处理效率或资源消耗。",
-      "improvement_directions": [
-        "扩展至非医学领域的多模态OCR任务，如通用文档或图像理解。",
-        "优化模型效率，减少计算资源需求，适用于边缘设备部署。",
-        "增强少样本或零样本学习能力，降低对标注数据的依赖。",
-        "集成更多模态，如音频或视频，以支持更全面的医疗信息处理。"
-      ],
-      "engineering_value": "高，作为开源资源，MedGemma 1.5 4B为医学AI应用提供了强大的多模态基础模型，可直接用于临床文档解析、影像分析和健康记录处理，提升自动化诊断和信息提取的准确性。",
-      "why_relevant": "该论文涉及医学文档理解和多模态分析，与OCR和文档解析领域高度相关，展示了如何整合文本和图像处理技术，适用于医疗记录、报告提取等实际应用。"
-    },
-    {
-      "title": "Firebolt-VL: Efficient Vision-Language Understanding with Cross-Modality Modulation",
-      "summary": "Recent advances in multimodal large language models (MLLMs) have enabled impressive progress in vision-language understanding, yet their high computational cost limits deployment in resource-constrained scenarios such as personal assistants, document understanding, and smart cameras. Most existing methods rely on Transformer-based cross-attention, whose quadratic complexity hinders efficiency. Moreover, small vision-language models often struggle to precisely capture fine-grained, task-relevant visual regions, leading to degraded performance on fine-grained reasoning tasks that limit their effectiveness in the real world. To address these issues, we introduce Firebolt-VL, an efficient vision-language model that replaces the Transformer-based decoder with a Liquid Foundation Model (LFM) decoder. To further enhance visual grounding, we propose a Token-Grid Correlation Module, which computes lightweight correlations between text tokens and image patches and modulates via the state-space model with FiLM conditioning. This enables the model to selectively emphasize visual regions relevant to the textual prompt while maintaining linear-time inference. Experimental results across multiple benchmarks demonstrate that Firebolt-VL achieves accurate, fine-grained understanding with significantly improved efficiency. Our model and code are available at: https://fireboltvl.github.io",
-      "link": "https://arxiv.org/abs/2604.04579v2",
-      "pdf_url": "https://arxiv.org/pdf/2604.04579v2",
-      "authors": [
-        "Quoc-Huy Trinh",
-        "Mustapha Abdullahi",
-        "Bo Zhao",
-        "Debesh Jha"
-      ],
-      "published": "2026-04-06T10:25:16Z",
-      "updated": "2026-04-07T05:30:10Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2604.04579v2",
+      "arxiv_id": "2604.06950v1",
       "score": 7,
       "topic_tags": [
-        "视觉语言模型",
-        "高效计算",
-        "细粒度理解",
-        "文档理解",
-        "LFM解码器"
+        "对抗性攻击",
+        "内容审核",
+        "OCR鲁棒性",
+        "MLLMs安全",
+        "视觉编码"
       ],
-      "zh_summary": "本文提出Firebolt-VL，一种高效的视觉语言模型，旨在解决多模态大语言模型（MLLMs）在资源受限场景（如个人助手、文档理解和智能相机）中计算成本高的问题。现有方法通常基于Transformer交叉注意力，其二次复杂度限制了效率，且小模型在捕捉细粒度视觉区域时表现不佳，影响精细推理任务。Firebolt-VL采用液态基础模型（LFM）解码器替代Transformer解码器，并引入Token-Grid相关模块，通过计算文本标记与图像补丁之间的轻量级相关性，并利用状态空间模型和FiLM条件进行调制，使模型能选择性强调与文本提示相关的视觉区域，同时保持线性时间推理。实验结果表明，Firebolt-VL在多个基准测试中实现了准确且细粒度的理解，并显著提升了效率。",
-      "novelty": "Firebolt-VL通过LFM解码器和Token-Grid相关模块，实现了高效的视觉语言理解，在保持线性时间推理的同时，提升了细粒度视觉区域的捕捉能力，适用于资源受限环境。",
+      "zh_summary": "MLLMs越来越多地部署为自动内容审核器。本文揭示关键威胁：对抗性走私攻击。与对抗扰动和越狱不同，走私攻击利用人-AI能力差距，将有害内容编码为人可读但AI不可读的视觉格式，从而逃避自动检测。将走私攻击分类为两条路径：感知盲区（破坏文本识别）和推理阻断（抑制语义理解）。构建SmuggleBench基准，包含1700个攻击实例。评估显示，最先进模型易受攻击，攻击成功率超过90%。通过感知和推理视角分析漏洞根源：视觉编码器能力有限、OCR鲁棒性差距、领域特定对抗样本稀缺。初步探索缓解策略，如测试时缩放和对抗训练。",
+      "novelty": "揭示对抗性走私攻击作为MLLMs内容审核的新威胁，通过视觉格式编码逃避检测，构建基准并分析漏洞根源。",
       "innovation_points": [
-        "方法设计：引入Token-Grid相关模块，计算文本与图像之间的轻量级相关性，优化视觉接地。",
-        "训练范式：利用状态空间模型和FiLM条件进行调制，增强模型对任务相关区域的关注。",
-        "架构：采用液态基础模型（LFM）解码器替代Transformer，降低计算复杂度。",
-        "任务定义：专注于细粒度视觉语言推理任务，提升在文档理解等场景中的性能。"
+        "对抗性走私攻击分类为感知盲区和推理阻断路径",
+        "构建SmuggleBench基准用于评估攻击",
+        "分析漏洞根源，包括OCR鲁棒性差距",
+        "初步探索缓解策略如测试时缩放和对抗训练"
       ],
-      "limitations": "模型可能在大规模或复杂多模态任务中性能有限；未详细评估在真实世界OCR文档解析中的泛化能力；依赖特定调制技术，可能增加调参难度。",
+      "limitations": "缓解策略效果有限，未完全解决攻击问题；攻击可能扩展到更多视觉格式和场景。",
       "improvement_directions": [
-        "扩展至更广泛的OCR任务，如手写文本识别或表格提取，以验证通用性。",
-        "优化模型在低资源设备上的部署效率，进一步减少内存和计算需求。",
-        "增强多语言支持，适用于跨语言文档理解场景。",
-        "集成更多模态，如音频或3D数据，以支持更丰富的应用。"
+        "开发更鲁棒的OCR模型以抵抗感知盲区攻击",
+        "集成多模态防御机制，如结合文本和图像分析",
+        "扩展基准到更多语言和文档类型，提升泛化性"
       ],
-      "engineering_value": "中高，Firebolt-VL的高效设计使其适合部署在资源受限环境中，如移动设备或边缘计算，可用于实时文档理解、图像标注和智能助手应用，提升OCR系统的可扩展性。",
-      "why_relevant": "该论文关注视觉语言模型的高效性和细粒度理解，与OCR和文档解析领域直接相关，提供了改进模型效率和准确性的方法，适用于智能文档处理等工程应用。"
+      "engineering_value": "高，研究直接关联OCR安全，对提升MLLMs在内容审核中的鲁棒性有重要应用价值，可指导实际系统设计。",
+      "why_relevant": "直接涉及OCR作为攻击目标（感知盲区），强调OCR鲁棒性差距，对OCR安全研究和实践有直接相关性。"
     },
     {
       "title": "A Multi-Stage Validation Framework for Trustworthy Large-scale Clinical Information Extraction using Large Language Models",
@@ -513,28 +366,30 @@
       "score": 6,
       "topic_tags": [
         "临床信息提取",
+        "大型语言模型",
         "弱监督验证",
-        "LLM应用",
-        "可信AI",
-        "多阶段框架"
+        "多阶段框架",
+        "医疗文档解析"
       ],
-      "zh_summary": "本文提出一个多阶段验证框架，用于基于大语言模型（LLMs）的可信大规模临床信息提取。尽管LLMs在从非结构化健康记录中提取临床信息方面显示出潜力，但其在实际应用中的转化受到缺乏可扩展和可信验证方法的限制。传统评估方法依赖标注密集的参考标准或不完整的结构化数据，难以在人群规模上实施。该框架整合了提示校准、基于规则的合理性过滤、语义接地评估、使用独立高容量法官LLM进行针对性确认评估、选择性专家评审和外部预测有效性分析，以量化不确定性并表征错误模式，无需详尽手动标注。应用该框架从919,783份临床笔记中提取11种物质类别的物质使用障碍（SUD）诊断。基于规则的过滤和语义接地移除了14.59%的LLM阳性提取，这些提取未受支持、不相关或结构上不合理。对于高不确定性案例，法官LLM的评估与主题专家评审显示出高度一致性（Gwet's AC1=0.80）。使用法官评估输出作为参考，主要LLM在宽松匹配标准下实现了0.80的F1分数。LLM提取的SUD诊断在预测后续SUD专科护理参与方面也比结构化数据基线更准确。",
-      "novelty": "该多阶段验证框架通过弱监督方法，实现了LLM基临床信息提取的可扩展和可信评估，整合多种技术以减少对手动标注的依赖，并提升提取结果的可靠性和预测有效性。",
+      "zh_summary": "大型语言模型（LLMs）在从非结构化健康记录中提取临床有意义信息方面展现出潜力，但其在现实世界中的应用受到缺乏可扩展和可信验证方法的限制。传统评估方法严重依赖标注密集的参考标准或不完整的结构化数据，限制了在人口规模上的可行性。我们提出了一个基于LLM的临床信息提取的多阶段验证框架，能够在弱监督下进行严格评估。该框架集成了提示校准、基于规则的合理性过滤、语义基础评估、使用独立高能力法官LLM的针对性确认评估、选择性专家评审和外部预测有效性分析，以量化不确定性并描述错误模式，无需详尽的人工标注。我们将此框架应用于从919,783份临床记录中提取11种物质类别的物质使用障碍（SUD）诊断。基于规则的过滤和语义基础移除了14.59%的LLM阳性提取，这些提取未受支持、不相关或结构上不合理。对于高不确定性案例，法官LLM的评估与主题专家评审显示出高度一致性（Gwet's AC1=0.80）。使用法官评估输出作为参考，主要LLM在宽松匹配标准下实现了F1分数0.80。LLM提取的SUD诊断在预测后续参与SUD专科护理方面比结构化数据基线更准确。",
+      "novelty": "提出一个多阶段验证框架，用于基于LLM的临床信息提取，通过弱监督方法实现大规模可信评估，减少对人工标注的依赖。",
       "innovation_points": [
-        "方法设计：设计多阶段流程，包括提示校准、规则过滤和语义接地，系统化验证LLM输出。",
-        "训练范式：利用法官LLM进行确认评估，增强验证的客观性和一致性。",
-        "数据：在弱监督下处理大规模临床笔记，减少标注需求。",
-        "任务定义：专注于临床信息提取任务，如SUD诊断，并量化不确定性和错误模式。"
+        "多阶段验证框架设计，集成提示校准、规则过滤、语义评估和法官LLM评估",
+        "弱监督训练范式，利用规则和语义基础减少标注需求",
+        "数据增强方法，通过外部预测有效性分析量化不确定性",
+        "架构创新，结合多个LLM（主要LLM和法官LLM）进行协同评估",
+        "任务定义扩展，从传统提取扩展到可信度评估和错误模式分析"
       ],
-      "limitations": "框架依赖特定规则和法官LLM，可能在其他领域或任务中泛化能力有限；未详细讨论实时处理速度或计算资源需求；基于临床数据，可能不直接适用于通用OCR任务。",
+      "limitations": "框架依赖规则和语义基础，可能引入偏差；法官LLM的评估能力受其训练数据限制；在更复杂或多样化的临床场景中泛化能力未充分验证。",
       "improvement_directions": [
-        "扩展框架至非临床领域的OCR信息提取，如法律或金融文档，以测试通用性。",
-        "优化验证流程的自动化程度，减少人工干预，提高可扩展性。",
-        "集成更多验证技术，如对抗测试或不确定性估计，以增强鲁棒性。",
-        "开发开源工具，促进在多样化文档解析任务中的应用。"
+        "开发自适应规则生成以减少人工规则设计",
+        "探索多模态数据（如图像或时间序列）集成以增强语义基础",
+        "优化法官LLM的训练数据以提高评估准确性",
+        "扩展框架到其他OCR任务如手写文本或低质量文档提取",
+        "研究实时验证机制以支持动态临床环境"
       ],
-      "engineering_value": "高，该框架为LLM基信息提取提供了可信的验证方法，可直接应用于医疗记录处理、自动化数据提取和合规性检查，提升OCR系统在敏感领域的可靠性和部署可行性。",
-      "why_relevant": "该论文涉及文档解析中的信息提取和验证技术，与OCR领域紧密相关，展示了如何利用LLMs和弱监督方法处理大规模非结构化文本，适用于健康记录、报告分析等实际场景。"
+      "engineering_value": "高，框架提供可扩展的验证方法，适用于大规模临床文档处理，减少人工成本，提升信息提取的可靠性和实用性，支持医疗决策和流行病学研究。",
+      "why_relevant": "该论文直接涉及OCR/文档解析领域，专注于从非结构化文本中提取信息，并引入验证框架以提高准确性和可信度，对医疗文档处理具有重要应用价值。"
     }
   ]
 }
