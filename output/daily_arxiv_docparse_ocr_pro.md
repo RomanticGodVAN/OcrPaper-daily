@@ -1,61 +1,247 @@
-# OCR / 文档解析研究日报（2026-04-14）
+# OCR / 文档解析研究日报（2026-04-15）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-04-14 04:20:03`
+- 生成时间（UTC）：`2026-04-15 04:19:39`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日论文聚焦于OCR/文档解析领域的多模态评估、基准构建、历史文档处理、信息提取方法及脑解码应用。核心趋势包括：强调受控基准以诊断视觉语言模型（VLM）能力，推动多模态多文档科学推理评估，探索传统与LLM-based OCR在古文字识别的性能比较，提出渐进学习优化通用信息提取（UIE），以及引入显著性先验提升脑解码图像重建。这些研究共同指向更精细化的模型评估、跨模态整合、效率优化和特定领域应用，为工程实践提供诊断工具、标准化平台和高效框架。
+> 今日研究聚焦于OCR与文档解析的多个前沿方向，包括长文档处理、多模态理解、基准评估和模型优化。核心趋势是结合视觉、文本和结构信息以提升复杂文档（如工业、金融、科学文档）的理解能力，同时强调对低资源脚本、历史文档和跨语言场景的泛化挑战。研究普遍采用多模态方法（如视觉解析、OCR、LLMs）和结构化工作流程，并引入新基准（如GlotOCR Bench、PaperScope）进行系统评估。工程上，这些进展为RAG系统、文档QA和自动驾驶等应用提供了实用解决方案，但需关注计算成本、泛化性和数据规模等限制。
 
 ## 二、今日趋势判断
 
-研究趋势呈现三大方向：一是基准测试从通用向受控、多模态多文档深化，如TraversalBench和PaperScope强调结构化评估以揭示模型弱点；二是技术融合加速，结合传统OCR、LLM和代理架构处理历史文档，同时渐进学习优化UIE；三是跨领域应用扩展，如脑解码引入显著性先验，与OCR潜在结合。整体上，工作更注重诊断性、真实场景复杂性和计算效率。
+研究趋势呈现三个主要方向：1) 多模态与结构化文档解析：通过集成视觉解析、OCR和LLMs显式处理文档层次结构（如MultiDocFusion、DocSeeker），以提升长文档QA性能；2) 基准驱动评估与泛化挑战：新基准（如GlotOCR Bench、INDOTABVQA）揭示模型在低资源脚本、跨语言表格理解和多文档推理上的局限性，强调数据多样性和结构复杂性的重要性；3) 模型优化与工程应用：方法如SOAR和物理接地框架通过自校正、几何先验等技术优化模型性能，直接服务于工业文档处理、自动驾驶等实际场景。
 
 ## 三、今日论文概览
 
-1. **TraversalBench: Challenging Paths to Follow for Vision Language Models** | 标签：视觉语言模型、基准测试、视觉路径理解、多模态评估
-2. **PaperScope: A Multi-Modal Multi-Document Benchmark for Agentic Deep Research Across Massive Scientific Papers** | 标签：多模态基准、科学文献理解、多文档推理、研究代理
-3. **The Devil is in the Details -- From OCR for Old Church Slavonic to Purely Visual Stemma Reconstruction** | 标签：历史文档OCR、古文字识别、谱系学、LLM应用、代理架构
-4. **ProUIE: A Macro-to-Micro Progressive Learning Method for LLM-based Universal Information Extraction** | 标签：通用信息提取、渐进学习、LLM微调、结构化输出
-5. **Brain-Grasp: Graph-based Saliency Priors for Improved fMRI-based Visual Brain Decoding** | 标签：脑解码、显著性先验、扩散模型、图像重建
+1. **MultiDocFusion: Hierarchical and Multimodal Chunking Pipeline for Enhanced RAG on Long Industrial Documents** | 标签：文档分块、多模态处理、RAG系统、工业文档、层次结构解析
+2. **Empirical Evaluation of PDF Parsing and Chunking for Financial Question Answering with RAG** | 标签：PDF解析、分块策略、RAG评估、金融文档、实证研究
+3. **GlotOCR Bench: OCR Models Still Struggle Beyond a Handful of Unicode Scripts** | 标签：OCR基准、多脚本泛化、低资源语言、视觉语言模型、预训练分析
+4. **TraversalBench: Challenging Paths to Follow for Vision Language Models** | 标签：视觉路径遍历、VLM诊断、路径结构分析、多模态基准、视觉处理
+5. **INDOTABVQA: A Benchmark for Cross-Lingual Table Understanding in Bahasa Indonesia Documents** | 标签：表格VQA、跨语言处理、印尼语文档、空间先验、微调策略
+6. **PaperScope: A Multi-Modal Multi-Document Benchmark for Agentic Deep Research Across Massive Scientific Papers** | 标签：多文档推理、科学基准、知识图、多模态评估、智能研究
+7. **SOAR: Self-Correction for Optimal Alignment and Refinement in Diffusion Models** | 标签：扩散模型、后训练、自校正、OCR、生成模型
+8. **The Devil is in the Details -- From OCR for Old Church Slavonic to Purely Visual Stemma Reconstruction** | 标签：历史文档OCR、大语言模型、谱系学、图像处理、手写识别
+9. **DocSeeker: Structured Visual Reasoning with Evidence Grounding for Long Document Understanding** | 标签：长文档理解、多模态大语言模型、证据定位、结构化推理、文档分析
+10. **Physics-Grounded Monocular Vehicle Distance Estimation Using Standardized License Plate Typography** | 标签：车辆距离估计、OCR、单目视觉、物理接地、自动驾驶
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 设计受控基准以系统评估模型在特定任务（如视觉路径遍历或多文档推理）上的能力，最小化外部依赖。
-- 结合多种技术（如传统OCR、LLM、代理架构）处理复杂文档（如古文字），提升识别精度和流程灵活性。
-- 采用渐进学习或结构化训练策略（如ProUIE的三阶段框架）优化模型性能，同时降低计算成本。
-- 引入先验知识（如图信息显著性先验）或简化输出格式，增强模型的结构保真度和可控性。
+- 集成视觉解析、OCR和LLMs进行多模态文档结构分析以提升理解精度。
+- 引入新基准系统评估模型在特定任务（如多脚本OCR、表格VQA）上的性能与局限性。
+- 采用结构化工作流程（如分析-定位-推理）解决长文档理解中的信噪比和监督稀缺问题。
+- 结合几何先验或物理约束（如车牌字体）实现无需训练数据的低成本应用解决方案。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 开发结合OCR与视觉路径理解的混合基准，用于评估文档图表或地图中的路径跟踪能力。
-- 扩展多模态UIE任务至文档图像，集成OCR输出进行端到端的实体和关系提取。
-- 优化LLM微调策略，针对历史文档OCR中的复杂字形和变音符号问题。
-- 设计实时交互式研究代理评估任务，模拟真实科学工作流中的多文档检索和推理。
-- 探索自适应显著性先验学习机制，用于脑解码中文本刺激的处理，结合OCR技术。
+- 开发轻量级文档结构解析方法以减少对LLMs的依赖并降低计算开销。
+- 扩展OCR模型的多脚本预训练策略以提升对低资源语言和复杂字符（如变音符号）的泛化能力。
+- 优化分块策略与检索模型的交互，以处理更复杂的文档布局（如多表格、混合媒体）。
+- 研究跨语言文档理解的高效微调方法，结合先进OCR技术提升文本提取质量。
+- 将路径遍历等视觉诊断任务扩展到包含文本元素的文档布局分析中，增强多模态理解。
 
 ## 六、工程落地启发
 
-- 利用TraversalBench等诊断工具分析VLM在视觉处理中的故障，优化自动驾驶或文档解析模型。
-- 采用PaperScope基准评估科学文献分析系统，提升学术搜索引擎和研究助手的多模态推理能力。
-- 实施代理OCR架构（如专用后处理代理）处理历史文档，提高古文字识别的准确性和流程效率。
-- 应用ProUIE渐进学习框架训练UIE模型，降低生产环境中信息提取的计算开销并提升可控性。
-- 集成显著性先验到脑解码流程，增强图像重建的结构一致性，支持医疗诊断应用。
+- 为工业文档处理实施层次化多模态分块管道可显著提升RAG系统的检索和QA性能。
+- 在金融文档QA中，系统评估PDF解析器与分块策略的协同效应能优化管道设计。
+- 利用标准化车牌字体的OCR和几何先验可实现低成本、高精度的单目车辆距离估计。
+- 采用DocSeeker的结构化工作流程和两阶段训练可改善长文档理解任务中的证据定位。
+- 应用SOAR的自校正后训练方法能提升扩散模型在OCR等生成任务中的性能，无需奖励模型。
 
 ## 七、优先关注论文
 
-- **TraversalBench: Challenging Paths to Follow for Vision Language Models**：提供视觉路径遍历的受控基准，有助于诊断VLM在文档图表解析中的视觉处理能力，工程上可优化路径理解任务。
-- **PaperScope: A Multi-Modal Multi-Document Benchmark for Agentic Deep Research Across Massive Scientific Papers**：首个多模态多文档科学推理基准，推动文档解析系统在学术领域的深度应用，如研究助手和知识整合工具。
-- **The Devil is in the Details -- From OCR for Old Church Slavonic to Purely Visual Stemma Reconstruction**：系统比较OCR技术并创新纯视觉谱系方法，为历史文档数字化和古籍保护提供实用方案，工程上可扩展至多语言OCR。
-- **ProUIE: A Macro-to-Micro Progressive Learning Method for LLM-based Universal Information Extraction**：提出高效渐进学习框架，提升UIE性能并降低计算成本，适用于文档处理流水线中的信息提取优化。
+- **MultiDocFusion: Hierarchical and Multimodal Chunking Pipeline for Enhanced RAG on Long Industrial Documents**：为长工业文档提供了实用的多模态分块解决方案，能直接提升RAG系统性能，适用于文档密集型应用。
+- **GlotOCR Bench: OCR Models Still Struggle Beyond a Handful of Unicode Scripts**：揭示了当前OCR模型在低资源脚本上的严重泛化局限，为模型改进和评估提供了关键基准。
+- **DocSeeker: Structured Visual Reasoning with Evidence Grounding for Long Document Understanding**：提出可扩展的长文档理解方法，解决低信噪比问题，对视觉检索增强生成系统有直接应用价值。
+- **Physics-Grounded Monocular Vehicle Distance Estimation Using Standardized License Plate Typography**：提供无需训练数据的低成本距离估计框架，适用于ADAS和自动驾驶，具有高工程价值。
+- **PaperScope: A Multi-Modal Multi-Document Benchmark for Agentic Deep Research Across Massive Scientific Papers**：为多模态多文档科学推理设定了先进评估标准，能推动智能研究系统和文档理解技术的发展。
 
 ## 八、论文逐篇解析
 
-### 1. TraversalBench: Challenging Paths to Follow for Vision Language Models
+### 1. MultiDocFusion: Hierarchical and Multimodal Chunking Pipeline for Enhanced RAG on Long Industrial Documents
+
+- arXiv: [2604.12352v1](https://arxiv.org/abs/2604.12352v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.12352v1)
+- 作者: Joongmin Shin, Chanjun Park, Jeongbae Park, Jaehyung Seo, Heuiseok Lim
+- 发布时间: 2026-04-14T06:40:22Z
+- 分类: cs.AI, cs.CL
+- 相关性评分: 23
+- 主题标签: 文档分块、多模态处理、RAG系统、工业文档、层次结构解析
+
+**中文摘要**
+
+> RAG-based QA在处理长工业文档时面临信息丢失和答案质量下降的问题，主要源于传统文本分块方法忽略了文档的复杂结构。MultiDocFusion提出了一种多模态分块管道，集成了基于视觉的文档区域检测、OCR文本提取、基于LLM的文档层次结构解析和DFS分组构建层次分块。实验表明，该方法在工业基准上提高了检索精度8-15%和ANLS QA分数2-3%，强调了显式利用文档层次结构对多模态文档QA的重要性。
+
+**核心创新概述**
+
+> 提出了一种结合视觉解析、OCR和LLM的层次化多模态分块方法，显式处理长工业文档的结构，以提升RAG系统的性能。
+
+**创新点拆解**
+
+- 集成视觉文档解析进行区域检测
+- 使用OCR从检测区域提取文本
+- 基于LLM的文档层次结构解析（DSHP-LLM）
+- 通过DFS分组构建层次分块
+
+**当前局限**
+
+> 方法依赖于LLM进行结构解析，可能受限于LLM的准确性和计算成本；实验主要针对工业文档，泛化到其他文档类型需验证。
+
+**后续可改进方向**
+
+- 探索更轻量级的结构解析方法以减少计算开销
+- 扩展应用到更多文档类型（如学术论文、法律文件）
+- 优化分块策略以处理更复杂的文档布局
+
+**工程启发**
+
+> 高，为工业文档处理提供了实用的分块解决方案，能显著提升RAG系统的检索和QA性能，适用于文档密集型应用。
+
+**为什么值得关注**
+
+> 直接涉及OCR在文档解析中的应用，以及如何结合视觉和语言模型处理文档结构，对OCR和文档理解研究有指导意义。
+
+**原始摘要**
+
+RAG-based QA has emerged as a powerful method for processing long industrial documents. However,
+conventional text chunking approaches often neglect complex and long industrial document structures,
+causing information loss and reduced answer quality. To address this, we introduce MultiDocFusion, a
+multimodal chunking pipeline that integrates: (i) detection of document regions using vision-based
+document parsing, (ii) text extraction from these regions via OCR, (iii) reconstruction of document
+structure into a hierarchical tree using large language model (LLM)-based document section
+hierarchical parsing (DSHP-LLM), and (iv) construction of hierarchical chunks through DFS-based
+grouping. Extensive experiments across industrial benchmarks demonstrate that MultiDocFusion
+improves retrieval precision by 8-15% and ANLS QA scores by 2-3% compared to baselines, emphasizing
+the critical role of explicitly leveraging document hierarchy for multimodal document-based QA.
+These significant performance gains underscore the necessity of structure-aware chunking in
+enhancing the fidelity of RAG-based QA systems.
+
+---
+
+### 2. Empirical Evaluation of PDF Parsing and Chunking for Financial Question Answering with RAG
+
+- arXiv: [2604.12047v1](https://arxiv.org/abs/2604.12047v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.12047v1)
+- 作者: Omar El Bachyr, Yewei Song, Saad Ezzini, Jacques Klein, Tegawendé F. Bissyandé, Anas Zilali, Ulrick Ble, Anne Goujon
+- 发布时间: 2026-04-13T20:39:43Z
+- 分类: cs.CL, cs.IR
+- 相关性评分: 20
+- 主题标签: PDF解析、分块策略、RAG评估、金融文档、实证研究
+
+**中文摘要**
+
+> PDF文件因其异构内容（如文本、表格、图像）给解析和信息提取带来挑战，RAG系统被用于自动化PDF处理，但缺乏对组件和设计选择影响的全面研究。本文通过聚焦QA任务，利用金融领域基准（包括新公开的TableQuest），系统评估了多种PDF解析器和分块策略（含不同重叠）及其在保留文档结构和确保答案正确性方面的协同作用。结果提供了构建稳健RAG管道的实用指南。
+
+**核心创新概述**
+
+> 首次对PDF解析和分块策略在金融QA任务中的影响进行系统实证研究，并引入了新的公开基准TableQuest。
+
+**创新点拆解**
+
+- 系统评估PDF解析器和分块策略的协同效应
+- 引入新的金融领域基准TableQuest
+- 聚焦QA任务以提供实用指南
+
+**当前局限**
+
+> 研究限于金融领域，可能不直接适用于其他文档类型；未深入探讨模型内部机制。
+
+**后续可改进方向**
+
+- 扩展到其他领域（如医疗、法律）以验证泛化性
+- 结合更先进的解析技术（如深度学习模型）
+- 研究分块策略与检索模型的交互优化
+
+**工程启发**
+
+> 中高，为RAG系统在PDF处理中的实践提供了数据驱动的指导，有助于优化管道设计。
+
+**为什么值得关注**
+
+> 涉及OCR和文档解析在PDF处理中的关键作用，对提升RAG系统性能有实际参考价值。
+
+**原始摘要**
+
+PDF files are primarily intended for human reading rather than automated processing. In addition,
+the heterogeneous content of PDFs, such as text, tables, and images, poses significant challenges
+for parsing and information extraction. To address these difficulties, both practitioners and
+researchers are increasingly developing new methods, including the promising Retrieval-Augmented
+Generation (RAG) systems to automated PDF processing. However, there is no comprehensive study
+investigating how different components and design choices affect the performance of a RAG system for
+understanding PDFs. In this paper, we propose such a study (1) by focusing on Question Answering, a
+specific language understanding task, and (2) by leveraging two benchmarks from the financial
+domain, including TableQuest, our newly generated, publicly available benchmark. We systematically
+examine multiple PDF parsers and chunking strategies (with varied overlap), along with their
+potential synergies in preserving document structure and ensuring answer correctness. Overall, our
+results offer practical guidelines for building robust RAG pipelines for PDF understanding.
+
+---
+
+### 3. GlotOCR Bench: OCR Models Still Struggle Beyond a Handful of Unicode Scripts
+
+- arXiv: [2604.12978v1](https://arxiv.org/abs/2604.12978v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.12978v1)
+- 作者: Amir Hossein Kargaran, Nafiseh Nikeghbal, Jana Diesner, François Yvon, Hinrich Schütze
+- 发布时间: 2026-04-14T17:12:41Z
+- 分类: cs.CL, cs.CV
+- 相关性评分: 16
+- 主题标签: OCR基准、多脚本泛化、低资源语言、视觉语言模型、预训练分析
+
+**中文摘要**
+
+> OCR在视觉语言模型推动下快速发展，但评估仍集中于少数高资源和中资源脚本。GlotOCR Bench引入了一个全面基准，评估了100多种Unicode脚本的OCR泛化能力。基准包含从真实多语言文本渲染的干净和退化图像变体，使用Google Fonts字体、HarfBuzz形状化和FreeType栅格化，支持LTR和RTL脚本。评估发现，大多数模型在少于10种脚本上表现良好，即使最强前沿模型也难以泛化超过30种脚本，性能与脚本级预训练覆盖相关，表明当前OCR系统依赖语言模型预训练。模型面对不熟悉脚本时会产生随机噪声或幻觉相似脚本字符。
+
+**核心创新概述**
+
+> 提出了首个大规模多脚本OCR基准GlotOCR Bench，揭示了当前OCR模型在泛化到低资源脚本时的严重局限性。
+
+**创新点拆解**
+
+- 涵盖100多种Unicode脚本的全面评估
+- 使用真实文本渲染图像，支持多种脚本方向
+- 分析模型性能与预训练覆盖的相关性
+
+**当前局限**
+
+> 基准主要基于渲染图像，可能未完全反映真实世界OCR场景的复杂性；未探索模型微调对泛化的影响。
+
+**后续可改进方向**
+
+- 扩展基准以包含更多真实世界图像和退化类型
+- 研究多脚本预训练策略以提升泛化能力
+- 开发专门针对低资源脚本的OCR模型
+
+**工程启发**
+
+> 中，为OCR模型评估提供了重要工具，有助于识别和改进模型在多样化脚本上的性能。
+
+**为什么值得关注**
+
+> 直接针对OCR技术的核心挑战——多语言和低资源脚本处理，对推动OCR研究具有基础性意义。
+
+**原始摘要**
+
+Optical character recognition (OCR) has advanced rapidly with the rise of vision-language models,
+yet evaluation has remained concentrated on a small cluster of high- and mid-resource scripts. We
+introduce GlotOCR Bench, a comprehensive benchmark evaluating OCR generalization across 100+ Unicode
+scripts. Our benchmark comprises clean and degraded image variants rendered from real multilingual
+texts. Images are rendered using fonts from the Google Fonts repository, shaped with HarfBuzz and
+rasterized with FreeType, supporting both LTR and RTL scripts. Samples of rendered images were
+manually reviewed to verify correct rendering across all scripts. We evaluate a broad suite of open-
+weight and proprietary vision-language models and find that most perform well on fewer than ten
+scripts, and even the strongest frontier models fail to generalize beyond thirty scripts.
+Performance broadly tracks script-level pretraining coverage, suggesting that current OCR systems
+rely on language model pretraining as much as on visual recognition. Models confronted with
+unfamiliar scripts either produce random noise or hallucinate characters from similar scripts they
+already know. We release the benchmark and pipeline for reproducibility. Pipeline Code:
+https://github.com/cisnlp/glotocr-bench, Benchmark: https://hf.co/datasets/cis-lmu/glotocr-bench.
+
+---
+
+### 4. TraversalBench: Challenging Paths to Follow for Vision Language Models
 
 - arXiv: [2604.10999v1](https://arxiv.org/abs/2604.10999v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2604.10999v1)
@@ -63,39 +249,39 @@
 - 发布时间: 2026-04-13T04:58:52Z
 - 分类: cs.CV
 - 相关性评分: 16
-- 主题标签: 视觉语言模型、基准测试、视觉路径理解、多模态评估
+- 主题标签: 视觉路径遍历、VLM诊断、路径结构分析、多模态基准、视觉处理
 
 **中文摘要**
 
-> 视觉语言模型（VLM）在多模态基准测试中表现优异，但其遵循复杂视觉路径的能力——人类观察者通常认为简单的任务——尚未得到充分测试。本文提出TraversalBench，一个用于精确视觉路径遍历的受控基准。每个实例包含一条连续折线、唯一起始标记和路径顶点标记；任务是从起点到终点遍历路径时恢复遇到的确切有序序列。该基准明确平衡了关键路径结构因素，包括自相交次数、曲折度、顶点数和附近混淆线，同时最小化对OCR、世界知识和开放式规划的依赖。研究发现自相交是主要困难来源。首次交叉分析显示错误高度局部化：在首次交叉前性能相对稳定，当模型必须解析正确延续时急剧下降。相比之下，附近混淆线产生较弱的持续性能下降，并随重复暴露而加剧。这些分析使TraversalBench成为识别模型是否遭受类人失败或持续视觉处理中其他故障的有用诊断工具。辅助阅读顺序基准进一步揭示了对左到右序列化兼容布局的一致偏好，但未解释路径复杂性的主要影响。这些结果共同将TraversalBench定位为受控诊断工具。
+> 视觉语言模型在多模态基准上表现强劲，但遵循复杂视觉路径的能力——人类通常认为简单的任务——仍未得到充分测试。TraversalBench引入了一个受控基准，用于精确视觉路径遍历。每个实例包含一条连续折线、唯一起始标记和路径顶点标记；任务是从起点到终点遍历路径时恢复遇到的精确有序序列。基准明确平衡了关键路径结构因素，如自相交计数、曲折度、顶点数和附近混淆线，同时最小化对OCR、世界知识和开放端规划的依赖。研究发现自相交是主要困难来源，错误局部化明显。辅助阅读顺序基准进一步揭示了模型对左到右序列化兼容布局的偏好。
 
 **核心创新概述**
 
-> 首次提出专门针对视觉路径遍历能力的受控基准，通过精确控制路径结构因素（如自相交、曲折度）来系统评估VLM的视觉处理能力，而非依赖OCR或世界知识。
+> 提出了TraversalBench基准，专门测试VLMs在视觉路径遍历任务上的能力，并分析了路径结构因素对性能的影响。
 
 **创新点拆解**
 
-- 任务定义创新：设计精确视觉路径遍历任务，要求模型恢复路径上的有序序列
-- 基准设计方法：平衡关键路径结构因素（自相交、曲折度、顶点数、混淆线），最小化外部依赖
-- 诊断分析框架：通过首次交叉分析和混淆线效应分析，区分类人失败与其他视觉处理故障
+- 设计受控视觉路径遍历任务
+- 平衡路径结构因素以进行诊断分析
+- 揭示自相交作为主要困难来源
 
 **当前局限**
 
-> 基准主要关注合成折线路径，可能未完全覆盖真实世界复杂视觉场景（如自然图像中的遮挡、光照变化）；任务形式相对单一，缺乏多模态交互要素。
+> 任务相对抽象，可能不直接映射到真实世界OCR或文档理解应用；未集成文本元素。
 
 **后续可改进方向**
 
-- 扩展基准包含真实图像中的路径跟踪任务
-- 引入动态或交互式路径遍历场景
-- 结合OCR或文本线索的混合路径理解任务
+- 将路径遍历任务扩展到包含文本和文档布局的复杂场景
+- 研究模型在路径解析中的注意力机制
+- 结合OCR技术以增强多模态理解
 
 **工程启发**
 
-> 为VLM视觉处理能力提供标准化诊断工具，有助于模型优化和故障分析，在自动驾驶路径理解、文档图表解析等场景有潜在应用价值。
+> 低到中，主要为VLMs提供诊断工具，对直接OCR应用有限，但可启发文档布局分析。
 
 **为什么值得关注**
 
-> 虽然基准最小化OCR依赖，但其视觉序列理解能力与文档图像中的阅读顺序、流程图解析等OCR相关任务有间接关联。
+> 涉及视觉处理能力，与OCR中的文档布局和结构理解相关，为多模态模型评估提供新视角。
 
 **原始摘要**
 
@@ -122,7 +308,71 @@ grounding benchmarks for VLMs.
 
 ---
 
-### 2. PaperScope: A Multi-Modal Multi-Document Benchmark for Agentic Deep Research Across Massive Scientific Papers
+### 5. INDOTABVQA: A Benchmark for Cross-Lingual Table Understanding in Bahasa Indonesia Documents
+
+- arXiv: [2604.11970v1](https://arxiv.org/abs/2604.11970v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.11970v1)
+- 作者: Somraj Gautam, Anathapindika Dravichi, Gaurav Harit
+- 发布时间: 2026-04-13T19:03:10Z
+- 分类: cs.CV, cs.AI, cs.CL, cs.LG
+- 相关性评分: 10
+- 主题标签: 表格VQA、跨语言处理、印尼语文档、空间先验、微调策略
+
+**中文摘要**
+
+> INDOTABVQA引入了一个基准，用于评估在印尼语文档图像上的跨语言表格视觉问答。数据集包含1,593张文档图像，涵盖三种视觉样式（有边框、无边框和彩色），带有单个或多个表格，以及1,593个问题-答案集，支持四种语言：印尼语、英语、印地语和阿拉伯语。这使得可以评估VLMs在单语和跨语言设置下的性能。基准测试显示，领先的开源VLMs和GPT-4o存在显著性能差距，特别是在结构复杂表格和低资源语言上。在数据集上微调紧凑模型能带来11.6%和17.8%的准确率提升。提供显式表格区域坐标作为额外输入进一步改善性能4-7%，证明了空间先验对表格推理的价值。
+
+**核心创新概述**
+
+> 提出了首个针对印尼语文档的跨语言表格VQA基准INDOTABVQA，强调了语言多样性和结构复杂性对文档理解的重要性。
+
+**创新点拆解**
+
+- 涵盖多语言和多种表格样式的基准
+- 评估跨语言VQA性能
+- 展示微调和空间先验对性能的提升
+
+**当前局限**
+
+> 数据集规模相对较小（1,593张图像），可能限制统计显著性；未涵盖所有文档类型。
+
+**后续可改进方向**
+
+- 扩展数据集以包含更多文档和语言
+- 研究更高效的多语言微调方法
+- 集成先进OCR技术以提升文本提取质量
+
+**工程启发**
+
+> 中高，为表格理解和跨语言文档处理提供了实用基准，有助于开发针对特定语言的VLM应用。
+
+**为什么值得关注**
+
+> 直接涉及OCR在表格提取和多语言文档处理中的作用，对提升文档理解系统的泛化能力有参考价值。
+
+**原始摘要**
+
+We introduce INDOTABVQA, a benchmark for evaluating cross-lingual Table Visual Question Answering
+(VQA) on real-world document images in Bahasa Indonesia. The dataset comprises 1,593 document images
+across three visual styles (bordered, borderless, and colorful) with one or more than one tables,
+and 1,593 question-answer sets in four languages: Bahasa Indonesia, English, Hindi, and Arabic. This
+enables evaluation of Vision-Language Models (VLMs) in both monolingual (Bahasa documents with
+Bahasa questions) and cross-lingual settings (Bahasa documents with questions in other languages).
+We benchmark leading open-source VLMs (Qwen2.5-VL, Gemma-3, LLaMA-3.2) and GPT-4o and reveal
+substantial performance gaps, particularly on structurally complex tables and in low-resource
+languages. Fine-tuning a compact 3B and LoRA-finetuned 7B model on our dataset yields 11.6% and
+17.8% improvements in accuracy. Providing explicit table region coordinates as additional input
+further improves performance by 4-7%, demonstrating the value of Spatial priors for table-based
+reasoning. Our findings underscore the importance of language-diverse, domain-specific datasets and
+demonstrate that targeted fine-tuning can significantly enhance VLM performance on specialized
+document understanding tasks. INDOTABVQA provides a valuable resource for advancing research in
+cross-lingual, structure-aware document understanding, especially in underrepresented regions of the
+world. Full dataset can be accessed in huggingface at:
+https://huggingface.co/datasets/NusaBharat/INDOTABVQA}
+
+---
+
+### 6. PaperScope: A Multi-Modal Multi-Document Benchmark for Agentic Deep Research Across Massive Scientific Papers
 
 - arXiv: [2604.11307v1](https://arxiv.org/abs/2604.11307v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2604.11307v1)
@@ -130,39 +380,39 @@ grounding benchmarks for VLMs.
 - 发布时间: 2026-04-13T11:07:08Z
 - 分类: cs.AI
 - 相关性评分: 10
-- 主题标签: 多模态基准、科学文献理解、多文档推理、研究代理
+- 主题标签: 多文档推理、科学基准、知识图、多模态评估、智能研究
 
 **中文摘要**
 
-> 利用多模态大语言模型（MLLM）加速前沿科学研究前景广阔，但如何严格评估此类系统仍不明确。现有基准主要关注单文档理解，而真实科学工作流需要整合多篇论文的证据，包括文本、表格和图表。因此，多模态、多文档科学推理仍未被充分探索且缺乏系统评估。为填补这一空白，本文提出PaperScope，一个为深度研究代理设计的多模态多文档基准。PaperScope具有三大优势：（1）结构化科学基础：基于包含三年内2000多篇AI论文的知识图谱构建，为研究型查询提供结构化基础。（2）语义密集证据构建：整合语义相关的关键信息节点，采用优化随机游走文章选择器采样主题连贯的论文集，确保足够的语义密度和任务复杂性。（3）科学推理多任务评估：包含超过2000个QA对，涵盖推理、检索、总结和问题解决，支持多步科学推理评估。实验结果显示，即使先进系统如OpenAI Deep Research和Tongyi Deep Research在PaperScope上得分有限，突显了长上下文检索和深度多源推理的难度。PaperScope因此提供了一个严格基准及可扩展流程。
+> 利用多模态大语言模型加速前沿科学研究具有前景，但如何严格评估此类系统仍不明确。现有基准主要关注单文档理解，而真实科学工作流需要整合多篇论文的证据，包括文本、表格和图像。因此，多模态、多文档科学推理仍未充分探索且缺乏系统评估。为填补这一空白，PaperScope引入了一个多模态多文档基准，专为智能深度研究设计。PaperScope具有三个优势：(1) 结构化科学基础，基于超过2,000篇AI论文的知识图构建；(2) 语义密集证据构建，整合语义相关关键信息节点；(3) 科学推理的多任务评估，包含超过2,000个QA对。实验结果显示，即使先进系统在PaperScope上得分有限，突出了长上下文检索和深度多源推理的难度。
 
 **核心创新概述**
 
-> 首个针对多模态多文档科学推理的基准，强调从大量科学论文（含图表表格）中整合证据的深度研究能力，而非传统单文档理解。
+> 提出了PaperScope基准，首次系统评估多模态、多文档科学推理能力，基于大规模知识图和语义密集构建。
 
 **创新点拆解**
 
-- 基准构建方法：基于知识图谱的结构化科学基础，确保任务真实性和复杂性
-- 证据采样策略：优化随机游走文章选择器，生成语义密集且主题连贯的论文集
-- 多任务评估框架：涵盖推理、检索、总结、问题解决等多维度科学能力评估
+- 基于知识图的多文档基准构建
+- 语义密集证据采样策略
+- 多任务科学推理评估
 
 **当前局限**
 
-> 基准目前聚焦AI领域论文，可能未覆盖其他科学领域的特定挑战；多模态内容主要限于图表表格，未包含视频、音频等更丰富模态。
+> 基准主要针对AI领域，可能不直接适用于其他科学领域；评估复杂度高，可能难以规模化。
 
 **后续可改进方向**
 
-- 扩展至跨学科科学文献基准
-- 纳入更多模态类型（如代码、实验数据）
-- 设计实时交互式研究代理评估任务
+- 扩展基准到其他科学领域以增强泛化性
+- 优化检索和推理算法以处理长上下文
+- 结合OCR技术提升多模态文档解析精度
 
 **工程启发**
 
-> 为科学文献智能分析系统提供标准化评估平台，推动学术搜索引擎、研究助手等工具的发展，提升科研效率。
+> 高，为科学研究和文档理解提供了先进的评估工具，能推动智能研究系统的发展。
 
 **为什么值得关注**
 
-> 基准涉及文档图像（图表表格）理解与文本整合，与OCR增强的多文档信息提取任务高度相关。
+> 涉及多模态文档处理和OCR在科学论文解析中的应用，对提升文档理解系统的深度推理能力有重要意义。
 
 **原始摘要**
 
@@ -187,7 +437,73 @@ research datasets.
 
 ---
 
-### 3. The Devil is in the Details -- From OCR for Old Church Slavonic to Purely Visual Stemma Reconstruction
+### 7. SOAR: Self-Correction for Optimal Alignment and Refinement in Diffusion Models
+
+- arXiv: [2604.12617v1](https://arxiv.org/abs/2604.12617v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.12617v1)
+- 作者: You Qin, Linqing Wang, Hao Fei, Roger Zimmermann, Liefeng Bo, Qinglin Lu, Chunyu Wang
+- 发布时间: 2026-04-14T11:45:15Z
+- 分类: cs.LG, cs.AI
+- 相关性评分: 9
+- 主题标签: 扩散模型、后训练、自校正、OCR、生成模型
+
+**中文摘要**
+
+> 扩散模型的后训练流程通常包括监督微调（SFT）和强化学习（RL）两个阶段，但两者之间存在根本性差距。SFT仅在前向加噪过程采样的真实状态上优化去噪器，一旦推理偏离这些理想状态，后续去噪依赖于分布外泛化而非学习到的校正，表现出类似于自回归模型的暴露偏差，但沿去噪轨迹而非标记序列累积。RL理论上可解决此不匹配，但其终端奖励信号稀疏、存在信用分配困难，且易受奖励黑客攻击。本文提出SOAR（自校正优化对齐与精炼），一种偏差校正后训练方法，填补此差距。从真实样本出发，SOAR使用当前模型执行单次停止梯度展开，对生成的偏离轨迹状态重新加噪，并监督模型引导回原始清洁目标。该方法为在线策略、无需奖励，提供密集的每时间步监督，无信用分配问题。在SD3.5-Medium上，SOAR将GenEval从0.70提升至0.78，OCR从0.64提升至0.67，同时提高所有基于模型的偏好分数。在受控奖励特定实验中，SOAR在美学和文本图像对齐任务上均超越Flow-GRPO的最终指标值，尽管未使用奖励模型。
+
+**核心创新概述**
+
+> 提出SOAR方法，通过自校正机制弥合扩散模型后训练中SFT和RL之间的差距，利用单次停止梯度展开和重新加噪提供密集监督，避免暴露偏差和信用分配问题。
+
+**创新点拆解**
+
+- 方法设计：引入自校正机制，从真实样本出发执行单次停止梯度展开，重新加噪偏离状态以监督模型回归目标。
+- 训练范式：在线策略、奖励无关的后训练方法，提供密集的每时间步监督，无需奖励模型。
+- 架构：结合SFT和RL优势，通过偏差校正优化对齐和精炼。
+
+**当前局限**
+
+> 方法依赖于当前模型的质量进行展开，可能在高偏差状态下表现受限；未在更广泛的模型或任务上进行验证，泛化性需进一步评估。
+
+**后续可改进方向**
+
+- 扩展至其他扩散模型架构或任务，如文本生成或多模态应用。
+- 探索自适应展开策略，以处理更复杂的偏离状态。
+- 结合奖励模型进行混合训练，以进一步提升性能。
+
+**工程启发**
+
+> 高，SOAR提供了一种简单有效的后训练方法，可提升扩散模型在生成任务（如OCR）中的性能，无需额外奖励模型，易于集成到现有流程。
+
+**为什么值得关注**
+
+> 论文涉及扩散模型在生成任务中的应用，包括OCR性能提升，对OCR领域的方法优化有直接参考价值。
+
+**原始摘要**
+
+The post-training pipeline for diffusion models currently has two stages: supervised fine-tuning
+(SFT) on curated data and reinforcement learning (RL) with reward models. A fundamental gap
+separates them. SFT optimizes the denoiser only on ground-truth states sampled from the forward
+noising process; once inference deviates from these ideal states, subsequent denoising relies on
+out-of-distribution generalization rather than learned correction, exhibiting the same exposure bias
+that afflicts autoregressive models, but accumulated along the denoising trajectory instead of the
+token sequence. RL can in principle address this mismatch, yet its terminal reward signal is sparse,
+suffers from credit-assignment difficulty, and risks reward hacking. We propose SOAR (Self-
+Correction for Optimal Alignment and Refinement), a bias-correction post-training method that fills
+this gap. Starting from a real sample, SOAR performs a single stop-gradient rollout with the current
+model, re-noises the resulting off-trajectory state, and supervises the model to steer back toward
+the original clean target. The method is on-policy, reward-free, and provides dense per-timestep
+supervision with no credit-assignment problem. On SD3.5-Medium, SOAR improves GenEval from 0.70 to
+0.78 and OCR from 0.64 to 0.67 over SFT, while simultaneously raising all model-based preference
+scores. In controlled reward-specific experiments, SOAR surpasses Flow-GRPO in final metric value on
+both aesthetic and text-image alignment tasks, despite having no access to a reward model. Since
+SOAR's base loss subsumes the standard SFT objective, it can directly replace SFT as a stronger
+first post-training stage after pretraining, while remaining fully compatible with subsequent RL
+alignment.
+
+---
+
+### 8. The Devil is in the Details -- From OCR for Old Church Slavonic to Purely Visual Stemma Reconstruction
 
 - arXiv: [2604.11724v1](https://arxiv.org/abs/2604.11724v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2604.11724v1)
@@ -195,39 +511,39 @@ research datasets.
 - 发布时间: 2026-04-13T16:58:57Z
 - 分类: cs.CV
 - 相关性评分: 8
-- 主题标签: 历史文档OCR、古文字识别、谱系学、LLM应用、代理架构
+- 主题标签: 历史文档OCR、大语言模型、谱系学、图像处理、手写识别
 
 **中文摘要**
 
-> 人工智能时代为许多领域和任务带来新可能性和陷阱。细节决定成败，这在构建新流程和执行小型实践实验时尤为突出。OCR和谱系学也不例外。本研究首先比较了一系列OCR系统（从经典到机器学习再到LLM），针对18世纪晚期手写教会斯拉夫语手稿的大约6000个字符。聚焦基本字母正确性，比较了超过10个CS OCR系统，其中包括2个LLM（GPT5和Gemini3-flash）。然后评估通过LLM的后处理，最后测试不同的代理OCR架构（专用后处理代理、代理流程和RAG）。随着新技术的发展，实验表明教会斯拉夫语基本字母的CER可能低至2-3%，但精细变音符号仍可能存在问题。OCR如何为下游谱系学任务提供支持是文章第二部分的切入点，该部分介绍了一种仅基于图像处理的新谱系方法。这里提出了一个自动化视觉字形提取、聚类和成对统计比较的流程，最终生成距离矩阵和谱系图，并应用于两个小型语料库：一个是14至16世纪的教会斯拉夫语马可福音，另一个是14和15世纪的法语玫瑰传奇。该方法的基本功能得到演示。
+> 人工智能时代为许多领域和任务带来新可能性和陷阱，细节至关重要，这在构建新流程和执行小规模实践实验中尤为突出。OCR和谱系学也不例外。本研究首先比较了多种OCR系统，从经典方法到机器学习再到大语言模型（LLMs），针对约6000个18世纪晚期手写教会斯拉夫语手稿字符。聚焦基本字母正确性，比较了超过10个CS OCR系统，其中包括2个LLMs（GPT5和Gemini3-flash）。然后评估了通过LLMs的后处理，并测试了不同的代理OCR架构（专用后处理代理、代理流程和RAG）。随着新技术的发展，实验表明，教会斯拉夫语基本字母的CER可能低至2-3%，但复杂的变音符号仍可能存在问题。OCR如何作为下游任务谱系学的先导是文章第二部分的切入点，该部分介绍了一种仅基于图像处理的新谱系方法。这里展示并应用于两个小型语料库的流程：自动视觉字形提取、聚类和成对统计比较，生成距离矩阵并最终构建谱系，一个用于14至16世纪的教会斯拉夫语马可福音，另一个用于14和15世纪的法语玫瑰传奇。方法的基本功能得以展示。
 
 **核心创新概述**
 
-> 系统比较传统OCR、机器学习OCR和LLM在古文字（教会斯拉夫语）识别上的性能，并创新提出纯视觉谱系重建方法，不依赖文本转录。
+> 针对历史手写文档（如教会斯拉夫语手稿），系统比较了多种OCR系统（包括LLMs），并引入一种纯视觉的谱系重建方法，基于图像处理自动化流程。
 
 **创新点拆解**
 
-- OCR评估框架：跨多种技术（经典OCR、ML、LLM）系统比较古文字识别性能
-- 代理OCR架构：探索专用后处理代理、代理流程和RAG在OCR中的应用
-- 纯视觉谱系方法：基于图像处理（字形提取、聚类、统计比较）直接重建谱系，绕过文本转录步骤
+- 数据：使用历史手写文档（教会斯拉夫语手稿）作为OCR评估数据集，涵盖复杂字符和变音符号。
+- 方法设计：比较经典OCR、机器学习OCR和LLMs，并测试代理OCR架构（如RAG）进行后处理。
+- 任务定义：将OCR与下游谱系学任务结合，提出纯视觉的谱系重建流程，包括字形提取、聚类和统计比较。
 
 **当前局限**
 
-> 实验规模较小（6000字符），可能未充分统计性能；纯视觉谱系方法仅在小语料库验证，泛化性待考；未深入探讨LLM在复杂古文字OCR中的优化策略。
+> 实验规模较小（约6000字符），可能限制统计显著性；复杂变音符号的OCR性能仍不理想；纯视觉谱系方法在更大或更多样化语料库上的有效性未验证。
 
 **后续可改进方向**
 
-- 扩展古文字OCR数据集规模和多语言覆盖
-- 优化LLM用于历史文档OCR的微调策略
-- 融合文本和视觉信息的混合谱系重建方法
+- 扩展数据集规模，包括更多历史语言和文档类型，以提升OCR评估的鲁棒性。
+- 优化LLMs或专用模型处理复杂变音符号，减少CER。
+- 将纯视觉谱系方法应用于更大语料库，验证其可扩展性和准确性。
 
 **工程启发**
 
-> 为历史文档数字化提供实用OCR方案和谱系分析新工具，在古籍保护、数字人文领域有直接应用价值。
+> 中等，研究提供了历史文档OCR的系统比较和纯视觉谱系方法，对古籍数字化和文档分析有实用价值，但需进一步工程化以处理大规模数据。
 
 **为什么值得关注**
 
-> 核心聚焦OCR技术（特别是古文字和手写体）及其下游应用（谱系学），是OCR领域的直接研究。
+> 论文直接涉及OCR技术，特别是针对历史手写文档的评估和应用，对OCR在文化遗产领域的实践有重要参考。
 
 **原始摘要**
 
@@ -250,121 +566,130 @@ the 14th and 15th centuries. Basic functioning of the method can be demonstrated
 
 ---
 
-### 4. ProUIE: A Macro-to-Micro Progressive Learning Method for LLM-based Universal Information Extraction
+### 9. DocSeeker: Structured Visual Reasoning with Evidence Grounding for Long Document Understanding
 
-- arXiv: [2604.10633v1](https://arxiv.org/abs/2604.10633v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2604.10633v1)
-- 作者: Wenda Liu, Zhigang Song, Shuai Nie, Guangyao Liu, Lisung Chen, Binyu Yang, Yaran Chen, Peng Zhou, Hongzhen Wang, Yuchen Liu, Wenyue Hu, Jiaming Xu, Runyu Shi, Ying Huang
-- 发布时间: 2026-04-12T13:20:58Z
-- 分类: cs.CL
-- 相关性评分: 6
-- 主题标签: 通用信息提取、渐进学习、LLM微调、结构化输出
+- arXiv: [2604.12812v1](https://arxiv.org/abs/2604.12812v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.12812v1)
+- 作者: Hao Yan, Yuliang Liu, Xingchen Liu, Yuyi Zhang, Minghui Liao, Jihao Wu, Wei Chen, Xiang Bai
+- 发布时间: 2026-04-14T14:39:26Z
+- 分类: cs.AI
+- 相关性评分: 7
+- 主题标签: 长文档理解、多模态大语言模型、证据定位、结构化推理、文档分析
 
 **中文摘要**
 
-> 基于LLM的通用信息提取（UIE）方法通常依赖原始训练数据之外的额外信息，这增加了训练复杂性却往往收益有限。为解决此问题，本文提出ProUIE，一种从宏观到微观的渐进学习方法，在不引入任何外部信息的情况下改进UIE。ProUIE包含三个阶段：（i）宏观层面完整建模（CM），在完整训练数据上按照NER、RE和EE的内在难度顺序学习，构建统一提取基础；（ii）中观层面精简对齐（SA），在采样数据上操作，简化目标格式，精简和规范化结构化输出，使其更简洁可控；（iii）微观层面深度探索（DE），应用GRPO和逐步细粒度奖励（SFR）在结构单元上引导探索并提升性能。在36个公共数据集上的实验表明，ProUIE持续改进统一提取，在使用较小骨干网络的情况下，在NER和RE上平均优于强指令调优基线，并在大规模生产导向信息提取中进一步显示明显增益。
+> 现有的多模态大语言模型（MLLMs）在长文档理解任务上随着文档长度增加而性能显著下降。这源于两个根本挑战：1）低信噪比（SNR），关键证据被无关页面淹没；2）监督稀缺，仅提供最终简短答案的数据集提供弱学习信号。本文通过提出一种要求模型执行结构化“分析、定位和推理”工作流程的范式来解决这些挑战。为培养此能力，我们设计了一个两阶段训练框架：首先在通过高效知识蒸馏策略生成的高质量数据上进行监督微调。随后，采用证据感知的组相对策略优化，联合优化证据定位和答案准确性。此外，引入证据引导的分辨率分配策略以缓解多页文档训练的内存约束。大量实验表明，DocSeeker在域内和域外任务上均实现优越性能。我们展示其从短页训练到超长文档的鲁棒泛化，并自然与视觉检索增强生成系统协同，为其实现提供坚实基础。
 
 **核心创新概述**
 
-> 提出无需外部信息的渐进学习框架，通过宏观到微观的三阶段训练优化LLM-based UIE，强调结构化输出的精简和可控性。
+> 提出DocSeeker方法，针对长文档理解任务，通过结构化工作流程（分析、定位、推理）和两阶段训练框架（监督微调加证据感知策略优化），解决低信噪比和监督稀缺问题。
 
 **创新点拆解**
 
-- 渐进学习范式：分CM、SA、DE三阶段，从完整建模到精细探索逐步优化
-- 训练策略：按任务难度顺序学习，结合简化目标格式和细粒度奖励（SFR）
-- 效率设计：使用较小骨干网络实现性能提升，降低计算成本
+- 方法设计：引入结构化工作流程，强制模型执行分析、定位和推理步骤，以提升长文档理解。
+- 训练范式：两阶段框架，结合监督微调和证据感知的组相对策略优化，联合优化证据定位和答案准确性。
+- 架构：集成证据引导的分辨率分配策略，处理多页文档训练的内存挑战。
 
 **当前局限**
 
-> 方法主要针对文本信息提取，未明确涉及多模态（如图像表格）UIE；渐进阶段设计可能增加训练复杂度。
+> 方法依赖于高质量生成数据，可能受知识蒸馏策略的限制；在极端长文档或高度噪声环境下的性能未充分测试。
 
 **后续可改进方向**
 
-- 扩展至多模态UIE任务（如文档图像中的实体关系提取）
-- 探索更高效的渐进学习调度策略
-- 结合OCR输出进行端到端文档信息提取
+- 探索更高效的数据生成方法，减少对知识蒸馏的依赖。
+- 扩展至更多模态或文档类型，如扫描文档或混合媒体。
+- 优化内存管理策略，以支持更大规模的文档处理。
 
 **工程启发**
 
-> 为通用信息提取提供高效训练框架，提升生产环境中的提取准确率和可控性，适用于文档处理、知识图谱构建等场景。
+> 高，DocSeeker提供了一种可扩展的长文档理解解决方案，适用于视觉检索增强生成系统，对文档分析和信息提取任务有直接应用价值。
 
 **为什么值得关注**
 
-> 信息提取是OCR下游核心任务，方法可迁移至文档图像理解，增强结构化信息抽取能力。
+> 论文涉及文档理解任务，与OCR相关，特别是在长文档处理和多模态分析方面，对OCR系统的下游应用有参考意义。
 
 **原始摘要**
 
-LLM-based universal information extraction (UIE) methods often rely on additional information beyond
-the original training data, which increases training complexity yet often yields limited gains. To
-address this, we propose ProUIE, a Macro-to-Micro progressive learning approach that improves UIE
-without introducing any external information. ProUIE consists of three stages: (i) macro-level
-Complete Modeling (CM), which learns NER, RE, and EE along their intrinsic difficulty order on the
-full training data to build a unified extraction foundation, (ii) meso-level Streamlined Alignment
-(SA), which operates on sampled data with simplified target formats, streamlining and regularizing
-structured outputs to make them more concise and controllable, and (iii) micro-level Deep
-Exploration (DE), which applies GRPO with stepwise fine-grained rewards (SFR) over structural units
-to guide exploration and improve performance. Experiments on 36 public datasets show that ProUIE
-consistently improves unified extraction, outperforming strong instruction-tuned baselines on
-average for NER and RE while using a smaller backbone, and it further demonstrates clear gains in
-large-scale production-oriented information extraction.
+Existing Multimodal Large Language Models (MLLMs) suffer from significant performance degradation on
+the long document understanding task as document length increases. This stems from two fundamental
+challenges: 1) a low Signal-to-Noise Ratio (SNR), with crucial evidence buried in irrelevant pages;
+and 2) supervision scarcity, as datasets offering only final short answers provide a weak learning
+signal. In this paper, we address these challenges by proposing a paradigm that requires the model
+to execute a structured ``\textbf{Analysis}, \textbf{Localization} and \textbf{Reasoning}''
+workflow. To instill this capability, we design a two-stage training framework: we first perform
+Supervised Fine-Tuning on high-quality data generated via an efficient knowledge distillation
+strategy. Subsequently, we employ an Evidence-aware Group Relative Policy Optimization which jointly
+optimizes for both evidence localization and answer accuracy. Additionally, we introduce a Evidence-
+Guided Resolution Allocation strategy to mitigate memory constraints of training on multi-pages
+documents. Extensive experiments demonstrate that DocSeeker achieves superior performance on both
+in-domain and out-of-domain tasks. We show it robustly generalizes from short-page training to
+ultra-long documents and is naturally synergistic with visual Retrieval-Augmented Generation
+systems, serving as a solid foundation for their implementation.
 
 ---
 
-### 5. Brain-Grasp: Graph-based Saliency Priors for Improved fMRI-based Visual Brain Decoding
+### 10. Physics-Grounded Monocular Vehicle Distance Estimation Using Standardized License Plate Typography
 
-- arXiv: [2604.10617v1](https://arxiv.org/abs/2604.10617v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2604.10617v1)
-- 作者: Mohammad Moradi, Morteza Moradi, Marco Grassia, Giuseppe Mangioni
-- 发布时间: 2026-04-12T12:50:49Z
-- 分类: eess.IV, cs.CV, cs.MM
-- 相关性评分: 6
-- 主题标签: 脑解码、显著性先验、扩散模型、图像重建
+- arXiv: [2604.12239v1](https://arxiv.org/abs/2604.12239v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.12239v1)
+- 作者: Manognya Lokesh Reddy, Zheng Liu
+- 发布时间: 2026-04-14T03:27:44Z
+- 分类: cs.CV, eess.IV
+- 相关性评分: 5
+- 主题标签: 车辆距离估计、OCR、单目视觉、物理接地、自动驾驶
 
 **中文摘要**
 
-> 脑引导图像生成的最新进展改善了fMRI基于重建的质量；然而，在保留对象级结构和语义保真度方面仍存在基本挑战。许多现有方法忽视了显著对象的空间排列，导致概念不一致的输出。本文提出一种显著性驱动的解码框架，采用图信息显著性先验将脑信号中的结构线索转换为空间掩码。这些掩码与从嵌入中提取的语义信息一起，条件化扩散模型以引导图像再生，帮助保持对象一致性同时维持自然场景组合。与调用多个扩散阶段的流程相比，我们的方法依赖单个冻结模型，提供更轻量级但有效的设计。实验表明，该策略提高了与原始刺激的概念对齐和结构相似性，同时为高效、可解释和结构基础的脑解码引入了新方向。
+> 准确的车辆间距离估计是高级驾驶辅助系统（ADAS）和自动驾驶的基石。虽然LiDAR和雷达提供高精度，但其高成本阻碍了在量产车辆中的广泛采用。基于单目摄像头的估计提供了低成本替代方案，但受限于根本的尺度模糊性。最近用于单目深度的深度学习方法取得显著成果，但需要昂贵的监督训练，受域偏移影响，且产生的预测难以在安全关键部署中认证。本文提出一个框架，利用美国车牌标准化字体作为被动基准标记进行度量测距，通过显式几何先验解决尺度模糊性，无需任何训练数据或主动照明。首先，四方法并行车牌检测器在全汽车照明范围内实现鲁棒车牌读取。其次，三阶段状态识别引擎融合OCR文本匹配、多设计颜色评分和轻量神经网络分类器，在所有环境条件下提供鲁棒识别。第三，混合深度融合与逆方差加权和在线尺度对齐，结合一维恒定速度卡尔曼滤波器，提供平滑距离、相对速度和碰撞时间用于碰撞警告。基线验证再现了字符高度测量中2.3%的变异系数，并与车牌宽度方法相比减少了36%的距离估计方差。
 
 **核心创新概述**
 
-> 首次将图信息显著性先验引入fMRI脑解码，通过空间掩码条件化扩散模型，提升重建图像的对象结构和语义一致性。
+> 提出一种基于标准化车牌字体的物理接地单目车辆距离估计框架，利用OCR和几何先验解决尺度模糊性，无需训练数据，实现低成本、高精度的测距。
 
 **创新点拆解**
 
-- 解码框架设计：融合图信息显著性先验和语义嵌入，条件化单扩散模型
-- 结构保留机制：通过空间掩码明确编码对象布局，增强重建的结构保真度
-- 效率优化：使用冻结单模型，避免多阶段扩散的复杂性和计算开销
+- 方法设计：结合OCR文本匹配、颜色评分和神经网络分类器进行车牌状态识别，用于距离估计。
+- 数据：利用标准化车牌字体作为被动基准标记，无需额外训练数据，减少域偏移问题。
+- 架构：集成混合深度融合、逆方差加权和卡尔曼滤波器，提供平滑和鲁棒的输出。
 
 **当前局限**
 
-> 方法主要针对视觉刺激重建，未涵盖其他模态（如语言）脑解码；显著性先验的泛化性在不同脑数据集上待验证。
+> 方法依赖于特定地区（如美国）的车牌标准化，可能在其他地区或非标准车牌上表现受限；环境条件（如极端光照或遮挡）可能影响检测和识别精度。
 
 **后续可改进方向**
 
-- 扩展至多模态脑解码任务
-- 探索自适应显著性先验学习机制
-- 结合OCR技术处理文本刺激的脑解码
+- 扩展至全球不同车牌标准和设计，提升泛化能力。
+- 优化检测和识别算法以处理更复杂的环境条件，如雨雪或夜间低光。
+- 集成其他传感器数据（如雷达）进行融合，以进一步提高精度和鲁棒性。
 
 **工程启发**
 
-> 为脑机接口和神经科学工具提供更准确、高效的图像重建方法，推动医疗诊断和认知研究应用。
+> 高，框架提供了一种低成本、无需训练的单目距离估计解决方案，适用于ADAS和自动驾驶系统，易于部署和认证。
 
 **为什么值得关注**
 
-> 虽然非直接OCR研究，但其图像重建和结构保留技术与文档图像恢复、增强任务有方法论关联。
+> 论文直接应用OCR技术于车牌识别，作为车辆距离估计的关键组件，对OCR在智能交通和自动驾驶领域的工程应用有重要价值。
 
 **原始摘要**
 
-Recent progress in brain-guided image generation has improved the quality of fMRI-based
-reconstructions; however, fundamental challenges remain in preserving object-level structure and
-semantic fidelity. Many existing approaches overlook the spatial arrangement of salient objects,
-leading to conceptually inconsistent outputs. We propose a saliency-driven decoding framework that
-employs graph-informed saliency priors to translate structural cues from brain signals into spatial
-masks. These masks, together with semantic information extracted from embeddings, condition a
-diffusion model to guide image regeneration, helping preserve object conformity while maintaining
-natural scene composition. In contrast to pipelines that invoke multiple diffusion stages, our
-approach relies on a single frozen model, offering a more lightweight yet effective design.
-Experiments show that this strategy improves both conceptual alignment and structural similarity to
-the original stimuli, while also introducing a new direction for efficient, interpretable, and
-structurally grounded brain decoding.
+Accurate inter-vehicle distance estimation is a cornerstone of Advanced Driver Assistance Systems
+(ADAS) and autonomous driving. While LiDAR and radar provide high precision, their high cost
+prohibits widespread adoption in mass-market vehicles. Monocular camera-based estimation offers a
+low-cost alternative but suffers from fundamental scale ambiguity. Recent deep learning methods for
+monocular depth achieve impressive results yet require expensive supervised training, suffer from
+domain shift, and produce predictions that are difficult to certify for safety-critical deployment.
+This paper presents a framework that exploits the standardized typography of United States license
+plates as passive fiducial markers for metric ranging, resolving scale ambiguity through explicit
+geometric priors without any training data or active illumination. First, a four-method parallel
+plate detector achieves robust plate reading across the full automotive lighting range. Second, a
+three-stage state identification engine fusing OCR text matching, multi-design color scoring, and a
+lightweight neural network classifier provides robust identification across all ambient conditions.
+Third, hybrid depth fusion with inverse-variance weighting and online scale alignment, combined with
+a one-dimensional constant-velocity Kalman filter, delivers smoothed distance, relative velocity,
+and time-to-collision for collision warning. Baseline validation reproduces a 2.3% coefficient of
+variation in character height measurements and a 36% reduction in distance-estimate variance
+compared with plate-width methods from prior work. Extensive outdoor experiments confirm a mean
+absolute error of 2.3% at 10 m and continuous distance output during brief plate occlusions,
+outperforming deep learning baselines by a factor of five in relative error.
 
 ---
