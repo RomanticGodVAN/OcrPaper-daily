@@ -1,123 +1,58 @@
-# OCR / 文档解析研究日报（2026-04-16）
+# OCR / 文档解析研究日报（2026-04-17）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-04-16 04:25:57`
+- 生成时间（UTC）：`2026-04-17 04:22:21`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日论文聚焦于OCR与文档解析领域的关键挑战与创新解决方案。MultiDocFusion和DocSeeker通过结构感知方法提升长文档处理能力，分别针对RAG-based QA和多模态大语言模型进行优化。Doc-V*提出OCR-free代理框架，减少对传统OCR的依赖，增强多页面文档视觉问答的域外性能。GlotOCR Bench揭示OCR模型在脚本泛化上的局限性，推动多语言技术发展。SOAR为扩散模型后训练引入自校正机制，提升OCR等任务性能。Evaluating the Evaluator则批判性评估基准问题，强调数据质量的重要性。整体趋势显示，研究正从单纯文本提取转向多模态、结构化、高效推理，并关注数据质量和泛化能力。
+> 今日论文聚焦于OCR和文档解析的创新方法，涵盖无OCR代理框架、专门小型语言模型、低资源语言代理RAG以及信息提取作为认知缓存。核心趋势包括代理化推理、结构化输出优化和跨语言扩展。Doc-V*通过顺序证据聚合提升多页文档VQA性能，DharmaOCR利用DPO减少文本退化并增强结构化输出，乌克兰语代理RAG探索低资源语言应用，IE-as-Cache框架将信息提取重新用于增强推理。这些研究在准确性、效率和泛化方面取得进展，为工程部署提供新方向。
 
 ## 二、今日趋势判断
 
-当前研究趋势强调多模态集成与结构化处理，以解决长文档理解中的信噪比和效率问题。OCR-free方法和代理框架兴起，减少对传统OCR的依赖，提升灵活性和域外性能。基准评估和数据质量成为关注焦点，推动更鲁棒的预处理和标准化测试。模型优化方面，自校正和证据感知训练等新技术被引入，以增强生成和推理能力。整体方向从基础识别转向智能解析和高效应用。
+研究趋势显示代理化方法（如Doc-V*和代理RAG）成为文档理解的核心，强调主动导航和推理优化；结构化OCR模型（如DharmaOCR）通过专门设计和DPO应用提升稳定性和质量；低资源语言（如乌克兰语）和跨域适应性受到关注；信息提取被重新定位为可重用资源以支持复杂推理。整体上，工作侧重于平衡性能与计算成本，减少对传统OCR的依赖，并增强多步推理能力。
 
 ## 三、今日论文概览
 
-1. **MultiDocFusion: Hierarchical and Multimodal Chunking Pipeline for Enhanced RAG on Long Industrial Documents** | 标签：文档分块、多模态文档解析、RAG、工业文档处理、层次结构重建
-2. **Doc-V*:Coarse-to-Fine Interactive Visual Reasoning for Multi-Page Document VQA** | 标签：OCR-free文档理解、多页面DocVQA、代理框架、证据聚合、主动导航
-3. **Evaluating the Evaluator: Problems with SemEval-2020 Task 1 for Lexical Semantic Change Detection** | 标签：基准评估、词汇语义变化检测、OCR噪声、数据质量、预处理问题
-4. **GlotOCR Bench: OCR Models Still Struggle Beyond a Handful of Unicode Scripts** | 标签：OCR基准、脚本泛化、多语言OCR、视觉语言模型、Unicode脚本
-5. **SOAR: Self-Correction for Optimal Alignment and Refinement in Diffusion Models** | 标签：扩散模型、后训练优化、自校正、OCR性能提升、偏差校正
-6. **DocSeeker: Structured Visual Reasoning with Evidence Grounding for Long Document Understanding** | 标签：长文档理解、多模态大语言模型、证据定位、结构化推理、训练优化
+1. **Doc-V*:Coarse-to-Fine Interactive Visual Reasoning for Multi-Page Document VQA** | 标签：多页文档视觉问答、无OCR方法、代理框架、证据聚合、主动导航
+2. **DharmaOCR: Specialized Small Language Models for Structured OCR that outperform Open-Source and Commercial Baselines** | 标签：结构化OCR、专门小型语言模型、直接偏好优化、文本退化、监督微调
+3. **Toward Agentic RAG for Ukrainian** | 标签：代理检索增强生成、乌克兰语文档理解、两阶段检索、轻量级代理层、低资源语言
+4. **IE as Cache: Information Extraction Enhanced Agentic Reasoning** | 标签：信息提取、认知缓存、代理推理、查询驱动提取、缓存感知推理
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 集成视觉解析与文本提取以重建文档层次结构，如MultiDocFusion中的多模态分块流水线。
-- 采用代理框架和主动导航机制处理多页面文档，如Doc-V*的顺序证据聚合。
-- 结合监督微调与强化学习优化，如DocSeeker中的证据感知Group Relative Policy Optimization。
-- 设计大规模基准评估模型泛化能力，如GlotOCR Bench覆盖100+ Unicode脚本。
-- 引入自校正机制优化模型后训练，如SOAR的偏差校正方法提升OCR性能。
+- 代理框架设计用于文档理解，结合主动导航和推理优化以提升效率。
+- 直接偏好优化应用于OCR任务，通过惩罚退化生成来减少文本循环问题。
+- 结构化输出强制执行，如JSON模式，以提高文档解析的准确性和一致性。
+- 查询驱动提取与缓存机制结合，动态维护信息以支持多步推理。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 开发轻量级文档层次解析方法，减少对LLM的依赖以降低计算成本。
-- 扩展OCR-free框架到更多文档类型，如手写或扫描文档，以增强通用性。
-- 构建包含真实世界噪声的多语言OCR基准，以更全面评估模型鲁棒性。
-- 优化扩散模型自校正技术，应用于OCR后处理以提高文本识别准确性。
-- 探索少样本学习在跨脚本OCR中的应用，以解决数据稀缺问题。
+- 开发更高效的页面检索算法，以优化多页文档导航和减少计算开销。
+- 扩展基准测试到更多文档类型和语言，增强模型对多样化输入的泛化能力。
+- 研究无监督或弱监督训练方法，减少对专家轨迹数据的依赖以提高适应性。
+- 优化缓存策略在IE-as-Cache框架中，以提升复杂推理任务的效率和准确性。
+- 增强检索模块处理多语言和跨域文档，改进低资源语言代理RAG系统的性能。
 
 ## 六、工程落地启发
 
-- 集成层次化分块流水线可提升工业文档QA系统的检索精度和答案质量。
-- 采用OCR-free代理框架能减少对OCR的依赖，适用于多页面文档的快速处理场景。
-- 实施证据感知训练策略可增强多模态大语言模型在长文档理解中的性能。
-- 使用标准化多脚本基准有助于评估和优化OCR模型的泛化能力。
-- 应用自校正后训练方法可改善扩散模型在OCR任务中的生成质量。
+- Doc-V*的无OCR代理框架可应用于多页文档VQA任务，提升跨域性能和推理效率。
+- DharmaOCR的专门小型模型结合DPO，适用于生产环境以减少退化并提高结构化OCR质量。
+- IE-as-Cache框架可集成到代理系统中，通过缓存提取信息来增强文档理解推理。
+- 乌克兰语代理RAG系统为低资源语言文档理解提供初步方案，但需优化检索以提升实用性。
 
 ## 七、优先关注论文
 
-- **MultiDocFusion: Hierarchical and Multimodal Chunking Pipeline for Enhanced RAG on Long Industrial Documents**：其层次化多模态分块方法可直接集成到现有RAG系统，显著提升工业文档处理效果。
-- **Doc-V*:Coarse-to-Fine Interactive Visual Reasoning for Multi-Page Document VQA**：OCR-free代理框架为多页面文档QA提供了高效解决方案，具有高域外性能潜力。
-- **GlotOCR Bench: OCR Models Still Struggle Beyond a Handful of Unicode Scripts**：大规模多脚本基准揭示了当前OCR模型的泛化局限，指导多语言技术开发。
-- **DocSeeker: Structured Visual Reasoning with Evidence Grounding for Long Document Understanding**：结构化推理工作流和训练优化策略可扩展MLLMs的长文档处理能力，适用于复杂应用场景。
+- **Doc-V*:Coarse-to-Fine Interactive Visual Reasoning for Multi-Page Document VQA**：无OCR代理框架在跨域性能上提升显著，适用于多页文档理解，可能推动视觉推理技术发展。
+- **DharmaOCR: Specialized Small Language Models for Structured OCR that outperform Open-Source and Commercial Baselines**：首次应用DPO减少文本退化，模型在提取质量和稳定性上表现优异，对生产部署有高价值。
+- **IE as Cache: Information Extraction Enhanced Agentic Reasoning**：将信息提取重新用作认知缓存，能增强代理推理准确性，为下游应用提供新思路。
 
 ## 八、论文逐篇解析
 
-### 1. MultiDocFusion: Hierarchical and Multimodal Chunking Pipeline for Enhanced RAG on Long Industrial Documents
-
-- arXiv: [2604.12352v1](https://arxiv.org/abs/2604.12352v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2604.12352v1)
-- 作者: Joongmin Shin, Chanjun Park, Jeongbae Park, Jaehyung Seo, Heuiseok Lim
-- 发布时间: 2026-04-14T06:40:22Z
-- 分类: cs.AI, cs.CL
-- 相关性评分: 23
-- 主题标签: 文档分块、多模态文档解析、RAG、工业文档处理、层次结构重建
-
-**中文摘要**
-
-> RAG-based QA在处理长工业文档时面临传统文本分块方法忽略文档复杂结构的问题，导致信息丢失和答案质量下降。为此，我们提出MultiDocFusion，一种多模态分块流水线，集成了：基于视觉的文档区域检测、OCR文本提取、基于LLM的文档层次解析重建文档结构为层次树、以及基于DFS的分组构建层次分块。在工业基准测试中，MultiDocFusion相比基线方法将检索精度提高了8-15%，ANLS QA得分提高了2-3%，强调了显式利用文档层次结构对多模态文档QA的关键作用。
-
-**核心创新概述**
-
-> 提出了一种结合视觉文档解析、OCR和LLM的层次化多模态分块流水线，首次将文档结构重建为层次树用于RAG-based QA，显著提升了长工业文档的处理效果。
-
-**创新点拆解**
-
-- 视觉文档区域检测与OCR文本提取的集成
-- 基于LLM的文档层次解析（DSHP-LLM）重建文档结构
-- DFS-based分组构建层次分块
-- 多模态分块流水线设计
-
-**当前局限**
-
-> 方法依赖LLM进行文档层次解析，可能受限于LLM的准确性和计算成本；实验主要针对工业文档，通用性需进一步验证。
-
-**后续可改进方向**
-
-- 优化LLM解析效率以降低计算开销
-- 扩展方法到更广泛的文档类型（如学术论文、法律文书）
-- 探索轻量级替代方案减少对LLM的依赖
-
-**工程启发**
-
-> 高，为工业文档QA系统提供了结构感知的分块方案，可直接集成到现有RAG系统中提升检索和答案质量。
-
-**为什么值得关注**
-
-> 直接涉及OCR在文档解析中的应用，通过多模态分块优化文档处理流程，对OCR在复杂文档结构中的集成有重要参考价值。
-
-**原始摘要**
-
-RAG-based QA has emerged as a powerful method for processing long industrial documents. However,
-conventional text chunking approaches often neglect complex and long industrial document structures,
-causing information loss and reduced answer quality. To address this, we introduce MultiDocFusion, a
-multimodal chunking pipeline that integrates: (i) detection of document regions using vision-based
-document parsing, (ii) text extraction from these regions via OCR, (iii) reconstruction of document
-structure into a hierarchical tree using large language model (LLM)-based document section
-hierarchical parsing (DSHP-LLM), and (iv) construction of hierarchical chunks through DFS-based
-grouping. Extensive experiments across industrial benchmarks demonstrate that MultiDocFusion
-improves retrieval precision by 8-15% and ANLS QA scores by 2-3% compared to baselines, emphasizing
-the critical role of explicitly leveraging document hierarchy for multimodal document-based QA.
-These significant performance gains underscore the necessity of structure-aware chunking in
-enhancing the fidelity of RAG-based QA systems.
-
----
-
-### 2. Doc-V*:Coarse-to-Fine Interactive Visual Reasoning for Multi-Page Document VQA
+### 1. Doc-V*:Coarse-to-Fine Interactive Visual Reasoning for Multi-Page Document VQA
 
 - arXiv: [2604.13731v1](https://arxiv.org/abs/2604.13731v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2604.13731v1)
@@ -125,41 +60,40 @@ enhancing the fidelity of RAG-based QA systems.
 - 发布时间: 2026-04-15T11:12:27Z
 - 分类: cs.CL
 - 相关性评分: 17
-- 主题标签: OCR-free文档理解、多页面DocVQA、代理框架、证据聚合、主动导航
+- 主题标签: 多页文档视觉问答、无OCR方法、代理框架、证据聚合、主动导航
 
 **中文摘要**
 
-> 多页面文档视觉问答需要推理长而视觉密集文档中的语义、布局和视觉元素。现有OCR-free方法在容量和精度之间存在权衡：端到端模型随文档长度扩展性差，而基于视觉检索的流水线脆弱且被动。我们提出Doc-V*，一个OCR-free代理框架，将多页面DocVQA视为顺序证据聚合。Doc-V*从缩略图概览开始，通过语义检索和定向页面获取主动导航，并在结构化工作内存中聚合证据以进行基础推理。通过模仿学习专家轨迹训练，并用Group Relative Policy Optimization进一步优化，Doc-V*平衡了答案准确性和证据搜索效率。在五个基准测试中，Doc-V*优于开源基线并接近专有模型，相比RAG基线将域外性能提高了高达47.9%。其他结果显示，通过选择性注意力而非增加输入页面实现有效证据聚合。
+> 多页文档视觉问答需要在长且视觉密集的文档中对语义、布局和视觉元素进行推理。现有无OCR方法面临容量与精度的权衡：端到端模型随文档长度扩展性差，而基于视觉检索的流程脆弱且被动。本文提出Doc-V*，一种无OCR的代理框架，将多页DocVQA视为顺序证据聚合。Doc-V*从缩略图概览开始，通过语义检索和定向页面获取主动导航，并在结构化工作内存中聚合证据以进行基于事实的推理。通过模仿专家轨迹训练，并进一步使用组相对策略优化，Doc-V*平衡答案准确性与证据搜索效率。在五个基准测试中，Doc-V*优于开源基线，接近专有模型，在RAG基线上将跨域性能提升高达47.9%。其他结果显示，通过选择性注意力实现有效证据聚合，而非增加输入页面。
 
 **核心创新概述**
 
-> 提出了首个OCR-free代理框架Doc-V*，通过顺序证据聚合和主动导航机制解决多页面DocVQA问题，避免了传统OCR的依赖，显著提升了域外性能。
+> 提出首个无OCR的代理框架，将多页文档视觉问答建模为顺序证据聚合，结合主动导航和结构化工作内存，以平衡准确性与效率。
 
 **创新点拆解**
 
-- OCR-free代理框架设计
-- 顺序证据聚合机制
-- 主动导航与语义检索集成
-- 结构化工作内存用于推理
-- 模仿学习与Group Relative Policy Optimization训练范式
+- 无OCR代理框架设计，避免传统OCR依赖
+- 顺序证据聚合方法，通过缩略图概览、语义检索和定向页面获取
+- 结构化工作内存用于基于事实的推理
+- 模仿学习与组相对策略优化的训练范式
 
 **当前局限**
 
-> 框架依赖专家轨迹进行模仿学习，数据获取成本较高；主动导航机制可能增加计算复杂度。
+> 框架可能对长文档的导航效率仍有优化空间，且依赖于专家轨迹数据，泛化能力需进一步验证。
 
 **后续可改进方向**
 
-- 开发无监督或半监督训练方法减少对专家数据的依赖
-- 优化导航算法以降低计算开销
-- 扩展框架到更广泛的视觉文档类型
+- 探索更高效的页面检索算法以减少计算开销
+- 增强框架对多样化文档类型的适应性
+- 研究无监督或弱监督训练方法以减少对专家数据的依赖
 
 **工程启发**
 
-> 高，为多页面文档QA提供了高效的OCR-free解决方案，可应用于需要快速处理长文档的场景，如法律或医疗文档分析。
+> 高，提供了一种可扩展的无OCR解决方案，适用于多页文档理解任务，能提升跨域性能和推理效率。
 
 **为什么值得关注**
 
-> 虽然避免使用OCR，但涉及文档视觉解析和推理，对OCR-free文档理解方法有重要启示，可推动替代性文档处理技术的发展。
+> 直接针对文档解析中的视觉问答挑战，提出创新方法，对OCR和文档理解领域有重要参考价值。
 
 **原始摘要**
 
@@ -178,259 +112,183 @@ evidence aggregation with selective attention, not increased input pages.
 
 ---
 
-### 3. Evaluating the Evaluator: Problems with SemEval-2020 Task 1 for Lexical Semantic Change Detection
+### 2. DharmaOCR: Specialized Small Language Models for Structured OCR that outperform Open-Source and Commercial Baselines
 
-- arXiv: [2604.13232v1](https://arxiv.org/abs/2604.13232v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2604.13232v1)
-- 作者: Bach Phan-Tat, Kris Heylen, Dirk Geeraerts, Stefano De Pascale, Dirk Speelmana
-- 发布时间: 2026-04-14T19:01:25Z
-- 分类: cs.CL
-- 相关性评分: 16
-- 主题标签: 基准评估、词汇语义变化检测、OCR噪声、数据质量、预处理问题
-
-**中文摘要**
-
-> 本文通过操作化、数据质量和基准设计三部分评估框架重新审视了SemEval-2020 Task 1，这是词汇语义变化检测中最有影响力的共享基准。首先，在操作化层面，我们认为该基准主要将语义变化建模为离散意义的增益、损失或重新分配。虽然便于标注和评估，但这种框架过于狭窄，无法捕捉渐进的、构式的、搭配的和话语层面的变化。此外，黄金标签是标注决策、聚类程序和阈值设置的结果，可能限制任务的有效性。其次，在数据质量层面，我们显示该基准受到大量语料库和预处理问题的影响，包括OCR噪声、畸形字符、截断句子、不一致的词形还原、POS标注错误和遗漏目标。这些问题可能扭曲模型行为、复杂化语言分析并降低可重复性。第三，在基准设计层面，我们认为小规模策划目标集和有限语言覆盖降低了现实性并增加了统计不确定性。综合来看，这些限制表明该基准应被视为有用但部分的测试平台，而非进展的确定性度量。因此，我们呼吁未来数据集和共享任务采用更广泛的语义变化理论、透明记录预处理、扩展跨语言覆盖并使用更现实的评估设置。
-
-**核心创新概述**
-
-> 首次系统评估了SemEval-2020 Task 1基准在操作化、数据质量和设计方面的局限性，特别是揭示了OCR噪声等预处理问题对词汇语义变化检测的负面影响。
-
-**创新点拆解**
-
-- 三部分评估框架（操作化、数据质量、基准设计）
-- 详细分析OCR噪声等数据质量问题
-- 批判性反思基准设计的现实性和有效性
-
-**当前局限**
-
-> 分析主要基于现有基准，未提出具体改进方法；讨论偏重理论层面，工程应用指导有限。
-
-**后续可改进方向**
-
-- 开发更鲁棒的OCR预处理流程以减少噪声影响
-- 设计更全面的语义变化标注方案
-- 构建更大规模、多语言的基准数据集
-
-**工程启发**
-
-> 中等，为OCR在语言学任务中的应用提供了质量警示，指导后续研究关注数据清洗和基准优化。
-
-**为什么值得关注**
-
-> 直接指出OCR噪声作为数据质量问题之一，对OCR在文本预处理中的角色有重要影响，强调了高质量OCR对下游NLP任务的重要性。
-
-**原始摘要**
-
-This discussion paper re-examines SemEval-2020 Task 1, the most influential shared benchmark for
-lexical semantic change detection, through a three-part evaluative framework: operationalisation,
-data quality, and benchmark design. First, at the level of operationalisation, we argue that the
-benchmark models semantic change mainly as gain, loss, or redistribution of discrete senses. While
-practical for annotation and evaluation, this framing is too narrow to capture gradual,
-constructional, collocational, and discourse-level change. Also, the gold labels are outcomes of
-annotation decisions, clustering procedures, and threshold settings, which could potentially limit
-the validity of the task. Second, at the level of data quality, we show that the benchmark is
-affected by substantial corpus and preprocessing problems, including OCR noise, malformed
-characters, truncated sentences, inconsistent lemmatisation, POS-tagging errors, and missed targets.
-These issues can distort model behaviour, complicate linguistic analysis, and reduce
-reproducibility. Third, at the level of bench-mark design, we argue the small curated target sets
-and limited language coverage reduce realism and increase statistical uncertainty. Taken together,
-these limitations suggest that the benchmark should be treated as a useful but partial test bed
-rather than a definitive measure of progress. We therefore call for future datasets and shared tasks
-to adopt broader theories of semantic change, document pre-processing transparently, expand cross-
-linguistic coverage, and use more realistic evaluation settings. Such steps are necessary for more
-valid, interpretable, and generalisable progress in lexical semantic change detection
-
----
-
-### 4. GlotOCR Bench: OCR Models Still Struggle Beyond a Handful of Unicode Scripts
-
-- arXiv: [2604.12978v1](https://arxiv.org/abs/2604.12978v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2604.12978v1)
-- 作者: Amir Hossein Kargaran, Nafiseh Nikeghbal, Jana Diesner, François Yvon, Hinrich Schütze
-- 发布时间: 2026-04-14T17:12:41Z
-- 分类: cs.CL, cs.CV
-- 相关性评分: 16
-- 主题标签: OCR基准、脚本泛化、多语言OCR、视觉语言模型、Unicode脚本
+- arXiv: [2604.14314v1](https://arxiv.org/abs/2604.14314v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.14314v1)
+- 作者: Gabriel Pimenta de Freitas Cardoso, Caio Lucas da Silva Chacon, Jonas Felipe da Fonseca Oliveira, Paulo Henrique de Medeiros Araujo
+- 发布时间: 2026-04-15T18:17:11Z
+- 分类: cs.CV, cs.AI, cs.CL
+- 相关性评分: 15
+- 主题标签: 结构化OCR、专门小型语言模型、直接偏好优化、文本退化、监督微调
 
 **中文摘要**
 
-> 光学字符识别（OCR）随着视觉语言模型的兴起而迅速发展，但评估仍集中在少数高资源和中资源脚本上。我们介绍了GlotOCR Bench，一个全面评估OCR在100+ Unicode脚本上泛化能力的基准。我们的基准包括从真实多语言文本渲染的干净和退化图像变体。图像使用Google Fonts存储库中的字体渲染，用HarfBuzz整形并用FreeType栅格化，支持LTR和RTL脚本。渲染图像样本经过手动审查以验证所有脚本的正确渲染。我们评估了广泛的开源和专有视觉语言模型，发现大多数在少于十个脚本上表现良好，即使最强的前沿模型也无法泛化到超过三十个脚本。性能大致跟踪脚本级预训练覆盖，表明当前OCR系统依赖语言模型预训练与视觉识别一样多。面对不熟悉脚本的模型要么产生随机噪声，要么幻觉出类似已知脚本的字符。我们发布了基准和流水线以促进可重复性。
+> 本文介绍了DharmaOCR Full和Lite，一对专用于结构化OCR的专门小型语言模型，联合优化转录质量、生成稳定性和推理成本。同时提出DharmaOCR-Benchmark，覆盖印刷、手写和法律/行政文档，并提出了统一评估协议，测量保真度和结构，同时将文本退化作为首要基准指标（与单位成本一起）。除了报告退化率，本文实证显示退化不仅是质量失败，因为它通过增加响应时间、降低吞吐量和因异常生成长度而增加计算成本，实质性地恶化生产性能。据作者所知，作为方法贡献，这是首次将直接偏好优化应用于OCR，明确使用退化生成作为拒绝示例来惩罚循环行为。结合监督微调以强制执行严格的JSON模式（页眉、页边、页脚和文本），DPO在不同模型系列中一致减少退化率（相对高达87.6%），同时保持或提高提取质量。所得模型，即DharmaOCR Full（7B）和Lite（3B），在DharmaOCR-Benchmark上设定了新的最先进水平，在提取质量方面优于每个评估的开源和商业基线模型，得分分别为0.925和0.911，退化率为0.40%和0.20%。
 
 **核心创新概述**
 
-> 提出了首个大规模多脚本OCR基准GlotOCR Bench，覆盖100+ Unicode脚本，系统评估了现有模型在脚本泛化上的局限性，揭示了模型对预训练数据的强依赖。
+> 首次将直接偏好优化应用于OCR任务，通过使用退化生成作为拒绝示例来减少文本退化，同时结合监督微调强制执行结构化输出。
 
 **创新点拆解**
 
-- 大规模多脚本OCR基准设计
-- 支持LTR和RTL脚本的渲染流水线
-- 手动验证确保数据质量
-- 系统评估模型脚本泛化能力
+- 专门小型语言模型设计，优化转录质量、稳定性和成本
+- 直接偏好优化在OCR中的应用，惩罚循环行为
+- 监督微调强制执行JSON模式以增强结构化输出
+- 统一评估协议，包括文本退化作为核心指标
 
 **当前局限**
 
-> 基准主要基于渲染图像，可能未完全反映真实世界OCR场景的复杂性；模型评估限于当前技术，未来进展可能改变结论。
+> 模型可能对特定文档类型（如高度非结构化或低质量图像）的泛化能力有限，且评估基准范围需扩展。
 
 **后续可改进方向**
 
-- 扩展基准到更多真实世界图像以增强实用性
-- 开发更高效的跨脚本预训练方法
-- 探索少样本或零样本OCR技术
+- 扩展基准测试以涵盖更多文档类型和语言
+- 研究模型对噪声和模糊输入的鲁棒性
+- 探索更高效的模型压缩技术以进一步降低推理成本
 
 **工程启发**
 
-> 高，为OCR模型评估提供了标准化工具，帮助识别和解决脚本泛化问题，推动多语言OCR技术的发展。
+> 高，提供高效且稳定的结构化OCR解决方案，适用于生产环境，能显著减少退化问题并提高提取质量。
 
 **为什么值得关注**
 
-> 直接关注OCR的核心能力——字符识别在不同脚本上的表现，对提升OCR的泛化性和实用性有重要指导意义。
+> 针对OCR中的文本退化和结构化输出挑战，提出创新训练方法，对文档解析和语言模型应用有直接贡献。
 
 **原始摘要**
 
-Optical character recognition (OCR) has advanced rapidly with the rise of vision-language models,
-yet evaluation has remained concentrated on a small cluster of high- and mid-resource scripts. We
-introduce GlotOCR Bench, a comprehensive benchmark evaluating OCR generalization across 100+ Unicode
-scripts. Our benchmark comprises clean and degraded image variants rendered from real multilingual
-texts. Images are rendered using fonts from the Google Fonts repository, shaped with HarfBuzz and
-rasterized with FreeType, supporting both LTR and RTL scripts. Samples of rendered images were
-manually reviewed to verify correct rendering across all scripts. We evaluate a broad suite of open-
-weight and proprietary vision-language models and find that most perform well on fewer than ten
-scripts, and even the strongest frontier models fail to generalize beyond thirty scripts.
-Performance broadly tracks script-level pretraining coverage, suggesting that current OCR systems
-rely on language model pretraining as much as on visual recognition. Models confronted with
-unfamiliar scripts either produce random noise or hallucinate characters from similar scripts they
-already know. We release the benchmark and pipeline for reproducibility. Pipeline Code:
-https://github.com/cisnlp/glotocr-bench, Benchmark: https://hf.co/datasets/cis-lmu/glotocr-bench.
+This manuscript introduces DharmaOCR Full and Lite, a pair of specialized small language models
+(SSLMs) for structured OCR that jointly optimize transcription quality, generation stability, and
+inference cost. It also presents DharmaOCR-Benchmark, a benchmark that covers printed, handwritten,
+and legal/administrative documents, and proposes a unified evaluation protocol that measures
+fidelity and structure while explicitly tracking text degeneration as a first-class benchmark metric
+(alongside unit cost). Beyond reporting degeneration rates, the manuscript empirically shows
+degeneration is not merely a quality failure, since it materially worsens production performance by
+increasing response time, reducing throughput, and inflating computational cost due to abnormally
+long generations. To the best of the author's knowledge, as a methodological contribution, this is
+the first application of Direct Preference Optimization (DPO) for OCR, explicitly using degenerate
+generations as rejected examples to penalize looping behavior. Combined with Supervised Fine-Tuning
+(SFT) for enforcing a strict JSON schema (header, margin, footer, and text), DPO consistently
+reduces degeneration rate across model families (up to 87.6% relative) while preserving or improving
+extraction quality. The resulting models, namely, DharmaOCR Full (7B) and DharmaOCR Lite (3B), set a
+new state-of-the-art on DharmaOCR-Benchmark, outperforming each open-source and commercial baseline
+model evaluated regarding extraction quality, reaching 0.925 and 0.911 scores with 0.40% and 0.20%
+degeneration rates. AWQ quantization reduced up to 22% per-page cost with negligible quality loss,
+enabling a strong quality-cost trade-off in comparison to proprietary OCR APIs and open-source
+alternatives.
 
 ---
 
-### 5. SOAR: Self-Correction for Optimal Alignment and Refinement in Diffusion Models
+### 3. Toward Agentic RAG for Ukrainian
 
-- arXiv: [2604.12617v1](https://arxiv.org/abs/2604.12617v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2604.12617v1)
-- 作者: You Qin, Linqing Wang, Hao Fei, Roger Zimmermann, Liefeng Bo, Qinglin Lu, Chunyu Wang
-- 发布时间: 2026-04-14T11:45:15Z
-- 分类: cs.LG, cs.AI
-- 相关性评分: 9
-- 主题标签: 扩散模型、后训练优化、自校正、OCR性能提升、偏差校正
-
-**中文摘要**
-
-> 扩散模型的后训练流水线目前有两个阶段：在策划数据上的监督微调（SFT）和使用奖励模型的强化学习（RL）。一个根本性差距分隔了它们。SFT仅在前向噪声过程采样的真实状态上优化去噪器；一旦推理偏离这些理想状态，后续去噪依赖于分布外泛化而非学习校正，表现出与自回归模型相同的暴露偏差，但沿去噪轨迹而非令牌序列累积。RL原则上可以解决这种不匹配，但其终端奖励信号稀疏、受信用分配困难影响，并可能奖励黑客攻击。我们提出SOAR（自校正优化对齐和精炼），一种填补这一差距的偏差校正后训练方法。从真实样本开始，SOAR使用当前模型执行单次停止梯度展开，重新噪声得到的偏离轨迹状态，并监督模型引导回原始干净目标。该方法是在策略、无奖励的，并提供密集的每时间步监督，无信用分配问题。在SD3.5-Medium上，SOAR将GenEval从0.70提高到0.78，OCR从0.64提高到0.67超过SFT，同时提高了所有基于模型的偏好得分。在受控奖励特定实验中，SOAR在美学和文本图像对齐任务上的最终度量值均超过Flow-GRPO，尽管无法访问奖励模型。
-
-**核心创新概述**
-
-> 提出了SOAR方法，通过自校正机制填补扩散模型SFT和RL后训练之间的差距，首次在无奖励模型的情况下实现密集监督和偏差校正，显著提升包括OCR在内的多项任务性能。
-
-**创新点拆解**
-
-- 自校正偏差校正机制
-- 单次停止梯度展开与重新噪声策略
-- 密集每时间步监督设计
-- 无奖励模型的在策略优化
-
-**当前局限**
-
-> 方法主要针对扩散模型，通用性需在其他模型类型上验证；计算开销可能较高。
-
-**后续可改进方向**
-
-- 优化计算效率以适用于更大规模模型
-- 扩展方法到其他生成模型（如自回归模型）
-- 探索与现有RL方法的结合以进一步提升性能
-
-**工程启发**
-
-> 中等，为扩散模型后训练提供了新范式，可提升OCR等下游任务的生成质量，但需适配到具体OCR应用中。
-
-**为什么值得关注**
-
-> 方法在实验中直接提升了OCR性能，表明自校正机制对改善文本识别生成有潜在价值，对OCR在生成式模型中的应用有参考意义。
-
-**原始摘要**
-
-The post-training pipeline for diffusion models currently has two stages: supervised fine-tuning
-(SFT) on curated data and reinforcement learning (RL) with reward models. A fundamental gap
-separates them. SFT optimizes the denoiser only on ground-truth states sampled from the forward
-noising process; once inference deviates from these ideal states, subsequent denoising relies on
-out-of-distribution generalization rather than learned correction, exhibiting the same exposure bias
-that afflicts autoregressive models, but accumulated along the denoising trajectory instead of the
-token sequence. RL can in principle address this mismatch, yet its terminal reward signal is sparse,
-suffers from credit-assignment difficulty, and risks reward hacking. We propose SOAR (Self-
-Correction for Optimal Alignment and Refinement), a bias-correction post-training method that fills
-this gap. Starting from a real sample, SOAR performs a single stop-gradient rollout with the current
-model, re-noises the resulting off-trajectory state, and supervises the model to steer back toward
-the original clean target. The method is on-policy, reward-free, and provides dense per-timestep
-supervision with no credit-assignment problem. On SD3.5-Medium, SOAR improves GenEval from 0.70 to
-0.78 and OCR from 0.64 to 0.67 over SFT, while simultaneously raising all model-based preference
-scores. In controlled reward-specific experiments, SOAR surpasses Flow-GRPO in final metric value on
-both aesthetic and text-image alignment tasks, despite having no access to a reward model. Since
-SOAR's base loss subsumes the standard SFT objective, it can directly replace SFT as a stronger
-first post-training stage after pretraining, while remaining fully compatible with subsequent RL
-alignment.
-
----
-
-### 6. DocSeeker: Structured Visual Reasoning with Evidence Grounding for Long Document Understanding
-
-- arXiv: [2604.12812v2](https://arxiv.org/abs/2604.12812v2)
-- PDF: [下载链接](https://arxiv.org/pdf/2604.12812v2)
-- 作者: Hao Yan, Yuliang Liu, Xingchen Liu, Yuyi Zhang, Minghui Liao, Jihao Wu, Wei Chen, Xiang Bai
-- 发布时间: 2026-04-14T14:39:26Z
+- arXiv: [2604.14896v1](https://arxiv.org/abs/2604.14896v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.14896v1)
+- 作者: Marta Sumyk, Oleksandr Kosovan
+- 发布时间: 2026-04-16T11:40:06Z
 - 分类: cs.AI
 - 相关性评分: 7
-- 主题标签: 长文档理解、多模态大语言模型、证据定位、结构化推理、训练优化
+- 主题标签: 代理检索增强生成、乌克兰语文档理解、两阶段检索、轻量级代理层、低资源语言
 
 **中文摘要**
 
-> 现有多模态大语言模型（MLLMs）在长文档理解任务上随着文档长度增加而性能显著下降。这源于两个根本挑战：1）低信噪比（SNR），关键证据被埋没在无关页面中；2）监督稀缺，仅提供最终简短答案的数据集提供弱学习信号。在本文中，我们通过提出一个要求模型执行结构化分析、定位和推理工作流的范式来解决这些挑战。为了灌输这种能力，我们设计了一个两阶段训练框架：我们首先在通过高效知识蒸馏策略生成的高质量数据上进行监督微调。随后，我们采用证据感知的Group Relative Policy Optimization，联合优化证据定位和答案准确性。此外，我们引入了证据引导的分辨率分配策略以减轻多页面文档训练的内存约束。大量实验表明，DocSeeker在域内和域外任务上均实现卓越性能。我们显示它从短页面训练稳健地泛化到超长文档，并自然与视觉检索增强生成系统协同，为其实现提供了坚实基础。
+> 本文对乌克兰语的代理检索增强生成进行了初步调查，基于UNLP 2026多领域文档理解共享任务。系统结合两阶段检索（BGE-M3与BGE重排序）和轻量级代理层，在Qwen2.5-3B-Instruct上执行查询重述和答案重试循环。分析显示检索质量是主要瓶颈：代理重试机制提高答案准确性，但总体分数受文档和页面识别限制。讨论了离线代理流程的实际限制，并概述了结合更强检索与更先进代理推理的方向。
 
 **核心创新概述**
 
-> 提出了DocSeeker框架，通过结构化分析、定位和推理工作流解决长文档理解中的信噪比和监督稀缺问题，首次结合证据感知优化和分辨率分配策略，显著提升MLLMs在长文档上的性能。
+> 针对乌克兰语文档理解，提出结合两阶段检索和轻量级代理层的系统，初步探索代理RAG在低资源语言中的应用。
 
 **创新点拆解**
 
-- 结构化分析、定位和推理工作流设计
-- 两阶段训练框架（SFT + Group Relative Policy Optimization）
-- 证据感知联合优化机制
-- 证据引导的分辨率分配策略
+- 两阶段检索方法（BGE-M3与重排序）
+- 轻量级代理层设计，包括查询重述和答案重试循环
+- 针对低资源语言（乌克兰语）的文档理解应用
 
 **当前局限**
 
-> 框架依赖高质量生成数据，可能受限于知识蒸馏的效果；训练复杂度较高，需要大量计算资源。
+> 检索质量是主要瓶颈，系统性能受限于文档识别，且代理机制在离线环境中可能效率较低。
 
 **后续可改进方向**
 
-- 开发更高效的数据生成方法以减少对蒸馏的依赖
-- 优化训练流程以降低计算成本
-- 扩展框架到更广泛的多模态文档类型
+- 增强检索模块以处理多语言和跨域文档
+- 开发更高效的在线代理推理方法
+- 扩展系统到其他低资源语言以验证泛化能力
 
 **工程启发**
 
-> 高，为长文档理解提供了可扩展的解决方案，可直接集成到现有MLLMs中提升处理能力，适用于法律、学术等长文档分析场景。
+> 中等，为低资源语言文档理解提供初步解决方案，但需进一步优化以提升实用性和扩展性。
 
 **为什么值得关注**
 
-> 涉及文档视觉解析和推理，对OCR在长文档多模态理解中的集成有间接参考价值，强调了结构化和证据定位的重要性。
+> 涉及文档解析中的多语言和检索增强生成挑战，对OCR和自然语言处理领域有参考意义。
 
 **原始摘要**
 
-Existing Multimodal Large Language Models (MLLMs) suffer from significant performance degradation on
-the long document understanding task as document length increases. This stems from two fundamental
-challenges: 1) a low Signal-to-Noise Ratio (SNR), with crucial evidence buried in irrelevant pages;
-and 2) supervision scarcity, as datasets offering only final short answers provide a weak learning
-signal. In this paper, we address these challenges by proposing a paradigm that requires the model
-to execute a structured Analysis, Localization and Reasoning workflow. To instill this capability,
-we design a two-stage training framework: we first perform Supervised Fine-Tuning on high-quality
-data generated via an efficient knowledge distillation strategy. Subsequently, we employ an
-Evidence-aware Group Relative Policy Optimization which jointly optimizes for both evidence
-localization and answer accuracy. Additionally, we introduce a Evidence-Guided Resolution Allocation
-strategy to mitigate memory constraints of training on multi-pages documents. Extensive experiments
-demonstrate that DocSeeker achieves superior performance on both in-domain and out-of-domain tasks.
-We show it robustly generalizes from short-page training to ultra-long documents and is naturally
-synergistic with visual Retrieval-Augmented Generation systems, serving as a solid foundation for
-their implementation.
+We present an initial investigation into Agentic Retrieval-Augmented Generation (RAG) for Ukrainian,
+conducted within the UNLP 2026 Shared Task on Multi-Domain Document Understanding. Our system
+combines two-stage retrieval (BGE-M3 with BGE reranking) with a lightweight agentic layer performing
+query rephrasing and answer-retry loops on top of Qwen2.5-3B-Instruct. Our analysis reveals that
+retrieval quality is the primary bottleneck: agentic retry mechanisms improve answer accuracy but
+the overall score remains constrained by document and page identification. We discuss practical
+limitations of offline agentic pipelines and outline directions for combining stronger retrieval
+with more advanced agentic reasoning for Ukrainian.
+
+---
+
+### 4. IE as Cache: Information Extraction Enhanced Agentic Reasoning
+
+- arXiv: [2604.14930v1](https://arxiv.org/abs/2604.14930v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.14930v1)
+- 作者: Hang Lv, Sheng Liang, Hongchao Gu, Wei Guo, Defu Lian, Yong Liu, Hao Wang, Enhong Chen
+- 发布时间: 2026-04-16T12:18:27Z
+- 分类: cs.CL
+- 相关性评分: 6
+- 主题标签: 信息提取、认知缓存、代理推理、查询驱动提取、缓存感知推理
+
+**中文摘要**
+
+> 信息提取旨在从非结构化文本中提炼结构化、决策相关信息，作为下游理解和推理的基础。然而，传统上它仅被视为终端目标：一旦提取，所得结构常被孤立使用，而非在多步推理中维护和重用。超越此，本文提出IE-as-Cache框架，将信息提取重新用作认知缓存以增强代理推理。受分层计算机内存启发，方法结合查询驱动提取和缓存感知推理，动态维护紧凑中间信息并过滤噪声。在多样化LLM上的挑战性基准测试中显示推理准确性显著提升，表明信息提取可有效重新用作可重用认知资源，为未来信息提取下游应用研究提供有前景方向。
+
+**核心创新概述**
+
+> 提出IE-as-Cache框架，将信息提取重新定位为可重用认知缓存，结合查询驱动提取和缓存感知推理以增强多步推理。
+
+**创新点拆解**
+
+- IE-as-Cache框架设计，将信息提取用作认知缓存
+- 查询驱动提取与缓存感知推理结合
+- 动态维护中间信息以过滤噪声
+- 受分层计算机内存启发的架构
+
+**当前局限**
+
+> 框架可能对复杂推理任务的缓存管理效率有挑战，且依赖于LLM性能，可扩展性需进一步研究。
+
+**后续可改进方向**
+
+- 优化缓存策略以提高推理效率和准确性
+- 探索框架在不同类型文档和任务中的适应性
+- 研究轻量级实现以减少计算资源需求
+
+**工程启发**
+
+> 高，提供了一种增强代理推理的新方法，能提升文档理解任务的性能，具有广泛的应用潜力。
+
+**为什么值得关注**
+
+> 涉及文档解析中的信息提取和推理集成，对OCR和人工智能领域有创新贡献。
+
+**原始摘要**
+
+Information Extraction aims to distill structured, decision-relevant information from unstructured
+text, serving as a foundation for downstream understanding and reasoning. However, it is
+traditionally treated merely as a terminal objective: once extracted, the resulting structure is
+often consumed in isolation rather than maintained and reused during multi-step inference. Moving
+beyond this, we propose \textit{IE-as-Cache}, a framework that repurposes IE as a cognitive cache to
+enhance agentic reasoning. Drawing inspiration from hierarchical computer memory, our approach
+combines query-driven extraction with cache-aware reasoning to dynamically maintain compact
+intermediate information and filter noise. Experiments on challenging benchmarks across diverse LLMs
+demonstrate significant improvements in reasoning accuracy, indicating that IE can be effectively
+repurposed as a reusable cognitive resource and offering a promising direction for future research
+on downstream uses of IE.
 
 ---
