@@ -1,144 +1,46 @@
 {
   "meta": {
-    "report_date": "2026-04-17",
-    "generated_at_utc": "2026-04-17 04:22:21",
+    "report_date": "2026-04-18",
+    "generated_at_utc": "2026-04-18 04:05:36",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 4
+    "count": 2
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦于OCR和文档解析的创新方法，涵盖无OCR代理框架、专门小型语言模型、低资源语言代理RAG以及信息提取作为认知缓存。核心趋势包括代理化推理、结构化输出优化和跨语言扩展。Doc-V*通过顺序证据聚合提升多页文档VQA性能，DharmaOCR利用DPO减少文本退化并增强结构化输出，乌克兰语代理RAG探索低资源语言应用，IE-as-Cache框架将信息提取重新用于增强推理。这些研究在准确性、效率和泛化方面取得进展，为工程部署提供新方向。",
-    "trend_summary": "研究趋势显示代理化方法（如Doc-V*和代理RAG）成为文档理解的核心，强调主动导航和推理优化；结构化OCR模型（如DharmaOCR）通过专门设计和DPO应用提升稳定性和质量；低资源语言（如乌克兰语）和跨域适应性受到关注；信息提取被重新定位为可重用资源以支持复杂推理。整体上，工作侧重于平衡性能与计算成本，减少对传统OCR的依赖，并增强多步推理能力。",
+    "executive_summary": "今日论文聚焦于代理增强的文档理解与信息提取技术，强调检索质量与信息重用在OCR下游任务中的关键作用。首篇论文针对乌克兰语提出代理RAG系统，结合两阶段检索与轻量级代理层，但受限于检索瓶颈；第二篇论文提出IE-as-Cache框架，将信息提取作为认知缓存以提升代理推理效率，展现出高工程价值。整体趋势显示，结合检索、提取与代理推理的混合方法正成为文档解析研究的前沿方向，但需解决检索质量、缓存优化等具体挑战。",
+    "trend_summary": "研究趋势向代理驱动的文档理解系统发展，强调检索增强生成（RAG）与信息提取（IE）的结合。论文1探索乌克兰语代理RAG，突出检索质量的重要性；论文2提出IE-as-Cache框架，将IE重用作认知缓存以增强推理。共同点包括：利用代理机制优化多步推理，关注轻量级或动态方法，并指向更高级检索与推理集成。这表明OCR领域正从单纯提取转向智能、自适应解析，但需克服语言特定性、缓存管理等工程障碍。",
     "common_innovations": [
-      "代理框架设计用于文档理解，结合主动导航和推理优化以提升效率。",
-      "直接偏好优化应用于OCR任务，通过惩罚退化生成来减少文本循环问题。",
-      "结构化输出强制执行，如JSON模式，以提高文档解析的准确性和一致性。",
-      "查询驱动提取与缓存机制结合，动态维护信息以支持多步推理。"
+      "结合代理机制与检索或提取技术以增强文档理解和推理能力。",
+      "采用轻量级或动态方法（如查询重述、缓存维护）优化中间信息处理。",
+      "强调检索质量或信息重用作为系统性能的关键瓶颈或提升点。",
+      "在多样化LLM或基准测试中验证方法的有效性，推动实际应用。"
     ],
     "future_directions": [
-      "开发更高效的页面检索算法，以优化多页文档导航和减少计算开销。",
-      "扩展基准测试到更多文档类型和语言，增强模型对多样化输入的泛化能力。",
-      "研究无监督或弱监督训练方法，减少对专家轨迹数据的依赖以提高适应性。",
-      "优化缓存策略在IE-as-Cache框架中，以提升复杂推理任务的效率和准确性。",
-      "增强检索模块处理多语言和跨域文档，改进低资源语言代理RAG系统的性能。"
+      "开发多语言或跨领域代理RAG系统，优化检索技术以提升文档和页面识别精度。",
+      "扩展IE-as-Cache框架到复杂文档类型（如表格、图像文本混合），并集成自适应缓存策略。",
+      "探索在线或混合代理管道，结合实时反馈以克服离线限制并增强推理循环。",
+      "结合更强检索模型（如改进的嵌入和重排序）与高级代理推理，用于特定语言如乌克兰语的文档解析。",
+      "研究轻量级代理层在资源受限环境中的应用，以降低OCR下游任务的部署成本。"
     ],
     "engineering_takeaways": [
-      "Doc-V*的无OCR代理框架可应用于多页文档VQA任务，提升跨域性能和推理效率。",
-      "DharmaOCR的专门小型模型结合DPO，适用于生产环境以减少退化并提高结构化OCR质量。",
-      "IE-as-Cache框架可集成到代理系统中，通过缓存提取信息来增强文档理解推理。",
-      "乌克兰语代理RAG系统为低资源语言文档理解提供初步方案，但需优化检索以提升实用性。"
+      "在代理RAG系统中优先优化检索质量，例如通过两阶段检索和重排序技术提升文档匹配精度。",
+      "实施IE-as-Cache框架以动态维护结构化信息，减少重复提取并加速下游推理任务。",
+      "设计轻量级代理层（如基于Qwen2.5-3B-Instruct）进行查询重述和答案重试，平衡性能与计算开销。",
+      "在工程部署中考虑离线代理管道的限制，探索混合管道以支持实时文档解析需求。"
     ],
     "watchlist": [
       {
-        "title": "Doc-V*:Coarse-to-Fine Interactive Visual Reasoning for Multi-Page Document VQA",
-        "watch_reason": "无OCR代理框架在跨域性能上提升显著，适用于多页文档理解，可能推动视觉推理技术发展。"
-      },
-      {
-        "title": "DharmaOCR: Specialized Small Language Models for Structured OCR that outperform Open-Source and Commercial Baselines",
-        "watch_reason": "首次应用DPO减少文本退化，模型在提取质量和稳定性上表现优异，对生产部署有高价值。"
+        "title": "Toward Agentic RAG for Ukrainian",
+        "watch_reason": "首次针对乌克兰语探索代理RAG系统，为多语言文档理解提供原型，但检索瓶颈需关注以指导类似语言或领域的研究。"
       },
       {
         "title": "IE as Cache: Information Extraction Enhanced Agentic Reasoning",
-        "watch_reason": "将信息提取重新用作认知缓存，能增强代理推理准确性，为下游应用提供新思路。"
+        "watch_reason": "提出IE-as-Cache新范式，将信息提取重用作认知缓存，有潜力显著提升OCR下游任务如信息检索和推理的效率，值得工程团队评估集成。"
       }
     ]
   },
   "papers": [
-    {
-      "title": "Doc-V*:Coarse-to-Fine Interactive Visual Reasoning for Multi-Page Document VQA",
-      "summary": "Multi-page Document Visual Question Answering requires reasoning over semantics, layouts, and visual elements in long, visually dense documents. Existing OCR-free methods face a trade-off between capacity and precision: end-to-end models scale poorly with document length, while visual retrieval-based pipelines are brittle and passive. We propose Doc-$V^*$, an \\textbf{OCR-free agentic} framework that casts multi-page DocVQA as sequential evidence aggregation. Doc-$V^*$ begins with a thumbnail overview, then actively navigates via semantic retrieval and targeted page fetching, and aggregates evidence in a structured working memory for grounded reasoning. Trained by imitation learning from expert trajectories and further optimized with Group Relative Policy Optimization, Doc-$V^*$ balances answer accuracy with evidence-seeking efficiency. Across five benchmarks, Doc-$V^*$ outperforms open-source baselines and approaches proprietary models, improving out-of-domain performance by up to \\textbf{47.9\\%} over RAG baseline. Other results reveal effective evidence aggregation with selective attention, not increased input pages.",
-      "link": "https://arxiv.org/abs/2604.13731v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.13731v1",
-      "authors": [
-        "Yuanlei Zheng",
-        "Pei Fu",
-        "Hang Li",
-        "Ziyang Wang",
-        "Yuyi Zhang",
-        "Wenyu Ruan",
-        "Xiaojin Zhang",
-        "Zhongyu Wei",
-        "Zhenbo Luo",
-        "Jian Luan",
-        "Wei Chen",
-        "Xiang Bai"
-      ],
-      "published": "2026-04-15T11:12:27Z",
-      "updated": "2026-04-15T11:12:27Z",
-      "categories": [
-        "cs.CL"
-      ],
-      "arxiv_id": "2604.13731v1",
-      "score": 17,
-      "topic_tags": [
-        "多页文档视觉问答",
-        "无OCR方法",
-        "代理框架",
-        "证据聚合",
-        "主动导航"
-      ],
-      "zh_summary": "多页文档视觉问答需要在长且视觉密集的文档中对语义、布局和视觉元素进行推理。现有无OCR方法面临容量与精度的权衡：端到端模型随文档长度扩展性差，而基于视觉检索的流程脆弱且被动。本文提出Doc-V*，一种无OCR的代理框架，将多页DocVQA视为顺序证据聚合。Doc-V*从缩略图概览开始，通过语义检索和定向页面获取主动导航，并在结构化工作内存中聚合证据以进行基于事实的推理。通过模仿专家轨迹训练，并进一步使用组相对策略优化，Doc-V*平衡答案准确性与证据搜索效率。在五个基准测试中，Doc-V*优于开源基线，接近专有模型，在RAG基线上将跨域性能提升高达47.9%。其他结果显示，通过选择性注意力实现有效证据聚合，而非增加输入页面。",
-      "novelty": "提出首个无OCR的代理框架，将多页文档视觉问答建模为顺序证据聚合，结合主动导航和结构化工作内存，以平衡准确性与效率。",
-      "innovation_points": [
-        "无OCR代理框架设计，避免传统OCR依赖",
-        "顺序证据聚合方法，通过缩略图概览、语义检索和定向页面获取",
-        "结构化工作内存用于基于事实的推理",
-        "模仿学习与组相对策略优化的训练范式"
-      ],
-      "limitations": "框架可能对长文档的导航效率仍有优化空间，且依赖于专家轨迹数据，泛化能力需进一步验证。",
-      "improvement_directions": [
-        "探索更高效的页面检索算法以减少计算开销",
-        "增强框架对多样化文档类型的适应性",
-        "研究无监督或弱监督训练方法以减少对专家数据的依赖"
-      ],
-      "engineering_value": "高，提供了一种可扩展的无OCR解决方案，适用于多页文档理解任务，能提升跨域性能和推理效率。",
-      "why_relevant": "直接针对文档解析中的视觉问答挑战，提出创新方法，对OCR和文档理解领域有重要参考价值。"
-    },
-    {
-      "title": "DharmaOCR: Specialized Small Language Models for Structured OCR that outperform Open-Source and Commercial Baselines",
-      "summary": "This manuscript introduces DharmaOCR Full and Lite, a pair of specialized small language models (SSLMs) for structured OCR that jointly optimize transcription quality, generation stability, and inference cost. It also presents DharmaOCR-Benchmark, a benchmark that covers printed, handwritten, and legal/administrative documents, and proposes a unified evaluation protocol that measures fidelity and structure while explicitly tracking text degeneration as a first-class benchmark metric (alongside unit cost). Beyond reporting degeneration rates, the manuscript empirically shows degeneration is not merely a quality failure, since it materially worsens production performance by increasing response time, reducing throughput, and inflating computational cost due to abnormally long generations. To the best of the author's knowledge, as a methodological contribution, this is the first application of Direct Preference Optimization (DPO) for OCR, explicitly using degenerate generations as rejected examples to penalize looping behavior. Combined with Supervised Fine-Tuning (SFT) for enforcing a strict JSON schema (header, margin, footer, and text), DPO consistently reduces degeneration rate across model families (up to 87.6% relative) while preserving or improving extraction quality. The resulting models, namely, DharmaOCR Full (7B) and DharmaOCR Lite (3B), set a new state-of-the-art on DharmaOCR-Benchmark, outperforming each open-source and commercial baseline model evaluated regarding extraction quality, reaching 0.925 and 0.911 scores with 0.40% and 0.20% degeneration rates. AWQ quantization reduced up to 22% per-page cost with negligible quality loss, enabling a strong quality-cost trade-off in comparison to proprietary OCR APIs and open-source alternatives.",
-      "link": "https://arxiv.org/abs/2604.14314v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.14314v1",
-      "authors": [
-        "Gabriel Pimenta de Freitas Cardoso",
-        "Caio Lucas da Silva Chacon",
-        "Jonas Felipe da Fonseca Oliveira",
-        "Paulo Henrique de Medeiros Araujo"
-      ],
-      "published": "2026-04-15T18:17:11Z",
-      "updated": "2026-04-15T18:17:11Z",
-      "categories": [
-        "cs.CV",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "arxiv_id": "2604.14314v1",
-      "score": 15,
-      "topic_tags": [
-        "结构化OCR",
-        "专门小型语言模型",
-        "直接偏好优化",
-        "文本退化",
-        "监督微调"
-      ],
-      "zh_summary": "本文介绍了DharmaOCR Full和Lite，一对专用于结构化OCR的专门小型语言模型，联合优化转录质量、生成稳定性和推理成本。同时提出DharmaOCR-Benchmark，覆盖印刷、手写和法律/行政文档，并提出了统一评估协议，测量保真度和结构，同时将文本退化作为首要基准指标（与单位成本一起）。除了报告退化率，本文实证显示退化不仅是质量失败，因为它通过增加响应时间、降低吞吐量和因异常生成长度而增加计算成本，实质性地恶化生产性能。据作者所知，作为方法贡献，这是首次将直接偏好优化应用于OCR，明确使用退化生成作为拒绝示例来惩罚循环行为。结合监督微调以强制执行严格的JSON模式（页眉、页边、页脚和文本），DPO在不同模型系列中一致减少退化率（相对高达87.6%），同时保持或提高提取质量。所得模型，即DharmaOCR Full（7B）和Lite（3B），在DharmaOCR-Benchmark上设定了新的最先进水平，在提取质量方面优于每个评估的开源和商业基线模型，得分分别为0.925和0.911，退化率为0.40%和0.20%。",
-      "novelty": "首次将直接偏好优化应用于OCR任务，通过使用退化生成作为拒绝示例来减少文本退化，同时结合监督微调强制执行结构化输出。",
-      "innovation_points": [
-        "专门小型语言模型设计，优化转录质量、稳定性和成本",
-        "直接偏好优化在OCR中的应用，惩罚循环行为",
-        "监督微调强制执行JSON模式以增强结构化输出",
-        "统一评估协议，包括文本退化作为核心指标"
-      ],
-      "limitations": "模型可能对特定文档类型（如高度非结构化或低质量图像）的泛化能力有限，且评估基准范围需扩展。",
-      "improvement_directions": [
-        "扩展基准测试以涵盖更多文档类型和语言",
-        "研究模型对噪声和模糊输入的鲁棒性",
-        "探索更高效的模型压缩技术以进一步降低推理成本"
-      ],
-      "engineering_value": "高，提供高效且稳定的结构化OCR解决方案，适用于生产环境，能显著减少退化问题并提高提取质量。",
-      "why_relevant": "针对OCR中的文本退化和结构化输出挑战，提出创新训练方法，对文档解析和语言模型应用有直接贡献。"
-    },
     {
       "title": "Toward Agentic RAG for Ukrainian",
       "summary": "We present an initial investigation into Agentic Retrieval-Augmented Generation (RAG) for Ukrainian, conducted within the UNLP 2026 Shared Task on Multi-Domain Document Understanding. Our system combines two-stage retrieval (BGE-M3 with BGE reranking) with a lightweight agentic layer performing query rephrasing and answer-retry loops on top of Qwen2.5-3B-Instruct. Our analysis reveals that retrieval quality is the primary bottleneck: agentic retry mechanisms improve answer accuracy but the overall score remains constrained by document and page identification. We discuss practical limitations of offline agentic pipelines and outline directions for combining stronger retrieval with more advanced agentic reasoning for Ukrainian.",
@@ -156,27 +58,28 @@
       "arxiv_id": "2604.14896v1",
       "score": 7,
       "topic_tags": [
-        "代理检索增强生成",
-        "乌克兰语文档理解",
-        "两阶段检索",
-        "轻量级代理层",
-        "低资源语言"
+        "代理RAG",
+        "乌克兰语处理",
+        "文档理解",
+        "检索技术",
+        "轻量级代理"
       ],
-      "zh_summary": "本文对乌克兰语的代理检索增强生成进行了初步调查，基于UNLP 2026多领域文档理解共享任务。系统结合两阶段检索（BGE-M3与BGE重排序）和轻量级代理层，在Qwen2.5-3B-Instruct上执行查询重述和答案重试循环。分析显示检索质量是主要瓶颈：代理重试机制提高答案准确性，但总体分数受文档和页面识别限制。讨论了离线代理流程的实际限制，并概述了结合更强检索与更先进代理推理的方向。",
-      "novelty": "针对乌克兰语文档理解，提出结合两阶段检索和轻量级代理层的系统，初步探索代理RAG在低资源语言中的应用。",
+      "zh_summary": "本文对乌克兰语的代理检索增强生成进行了初步研究，作为UNLP 2026多领域文档理解共享任务的一部分。系统结合了两阶段检索（使用BGE-M3和BGE重排序）与一个轻量级代理层，在Qwen2.5-3B-Instruct模型上执行查询重述和答案重试循环。分析表明，检索质量是主要瓶颈：代理重试机制提高了答案准确性，但整体得分仍受限于文档和页面识别。讨论了离线代理管道的实际限制，并概述了将更强检索与更高级代理推理结合用于乌克兰语的方向。",
+      "novelty": "首次针对乌克兰语探索代理RAG系统，结合两阶段检索和轻量级代理层进行查询重述和答案重试，强调检索质量作为关键瓶颈。",
       "innovation_points": [
-        "两阶段检索方法（BGE-M3与重排序）",
-        "轻量级代理层设计，包括查询重述和答案重试循环",
-        "针对低资源语言（乌克兰语）的文档理解应用"
+        "针对乌克兰语设计代理RAG系统",
+        "结合两阶段检索（BGE-M3和BGE重排序）与轻量级代理层",
+        "在Qwen2.5-3B-Instruct上实现查询重述和答案重试循环",
+        "分析检索质量作为系统瓶颈"
       ],
-      "limitations": "检索质量是主要瓶颈，系统性能受限于文档识别，且代理机制在离线环境中可能效率较低。",
+      "limitations": "检索质量受限，整体得分受文档和页面识别影响；离线代理管道存在实际限制。",
       "improvement_directions": [
-        "增强检索模块以处理多语言和跨域文档",
-        "开发更高效的在线代理推理方法",
-        "扩展系统到其他低资源语言以验证泛化能力"
+        "结合更强检索技术与更高级代理推理",
+        "优化文档和页面识别方法",
+        "探索在线或混合代理管道以克服离线限制"
       ],
-      "engineering_value": "中等，为低资源语言文档理解提供初步解决方案，但需进一步优化以提升实用性和扩展性。",
-      "why_relevant": "涉及文档解析中的多语言和检索增强生成挑战，对OCR和自然语言处理领域有参考意义。"
+      "engineering_value": "中等，为乌克兰语文档理解提供代理RAG原型，但检索瓶颈需解决以提升实用性。",
+      "why_relevant": "涉及文档理解、检索增强生成和代理系统，与OCR下游应用相关，可借鉴于多语言文档处理。"
     },
     {
       "title": "IE as Cache: Information Extraction Enhanced Agentic Reasoning",
@@ -202,27 +105,27 @@
       "score": 6,
       "topic_tags": [
         "信息提取",
-        "认知缓存",
         "代理推理",
-        "查询驱动提取",
-        "缓存感知推理"
+        "认知缓存",
+        "文档理解",
+        "LLM应用"
       ],
-      "zh_summary": "信息提取旨在从非结构化文本中提炼结构化、决策相关信息，作为下游理解和推理的基础。然而，传统上它仅被视为终端目标：一旦提取，所得结构常被孤立使用，而非在多步推理中维护和重用。超越此，本文提出IE-as-Cache框架，将信息提取重新用作认知缓存以增强代理推理。受分层计算机内存启发，方法结合查询驱动提取和缓存感知推理，动态维护紧凑中间信息并过滤噪声。在多样化LLM上的挑战性基准测试中显示推理准确性显著提升，表明信息提取可有效重新用作可重用认知资源，为未来信息提取下游应用研究提供有前景方向。",
-      "novelty": "提出IE-as-Cache框架，将信息提取重新定位为可重用认知缓存，结合查询驱动提取和缓存感知推理以增强多步推理。",
+      "zh_summary": "信息提取旨在从非结构化文本中提炼结构化、决策相关信息，作为下游理解和推理的基础。然而，传统上它仅被视为终端目标：提取后，结果结构常被孤立使用，而非在多步推理中维护和重用。为此，我们提出IE-as-Cache框架，将IE重新用作认知缓存以增强代理推理。受分层计算机内存启发，该方法结合查询驱动提取和缓存感知推理，动态维护紧凑中间信息并过滤噪声。在多样化LLM的挑战性基准测试中，实验显示推理准确性显著提升，表明IE可有效重用作可重用认知资源，为IE下游应用研究提供有前景方向。",
+      "novelty": "提出IE-as-Cache框架，将信息提取重新定位为认知缓存，结合查询驱动提取和缓存感知推理，动态维护中间信息以增强代理推理。",
       "innovation_points": [
-        "IE-as-Cache框架设计，将信息提取用作认知缓存",
-        "查询驱动提取与缓存感知推理结合",
-        "动态维护中间信息以过滤噪声",
-        "受分层计算机内存启发的架构"
+        "提出IE-as-Cache框架，将IE重用作认知缓存",
+        "结合查询驱动提取与缓存感知推理",
+        "动态维护紧凑中间信息并过滤噪声",
+        "在多样化LLM基准测试中验证有效性"
       ],
-      "limitations": "框架可能对复杂推理任务的缓存管理效率有挑战，且依赖于LLM性能，可扩展性需进一步研究。",
+      "limitations": "未具体说明框架在复杂或多领域文档中的泛化能力；缓存管理策略可能需进一步优化。",
       "improvement_directions": [
-        "优化缓存策略以提高推理效率和准确性",
-        "探索框架在不同类型文档和任务中的适应性",
-        "研究轻量级实现以减少计算资源需求"
+        "扩展框架到更复杂文档类型或多语言场景",
+        "优化缓存更新和淘汰策略",
+        "集成更高级推理机制以提升性能"
       ],
-      "engineering_value": "高，提供了一种增强代理推理的新方法，能提升文档理解任务的性能，具有广泛的应用潜力。",
-      "why_relevant": "涉及文档解析中的信息提取和推理集成，对OCR和人工智能领域有创新贡献。"
+      "engineering_value": "高，为文档理解和代理系统提供新范式，可提升OCR下游任务如信息提取和推理的效率。",
+      "why_relevant": "直接关联信息提取和代理推理，与OCR文档解析中的结构化和推理任务高度相关，可应用于增强文档理解流程。"
     }
   ]
 }
