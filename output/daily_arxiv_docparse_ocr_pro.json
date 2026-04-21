@@ -1,28 +1,226 @@
 {
   "meta": {
-    "report_date": "2026-04-20",
-    "generated_at_utc": "2026-04-20 04:28:43",
+    "report_date": "2026-04-21",
+    "generated_at_utc": "2026-04-21 04:22:41",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 0
+    "count": 4
   },
   "synthesis": {
-    "executive_summary": "今日无新论文情报，研究进展暂缓，建议团队回顾现有成果并规划未来方向。",
-    "trend_summary": "无新趋势可报告，当前领域可能处于平稳期或数据缺失状态。",
-    "common_innovations": [],
+    "executive_summary": "今日论文聚焦于OCR与文档解析的多个前沿方向，包括场景文本编辑的精度控制、扩散模型与强化学习的稳定整合、文本属性图的双粒度编码以及古代铭文的图像修复。核心趋势是增强模型对文本语义和结构的感知能力，同时追求无需训练或高效训练的方法以提升工程实用性。研究普遍关注跨模态整合、后处理优化和特定领域应用，为实际系统提供了可落地的创新思路。",
+    "trend_summary": "当前研究呈现三大趋势：一是强调语义和结构感知，如通过OCR检测引导编辑（EFF）、图拓扑约束注意力（DuConTE）或字符宽度估计（MESA）来提升文本处理的精确性；二是探索无需训练或高效训练范式，如后处理模块（EFF）、多示例框架（MESA）和稳定RL整合（UDM-GRPO），以降低部署成本；三是跨任务泛化验证，例如在T2I和OCR基准上测试UDM-GRPO，推动方法从生成到解析的扩展。这些趋势共同指向更智能、高效和可集成的文档分析系统。",
+    "common_innovations": [
+      "利用OCR检测或估计结果（如文本区域、字符宽度）作为先验信息，增强模型对文本结构的感知和控制能力。",
+      "设计无需训练或低训练开销的模块（如后处理场、多示例框架），提高方法的通用性和工程易用性。",
+      "通过连续场或动态注意力机制（如四区场、拓扑约束注意力）替代二进制掩码，实现更精细的像素级或语义级控制。",
+      "在特定任务（如场景文本编辑、铭文修复）中引入新颖评估协议（如每区域溢出量化），细化性能度量标准。"
+    ],
     "future_directions": [
-      "探索多模态融合在文档解析中的实际应用，如结合视觉和文本特征提升表格识别精度",
-      "开发轻量级OCR模型以适应边缘计算场景，减少资源消耗",
-      "研究对抗样本鲁棒性增强方法，提高OCR系统在噪声环境下的稳定性",
-      "集成大语言模型进行文档内容理解和结构化输出，自动化信息提取流程"
+      "开发鲁棒性更强的OCR检测模块，减少对检测错误的敏感性，以提升下游任务（如编辑控制、铭文修复）的可靠性。",
+      "将无需训练的后处理技术（如EFF）扩展到非扩散基础的文本编辑方法（如基于GAN或Transformer的模型），验证泛化性。",
+      "优化图神经网络中的注意力机制（如拓扑约束注意力），降低计算复杂度，以支持大规模文档图或社交网络文本的分析。",
+      "研究多语言或多字体场景下的文本处理问题，例如在场景文本编辑或铭文修复中增强对多样化文本样式的适应性。",
+      "整合多模态信息（如图像风格与文本语义），探索跨模态文档解析方法，如结合视觉特征的文档分类或信息提取。"
     ],
     "engineering_takeaways": [
-      "优化现有OCR流水线以处理低质量扫描文档，减少错误率",
-      "实施模型监控和更新机制，确保系统性能随时间保持稳定",
-      "采用模块化设计便于集成新算法，加速实验和部署周期"
+      "EFF可作为轻量级后处理模块集成到现有场景文本编辑系统，显著减少非目标区域修改，提升编辑精度。",
+      "UDM-GRPO提供了稳定的强化学习训练框架，适用于需要高质量文本到图像生成或OCR增强的实际应用。",
+      "DuConTE的双粒度编码架构可改进文档图分析任务（如文档分类），但需评估其在大规模图上的计算效率。",
+      "MESA的无需训练设计使其易于部署于文化遗产保护等场景，但依赖示例质量和OCR估计准确性，需预处理保障。"
     ],
-    "watchlist": []
+    "watchlist": [
+      {
+        "title": "Edit Fidelity Field: Semantics-Aware Region Isolation for Training-Free Scene Text Editing",
+        "watch_reason": "提出了解决编辑溢出问题的创新后处理模块EFF，无需训练且模型无关，工程集成价值高，可能成为场景文本编辑的标准组件。"
+      },
+      {
+        "title": "UDM-GRPO: Stable and Efficient Group Relative Policy Optimization for Uniform Discrete Diffusion Models",
+        "watch_reason": "首次将均匀离散扩散模型与强化学习稳定整合，在OCR基准上准确率从8%提升至57%，展示了从生成模型到解析任务的泛化潜力。"
+      },
+      {
+        "title": "MESA: A Training-Free Multi-Exemplar Deep Framework for Restoring Ancient Inscription Textures",
+        "watch_reason": "针对古代铭文修复的无需训练方法，结合OCR估计和风格感知，为文档图像恢复提供了新思路，可扩展至其他文本修复场景。"
+      }
+    ]
   },
-  "papers": []
+  "papers": [
+    {
+      "title": "Edit Fidelity Field: Semantics-Aware Region Isolation for Training-Free Scene Text Editing",
+      "summary": "Scene text editing (STE) has achieved remarkable progress in accurately rendering target text through diffusion-based methods. However, we identify a critical yet overlooked problem: edit spillover -- when editing a target text region, existing methods inadvertently modify non-target regions, particularly neighboring text. Through systematic evaluation on 50 real-world scenes across four categories, we reveal that state-of-the-art diffusion editing models exhibit a spillover rate of 94%, meaning nearly all non-target text regions are altered during editing. To address this, we propose the Edit Fidelity Field (EFF), a semantics-aware continuous field that controls per-pixel editing fidelity. Unlike binary masks, EFF leverages OCR-detected text regions to construct a four-zone field: Edit Core (fully editable), Transition Zone (smooth decay), Protected Zone (non-target text, explicitly locked), and Background (strictly preserved). EFF operates as a training-free, model-agnostic post-processing module applicable to any diffusion-based STE method. We further propose per-region spillover quantification, a novel evaluation protocol that measures edit leakage at each non-target text region individually. Experiments demonstrate that EFF reduces spillover rate from 94% to 25% while improving non-target region preservation by +91.4 dB PSNR.",
+      "link": "https://arxiv.org/abs/2604.17500v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.17500v1",
+      "authors": [
+        "Guandong Li",
+        "Mengxia Ye"
+      ],
+      "published": "2026-04-19T15:43:14Z",
+      "updated": "2026-04-19T15:43:14Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2604.17500v1",
+      "score": 13,
+      "topic_tags": [
+        "场景文本编辑",
+        "扩散模型",
+        "编辑溢出",
+        "OCR检测",
+        "后处理模块"
+      ],
+      "zh_summary": "场景文本编辑（STE）通过基于扩散的方法在准确渲染目标文本方面取得了显著进展。然而，我们发现一个关键但被忽视的问题：编辑溢出——在编辑目标文本区域时，现有方法无意中修改了非目标区域，特别是邻近文本。通过对四个类别的50个真实场景进行系统评估，我们发现最先进的扩散编辑模型表现出94%的溢出率，意味着几乎所有非目标文本区域在编辑过程中都被改变。为解决此问题，我们提出了编辑保真度场（EFF），这是一个语义感知的连续场，控制每个像素的编辑保真度。与二进制掩码不同，EFF利用OCR检测的文本区域构建一个四区场：编辑核心（完全可编辑）、过渡区（平滑衰减）、保护区（非目标文本，明确锁定）和背景（严格保留）。EFF作为一个无需训练、模型无关的后处理模块，适用于任何基于扩散的STE方法。我们进一步提出了每区域溢出量化，这是一种新颖的评估协议，单独测量每个非目标文本区域的编辑泄漏。实验表明，EFF将溢出率从94%降低到25%，同时将非目标区域保留提高了+91.4 dB PSNR。",
+      "novelty": "首次系统识别并量化了场景文本编辑中的编辑溢出问题，并提出了一种无需训练、模型无关的语义感知连续场（EFF）来精确控制编辑保真度，有效减少非目标区域的修改。",
+      "innovation_points": [
+        "方法设计：提出编辑保真度场（EFF），基于OCR检测的文本区域构建四区连续场，实现像素级编辑控制",
+        "训练范式：无需训练，作为后处理模块，适用于任何基于扩散的STE方法，提高通用性",
+        "数据：通过系统评估50个真实场景，量化溢出率为94%，为问题提供实证基础",
+        "架构：采用连续场而非二进制掩码，允许平滑过渡和精确锁定非目标区域",
+        "任务定义：引入每区域溢出量化评估协议，细化编辑泄漏的测量标准"
+      ],
+      "limitations": "EFF依赖于OCR检测的文本区域准确性，如果OCR检测错误，可能导致编辑控制失效；实验主要针对扩散模型，对其他STE方法的泛化性需进一步验证；溢出率虽降低至25%，但仍存在部分非目标区域修改。",
+      "improvement_directions": [
+        "集成更鲁棒的OCR检测方法以减少对检测错误的敏感性",
+        "扩展EFF到非扩散基础的STE方法，如基于GAN或Transformer的模型",
+        "开发自适应阈值机制，动态调整EFF参数以适应不同场景复杂度",
+        "研究多语言或多字体场景下的编辑溢出问题，增强方法泛化能力"
+      ],
+      "engineering_value": "高，EFF作为无需训练的后处理模块，易于集成到现有STE系统中，可显著提升编辑精度和用户满意度，适用于广告设计、图像修复等实际应用。",
+      "why_relevant": "直接涉及OCR技术在场景文本编辑中的应用，通过OCR检测文本区域来指导编辑过程，减少溢出问题，对OCR在图像处理中的集成有重要参考价值。"
+    },
+    {
+      "title": "UDM-GRPO: Stable and Efficient Group Relative Policy Optimization for Uniform Discrete Diffusion Models",
+      "summary": "Uniform Discrete Diffusion Model (UDM) has recently emerged as a promising paradigm for discrete generative modeling; however, its integration with reinforcement learning remains largely unexplored. We observe that naively applying GRPO to UDM leads to training instability and marginal performance gains. To address this, we propose \\Ours, the first framework to integrate UDM with RL. Our method is guided by two key insights: (i) treating the final clean sample as the action provides more accurate and stable optimization signals; and (ii) reconstructing trajectories via the diffusion forward process better aligns probability paths with the pretraining distribution. Additionally, we introduce two strategies, Reduced-Step and CFG-Free, to further improve training efficiency. \\Ours significantly improves base model performance across multiple T2I tasks. Notably, GenEval accuracy improves from $69\\%$ to $96\\%$ and PickScore increases from $20.46$ to $23.81$, achieving state-of-the-art performance in both continuous and discrete settings. On the OCR benchmark, accuracy rises from $8\\%$ to $57\\%$, further validating the generalization ability of our method. Code is available at \\href{https://github.com/Yovecent/UDM-GRPO}{https://github.com/Yovecent/UDM-GRPO}.",
+      "link": "https://arxiv.org/abs/2604.18518v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.18518v1",
+      "authors": [
+        "Jiaqi Wang",
+        "Haoge Deng",
+        "Ting Pan",
+        "Yang Liu",
+        "Chengyuan Wang",
+        "Fan Zhang",
+        "Yonggang Qi",
+        "Xinlong Wang"
+      ],
+      "published": "2026-04-20T17:16:50Z",
+      "updated": "2026-04-20T17:16:50Z",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "arxiv_id": "2604.18518v1",
+      "score": 12,
+      "topic_tags": [
+        "均匀离散扩散模型",
+        "强化学习",
+        "文本到图像生成",
+        "OCR基准测试",
+        "训练稳定性"
+      ],
+      "zh_summary": "均匀离散扩散模型（UDM）最近成为离散生成建模的有前景范式；然而，其与强化学习的整合仍很大程度上未被探索。我们观察到，简单应用GRPO到UDM会导致训练不稳定和边际性能提升。为解决此问题，我们提出了UDM-GRPO，这是首个将UDM与RL整合的框架。我们的方法基于两个关键见解：（i）将最终干净样本视为动作提供更准确和稳定的优化信号；（ii）通过扩散前向过程重建轨迹更好地对齐概率路径与预训练分布。此外，我们引入了两种策略，减少步数和无CFG，以进一步提高训练效率。UDM-GRPO在多个T2I任务中显著提升了基础模型性能。值得注意的是，GenEval准确率从69%提高到96%，PickScore从20.46提高到23.81，在连续和离散设置中均达到最先进性能。在OCR基准测试中，准确率从8%提高到57%，进一步验证了我们方法的泛化能力。代码可在https://github.com/Yovecent/UDM-GRPO获取。",
+      "novelty": "首次将均匀离散扩散模型（UDM）与强化学习整合，提出UDM-GRPO框架，通过将最终样本作为动作和重建轨迹对齐分布，解决了训练不稳定问题，并在多个任务中实现显著性能提升。",
+      "innovation_points": [
+        "方法设计：提出UDM-GRPO框架，整合UDM与RL，优化训练稳定性和性能",
+        "训练范式：引入减少步数和无CFG策略，提高训练效率",
+        "架构：基于UDM的离散生成建模，结合GRPO进行强化学习优化",
+        "任务定义：在T2I和OCR任务中验证方法有效性，扩展UDM应用范围"
+      ],
+      "limitations": "方法依赖于UDM的预训练分布，如果预训练数据不足，可能影响性能；实验主要针对特定基准测试，在更复杂或多样化场景中的泛化性需进一步研究；OCR基准测试准确率提升显著，但仍为57%，有改进空间。",
+      "improvement_directions": [
+        "探索UDM在其他离散生成任务中的应用，如文本生成或语音合成",
+        "优化RL组件以处理更复杂的奖励函数或动态环境",
+        "研究多模态整合，将UDM-GRPO扩展到跨模态任务",
+        "增强方法对低资源或噪声数据的鲁棒性"
+      ],
+      "engineering_value": "中高，UDM-GRPO提供了稳定的RL训练框架，可应用于图像生成、OCR等实际系统，但需调整以适应特定领域需求。",
+      "why_relevant": "涉及OCR基准测试，方法在OCR任务中准确率从8%提升到57%，展示了在文本相关应用中的潜力，对OCR模型优化有间接贡献。"
+    },
+    {
+      "title": "DuConTE: Dual-Granularity Text Encoder with Topology-Constrained Attention for Text-attributed Graphs",
+      "summary": "Text-attributed graphs integrate semantic information of node texts with topological structure, offering significant value in various applications such as document classification and information extraction. Existing approaches typically encode textual content using language models (LMs), followed by graph neural networks (GNNs) to process structural information. However, during the LM-based text encoding phase, most methods not only perform semantic interaction solely at the word-token granularity, but also neglect the structural dependencies among texts from different nodes. In this work, we propose DuConTE, a dual-granularity text encoder with topology-constrained attention. The model employs a cascaded architecture of two pretrained LMs, encoding semantics first at the word-token granularity and then at the node granularity. During the self-attention computation in each LM, we dynamically adjust the attention mask matrix based on node connectivity, guiding the model to learn semantic correlations informed by the graph structure. Furthermore, when composing node representations from word-token embeddings, we separately evaluate the importance of tokens under the center-node context and the neighborhood context, enabling the capture of more contextually relevant semantic information. Extensive experiments on multiple benchmark datasets demonstrate that DuConTE achieves state-of-the-art performance on the majority of them.",
+      "link": "https://arxiv.org/abs/2604.17411v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.17411v1",
+      "authors": [
+        "Lexuan Liang",
+        "Tao Zou",
+        "Xuxiang Ta",
+        "Zekun Qiu"
+      ],
+      "published": "2026-04-19T12:36:18Z",
+      "updated": "2026-04-19T12:36:18Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "arxiv_id": "2604.17411v1",
+      "score": 10,
+      "topic_tags": [
+        "文本属性图",
+        "语言模型",
+        "图神经网络",
+        "拓扑约束注意力",
+        "双粒度编码"
+      ],
+      "zh_summary": "文本属性图整合了节点文本的语义信息与拓扑结构，在文档分类和信息提取等应用中具有重要价值。现有方法通常使用语言模型（LMs）编码文本内容，然后通过图神经网络（GNNs）处理结构信息。然而，在基于LM的文本编码阶段，大多数方法不仅在词令牌粒度上执行语义交互，还忽略了来自不同节点的文本之间的结构依赖关系。在这项工作中，我们提出了DuConTE，一种具有拓扑约束注意力的双粒度文本编码器。该模型采用两个预训练LMs的级联架构，首先在词令牌粒度编码语义，然后在节点粒度编码语义。在每个LM的自注意力计算中，我们基于节点连接性动态调整注意力掩码矩阵，指导模型学习由图结构通知的语义相关性。此外，在从词令牌嵌入组合节点表示时，我们分别评估在中心节点上下文和邻居上下文下令牌的重要性，从而捕获更多上下文相关的语义信息。在多个基准数据集上的广泛实验表明，DuConTE在大多数数据集上达到了最先进的性能。",
+      "novelty": "提出DuConTE，一种双粒度文本编码器，通过拓扑约束注意力和级联LM架构，在编码文本时同时考虑词令牌和节点粒度，有效整合图结构信息，提升文本属性图上的性能。",
+      "innovation_points": [
+        "方法设计：采用双粒度编码架构，级联两个预训练LMs，分别处理词令牌和节点粒度语义",
+        "训练范式：引入拓扑约束注意力，动态调整注意力掩码基于节点连接性，增强结构感知",
+        "数据：在文本属性图数据集上验证，整合语义和拓扑信息",
+        "架构：结合LM和GNN元素，但聚焦于文本编码阶段的改进"
+      ],
+      "limitations": "模型依赖于预训练LMs，可能受限于LM的泛化能力；拓扑约束注意力增加了计算复杂度，可能影响大规模图的可扩展性；实验主要针对基准数据集，在真实世界复杂图中的应用需进一步验证。",
+      "improvement_directions": [
+        "优化注意力机制以减少计算开销，提高大规模图处理效率",
+        "探索多语言或跨领域文本属性图的编码方法",
+        "集成动态图或时序图结构，扩展模型适用性",
+        "研究少样本或零样本场景下的性能提升策略"
+      ],
+      "engineering_value": "中高，DuConTE可应用于文档分析、社交网络挖掘等实际系统，但需调整以适应特定图结构和文本类型。",
+      "why_relevant": "涉及文本编码和图结构整合，对OCR后的文档处理和信息提取有潜在应用价值，但未直接涉及OCR技术。"
+    },
+    {
+      "title": "MESA: A Training-Free Multi-Exemplar Deep Framework for Restoring Ancient Inscription Textures",
+      "summary": "Ancient inscriptions frequently suffer missing or corrupted regions from fragmentation, erosion, or other damage, hindering reading, and analysis. We review prior image restoration methods and their applicability to inscription image recovery, then introduce MESA (Multi-Exemplar, Style-Aware) -an image-level restoration method that uses well-preserved exemplar inscriptions (from the same epigraphic monument, material, or similar letterforms) to guide reconstruction of damaged text. MESA encodes VGG19 convolutional features as Gram matrices to capture exemplar texture, style, and stroke structure; for each neural network layer it selects the exemplar minimizing Mean-Squared Displacement (MSD) to the damaged input. Layer-wise contribution weights are derived from Optical Character Recognition-estimated character widths in the exemplar set to bias filters toward scales matching letter geometry, and a training mask preserves intact regions so synthesis is restricted to damaged areas. We also summarize prior network architectures and exemplar and single-image synthesis, inpainting, and Generative Adversarial Network (GAN) approaches, highlighting limitations that MESA addresses. Comparative experiments demonstrate the advantages of MESA. Finally, we provide a practical roadmap for choosing restoration strategies given available exemplars and metadata.",
+      "link": "https://arxiv.org/abs/2604.17390v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.17390v1",
+      "authors": [
+        "Vasileios Toulatzis",
+        "Ioannis Fudos"
+      ],
+      "published": "2026-04-19T11:38:03Z",
+      "updated": "2026-04-19T11:38:03Z",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.GR"
+      ],
+      "arxiv_id": "2604.17390v1",
+      "score": 10,
+      "topic_tags": [
+        "古代铭文修复",
+        "图像修复",
+        "多示例合成",
+        "OCR估计",
+        "风格感知"
+      ],
+      "zh_summary": "古代铭文常因碎片化、侵蚀或其他损坏而缺失或损坏区域，阻碍阅读和分析。我们回顾了先前的图像修复方法及其在铭文图像恢复中的适用性，然后介绍了MESA（多示例，风格感知）——一种图像级修复方法，使用保存良好的示例铭文（来自同一碑刻、材料或类似字母形式）来指导损坏文本的重建。MESA编码VGG19卷积特征作为Gram矩阵以捕获示例纹理、风格和笔画结构；对于每个神经网络层，它选择最小化与损坏输入均方位移（MSD）的示例。层间贡献权重从光学字符识别估计的示例集中字符宽度导出，以偏向匹配字母几何的尺度滤波器，并且训练掩码保留完整区域，因此合成仅限于损坏区域。我们还总结了先前的网络架构以及示例和单图像合成、修复和生成对抗网络（GAN）方法，突出了MESA解决的局限性。比较实验展示了MESA的优势。最后，我们提供了根据可用示例和元数据选择修复策略的实用路线图。",
+      "novelty": "提出MESA，一种无需训练的多示例深度框架，用于恢复古代铭文纹理，通过Gram矩阵编码示例风格和结构，并基于OCR估计的字符宽度优化层间权重，实现精确的损坏区域修复。",
+      "innovation_points": [
+        "方法设计：提出MESA框架，利用多示例和风格感知进行铭文修复，无需训练",
+        "数据：基于OCR估计字符宽度，优化滤波器尺度以匹配字母几何",
+        "架构：使用VGG19特征和Gram矩阵捕获纹理和风格信息",
+        "任务定义：聚焦于古代铭文修复，解决特定领域图像恢复问题"
+      ],
+      "limitations": "方法依赖于示例铭文的质量和可用性，如果示例不足或差异大，可能影响修复效果；OCR估计字符宽度可能受损坏区域影响，导致权重不准确；实验主要针对铭文图像，在其他文本修复任务中的泛化性需验证。",
+      "improvement_directions": [
+        "集成更先进的OCR技术以提高字符宽度估计的准确性",
+        "扩展MESA到其他类型文本图像修复，如手写文档或印刷文本",
+        "研究自适应示例选择机制，动态优化示例匹配过程",
+        "探索结合深度学习训练的方法，以处理更复杂损坏模式"
+      ],
+      "engineering_value": "中高，MESA作为无需训练的方法，易于应用于文化遗产保护等实际场景，但需确保示例质量和OCR准确性。",
+      "why_relevant": "直接涉及OCR技术在古代铭文修复中的应用，通过OCR估计字符宽度来指导修复过程，对OCR在图像恢复中的集成有重要参考价值。"
+    }
+  ]
 }
