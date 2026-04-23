@@ -1,90 +1,124 @@
 {
   "meta": {
-    "report_date": "2026-04-22",
-    "generated_at_utc": "2026-04-22 04:17:40",
+    "report_date": "2026-04-23",
+    "generated_at_utc": "2026-04-23 04:22:09",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 2
+    "count": 3
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦于OCR/文档解析领域的两项关键进展：UDM-GRPO提出一种将均匀离散扩散模型与强化学习结合的新方法，在OCR基准测试中准确率从8%提升至57%，显著提升了生成建模的稳定性和性能，具有高工程应用潜力；SAHM基准测试填补了阿拉伯语金融NLP的空白，通过多任务设计和真实数据源支持文档理解研究，但模型在复杂推理任务上仍有局限，工程价值中等。整体趋势显示，强化学习与扩散模型的整合正推动OCR性能突破，而多语言和领域特定基准测试正成为文档解析研究的重要方向。",
-    "trend_summary": "研究趋势表明，OCR/文档解析正从传统方法向基于生成模型和强化学习的优化方向发展，强调训练稳定性和效率提升。同时，多语言和金融等垂直领域的基准测试日益重要，以解决数据稀缺和评估不足问题，推动模型在复杂文档理解任务中的泛化能力。",
+    "executive_summary": "今日研究聚焦于OCR/文档解析的三大前沿方向：跨文字迁移学习、命名实体识别效率优化、以及特定领域文档处理基准构建。论文1成功将TrOCR适配至非洲Ge'ez文字识别，通过创新性词边界处理解决了跨文字迁移的核心难题，在低资源环境下实现高性能。论文2提出的SpanDec框架显著提升了基于span的NER系统效率，直接回应了工业部署中的计算瓶颈。论文3构建的SAHM基准填补了阿拉伯语金融文档处理领域的空白，揭示了当前模型在复杂推理任务上的局限性。整体来看，研究呈现出从通用技术向特定语言/领域深化、从精度优先向精度-效率平衡发展的趋势。",
+    "trend_summary": "当前OCR/文档解析研究呈现三个主要趋势：一是向低资源、非拉丁文字（如非洲、阿拉伯文字）的深度适配与迁移学习；二是工业级应用中对推理效率与部署成本的极致优化；三是针对金融、法律等垂直领域构建高质量基准以驱动专业化模型发展。研究重点正从通用模型能力转向解决具体场景下的实际瓶颈。",
     "common_innovations": [
-      "通过整合强化学习与扩散模型，优化训练过程以提升OCR准确率和稳定性。",
-      "引入基于真实数据的多任务基准测试，扩展文档解析在特定领域（如金融）的应用范围。",
-      "采用轨迹重建和动作定义等机制，增强模型对齐和优化信号，减少训练不稳定。"
+      "通过扩展分词器或引入边界感知机制解决跨文字/跨领域迁移中的结构适配问题",
+      "采用轻量级解码器或过滤策略优化计算密集型任务（如span枚举）的推理效率",
+      "构建专家验证的多任务基准数据集以评估和提升模型在垂直领域的复杂推理能力"
     ],
     "future_directions": [
-      "将UDM-GRPO方法扩展到多语言OCR任务，如手写识别或低资源语言文档解析，以验证泛化性。",
-      "开发跨语言金融NLP基准，结合OCR技术处理多语言文档，提升模型在复杂推理任务上的性能。",
-      "优化训练策略以减少对预训练分布的依赖，适用于低资源或实时OCR应用场景。",
-      "结合图像-文本对等多模态数据，增强模型在文档理解（如表格提取或布局分析）中的表现。",
-      "扩展基准测试到更多金融子领域（如风险管理），支持OCR在自动化合规检查中的工程应用。"
+      "将跨文字迁移学习框架（如词感知加权）扩展到更多非洲音节文字或手写文本识别",
+      "开发针对阿拉伯语等右向左文字金融文档的端到端信息抽取与因果推理模型",
+      "研究span-based NER中过滤机制的动态阈值调整以减少误判并保持高召回率",
+      "探索合成数据增强与真实世界数据微调的结合策略以提升低资源文字OCR的泛化能力",
+      "设计多模态文档解析中文本与版面信息的联合高效解码架构"
     ],
     "engineering_takeaways": [
-      "UDM-GRPO框架可用于提升OCR系统的准确率，适用于图像生成和文档自动化处理。",
-      "SAHM基准测试的数据集和评估框架可支持构建阿拉伯语金融助手或文档解析工具。",
-      "采用Reduced-Step和CFG-Free策略可减少训练计算开销，提高工程部署效率。",
-      "基于量规的开放输出评分方法可增强模型评估的全面性，指导工程优化。"
+      "TrOCR的跨文字适配方案（扩展BPE+词感知损失）可直接用于支持多语言OCR系统，特别是在资源受限的非洲文字场景",
+      "SpanDec的轻量级解码器与候选过滤机制可集成到现有NER流水线，以提升高吞吐量服务的响应速度",
+      "SAHM的评估框架可作为阿拉伯语金融文档处理系统的验证基准，指导模型选型与微调策略"
     ],
     "watchlist": [
       {
-        "title": "UDM-GRPO: Stable and Efficient Group Relative Policy Optimization for Uniform Discrete Diffusion Models",
-        "watch_reason": "在OCR基准测试中准确率大幅提升（从8%到57%），展示了强化学习与扩散模型结合在文档解析中的潜力，可能推动后续工程应用。"
+        "title": "Adapting TrOCR for Printed Tigrinya Text Recognition: Word-Aware Loss Weighting for Cross-Script Transfer Learning",
+        "watch_reason": "其词边界处理机制为跨文字OCR迁移提供了可复用的通用解决方案，可能推动低资源文字识别技术的标准化"
       },
       {
-        "title": "SAHM: A Benchmark for Arabic Financial and Shari'ah-Compliant Reasoning",
-        "watch_reason": "填补了阿拉伯语金融NLP的基准测试空白，为多语言文档解析和OCR技术融合提供数据基础，可能影响金融领域自动化工具开发。"
+        "title": "Decoding Text Spans for Efficient and Accurate Named-Entity Recognition",
+        "watch_reason": "SpanDec框架在保持精度的同时大幅提升效率，对工业级文档信息抽取系统的实时部署有直接影响"
       }
     ]
   },
   "papers": [
     {
-      "title": "UDM-GRPO: Stable and Efficient Group Relative Policy Optimization for Uniform Discrete Diffusion Models",
-      "summary": "Uniform Discrete Diffusion Model (UDM) has recently emerged as a promising paradigm for discrete generative modeling; however, its integration with reinforcement learning remains largely unexplored. We observe that naively applying GRPO to UDM leads to training instability and marginal performance gains. To address this, we propose UDM-GRPO, the first framework to integrate UDM with RL. Our method is guided by two key insights: (i) treating the final clean sample as the action provides more accurate and stable optimization signals; and (ii) reconstructing trajectories via the diffusion forward process better aligns probability paths with the pretraining distribution. Additionally, we introduce two strategies, Reduced-Step and CFG-Free, to further improve training efficiency. UDM-GRPO significantly improves base model performance across multiple T2I tasks. Notably, GenEval accuracy improves from $69\\%$ to $96\\%$ and PickScore increases from $20.46$ to $23.81$, achieving state-of-the-art performance in both continuous and discrete settings. On the OCR benchmark, accuracy rises from $8\\%$ to $57\\%$, further validating the generalization ability of our method. Code is available at https://github.com/Yovecent/UDM-GRPO.",
-      "link": "https://arxiv.org/abs/2604.18518v2",
-      "pdf_url": "https://arxiv.org/pdf/2604.18518v2",
+      "title": "Adapting TrOCR for Printed Tigrinya Text Recognition: Word-Aware Loss Weighting for Cross-Script Transfer Learning",
+      "summary": "Transformer-based OCR models have shown strong performance on Latin and CJK scripts, but their application to African syllabic writing systems remains limited. We present the first adaptation of TrOCR for printed Tigrinya using the Ge'ez script. Starting from a pre-trained model, we extend the byte-level BPE tokenizer to cover 230 Ge'ez characters and introduce Word-Aware Loss Weighting to resolve systematic word-boundary failures that arise when applying Latin-centric BPE conventions to a new script. The unmodified model produces no usable output on Ge'ez text. After adaptation, the TrOCR-Printed variant achieves 0.22% Character Error Rate and 97.20% exact match accuracy on a held-out test set of 5,000 synthetic images from the GLOCR dataset. An ablation study confirms that Word-Aware Loss Weighting is the critical component, reducing CER by two orders of magnitude compared to vocabulary extension alone. The full pipeline trains in under three hours on a single 8 GB consumer GPU. All code, model weights, and evaluation scripts are publicly released.",
+      "link": "https://arxiv.org/abs/2604.20813v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.20813v1",
       "authors": [
-        "Jiaqi Wang",
-        "Haoge Deng",
-        "Ting Pan",
-        "Yang Liu",
-        "Chengyuan Wang",
-        "Fan Zhang",
-        "Yonggang Qi",
-        "Xinlong Wang"
+        "Yonatan Haile Medhanie",
+        "Yuanhua Ni"
       ],
-      "published": "2026-04-20T17:16:50Z",
-      "updated": "2026-04-21T03:05:09Z",
+      "published": "2026-04-22T17:43:50Z",
+      "updated": "2026-04-22T17:43:50Z",
       "categories": [
-        "cs.CV",
-        "cs.LG"
+        "cs.CV"
       ],
-      "arxiv_id": "2604.18518v2",
-      "score": 12,
+      "arxiv_id": "2604.20813v1",
+      "score": 14,
       "topic_tags": [
-        "扩散模型",
-        "强化学习",
-        "生成建模",
         "OCR",
-        "训练优化"
+        "跨文字迁移学习",
+        "Transformer模型",
+        "非洲文字识别",
+        "词边界处理"
       ],
-      "zh_summary": "均匀离散扩散模型（UDM）是离散生成建模的新兴范式，但其与强化学习的结合尚未充分探索。研究发现，简单应用GRPO到UDM会导致训练不稳定和性能提升有限。为此，本文提出UDM-GRPO，首次将UDM与强化学习整合。方法基于两个关键洞见：（i）将最终干净样本作为动作可提供更准确稳定的优化信号；（ii）通过扩散前向过程重建轨迹能更好地对齐概率路径与预训练分布。此外，引入Reduced-Step和CFG-Free策略以提升训练效率。UDM-GRPO在多个T2I任务中显著提升基础模型性能，GenEval准确率从69%提升至96%，PickScore从20.46提升至23.81，在连续和离散设置下均达到最先进水平。在OCR基准测试中，准确率从8%提升至57%，验证了方法的泛化能力。",
-      "novelty": "首次将均匀离散扩散模型与强化学习结合，解决了直接应用GRPO时的训练不稳定问题，通过将最终样本作为动作和轨迹重建机制，实现了更稳定的优化和对齐。",
+      "zh_summary": "Transformer-based OCR模型在拉丁和CJK文字上表现优异，但在非洲音节文字系统中的应用有限。本研究首次将TrOCR适配于使用Ge'ez文字的印刷体Tigrinya文本识别。从预训练模型出发，扩展字节级BPE分词器以覆盖230个Ge'ez字符，并引入词感知损失加权来解决将拉丁中心BPE惯例应用于新文字时产生的系统性词边界失败问题。未修改模型在Ge'ez文本上无可用输出，适配后TrOCR-Printed变体在GLOCR数据集的5000张合成图像测试集上达到0.22%字符错误率和97.20%精确匹配准确率。消融研究确认词感知损失加权是关键组件，相比仅扩展词汇表，将CER降低两个数量级。完整流程在单个8GB消费级GPU上训练不到三小时，所有代码、模型权重和评估脚本已公开。",
+      "novelty": "首次将TrOCR适配于Ge'ez文字的印刷体Tigrinya文本识别，通过扩展BPE分词器和引入词感知损失加权解决跨文字迁移学习中的词边界问题，显著提升性能。",
       "innovation_points": [
-        "方法设计：提出UDM-GRPO框架，整合UDM与强化学习，通过动作定义和轨迹重建优化训练过程。",
-        "训练范式：引入Reduced-Step和CFG-Free策略，提升训练效率，减少计算开销。",
-        "架构创新：利用扩散前向过程重建轨迹，对齐概率路径，增强模型稳定性。"
+        "扩展字节级BPE分词器以覆盖Ge'ez字符",
+        "引入词感知损失加权机制",
+        "针对非洲音节文字系统的跨文字迁移学习设计"
       ],
-      "limitations": "方法主要针对离散生成任务，在连续设置下的泛化能力可能有限；OCR基准测试的准确率提升显著但绝对水平仍较低（57%），表明在复杂OCR场景中仍有改进空间。",
+      "limitations": "研究基于合成图像数据集，可能未完全覆盖真实世界印刷体Tigrinya文本的多样性；未评估对其他非洲文字或手写文本的泛化能力。",
       "improvement_directions": [
-        "扩展方法到更广泛的OCR任务，如手写识别或多语言文档解析，以验证泛化性。",
-        "优化训练策略，减少对预训练分布的依赖，提升在低资源场景下的性能。",
-        "结合更多模态数据（如图像-文本对）增强模型在文档理解任务中的表现。"
+        "扩展到其他非洲文字或手写文本识别",
+        "在真实世界数据集上验证和微调",
+        "探索更高效的训练策略以减少资源需求"
       ],
-      "engineering_value": "高。方法在T2I任务中实现最先进性能，OCR准确率大幅提升，具有实际应用潜力，可用于图像生成、文档解析和自动化处理系统。",
-      "why_relevant": "论文在OCR基准测试中展示显著性能提升（准确率从8%到57%），直接相关于OCR技术改进，为文档解析和生成任务提供新方法。"
+      "engineering_value": "高，提供公开代码和模型，支持低资源环境部署，适用于多语言OCR系统开发，特别是非洲文字处理。",
+      "why_relevant": "直接针对OCR领域中的跨文字迁移学习挑战，方法设计具有通用性，可启发其他低资源文字识别研究。"
+    },
+    {
+      "title": "Decoding Text Spans for Efficient and Accurate Named-Entity Recognition",
+      "summary": "Named Entity Recognition (NER) is a key component in industrial information extraction pipelines, where systems must satisfy strict latency and throughput constraints in addition to strong accuracy. State-of-the-art NER accuracy is often achieved by span-based frameworks, which construct span representations from token encodings and classify candidate spans. However, many span-based methods enumerate large numbers of candidates and process each candidate with marker-augmented inputs, substantially increasing inference cost and limiting scalability in large-scale deployments. In this work, we propose SpanDec, an efficient span-based NER framework that targets this bottleneck. Our main insight is that span representation interactions can be computed effectively at the final transformer stage, avoiding redundant computation in earlier layers via a lightweight decoder dedicated to span representations. We further introduce a span filtering mechanism during enumeration to prune unlikely candidates before expensive processing. Across multiple benchmarks, SpanDec matches competitive span-based baselines while improving throughput and reducing computational cost, yielding a better accuracy-efficiency trade-off suitable for high-volume serving and on-device applications.",
+      "link": "https://arxiv.org/abs/2604.20447v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.20447v1",
+      "authors": [
+        "Andrea Maracani",
+        "Savas Ozkan",
+        "Junyi Zhu",
+        "Sinan Mutlu",
+        "Mete Ozay"
+      ],
+      "published": "2026-04-22T11:09:45Z",
+      "updated": "2026-04-22T11:09:45Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2604.20447v1",
+      "score": 9,
+      "topic_tags": [
+        "命名实体识别",
+        "span-based方法",
+        "效率优化",
+        "轻量级解码器",
+        "工业部署"
+      ],
+      "zh_summary": "命名实体识别（NER）是工业信息抽取流水线的关键组件，系统需在强准确性基础上满足严格延迟和吞吐量约束。最先进的NER准确性常通过基于span的框架实现，该框架从token编码构建span表示并分类候选span。然而，许多基于span的方法枚举大量候选，并使用标记增强输入处理每个候选，显著增加推理成本并限制大规模部署的可扩展性。本研究提出SpanDec，一个高效的基于span的NER框架，针对此瓶颈。主要见解是span表示交互可在最终transformer阶段有效计算，通过专用于span表示的轻量级解码器避免早期层的冗余计算。进一步引入span过滤机制在枚举期间修剪不可能候选，减少昂贵处理。在多个基准测试中，SpanDec匹配竞争性基于span的基线，同时提高吞吐量和降低计算成本，提供更好的准确性-效率权衡，适用于高容量服务和设备端应用。",
+      "novelty": "提出SpanDec框架，通过轻量级解码器和span过滤机制优化基于span的NER计算效率，在保持准确性的同时显著降低推理成本。",
+      "innovation_points": [
+        "在最终transformer阶段计算span表示交互",
+        "引入轻量级解码器专用于span表示",
+        "设计span过滤机制以修剪候选"
+      ],
+      "limitations": "研究主要关注英文NER任务，未评估跨语言或多领域泛化能力；过滤机制可能引入误判风险。",
+      "improvement_directions": [
+        "扩展到多语言或领域特定NER任务",
+        "优化过滤机制以减少误判",
+        "集成到端到端信息抽取系统中"
+      ],
+      "engineering_value": "高，直接解决工业部署中的效率瓶颈，支持高吞吐量和低延迟应用，如实时信息处理和边缘计算。",
+      "why_relevant": "针对OCR后处理和信息抽取中的效率问题，方法具有通用性，可应用于文档解析流水线。"
     },
     {
       "title": "SAHM: A Benchmark for Arabic Financial and Shari'ah-Compliant Reasoning",
@@ -118,27 +152,27 @@
       "arxiv_id": "2604.19098v1",
       "score": 4,
       "topic_tags": [
-        "金融NLP",
-        "阿拉伯语处理",
-        "基准测试",
-        "文档理解",
-        "伊斯兰金融"
+        "阿拉伯语NLP",
+        "金融文档处理",
+        "伊斯兰教法合规",
+        "基准构建",
+        "指令调优"
       ],
-      "zh_summary": "英语金融NLP通过情感分析、文档理解和问答等基准测试快速发展，而阿拉伯语金融NLP尽管在实际需求强烈（如可信金融和伊斯兰金融助手）下仍相对未被充分探索。本文介绍SAHM，一个面向阿拉伯语金融NLP和伊斯兰教法合规推理的文档基础基准测试和指令调优数据集。SAHM包含14,380个专家验证实例，涵盖七个任务：AAOIFI标准问答、教法裁决问答/多选题、会计和商业考试、金融情感分析、抽取式摘要和事件-原因推理，数据源自真实监管、法理和企业来源。评估19个强大开源和专有LLM，使用任务特定指标和基于量规的开放输出评分，发现阿拉伯语流利度不能可靠转化为证据基础的金融推理：模型在识别式任务上强于生成和因果推理，最大差距在事件-原因推理任务上。发布基准测试、评估框架和指令调优模型，以支持未来可信阿拉伯语金融NLP研究。",
-      "novelty": "首次构建针对阿拉伯语金融和伊斯兰教法合规推理的综合性基准测试SAHM，填补了该领域的数据和评估空白，通过多任务设计和真实数据源提升研究实用性。",
+      "zh_summary": "英语金融NLP通过情感、文档理解和金融问答基准快速发展，而阿拉伯语金融NLP尽管对可信金融和伊斯兰金融助手有强烈实际需求，仍相对未充分探索。本研究引入SAHM，一个基于文档的基准和指令调优数据集，用于阿拉伯语金融NLP和伊斯兰教法合规推理。SAHM包含14,380个专家验证实例，涵盖七项任务：AAOIFI标准问答、教令问答/多项选择、会计和商业考试、金融情感分析、抽取式摘要和事件-原因推理，从真实监管、法理和企业来源整理。使用任务特定指标和基于量规的开放输出评分评估19个强开源和专有LLM，发现阿拉伯语流利度不能可靠转化为基于证据的金融推理：模型在识别式任务上明显强于生成和因果推理，最大差距在事件-原因推理上。发布基准、评估框架和指令调优模型以支持未来可信阿拉伯语金融NLP研究。",
+      "novelty": "首次构建SAHM基准，专注于阿拉伯语金融和伊斯兰教法合规推理，提供多任务数据集和评估框架，填补该领域空白。",
       "innovation_points": [
-        "数据创新：收集并专家验证大规模阿拉伯语金融文档数据，涵盖监管、法理和企业来源，增强数据多样性和真实性。",
-        "任务定义：设计七个任务，包括AAOIFI标准QA和事件-原因推理，扩展了金融NLP的任务范围。",
-        "评估框架：引入基于量规的开放输出评分，提供更全面的模型性能评估，超越传统指标。"
+        "构建多任务阿拉伯语金融NLP基准",
+        "涵盖伊斯兰教法合规推理任务",
+        "提供专家验证数据集和评估框架"
       ],
-      "limitations": "基准测试主要针对阿拉伯语，可能不直接适用于其他语言；模型在生成和因果推理任务上表现较弱，表明当前方法在处理复杂金融推理时存在局限。",
+      "limitations": "数据集规模相对有限，可能未覆盖所有金融子领域；模型评估显示在生成和因果推理任务上性能不足。",
       "improvement_directions": [
-        "开发跨语言金融NLP基准，以促进多语言文档解析和OCR技术的融合。",
-        "优化模型架构，提升在生成和因果推理任务上的性能，例如通过增强上下文理解或引入外部知识。",
-        "扩展数据集到更多金融子领域（如风险管理或合规检查），以支持更广泛的OCR应用。"
+        "扩展数据集以覆盖更多金融场景和语言变体",
+        "开发专门针对阿拉伯语金融推理的模型架构",
+        "优化指令调优策略以提升生成任务性能"
       ],
-      "engineering_value": "中等。基准测试和数据集为阿拉伯语金融NLP研究提供基础，但直接工程应用依赖于后续模型开发；可用于构建金融助手、文档自动化处理系统。",
-      "why_relevant": "论文涉及文档基础任务和抽取式摘要，与OCR和文档解析技术相关，为多语言金融文档处理提供数据和方法支持。"
+      "engineering_value": "中等，提供基准和模型支持研究和开发，但直接工程应用需进一步模型优化和领域适配。",
+      "why_relevant": "涉及文档解析和NLP在金融领域的应用，对OCR输出的文本处理和信息抽取有间接支持作用。"
     }
   ]
 }
