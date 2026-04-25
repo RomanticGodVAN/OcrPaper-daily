@@ -1,131 +1,39 @@
 {
   "meta": {
-    "report_date": "2026-04-24",
-    "generated_at_utc": "2026-04-24 04:26:17",
+    "report_date": "2026-04-25",
+    "generated_at_utc": "2026-04-25 04:08:02",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 3
+    "count": 1
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦于低资源文字OCR、高效NER推理和视觉语言模型推理可信性。TrOCR在提格里尼亚语上取得突破，SpanDec提出轻量NER架构，VG-CoT通过自动化流程提升视觉推理透明度。",
-    "trend_summary": "低资源OCR和跨脚本迁移学习、端侧高效推理、模块化自动化评估成为热点。",
+    "executive_summary": "今日重点论文《VG-CoT》提出了一种自动化构建视觉接地思维链数据集的方法，通过集成OCR和检测模型实现推理步骤与图像区域对齐，显著提升了视觉语言模型在文档解析等任务中的可解释性和准确性，其全自动化流程具有工程实用性。",
+    "trend_summary": "当前OCR与文档解析研究正从单纯提升识别精度转向增强模型的推理可信度与可解释性，通过显式视觉接地和多模态思维链来对齐推理过程与证据，同时注重低成本、自动化数据集构建。",
     "common_innovations": [
-      "利用合成数据和损失函数设计解决低资源文字OCR问题。",
-      "通过轻量解码器和候选过滤提升NER推理效率。",
-      "自动化流程提取视觉证据并生成链条式推理以增强模型可信性。",
-      "开源代码和数据集促进可复现研究和工业应用。"
+      "集成OCR模型提取文档中的文本级视觉证据，支撑多步推理。",
+      "利用大型语言模型（如GPT-4o）自动化生成逐步接地推理，降低人工标注成本。",
+      "基于推理内容动态调整目标检测（理由驱动的开集检测），提升视觉证据的相关性。"
     ],
     "future_directions": [
-      "扩展TrOCR到真实场景提格里尼亚语手写体识别并评估版面分析集成效果。",
-      "研究跨脚本分词策略对低资源文字OCR鲁棒性的影响。",
-      "将SpanDec的跨度过滤策略与动态编码器深度结合，实现自适应推理加速。",
-      "探索SpanDec在端到端OCR-NER联合模型中的集成方案。",
-      "在VG-CoT中引入像素级分割证据，提升视觉接地细粒度。",
-      "开发无需GPT-4的自动推理链生成方法，降低依赖和偏差。",
-      "将VG-CoT应用于文档级实体推理任务，验证其通用性。"
+      "探索基于规则或强化学习的接地推理生成策略，减少对大型语言模型的依赖与偏差。",
+      "将接地推理框架扩展到视频文档或3D场景，处理多帧文本追踪与空间关系。",
+      "研究不同OCR/检测模型对推理质量的鲁棒性，开发自适应证据提取策略以提升系统稳定性。",
+      "设计更细粒度的评估指标，涵盖文本识别准确率、推理步骤对齐度、决策可解释性等多维度。"
     ],
     "engineering_takeaways": [
-      "TrOCR可在消费级GPU快速微调，适合低资源语言OCR部署。",
-      "SpanDec的轻量解码器设计可在保持准确率下显著提升吞吐量。",
-      "VG-CoT的自动化评估管线可复用为文档理解系统评测工具。",
-      "开源代码（TrOCR、SpanDec、VG-CoT）可直接用于工程实验。"
+      "可复用其自动化三阶段流程（证据提取-推理生成-接地优化）构建领域定制数据集，降低人力成本。",
+      "集成轻量级OCR模型（如PaddleOCR、Tesseract）作为证据提取模块，增强文档解析的可解释性。",
+      "采用理由驱动的开集检测策略，可根据推理内容灵活调整检测目标，避免固定类别限制。"
     ],
     "watchlist": [
       {
-        "title": "Adapting TrOCR for Printed Tigrinya Text Recognition: Word-Aware Loss Weighting for Cross-Script Transfer Learning",
-        "watch_reason": "开源且验证效果好（CER 0.22%），是低资源文字OCR的实用基线，未来真实场景评估值得跟进。"
-      },
-      {
-        "title": "Decoding Text Spans for Efficient and Accurate Named-Entity Recognition",
-        "watch_reason": "提供高吞吐NER解决方案，若公开具体加速比数据，对工业部署有直接参考价值。"
-      },
-      {
         "title": "VG-CoT: Towards Trustworthy Visual Reasoning via Grounded Chain-of-Thought",
-        "watch_reason": "自动化评估方法可应用于文档推理系统，尤其关注其OCR+检测模块的集成效果。"
+        "watch_reason": "提出全自动化视觉接地推理框架，能够直接应用于文档解析任务以提升可信度，具有工程部署潜力。"
       }
     ]
   },
   "papers": [
-    {
-      "title": "Adapting TrOCR for Printed Tigrinya Text Recognition: Word-Aware Loss Weighting for Cross-Script Transfer Learning",
-      "summary": "Transformer-based OCR models have shown strong performance on Latin and CJK scripts, but their application to African syllabic writing systems remains limited. We present the first adaptation of TrOCR for printed Tigrinya using the Ge'ez script. Starting from a pre-trained model, we extend the byte-level BPE tokenizer to cover 230 Ge'ez characters and introduce Word-Aware Loss Weighting to resolve systematic word-boundary failures that arise when applying Latin-centric BPE conventions to a new script. The unmodified model produces no usable output on Ge'ez text. After adaptation, the TrOCR-Printed variant achieves 0.22% Character Error Rate and 97.20% exact match accuracy on a held-out test set of 5,000 synthetic images from the GLOCR dataset. An ablation study confirms that Word-Aware Loss Weighting is the critical component, reducing CER by two orders of magnitude compared to vocabulary extension alone. The full pipeline trains in under three hours on a single 8 GB consumer GPU. All code, model weights, and evaluation scripts are publicly released.",
-      "link": "https://arxiv.org/abs/2604.20813v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.20813v1",
-      "authors": [
-        "Yonatan Haile Medhanie",
-        "Yuanhua Ni"
-      ],
-      "published": "2026-04-22T17:43:50Z",
-      "updated": "2026-04-22T17:43:50Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2604.20813v1",
-      "score": 14,
-      "topic_tags": [
-        "OCR",
-        "跨脚本迁移学习",
-        "损失函数设计",
-        "低资源文字"
-      ],
-      "zh_summary": "提出首个适用于提格里尼亚语（Ge'ez文字）的TrOCR模型，通过词汇感知损失加权解决跨脚本词边界问题，在合成测试集上达到0.22%字符错误率和97.20%精确匹配率。",
-      "novelty": "首次将TrOCR应用于非洲音节文字（Ge'ez），并设计词汇感知损失加权策略",
-      "innovation_points": [
-        "针对Ge'ez文字扩展BPE词表至230个字符",
-        "提出词汇感知损失加权（Word-Aware Loss Weighting）解决跨脚本词边界失败问题",
-        "在单张8GB消费级GPU上3小时内完成训练"
-      ],
-      "limitations": "仅在合成数据上验证，未见真实场景评估；仅针对印刷体文本",
-      "improvement_directions": [
-        "扩展到手写体或混合场景",
-        "探索更鲁棒的跨脚本分词策略",
-        "与版面分析等预处理模块集成"
-      ],
-      "engineering_value": "开源全部代码和模型，训练效率高，适合资源受限场景",
-      "why_relevant": "展示了预训练OCR模型对低资源文字的适应方法，对OCR系统跨语言迁移有参考意义"
-    },
-    {
-      "title": "Decoding Text Spans for Efficient and Accurate Named-Entity Recognition",
-      "summary": "Named Entity Recognition (NER) is a key component in industrial information extraction pipelines, where systems must satisfy strict latency and throughput constraints in addition to strong accuracy. State-of-the-art NER accuracy is often achieved by span-based frameworks, which construct span representations from token encodings and classify candidate spans. However, many span-based methods enumerate large numbers of candidates and process each candidate with marker-augmented inputs, substantially increasing inference cost and limiting scalability in large-scale deployments. In this work, we propose SpanDec, an efficient span-based NER framework that targets this bottleneck. Our main insight is that span representation interactions can be computed effectively at the final transformer stage, avoiding redundant computation in earlier layers via a lightweight decoder dedicated to span representations. We further introduce a span filtering mechanism during enumeration to prune unlikely candidates before expensive processing. Across multiple benchmarks, SpanDec matches competitive span-based baselines while improving throughput and reducing computational cost, yielding a better accuracy-efficiency trade-off suitable for high-volume serving and on-device applications.",
-      "link": "https://arxiv.org/abs/2604.20447v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.20447v1",
-      "authors": [
-        "Andrea Maracani",
-        "Savas Ozkan",
-        "Junyi Zhu",
-        "Sinan Mutlu",
-        "Mete Ozay"
-      ],
-      "published": "2026-04-22T11:09:45Z",
-      "updated": "2026-04-22T11:09:45Z",
-      "categories": [
-        "cs.CL"
-      ],
-      "arxiv_id": "2604.20447v1",
-      "score": 9,
-      "topic_tags": [
-        "命名实体识别",
-        "跨度分类",
-        "推理加速",
-        "轻量架构"
-      ],
-      "zh_summary": "提出SpanDec，一种高效的基于跨度（span）的命名实体识别框架，通过轻量解码器避免早期层冗余计算，并引入跨度过滤机制，在保持准确率的同时提升吞吐量并降低计算成本。",
-      "novelty": "在最终Transformer层有效计算跨度表示交互，避免早期层冗余计算",
-      "innovation_points": [
-        "设计轻量解码器专注跨度表示，减少早期层计算",
-        "引入跨度过滤机制剪枝不可能候选",
-        "在多个基准上匹配基线准确率同时提升吞吐量"
-      ],
-      "limitations": "未给出具体加速比和计算量对比数据；可能对长文本或高重叠实体场景需进一步验证",
-      "improvement_directions": [
-        "结合动态编码器深度或自适应推理加速",
-        "探索更优的过滤策略以平衡召回与效率",
-        "适配端到端OCR-NER联合模型"
-      ],
-      "engineering_value": "适用于高吞吐工业部署和端侧设备，平衡准确率与效率",
-      "why_relevant": "提出通用NER效率优化框架，可迁移至文档信息抽取场景"
-    },
     {
       "title": "VG-CoT: Towards Trustworthy Visual Reasoning via Grounded Chain-of-Thought",
       "summary": "The advancement of Large Vision-Language Models (LVLMs) requires precise local region-based reasoning that faithfully grounds the model's logic in actual visual evidence. However, existing datasets face limitations in scalability due to extensive manual annotation and lack of explicit alignment between multi-step reasoning and corresponding image regions, which constrains the evaluation of model trustworthiness. To address these challenges, we propose the Visual Grounding Chain-of-Thought (VG-CoT) dataset, which explicitly links each reasoning step to real visual evidence within the image through a fully automated three-stage pipeline. The pipeline first extracts object- and text-level visual evidence using state-of-the-art detection and OCR models, then generates step-by-step grounded reasoning with GPT-4o, and finally refines the grounding through a rationale-driven open-set detection process. In addition, we introduce a new benchmark that comprehensively evaluates LVLMs reasoning across three complementary dimensions: Rationale Quality, Answer Accuracy, and Reasoning-Answer Alignment. Experiments with representative LVLMs, including LLaVA-1.5 and Qwen2-VL, demonstrate consistent improvements on most evaluation metrics, confirming that VG-CoT effectively enhances trustworthy, evidence-based reasoning while maintaining scalable and cost-efficient dataset construction. The dataset and code will be released publicly upon acceptance to facilitate further research.",
@@ -146,27 +54,28 @@
       "arxiv_id": "2604.21396v1",
       "score": 6,
       "topic_tags": [
-        "视觉语言模型",
-        "链式推理",
-        "视觉接地",
+        "视觉推理",
+        "接地推理",
+        "数据集构建",
         "评估基准",
-        "多模态"
+        "可信AI"
       ],
-      "zh_summary": "提出视觉接地链式推理（VG-CoT）数据集及自动化构建流程，通过检测和OCR提取视觉证据，生成接地推理链，并提供多维度评估基准，提升大型视觉语言模型的可信推理能力。",
-      "novelty": "全自动流程将多步推理与图像区域显式对齐，无需人工标注",
+      "zh_summary": "提出视觉接地思维链(VG-CoT)数据集，通过自动化三阶段流程将多步推理与图像中的真实视觉证据对齐，包括使用检测和OCR模型提取视觉证据、利用GPT-4o生成逐步接地推理、并通过理由驱动的开集检测优化接地。同时引入新基准，从理由质量、答案准确性、推理-答案对齐三个维度评估大型视觉语言模型(LVLM)的推理可信度。实验表明，VG-CoT能有效增强基于证据的可信推理，且数据构建可扩展、低成本。",
+      "novelty": "提出全自动化流程构建视觉推理数据集，实现推理步骤与图像区域显式对齐，并设计多维度评估基准。",
       "innovation_points": [
-        "三步自动管线：视觉证据提取 → 推理链生成 → 开放集检测优化接地",
-        "引入三项评估维度：推理质量、答案准确性、推理-答案对齐",
-        "在LLaVA-1.5和Qwen2-VL上验证一致性改进"
+        "全自动化三阶段流程：自动提取视觉证据、生成接地推理、优化接地，无需人工标注。",
+        "集成OCR模型提取文本级视觉证据，增强对文档等场景的推理能力。",
+        "理由驱动的开集检测：基于推理内容动态调整检测目标，而非固定类别。",
+        "多维度评估基准：综合理由质量、答案准确性、推理-答案对齐三个互补维度。"
       ],
-      "limitations": "依赖现有检测和OCR模型的质量；GPT-4o生成可能引入偏差",
+      "limitations": "依赖GPT-4o生成推理可能引入偏差；检测模型精度影响低层视觉证据质量；仅评估LVLM，未涉及纯语言模型或跨模态模型。",
       "improvement_directions": [
-        "扩展到更细粒度的视觉证据（如像素级分割）",
-        "探索少样本或无需GPT-4o的生成方案",
-        "集成到文档理解系统中的实体级推理"
+        "探索更少依赖大型语言模型的生成策略，如基于规则或强化学习的方法。",
+        "将接地推理扩展到视频或3D场景，处理多帧或空间关系。",
+        "研究不同检测模型对推理质量的鲁棒性，开发自适应证据提取策略。"
       ],
-      "engineering_value": "开源代码和数据集，为视觉语言模型的可信评估提供自动化工具",
-      "why_relevant": "其接地推理和OCR组件直接关联文档解析中的多模态理解与验证"
+      "engineering_value": "为构建大规模、高质量的可信视觉推理数据集提供低成本自动化方案，可直接用于提升LVLM在文档分析、视觉问答等任务中的可解释性和准确性。",
+      "why_relevant": "该研究与OCR/文档解析高度相关，因其流程中明确使用OCR模型提取文本视觉证据，且生成推理涉及文档图像中的文本-区域对应关系，对提升文档理解的可信推理有直接价值。"
     }
   ]
 }
