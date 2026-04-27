@@ -1,26 +1,18 @@
 {
   "meta": {
-    "report_date": "2026-04-26",
-    "generated_at_utc": "2026-04-26 04:30:38",
+    "report_date": "2026-04-27",
+    "generated_at_utc": "2026-04-27 04:38:34",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
     "count": 0
   },
   "synthesis": {
-    "executive_summary": "基于今日论文清单，暂无新论文收录，研究动态无变化。",
-    "trend_summary": "当前无显著趋势。",
+    "executive_summary": "本日报基于空论文清单，因此未发现新的 OCR/文档解析技术突破或趋势。",
+    "trend_summary": "无新论文，无法提取趋势。",
     "common_innovations": [],
-    "future_directions": [
-      "探索基于视觉Transformer的端到端OCR模型以提升不规则文本识别精度。",
-      "研究半监督和自监督方法减少大规模标注依赖。",
-      "利用多模态预训练模型增强文档布局与内容理解。",
-      "开发轻量化模型实现移动端实时文档解析。",
-      "将OCR与知识图谱结合提升结构化信息抽取能力。"
-    ],
-    "engineering_takeaways": [
-      "今日无新工程建议。"
-    ],
+    "future_directions": [],
+    "engineering_takeaways": [],
     "watchlist": []
   },
   "papers": []
