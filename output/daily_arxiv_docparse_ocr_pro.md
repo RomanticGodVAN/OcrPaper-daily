@@ -1,55 +1,23 @@
-# OCR / 文档解析研究日报（2026-04-30）
+# OCR / 文档解析研究日报（2026-05-01）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-04-30 04:44:06`
+- 生成时间（UTC）：`2026-05-01 04:57:29`
 - 大模型综合分析：`关闭`
-- 备注：DeepSeek 处理失败：Expecting ',' delimiter: line 77 column 3 (char 3595)
+- 备注：DeepSeek 处理失败：Expecting ',' delimiter: line 78 column 3 (char 3794)
 
 ## 三、今日论文概览
 
-1. **The Structured Output Benchmark: A Multi-Source Benchmark for Evaluating Structured Output Quality in Large Language Models**
-2. **A Multistage Extraction Pipeline for Long Scanned Financial Documents: An Empirical Study in Industrial KYC Workflows**
+1. **A Multistage Extraction Pipeline for Long Scanned Financial Documents: An Empirical Study in Industrial KYC Workflows**
+2. **Linguistically Informed Multimodal Fusion for Vietnamese Scene-Text Image Captioning: Dataset, Graph Framework, and Phonological Attention**
 3. **OCR-Memory: Optical Context Retrieval for Long-Horizon Agent Memory**
-4. **GPT-Image-2 in the Wild: A Twitter Dataset of Self-Reported AI-Generated Images from the First Week of Deployment**
+4. **SpecVQA: A Benchmark for Spectral Understanding and Visual Question Answering in Scientific Images**
 
 ## 八、论文逐篇解析
 
-### 1. The Structured Output Benchmark: A Multi-Source Benchmark for Evaluating Structured Output Quality in Large Language Models
-
-- arXiv: [2604.25359v1](https://arxiv.org/abs/2604.25359v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2604.25359v1)
-- 作者: Abhinav Kumar Singh, Harsha Vardhan Khurdula, Yoeven D Khemlani, Vineet Agarwal
-- 发布时间: 2026-04-28T08:27:01Z
-- 分类: cs.CL, cs.AI
-- 相关性评分: 22
-
-**原始摘要**
-
-Large Language Models are increasingly being deployed to extract structured data from unstructured
-and semi-structured sources: parsing invoices, medical records, and converting PDF documents to
-database entries. Yet existing benchmarks for structured output generation either focus on schema
-compliance alone, or evaluate value correctness within a single source domain. We introduce SOB (The
-Structured Output Benchmark), a multi-source benchmark spanning three source modalities: native
-text, images, and audio conversations. All models receive a text-normalized representation of their
-context regardless of source modality; this deliberate design isolates structured-output capability
-from raw vision or speech-processing quality, ensuring a fair, source-agnostic comparison. Our
-benchmark comprises 5,000 text evaluation records derived from multi-hop QA drawn from a
-25,091-record full corpus, 209 image records from OCR-processed PDFs across seven document types
-including multi-column layouts, dense tables, scanned historical documents, small-print text, and
-mathematical typesetting, and 115 audio records from the AMI corpus. Each record pairs a natural-
-language question with a JSON schema that the model must follow and a ground-truth answer verified
-against the source context. We evaluate 21 frontier and open-weight models across three source
-domains and seven metrics. Our results reveal a consistent pattern: models achieve near-perfect
-schema compliance, yet the best Value Accuracy, measured by exact leaf-value match, reaches only
-83.0% on text, 67.2% on images, and 23.7% on audio, where longer context makes extraction
-substantially harder. We release the dataset, evaluation pipeline, and all related code.
-
----
-
-### 2. A Multistage Extraction Pipeline for Long Scanned Financial Documents: An Empirical Study in Industrial KYC Workflows
+### 1. A Multistage Extraction Pipeline for Long Scanned Financial Documents: An Empirical Study in Industrial KYC Workflows
 
 - arXiv: [2604.26462v1](https://arxiv.org/abs/2604.26462v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2604.26462v1)
@@ -75,6 +43,35 @@ accuracy by up to 31.9 percentage points. The best configuration, PaddleOCR with
 achieves 87.27 percent accuracy. Ablation studies show that page-level retrieval is the dominant
 factor in performance improvements, particularly for complex financial statements and non-English
 documents.
+
+---
+
+### 2. Linguistically Informed Multimodal Fusion for Vietnamese Scene-Text Image Captioning: Dataset, Graph Framework, and Phonological Attention
+
+- arXiv: [2604.27712v1](https://arxiv.org/abs/2604.27712v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.27712v1)
+- 作者: Nhi Ngoc-Yen Nguyen, Anh-Duc Nguyen, Nghia Hieu Nguyen, Kiet Van Nguyen, Ngan Luu-Thuy Nguyen
+- 发布时间: 2026-04-30T10:57:38Z
+- 分类: cs.CV, cs.CL
+- 相关性评分: 9
+
+**原始摘要**
+
+Scene-text image captioning requires fusing three information streams -- visual features, OCR-
+detected text, and linguistic knowledge -- to generate descriptions that faithfully integrate text
+visible in images. Existing fusion approaches treat text as language-agnostic, which fails for
+Vietnamese: a tonal language where diacritics alter word meaning, OCR errors are pervasive, and word
+boundaries are ambiguous. We argue that Vietnamese scene-text captioning demands
+\textit{linguistically informed multimodal fusion}, where language-specific structural knowledge is
+explicitly incorporated into the fusion mechanism. Motivated from these insights, we propose
+\textbf{HSTFG} (Heterogeneous Scene-Text Fusion Graph), a general-purpose graph fusion framework
+with learned spatial attention bias, and show through topology analysis that cross-modal graph edges
+are harmful for scene-text fusion. Building on this finding, we design \textbf{PhonoSTFG}
+(Phonological Scene-Text Fusion Graph) which specializes graph-level fusion for Vietnamese
+linguistic reasoning. To support evaluation, we introduce \textbf{ViTextCaps}, the first large-scale
+Vietnamese scene-text captioning dataset (\textbf{15{,}729} images with \textbf{74{,}970} captions),
+with comprehensive linguistic analysis showing that 52.8\% of the vocabulary is at risk of diacritic
+collision.
 
 ---
 
@@ -106,29 +103,31 @@ preserving faithful evidence recovery.
 
 ---
 
-### 4. GPT-Image-2 in the Wild: A Twitter Dataset of Self-Reported AI-Generated Images from the First Week of Deployment
+### 4. SpecVQA: A Benchmark for Spectral Understanding and Visual Question Answering in Scientific Images
 
-- arXiv: [2604.25370v1](https://arxiv.org/abs/2604.25370v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2604.25370v1)
-- 作者: Kidus Zewde, Simiao Ren, Xingyu Shen, Jenny Wu, Yuchen Zhou, Tommy Duong, Zikang Zhang, Ethan Traister
-- 发布时间: 2026-04-28T08:35:51Z
-- 分类: cs.CV, cs.AI
-- 相关性评分: 9
+- arXiv: [2604.28039v1](https://arxiv.org/abs/2604.28039v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2604.28039v1)
+- 作者: Jialu Shen, Han Lyu, Suyang Zhong, Hanzheng Li, Haoyi Tao, Nan Wang, Changhong Chen, Xi Fang
+- 发布时间: 2026-04-30T15:51:10Z
+- 分类: cs.AI
+- 相关性评分: 6
 
 **原始摘要**
 
-The release of GPT-image-2 by OpenAI marks a watershed moment in AI-generated imagery: the boundary
-between photographic reality and synthetic content has never been more difficult to discern. We
-introduce the GPT-Image-2 Twitter Dataset, the first published dataset of GPT-image-2 generated
-images, sourced from publicly available Twitter/X posts in the immediate aftermath of the model's
-April 21, 2026 release. Leveraging the Twitter API v2 and a multi-stage curation pipeline spanning
-multilingual text heuristics (English, Japanese, and Chinese), browser-automated Twitter "Made with
-AI" badge verification, and model name variant matching, we curate 10,217 confirmed GPT-image-2
-images from 27,662 collected records over a six-day window. We characterize the dataset across four
-analyses: CLIP-based zero-shot subject taxonomy, OCR text legibility (82.0% of images contain
-detectable text), face detection (59.2% of images, 22,583 total faces), and semantic clustering (137
-CLIP ViT-L/14 clusters). A key negative result is that C2PA content credentials are systematically
-stripped by Twitter's CDN on upload, rendering cryptographic provenance verification infeasible for
-social-media-sourced AI images. The dataset and all curation code are released publicly.
+Spectra are a prevalent yet highly information-dense form of scientific imagery, presenting
+substantial challenges to multimodal large language models (MLLMs) due to their unstructured and
+domain-specific characteristics. Here we introduce SpecVQA, a professional scientific-image
+benchmark for evaluating multimodal models on scientific spectral understanding, covering 7
+representative spectrum types with expert-annotated question-answer pairs. The aim comprises two
+aspects: spectra scientific QA evaluation and corresponding underlying task evaluation. SpecVQA
+contains 620 figures and 3100 QA pairs curated from peer-reviewed literature, targeting both direct
+information extraction and domain-specific reasoning. To effectively reduce token length while
+preserving essential curve characteristics, we propose a spectral data sampling and interpolation
+reconstruction approach. Ablation studies further confirm that the approach achieves substantial
+performance improvements on the proposed benchmark. We test the capability of prominent MLLMs in
+scientific spectral understanding on our benchmark and present a leaderboard. This work represents
+an essential step toward enhancing spectral understanding in multimodal large models and suggests
+promising directions for extending visual-language models to broader scientific research and data
+analysis.
 
 ---
