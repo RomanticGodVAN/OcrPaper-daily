@@ -1,52 +1,52 @@
-# OCR / 文档解析研究日报（2026-05-01）
+# OCR / 文档解析研究日报（2026-05-02）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-05-01 04:57:29`
-- 大模型综合分析：`关闭`
-- 备注：DeepSeek 处理失败：Expecting ',' delimiter: line 78 column 3 (char 3794)
+- 生成时间（UTC）：`2026-05-02 04:27:06`
+- 大模型综合分析：`开启`
+
+## 一、今日执行摘要
+
+> 今日论文集中于两个方向：一是针对越南语场景文本图像描述的语言感知多模态融合，二是面向科学光谱图像的多模态问答基准。前者揭示了跨模态图边可能有害的反直觉发现，并构建了首个大型越南语数据集；后者提出了光谱数据采样与插值重建方法，显著提升大模型在科学图像理解上的性能。
+
+## 二、今日趋势判断
+
+当前 OCR 与文档解析研究正从通用场景文本向特定语言和科学领域深化，多模态融合与预训练大模型适配成为关键创新点。语言感知和谱域理解是前沿趋势。
 
 ## 三、今日论文概览
 
-1. **A Multistage Extraction Pipeline for Long Scanned Financial Documents: An Empirical Study in Industrial KYC Workflows**
-2. **Linguistically Informed Multimodal Fusion for Vietnamese Scene-Text Image Captioning: Dataset, Graph Framework, and Phonological Attention**
-3. **OCR-Memory: Optical Context Retrieval for Long-Horizon Agent Memory**
-4. **SpecVQA: A Benchmark for Spectral Understanding and Visual Question Answering in Scientific Images**
+1. **Linguistically Informed Multimodal Fusion for Vietnamese Scene-Text Image Captioning: Dataset, Graph Framework, and Phonological Attention** | 标签：场景文本图像描述、多模态图融合、声调语言、越南语OCR、数据集构建
+2. **SpecVQA: A Benchmark for Spectral Understanding and Visual Question Answering in Scientific Images** | 标签：科学图像理解、光谱分析、多模态问答、数据采样与重建、大模型评估
+
+## 四、今天 OCR / 文档解析论文里的主要创新点
+
+- 跨模态融合中，图结构设计需警惕跨模态边引入噪声，可能对融合有害。
+- 针对特定场景（如越南语、光谱）定制 OCR 前处理或特征压缩方法，可有效提升下游任务效果。
+
+## 五、后续 OCR 领域值得推进的改进方向
+
+- 探索其他声调语言（如中文、泰语）的语言感知融合策略，验证图拓扑结论的通用性。
+- 设计更高效的图结构或注意力机制，减少跨模态交互中的噪声传递。
+- 扩展科学光谱问答数据集至更多光谱类型和复杂任务（如多峰拟合、实时分析）。
+- 研究端到端光谱曲线编码器，减少对预训练视觉模型的依赖，降低 token 开销。
+- 引入领域知识图谱或预训练语言模型，增强科学图像中隐含物理、化学规则的推理能力。
+
+## 六、工程落地启发
+
+- ViTextCaps 数据集可直接用于越南语场景文本应用，包括图像检索、辅助阅读等。
+- SpecVQA 的采样与插值方法可降低大模型处理长序列光谱数据的计算成本，建议集成到现有文档解析管线中。
+- 语言感知融合思路可用于其他语言（如阿拉伯语、泰语）的 OCR 场景描述系统开发。
+
+## 七、优先关注论文
+
+- **Linguistically Informed Multimodal Fusion for Vietnamese Scene-Text Image Captioning: Dataset, Graph Framework, and Phonological Attention**：首次针对越南语场景文本描述，揭示了跨模态边有害的反直觉发现，其语言感知融合框架可启发其他声调语言的处理方法。后续关注该框架向中文、泰语等语言的泛化研究。
+- **SpecVQA: A Benchmark for Spectral Understanding and Visual Question Answering in Scientific Images**：构建了首个科学光谱图像问答基准，提出的采样插值方法对降低大模型处理长序列光谱成本有实用价值。后续关注数据集扩展以及端到端光谱编码器的发展。
 
 ## 八、论文逐篇解析
 
-### 1. A Multistage Extraction Pipeline for Long Scanned Financial Documents: An Empirical Study in Industrial KYC Workflows
-
-- arXiv: [2604.26462v1](https://arxiv.org/abs/2604.26462v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2604.26462v1)
-- 作者: Yuxuan Han, Yuanxing Zhang, Yushuo Wang, Yichao Jin, Kenneth Zhu Ke, Jingyuan Zhao
-- 发布时间: 2026-04-29T09:19:16Z
-- 分类: cs.CV
-- 相关性评分: 18
-
-**原始摘要**
-
-Structured information extraction from long, multilingual scanned financial documents is a core
-requirement in industrial KYC and compliance workflows. These documents are typically non machine
-readable, noisy, and visually heterogeneous. They usually span dozens of pages while containing only
-sparse task relevant information. Although recent vision-language models achieve strong benchmark
-performance, directly applying them end to end to full financial reports often leads to unreliable
-extraction under real world conditions. We present a multistage extraction framework that integrates
-image preprocessing, multilingual OCR, hybrid page-level retrieval, and compact VLM-based structured
-extraction. The design separates page localization from multimodal reasoning, enabling more accurate
-extraction from complex multipage documents. We evaluated the framework on 120 production KYC
-documents comprising about 3000 multilingual scanned pages. Across multiple OCR-VLM combinations,
-the proposed pipeline consistently outperforms direct PDF-to-VLM baselines, improving field-level
-accuracy by up to 31.9 percentage points. The best configuration, PaddleOCR with MiniCPM2.6,
-achieves 87.27 percent accuracy. Ablation studies show that page-level retrieval is the dominant
-factor in performance improvements, particularly for complex financial statements and non-English
-documents.
-
----
-
-### 2. Linguistically Informed Multimodal Fusion for Vietnamese Scene-Text Image Captioning: Dataset, Graph Framework, and Phonological Attention
+### 1. Linguistically Informed Multimodal Fusion for Vietnamese Scene-Text Image Captioning: Dataset, Graph Framework, and Phonological Attention
 
 - arXiv: [2604.27712v1](https://arxiv.org/abs/2604.27712v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2604.27712v1)
@@ -54,6 +54,39 @@ documents.
 - 发布时间: 2026-04-30T10:57:38Z
 - 分类: cs.CV, cs.CL
 - 相关性评分: 9
+- 主题标签: 场景文本图像描述、多模态图融合、声调语言、越南语OCR、数据集构建
+
+**中文摘要**
+
+> 本文针对越南语场景文本图像描述任务，提出语言感知的多模态融合方法。现有方法将文本视为语言无关，不适用于越南语（声调语言，变音符改变词义，OCR 错误普遍且词边界模糊）。为此，作者提出通用图融合框架 HSTFG（异构场景文本融合图）和专用越南语推理的 PhonoSTFG（音韵场景文本融合图），并通过图拓扑分析发现跨模态图边对融合有害。同时发布首个大型越南语场景文本描述数据集 ViTextCaps（15,729 张图像，74,970 条描述），词汇分析显示 52.8% 的词汇存在变音符冲突风险。
+
+**核心创新概述**
+
+> 首次针对越南语场景文本描述任务，提出语言感知的多模态融合框架；通过图拓扑分析揭示跨模态边有害这一反直觉发现；构建首个大型越南语场景文本描述数据集。
+
+**创新点拆解**
+
+- 提出 HSTFG 通用图融合框架，包含可学习的空间注意力偏置
+- 基于跨模态边有害的发现，设计 PhonoSTFG 专门针对越南语音韵推理进行图级融合
+- 构建 ViTextCaps 数据集，首个大规模越南语场景文本描述数据集，包含详细的声调变音符冲突分析
+
+**当前局限**
+
+> 数据集仅覆盖越南语，方法对其他声调语言（如中文、泰语）的泛化性未验证；图拓扑分析结论可能依赖特定图结构设计，通用性需进一步研究。
+
+**后续可改进方向**
+
+- 探索其他声调语言（如中文、泰语）的语言感知融合策略
+- 研究更高效的图结构以减少跨模态交互噪声
+- 引入自监督或对比学习以增强音韵特征表示
+
+**工程启发**
+
+> 为越南语OCR场景描述提供完整解决方案，直接可用于越南语图像检索、辅助阅读等应用，其语言感知融合思路可推广至其他复杂语言系统。
+
+**为什么值得关注**
+
+> 关注场景文本图像描述中语言特定知识的融合，涉及声调语言OCR后处理、多模态图网络设计，对多语言OCR理解有参考价值。
 
 **原始摘要**
 
@@ -75,35 +108,7 @@ collision.
 
 ---
 
-### 3. OCR-Memory: Optical Context Retrieval for Long-Horizon Agent Memory
-
-- arXiv: [2604.26622v1](https://arxiv.org/abs/2604.26622v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2604.26622v1)
-- 作者: Jinze Li, Yang Zhang, Xin Yang, Jiayi Qu, Jinfeng Xu, Shuo Yang, Junhua Ding, Edith Cheuk-Han Ngai
-- 发布时间: 2026-04-29T12:49:30Z
-- 分类: cs.CL
-- 相关性评分: 9
-
-**原始摘要**
-
-Autonomous LLM agents increasingly operate in long-horizon, interactive settings where success
-depends on reusing experience accumulated over extended histories. However, existing agent memory
-systems are fundamentally constrained by text-context budgets: storing or revisiting raw
-trajectories is prohibitively token-expensive, while summarization and text-only retrieval trade
-token savings for information loss and fragmented evidence. To address this limitation, we propose
-Optical Context Retrieval Memory (OCR-Memory), a memory framework that leverages the visual modality
-as a high-density representation of agent experience, enabling retention of arbitrarily long
-histories with minimal prompt overhead at retrieval time. Specifically, OCR-Memory renders
-historical trajectories into images annotated with unique visual identifiers. OCR-Memory retrieves
-stored experience via a \emph{locate-and-transcribe} paradigm that selects relevant regions through
-visual anchors and retrieves the corresponding verbatim text, avoiding free-form generation and
-reducing hallucination. Experiments on long-horizon agent benchmarks show consistent gains under
-strict context limits, demonstrating that optical encoding increases effective memory capacity while
-preserving faithful evidence recovery.
-
----
-
-### 4. SpecVQA: A Benchmark for Spectral Understanding and Visual Question Answering in Scientific Images
+### 2. SpecVQA: A Benchmark for Spectral Understanding and Visual Question Answering in Scientific Images
 
 - arXiv: [2604.28039v1](https://arxiv.org/abs/2604.28039v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2604.28039v1)
@@ -111,6 +116,39 @@ preserving faithful evidence recovery.
 - 发布时间: 2026-04-30T15:51:10Z
 - 分类: cs.AI
 - 相关性评分: 6
+- 主题标签: 科学图像理解、光谱分析、多模态问答、数据采样与重建、大模型评估
+
+**中文摘要**
+
+> 本文提出 SpecVQA 基准，用于评估多模态大模型对科学光谱图像的理解能力。光谱是信息密集的科学图像，对多模态大模型构成挑战。SpecVQA 涵盖 7 种代表性光谱类型，包含 620 张图像和 3100 个专家标注的问答对，旨在评估直接信息提取和领域推理能力。同时提出一种光谱数据采样与插值重建方法，以减少 token 长度并保留关键曲线特征，消融实验证实该方法显著提升性能。测试了主流多模态大模型并发布排行榜。
+
+**核心创新概述**
+
+> 首次构建面向科学光谱图像的多模态问答基准，覆盖多种光谱类型；提出专门的光谱数据采样与插值重建方法以适配大模型输入。
+
+**创新点拆解**
+
+- 构建 SpecVQA 基准，包含 7 种光谱类型和专家标注的问答对
+- 提出光谱数据采样与插值重建方法，有效压缩 token 同时保留曲线特征
+- 系统评估主流多模态大模型在光谱理解任务上的表现并发布排行榜
+
+**当前局限**
+
+> 数据集规模较小（620 图），覆盖光谱类型有限；问答任务设计偏向基础推理，复杂光谱分析（如多峰拟合）未涉及。
+
+**后续可改进方向**
+
+- 扩展数据集覆盖更多光谱类型和复杂任务
+- 研究针对光谱曲线的端到端编码器，减少对预训练视觉模型的依赖
+- 引入领域知识图谱增强推理能力
+
+**工程启发**
+
+> 提供光谱理解评估标准和基线方法，可直接用于科学文献自动解读、实验室数据辅助分析等场景，数据采样方法可降低大模型处理长序列光谱的成本。
+
+**为什么值得关注**
+
+> 专注于科学图像中的光谱理解，涉及曲线数据压缩与多模态推理，对文档图像中的图表理解和OCR后处理有启发意义。
 
 **原始摘要**
 
