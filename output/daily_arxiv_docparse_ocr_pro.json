@@ -1,19 +1,182 @@
 {
   "meta": {
-    "report_date": "2026-05-04",
-    "generated_at_utc": "2026-05-04 04:49:35",
+    "report_date": "2026-05-05",
+    "generated_at_utc": "2026-05-05 04:27:34",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 0
+    "count": 3
   },
   "synthesis": {
-    "executive_summary": "今日未有新增论文，建议持续关注领域主要会议和预印本平台。",
-    "trend_summary": "暂无趋势可总结。",
-    "common_innovations": [],
-    "future_directions": [],
-    "engineering_takeaways": [],
-    "watchlist": []
+    "executive_summary": "今日重点论文覆盖高密度图表推理、低资源跨语言手写识别、历史百科结构化，均涉及OCR/文档解析的细粒度感知或结构化恢复。图表推理引入视觉聚焦链式推理和强化学习；手写识别证实跨脚本迁移的关键在于共享字符集；百科数字化展示了从OCR后处理到实体链接的完整流水线。共同趋势是追求更高信息密度下的精确解析、跨域迁移能力及结构化输出。",
+    "trend_summary": "趋势一：从OCR文本提取向细粒度、结构化、语义级理解升级；趋势二：强化视觉聚焦和显式推理路径以应对信息密集型文档；趋势三：低资源场景下利用跨脚本/跨语言共享知识提升识别性能。",
+    "common_innovations": [
+      "引入视觉焦点机制将推理步骤与关键视觉区域显式对齐。",
+      "利用强化学习中的信息效率奖励和自适应惩罚控制推理深度。",
+      "通过字符级迁移分析指导低资源跨语言手写识别训练。",
+      "构建系统化流水线实现从OCR后结构化到实体链接的端到端处理。",
+      "设计信息密度度量基准以量化文档解析难度。"
+    ],
+    "future_directions": [
+      "研究Focus-CoT在3D图表和动态可视化中的应用，扩展视觉聚焦范围。",
+      "开发自适应KL惩罚的自动化调参策略，减少人工干预。",
+      "将跨脚本迁移学习方法推广至更多阿拉伯文字语言（如普什图语、信德语）。",
+      "探索混合脚本数据中的字符归一化方法以减轻负迁移。",
+      "将ATLAS实体链接流水线适配到多语言历史文档，并提升召回率。",
+      "集成更先进的OCR后校正技术（如基于Transformer的错误检测）以提升低质量文本解析。",
+      "设计端到端训练框架联合优化OCR和结构化推理任务。"
+    ],
+    "engineering_takeaways": [
+      "Focus-GRPO的信息效率奖励可直接应用于自动化仪表盘分析系统，减少冗余输出。",
+      "低资源HTR系统可优先联合训练共享字符多的语言，再微调特有字符。",
+      "百科数字化流水线中的词条提取和实体分类技术可复用至法律、医学等历史文档。",
+      "图表理解中显式链接OCR信号与推理步骤可提升细粒度感知，适合财务图表分析。"
+    ],
+    "watchlist": [
+      {
+        "title": "Chart-FR1: Visual Focus-Driven Fine-Grained Reasoning on Dense Charts",
+        "watch_reason": "提出的Focus-CoT和Focus-GRPO方法为高密度图表推理提供了新范式，后续可能扩展至其他文档类型（如密集表格、学术图表），值得跟踪实际部署效果和跨领域泛化性。"
+      },
+      {
+        "title": "Cross-Language Learning within Arabic Script for Low-Resource HTR",
+        "watch_reason": "量化了字符级迁移效应，对多语言OCR系统设计具有直接指导意义，后续关注其在更多低资源语言上的实验及字符归一化技术改进。"
+      },
+      {
+        "title": "ATLAS: Article Tracking, Linking, and Analysis of Swedish Encyclopedias",
+        "watch_reason": "系统化流水线整合了OCR后处理与实体链接，低召回率问题提示了改进方向，后续版本可能提升召回并扩展至其他语言，具有数字人文应用潜力。"
+      }
+    ]
   },
-  "papers": []
+  "papers": [
+    {
+      "title": "Chart-FR1: Visual Focus-Driven Fine-Grained Reasoning on Dense Charts",
+      "summary": "Multimodal large language models (MLLMs) have shown considerable potential in chart understanding and reasoning tasks. However, they still struggle with high information density (HID) charts characterized by multiple subplots, legends, and dense annotations due to three major challenges: (1) limited fine-grained perception results in the omission of critical visual cues; (2) redundant or noisy visual information undermines the performance of multimodal reasoning; (3) lack of adaptive deep reasoning relative to the amount of visual information. To tackle these challenges, we present a novel focus-driven fine-grained chart reasoning model, Chart-FR1, to improve perception, focusing efficiency, and adaptive deep reasoning on HID charts. Specifically, we propose Focus-CoT, a visual focusing chain-of-thought that enhances fine-grained perception by explicitly linking reasoning steps to key visual cues, such as local image regions and OCR signals. Building on this, we introduce Focus-GRPO, a focus-driven reinforcement learning algorithm with an information-efficiency reward that compresses redundant visual information for efficient focusing, and an adaptive KL penalty mechanism that enables flexible control over reasoning depth as more visual cues are discovered. Furthermore, to fill the gap in benchmarks for HID charts, we build HID-Chart, a challenging benchmark with an information-density metric designed to evaluate fine-grained chart reasoning capabilities. Extensive experiments on multiple chart benchmarks demonstrate that Chart-FR1 outperforms state-of-the-art MLLMs in chart understanding and reasoning. Code is available at https://github.com/phkhub/Chart-FR1.",
+      "link": "https://arxiv.org/abs/2605.01882v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.01882v1",
+      "authors": [
+        "Hongkun Pan",
+        "Yuwei Wu",
+        "Wanyi Hong",
+        "Shenghui Hu",
+        "Qitong Yan",
+        "Yi Yang",
+        "Rufei Han",
+        "Changju Zhou",
+        "Minfeng Zhu",
+        "Dongming Han",
+        "Wei Chen"
+      ],
+      "published": "2026-05-03T13:57:23Z",
+      "updated": "2026-05-03T13:57:23Z",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "arxiv_id": "2605.01882v1",
+      "score": 11,
+      "topic_tags": [
+        "图表理解",
+        "链式推理",
+        "强化学习",
+        "视觉聚焦",
+        "高密度图表"
+      ],
+      "zh_summary": "提出Chart-FR1模型，通过Focus-CoT和Focus-GRPO机制，解决高信息密度图表中感知不足、信息冗余和缺乏深度推理的问题，并构建HID-Chart基准。在多个图表基准上超越现有MLLM。",
+      "novelty": "首次提出视觉聚焦链式推理（Focus-CoT）和聚焦强化学习（Focus-GRPO）以应对高密度图表推理挑战，并设计信息密度度量基准。",
+      "innovation_points": [
+        "提出Focus-CoT，将推理步骤显式链接到关键视觉线索（如图像区域和OCR信号），增强细粒度感知。",
+        "提出Focus-GRPO，含信息效率奖励（压缩冗余信息）和自适应KL惩罚（控制推理深度）。",
+        "构建HID-Chart基准，包含信息密度度量。"
+      ],
+      "limitations": "未明确讨论跨领域泛化性；高密度图表定义依赖人工设定。",
+      "improvement_directions": [
+        "探索Focus-CoT在更广泛图表类型（如3D图表）的适用性。",
+        "研究自适应KL惩罚机制的自动化调参策略。",
+        "评估模型在真实场景（如财报、科学论文）的图表理解性能。"
+      ],
+      "engineering_value": "可提升自动化图表分析系统的准确性和效率，适用于数据仪表盘、学术出版等领域。",
+      "why_relevant": "涉及OCR和视觉语言理解交叉，Focus-CoT直接利用OCR信号，适用于文档解析中的图表理解。"
+    },
+    {
+      "title": "Cross-Language Learning within Arabic Script for Low-Resource HTR",
+      "summary": "Handwritten Text Recognition (HTR) under limited labeled data remains a challenging problem, particularly for Arabic-script languages. Although modern sequence-based recognizers perform well in high-resource settings, their accuracy degrades sharply as training data becomes scarce. Arabic-script languages share a common writing system with substantial character overlap, motivating cross-script training as a strategy to mitigate data scarcity. We performed experiments on Arabic, Urdu, and Persian scripts and achieved improvements over single-script baselines (new SotA especially for low-resource settings). A key finding of our experiments is that cross-script transfer is largely driven by script-level overlap rather than uniform accuracy improvements. Through a statistical character-level analysis we show that gains are structurally concentrated on characters shared across scripts, while language-specific characters exhibit limited or negative transfer. These findings provide insight into transfer dynamics in low-resource script families. Detailed results include: We conduct a controlled line-level study of cross-script joint training for Arabic-script HTR under low-resource regimes (number of samples K \\in 100, 500, 1000 labeled lines) on Arabic (KHATT), Urdu (NUST-UHWR), and Persian (PHTD). A CRNN model is trained on the union of multiple related Arabic-script datasets and evaluated on individual target languages. On Persian (PHTD), joint training achieves a Character Error Rate (CER) of 9.99, surpassing previously reported results despite not using the full available training data. On an Urdu dataset (UNHD), joint training reduces CER from 17.20 to 14.45. Code and data splits are released to ensure reproducibility.1",
+      "link": "https://arxiv.org/abs/2605.02089v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.02089v1",
+      "authors": [
+        "Sana Al-azzawi",
+        "Elisa Barney",
+        "Marcus Liwicki"
+      ],
+      "published": "2026-05-03T23:18:21Z",
+      "updated": "2026-05-03T23:18:21Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2605.02089v1",
+      "score": 10,
+      "topic_tags": [
+        "手写文本识别",
+        "低资源学习",
+        "跨脚本迁移",
+        "阿拉伯文字",
+        "CRNN"
+      ],
+      "zh_summary": "研究低资源阿拉伯文字手写识别（HTR）的跨语言学习，发现共享字符的迁移增益为主，语言特有字符可能负迁移。在阿拉伯语、乌尔都语和波斯语上联合训练取得最先进结果。",
+      "novelty": "系统量化跨脚本训练中字符级迁移效应，揭示脚本重叠对低资源HTR的关键作用。",
+      "innovation_points": [
+        "采用CRNN模型在低资源设置下进行跨脚本联合训练（K=100,500,1000行）。",
+        "通过字符级统计分析，区分共享字符和语言特有字符的迁移效果。",
+        "在波斯语上取得CER 9.99，超越先前结果。"
+      ],
+      "limitations": "仅实验三种语言；未验证在不同书写风格（如手写与印刷）的泛化性。",
+      "improvement_directions": [
+        "扩展至更多阿拉伯文字语言（如普什图语、信德语）。",
+        "探索混合脚本数据中的字符归一化或增强方法以减少负迁移。",
+        "结合语言模型或上下文信息进一步提升特有字符识别。"
+      ],
+      "engineering_value": "为多语言HTR系统提供低成本部署策略，特别适用于历史手稿数字化。",
+      "why_relevant": "直接针对手写文本识别，涉及低资源场景下的数据增强和迁移学习。"
+    },
+    {
+      "title": "ATLAS: Article Tracking, Linking, and Analysis of Swedish Encyclopedias",
+      "summary": "The digitization of old encyclopedias represents an important step to improve access to historically structured knowledge. Often, however, this process does not go beyond an optical character recognition, leaving all the underlying structure unexploited. In addition, many encyclopedias had multiple editions reflecting the evolution of knowledge. The lack of structure in the raw text makes it difficult to track changes across these editions. In this work, we built a pipeline to restore the text structure, where we extract the headwords and identify entries; categorize the entities; match entries across editions; and link entries to a Wikidata item. We applied this pipeline to the four major editions of \\textit{Nordisk familjebok}, an authoritative Swedish encyclopedia published between 1876 and 1951. We could extract the headwords with an F1 score of 97.8\\% and we obtained an F1 score of 93.4\\% on the headword classification. On a small-scale evaluation, we reached a 93\\% precision on the cross-edition matching, 85\\% precision and 16.5\\% recall on the Wikidata linking. This shows that an automated approach to digitized historical knowledge is possible. This should facilitate the preservation of general knowledge and the understanding of knowledge transmission. The datasets and programs are available online.",
+      "link": "https://arxiv.org/abs/2605.02466v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.02466v1",
+      "authors": [
+        "Albin Andersson",
+        "Salam Jonasson",
+        "Fredrik Wastring",
+        "Pierre Nugues"
+      ],
+      "published": "2026-05-04T11:08:59Z",
+      "updated": "2026-05-04T11:08:59Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2605.02466v1",
+      "score": 7,
+      "topic_tags": [
+        "百科数字化",
+        "文本结构化",
+        "实体链接",
+        "OCR后处理",
+        "数字人文"
+      ],
+      "zh_summary": "构建ATLAS流水线，从数字化瑞典百科全书中提取词条、分类实体、跨版本匹配及链接到Wikidata。在Nordisk familjebok四版上词条提取F1=97.8%，分类F1=93.4%。",
+      "novelty": "系统化流水线整合多版本百科的语义结构恢复与实体链接，涵盖OCR后处理。",
+      "innovation_points": [
+        "设计流水线包括OCR后文本结构化、词条提取、实体分类、跨版本匹配和Wikidata链接。",
+        "跨版本匹配精确率达93%，Wikidata链接精确率85%。"
+      ],
+      "limitations": "Wikidata链接召回率仅16.5%，说明链接任务具有挑战性；限于瑞典语。",
+      "improvement_directions": [
+        "改进实体链接召回率，如利用上下文嵌入或迁移学习。",
+        "扩展流水线至其他历史多版本文档（如法律、医学百科）。",
+        "集成更先进的OCR后校正技术以提升文本质量。"
+      ],
+      "engineering_value": "为数字人文领域提供自动化知识库构建工具，促进历史知识传承与分析。",
+      "why_relevant": "核心依赖OCR输出进行文本结构恢复和语义链接，直接关联文档解析后处理。"
+    }
+  ]
 }
