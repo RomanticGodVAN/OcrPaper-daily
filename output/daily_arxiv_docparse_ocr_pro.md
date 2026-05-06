@@ -1,186 +1,175 @@
-# OCR / 文档解析研究日报（2026-05-05）
+# OCR / 文档解析研究日报（2026-05-06）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-05-05 04:27:34`
+- 生成时间（UTC）：`2026-05-06 04:43:27`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日重点论文覆盖高密度图表推理、低资源跨语言手写识别、历史百科结构化，均涉及OCR/文档解析的细粒度感知或结构化恢复。图表推理引入视觉聚焦链式推理和强化学习；手写识别证实跨脚本迁移的关键在于共享字符集；百科数字化展示了从OCR后处理到实体链接的完整流水线。共同趋势是追求更高信息密度下的精确解析、跨域迁移能力及结构化输出。
+> 今日论文覆盖OCR基准评估、医疗文档信息抽取、历史文档结构化及NER工具比较四大热点，共同指向对真实场景鲁棒性和领域特定需求的关注。CC-OCR V2揭示了现有大模型在真实文档处理中的性能短板；MedStruct-S证明了半结构化提取在OCR噪声下的可行性；ATLAS展示了历史文档结构化管道的潜力；NER工具比较则强调了工具选择对下游任务的影响。
 
 ## 二、今日趋势判断
 
-趋势一：从OCR文本提取向细粒度、结构化、语义级理解升级；趋势二：强化视觉聚焦和显式推理路径以应对信息密集型文档；趋势三：低资源场景下利用跨脚本/跨语言共享知识提升识别性能。
+研究重点正从通用OCR性能转向真实场景下的鲁棒性评估和领域特定优化，包括高难度样本、OCR噪声、半结构化提取和知识结构恢复。多模态大模型成为主流工具，但评估显示其在实际部署中仍有明显差距。NER和结构化提取的工具对比与鲁棒性研究受到更多关注。
 
 ## 三、今日论文概览
 
-1. **Chart-FR1: Visual Focus-Driven Fine-Grained Reasoning on Dense Charts** | 标签：图表理解、链式推理、强化学习、视觉聚焦、高密度图表
-2. **Cross-Language Learning within Arabic Script for Low-Resource HTR** | 标签：手写文本识别、低资源学习、跨脚本迁移、阿拉伯文字、CRNN
-3. **ATLAS: Article Tracking, Linking, and Analysis of Swedish Encyclopedias** | 标签：百科数字化、文本结构化、实体链接、OCR后处理、数字人文
+1. **CC-OCR V2: Benchmarking Large Multimodal Models for Literacy in Real-world Document Processing** | 标签：OCR基准、多模态大模型、文档处理、真实场景评估
+2. **MedStruct-S: A Benchmark for Key Discovery, Key-Conditioned QA and Semi-Structured Extraction from OCR Clinical Reports** | 标签：OCR临床报告、半结构化提取、信息抽取、模型鲁棒性
+3. **ATLAS: Article Tracking, Linking, and Analysis of Swedish Encyclopedias** | 标签：OCR后处理、历史文档、知识结构恢复、书籍结构化
+4. **Geolocating News about Extreme Climate Events: A Comparative Analysis of Off-the-Shelf Tools for Toponym Identification in German** | 标签：NER工具比较、地理定位、气候事件、德语文本
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 引入视觉焦点机制将推理步骤与关键视觉区域显式对齐。
-- 利用强化学习中的信息效率奖励和自适应惩罚控制推理深度。
-- 通过字符级迁移分析指导低资源跨语言手写识别训练。
-- 构建系统化流水线实现从OCR后结构化到实体链接的端到端处理。
-- 设计信息密度度量基准以量化文档解析难度。
+- 所有研究均强调在真实噪声和边缘情况下的评估与优化，而非仅关注理想场景。
+- 多个工作提出了针对特定领域（如医疗、历史文献）的专用基准或结构化管道，推动OCR从通用走向垂直。
+- 多模态大模型与编码器-解码器架构的对比成为评估核心，揭示了不同架构在特定任务上的优劣。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 研究Focus-CoT在3D图表和动态可视化中的应用，扩展视觉聚焦范围。
-- 开发自适应KL惩罚的自动化调参策略，减少人工干预。
-- 将跨脚本迁移学习方法推广至更多阿拉伯文字语言（如普什图语、信德语）。
-- 探索混合脚本数据中的字符归一化方法以减轻负迁移。
-- 将ATLAS实体链接流水线适配到多语言历史文档，并提升召回率。
-- 集成更先进的OCR后校正技术（如基于Transformer的错误检测）以提升低质量文本解析。
-- 设计端到端训练框架联合优化OCR和结构化推理任务。
+- 构建包含更多高难度样本和真实噪声的大规模OCR基准，覆盖表格、公式、手写等多类型文档。
+- 研究显式建模OCR噪声的方法，例如将噪声类型作为输入特征或设计噪声增强训练策略。
+- 探索结合编码器和解码器优势的混合架构，用于半结构化文档的端到端抽取。
+- 开发领域自适应OCR后处理管道，利用知识图谱和上下文信息提升结构化恢复的召回率。
+- 针对极端气候等特定事件，训练专用NER模型并融合地理知识以提升定位准确率。
 
 ## 六、工程落地启发
 
-- Focus-GRPO的信息效率奖励可直接应用于自动化仪表盘分析系统，减少冗余输出。
-- 低资源HTR系统可优先联合训练共享字符多的语言，再微调特有字符。
-- 百科数字化流水线中的词条提取和实体分类技术可复用至法律、医学等历史文档。
-- 图表理解中显式链接OCR信号与推理步骤可提升细粒度感知，适合财务图表分析。
+- 企业选型时应参考如CC-OCR V2的贴近实际场景的基准，而非仅依赖公开榜指标。
+- 在医疗等高风险领域，优先考虑微调解码器-only模型或编码器-only模型进行键条件抽取。
+- 历史文档数字化可采用ATLAS类管道实现高精确率的结构恢复，但需注意实体链接召回率瓶颈。
+- NER工具选择需评估其对下游任务的影响，建议在应用领域进行标准化对比测试。
 
 ## 七、优先关注论文
 
-- **Chart-FR1: Visual Focus-Driven Fine-Grained Reasoning on Dense Charts**：提出的Focus-CoT和Focus-GRPO方法为高密度图表推理提供了新范式，后续可能扩展至其他文档类型（如密集表格、学术图表），值得跟踪实际部署效果和跨领域泛化性。
-- **Cross-Language Learning within Arabic Script for Low-Resource HTR**：量化了字符级迁移效应，对多语言OCR系统设计具有直接指导意义，后续关注其在更多低资源语言上的实验及字符归一化技术改进。
-- **ATLAS: Article Tracking, Linking, and Analysis of Swedish Encyclopedias**：系统化流水线整合了OCR后处理与实体链接，低召回率问题提示了改进方向，后续版本可能提升召回并扩展至其他语言，具有数字人文应用潜力。
+- **CC-OCR V2: Benchmarking Large Multimodal Models for Literacy in Real-world Document Processing**：首个聚焦真实高难度文档处理的OCR基准，可能成为行业评估标准，对模型选型和改进方向有指导意义。
+- **MedStruct-S: A Benchmark for Key Discovery, Key-Conditioned QA and Semi-Structured Extraction from OCR Clinical Reports**：针对OCR临床报告的半结构化提取基准，其评估结果和模型对比对医疗文档自动化有直接参考价值，可能推动该领域标准化。
 
 ## 八、论文逐篇解析
 
-### 1. Chart-FR1: Visual Focus-Driven Fine-Grained Reasoning on Dense Charts
+### 1. CC-OCR V2: Benchmarking Large Multimodal Models for Literacy in Real-world Document Processing
 
-- arXiv: [2605.01882v1](https://arxiv.org/abs/2605.01882v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.01882v1)
-- 作者: Hongkun Pan, Yuwei Wu, Wanyi Hong, Shenghui Hu, Qitong Yan, Yi Yang, Rufei Han, Changju Zhou, Minfeng Zhu, Dongming Han, Wei Chen
-- 发布时间: 2026-05-03T13:57:23Z
-- 分类: cs.CV, cs.AI, cs.LG
-- 相关性评分: 11
-- 主题标签: 图表理解、链式推理、强化学习、视觉聚焦、高密度图表
+- arXiv: [2605.03903v1](https://arxiv.org/abs/2605.03903v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.03903v1)
+- 作者: Zhipeng Xu, Junhao Ji, Zulong Chen, Zhenghao Liu, Qing Liu, Chunyi Peng, Zubao Qin, Ze Xu, Jianqiang Wan, Jun Tang, Zhibo Yang, Shuai Bai, Dayiheng Liu
+- 发布时间: 2026-05-05T15:56:12Z
+- 分类: cs.CL
+- 相关性评分: 33
+- 主题标签: OCR基准、多模态大模型、文档处理、真实场景评估
 
 **中文摘要**
 
-> 提出Chart-FR1模型，通过Focus-CoT和Focus-GRPO机制，解决高信息密度图表中感知不足、信息冗余和缺乏深度推理的问题，并构建HID-Chart基准。在多个图表基准上超越现有MLLM。
+> 提出CC-OCR V2基准，聚焦真实文档处理中的高难度OCR任务，涵盖文本识别、文档解析等5个主要赛道，共7093个样本。对14个先进多模态大模型评估显示，现有模型在真实场景中性能显著下降，与基准测试存在差距。
 
 **核心创新概述**
 
-> 首次提出视觉聚焦链式推理（Focus-CoT）和聚焦强化学习（Focus-GRPO）以应对高密度图表推理挑战，并设计信息密度度量基准。
+> 首个针对企业级真实文档处理的高难度OCR基准，包含之前被忽视的关键和边缘情况任务。
 
 **创新点拆解**
 
-- 提出Focus-CoT，将推理步骤显式链接到关键视觉线索（如图像区域和OCR信号），增强细粒度感知。
-- 提出Focus-GRPO，含信息效率奖励（压缩冗余信息）和自适应KL惩罚（控制推理深度）。
-- 构建HID-Chart基准，包含信息密度度量。
+- 设计涵盖5个OCR核心任务的综合基准
+- 聚焦高难度样本和真实场景边缘情况
+- 揭示当前LMM在真实应用中的性能差距
 
 **当前局限**
 
-> 未明确讨论跨领域泛化性；高密度图表定义依赖人工设定。
+> 基准样本数量相对有限（7093个），且仅评估了14个模型，未覆盖所有可能的方法。
 
 **后续可改进方向**
 
-- 探索Focus-CoT在更广泛图表类型（如3D图表）的适用性。
-- 研究自适应KL惩罚机制的自动化调参策略。
-- 评估模型在真实场景（如财报、科学论文）的图表理解性能。
+- 扩展基准规模，覆盖更多任务类型和场景
+- 研究模型在真实噪声和多样性条件下的鲁棒性提升方法
 
 **工程启发**
 
-> 可提升自动化图表分析系统的准确性和效率，适用于数据仪表盘、学术出版等领域。
+> 为企业文档处理系统的OCR选型和性能评估提供可靠基准，促进模型在实际应用中的落地。
 
 **为什么值得关注**
 
-> 涉及OCR和视觉语言理解交叉，Focus-CoT直接利用OCR信号，适用于文档解析中的图表理解。
+> 直接面向OCR在真实场景中的性能评估，为文档OCR研究提供方向和测试平台。
 
 **原始摘要**
 
-Multimodal large language models (MLLMs) have shown considerable potential in chart understanding
-and reasoning tasks. However, they still struggle with high information density (HID) charts
-characterized by multiple subplots, legends, and dense annotations due to three major challenges:
-(1) limited fine-grained perception results in the omission of critical visual cues; (2) redundant
-or noisy visual information undermines the performance of multimodal reasoning; (3) lack of adaptive
-deep reasoning relative to the amount of visual information. To tackle these challenges, we present
-a novel focus-driven fine-grained chart reasoning model, Chart-FR1, to improve perception, focusing
-efficiency, and adaptive deep reasoning on HID charts. Specifically, we propose Focus-CoT, a visual
-focusing chain-of-thought that enhances fine-grained perception by explicitly linking reasoning
-steps to key visual cues, such as local image regions and OCR signals. Building on this, we
-introduce Focus-GRPO, a focus-driven reinforcement learning algorithm with an information-efficiency
-reward that compresses redundant visual information for efficient focusing, and an adaptive KL
-penalty mechanism that enables flexible control over reasoning depth as more visual cues are
-discovered. Furthermore, to fill the gap in benchmarks for HID charts, we build HID-Chart, a
-challenging benchmark with an information-density metric designed to evaluate fine-grained chart
-reasoning capabilities. Extensive experiments on multiple chart benchmarks demonstrate that Chart-
-FR1 outperforms state-of-the-art MLLMs in chart understanding and reasoning. Code is available at
-https://github.com/phkhub/Chart-FR1.
+Large Multimodal Models (LMMs) have recently shown strong performance on Optical Character
+Recognition (OCR) tasks, demonstrating their promising capability in document literacy. However,
+their effectiveness in real-world applications remains underexplored, as existing benchmarks adopt
+task scopes misaligned with practical applications and assume homogeneous acquisition conditions. To
+address this gap, we introduce CC-OCR V2, a comprehensive and challenging OCR benchmark tailored to
+real-world document processing. CC-OCR V2 focuses on practical enterprise document processing tasks
+and incorporates hard and corner cases that are critical yet underrepresented in prior benchmarks,
+covering 5 major OCR-centric tracks: text recognition, document parsing, document grounding, key
+information extraction, and document question answering, comprising 7,093 high-difficulty samples.
+Extensive experiments on 14 advanced LMMs reveal that current models fall short of real-world
+application requirements. Even state-of-the-art LMMs exhibit substantial performance degradation
+across diverse tasks and scenarios. These findings reveal a significant gap between performance on
+current benchmarks and effectiveness in real-world applications. We release the full dataset and
+evaluation toolkit at https://github.com/eioss/CC-OCR-V2.
 
 ---
 
-### 2. Cross-Language Learning within Arabic Script for Low-Resource HTR
+### 2. MedStruct-S: A Benchmark for Key Discovery, Key-Conditioned QA and Semi-Structured Extraction from OCR Clinical Reports
 
-- arXiv: [2605.02089v1](https://arxiv.org/abs/2605.02089v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.02089v1)
-- 作者: Sana Al-azzawi, Elisa Barney, Marcus Liwicki
-- 发布时间: 2026-05-03T23:18:21Z
-- 分类: cs.CV
-- 相关性评分: 10
-- 主题标签: 手写文本识别、低资源学习、跨脚本迁移、阿拉伯文字、CRNN
+- arXiv: [2605.03103v1](https://arxiv.org/abs/2605.03103v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.03103v1)
+- 作者: Yingyun Li, Yu Wang, Haiyang Qian
+- 发布时间: 2026-05-04T19:37:21Z
+- 分类: cs.CL, cs.AI, cs.LG
+- 相关性评分: 12
+- 主题标签: OCR临床报告、半结构化提取、信息抽取、模型鲁棒性
 
 **中文摘要**
 
-> 研究低资源阿拉伯文字手写识别（HTR）的跨语言学习，发现共享字符的迁移增益为主，语言特有字符可能负迁移。在阿拉伯语、乌尔都语和波斯语上联合训练取得最先进结果。
+> 提出MedStruct-S基准，用于评估OCR临床报告中未知键与OCR噪声下的半结构化信息提取任务。包含3582页标注报告，对比编码器-解码器与解码器-only模型。结果表明，编码器-only模型在空值条件下的键条件问答任务中性能最佳，而微调的解码器-only模型整体最优。
 
 **核心创新概述**
 
-> 系统量化跨脚本训练中字符级迁移效应，揭示脚本重叠对低资源HTR的关键作用。
+> 首次在OCR临床报告场景中综合考虑未知键表示和OCR噪声，设计三项子任务。
 
 **创新点拆解**
 
-- 采用CRNN模型在低资源设置下进行跨脚本联合训练（K=100,500,1000行）。
-- 通过字符级统计分析，区分共享字符和语言特有字符的迁移效果。
-- 在波斯语上取得CER 9.99，超越先前结果。
+- 定义键发现、键条件问答和端到端键值对提取三项任务
+- 考虑未知键和OCR噪声下的鲁棒性评估
+- 系统对比编码器-only和解码器-only模型范式
 
 **当前局限**
 
-> 仅实验三种语言；未验证在不同书写风格（如手写与印刷）的泛化性。
+> 仅基于临床报告领域，通用性有待验证；模型规模范围0.11B-103B，但未覆盖所有最新模型。
 
 **后续可改进方向**
 
-- 扩展至更多阿拉伯文字语言（如普什图语、信德语）。
-- 探索混合脚本数据中的字符归一化或增强方法以减少负迁移。
-- 结合语言模型或上下文信息进一步提升特有字符识别。
+- 扩展至更多领域（如法律、金融）的半结构化文档
+- 探索结合编码器和解码器优势的混合架构
+- 研究OCR噪声的显式建模方法
 
 **工程启发**
 
-> 为多语言HTR系统提供低成本部署策略，特别适用于历史手稿数字化。
+> 为医疗文档自动化处理中的模型选择提供实用指南，降低真实应用中的部署风险。
 
 **为什么值得关注**
 
-> 直接针对手写文本识别，涉及低资源场景下的数据增强和迁移学习。
+> 针对OCR文档中的半结构化信息提取，对医疗、金融等领域具有直接实用价值。
 
 **原始摘要**
 
-Handwritten Text Recognition (HTR) under limited labeled data remains a challenging problem,
-particularly for Arabic-script languages. Although modern sequence-based recognizers perform well in
-high-resource settings, their accuracy degrades sharply as training data becomes scarce. Arabic-
-script languages share a common writing system with substantial character overlap, motivating cross-
-script training as a strategy to mitigate data scarcity. We performed experiments on Arabic, Urdu,
-and Persian scripts and achieved improvements over single-script baselines (new SotA especially for
-low-resource settings). A key finding of our experiments is that cross-script transfer is largely
-driven by script-level overlap rather than uniform accuracy improvements. Through a statistical
-character-level analysis we show that gains are structurally concentrated on characters shared
-across scripts, while language-specific characters exhibit limited or negative transfer. These
-findings provide insight into transfer dynamics in low-resource script families. Detailed results
-include: We conduct a controlled line-level study of cross-script joint training for Arabic-script
-HTR under low-resource regimes (number of samples K \in 100, 500, 1000 labeled lines) on Arabic
-(KHATT), Urdu (NUST-UHWR), and Persian (PHTD). A CRNN model is trained on the union of multiple
-related Arabic-script datasets and evaluated on individual target languages. On Persian (PHTD),
-joint training achieves a Character Error Rate (CER) of 9.99, surpassing previously reported results
-despite not using the full available training data. On an Urdu dataset (UNHD), joint training
-reduces CER from 17.20 to 14.45. Code and data splits are released to ensure reproducibility.1
+Semi-structured information extraction (IE) from OCR-derived clinical reports is crucial for
+efficiently reconstructing patients' longitudinal medical histories. In practice, this scenario
+commonly involves three tasks: (i) field-header (key) discovery, (ii) key-conditioned question
+answering (QA), and (iii) end-to-end key-value pair extraction. However, existing evaluations often
+under-model two factors: heterogeneous and incompletely known key representations, and OCR-induced
+noise. This makes it difficult to assess model robustness in real-world settings. We present
+MedStruct-S, a benchmark specifically designed to evaluate these tasks under unknown keys and OCR
+noise. MedStruct-S contains 3,582 annotated real-world clinical report pages. Using MedStruct-S, we
+benchmark two representative paradigms: encoder-only sequence labeling with post-processing and
+decoder-only structured generation, covering four encoder-only and five decoder-only models spanning
+0.11B to 103B parameters. Our results show that encoder-only models achieve the best performance for
+non-null-value key-conditioned QA despite being substantially smaller than decoder-only models. When
+comparing models of similar order of magnitude, encoder-only models still perform better overall.
+Without controlling for model scale, fine-tuned decoder-only models deliver the strongest overall
+results. These findings show that the benchmark provides a reliable and practical basis for
+selecting and comparing models across different semi-structured IE settings.
 
 ---
 
@@ -192,38 +181,39 @@ reduces CER from 17.20 to 14.45. Code and data splits are released to ensure rep
 - 发布时间: 2026-05-04T11:08:59Z
 - 分类: cs.CL
 - 相关性评分: 7
-- 主题标签: 百科数字化、文本结构化、实体链接、OCR后处理、数字人文
+- 主题标签: OCR后处理、历史文档、知识结构恢复、书籍结构化
 
 **中文摘要**
 
-> 构建ATLAS流水线，从数字化瑞典百科全书中提取词条、分类实体、跨版本匹配及链接到Wikidata。在Nordisk familjebok四版上词条提取F1=97.8%，分类F1=93.4%。
+> 构建管道对瑞典百科全书《Nordisk familjebok》的四版进行OCR后结构化处理，包括词条提取（F1 97.8%）、分类（F1 93.4%）、跨版本匹配（精确率93%）和Wikidata链接（精确率85%）。展示了自动化处理历史文本结构的可行性。
 
 **核心创新概述**
 
-> 系统化流水线整合多版本百科的语义结构恢复与实体链接，涵盖OCR后处理。
+> 针对多版百科全书的完整结构化管道，将OCR文本恢复为可追溯的知识结构。
 
 **创新点拆解**
 
-- 设计流水线包括OCR后文本结构化、词条提取、实体分类、跨版本匹配和Wikidata链接。
-- 跨版本匹配精确率达93%，Wikidata链接精确率85%。
+- 设计从OCR文本到结构化条目的完整流程
+- 实现跨版本条目匹配和知识图谱链接
+- 在瑞典语历史文档上达到高精确率
 
 **当前局限**
 
-> Wikidata链接召回率仅16.5%，说明链接任务具有挑战性；限于瑞典语。
+> Wikidata链接召回率较低（16.5%），跨版本匹配仅小规模评估；依赖的语言和领域有限。
 
 **后续可改进方向**
 
-- 改进实体链接召回率，如利用上下文嵌入或迁移学习。
-- 扩展流水线至其他历史多版本文档（如法律、医学百科）。
-- 集成更先进的OCR后校正技术以提升文本质量。
+- 改进实体链接的召回率，例如利用上下文信息或知识图谱嵌入
+- 扩展至更多语言和历史文档类型
+- 研究OCR错误对结构化影响的鲁棒方法
 
 **工程启发**
 
-> 为数字人文领域提供自动化知识库构建工具，促进历史知识传承与分析。
+> 为历史文献数字化提供自动化结构恢复方案，促进知识传播和历史研究。
 
 **为什么值得关注**
 
-> 核心依赖OCR输出进行文本结构恢复和语义链接，直接关联文档解析后处理。
+> 展示OCR后处理中结构恢复的重要性，为文档解析提供实用方法。
 
 **原始摘要**
 
@@ -241,5 +231,61 @@ precision on the cross-edition matching, 85\% precision and 16.5\% recall on the
 This shows that an automated approach to digitized historical knowledge is possible. This should
 facilitate the preservation of general knowledge and the understanding of knowledge transmission.
 The datasets and programs are available online.
+
+---
+
+### 4. Geolocating News about Extreme Climate Events: A Comparative Analysis of Off-the-Shelf Tools for Toponym Identification in German
+
+- arXiv: [2605.03414v1](https://arxiv.org/abs/2605.03414v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.03414v1)
+- 作者: Brielen Madureira, Mariana Madruga de Brito, Andreas Niekler
+- 发布时间: 2026-05-05T06:40:26Z
+- 分类: cs.CL
+- 相关性评分: 4
+- 主题标签: NER工具比较、地理定位、气候事件、德语文本
+
+**中文摘要**
+
+> 比较Flair、Spacy和Stanza三种NER工具在德国新闻文本中识别极端气候事件地点的表现，通过下游任务评估地理定位结果差异。发现工具间的差异会传播到下游任务，影响关于文档地理焦点的决策，进而影响国家在德国媒体中的显著性结论。
+
+**核心创新概述**
+
+> 系统评估NER工具在极端气候事件地理定位中的差异传播影响。
+
+**创新点拆解**
+
+- 对比三种主流NER工具在气候变化领域的表现
+- 分析NER输出差异对下游地理定位任务的影响
+- 揭示工具选择对结论可靠性的潜在影响
+
+**当前局限**
+
+> 仅聚焦德语新闻，且任务为区域级定位；未考虑OCR噪声对NER的影响。
+
+**后续可改进方向**
+
+- 开发针对极端气候事件的专用NER模型
+- 结合地理知识和上下文消歧提高定位准确率
+- 研究OCR噪声场景下NER的鲁棒性
+
+**工程启发**
+
+> 为气候研究中的文本地理定位提供工具选择指导，减少分析偏差。
+
+**为什么值得关注**
+
+> OCR常用于新闻数字化，NER工具选择直接影响下游任务，与OCR文档分析相关。
+
+**原始摘要**
+
+Determining the geolocation of extreme climate events and disasters in texts is a common problem in
+climate impact and adaptation research. Named-entity recognition (NER) tools are typically used to
+identify a pool of toponyms that serve as candidate event locations. In this study, we conduct a
+comparative analysis of three off-the-shelf NER tools, namely Flair, Spacy and Stanza. We describe
+and quantify differences between their outputs for German news articles and evaluate them
+extrinsically based on three methods to determine the country where events took place. We show how
+their contrasts are propagated into downstream tasks and can yield distinct decisions about a
+document's geographical focus, which, in turn, can impact conclusions about countries' prominence in
+German media.
 
 ---
