@@ -1,41 +1,44 @@
 {
   "meta": {
-    "report_date": "2026-05-06",
-    "generated_at_utc": "2026-05-06 04:43:27",
+    "report_date": "2026-05-07",
+    "generated_at_utc": "2026-05-07 04:44:57",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 4
+    "count": 6
   },
   "synthesis": {
-    "executive_summary": "今日论文覆盖OCR基准评估、医疗文档信息抽取、历史文档结构化及NER工具比较四大热点，共同指向对真实场景鲁棒性和领域特定需求的关注。CC-OCR V2揭示了现有大模型在真实文档处理中的性能短板；MedStruct-S证明了半结构化提取在OCR噪声下的可行性；ATLAS展示了历史文档结构化管道的潜力；NER工具比较则强调了工具选择对下游任务的影响。",
-    "trend_summary": "研究重点正从通用OCR性能转向真实场景下的鲁棒性评估和领域特定优化，包括高难度样本、OCR噪声、半结构化提取和知识结构恢复。多模态大模型成为主流工具，但评估显示其在实际部署中仍有明显差距。NER和结构化提取的工具对比与鲁棒性研究受到更多关注。",
+    "executive_summary": "今日研究涵盖OCR基准、多模态智能体、低资源NER、临床信息提取和多模态搜索智能体，聚焦文档解析与信息提取的实际应用优化。核心趋势是大型模型性能在真实场景下降明显，而以模块化、轻量级和领域特定方案为特征的混合方法成为提升实用性的关键方向。",
+    "trend_summary": "研究重心从单一模型评测转向系统性能力评估与可复现开源方案；在实际部署中，模块化多智能体架构和自提示优化等轻量级方案受到关注；低资源与隐私敏感场景推动更高效、可本地化的NER方法发展。",
     "common_innovations": [
-      "所有研究均强调在真实噪声和边缘情况下的评估与优化，而非仅关注理想场景。",
-      "多个工作提出了针对特定领域（如医疗、历史文献）的专用基准或结构化管道，推动OCR从通用走向垂直。",
-      "多模态大模型与编码器-解码器架构的对比成为评估核心，揭示了不同架构在特定任务上的优劣。"
+      "多模态搜索智能体OpenSearch-VL集成OCR、图像处理等多工具，通过强化学习提升多步推理鲁棒性。",
+      "CC-OCR V2基准涵盖5个核心OCR任务，聚焦真实文档处理中的硬例与边界情况。",
+      "材料数据库代理采用多智能体并行处理PDF文本与图表，自动化构建结构化数据库。",
+      "自提示小语言模型框架结合自动提示优化与DPO，实现隐私友好的临床NER。",
+      "混合NER框架利用规则降低标签复杂度，再微调预训练模型，配合LLM数据增强解决低资源问题。"
     ],
     "future_directions": [
-      "构建包含更多高难度样本和真实噪声的大规模OCR基准，覆盖表格、公式、手写等多类型文档。",
-      "研究显式建模OCR噪声的方法，例如将噪声类型作为输入特征或设计噪声增强训练策略。",
-      "探索结合编码器和解码器优势的混合架构，用于半结构化文档的端到端抽取。",
-      "开发领域自适应OCR后处理管道，利用知识图谱和上下文信息提升结构化恢复的召回率。",
-      "针对极端气候等特定事件，训练专用NER模型并融合地理知识以提升定位准确率。"
+      "开发针对真实文档硬例（如模糊、倾斜、复杂版面）的专项训练数据与评估方法。",
+      "构建模块化多智能体系统，实现文档处理中文本、图表、表格的协同提取。",
+      "探索自动提示生成与偏好优化结合的微调策略，减少对人工标注的依赖。",
+      "设计可复现的开源搜索/信息提取智能体，集成视觉与语言工具的协同调用。",
+      "研究基于规则与深度学习的混合架构，提升低资源语言NER的领域迁移能力。"
     ],
     "engineering_takeaways": [
-      "企业选型时应参考如CC-OCR V2的贴近实际场景的基准，而非仅依赖公开榜指标。",
-      "在医疗等高风险领域，优先考虑微调解码器-only模型或编码器-only模型进行键条件抽取。",
-      "历史文档数字化可采用ATLAS类管道实现高精确率的结构恢复，但需注意实体链接召回率瓶颈。",
-      "NER工具选择需评估其对下游任务的影响，建议在应用领域进行标准化对比测试。"
+      "企业选型时应采用CC-OCR V2这类真实基准评估模型，而非仅依赖学术基准。",
+      "材料数据库代理的模块化设计可复用至领域文献挖掘，需并行处理多种输入格式。",
+      "自提示小模型适合医患数据本地部署，结合QLoRA与DPO可控制性能与隐私。",
+      "OpenSearch-VL的全开源方案为构建多模态搜索智能体提供了可复现基线。",
+      "低资源NER优化可从规则简化标签体系与LLM数据增强两个方向入手。"
     ],
     "watchlist": [
       {
         "title": "CC-OCR V2: Benchmarking Large Multimodal Models for Literacy in Real-world Document Processing",
-        "watch_reason": "首个聚焦真实高难度文档处理的OCR基准，可能成为行业评估标准，对模型选型和改进方向有指导意义。"
+        "watch_reason": "提供了最贴近企业实用的OCR基准，后续版本更新和模型在基准上的表现直接影响产品选型。"
       },
       {
-        "title": "MedStruct-S: A Benchmark for Key Discovery, Key-Conditioned QA and Semi-Structured Extraction from OCR Clinical Reports",
-        "watch_reason": "针对OCR临床报告的半结构化提取基准，其评估结果和模型对比对医疗文档自动化有直接参考价值，可能推动该领域标准化。"
+        "title": "OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents",
+        "watch_reason": "开源的多模态搜索智能体方案，其训练数据和算法可复用于文档搜索、检索增强生成等场景。"
       }
     ]
   },
@@ -71,103 +74,209 @@
         "OCR基准",
         "多模态大模型",
         "文档处理",
-        "真实场景评估"
+        "真实场景评估",
+        "文本识别",
+        "文档解析",
+        "关键信息提取",
+        "文档问答"
       ],
-      "zh_summary": "提出CC-OCR V2基准，聚焦真实文档处理中的高难度OCR任务，涵盖文本识别、文档解析等5个主要赛道，共7093个样本。对14个先进多模态大模型评估显示，现有模型在真实场景中性能显著下降，与基准测试存在差距。",
-      "novelty": "首个针对企业级真实文档处理的高难度OCR基准，包含之前被忽视的关键和边缘情况任务。",
+      "zh_summary": "本文提出CC-OCR V2基准测试，用于评估大型多模态模型在真实世界文档处理中的识字能力。该基准涵盖5个OCR核心任务（文本识别、文档解析、文档定位、关键信息提取、文档问答），包含7093个高难度样本。对14个先进LMM的广泛实验表明，现有模型在真实应用场景中性能显著下降，与现有基准上的表现存在较大差距。数据集和评估工具已开源。",
+      "novelty": "提出了针对真实世界文档处理的综合性OCR基准，聚焦实际企业文档任务中的硬例和边界情况，填补了现有基准与实际应用之间的差距。",
       "innovation_points": [
-        "设计涵盖5个OCR核心任务的综合基准",
-        "聚焦高难度样本和真实场景边缘情况",
-        "揭示当前LMM在真实应用中的性能差距"
+        "设计覆盖5个OCR核心任务的高难度基准，共7093个样本",
+        "重点关注实际企业文档处理中的硬例和边界情况",
+        "提供开源数据集和评估工具"
       ],
-      "limitations": "基准样本数量相对有限（7093个），且仅评估了14个模型，未覆盖所有可能的方法。",
+      "limitations": "当前LMM在真实多样化场景下性能退化严重，离实际应用要求仍有较大差距。",
       "improvement_directions": [
-        "扩展基准规模，覆盖更多任务类型和场景",
-        "研究模型在真实噪声和多样性条件下的鲁棒性提升方法"
+        "提升模型在多样化采集条件和复杂文档结构下的鲁棒性",
+        "针对真实文档处理场景中的硬例和边界情况进行专项优化"
       ],
-      "engineering_value": "为企业文档处理系统的OCR选型和性能评估提供可靠基准，促进模型在实际应用中的落地。",
-      "why_relevant": "直接面向OCR在真实场景中的性能评估，为文档OCR研究提供方向和测试平台。"
+      "engineering_value": "为企业级文档处理系统选择或评估LMM提供了更贴近实际的测试基准和工具。",
+      "why_relevant": "直接关注OCR在真实应用中的瓶颈，对提升文档理解系统的实用价值有重要指导意义。"
     },
     {
-      "title": "MedStruct-S: A Benchmark for Key Discovery, Key-Conditioned QA and Semi-Structured Extraction from OCR Clinical Reports",
-      "summary": "Semi-structured information extraction (IE) from OCR-derived clinical reports is crucial for efficiently reconstructing patients' longitudinal medical histories. In practice, this scenario commonly involves three tasks: (i) field-header (key) discovery, (ii) key-conditioned question answering (QA), and (iii) end-to-end key-value pair extraction. However, existing evaluations often under-model two factors: heterogeneous and incompletely known key representations, and OCR-induced noise. This makes it difficult to assess model robustness in real-world settings. We present MedStruct-S, a benchmark specifically designed to evaluate these tasks under unknown keys and OCR noise. MedStruct-S contains 3,582 annotated real-world clinical report pages. Using MedStruct-S, we benchmark two representative paradigms: encoder-only sequence labeling with post-processing and decoder-only structured generation, covering four encoder-only and five decoder-only models spanning 0.11B to 103B parameters. Our results show that encoder-only models achieve the best performance for non-null-value key-conditioned QA despite being substantially smaller than decoder-only models. When comparing models of similar order of magnitude, encoder-only models still perform better overall. Without controlling for model scale, fine-tuned decoder-only models deliver the strongest overall results. These findings show that the benchmark provides a reliable and practical basis for selecting and comparing models across different semi-structured IE settings.",
-      "link": "https://arxiv.org/abs/2605.03103v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.03103v1",
+      "title": "Material Database Agent: A Multimodal Agentic Framework for Scientific Literature Mining",
+      "summary": "Materials science workflows rely on structured and unstructured data from the vast body of available scientific literature. However, most of the experimental details remain buried in text, tables, graphs and figures. Thus, constructing databases that incorporate this data is a manual, time-consuming, and hard-to-scale process. Multimodal large language models have made it feasible to extract information from text and scientific figures with high speed and accuracy. This opens the possibility of an AI system that can create production-scale material databases. Material Database Agent (MDA) is a modular, multi-agent system architecture for converting research literature into structured databases. MDA accepts article PDFs as input, which are subsequently processed in parallel into markdown files and figures. Multiple sub-agents read these markdown files and figures in parallel to assemble sub-databases for each paper. These sub-databases are then compiled into a single tabular database by an agent. As opposed to using either a rule-based approach or a single-pass pipeline for extracting information, MDA is a specialized architecture for transforming the literature into a database in the field of materials science. More generally, this study provides a basis for positioning multimodal agentic information extraction as a viable means for constructing next-generation scientific databases from the primary literature.",
+      "link": "https://arxiv.org/abs/2605.04278v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.04278v1",
       "authors": [
-        "Yingyun Li",
-        "Yu Wang",
-        "Haiyang Qian"
+        "Achuth Chandrasekhar",
+        "Omid Barati Farimani",
+        "Radheesh Sharma Meda",
+        "Amir Barati Farimani"
       ],
-      "published": "2026-05-04T19:37:21Z",
-      "updated": "2026-05-04T19:37:21Z",
-      "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.LG"
-      ],
-      "arxiv_id": "2605.03103v1",
-      "score": 12,
-      "topic_tags": [
-        "OCR临床报告",
-        "半结构化提取",
-        "信息抽取",
-        "模型鲁棒性"
-      ],
-      "zh_summary": "提出MedStruct-S基准，用于评估OCR临床报告中未知键与OCR噪声下的半结构化信息提取任务。包含3582页标注报告，对比编码器-解码器与解码器-only模型。结果表明，编码器-only模型在空值条件下的键条件问答任务中性能最佳，而微调的解码器-only模型整体最优。",
-      "novelty": "首次在OCR临床报告场景中综合考虑未知键表示和OCR噪声，设计三项子任务。",
-      "innovation_points": [
-        "定义键发现、键条件问答和端到端键值对提取三项任务",
-        "考虑未知键和OCR噪声下的鲁棒性评估",
-        "系统对比编码器-only和解码器-only模型范式"
-      ],
-      "limitations": "仅基于临床报告领域，通用性有待验证；模型规模范围0.11B-103B，但未覆盖所有最新模型。",
-      "improvement_directions": [
-        "扩展至更多领域（如法律、金融）的半结构化文档",
-        "探索结合编码器和解码器优势的混合架构",
-        "研究OCR噪声的显式建模方法"
-      ],
-      "engineering_value": "为医疗文档自动化处理中的模型选择提供实用指南，降低真实应用中的部署风险。",
-      "why_relevant": "针对OCR文档中的半结构化信息提取，对医疗、金融等领域具有直接实用价值。"
-    },
-    {
-      "title": "ATLAS: Article Tracking, Linking, and Analysis of Swedish Encyclopedias",
-      "summary": "The digitization of old encyclopedias represents an important step to improve access to historically structured knowledge. Often, however, this process does not go beyond an optical character recognition, leaving all the underlying structure unexploited. In addition, many encyclopedias had multiple editions reflecting the evolution of knowledge. The lack of structure in the raw text makes it difficult to track changes across these editions. In this work, we built a pipeline to restore the text structure, where we extract the headwords and identify entries; categorize the entities; match entries across editions; and link entries to a Wikidata item. We applied this pipeline to the four major editions of \\textit{Nordisk familjebok}, an authoritative Swedish encyclopedia published between 1876 and 1951. We could extract the headwords with an F1 score of 97.8\\% and we obtained an F1 score of 93.4\\% on the headword classification. On a small-scale evaluation, we reached a 93\\% precision on the cross-edition matching, 85\\% precision and 16.5\\% recall on the Wikidata linking. This shows that an automated approach to digitized historical knowledge is possible. This should facilitate the preservation of general knowledge and the understanding of knowledge transmission. The datasets and programs are available online.",
-      "link": "https://arxiv.org/abs/2605.02466v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.02466v1",
-      "authors": [
-        "Albin Andersson",
-        "Salam Jonasson",
-        "Fredrik Wastring",
-        "Pierre Nugues"
-      ],
-      "published": "2026-05-04T11:08:59Z",
-      "updated": "2026-05-04T11:08:59Z",
+      "published": "2026-05-05T20:30:45Z",
+      "updated": "2026-05-05T20:30:45Z",
       "categories": [
         "cs.CL"
       ],
-      "arxiv_id": "2605.02466v1",
-      "score": 7,
+      "arxiv_id": "2605.04278v1",
+      "score": 11,
       "topic_tags": [
-        "OCR后处理",
-        "历史文档",
-        "知识结构恢复",
-        "书籍结构化"
+        "文献挖掘",
+        "多模态信息提取",
+        "智能体系统",
+        "科学数据库",
+        "PDF处理",
+        "材料科学"
       ],
-      "zh_summary": "构建管道对瑞典百科全书《Nordisk familjebok》的四版进行OCR后结构化处理，包括词条提取（F1 97.8%）、分类（F1 93.4%）、跨版本匹配（精确率93%）和Wikidata链接（精确率85%）。展示了自动化处理历史文本结构的可行性。",
-      "novelty": "针对多版百科全书的完整结构化管道，将OCR文本恢复为可追溯的知识结构。",
+      "zh_summary": "本文提出材料数据库代理（MDA），一个模块化的多智能体系统架构，用于将科研文献自动转化为结构化数据库。MDA以PDF为输入，并行处理为markdown文件和图表，多个子智能体分别提取信息形成子数据库，最终由智能体合并为单一表格数据库。该方法专为材料科学领域设计，展示了将多模态智能体信息提取用于构建下一代科学数据库的可行性。",
+      "novelty": "提出了一种模块化多智能体系统，专门用于将材料科学文献自动转化为结构化数据库，区别于规则方法或单轮管道。",
       "innovation_points": [
-        "设计从OCR文本到结构化条目的完整流程",
-        "实现跨版本条目匹配和知识图谱链接",
-        "在瑞典语历史文档上达到高精确率"
+        "多智能体并行处理PDF文献，包括文本和图表",
+        "分步组装子数据库并合并为统一表格数据库",
+        "专为材料科学领域的信息提取定制架构"
       ],
-      "limitations": "Wikidata链接召回率较低（16.5%），跨版本匹配仅小规模评估；依赖的语言和领域有限。",
+      "limitations": "目前局限于材料科学领域，通用性尚未验证；依赖多模态大语言模型的准确性。",
       "improvement_directions": [
-        "改进实体链接的召回率，例如利用上下文信息或知识图谱嵌入",
-        "扩展至更多语言和历史文档类型",
-        "研究OCR错误对结构化影响的鲁棒方法"
+        "扩展到其他科学领域",
+        "提升对图表中复杂信息的提取精度"
       ],
-      "engineering_value": "为历史文献数字化提供自动化结构恢复方案，促进知识传播和历史研究。",
-      "why_relevant": "展示OCR后处理中结构恢复的重要性，为文档解析提供实用方法。"
+      "engineering_value": "可大幅减少人工构建科学数据库的时间和成本，支撑材料科学的数据驱动研究。",
+      "why_relevant": "展示了多模态信息提取在科学文献自动化处理中的实用价值，与OCR和文档理解技术密切相关。"
+    },
+    {
+      "title": "Self-Prompting Small Language Models for Privacy-Sensitive Clinical Information Extraction",
+      "summary": "Clinical named entity recognition from dental progress notes is challenging because documentation is highly unstructured, domain-specific, and often privacy-sensitive. We developed a locally deployable framework that enables small language models to self-generate, verify, refine, and evaluate entity-specific prompts for extracting multiple clinical entities from dental notes. Using 1,200 annotated notes, we evaluated candidate open-weight models with multi-prompt ensemble inference and further adapted selected models using QLoRA-based supervised fine-tuning and direct preference optimization. Model performance varied substantially, highlighting the need for task-specific evaluation rather than reliance on generic benchmarks. Qwen2.5-14B-Instruct achieved the strongest baseline performance. After DPO, Qwen2.5-14B-Instruct and Llama-3.1-8B-Instruct achieved micro/macro F1 scores of 0.864/0.837 and 0.806/0.797, respectively. These findings suggest that automated prompt optimization combined with lightweight preference-based post-training can support scalable clinical information extraction using locally deployed small language models.",
+      "link": "https://arxiv.org/abs/2605.04221v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.04221v1",
+      "authors": [
+        "Yao-Shun Chuang",
+        "Tushti Mody",
+        "Uday Pratap Singh",
+        "Shirindokht Shiraz",
+        "Chun-Teh Lee",
+        "Ryan Brandon",
+        "Muhammad F Walji",
+        "Xiaoqian Jiang",
+        "Bunmi Tokede"
+      ],
+      "published": "2026-05-05T19:03:40Z",
+      "updated": "2026-05-05T19:03:40Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "arxiv_id": "2605.04221v1",
+      "score": 10,
+      "topic_tags": [
+        "临床NER",
+        "小型语言模型",
+        "提示优化",
+        "DPO",
+        "隐私保护",
+        "信息提取"
+      ],
+      "zh_summary": "本文针对牙科记录中隐私敏感的临床命名实体识别问题，提出一个可本地部署的框架，使小型语言模型能够自我生成、验证、优化和评估实体特定提示。使用1200条标注笔记，结合多提示集成推理和基于QLoRA的微调及直接偏好优化（DPO），Qwen2.5-14B-Instruct在DPO后达到micro/macro F1分数0.864/0.837。研究表明自动提示优化与轻量级偏好后训练可支持可扩展的临床信息提取。",
+      "novelty": "提出小型语言模型自提示框架，结合自动提示优化与轻量级偏好后训练，用于隐私敏感的临床NER。",
+      "innovation_points": [
+        "自生成、验证、优化和评估实体特定提示的流程",
+        "多提示集成推理与QLoRA微调及DPO结合",
+        "本地可部署，保护隐私"
+      ],
+      "limitations": "仅针对牙科领域，模型性能因任务而异，依赖高质量标注数据。",
+      "improvement_directions": [
+        "扩展至其他医疗领域",
+        "减少对标注数据的依赖"
+      ],
+      "engineering_value": "提供了一种可本地部署、保护隐私的临床信息提取方案，适用于医疗机构的实际应用。",
+      "why_relevant": "涉及到非结构化文档（牙科记录）中的信息提取，与OCR和文档解析的后续处理相关。"
+    },
+    {
+      "title": "OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents",
+      "summary": "Deep search has become a crucial capability for frontier multimodal agents, enabling models to solve complex questions through active search, evidence verification, and multi-step reasoning. Despite rapid progress, top-tier multimodal search agents remain difficult to reproduce, largely due to the absence of open high-quality training data, transparent trajectory synthesis pipelines, or detailed training recipes. To this end, we introduce OpenSearch-VL, a fully open-source recipe for training frontier multimodal deep search agents with agentic reinforcement learning. First, we curated a dedicated pipeline to construct high-quality training data through Wikipedia path sampling, fuzzy entity rewriting, and source-anchor visual grounding, which jointly reduce shortcuts and one-step retrieval collapse. Based on this pipeline, we curate two training datasets, SearchVL-SFT-36k for SFT and SearchVL-RL-8k for RL. Besides, we design a diverse tool environment that unifies text search, image search, OCR, cropping, sharpening, super-resolution, and perspective correction, enabling agents to combine active perception with external knowledge acquisition. Finally, we propose a multi-turn fatal-aware GRPO training algorithm that handles cascading tool failures by masking post-failure tokens while preserving useful pre-failure reasoning through one-sided advantage clamping. Built on this recipe, OpenSearch-VL delivers substantial performance gains, with over 10-point average improvements across seven benchmarks, and achieves results comparable to proprietary commercial models on several tasks. We will release all data, code, and models to support open research on multimodal deep search agents.",
+      "link": "https://arxiv.org/abs/2605.05185v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.05185v1",
+      "authors": [
+        "Shuang Chen",
+        "Kaituo Feng",
+        "Hangting Chen",
+        "Wenxuan Huang",
+        "Dasen Dai",
+        "Quanxin Shou",
+        "Yunlong Lin",
+        "Xiangyu Yue",
+        "Shenghua Gao",
+        "Tianyu Pang"
+      ],
+      "published": "2026-05-06T17:50:38Z",
+      "updated": "2026-05-06T17:50:38Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2605.05185v1",
+      "score": 9,
+      "topic_tags": [
+        "多模态搜索",
+        "智能体",
+        "强化学习",
+        "OCR",
+        "图像处理",
+        "开源方案"
+      ],
+      "zh_summary": "本文提出OpenSearch-VL，一个完全开源的前沿多模态搜索智能体训练方案，包括高质量训练数据构建、多样化工具体系和多轮致命感知GRPO训练算法。该方案在7个基准上平均提升超过10个点，性能可与商业专有模型媲美。数据构建通过Wikipedia路径采样、模糊实体重写和源锚视觉定位减少捷径和一步检索崩溃。工具体系统一了文本搜索、图像搜索、OCR、裁剪、锐化、超分辨率和透视校正。",
+      "novelty": "提出了首个完全开源的多模态深度搜索智能体训练方案，包含创新性数据构建和训练算法。",
+      "innovation_points": [
+        "Wikipedia路径采样与模糊实体重写的数据构建方法",
+        "源锚视觉定位减少检索捷径",
+        "多样化工具体系，集成OCR、图像处理等",
+        "多轮致命感知GRPO算法处理工具级联失败"
+      ],
+      "limitations": "性能提升显著，但与最先进商业模型仍有差距（原文未明确）。",
+      "improvement_directions": [
+        "进一步提升视觉理解能力",
+        "增强在复杂多步推理中的鲁棒性"
+      ],
+      "engineering_value": "提供了可复现的先进多模态搜索智能体训练方案，为实际部署提供开源基础。",
+      "why_relevant": "集成了OCR作为重要工具，且任务涉及文档图像理解，与OCR的实际应用紧密相关。"
+    },
+    {
+      "title": "A Hybrid Method for Low-Resource Named Entity Recognition",
+      "summary": "Named Entity Recognition (NER) is a critical component of Natural Language Processing with diverse applications in information extraction and conversational AI. However, NER in specific domains for low-resource languages faces challenges such as limited annotated data and heterogeneous label sets. This study addresses these issues by proposing a hybrid neurosymbolic framework that integrates rule-based processing with deep learning models for Vietnamese NER. The core idea involves a two-stage pipeline: first, a rule-based component reduces label complexity by grouping relational and special categories; second, pre-trained language models are fine-tuned for high-precision extraction. A post-processing module is then utilized to restore fine-grained labels, preserving expressiveness for application-level usability. To mitigate data scarcity, a scalable data augmentation strategy leveraging Large Language Models (LLMs) is introduced to expand the label set without full re-annotation, which is a significant novelty of this work. The effectiveness of this method was evaluated across five specific-domain datasets, including logistics, wildlife, and healthcare. Experimental results demonstrate substantial improvements over strong RoBERTa-based baselines. Specifically, the proposed system achieved F1 scores of 90 percent in Customer Service, up from 83 percent; 84 percent in GAM, up from 73 percent; 83 percent in AI Fluent, up from 80 percent; 94 percent in PhoNER_Covid19, up from 91 percent; and 60 percent in Rare Wildlife, up from 36 percent. These findings confirm that the hybrid approach effectively captures the linguistic complexity of Vietnamese and contextual nuances in specialized domains, offering a robust contribution to low-resource NER research.",
+      "link": "https://arxiv.org/abs/2605.04489v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.04489v1",
+      "authors": [
+        "Do Minh Duc",
+        "Quan Xuan Truong",
+        "Viet Tran Hong",
+        "Le Hoang Anh",
+        "Mac Thi Minh Tra",
+        "Nguyen Van Thuy",
+        "Le Hai Ha",
+        "Vinh Nguyen Van"
+      ],
+      "published": "2026-05-06T04:36:01Z",
+      "updated": "2026-05-06T04:36:01Z",
+      "categories": [
+        "cs.CE",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "arxiv_id": "2605.04489v1",
+      "score": 6,
+      "topic_tags": [
+        "低资源NER",
+        "混合方法",
+        "规则学习",
+        "数据增强",
+        "LLM",
+        "越南语"
+      ],
+      "zh_summary": "本文针对低资源语言（越南语）的命名实体识别，提出一种混合神经符号框架，结合规则处理和深度学习模型。该框架采用两阶段流水线：先由规则组件通过分组关系类别降低标签复杂度，再微调预训练语言模型进行高精度提取，最后通过后处理恢复细粒度标签。利用LLM进行数据增强解决数据稀缺问题。在5个特定领域数据集上取得显著提升，F1分数最高提升24个百分点。",
+      "novelty": "提出结合规则与深度学习的混合框架，并利用LLM进行数据增强解决低资源NER问题，具有实用性。",
+      "innovation_points": [
+        "两阶段混合方法：规则消歧 + 深度学习提取 + 后处理恢复标签",
+        "利用LLM进行可扩展的数据增强，避免完整重标注",
+        "针对低资源语言的特定领域设计"
+      ],
+      "limitations": "依赖规则设计的质量，领域迁移可能需要重新设计规则。",
+      "improvement_directions": [
+        "探索更自动化的规则生成方法",
+        "提升对跨领域标签集合的适应性"
+      ],
+      "engineering_value": "为低资源语言在特定领域的NER提供了高效且实用的解决方案，显著提升性能。",
+      "why_relevant": "低资源NER与文档理解中信息提取相关，尤其对于非英文文档的处理有借鉴意义。"
     },
     {
       "title": "Geolocating News about Extreme Climate Events: A Comparative Analysis of Off-the-Shelf Tools for Toponym Identification in German",
@@ -187,26 +296,25 @@
       "arxiv_id": "2605.03414v1",
       "score": 4,
       "topic_tags": [
-        "NER工具比较",
+        "NER比较",
         "地理定位",
         "气候事件",
-        "德语文本"
+        "德语",
+        "信息提取"
       ],
-      "zh_summary": "比较Flair、Spacy和Stanza三种NER工具在德国新闻文本中识别极端气候事件地点的表现，通过下游任务评估地理定位结果差异。发现工具间的差异会传播到下游任务，影响关于文档地理焦点的决策，进而影响国家在德国媒体中的显著性结论。",
-      "novelty": "系统评估NER工具在极端气候事件地理定位中的差异传播影响。",
+      "zh_summary": "本文对三种现有的命名实体识别工具（Flair、Spacy、Stanza）在德语新闻文章中识别极端气候事件地名方面进行了比较分析。通过外在评估方法（确定事件发生国家），展示了不同工具的输出差异如何传播到下游任务，并可能影响关于国家媒体关注度的结论。",
+      "novelty": "系统比较了三种NER工具在德语新闻中识别气候事件地名的性能差异及其对下游任务的影响。",
       "innovation_points": [
-        "对比三种主流NER工具在气候变化领域的表现",
-        "分析NER输出差异对下游地理定位任务的影响",
-        "揭示工具选择对结论可靠性的潜在影响"
+        "对三种NER工具进行外在评估，关注下游决策影响",
+        "量化工具输出差异对地理焦点确定的影响"
       ],
-      "limitations": "仅聚焦德语新闻，且任务为区域级定位；未考虑OCR噪声对NER的影响。",
+      "limitations": "仅针对德语新闻和极端气候事件，可能不具广泛通用性。",
       "improvement_directions": [
-        "开发针对极端气候事件的专用NER模型",
-        "结合地理知识和上下文消歧提高定位准确率",
-        "研究OCR噪声场景下NER的鲁棒性"
+        "扩展评估至更多语言和事件类型",
+        "改进NER工具对地理上下文的理解"
       ],
-      "engineering_value": "为气候研究中的文本地理定位提供工具选择指导，减少分析偏差。",
-      "why_relevant": "OCR常用于新闻数字化，NER工具选择直接影响下游任务，与OCR文档分析相关。"
+      "engineering_value": "为用户在选择NER工具用于地理定位任务时提供了实证依据。",
+      "why_relevant": "涉及文档中地名识别，是OCR后处理（信息提取）的重要步骤。"
     }
   ]
 }
