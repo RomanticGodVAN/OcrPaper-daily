@@ -1,130 +1,30 @@
 {
   "meta": {
-    "report_date": "2026-05-09",
-    "generated_at_utc": "2026-05-09 04:33:34",
+    "report_date": "2026-05-10",
+    "generated_at_utc": "2026-05-10 04:53:10",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 2
+    "count": 0
   },
   "synthesis": {
-    "executive_summary": "今日研究揭示了两项关键进展：一是低资源手写识别中序列建模对跨语言迁移的核心作用，二是LLM动作决策中控制器类选择的理论框架，后者涉及OCR置信度与拒绝机制。两者均为OCR/文档解析系统的算法选择和效率优化提供了新的理论依据。",
-    "trend_summary": "当前OCR研究聚焦于低资源、多语言场景下的迁移学习机制，以及智能文档处理中决策理论的应用，强调从“更好的模型”向“更智能的决策策略”转变。",
+    "executive_summary": "今天没有新的论文情报，OCR和文档解析领域暂无明显突破或趋势变化。建议维持现有研究方向，继续关注后续更新。",
+    "trend_summary": "无新论文发布，趋势平稳。",
     "common_innovations": [
-      "通过控制变量实验（CNN-only vs CRNN）分离视觉表征与序列建模对跨语言迁移的贡献。",
-      "提出基于改进潜力、信号可靠性、恢复度三个可估瓶颈的控制器类选择理论。",
-      "利用OCR token作为无标签先验，设计先验门控控制器提升LLM在TextVQA上的表现。"
+      "暂无新创新点。"
     ],
     "future_directions": [
-      "验证注意力或Transformer序列模型在低资源跨语言HTR中的迁移增益。",
-      "研究序列建模共享对不同语言对（如拉丁语系与阿拉伯语系）的泛化能力。",
-      "结合无监督预训练（如掩码语言建模）进一步提升低资源手写识别的迁移效果。",
-      "将控制器类选择理论应用于OCR后处理中的置信度校准与拒绝/校对决策。",
-      "探索非嵌套控制器类选择问题的理论扩展，以支持更丰富的动作空间。"
+      "探索端到端OCR模型以简化流水线。",
+      "研究文档布局分析与OCR的联合学习。",
+      "利用多模态预训练提升文档理解。",
+      "开发大模型驱动的文档解析agent。"
     ],
     "engineering_takeaways": [
-      "低资源手写系统设计应优先采用带序列建模的CRNN架构，而非纯CNN，尤其涉及多语言时。",
-      "LLM动作决策中不应盲目追求实例级控制，应基于数据瓶颈评估选择合适控制器类以节省样本。",
-      "OCR输出的token可用作无标签先验，在文档解析中辅助LLM决策。"
+      "优化OCR推理速度以降低延迟。",
+      "提升复杂文档（如表格、手写）的鲁棒性。",
+      "确保模型在低资源语言上的泛化能力。"
     ],
-    "watchlist": [
-      {
-        "title": "Understanding Cross-Language Transfer Improvements in Low-Resource HTR: The Role of Sequence Modeling",
-        "watch_reason": "揭示了序列建模对低资源手写迁移的关键作用，可能影响未来多语言HTR系统架构设计。"
-      },
-      {
-        "title": "A Regime Theory of Controller Class Selection for LLM Action Decisions",
-        "watch_reason": "提出控制器类选择理论，直接影响OCR后处理中是否调用校对模型等决策，具有工程实践指导意义。"
-      }
-    ]
+    "watchlist": []
   },
-  "papers": [
-    {
-      "title": "Understanding Cross-Language Transfer Improvements in Low-Resource HTR: The Role of Sequence Modeling",
-      "summary": "Handwritten Text Recognition (HTR) for Arabic-script languages benefits from cross-language joint training under low-resource conditions, particularly when using CRNN-based models that combine convolutional encoders with sequence modeling. However, it remains unclear whether these improvements are better explained by shared visual representations or sequence-level dependencies. In this work, we conduct a controlled architectural study of line-level Arabic-script HTR, comparing CNN-only models with CTC decoding and CRNN models under identical single-script and multi-script training regimes. Experiments are performed on Arabic (KHATT), Urdu (NUST-UHWR), and Persian (PHTD) datasets under low-resource settings (K in {100, 500, 1000}). Our results show a clear divergence in transfer behavior: while CNN-only models exhibit limited or unstable improvements, CRNN models achieve better performance under multi-script training, particularly in the most data-constrained regimes. Focusing on transfer improvements (delta CER) rather than absolute performance, we find that cross-language improvements are associated with sequence-level modeling, while sharing visual representations learned by the CNN encoder, corresponding to similarities in character shapes across scripts, alone appears to be insufficient. This finding suggests that contextual modeling plays an important role in enabling effective transfer in low-resource scenarios, and that similar behavior may extend to other low-resource language settings.",
-      "link": "https://arxiv.org/abs/2605.05900v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.05900v1",
-      "authors": [
-        "Sana Al-azzawi",
-        "Chang Liu",
-        "Nudrat Habib",
-        "Elisa Barney",
-        "Marcus Liwicki"
-      ],
-      "published": "2026-05-07T09:11:56Z",
-      "updated": "2026-05-07T09:11:56Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2605.05900v1",
-      "score": 13,
-      "topic_tags": [
-        "手写文本识别",
-        "低资源迁移",
-        "跨语言",
-        "序列建模",
-        "阿拉伯语系"
-      ],
-      "zh_summary": "针对阿拉伯语系手写文本识别（HTR）的低资源跨语言迁移问题，通过对比CNN-only模型（CTC解码）和CRNN模型在相同单脚本与多脚本训练下的表现，发现跨语言迁移增益主要源于序列建模而非共享视觉表征。实验基于阿拉伯语、乌尔都语和波斯语数据集，在低资源设置下（K=100/500/1000）显示CRNN模型在多脚本训练中表现更优，且迁移改进（delta CER）与序列级建模相关。",
-      "novelty": "通过控制变量实验，揭示了序列建模而非共享视觉表征是低资源跨语言HTR迁移性能提升的关键因素。",
-      "innovation_points": [
-        "采用CNN-only与CRNN对比架构，分别对应独立解码与序列建模，消除其他变量影响",
-        "提出以delta CER（转移改进）而非绝对性能作为评估指标的实验设计",
-        "在三种阿拉伯语系语言（阿拉伯语、乌尔都语、波斯语）上验证低资源跨语言迁移效果"
-      ],
-      "limitations": "仅针对阿拉伯语系脚本，未验证其他语系或混合脚本场景；低资源设置仅到100样本，更极端资源情形未探讨。",
-      "improvement_directions": [
-        "探索注意力机制或Transformer序列模型在低资源跨语言HTR中的迁移效果",
-        "研究序列建模共享对不同语言对（如拉丁语系与阿拉伯语系）的泛化性",
-        "结合无监督预训练（如掩码语言建模）进一步提升低资源迁移增益"
-      ],
-      "engineering_value": "为低资源手写识别系统设计提供了明确的架构选择依据：优先采用带序列建模模块（如CRNN）而非仅CNN，尤其当涉及多语言或脚本时。",
-      "why_relevant": "直接针对OCR核心任务（手写文本识别）的跨语言迁移问题，且明确指出了序列建模模块的作用，对低资源场景下的OCR系统设计有直接指导意义。"
-    },
-    {
-      "title": "A Regime Theory of Controller Class Selection for LLM Action Decisions",
-      "summary": "Deployed language and vision-language models must decide, on each input, whether to answer directly, retrieve evidence, defer to a stronger model, or abstain. Contrary to the common monotonicity intuition, greater per-input expressivity is not uniformly beneficial in finite samples: under identical strict cross-validation, different benchmarks prefer different controller classes. This reflects a finite-sample limitation of instance-level uncertainty signals, which can be exhausted at a distribution-dependent scale. We organize controllers into a nested lattice of four classes: fixed actions, partition routers, instance-level controllers, and prior-gated controllers, ordered by complexity. We prove a regime theory that turns three data-estimable bottlenecks into a class choice: how much improvement is possible beyond the best fixed action, whether there are enough samples for instance-level controllers to make reliable decisions, and how much improvement a coarse partition router can recover when instance-level signal is unreliable. The resulting Bernstein-tight threshold has a matching information-theoretic lower bound, and strict nested cross-validation provably selects a near-best class. Across SMS-Spam, HallusionBench, A-OKVQA, and FOLIO, the predicted class matches the empirical winner; the prior-gated controller wins on TextVQA when OCR tokens supply a label-free prediction-time prior. Code is available at https://github.com/Anonymous-Awesome-Submissions/Regime-Theory.",
-      "link": "https://arxiv.org/abs/2605.06339v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.06339v1",
-      "authors": [
-        "Zhaoyang Jiang",
-        "Zhizhong Fu",
-        "Yunsoo Kim",
-        "Jiacong Mi",
-        "Zicheng Li",
-        "Xuanqi Peng",
-        "Honghan Wu"
-      ],
-      "published": "2026-05-07T14:28:17Z",
-      "updated": "2026-05-07T14:28:17Z",
-      "categories": [
-        "cs.AI"
-      ],
-      "arxiv_id": "2605.06339v1",
-      "score": 9,
-      "topic_tags": [
-        "大语言模型",
-        "决策理论",
-        "控制器选择",
-        "置信度",
-        "自适应动作"
-      ],
-      "zh_summary": "针对大语言模型（LLM）动作决策（直接回答、检索、延迟、弃权），提出控制器类选择的机制理论。通过严格交叉验证发现，并非总是更细粒度的实例级控制最优，不同基准偏好不同控制器类。将控制器组织为四类嵌套格结构：固定动作、分区路由器、实例级控制器、先验门控控制器，并推导出基于三个数据可估瓶颈的定理，用于选择近似最优类。在SMS-Spam、HallusionBench等基准上验证了理论预测与经验结果一致，其中先验门控控制器在TextVQA上因OCR token提供标签无关的先验而获胜。",
-      "novelty": "提出了控制器类选择的严格理论框架，打破了越精细控制越好的直觉，并给出了有限样本下的信息论边界。",
-      "innovation_points": [
-        "将控制器组织为四类嵌套格结构并定义复杂层级",
-        "推导基于三个可估瓶颈（改进潜力、实例级信号可靠性、分区路由器恢复度）的机制理论",
-        "证明严格嵌套交叉验证可近似选择最优类，且给出Bernstein紧界与下界匹配",
-        "提出先验门控控制器，利用OCR token作为无标签先验"
-      ],
-      "limitations": "理论假设控制器类为嵌套结构，实际中可能存在非嵌套设计；实验仅在少量基准上验证，需更多任务泛化。",
-      "improvement_directions": [
-        "扩展控制器类至更丰富的动作空间（如多步骤检索、自适应计算）",
-        "将理论应用于OCR任务中置信度校准与拒绝决策",
-        "探索非嵌套类选择问题的理论扩展"
-      ],
-      "engineering_value": "为部署LLM时设计自适应决策策略提供了理论指导，避免盲目追求实例级控制而浪费样本效率，例如在OCR后处理中决定是否使用校对模型。",
-      "why_relevant": "涉及OCR token用作先验门控，且决策理论可应用于OCR系统的后处理（如拒绝低置信OCR结果），对构建可靠的OCR流水线有参考价值。"
-    }
-  ]
+  "papers": []
 }
