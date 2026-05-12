@@ -1,10 +1,713 @@
-# OCR / 文档解析研究日报（2026-05-11）
+# OCR / 文档解析研究日报（2026-05-12）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-05-11 05:06:38`
+- 生成时间（UTC）：`2026-05-12 04:49:18`
 - 大模型综合分析：`开启`
 
-今天没有筛到符合条件的新论文。
+## 一、今日执行摘要
+
+> 今日8篇新论文核心聚焦OCR文档解析中的结构化提取、分类基准、检索增强与隐私保护，同时多篇探讨AI工具评估与置信度估计，共同推动文档智能向更可靠、可解释、低成本的工程方向发展。
+
+## 二、今日趋势判断
+
+当前趋势：1) 从通用OCR向领域专用结构化提取演进（如临床报告、PII提取）；2) 多模态文档理解基准向多层次、多领域、多语言扩展；3) 检索增强生成与潜在路由技术结合以实现成本-性能优化；4) 隐私保护与来源可追溯性成为文档处理系统的关键考量。
+
+## 三、今日论文概览
+
+1. **Useful for Exploration, Risky for Precision: Evaluating AI Tools in Academic Research** | 标签：AI工具评估、可解释性、学术研究、基准测试
+2. **Key Coverage Matters: Semi-Structured Extraction of OCR Clinical Reports** | 标签：OCR、临床报告、信息提取、键覆盖率、BERT
+3. **Multi-domain Multi-modal Document Classification Benchmark with a Multi-level Taxonomy** | 标签：文档分类、多模态、层次化、基准测试、多领域
+4. **GLiNER2-PII: A Multilingual Model for Personally Identifiable Information Extraction** | 标签：PII提取、多语言、小模型、合成数据、信息提取
+5. **TRACER: Verifiable Generative Provenance for Multimodal Tool-Using Agents** | 标签：来源验证、工具使用、多模态、可追溯性、强化学习
+6. **Route Before Retrieve: Activating Latent Routing Abilities of LLMs for RAG vs. Long-Context Selection** | 标签：路由机制、RAG、长上下文、LLM、成本优化
+7. **Qwen Goes Brrr: Off-the-Shelf RAG for Ukrainian Multi-Domain Document Understanding** | 标签：检索增强生成、多文档理解、问答系统、乌克兰语
+8. **PlantMarkerBench: A Multi-Species Benchmark for Evidence-Grounded Plant Marker Reasoning** | 标签：生物信息学、文献挖掘、证据推理、基准数据集
+9. **MemPrivacy: Privacy-Preserving Personalized Memory Management for Edge-Cloud Agents** | 标签：隐私保护、记忆管理、边缘计算、智能体
+10. **Grounded or Guessing? LVLM Confidence Estimation via Blind-Image Contrastive Ranking** | 标签：置信度估计、大视觉语言模型、视觉基础性、模型校准
+
+## 四、今天 OCR / 文档解析论文里的主要创新点
+
+- 采用规范键目录和键覆盖率度量实现领域专用OCR报告的高精度提取
+- 构建多层次、多领域、多模态文档分类基准，推动实际业务场景评估
+- 利用合成数据训练轻量级多语言PII提取模型，兼顾性能与部署效率
+- 提出主动路由框架（Pre-Route），在RAG与长上下文之间提前决策优化成本
+- 通过盲图像对比训练置信度探针，低成本检测视觉语言模型的视觉无根据性
+- 设计可验证生成来源记录（TRACER），为多模态工具智能体提供声明级依赖结构
+- 在边缘-云场景下使用类型感知占位符实现隐私保护，保持记忆系统高效用
+- 通过上下文分块和问题感知重排序提升乌克兰语多文档理解系统性能
+
+## 五、后续 OCR 领域值得推进的改进方向
+
+- 探索自动化规范键目录扩展方法，减少人工维护成本，推广到法律、金融等新领域
+- 研究基于层次化多模态特征融合的文档分类模型，利用五级标签体系提升细粒度识别
+- 开发半监督或主动学习策略，利用真实数据自适应优化合成数据训练的小模型（如PII提取）
+- 联合优化路由决策与下游性能，扩展Pre-Route框架至多跳推理与对话系统
+- 将BICR置信度估计扩展至多轮对话与多图像输入场景，增强文档理解可靠性
+- 扩展TRACER关系空间覆盖更广泛推理类型，应用于图像生成与视觉问答任务
+- 结合差分隐私与联邦学习，增强边缘-云智能体的记忆隐私保护能力
+- 将乌克兰语文档问答中的结构保留与答案空间感知策略迁移至其他低资源语言
+
+## 六、工程落地启发
+
+- 键覆盖率可作为OCR提取系统中关键的工程指标，指导目录构建与性能调优
+- 优先使用轻量元数据（文档类型、长度）进行主动路由，可显著降低LLM推理成本
+- 合成数据配合约束驱动管道生成，可有效训练小模型实现PII提取并避免隐私风险
+- 盲图像对比提供了一种零额外推理成本的置信度校准技术，适合部署在资源受限环境
+- 生成来源记录（TRACER）的训练信号可用于改进多模态智能体的可优化性
+- 边缘-云架构下，类型感知占位符替换在隐私保护与效用间取得良好平衡
+- 保留文档结构（如分块、层次）比复杂后处理启发式更能提升检索增强系统的效果
+- 评估AI工具时应结合人机中心与计算机中心指标，避免单一维度误导
+
+## 七、优先关注论文
+
+- **Key Coverage Matters: Semi-Structured Extraction of OCR Clinical Reports**：提出OCR结构化提取的方案简洁有效，键覆盖率可作为通用工程指标，有望推广至其他领域，值得跟踪后续扩展研究。
+- **Multi-domain Multi-modal Document Classification Benchmark with a Multi-level Taxonomy**：首个多层次多领域文档分类基准，为未来工业级系统提供评测平台，相关模型和数据集可能成为标准参考。
+- **Route Before Retrieve: Activating Latent Routing Abilities of LLMs for RAG vs. Long-Context Selection**：主动路由框架能大幅降低LLM推理成本，且元数据轻量，适用性广泛，在工程实践中具有显著应用前景。
+- **Grounded or Guessing? LVLM Confidence Estimation via Blind-Image Contrastive Ranking**：置信度估计对于高可靠性OCR应用至关重要，BICR方法模型无关且低成本，可能成为LVLM部署的标准组件。
+
+## 八、论文逐篇解析
+
+### 1. Useful for Exploration, Risky for Precision: Evaluating AI Tools in Academic Research
+
+- arXiv: [2605.10125v1](https://arxiv.org/abs/2605.10125v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.10125v1)
+- 作者: Anthea Dathe, Kiran Hoffmann, Aline Mangold
+- 发布时间: 2026-05-11T07:39:41Z
+- 分类: cs.AI, cs.HC
+- 相关性评分: 13
+- 主题标签: AI工具评估、可解释性、学术研究、基准测试
+
+**中文摘要**
+
+> 本文提出一种结合人机中心指标和计算机中心指标的基准测试框架，用于评估学术研究中基于AI的问答和文献综述工具。研究发现，问答工具在生成概览和一般性摘要时有用，但精确信息提取不可靠，可解释AI准确性低；文献综述工具支持探索性搜索，但可重复性低、透明度不足、来源质量不一致，不适合系统综述。
+
+**核心创新概述**
+
+> 提出了结合人机中心与计算机中心指标的基准测试框架，填补了现有基准在可用性、可解释性和工作流整合等人类中心标准方面的空白。
+
+**创新点拆解**
+
+- 设计并应用了同时包含人机中心指标（可用性、可解释性）和计算机中心指标的评估框架
+- 系统比较了问答工具和文献综述工具在学术研究工作流中的表现，指出了两者的适用场景与局限
+
+**当前局限**
+
+> 研究仅针对特定AI工具和学术研究场景，未涵盖其他领域或工具类型；可解释性评估指标可能不够全面。
+
+**后续可改进方向**
+
+- 扩展基准框架以覆盖更多类型的AI学术工具
+- 改进可解释性评估方法，使其更细粒度并更具实践意义
+- 探索提高AI工具结果可重复性和透明度的技术路径
+
+**工程启发**
+
+> 为学术研究者合理选择和使用AI工具提供了实证依据，指导工具开发者在可解释性和可靠性方面进行改进。
+
+**为什么值得关注**
+
+> 对OCR/文档解析领域尤其相关，因为文档分析工具的可解释性、可靠性和工作流整合是该领域的核心挑战。
+
+**原始摘要**
+
+Artificial intelligence (AI) tools are being incorporated into scientific research workflows with
+the potential to enhance efficiency in tasks such as document analysis, question answering (Q and
+A), and literature search. However, system outputs are often difficult to verify, lack transparency
+in their generation and remain prone to errors. Suitable benchmarks are needed to document and
+evaluate arising issues. Nevertheless, existing benchmarking approaches are not adequately capturing
+human-centered criteria such as usability, interpretability, and integration into research
+workflows. To address this gap, the present work proposes and applies a benchmarking framework
+combining human-centered and computer-centered metrics to evaluate AI-based Q&A and literature
+review tools for research use. The findings suggest that Q and A tools can offer valuable overviews
+and generally accurate summaries; however, they are not always reliable for precise information
+extraction. Explainable AI (xAI) accuracy was particularly low, meaning highlighted source passages
+frequently failed to correspond to generated answers. This shifted the burden of validation back
+onto the researcher. Literature review tools supported exploratory searches but showed low
+reproducibility, limited transparency regarding chosen sources and databases, and inconsistent
+source quality, making them unsuitable for systematic reviews. A comparison of these tool groups
+reveals a similar pattern: while AI tools can enhance efficiency in the early stages of the research
+workflow and shallow tasks, their outputs still require human verification. The findings underscore
+the importance of explainability features to enhance transparency, verification efficiency and
+careful integration of AI tools into researchers' workflows. Further, human-centered evaluation
+remains an important concern to ensure practical applicability.
+
+---
+
+### 2. Key Coverage Matters: Semi-Structured Extraction of OCR Clinical Reports
+
+- arXiv: [2605.09440v1](https://arxiv.org/abs/2605.09440v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.09440v1)
+- 作者: Yu Wang, Yingyun Li, Ying Qin, Haiyang Qian
+- 发布时间: 2026-05-10T09:29:33Z
+- 分类: cs.CL, cs.AI
+- 相关性评分: 13
+- 主题标签: OCR、临床报告、信息提取、键覆盖率、BERT
+
+**中文摘要**
+
+> 本文解决OCR临床报告的结构化提取问题。通过构造规范键目录并度量键覆盖率，实现基于BERT的提取模型。实验表明，键覆盖率是端到端性能的主导因素，覆盖Top-90规范键时，模型在精确匹配下F1达0.839，超越Qwen3-0.6B基线。
+
+**核心创新概述**
+
+> 将OCR临床报告提取形式化为规范键条件化的抽取式问答，并提出键覆盖率作为关键性能度量。
+
+**创新点拆解**
+
+- 提出规范键条件化的抽取式问答框架，适应开放键空间
+- 通过迭代键挖掘、归一化、聚类和轻量人工验证维护规范键目录
+- 引入键覆盖率指标量化目录完整性，并证明其对性能的主导作用
+
+**当前局限**
+
+> 依赖人工验证维护键目录；模型仅在特定临床报告数据集上评估，泛化性待验证。
+
+**后续可改进方向**
+
+- 探索自动化键目录扩展和更新方法，减少人工干预
+- 研究键覆盖率与模型性能的更细致关系，优化阈值选择
+- 将方法推广到其他领域（如法律、金融）的OCR文档提取
+
+**工程启发**
+
+> 提供低成本、可部署的OCR临床报告提取方案，有助于整合医疗记录和下游应用。
+
+**为什么值得关注**
+
+> 直接涉及OCR文档的可靠提取，属于OCR/文档解析的核心应用场景。
+
+**原始摘要**
+
+Clinical reports are often fragmented across healthcare institutions because privacy regulations and
+data silos limit direct information sharing. When patients seek care at a different hospital, they
+often carry paper or scanned reports from prior visits. This hinders EHR integration and
+longitudinal review, and downstream applications that depend on more complete patient records, such
+as patient management, follow-up care, real-world studies, and clinical-trial matching. Although OCR
+can digitize such reports, reliable extraction remains challenging because clinical documents are
+heterogeneous, OCR text is noisy, and many healthcare settings require low-cost on-premise
+deployment. We formulate this problem as canonical key-conditioned extractive question answering
+over OCR-derived clinical reports. Because the key fields are neither fixed nor known in advance,
+the key space is open. We maintain a canonical key inventory through iterative key mining,
+normalization, clustering, and lightweight human verification, and introduce key coverage as a
+metric to quantify inventory completeness. Using a 0.2B BERT-based model, experiments on real-world
+reports from more than 20 hospitals show performance improves monotonically with key coverage. The
+model achieves F1 scores of 0.839 and 0.893 under exact match and boundary-tolerant matching,
+respectively, once the Top-90 canonical keys are covered. These results show that key coverage is a
+dominant factor for end-to-end performance. At Top-90 coverage, our model outperforms a fine-tuned
+Qwen3-0.6B baseline under exact match. Although our annotated corpus is Chinese, the method relies
+on the language-agnostic key-value organization of semi-structured clinical reports and can be
+adapted to other settings given an appropriate canonical key inventory and alias mapping.
+
+---
+
+### 3. Multi-domain Multi-modal Document Classification Benchmark with a Multi-level Taxonomy
+
+- arXiv: [2605.10550v1](https://arxiv.org/abs/2605.10550v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.10550v1)
+- 作者: Denghao Ma, Qing Liu, Zulong Chen, Chuanfei Xu, Jia Xu, Zhibo Yang, Zhao Li
+- 发布时间: 2026-05-11T13:28:27Z
+- 分类: cs.CL
+- 相关性评分: 12
+- 主题标签: 文档分类、多模态、层次化、基准测试、多领域
+
+**中文摘要**
+
+> 本文构建了首个多层次、多领域、多模态文档分类基准（MMM-Bench），包含5级层次化标签体系、5990份真实多模态文档，来自12个商业领域。提供了开源模型和API模型的基线实验，识别了四个基本挑战并提出洞察。
+
+**核心创新概述**
+
+> 首次构建了覆盖多层次、多领域、多模态的文档分类基准，更贴近实际业务文档的复杂结构。
+
+**创新点拆解**
+
+- 设计了深度五级层次化标签体系，反映商业文档的组织逻辑
+- 收集并标注了来自12个商业领域的5990份真实多模态文档
+- 系统实验揭示了多层次文档分类的基本挑战并给出解决方向
+
+**当前局限**
+
+> 数据集规模和领域覆盖有限；基线模型未涵盖最新的大语言模型。
+
+**后续可改进方向**
+
+- 扩展数据集规模和领域多样性
+- 探索更有效的层次化多模态特征融合方法
+- 研究如何利用层次标签结构提升分类性能
+
+**工程启发**
+
+> 为工业级文档智能系统提供基准测试平台和评估工具，推动实际应用。
+
+**为什么值得关注**
+
+> 文档分类是文档解析的基础任务，多层次、多模态基准直接服务于OCR后处理。
+
+**原始摘要**
+
+Document classification forms the backbone of modern enterprise content management, yet existing
+benchmarks remain trapped in oversimplified paradigms -- single domain settings with flat label
+structures -- that bear little resemblance to the hierarchical, multi-modal, and cross-domain nature
+of real-world business documents. This gap not only misrepresents practical complexity but also
+stifles progress toward industrially viable document intelligence. To bridge this gap, we construct
+the first Multi-level, Multi-domain, Multi-modal document classification Benchmark (MMM-Bench). MMM-
+Bench includes (1) a deeply hierarchical taxonomy spanning five levels that capture the authentic
+organizational logic of business documentation; and (2) 5,990 real-world multi-modal documents
+meticulously curated from 12 commercial domains in Alibaba. Each document is manually annotated with
+a complete hierarchical path by domain experts. We establish comprehensive baselines on MMM-Bench,
+which consists of open-weight models and API-based models. Through systematic experiments, we
+identify four fundamental challenges within MMM-Bench and propose corresponding insights. To provide
+a solid foundation for advancing research in multi-level, multi-domain document classification, we
+release all of the data and the evaluation toolkit of MMM-Bench at https://github.com/MMMDC-
+Bench/MMMDC-Bench.
+
+---
+
+### 4. GLiNER2-PII: A Multilingual Model for Personally Identifiable Information Extraction
+
+- arXiv: [2605.09973v1](https://arxiv.org/abs/2605.09973v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.09973v1)
+- 作者: Urchade Zaratiana, Ash Lewis, George Hurn-Maloney
+- 发布时间: 2026-05-11T04:29:30Z
+- 分类: cs.CL, cs.AI
+- 相关性评分: 10
+- 主题标签: PII提取、多语言、小模型、合成数据、信息提取
+
+**中文摘要**
+
+> 本文提出GLiNER2-PII，一个0.3B参数的多语言个人身份信息（PII）提取模型，识别42种PII实体类型。通过约束驱动生成管道构建了多语言合成训练语料（4910个文本）。在SPY基准上，模型在跨度级F1上超越OpenAI Privacy Filter等对比系统。
+
+**核心创新概述**
+
+> 针对PII提取任务，使用合成数据训练小模型，在跨语言和多种格式下取得优异性能。
+
+**创新点拆解**
+
+- 基于GLiNER2微调，实现字符级跨度分辨率的多语言PII提取
+- 提出约束驱动生成管道，构建高质量多语言合成PII语料，避免隐私风险
+- 模型参数量仅0.3B，适合低资源部署
+
+**当前局限**
+
+> 合成数据可能无法完全覆盖真实PII分布；实体类型固定为42种，扩展性有限。
+
+**后续可改进方向**
+
+- 探索半监督或主动学习方法，利用真实数据进行自适应
+- 增加实体类型并支持动态扩展
+- 研究对对抗性攻击（如噪声、混淆）的鲁棒性
+
+**工程启发**
+
+> 提供高效、可部署的PII检测工具，适用于隐私合规场景。
+
+**为什么值得关注**
+
+> PII提取常涉及OCR文档中的个人信息，模型可直接应用于扫描件或图像中的文本。
+
+**原始摘要**
+
+Reliable detection of personally identifiable information (PII) is increasingly important across
+modern data-processing systems, yet the task remains difficult: PII spans are heterogeneous, locale-
+dependent, context-sensitive, and often embedded in noisy or semi-structured documents. We present
+GLiNER2-PII, a small 0.3B-parameter model adapted from GLiNER2 and designed to recognize a broad
+taxonomy of 42 PII entity types at character-span resolution. Training such systems, however, is
+constrained by the scarcity of shareable annotated data and the privacy risks associated with
+collecting real PII at scale. To address this challenge, we construct a multilingual synthetic
+corpus of 4,910 annotated texts using a constraint-driven generation pipeline that produces diverse,
+realistic examples across languages, domains, formats, and entity distributions. On the challenging
+SPY benchmark, GLiNER2-PII achieves the highest span-level F1 among five compared systems, including
+OpenAI Privacy Filter and three GLiNER-based detectors. We publicly release the model on Hugging
+Face to support further research and practical deployment of open PII detection systems.
+
+---
+
+### 5. TRACER: Verifiable Generative Provenance for Multimodal Tool-Using Agents
+
+- arXiv: [2605.09934v1](https://arxiv.org/abs/2605.09934v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.09934v1)
+- 作者: Bihui Yu, Caijun Jia, Jing Chi, Xiaohan Liu, Yining Wang, He Bai, Yuchen Liu, Jingxuan Wei, Junnan Zhu
+- 发布时间: 2026-05-11T03:32:55Z
+- 分类: cs.CL
+- 相关性评分: 9
+- 主题标签: 来源验证、工具使用、多模态、可追溯性、强化学习
+
+**中文摘要**
+
+> 本文提出TRACER框架，为多模态工具使用智能体生成可验证的生成来源记录，包含引文、压缩、推理三种关系。通过模式检查、工具轮对齐、来源真实性和关系合理性验证，将验证后的来源转化为可追溯性约束和局部信用，用于强化学习。在TRACE-Bench上，TRACER实现78.23%答案准确率和95.72%摘要准确率。
+
+**核心创新概述**
+
+> 提出了句子级的生成来源记录框架，填补了工具使用智能体中声明级依赖结构缺失的空白。
+
+**创新点拆解**
+
+- 设计结构化来源记录，包含支持工具轮、证据单元和语义支持关系
+- 定义引文、压缩、推理三种关系，覆盖直接复用、忠实浓缩和基于推理的衍生
+- 将验证后来源转化为训练信号，实现可追溯性约束和局部信用分配
+
+**当前局限**
+
+> 基准TRACE-Bench为合成场景；关系空间仅三种，可能无法涵盖所有语义支持类型。
+
+**后续可改进方向**
+
+- 扩展关系空间以覆盖更多推理类型
+- 探索弱监督或无监督的来源生成方法
+- 将TRACER应用于更广泛的多模态任务（如图像生成、视觉问答）
+
+**工程启发**
+
+> 提升多模态工具智能体的可验证性和可优化性，适用于需要高可靠性输出的应用。
+
+**为什么值得关注**
+
+> OCR是工具调用中的重要一环，TRACER可增强OCR结果在复杂工作流中的可追溯性和可信度。
+
+**原始摘要**
+
+Multimodal large language models increasingly solve vision-centric tasks by calling external tools
+for visual inspection, OCR, retrieval, calculation, and multi-step reasoning. Current tool-using
+agents usually expose the executed tool trajectory and the final answer, but they rarely specify
+which tool observation supports each generated claim. We call this missing claim-level dependency
+structure the provenance gap. The gap makes tool use hard to verify and hard to optimize, because
+useful evidence, redundant exploration, and unsupported reasoning are mixed in the same trajectory.
+We introduce TRACER, a framework for verifiable generative provenance in multimodal tool-using
+agents. Instead of adding citations after generation, TRACER generates each answer sentence together
+with a structured provenance record that identifies the supporting tool turn, evidence unit, and
+semantic support relation. Its relation space contains Quotation, Compression, and Inference,
+covering direct reuse, faithful condensation, and grounded derivation. TRACER verifies each record
+through schema checking, tool-turn alignment, source authenticity, and relation rationality, and
+then converts verified provenance into traceability constraints and provenance-derived local credit
+for reinforcement learning. We further construct TRACE-Bench, a benchmark for sentence-level
+provenance reconstruction from coarse multimodal tool trajectories. On TRACE-Bench, simply adding
+tools often introduces noise. With Qwen3-VL-8B, TRACER reaches 78.23% answer accuracy and 95.72%
+summary accuracy, outperforming the strongest closed-source tool-augmented baseline by 23.80
+percentage points. Compared with tool-only supervised fine-tuning, it also reduces total test-set
+tool calls from 4949 to 3486. These results show that reliable multimodal tool reasoning depends on
+provenance-aware use of observations, not on more tool calls alone.
+
+---
+
+### 6. Route Before Retrieve: Activating Latent Routing Abilities of LLMs for RAG vs. Long-Context Selection
+
+- arXiv: [2605.10235v1](https://arxiv.org/abs/2605.10235v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.10235v1)
+- 作者: Yiwen Chen, Kuan Li, Fuzhen Zhuang, Deqing Wang, Zhao Zhang, Liwen Zhang, Yong Jiang, Shuai Wang, Minhao Cheng
+- 发布时间: 2026-05-11T09:10:55Z
+- 分类: cs.CL
+- 相关性评分: 7
+- 主题标签: 路由机制、RAG、长上下文、LLM、成本优化
+
+**中文摘要**
+
+> 本文提出Pre-Route框架，在回答前进行主动路由决策，选择检索增强生成（RAG）或长上下文（LC）策略。利用轻量元数据（文档类型、长度、初始片段）进行任务分析、覆盖度估计和信息需求预测。在LaRA和LongBench-v2上，Pre-Route优于Always-RAG、Always-LC和Self-Route基线，实现更优的成本效益。
+
+**核心创新概述**
+
+> 提出主动路由框架，利用元数据在回答前进行结构化推理，而非被动回退。
+
+**创新点拆解**
+
+- 设计基于轻量元数据的主动路由决策流程，包含任务分析、覆盖度估计和信息需求预测
+- 发现LLMs具有潜在路由能力，可通过指南可靠激发
+- 使用线性探针分析表示空间，证明结构化提示增强了最优路由维度的可分离性
+- 通过蒸馏将路由推理结构迁移到小模型
+
+**当前局限**
+
+> 元数据依赖文档类型和长度等粗略信息，可能无法捕捉内容细节；路由决策的延迟和错误传播未充分讨论。
+
+**后续可改进方向**
+
+- 探索更丰富的元数据特征（如图表、表格、实体密度）
+- 研究路由决策与下游性能的联合优化
+- 将Pre-Route扩展到更多LLM应用场景（如多跳推理、对话系统）
+
+**工程启发**
+
+> 降低LLM推理成本的同时保持性能，适用于成本敏感的文档处理场景。
+
+**为什么值得关注**
+
+> RAG和LC策略的选择直接影响OCR文档的问答和摘要系统效率，Pre-Route可优化此类系统的资源分配。
+
+**原始摘要**
+
+Recent advances in large language models (LLMs) have expanded the context window to beyond 128K
+tokens, enabling long-document understanding and multi-source reasoning. A key challenge, however,
+lies in choosing between retrieval-augmented generation (RAG) and long-context (LC) strategies: RAG
+is efficient but constrained by retrieval quality, while LC supports global reasoning at higher cost
+and with position sensitivity. Existing methods such as Self-Route adopt failure-driven fallback
+from RAG to LC, but remain passive, inefficient, and hard to interpret. We propose Pre-Route, a
+proactive routing framework that performs structured reasoning before answering. Using lightweight
+metadata (e.g., document type, length, initial snippet), Pre-Route enables task analysis, coverage
+estimation, and information-need prediction, producing explainable and cost-efficient routing
+decisions. Our study shows three key findings: (i) LLMs possess latent routing ability that can be
+reliably elicited with guidelines, allowing single-sample performance to approach that of multi-
+sample (Best-of-N) results; (ii) linear probes reveal that structured prompts sharpen the
+separability of the "optimal routing dimension" in representation space; and (iii) distillation
+transfers this reasoning structure to smaller models for lightweight deployment. Experiments on LaRA
+(in-domain) and LongBench-v2 (OOD) confirm that Pre-Route outperforms Always-RAG, Always-LC, and
+Self-Route baselines, achieving superior overall cost-effectiveness.
+
+---
+
+### 7. Qwen Goes Brrr: Off-the-Shelf RAG for Ukrainian Multi-Domain Document Understanding
+
+- arXiv: [2605.10296v1](https://arxiv.org/abs/2605.10296v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.10296v1)
+- 作者: Anton Bazdyrev, Ivan Bashtovyi, Ivan Havlytskyi, Oleksandr Kharytonov, Artur Khodakovskyi
+- 发布时间: 2026-05-11T09:55:28Z
+- 分类: cs.CL, cs.AI, cs.IR, cs.LG
+- 相关性评分: 6
+- 主题标签: 检索增强生成、多文档理解、问答系统、乌克兰语
+
+**中文摘要**
+
+> 本文提出一种检索增强流水线用于乌克兰语多领域文档理解，围绕上下文分块、问题感知稠密检索和重排序、以及基于少量重排序段落生成答案三个核心思想构建。系统使用Qwen3-Embedding-8B检索、微调的Qwen3-Reranker-8B重排序和Qwen3-32B选择答案。在公开排行榜上达到0.9452，私有排行榜0.9598。结果表明在严格竞赛约束下，保留文档结构和使相关性估计感知答案空间比添加复杂下游启发式方法更有效。
+
+**核心创新概述**
+
+> 在乌克兰语多领域文档理解任务中，系统性地将上下文分块、问题感知重排序和约束生成结合，并证实了结构保留和答案空间感知的优势。
+
+**创新点拆解**
+
+- 提出上下文分块策略保留PDF文档结构
+- 设计问题感知的稠密检索与重排序机制，同时利用问题和选项
+- 基于少量重排序段落进行约束答案生成
+- 将Qwen3系列模型用于检索、重排序和生成的全流程
+
+**当前局限**
+
+> 实验仅针对乌克兰语和特定竞赛数据集，泛化性未验证；重排序对答案准确率的提升幅度有限（从0.9348到0.9674），可能受天花板效应影响。
+
+**后续可改进方向**
+
+- 探索跨语言迁移能力，验证方法在其他语言上的有效性
+- 研究更细粒度的文档结构建模，如表格和图表
+- 将重排序与生成联合优化，提升端到端性能
+
+**工程启发**
+
+> 提供了一套实用的检索增强问答基线系统，在资源受限的竞赛环境下表现优异，可直接应用于类似的多文档问答场景。
+
+**为什么值得关注**
+
+> 涉及PDF文档理解中的检索和答案定位，与OCR/文档解析下游任务（如文档级问答、信息检索）直接相关。
+
+**原始摘要**
+
+We participated in the Fifth UNLP shared task on multi-domain document understanding, where systems
+must answer Ukrainian multiple-choice questions from PDF collections and localize the supporting
+document and page. We propose a retrieval-augmented pipeline built around three ideas: contextual
+chunking of PDFs, question-aware dense retrieval and reranking conditioned on both the question and
+answer options, and constrained answer generation from a small set of reranked passages. Our final
+system uses Qwen3-Embedding-8B for retrieval, a fine-tuned Qwen3-Reranker-8B for passage ranking,
+and Qwen3-32B for answer selection. On a held-out split, reranking improves Recall@1 from 0.6957 to
+0.7935, while using the top-2 reranked passages raises answer accuracy from 0.9348 to 0.9674. Our
+best leaderboard run reached 0.9452 on the public leaderboard and 0.9598 on the private leaderboard.
+Our results suggest that, under strict code-competition constraints, preserving document structure
+and making relevance estimation aware of the answer space are more effective than adding complex
+downstream heuristics.
+
+---
+
+### 8. PlantMarkerBench: A Multi-Species Benchmark for Evidence-Grounded Plant Marker Reasoning
+
+- arXiv: [2605.10032v1](https://arxiv.org/abs/2605.10032v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.10032v1)
+- 作者: Sajib Acharjee Dip, Song Li, Liqing Zhang
+- 发布时间: 2026-05-11T05:57:15Z
+- 分类: cs.CL
+- 相关性评分: 6
+- 主题标签: 生物信息学、文献挖掘、证据推理、基准数据集
+
+**中文摘要**
+
+> 本文提出PlantMarkerBench，一个多物种基准用于评估基于文献的植物标志基因证据推理。通过模块化标注流程构建，包含拟南芥、玉米、水稻和番茄四个物种，共5550个句子级证据实例，定义了两个基准任务：候选句子是否为有效的标志证据，以及证据类型分类。评估多种语言模型发现，前沿模型在直接表达证据上表现较好，但在功能、间接和弱支持证据上性能大幅下降，开放权重模型在模糊生物学上下文中假阳性率较高。
+
+**核心创新概述**
+
+> 首个专注于植物标志基因文献证据推理的基准，覆盖多物种并定义细粒度证据类型，揭示了现有语言模型在该领域的不足。
+
+**创新点拆解**
+
+- 构建多物种植物标志基因证据基准，涵盖四种主要作物
+- 设计模块化标注流程，集成大规模文献检索、混合搜索和结构化证据提取
+- 定义两个细粒度任务：证据有效性判断和证据类型分类（表达、定位、功能、间接、阴性）
+- 系统评估开放权重和闭源模型在不同物种和提示策略下的表现
+
+**当前局限**
+
+> 基准仅包含四个物种，更多物种和上下文有待扩展；证据类型分类中混淆率较高，表明任务具有挑战性；句子级标注可能具有歧义。
+
+**后续可改进方向**
+
+- 扩展物种范围和文献语料库
+- 引入跨证据推理和多方证据整合机制
+- 开发专门针对弱支持和间接证据的模型或训练策略
+- 利用文档布局和结构信息辅助证据提取
+
+**工程启发**
+
+> 为植物生物学中的知识挖掘提供了标准评估工具，可推动文献证据自动提取和验证系统的开发。
+
+**为什么值得关注**
+
+> 涉及从科学文献中提取证据，与文档信息抽取和内容理解相关，尤其是结构化证据提取。
+
+**原始摘要**
+
+Cell-type-specific marker genes are fundamental to plant biology, yet existing resources primarily
+rely on curated databases or high-throughput studies without explicitly modeling the supporting
+evidence found in scientific literature. We introduce PlantMarkerBench, a multi-species benchmark
+for evaluating literature-grounded plant marker evidence interpretation from full-text biological
+papers. PlantMarkerBench is constructed using a modular curation pipeline integrating large-scale
+literature retrieval, hybrid search, species-aware biological grounding, structured evidence
+extraction, and targeted human review. The benchmark spans four plant species -- Arabidopsis, maize,
+rice, and tomato -- and contains 5,550 sentence-level evidence instances annotated for marker-
+evidence validity, evidence type, and support strength. We define two benchmark tasks: determining
+whether a candidate sentence provides valid marker evidence for a gene-cell-type pair, and
+classifying the evidence into expression, localization, function, indirect, or negative categories.
+We benchmark diverse open-weight and closed-source language models across species and prompting
+strategies. Although frontier models achieve relatively strong performance on direct expression
+evidence, performance drops substantially on functional, indirect, and weak-support evidence, with
+evidence-type confusion emerging as a dominant failure mode. Open-weight models additionally exhibit
+elevated false-positive rates under ambiguous biological contexts. PlantMarkerBench provides a
+challenging and reproducible evaluation framework for literature-grounded biological evidence
+attribution and supports future research on trustworthy scientific information extraction and AI-
+assisted plant biology.
+
+---
+
+### 9. MemPrivacy: Privacy-Preserving Personalized Memory Management for Edge-Cloud Agents
+
+- arXiv: [2605.09530v1](https://arxiv.org/abs/2605.09530v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.09530v1)
+- 作者: Yining Chen, Jihao Zhao, Bo Tang, Haofen Wang, Feiyu Xiong, Zhiyu Li
+- 发布时间: 2026-05-10T13:31:58Z
+- 分类: cs.CR, cs.CL
+- 相关性评分: 6
+- 主题标签: 隐私保护、记忆管理、边缘计算、智能体
+
+**中文摘要**
+
+> 本文提出MemPrivacy，一种面向边缘-云环境下的大语言模型智能体个性化记忆管理的隐私保护方法。该方法在边缘设备上识别隐私敏感片段，替换为语义结构化类型占位符，在云端处理记忆，再本地还原。构建了覆盖200用户、52000+隐私实例的MemPrivacy-Bench和四级隐私分类体系。实验显示，在隐私信息提取上超越GPT-5.2和Gemini-3.1-Pro，同时将记忆效用损失限制在1.6%以内。
+
+**核心创新概述**
+
+> 针对边缘-云场景下的个性化记忆隐私保护，提出类型感知占位符替代方案，在保护隐私的同时最大限度保留语义，并系统评估了多种记忆系统的效用损失。
+
+**创新点拆解**
+
+- 设计边缘设备上的隐私敏感跨度识别机制
+- 提出语义结构化类型感知占位符替换策略，解耦隐私保护与语义破坏
+- 构建包含四级隐私分类的MemPrivacy-Bench基准
+- 在多种流行记忆系统上验证，效用损失低于1.6%
+
+**当前局限**
+
+> 隐私分类体系可能无法覆盖所有细粒度场景；边缘设备计算资源有限可能影响延迟；仅评估了文本记忆场景。
+
+**后续可改进方向**
+
+- 扩展到多模态记忆场景（如图像）
+- 优化边缘设备上的隐私识别效率，降低计算开销
+- 结合差分隐私或联邦学习进一步增强保护
+- 探索动态隐私类型自适应策略
+
+**工程启发**
+
+> 为部署在边缘-云环境的智能体提供了实用的隐私保护方案，在保护用户敏感信息的同时维持了记忆系统的高效用。
+
+**为什么值得关注**
+
+> 涉及文档中的隐私信息识别和处理，与OCR后的隐私过滤和文档脱敏直接相关。
+
+**原始摘要**
+
+As LLM-powered agents are increasingly deployed in edge-cloud environments, personalized memory has
+become a key enabler of long-term adaptation and user-centric interaction. However, cloud-assisted
+memory management exposes sensitive user information, while existing privacy protection methods
+typically rely on aggressive masking that removes task-relevant semantics and consequently degrades
+memory utility and personalization quality. To address this challenge, We propose MemPrivacy, which
+identifies privacy-sensitive spans on edge devices, replaces them with semantically structured type-
+aware placeholders for cloud-side memory processing, and restores the original values locally when
+needed. By decoupling privacy protection from semantic destruction, MemPrivacy minimizes sensitive
+data exposure while retaining the information required for effective memory formation and retrieval.
+We also construct MemPrivacy-Bench for systematic evaluation, a dataset covering 200 users and over
+52k privacy instances, and introduce a four-level privacy taxonomy for configurable protection
+policies. Experiments show that MemPrivacy achieves strong performance in privacy information
+extraction, substantially surpassing strong general-purpose models such as GPT-5.2 and
+Gemini-3.1-Pro, while also reducing inference latency. Across multiple widely used memory systems,
+MemPrivacy limits utility loss to within 1.6%, outperforming baseline masking strategies. Overall,
+MemPrivacy offers an effective balance between privacy protection and personalized memory utility
+for edge-cloud agents, enabling secure, practical, and user-transparent deployment.
+
+---
+
+### 10. Grounded or Guessing? LVLM Confidence Estimation via Blind-Image Contrastive Ranking
+
+- arXiv: [2605.10893v1](https://arxiv.org/abs/2605.10893v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.10893v1)
+- 作者: Reza Khanmohammadi, Erfan Miahi, Simerjot Kaur, Charese H. Smiley, Ivan Brugere, Kundan Thind, Mohammad M. Ghassemi
+- 发布时间: 2026-05-11T17:35:10Z
+- 分类: cs.CL
+- 相关性评分: 4
+- 主题标签: 置信度估计、大视觉语言模型、视觉基础性、模型校准
+
+**中文摘要**
+
+> 本文提出BICR（盲图像对比排序），一种模型无关的置信度估计框架，用于检测大视觉语言模型的视觉无根据性（即模型仅依赖语言先验生成答案）。方法通过对比真实图像与遮黑图像时的隐藏状态，训练轻量级探针根据视觉基础程度调整置信度。在五个现代LVLM和七个基线上的评估表明，BICR在校准和判别性上均取得最佳平均表现，且参数量比最强探针基线少4-18倍。
+
+**核心创新概述**
+
+> 首次提出通过盲图像对比来显式建模视觉基础性，作为置信度估计的信号，实现了零额外推理成本的视觉无根据性检测。
+
+**创新点拆解**
+
+- 提出盲图像对比训练范式，将是否使用图像信息作为置信度信号
+- 设计对比排序损失，训练探针对真实图像赋予更高置信度
+- 模型无关，可应用于任意LVLM，且无需修改原模型
+- 在VQA、目标幻觉检测、医学影像和金融文档理解等多样化任务上验证
+
+**当前局限**
+
+> 依赖冻结的LVLM隐藏状态，探针性能受限于隐藏状态质量；仅针对单轮问答场景，未评估多轮对话；对多图像输入未涉及。
+
+**后续可改进方向**
+
+- 扩展到多轮对话和交互式场景
+- 结合多图像输入和多模态对齐
+- 探索隐藏状态到置信度的端到端学习方法
+- 研究视觉基础性的细粒度归因
+
+**工程启发**
+
+> 提供了一种低成本的置信度校准方案，可增强LVLM在文档理解等任务中的可靠性，尤其适用于需要高可信度输出的OCR下游应用。
+
+**为什么值得关注**
+
+> 涉及视觉文档理解中的模型可靠性评估，与OCR文档分析中的置信度判断和错误检测紧密相关。
+
+**原始摘要**
+
+Large vision-language models suffer from visual ungroundedness: they can produce a fluent,
+confident, and even correct response driven entirely by language priors, with the image contributing
+nothing to the prediction. Existing confidence estimation methods cannot detect this, as they
+observe model behavior under normal inference with no mechanism to determine whether a prediction
+was shaped by the image or by text alone. We introduce BICR (Blind-Image Contrastive Ranking), a
+model-agnostic confidence estimation framework that makes this contrast explicit during training by
+extracting hidden states from a frozen LVLM twice: once with the real image-question pair, and once
+with the image blacked out while the question is held fixed. A lightweight probe is trained on the
+real-image hidden state and regularized by a ranking loss that penalizes higher confidence on the
+blacked-out view, teaching it to treat visual grounding as a signal of reliability at zero
+additional inference cost. Evaluated across five modern LVLMs and seven baselines on a benchmark
+covering visual question answering, object hallucination detection, medical imaging, and financial
+document understanding, BICR achieves the best cross-LVLM average on both calibration and
+discrimination simultaneously, with statistically significant discrimination gains robust to
+cluster-aware analysis at 4-18x fewer parameters than the strongest probing baseline.
+
+---
