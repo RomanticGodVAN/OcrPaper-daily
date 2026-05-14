@@ -1,102 +1,108 @@
 {
   "meta": {
-    "report_date": "2026-05-13",
-    "generated_at_utc": "2026-05-13 04:59:06",
+    "report_date": "2026-05-14",
+    "generated_at_utc": "2026-05-14 04:57:49",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 9
+    "count": 7
   },
   "synthesis": {
-    "executive_summary": "今日研究集中于多模态路由、文档分类基准、OCR评估与检索增强系统。LatentRouter和Pre-Route分别展示了通过反事实预测和结构化推理实现高效模型选择与策略路由；MMM-Bench建立了多层次文档分类标准；Chronicles-OCR填补了历史文字感知空白；BICR提出轻量置信度估计方案。趋势上，路由机制与检索增强成为提升系统效率的关键，同时基准与评估工具规范化。",
-    "trend_summary": "路由机制（模型路由、策略路由）与检索增强持续融合，通过提前预测或元数据推理优化资源分配；文档理解向多领域、多层次、多模态发展，且注重历史与生物等专业场景；置信度估计与可解释性成为提升系统可靠性的热点。",
+    "executive_summary": "今日OCR/文档解析研究聚焦多语言文档理解、古文OCR、长上下文训练、高压缩图像表示、证据归因和金融文档自动化。多篇论文强调了数据合成和增强在低资源场景中的关键作用，同时揭示了现有模型在跨时期感知、长上下文泛化和避免幻觉方面的不足。工程上，提供了实用训练配方和评估基准。",
+    "trend_summary": "当前趋势包括：1) 多语言和低资源语言文档理解成为热点；2) 长上下文视觉语言模型训练策略系统化；3) 视觉大语言模型用于历史文档和古文识别的评估基准出现；4) 文档VQA向可信AI方向发展，关注证据归因；5) 多智能体框架与OCR结合用于特定领域自动化。",
     "common_innovations": [
-      "通过反事实预测或盲图对比等训练前/推理前机制提升系统决策效率与可靠性",
-      "构建多层次、多领域、多模态的标准化基准以推动文档智能发展",
-      "利用元数据或潜在表示进行路由，实现成本与性能的动态平衡",
-      "在检索增强中引入答案空间感知，提高重排序与生成准确率",
-      "开发轻量探针实现零额外成本的可解释性分析"
+      "合成数据生成和增强是提升低资源/特殊领域性能的关键，如DocAtlas和Qwen-Image-VAE-2.0分别用于多语言和文本场景。",
+      "直接偏好优化（DPO）被引入多语言文档理解，利用渲染真值作为正信号，避免退化。",
+      "长上下文训练中，长文档VQA数据比OCR转录更有效，且序列长度分布平衡优于聚焦长序列。",
+      "高压缩VAE通过全局跳跃连接和合成数据改善文本场景重建，降低编码开销。",
+      "证据归因基准引入元素级边界框引用和严格归属准确率，揭示普遍幻觉。"
     ],
     "future_directions": [
-      "研究多步推理场景下的动态路由，结合在线学习更新模型能力表示",
-      "扩展历史OCR基准至其他文字系统，并增加多物理介质与语义推理联合评估",
-      "开发可解释且透明的AI工具，设计验证机制以减轻研究人员负担",
-      "探索基于弱监督或半监督的多层次文档分类，适应动态层次结构",
-      "将答案空间感知的重排序推广至更多语言与领域，降低系统复杂度",
-      "研究跨句联合证据的生物文献推理，解决证据类型混淆问题"
+      "探索更有效的低资源语言数据增强策略，如基于GAN或扩散模型的生成数据，以弥合与高资源语言的差距。",
+      "研究DPO与其他微调方法（如LoRA）的结合，提升多语言适应稳定性并扩大提升幅度。",
+      "将Chronicles-OCR基准扩展到更多文字和更大规模，引入复杂的语义推理任务。",
+      "在更大参数规模（如13B、70B）上验证长上下文训练发现，并探索超长上下文（1M）下的性能。",
+      "结合合成与真实数据训练VAE，改善文本区域感知压缩，减少高压缩下的细节损失。",
+      "开发缓解归属幻觉的方法，如引用验证网络或检索增强生成，提升模型可信度。",
+      "扩展多智能体尽职调查框架到多个国家数据库，增强OCR对复杂布局和语言的鲁棒性。",
+      "利用局部文法一致性比较自动探索和生成候选文法，结合深度学习特征进行混合优化，提高NER效果。"
     ],
     "engineering_takeaways": [
-      "LatentRouter提供高效多模型选择方案，可平衡资源受限场景的性能与成本",
-      "Pre-Route的主动路由框架直接优化RAG/LC选择系统资源调度",
-      "MMM-Bench为工业级多模态文档分类提供可复用的标准基准",
-      "BICR的置信度探针轻量且通用，可嵌入现有LVLM系统",
-      "Chronicles-OCR数据集助力数字人文与历史文档OCR系统评估",
-      "Qwen RAG流水线的分块与重排序策略可直接复用于竞赛与生产环境"
+      "DocAtlas提供了多语言OCR训练数据和DPO微调方法，可直接提升低资源语言性能。",
+      "Chronicles-OCR基准可作为数字人文领域跨时期文字识别系统的标准化评估平台。",
+      "长上下文LVLM训练配方（纯长文档VQA、平衡序列长度、优先检索数据）可指导训练流程。",
+      "Qwen-Image-VAE-2.0的高压缩VAE可减少图像Token数量，加速推理。",
+      "CiteVQA基准和SAA指标可直接用于检测模型的证据归因缺陷。",
+      "多智能体框架提供了金融尽职调查的自动化方案，减少人工并提高效率。",
+      "基于一致性比较的文法组装策略可高效优化NER规则系统。"
     ],
     "watchlist": [
       {
-        "title": "LatentRouter: Can We Choose the Right Multimodal Model Before Seeing Its Answer?",
-        "watch_reason": "其路由机制可扩展至OCR系统中的模型选择，降低多模型推理成本"
+        "title": "DocAtlas: Multilingual Document Understanding Across 80+ Languages",
+        "watch_reason": "多语言OCR与文档理解的核心框架，DPO微调方法可直接应用于工程实践，且低资源语言性能差距有待跟踪后续改进。"
       },
       {
-        "title": "Chronicles-OCR: A Cross-Temporal Perception Benchmark for the Evolutionary Trajectory of Chinese Characters",
-        "watch_reason": "首个历史汉字OCR基准，对数字人文和古文献数字化具有里程碑意义"
+        "title": "Training Long-Context Vision-Language Models Effectively with Generalization Beyond 128K Context",
+        "watch_reason": "长上下文训练策略系统研究，提供了可直接复用的数据混合和训练配方，对构建高效长文档系统至关重要。"
       },
       {
-        "title": "Multi-domain Multi-modal Document Classification Benchmark with a Multi-level Taxonomy",
-        "watch_reason": "为工业文档分类提供标准化评估，直接推动企业文档智能应用"
+        "title": "Qwen-Image-VAE-2.0 Technical Report",
+        "watch_reason": "高压缩VAE可显著减少图像表示成本，加快文档处理流程，文本场景性能提升值得关注。"
       },
       {
-        "title": "Route Before Retrieve: Activating Latent Routing Abilities of LLMs for RAG vs. Long-Context Selection",
-        "watch_reason": "其轻量路由蒸馏策略可直接用于文档理解系统的资源优化"
-      },
-      {
-        "title": "Grounded or Guessing? LVLM Confidence Estimation via Blind-Image Contrastive Ranking",
-        "watch_reason": "置信度估计方法可提升OCR/文档解析系统的可靠性与可解释性"
+        "title": "CiteVQA: Benchmarking Evidence Attribution for Trustworthy Document Intelligence",
+        "watch_reason": "证据归因是文档智能可信化的关键方向，CiteVQA揭示了普遍幻觉，后续缓解方法值得关注。"
       }
     ]
   },
   "papers": [
     {
-      "title": "LatentRouter: Can We Choose the Right Multimodal Model Before Seeing Its Answer?",
-      "summary": "Multimodal large language models (MLLMs) have heterogeneous strengths across OCR, chart understanding, spatial reasoning, visual question answering, cost, and latency. Effective MLLM routing therefore requires more than estimating query difficulty: a router must match the multimodal requirements of the current image-question input with the capabilities of each candidate model. We propose LatentRouter, a router that formulates MLLM routing as counterfactual multimodal utility prediction. Given an image-question query, LatentRouter extracts learned multimodal routing capsules, represents each candidate MLLM with a model capability token, and performs latent communication between these states to estimate how each model would perform if selected. A distributional outcome head predicts model-specific counterfactual quality, while a bounded capsule correction refines close decisions without allowing residual signals to dominate the prediction. The resulting utility-based policy supports performance-oriented and performance-cost routing, and handles changing candidate pools through shared per-model scoring with availability masking. Experiments on MMR-Bench and VL-RouterBench show that LatentRouter outperforms fixed-model, feature-level, and learned-router baselines. Additional analyses show that the gains are strongest on multimodal task groups where model choice depends on visual, layout-sensitive, or reasoning-oriented requirements, and that latent communication is the main contributor to the improvement. The code is available at: https://github.com/LabRAI/LatentRouter.",
-      "link": "https://arxiv.org/abs/2605.11301v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.11301v1",
+      "title": "DocAtlas: Multilingual Document Understanding Across 80+ Languages",
+      "summary": "Multilingual document understanding remains limited for low-resource languages due to scarce training data and model-based annotation pipelines that perpetuate existing biases. We introduce DocAtlas, a framework that constructs high-fidelity OCR datasets and benchmarks covering 82 languages and 9 evaluation tasks. Our dual pipelines, differential rendering of native DOCX documents and synthetic LaTeX-based generation for right-to-left scripts produce precise structural annotations in a unified DocTag format encoding layout, text, and component types, without learned models for core annotation. Evaluating 16 state-of-the-art models reveals persistent gaps in low-resource scripts. We show that Direct Preference Optimization (DPO) using rendering-derived ground truth as positive signal achieves stable multilingual adaptation, improving both in-domain (+1.9%) and out-of-domain (+1.8%) accuracy without measurable base-language degradation, where supervised fine-tuning degrades out-of-domain performance by up to 21%. Our best variant, DocAtlas-DeepSeek, improves +1.7% over the strongest baseline.",
+      "link": "https://arxiv.org/abs/2605.12623v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.12623v1",
       "authors": [
-        "Xueqi Cheng",
-        "Yushun Dong"
+        "Ahmed Heakl",
+        "Youssef Mohamed",
+        "Abdullah Sohail",
+        "Rania Elbadry",
+        "Ahmed Nassar",
+        "Peter W. J. Staar",
+        "Fahad Shahbaz Khan",
+        "Imran Razzak",
+        "Salman Khan"
       ],
-      "published": "2026-05-11T22:42:12Z",
-      "updated": "2026-05-11T22:42:12Z",
+      "published": "2026-05-12T18:09:38Z",
+      "updated": "2026-05-12T18:09:38Z",
       "categories": [
-        "cs.AI",
         "cs.CL",
-        "cs.CV"
+        "cs.CV",
+        "cs.LG"
       ],
-      "arxiv_id": "2605.11301v1",
-      "score": 15,
+      "arxiv_id": "2605.12623v1",
+      "score": 20,
       "topic_tags": [
-        "多模态路由",
-        "反事实预测",
-        "模型选择",
-        "大语言模型"
+        "多语言OCR",
+        "数据增强",
+        "文档理解",
+        "直接偏好优化",
+        "低资源语言"
       ],
-      "zh_summary": "提出LatentRouter，一种通过反事实多模态效用预测来路由多模态大语言模型（MLLMs）的方法。它提取多模态路由胶囊，表示每个候选模型的能力令牌，并通过潜在通信估计各模型的性能。支持面向性能和性能-成本的路由，能处理动态候选池。在MMR-Bench和VL-RouterBench上优于基线。",
-      "novelty": "将MLLM路由建模为反事实效用预测，引入潜在通信机制和分布性结果头。",
+      "zh_summary": "针对低资源语言因数据稀缺导致的文档理解不足，提出了DocAtlas框架。该框架通过原生DOCX差分渲染和基于LaTeX的合成生成构建高保真OCR数据集及基准，覆盖82种语言、9个评估任务。核心标注采用统一的DocTag格式（编码布局、文本和组件类型），不依赖学习模型。评估16个最先进模型后，发现低资源脚本仍存在持续差距。利用渲染真值作为正信号的直接偏好优化（DPO）实现了稳定的多语言适应，在域内（+1.9%）和域外（+1.8%）准确率上均有提升，且未造成基础语言性能可测量的退化，而监督微调会降低域外性能高达21%。最佳变体DocAtlas-DeepSeek相比最强基线提升了1.7%。",
+      "novelty": "提出无需学习模型的核心标注管道，通过差分渲染和合成生成构建高保真多语言OCR基准；首次将DPO应用于多语言文档理解，利用渲染真值作为正信号。",
       "innovation_points": [
-        "反事实多模态效用预测框架",
-        "多模态路由胶囊与模型能力令牌",
-        "潜在通信机制",
-        "分布性结果头与有界胶囊校正"
+        "提出双管道数据生成方法：原生DOCX差分渲染和LaTeX合成生成，覆盖82种语言和右到左脚本",
+        "设计统一的DocTag标注格式，编码布局、文本和组件类型",
+        "将DPO应用于多语言文档理解，利用渲染真值作为正信号"
       ],
-      "limitations": "仅在现有基准上评估，未在真实部署中验证；路由策略可能对动态模型池的适应性有限。",
+      "limitations": "低资源语言性能仍存在显著差距；DPO虽稳定但提升幅度有限；DocAtlas-DeepSeek改进较小。",
       "improvement_directions": [
-        "研究更轻量的路由实现",
-        "探索多步推理场景下的路由",
-        "结合在线学习动态更新模型能力表示"
+        "探索更有效的低资源语言数据增强策略",
+        "研究DPO与其他微调方法的结合",
+        "扩展至更多语言和任务"
       ],
-      "engineering_value": "提供一种高效的多模型选择方案，有助于在资源受限场景下平衡性能和成本。",
-      "why_relevant": "直接解决OCR场景中多模型路由问题，提升下游任务效率。"
+      "engineering_value": "为多语言OCR系统提供了高质量训练数据和基准，以及DPO微调方法，可直接提升系统在低资源语言上的性能。",
+      "why_relevant": "直接针对OCR中的多语言数据稀缺问题，提供数据构建和模型微调方案，对扩展OCR系统语言覆盖有实际意义。"
     },
     {
       "title": "Chronicles-OCR: A Cross-Temporal Perception Benchmark for the Evolutionary Trajectory of Chinese Characters",
@@ -132,157 +138,236 @@
       "arxiv_id": "2605.11960v1",
       "score": 14,
       "topic_tags": [
-        "历史OCR",
+        "古文OCR",
+        "跨时期感知",
         "汉字演化",
-        "视觉感知",
-        "基准数据集"
+        "视觉大语言模型",
+        "数字人文"
       ],
-      "zh_summary": "提出Chronicles-OCR，首个评估视觉大语言模型（VLLMs）跨时间视觉感知能力的基准，涵盖汉字七体演化轨迹。数据集包含2800张图像，由领域专家标注，并设计阶段自适应标注范式与四个定量任务。",
-      "novelty": "首个系统评估VLLMs对汉字历史形态演化感知能力的基准，引入阶段自适应标注范式。",
+      "zh_summary": "提出了Chronicles-OCR基准，用于评估视觉大语言模型（VLLM）在汉字七体（从甲骨文到纸本书法）跨时间视觉感知能力。该数据集由专家合作构建，包含2800张平衡图像，涵盖多样化物理介质。设计了阶段自适应标注范式，并定义了四项量化任务：跨时期字符定位、通过视觉指代进行细粒度古文字识别、古文解析和脚本分类。实验揭示了当前VLLM在跨时期感知上的局限性。",
+      "novelty": "首个评估VLLM跨汉字完整演化轨迹视觉感知的基准，涵盖七种古文，并引入阶段自适应标注范式和四项标准化任务。",
       "innovation_points": [
-        "跨时间感知基准Chronicles-OCR",
-        "阶段自适应标注范式",
-        "四个定量任务设计",
-        "覆盖7000年汉字演化轨迹"
+        "构建涵盖汉字七体的跨时期基准数据集，专家标注2800张图像",
+        "提出阶段自适应标注范式，应对不同历史阶段的形态和拓扑变化",
+        "设计四项定量任务：跨时期字符定位、细粒度古文字识别、古文解析、脚本分类"
       ],
-      "limitations": "数据集规模较小（2800张），可能无法覆盖所有历史变体；仅针对汉字。",
+      "limitations": "数据量相对较小（2800张），仅覆盖汉字，未涉及其他文字系统。",
       "improvement_directions": [
-        "扩展至其他文字系统",
-        "增加更多历史时期和物理介质",
-        "结合语义推理与视觉感知联合评估"
+        "扩大数据集规模和文字种类",
+        "引入更复杂的古文字识别任务",
+        "结合语义推理与视觉感知评估"
       ],
-      "engineering_value": "为数字人文和历史文档OCR提供评估平台与数据资源。",
-      "why_relevant": "专门针对历史文字OCR的跨时间鲁棒性评估，对古文字识别有直接意义。"
+      "engineering_value": "为数字人文领域提供了评估和开发跨时期文字识别系统的标准化平台，可用于改进VLLM在历史文档中的表现。",
+      "why_relevant": "针对OCR在历史文字上的罕见挑战，提出基准和方法，启发OCR系统处理形态演变问题。"
     },
     {
-      "title": "Useful for Exploration, Risky for Precision: Evaluating AI Tools in Academic Research",
-      "summary": "Artificial intelligence (AI) tools are being incorporated into scientific research workflows with the potential to enhance efficiency in tasks such as document analysis, question answering (Q&A), and literature search. However, system outputs are often difficult to verify, lack transparency in their generation and remain prone to errors. Suitable benchmarks are needed to document and evaluate arising issues. Nevertheless, existing benchmarking approaches are not adequately capturing human-centered criteria such as usability, interpretability, and integration into research workflows. To address this gap, the present work proposes and applies a benchmarking framework combining human-centered and computer-centered metrics to evaluate AI-based Q&A and literature review tools for research use. The findings suggest that Q&A tools can offer valuable overviews and generally accurate summaries; however, they are not always reliable for precise information extraction. Explainable AI (xAI) accuracy was particularly low, meaning highlighted source passages frequently failed to correspond to generated answers. This shifted the burden of validation back onto the researcher. Literature review tools supported exploratory searches but showed low reproducibility, limited transparency regarding chosen sources and databases, and inconsistent source quality, making them unsuitable for systematic reviews. A comparison of these tool groups reveals a similar pattern: while AI tools can enhance efficiency in the early stages of the research workflow and shallow tasks, their outputs still require human verification. The findings underscore the importance of explainability features to enhance transparency, verification efficiency and careful integration of AI tools into researchers' workflows. Further, human-centered evaluation remains an important concern to ensure practical applicability.",
-      "link": "https://arxiv.org/abs/2605.10125v2",
-      "pdf_url": "https://arxiv.org/pdf/2605.10125v2",
+      "title": "Training Long-Context Vision-Language Models Effectively with Generalization Beyond 128K Context",
+      "summary": "Long-context modeling is becoming a core capability of modern large vision-language models (LVLMs), enabling sustained context management across long-document understanding, video analysis, and multi-turn tool use in agentic workflows. Yet practical training recipes remain insufficiently explored, particularly for designing and balancing long-context data mixtures. In this work, we present a systematic study of long-context continued pre-training for LVLMs, extending a 7B model from 32K to 128K context with extensive ablations on long-document data. We first show that long-document VQA is substantially more effective than OCR transcription. Building on this observation, our ablations further yield three key findings: i) for sequence-length distribution, balanced data outperforms target-length-focused data (e.g., 128K), suggesting that long-context ability requires generalizable key-information retrieval across various lengths and positions; ii) retrieval remains the primary bottleneck, favoring retrieval-heavy mixtures with modest reasoning data for task diversity; and iii) pure long-document VQA largely preserves short-context capabilities, suggesting that instruction-formatted long data reduces the need for short-data mixing. Based on these findings, we introduce MMProLong, obtained by long-context continued pre-training from Qwen2.5-VL-7B with only a 5B-token budget. MMProLong improves long-document VQA scores by 7.1% and maintains strong performance at 256K and 512K contexts beyond its 128K training window, without additional training. It further generalizes to webpage-based multimodal needle retrieval, long-context vision-text compression, and long-video understanding without task-specific supervision. Overall, our study establishes a practical LongPT recipe and an empirical foundation for advancing long-context vision-language models.",
+      "link": "https://arxiv.org/abs/2605.13831v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.13831v1",
       "authors": [
-        "Anthea Dathe",
-        "Kiran Hoffmann",
-        "Aline Mangold"
+        "Zhaowei Wang",
+        "Lishu Luo",
+        "Haodong Duan",
+        "Weiwei Liu",
+        "Sijin Wu",
+        "Ji Luo",
+        "Shen Yan",
+        "Shuai Peng",
+        "Sihang Yuan",
+        "Chaoyi Huang",
+        "Yi Lin",
+        "Yangqiu Song"
       ],
-      "published": "2026-05-11T07:39:41Z",
-      "updated": "2026-05-12T06:44:12Z",
+      "published": "2026-05-13T17:52:53Z",
+      "updated": "2026-05-13T17:52:53Z",
       "categories": [
-        "cs.AI",
-        "cs.HC"
+        "cs.CV"
       ],
-      "arxiv_id": "2605.10125v2",
+      "arxiv_id": "2605.13831v1",
       "score": 13,
       "topic_tags": [
-        "AI工具评估",
-        "可解释性",
-        "文献综述",
-        "文档分析"
+        "长上下文LVLM",
+        "文档VQA",
+        "训练策略",
+        "数据混合",
+        "持续预训练"
       ],
-      "zh_summary": "评估AI问答与文献综述工具在学术研究中的可用性、可解释性和集成度。发现问答工具对精确信息提取不可靠，xAI准确率低；文献综述工具探索支持好但可重复性和透明度差。",
-      "novelty": "结合人机与计算指标评估AI工具在研究工作流中的适用性。",
+      "zh_summary": "针对长上下文视觉语言模型（LVLM）的训练策略进行了系统研究。通过将7B模型从32K扩展到128K上下文，进行了大量消融实验。关键发现：长文档VQA比OCR转录更有效；序列长度分布平衡的数据优于仅目标长度（如128K）的数据；检索是主要瓶颈，应优先使用检索密集型数据；纯长文档VQA可保留短上下文能力。基于此训练的MMProLong（Qwen2.5-VL-7B为基础，仅5B token预算）将长文档VQA分数提升7.1%，并泛化至256K和512K上下文。",
+      "novelty": "系统性地探索了长上下文LVLM的continued pre-training策略，揭示数据组成的关键因素，并证明纯长文档VQA数据即可有效，无需过多短数据混合。",
       "innovation_points": [
-        "结合人类中心与计算指标的评估框架",
-        "系统评估AI问答和文献综述工具",
-        "揭示xAI准确率低的问题"
+        "发现长文档VQA比OCR转录数据更有效",
+        "提出序列长度分布平衡的数据策略优于聚焦长序列",
+        "验证检索密集型数据混合优于推理密集型",
+        "证明纯长文档VQA数据可保留短上下文性能"
       ],
-      "limitations": "样本量有限；聚焦特定AI工具，可能不具普适性。",
+      "limitations": "实验仅在7B模型上进行，更大模型可能有所不同；长上下文仅测试到512K，更极端长度未涉及。",
       "improvement_directions": [
-        "改进AI工具的可解释性和准确性",
-        "设计更透明、可重复的文献综述工具",
-        "开发验证机制以减轻研究人员负担"
+        "在更大规模模型上验证发现",
+        "探索更长上下文（如1M）的训练方法",
+        "研究不同长文档类型的异构性"
       ],
-      "engineering_value": "为研究人员选择和使用AI工具提供指导，推动工具改进。",
-      "why_relevant": "间接相关，但其中的文档分析评估方法对OCR工具质量评估有参考价值。"
+      "engineering_value": "为长上下文LVLM训练提供了实用配方针，可指导减少数据预算并保持性能，对文档理解和多模态智能体有直接应用。",
+      "why_relevant": "针对长文档OCR/VQA提供高效训练策略，改进长上下文理解能力，直接适用于文档智能系统。"
     },
     {
-      "title": "Multi-domain Multi-modal Document Classification Benchmark with a Multi-level Taxonomy",
-      "summary": "Document classification forms the backbone of modern enterprise content management, yet existing benchmarks remain trapped in oversimplified paradigms -- single domain settings with flat label structures -- that bear little resemblance to the hierarchical, multi-modal, and cross-domain nature of real-world business documents. This gap not only misrepresents practical complexity but also stifles progress toward industrially viable document intelligence. To bridge this gap, we construct the first Multi-level, Multi-domain, Multi-modal document classification Benchmark (MMM-Bench). MMM-Bench includes (1) a deeply hierarchical taxonomy spanning five levels that capture the authentic organizational logic of business documentation; and (2) 5,990 real-world multi-modal documents meticulously curated from 12 commercial domains in Alibaba. Each document is manually annotated with a complete hierarchical path by domain experts. We establish comprehensive baselines on MMM-Bench, which consists of open-weight models and API-based models. Through systematic experiments, we identify four fundamental challenges within MMM-Bench and propose corresponding insights. To provide a solid foundation for advancing research in multi-level, multi-domain document classification, we release all of the data and the evaluation toolkit of MMM-Bench at https://github.com/MMMDC-Bench/MMMDC-Bench.",
-      "link": "https://arxiv.org/abs/2605.10550v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.10550v1",
+      "title": "Qwen-Image-VAE-2.0 Technical Report",
+      "summary": "We present Qwen-Image-VAE-2.0, a suite of high-compression Variational Autoencoders (VAEs) that achieve significant advances in both reconstruction fidelity and diffusability. To address the reconstruction bottlenecks of high compression, we adopt an improved architecture featuring Global Skip Connections (GSC) and expanded latent channels. Moreover, we scale training to billions of images and incorporate a synthetic rendering engine to improve performance in text-rich scenarios. To tackle the convergence challenges of high-dimensional latent space, we implement an enhanced semantic alignment strategy to make the latent space highly amenable to diffusion modeling. To optimize computational efficiency, we leverage an asymmetric and attention-free encoder-decoder backbone to minimize encoding overhead. We present a comprehensive evaluation of Qwen-Image-VAE-2.0 on public reconstruction benchmarks. To evaluate performance in text-rich scenarios, we propose OmniDoc-TokenBench, a new benchmark comprising a diverse collection of real-world documents coupled with specialized OCR-based evaluation metrics. Qwen-Image-VAE-2.0 achieves state-of-the-art reconstruction performance, demonstrating exceptional capabilities in both general domains and text-rich scenarios at high compression ratio. Furthermore, downstream DiT experiments reveal our models possess superior diffusability, significantly accelerating convergence compared to existing high-compression baselines. These establish Qwen-Image-VAE-2.0 as a leading model with high compression, superior reconstruction, and exceptional diffusability.",
+      "link": "https://arxiv.org/abs/2605.13565v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.13565v1",
       "authors": [
-        "Denghao Ma",
-        "Qing Liu",
-        "Zulong Chen",
-        "Chuanfei Xu",
-        "Jia Xu",
-        "Zhibo Yang",
-        "Zhao Li"
+        "Zekai Zhang",
+        "Deqing Li",
+        "Kuan Cao",
+        "Yujia Wu",
+        "Chenfei Wu",
+        "Yu Wu",
+        "Liang Peng",
+        "Hao Meng",
+        "Jiahao Li",
+        "Jie Zhang",
+        "Kaiyuan Gao",
+        "Kun Yan",
+        "Lihan Jiang",
+        "Ningyuan Tang",
+        "Shengming Yin",
+        "Tianhe Wu",
+        "Xiao Xu",
+        "Xiaoyue Chen",
+        "Yan Shu",
+        "Yanran Zhang",
+        "Yilei Chen",
+        "Yixian Xu",
+        "Yuxiang Chen",
+        "Zhendong Wang",
+        "Zihao Liu",
+        "Zikai Zhou",
+        "Yiliang Gu",
+        "Yi Wang",
+        "Xiaoxiao Xu",
+        "Lin Qu"
       ],
-      "published": "2026-05-11T13:28:27Z",
-      "updated": "2026-05-11T13:28:27Z",
+      "published": "2026-05-13T14:04:56Z",
+      "updated": "2026-05-13T14:04:56Z",
       "categories": [
-        "cs.CL"
+        "cs.CV"
       ],
-      "arxiv_id": "2605.10550v1",
-      "score": 12,
+      "arxiv_id": "2605.13565v1",
+      "score": 13,
       "topic_tags": [
-        "文档分类",
-        "多模态",
-        "层次分类",
-        "基准数据集"
+        "变分自编码器",
+        "图像压缩",
+        "文本场景",
+        "扩散模型",
+        "合成数据"
       ],
-      "zh_summary": "构建首个多层次、多领域、多模态文档分类基准MMM-Bench，包含五级层次分类法、来自阿里12个商业领域的5990份真实多模态文档，并由专家标注完整层次路径。评估多种基线模型并识别四个基本挑战。",
-      "novelty": "首个结合多层次分类、跨领域和多模态的文档分类基准。",
+      "zh_summary": "提出了Qwen-Image-VAE-2.0，一系列高压缩变分自编码器（VAE），通过全局跳跃连接（GSC）和扩展潜在通道改进重建质量；扩展到数十亿图像训练并引入合成渲染引擎提升文本场景性能；通过语义对齐策略增强潜在空间的可扩散性；采用非对称无注意力编码器-解码器骨干降低编码开销。在通用和文本丰富场景中实现最先进的重建性能，下游DiT实验显示其优越的可扩散性。",
+      "novelty": "针对高压缩VAE的重建瓶颈，提出全局跳跃连接和语义对齐策略，同时利用合成数据提升文本场景表现，并设计无注意力编码器降低计算开销。",
       "innovation_points": [
-        "多层次（5级）分类法",
-        "多领域（12个商业领域）多模态数据集",
-        "专家标注的完整层次路径",
-        "系统实验与挑战识别"
+        "提出全局跳跃连接（GSC）架构改进高压缩VAE重建",
+        "引入合成渲染引擎生成文本丰富场景训练数据",
+        "实现语义对齐策略使潜在空间更适于扩散模型",
+        "设计非对称无注意力编码器-解码器骨干降低编码成本"
       ],
-      "limitations": "数据来自单一企业（阿里），可能引入领域偏差；分类层次固定，不易扩展。",
+      "limitations": "高压缩率下文本细节重建可能仍有损失；依赖合成数据可能引入域差异。",
       "improvement_directions": [
-        "引入更多样化的文档来源",
-        "研究动态层次结构学习",
-        "探索弱监督或半监督标注方法"
+        "探索更有效的文本区域感知压缩",
+        "结合真实与合成数据平衡",
+        "研究端到端训练与下游任务的联合优化"
       ],
-      "engineering_value": "为多模态文档分类提供标准基准，推动工业级文档智能发展。",
-      "why_relevant": "直接针对文档分类，与OCR下游任务紧密相关。"
+      "engineering_value": "高压缩VAE可显著降低图像Token数量，加速文档图像处理流程，尤其适合资源受限场景。",
+      "why_relevant": "高压缩VAE是文档图像Token化步骤，直接影响OCR/文档理解系统的效率和性能。"
     },
     {
-      "title": "Route Before Retrieve: Activating Latent Routing Abilities of LLMs for RAG vs. Long-Context Selection",
-      "summary": "Recent advances in large language models (LLMs) have expanded the context window to beyond 128K tokens, enabling long-document understanding and multi-source reasoning. A key challenge, however, lies in choosing between retrieval-augmented generation (RAG) and long-context (LC) strategies: RAG is efficient but constrained by retrieval quality, while LC supports global reasoning at higher cost and with position sensitivity. Existing methods such as Self-Route adopt failure-driven fallback from RAG to LC, but remain passive, inefficient, and hard to interpret. We propose Pre-Route, a proactive routing framework that performs structured reasoning before answering. Using lightweight metadata (e.g., document type, length, initial snippet), Pre-Route enables task analysis, coverage estimation, and information-need prediction, producing explainable and cost-efficient routing decisions. Our study shows three key findings: (i) LLMs possess latent routing ability that can be reliably elicited with guidelines, allowing single-sample performance to approach that of multi-sample (Best-of-N) results; (ii) linear probes reveal that structured prompts sharpen the separability of the \"optimal routing dimension\" in representation space; and (iii) distillation transfers this reasoning structure to smaller models for lightweight deployment. Experiments on LaRA (in-domain) and LongBench-v2 (OOD) confirm that Pre-Route outperforms Always-RAG, Always-LC, and Self-Route baselines, achieving superior overall cost-effectiveness.",
-      "link": "https://arxiv.org/abs/2605.10235v2",
-      "pdf_url": "https://arxiv.org/pdf/2605.10235v2",
+      "title": "CiteVQA: Benchmarking Evidence Attribution for Trustworthy Document Intelligence",
+      "summary": "Multimodal Large Language Models (MLLMs) have significantly advanced document understanding, yet current Doc-VQA evaluations score only the final answer and leave the supporting evidence unchecked. This answer-only approach masks a critical failure mode: a model can land on the correct answer while grounding it in the wrong passage -- a critical risk in high-stakes domains like law, finance, and medicine, where every conclusion must be traceable to a specific source region. To address this, we introduce CiteVQA, a benchmark that requires models to return element-level bounding-box citations alongside each answer, evaluating both jointly. CiteVQA comprises 1,897 questions across 711 PDFs spanning seven domains and two languages, averaging 40.6 pages per document. To ensure fidelity and scalability, the ground-truth citations are generated by an automated pipeline-which identifies crucial evidence via masking ablation-and are subsequently validated through expert review. At the core of our evaluation is Strict Attributed Accuracy (SAA), which credits a prediction only when the answer and the cited region are both correct. Auditing 20 MLLMs reveals a pervasive Attribution Hallucination: models frequently produce the right answer while citing the wrong region. The strongest system (Gemini-3.1-Pro-Preview) achieves an SAA of only 76.0, and the strongest open-source MLLM reaches just 22.5. Ultimately, towards trustworthy document intelligence, CiteVQA exposes a reliability gap that answer-only evaluations overlook, providing the instrumentation needed to close it. Our repository is available at https://github.com/opendatalab/CiteVQA.",
+      "link": "https://arxiv.org/abs/2605.12882v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.12882v1",
       "authors": [
-        "Yiwen Chen",
-        "Kuan Li",
-        "Fuzhen Zhuang",
-        "Deqing Wang",
-        "Zhao Zhang",
-        "Liwen Zhang",
-        "Yong Jiang",
-        "Shuai Wang",
-        "Minhao Cheng"
+        "Dongsheng Ma",
+        "Jiayu Li",
+        "Zhengren Wang",
+        "Yijie Wang",
+        "Jiahao Kong",
+        "Weijun Zeng",
+        "Jutao Xiao",
+        "Jie Yang",
+        "Wentao Zhang",
+        "Bin Wang",
+        "Conghui He"
       ],
-      "published": "2026-05-11T09:10:55Z",
-      "updated": "2026-05-12T12:50:30Z",
+      "published": "2026-05-13T01:54:42Z",
+      "updated": "2026-05-13T01:54:42Z",
       "categories": [
-        "cs.CL"
+        "cs.CL",
+        "cs.CV"
       ],
-      "arxiv_id": "2605.10235v2",
-      "score": 7,
+      "arxiv_id": "2605.12882v1",
+      "score": 11,
       "topic_tags": [
-        "路由",
-        "RAG",
-        "长上下文",
-        "检索增强"
+        "文档VQA",
+        "证据归因",
+        "归属幻觉",
+        "可信AI",
+        "基准评估"
       ],
-      "zh_summary": "提出Pre-Route，一种主动路由框架，在回答前通过结构化推理（基于元数据）决定使用检索增强生成（RAG）还是长上下文（LC），实现可解释且成本高效的路由。在LaRA和LongBench-v2上优于Always-RAG、Always-LC和Self-Route。",
-      "novelty": "证明LLM具有潜在路由能力，并设计主动推理框架实现最佳策略选择。",
+      "zh_summary": "提出了CiteVQA基准，用于评估多模态大语言模型在文档VQA中的证据归因能力。要求模型为每个答案返回元素级边界框引用，并联合评估答案和引用正确性。数据集包含1897个问题，跨711个PDF、7个领域和2种语言，平均每文档40.6页。通过掩码消融自动生成引用并经专家验证。核心指标为严格归属准确率（SAA）。评估20个MLLM发现普遍的“归属幻觉”：答案正确但引用区域错误。性能最高者SAA仅76.0，最强开源模型SAA仅22.5。",
+      "novelty": "首次提出同时评估文档VQA答案和证据引用的基准，设计严格的SAA指标，并揭示了归属幻觉问题。",
       "innovation_points": [
-        "主动路由框架Pre-Route",
-        "利用元数据进行结构化推理",
-        "揭示LLM的潜在路由能力",
-        "蒸馏到小模型实现轻量部署"
+        "提出元素级边界框引用作为答案的必备输出",
+        "设计严格归属准确率（SAA）联合度量答案和引用正确性",
+        "通过掩码消融管道自动生成高质量的引用标注"
       ],
-      "limitations": "元数据可能不完全代表任务难度；依赖初始片段质量。",
+      "limitations": "仅包含PDF文档，未涵盖其他格式；引用形式限于边界框，可能遗漏更抽象的引用。",
       "improvement_directions": [
-        "研究更丰富的元数据表示",
-        "探索动态元数据获取策略",
-        "将路由与模型在线学习结合"
+        "扩展至更多文档类型和引用形式（如段落、句子）",
+        "研究减轻归属幻觉的方法",
+        "建立与下游可靠性任务的关联"
       ],
-      "engineering_value": "提升RAG/LC选择效率，对文档处理系统的资源优化有直接价值。",
-      "why_relevant": "涉及文档检索与理解策略选择，对OCR后处理流程优化有借鉴意义。"
+      "engineering_value": "为文档智能系统提供了可信评估工具，可直接用于检测和提升模型的证据归因能力，尤其适用于高领域。",
+      "why_relevant": "关注OCR/文档理解中的关键可信问题：答案归因，直接关系到系统实用性和安全性。"
+    },
+    {
+      "title": "A Multi-Agent Orchestration Framework for Venture Capital Due Diligence",
+      "summary": "We present a fully automated multi-agent framework for corporate due diligence and market analysis in venture capital. The system runs on an event-driven orchestration architecture, combining Large Language Models (LLMs) with real-time web retrieval to synthesize unstructured data into structured investment intelligence. A central technical contribution is a programmatic extraction pipeline that reverse-engineers the frontend-to-backend communication of the Greek Business Registry ($Γ$.E.MH.), querying dynamic endpoints to retrieve official financial filings that are then parsed using a layout-aware OCR extractor. A structural fallback mechanism explicitly flags data absence rather than generating unverified figures, directly targeting hallucination in financial contexts. All workflow artifacts are publicly available to support replication.",
+      "link": "https://arxiv.org/abs/2605.13110v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.13110v1",
+      "authors": [
+        "Grigorios Alexandrou",
+        "Katerina Pramatari"
+      ],
+      "published": "2026-05-13T07:20:16Z",
+      "updated": "2026-05-13T07:20:16Z",
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "cs.IR"
+      ],
+      "arxiv_id": "2605.13110v1",
+      "score": 10,
+      "topic_tags": [
+        "多智能体",
+        "尽职调查",
+        "金融OCR",
+        "LLM应用",
+        "数据提取"
+      ],
+      "zh_summary": "提出了一个用于风险投资尽职调查的自动化多智能体框架。系统采用事件驱动编排架构，结合LLM和实时网络检索，将非结构化数据整合为结构化投资情报。技术贡献包括逆向工程技术抽取希腊商业注册库的动态端点，获取官方财务文件，并用布局感知OCR解析器处理；结构回退机制显式标记数据缺失而非生成未验证数字，以减轻金融场景中的幻觉。所有工作流制品公开可用。",
+      "novelty": "将OCR与LLM结合用于自动化风险投资尽职调查，通过逆向工程获取动态数据端点，并用结构回退机制缓解幻觉。",
+      "innovation_points": [
+        "设计事件驱动的多智能体编排框架整合LLM和实时检索",
+        "逆向工程爬取动态端点获取官方财务文件",
+        "使用布局感知OCR解析器处理扫描文档",
+        "引入结构回退机制显式标记缺失数据，避免幻觉"
+      ],
+      "limitations": "仅针对希腊商业注册库；OCR解析质量依赖文档布局；未评估框架的泛化能力。",
+      "improvement_directions": [
+        "扩展到更多国家和数据库",
+        "增强OCR对复杂布局的鲁棒性",
+        "探索动态端点的通用逆向工程方法"
+      ],
+      "engineering_value": "提供端到端自动化尽职调查解决方案，减少人工工作，提高金融分析效率。",
+      "why_relevant": "展示了OCR在特定领域（金融文件处理）的工程应用，以及结合LLM的数据提取方法。"
     },
     {
       "title": "Concordance Comparison as a Means of Assembling Local Grammars",
@@ -303,154 +388,26 @@
       "score": 6,
       "topic_tags": [
         "命名实体识别",
-        "局部语法",
-        "索引行对比",
-        "人物名提取"
+        "局部文法",
+        "一致性比较",
+        "文法组装",
+        "葡萄牙语"
       ],
-      "zh_summary": "提出通过比对索引行差异来组合局部语法的方法，用于人物命名实体识别。在葡萄牙语语料上取得比当前最佳高6个百分点的F1值（76.86）。",
-      "novelty": "利用索引行对比分析局部语法间的包含、相交和析取关系，辅助语法组装。",
+      "zh_summary": "本文提出利用两个局部文法的一致性比较来辅助构建最优文法，应用于葡萄牙语文本中的人名命名实体识别。通过分析文法的包含、交集和析取关系，组合出最佳文法。在Second HAREM黄金数据集上，F值达到76.86，相比先前最优方法提升6个百分点。",
+      "novelty": "利用局部文法的一致性比较作为自动组合和优化文法的辅助手段，而非传统的手动调整。",
       "innovation_points": [
-        "索引行对比辅助语法组装方法",
-        "通过关系分析选择最佳局部语法",
-        "在葡萄牙语命名实体识别上提升6个F1点"
+        "提出基于一致性比较的局部文法组装方法",
+        "通过分析包含、交集、析取关系指导文法组合",
+        "在葡萄牙语人名识别任务上取得性能提升"
       ],
-      "limitations": "仅针对葡萄牙语人名识别；依赖已有局部语法集合。",
+      "limitations": "方法依赖于已有的局部文法集合，且可能仅适用于特定语言或命名实体类型；比较过程可能引入额外计算开销。",
       "improvement_directions": [
-        "推广到其他语言和命名实体类型",
-        "自动发现局部语法关系",
-        "结合深度学习特征进行增强"
+        "将一致性比较扩展到多语言或多类型实体",
+        "探索自动发现和生成候选局部文法的方法",
+        "结合深度学习特征进行混合优化"
       ],
-      "engineering_value": "提供一种可解释的语法优化方法，适用于传统NER系统。",
-      "why_relevant": "涉及文本中的命名实体识别，是OCR后处理的重要环节。"
-    },
-    {
-      "title": "Qwen Goes Brrr: Off-the-Shelf RAG for Ukrainian Multi-Domain Document Understanding",
-      "summary": "We participated in the Fifth UNLP shared task on multi-domain document understanding, where systems must answer Ukrainian multiple-choice questions from PDF collections and localize the supporting document and page. We propose a retrieval-augmented pipeline built around three ideas: contextual chunking of PDFs, question-aware dense retrieval and reranking conditioned on both the question and answer options, and constrained answer generation from a small set of reranked passages. Our final system uses Qwen3-Embedding-8B for retrieval, a fine-tuned Qwen3-Reranker-8B for passage ranking, and Qwen3-32B for answer selection. On a held-out split, reranking improves Recall@1 from 0.6957 to 0.7935, while using the top-2 reranked passages raises answer accuracy from 0.9348 to 0.9674. Our best leaderboard run reached 0.9452 on the public leaderboard and 0.9598 on the private leaderboard. Our results suggest that, under strict code-competition constraints, preserving document structure and making relevance estimation aware of the answer space are more effective than adding complex downstream heuristics.",
-      "link": "https://arxiv.org/abs/2605.10296v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.10296v1",
-      "authors": [
-        "Anton Bazdyrev",
-        "Ivan Bashtovyi",
-        "Ivan Havlytskyi",
-        "Oleksandr Kharytonov",
-        "Artur Khodakovskyi"
-      ],
-      "published": "2026-05-11T09:55:28Z",
-      "updated": "2026-05-11T09:55:28Z",
-      "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.IR",
-        "cs.LG"
-      ],
-      "arxiv_id": "2605.10296v1",
-      "score": 6,
-      "topic_tags": [
-        "文档理解",
-        "检索增强生成",
-        "重排序",
-        "乌克兰语",
-        "问答系统"
-      ],
-      "zh_summary": "本文参与第五次UNLP共享任务，针对乌克兰语多领域文档理解（从PDF集合中回答选择题并定位证据文档和页面），提出一种检索增强流水线：包含上下文分块、问题感知稠密检索与重排序（同时考虑问题和选项），以及基于重排序段落的有约束答案生成。最终系统使用Qwen3-Embedding-8B检索、微调Qwen3-Reranker-8B重排序、Qwen3-32B选择答案。在保留集上重排序将Recall@1从0.6957提升到0.7935，使用top-2重排序段落准确率从0.9348提升到0.9674。公共排行榜0.9452，私有排行榜0.9598。结果表明，在严格代码竞赛约束下，保留文档结构并使相关性估计感知答案空间比添加复杂下游启发式方法更有效。",
-      "novelty": "针对文档理解问答任务，提出在重排序阶段显式利用答案选项信息，而非仅依赖问题-段落匹配。",
-      "innovation_points": [
-        "提出上下文分块策略，保留文档结构（如章节、段落边界）；",
-        "设计问题感知的稠密检索与重排序，重排序模型同时以问题和所有选项作为条件；",
-        "基于重排序后的小规模段落集合进行约束答案生成，避免全文档处理。"
-      ],
-      "limitations": "仅针对乌克兰语，可能在其他语言上泛化性未知；依赖多个专用模型（检索、重排序、生成），系统复杂度高；在低资源场景下重排序模型需要微调，训练数据需求可能受限。",
-      "improvement_directions": [
-        "探索更轻量的端到端方法，减少对多个独立模型的依赖；",
-        "将重排序阶段的答案空间感知推广到更多语言和领域；",
-        "研究如何在不增加推理代价的情况下融合文档结构信息到检索和重排序中。"
-      ],
-      "engineering_value": "高，提供了一套可直接复用的检索增强文档理解流水线，尤其在竞赛等严格约束下具有实用参考价值。",
-      "why_relevant": "OCR文档解析领域中常涉及从结构化PDF中提取信息并回答问题的任务，该工作关于上下文分块、检索-重排序-生成流水线的设计思想可直接迁移。"
-    },
-    {
-      "title": "PlantMarkerBench: A Multi-Species Benchmark for Evidence-Grounded Plant Marker Reasoning",
-      "summary": "Cell-type-specific marker genes are fundamental to plant biology, yet existing resources primarily rely on curated databases or high-throughput studies without explicitly modeling the supporting evidence found in scientific literature. We introduce PlantMarkerBench, a multi-species benchmark for evaluating literature-grounded plant marker evidence interpretation from full-text biological papers. PlantMarkerBench is constructed using a modular curation pipeline integrating large-scale literature retrieval, hybrid search, species-aware biological grounding, structured evidence extraction, and targeted human review. The benchmark spans four plant species -- Arabidopsis, maize, rice, and tomato -- and contains 5,550 sentence-level evidence instances annotated for marker-evidence validity, evidence type, and support strength. We define two benchmark tasks: determining whether a candidate sentence provides valid marker evidence for a gene-cell-type pair, and classifying the evidence into expression, localization, function, indirect, or negative categories. We benchmark diverse open-weight and closed-source language models across species and prompting strategies. Although frontier models achieve relatively strong performance on direct expression evidence, performance drops substantially on functional, indirect, and weak-support evidence, with evidence-type confusion emerging as a dominant failure mode. Open-weight models additionally exhibit elevated false-positive rates under ambiguous biological contexts. PlantMarkerBench provides a challenging and reproducible evaluation framework for literature-grounded biological evidence attribution and supports future research on trustworthy scientific information extraction and AI-assisted plant biology.",
-      "link": "https://arxiv.org/abs/2605.10032v2",
-      "pdf_url": "https://arxiv.org/pdf/2605.10032v2",
-      "authors": [
-        "Sajib Acharjee Dip",
-        "Song Li",
-        "Liqing Zhang"
-      ],
-      "published": "2026-05-11T05:57:15Z",
-      "updated": "2026-05-12T03:36:26Z",
-      "categories": [
-        "cs.CL"
-      ],
-      "arxiv_id": "2605.10032v2",
-      "score": 6,
-      "topic_tags": [
-        "生物文献挖掘",
-        "证据推理",
-        "基准数据集",
-        "标记基因",
-        "自然语言处理"
-      ],
-      "zh_summary": "本文提出PlantMarkerBench，一个多物种基准数据集，用于评估从全科学生物论文中基于文献证据解读植物细胞类型标记基因。通过模块化策展流水线构建，包含大规模文献检索、混合搜索、物种感知生物基础、结构化证据提取和人工审核，涵盖拟南芥、玉米、水稻、番茄四个物种，共5550个句子级证据实例，标注了标记证据有效性、证据类型和支持强度。定义两个任务：判断句子是否为有效的标记证据，以及分类证据类型（表达、定位、功能、间接或阴性）。基准测试了多种开源和闭源语言模型，发现前沿模型在直接表达证据上表现较好，但在功能、间接和弱支持证据上性能大幅下降，证据类型混淆是主要失败模式。开源模型在模糊生物上下文中假阳性率较高。",
-      "novelty": "首个面向植物生物学的、基于文献证据的标记基因推理基准，强调证据类型细粒度分类。",
-      "innovation_points": [
-        "构建了多物种、细粒度标注的植物标记基因证据数据集；",
-        "模块化策展流水线集成多种检索和证据提取技术；",
-        "定义了两阶段任务（有效性判断+类型分类），覆盖表达、定位、功能等证据类型。"
-      ],
-      "limitations": "仅包含四个植物物种，覆盖面有限；证据实例来自句子级别，可能忽略跨句联合证据；基准任务难度较高，当前模型表现有限，尤其是复杂性证据。",
-      "improvement_directions": [
-        "扩展更多物种和更多样化的证据类型（如实验条件依赖的证据）；",
-        "发展能够理解跨句联合证据和生物语境推理的方法；",
-        "探索证据类型混淆的解决方案，例如通过多任务学习或结构化预测。"
-      ],
-      "engineering_value": "中高，为植物生物学领域提供了可重复的评估框架，有助于推动文献挖掘和知识库构建工具的发展。",
-      "why_relevant": "OCR文档解析中常需从科学文献中抽取结构化知识，该工作关于证据类型分类和细粒度推理的思路可用于文档解析后的信息抽取和验证。"
-    },
-    {
-      "title": "Grounded or Guessing? LVLM Confidence Estimation via Blind-Image Contrastive Ranking",
-      "summary": "Large vision-language models suffer from visual ungroundedness: they can produce a fluent, confident, and even correct response driven entirely by language priors, with the image contributing nothing to the prediction. Existing confidence estimation methods cannot detect this, as they observe model behavior under normal inference with no mechanism to determine whether a prediction was shaped by the image or by text alone. We introduce BICR (Blind-Image Contrastive Ranking), a model-agnostic confidence estimation framework that makes this contrast explicit during training by extracting hidden states from a frozen LVLM twice: once with the real image-question pair, and once with the image blacked out while the question is held fixed. A lightweight probe is trained on the real-image hidden state and regularized by a ranking loss that penalizes higher confidence on the blacked-out view, teaching it to treat visual grounding as a signal of reliability at zero additional inference cost. Evaluated across five modern LVLMs and seven baselines on a benchmark covering visual question answering, object hallucination detection, medical imaging, and financial document understanding, BICR achieves the best cross-LVLM average on both calibration and discrimination simultaneously, with statistically significant discrimination gains robust to cluster-aware analysis at 4-18x fewer parameters than the strongest probing baseline.",
-      "link": "https://arxiv.org/abs/2605.10893v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.10893v1",
-      "authors": [
-        "Reza Khanmohammadi",
-        "Erfan Miahi",
-        "Simerjot Kaur",
-        "Charese H. Smiley",
-        "Ivan Brugere",
-        "Kundan Thind",
-        "Mohammad M. Ghassemi"
-      ],
-      "published": "2026-05-11T17:35:10Z",
-      "updated": "2026-05-11T17:35:10Z",
-      "categories": [
-        "cs.CL"
-      ],
-      "arxiv_id": "2605.10893v1",
-      "score": 4,
-      "topic_tags": [
-        "视觉语言模型",
-        "置信度估计",
-        "视觉基础",
-        "对比学习",
-        "多模态"
-      ],
-      "zh_summary": "本文指出大视觉语言模型存在视觉无根基问题：即使图像信息未被使用，模型仍能产生流畅、自信甚至正确的回应（仅依赖语言先验）。现有置信度估计方法无法检测此现象。作者提出BICR（盲图对比排序），一种模型无关的置信度估计框架。训练时，对冻结的LVLM提取两次隐藏状态：一次用真实图像-问题对，一次将图像变黑但问题不变。训练轻量探针基于真实图像隐藏状态，并通过排序损失正则化，惩罚在盲图上给出高置信度，使其学会将视觉基础视为可靠性信号，且推理时无额外代价。在五个LVLM和七个基线、覆盖VQA、物体幻觉检测、医学影像和金融文档理解的基准上，BICR在标定和区分度上同时取得最佳平均性能，区分度增益具有统计显著性，且参数比最强探针基线少4-18倍。",
-      "novelty": "提出通过对比有无视觉输入时模型内部表示来显式检测视觉基础程度的新颖训练范式，用于置信度估计。",
-      "innovation_points": [
-        "提出盲图对比训练策略，利用真实图像-黑图对的隐藏状态差异训练探针；",
-        "设计排序损失惩罚在黑图上输出高置信度，使探针学会感知视觉基础程度；",
-        "实现零额外推理代价的置信度估计，且在多个LVLM和任务上表现最优。"
-      ],
-      "limitations": "探针训练需要带真实图像和黑图的数据，对某些无法获取原始图像的场景（如加密图像）可能受限；依赖冻结LVLM的隐藏状态，可能无法捕捉更深层表示。",
-      "improvement_directions": [
-        "探索无需黑图的数据增强方法，扩大应用场景；",
-        "将BICR扩展到视频或3D理解等更复杂的多模态任务；",
-        "研究如何利用视觉基础信号改进模型生成质量，而不仅仅是估计置信度。"
-      ],
-      "engineering_value": "高，提供了一个轻量、高效、通用性强的置信度估计模块，可直接嵌入现有LVLM系统，提升可靠性。",
-      "why_relevant": "OCR文档解析中常使用LVLM处理图像文档，该工作关于检测模型是否真正依赖图像信息的方法，有助于识别和规避文档理解中的语言先验偏差。"
+      "engineering_value": "为低资源语言或规则与统计结合的系统提供了一种高效文法优化策略，减少人工试错成本。",
+      "why_relevant": "涉及命名实体识别与语法优化，对OCR后文本中的专名识别有参考价值。"
     }
   ]
 }
