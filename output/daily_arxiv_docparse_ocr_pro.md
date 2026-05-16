@@ -1,499 +1,178 @@
-# OCR / 文档解析研究日报（2026-05-14）
+# OCR / 文档解析研究日报（2026-05-16）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-05-14 04:57:49`
+- 生成时间（UTC）：`2026-05-16 04:37:16`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日OCR/文档解析研究聚焦多语言文档理解、古文OCR、长上下文训练、高压缩图像表示、证据归因和金融文档自动化。多篇论文强调了数据合成和增强在低资源场景中的关键作用，同时揭示了现有模型在跨时期感知、长上下文泛化和避免幻觉方面的不足。工程上，提供了实用训练配方和评估基准。
+> 今日 OCR 与文档解析研究聚焦于自监督场景文本识别和长期记忆多模态基准。Masked Next-Scale Prediction (MNSP) 通过跨尺度预测与掩码重建提升了场景文本识别的性能，而 MemLens 基准为评估多模态多轮对话中的记忆能力提供了标准。两者共同指向了更鲁棒和更具记忆能力的模型架构。
 
 ## 二、今日趋势判断
 
-当前趋势包括：1) 多语言和低资源语言文档理解成为热点；2) 长上下文视觉语言模型训练策略系统化；3) 视觉大语言模型用于历史文档和古文识别的评估基准出现；4) 文档VQA向可信AI方向发展，关注证据归因；5) 多智能体框架与OCR结合用于特定领域自动化。
+自监督学习的应用从单尺度向多尺度分层表示演进，多模态大模型的研究焦点开始从单轮感知扩展至长期记忆与多轮交互能力。
 
 ## 三、今日论文概览
 
-1. **DocAtlas: Multilingual Document Understanding Across 80+ Languages** | 标签：多语言OCR、数据增强、文档理解、直接偏好优化、低资源语言
-2. **Chronicles-OCR: A Cross-Temporal Perception Benchmark for the Evolutionary Trajectory of Chinese Characters** | 标签：古文OCR、跨时期感知、汉字演化、视觉大语言模型、数字人文
-3. **Training Long-Context Vision-Language Models Effectively with Generalization Beyond 128K Context** | 标签：长上下文LVLM、文档VQA、训练策略、数据混合、持续预训练
-4. **Qwen-Image-VAE-2.0 Technical Report** | 标签：变分自编码器、图像压缩、文本场景、扩散模型、合成数据
-5. **CiteVQA: Benchmarking Evidence Attribution for Trustworthy Document Intelligence** | 标签：文档VQA、证据归因、归属幻觉、可信AI、基准评估
-6. **A Multi-Agent Orchestration Framework for Venture Capital Due Diligence** | 标签：多智能体、尽职调查、金融OCR、LLM应用、数据提取
-7. **Concordance Comparison as a Means of Assembling Local Grammars** | 标签：命名实体识别、局部文法、一致性比较、文法组装、葡萄牙语
+1. **Masked Next-Scale Prediction for Self-supervised Scene Text Recognition** | 标签：场景文本识别、自监督学习、掩码图像建模、多尺度表示、预训练
+2. **MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models** | 标签：多模态大模型、长期记忆、基准测试、多轮对话、视觉语言模型
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 合成数据生成和增强是提升低资源/特殊领域性能的关键，如DocAtlas和Qwen-Image-VAE-2.0分别用于多语言和文本场景。
-- 直接偏好优化（DPO）被引入多语言文档理解，利用渲染真值作为正信号，避免退化。
-- 长上下文训练中，长文档VQA数据比OCR转录更有效，且序列长度分布平衡优于聚焦长序列。
-- 高压缩VAE通过全局跳跃连接和合成数据改善文本场景重建，降低编码开销。
-- 证据归因基准引入元素级边界框引用和严格归属准确率，揭示普遍幻觉。
+- 跨尺度预测与掩码重建的结合用于场景文本识别。
+- 多尺度语言对齐模块保持不同分辨率间的语义一致性。
+- 跨模态 token 计数方案统一不同长度上下文，用于记忆基准测试。
+- 图像消融实验验证了视觉证据的必要性。
+- 长期记忆与长上下文注意力的混合架构被提出作为方向。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 探索更有效的低资源语言数据增强策略，如基于GAN或扩散模型的生成数据，以弥合与高资源语言的差距。
-- 研究DPO与其他微调方法（如LoRA）的结合，提升多语言适应稳定性并扩大提升幅度。
-- 将Chronicles-OCR基准扩展到更多文字和更大规模，引入复杂的语义推理任务。
-- 在更大参数规模（如13B、70B）上验证长上下文训练发现，并探索超长上下文（1M）下的性能。
-- 结合合成与真实数据训练VAE，改善文本区域感知压缩，减少高压缩下的细节损失。
-- 开发缓解归属幻觉的方法，如引用验证网络或检索增强生成，提升模型可信度。
-- 扩展多智能体尽职调查框架到多个国家数据库，增强OCR对复杂布局和语言的鲁棒性。
-- 利用局部文法一致性比较自动探索和生成候选文法，结合深度学习特征进行混合优化，提高NER效果。
+- 探索轻量级跨尺度融合结构以降低 MNSP 的计算成本。
+- 将 MNSP 扩展到手写文本与多语言场景文本识别。
+- 研究未标注数据多样性对自监督预训练效果的影响。
+- 开发包含视频与音频的多模态长期记忆基准。
+- 优化长上下文注意力与结构化多模态检索的混合架构。
+- 研究记忆压缩策略在保持视觉保真度时的优化。
 
 ## 六、工程落地启发
 
-- DocAtlas提供了多语言OCR训练数据和DPO微调方法，可直接提升低资源语言性能。
-- Chronicles-OCR基准可作为数字人文领域跨时期文字识别系统的标准化评估平台。
-- 长上下文LVLM训练配方（纯长文档VQA、平衡序列长度、优先检索数据）可指导训练流程。
-- Qwen-Image-VAE-2.0的高压缩VAE可减少图像Token数量，加速推理。
-- CiteVQA基准和SAA指标可直接用于检测模型的证据归因缺陷。
-- 多智能体框架提供了金融尽职调查的自动化方案，减少人工并提高效率。
-- 基于一致性比较的文法组装策略可高效优化NER规则系统。
+- MNSP 可减少对标注数据的依赖，提升工业场景文本识别模型的泛化能力。
+- MemLens 为多模态对话系统的记忆模块设计提供了量化评估标准，可指导实际部署中的架构选择。
 
 ## 七、优先关注论文
 
-- **DocAtlas: Multilingual Document Understanding Across 80+ Languages**：多语言OCR与文档理解的核心框架，DPO微调方法可直接应用于工程实践，且低资源语言性能差距有待跟踪后续改进。
-- **Training Long-Context Vision-Language Models Effectively with Generalization Beyond 128K Context**：长上下文训练策略系统研究，提供了可直接复用的数据混合和训练配方，对构建高效长文档系统至关重要。
-- **Qwen-Image-VAE-2.0 Technical Report**：高压缩VAE可显著减少图像表示成本，加快文档处理流程，文本场景性能提升值得关注。
-- **CiteVQA: Benchmarking Evidence Attribution for Trustworthy Document Intelligence**：证据归因是文档智能可信化的关键方向，CiteVQA揭示了普遍幻觉，后续缓解方法值得关注。
+- **Masked Next-Scale Prediction for Self-supervised Scene Text Recognition**：提出新颖的多尺度自监督框架，计算开销可能是工程部署的瓶颈，值得跟踪轻量化改进方向。
+- **MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models**：首个多模态记忆基准，其提出的混合架构和记忆压缩策略有望成为多模态文档对话系统的设计指南。
 
 ## 八、论文逐篇解析
 
-### 1. DocAtlas: Multilingual Document Understanding Across 80+ Languages
+### 1. Masked Next-Scale Prediction for Self-supervised Scene Text Recognition
 
-- arXiv: [2605.12623v1](https://arxiv.org/abs/2605.12623v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.12623v1)
-- 作者: Ahmed Heakl, Youssef Mohamed, Abdullah Sohail, Rania Elbadry, Ahmed Nassar, Peter W. J. Staar, Fahad Shahbaz Khan, Imran Razzak, Salman Khan
-- 发布时间: 2026-05-12T18:09:38Z
-- 分类: cs.CL, cs.CV, cs.LG
-- 相关性评分: 20
-- 主题标签: 多语言OCR、数据增强、文档理解、直接偏好优化、低资源语言
-
-**中文摘要**
-
-> 针对低资源语言因数据稀缺导致的文档理解不足，提出了DocAtlas框架。该框架通过原生DOCX差分渲染和基于LaTeX的合成生成构建高保真OCR数据集及基准，覆盖82种语言、9个评估任务。核心标注采用统一的DocTag格式（编码布局、文本和组件类型），不依赖学习模型。评估16个最先进模型后，发现低资源脚本仍存在持续差距。利用渲染真值作为正信号的直接偏好优化（DPO）实现了稳定的多语言适应，在域内（+1.9%）和域外（+1.8%）准确率上均有提升，且未造成基础语言性能可测量的退化，而监督微调会降低域外性能高达21%。最佳变体DocAtlas-DeepSeek相比最强基线提升了1.7%。
-
-**核心创新概述**
-
-> 提出无需学习模型的核心标注管道，通过差分渲染和合成生成构建高保真多语言OCR基准；首次将DPO应用于多语言文档理解，利用渲染真值作为正信号。
-
-**创新点拆解**
-
-- 提出双管道数据生成方法：原生DOCX差分渲染和LaTeX合成生成，覆盖82种语言和右到左脚本
-- 设计统一的DocTag标注格式，编码布局、文本和组件类型
-- 将DPO应用于多语言文档理解，利用渲染真值作为正信号
-
-**当前局限**
-
-> 低资源语言性能仍存在显著差距；DPO虽稳定但提升幅度有限；DocAtlas-DeepSeek改进较小。
-
-**后续可改进方向**
-
-- 探索更有效的低资源语言数据增强策略
-- 研究DPO与其他微调方法的结合
-- 扩展至更多语言和任务
-
-**工程启发**
-
-> 为多语言OCR系统提供了高质量训练数据和基准，以及DPO微调方法，可直接提升系统在低资源语言上的性能。
-
-**为什么值得关注**
-
-> 直接针对OCR中的多语言数据稀缺问题，提供数据构建和模型微调方案，对扩展OCR系统语言覆盖有实际意义。
-
-**原始摘要**
-
-Multilingual document understanding remains limited for low-resource languages due to scarce
-training data and model-based annotation pipelines that perpetuate existing biases. We introduce
-DocAtlas, a framework that constructs high-fidelity OCR datasets and benchmarks covering 82
-languages and 9 evaluation tasks. Our dual pipelines, differential rendering of native DOCX
-documents and synthetic LaTeX-based generation for right-to-left scripts produce precise structural
-annotations in a unified DocTag format encoding layout, text, and component types, without learned
-models for core annotation. Evaluating 16 state-of-the-art models reveals persistent gaps in low-
-resource scripts. We show that Direct Preference Optimization (DPO) using rendering-derived ground
-truth as positive signal achieves stable multilingual adaptation, improving both in-domain (+1.9%)
-and out-of-domain (+1.8%) accuracy without measurable base-language degradation, where supervised
-fine-tuning degrades out-of-domain performance by up to 21%. Our best variant, DocAtlas-DeepSeek,
-improves +1.7% over the strongest baseline.
-
----
-
-### 2. Chronicles-OCR: A Cross-Temporal Perception Benchmark for the Evolutionary Trajectory of Chinese Characters
-
-- arXiv: [2605.11960v1](https://arxiv.org/abs/2605.11960v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.11960v1)
-- 作者: Gengluo Li, Shangpin Peng, Xingyu Wan, Chengquan Zhang, Hao Feng, Xin Xu, Pian Wu, Bang Li, Zengmao Ding, Yongge Liu, Yipei Ye, Yang Yang, Zhan Shu, Guojun Yan, Zhe Li, Can Ma, Weiping Wang, Yu Zhou, Han Hu
-- 发布时间: 2026-05-12T11:14:25Z
+- arXiv: [2605.14885v1](https://arxiv.org/abs/2605.14885v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.14885v1)
+- 作者: Zhuohao Chen, Zeng Li, Yifei Zhang, Chang Liu, Yu Zhou
+- 发布时间: 2026-05-14T14:28:55Z
 - 分类: cs.CV
-- 相关性评分: 14
-- 主题标签: 古文OCR、跨时期感知、汉字演化、视觉大语言模型、数字人文
+- 相关性评分: 16
+- 主题标签: 场景文本识别、自监督学习、掩码图像建模、多尺度表示、预训练
 
 **中文摘要**
 
-> 提出了Chronicles-OCR基准，用于评估视觉大语言模型（VLLM）在汉字七体（从甲骨文到纸本书法）跨时间视觉感知能力。该数据集由专家合作构建，包含2800张平衡图像，涵盖多样化物理介质。设计了阶段自适应标注范式，并定义了四项量化任务：跨时期字符定位、通过视觉指代进行细粒度古文字识别、古文解析和脚本分类。实验揭示了当前VLLM在跨时期感知上的局限性。
+> 提出了 Masked Next-Scale Prediction (MNSP) 自监督框架，通过跨尺度预测和掩码重建建模场景文本的分层视觉结构，在 Union14M 和标准数据集上达到 SOTA 性能。
 
 **核心创新概述**
 
-> 首个评估VLLM跨汉字完整演化轨迹视觉感知的基准，涵盖七种古文，并引入阶段自适应标注范式和四项标准化任务。
+> 首次将跨尺度预测与掩码图像重建结合，解决单尺度 MIM 无法捕获分层结构的问题。
 
 **创新点拆解**
 
-- 构建涵盖汉字七体的跨时期基准数据集，专家标注2800张图像
-- 提出阶段自适应标注范式，应对不同历史阶段的形态和拓扑变化
-- 设计四项定量任务：跨时期字符定位、细粒度古文字识别、古文解析、脚本分类
+- Next-Scale Prediction 机制学习从低分辨率到高分辨率的层次表示
+- 联合优化跨尺度预测和掩码重建，兼顾全局布局与局部细节
+- 多尺度语言对齐模块保持不同分辨率间的语义一致性
 
 **当前局限**
 
-> 数据量相对较小（2800张），仅覆盖汉字，未涉及其他文字系统。
+> 在极端低质量或严重遮挡场景下准确率仍有下降；跨尺度预测的计算开销较大。
 
 **后续可改进方向**
 
-- 扩大数据集规模和文字种类
-- 引入更复杂的古文字识别任务
-- 结合语义推理与视觉感知评估
+- 探索更轻量的跨尺度融合结构以降低计算成本
+- 将 MNSP 扩展到手写文本或多语言场景文本识别
+- 研究未标注数据的多样性对预训练效果的影响
 
 **工程启发**
 
-> 为数字人文领域提供了评估和开发跨时期文字识别系统的标准化平台，可用于改进VLLM在历史文档中的表现。
+> 可减少对标注数据的依赖，提升工业场景下文本识别模型的泛化能力和鲁棒性。
 
 **为什么值得关注**
 
-> 针对OCR在历史文字上的罕见挑战，提出基准和方法，启发OCR系统处理形态演变问题。
+> 直接面向场景文本识别，提出新的自监督预训练范式，对降低数据需求、提升模型性能有重要参考价值。
 
 **原始摘要**
 
-Vision Large Language Models (VLLMs) have achieved remarkable success in modern text-rich visual
-understanding. However, their perceptual robustness in the face of the continuous morphological
-evolution of historical writing systems remains largely unexplored. Existing ancient text datasets
-typically focus on isolated historical periods, failing to capture the systematic visual
-distribution shifts spanning thousands of years. To bridge this gap and empower Digital Humanities,
-we introduce Chronicles-OCR, the first comprehensive benchmark specifically designed to evaluate the
-cross-temporal visual perception capabilities of VLLMs across the complete evolutionary trajectory
-of Chinese characters, known as the Seven Chinese Scripts. Curated in collaboration with top-tier
-institutional domain experts, the dataset comprises 2,800 strictly balanced images encompassing
-highly diverse physical media, ranging from tortoise shells to paper-based calligraphy. To
-accommodate the drastic morphological and topological variations across different historical stages,
-we propose a novel Stage-Adaptive Annotation Paradigm. Based on this, Chronicles-OCR formulates four
-rigorous quantitative tasks: cross-period character spotting, fine-grained archaic character
-recognition via visual referring, ancient text parsing, and script classification. By isolating
-visual perception from semantic reasoning, Chronicles-OCR provides an authoritative platform to
-expose the limitations of current VLLMs, paving the way for robust, evolution-aware historical text
-perception. Chronicles-OCR is publicly available at https://github.com/VirtualLUOUCAS/Chronicles-
-OCR.
+Scene Text Recognition requires modeling visual structures that evolve from coarse layouts to fine-
+grained character strokes. Training such models relies on large amounts of annotated data. Recent
+self-supervised approaches, such as Masked Image Modeling (MIM), alleviate this dependency by
+leveraging large-scale unlabeled data. Yet most existing MIM methods operate at a single spatial
+scale and fail to capture the hierarchical nature of scene text. In this work, we introduce Masked
+Next-Scale Prediction (MNSP), a unified self-supervised framework designed to explicitly model
+cross-scale structural evolution. The framework incorporates Next-Scale Prediction (NSP), which
+learns hierarchical representations by predicting higher-resolution features from lower-resolution
+contexts. Naive scale prediction, however, tends to produce spatially diffuse attention, directing
+the model toward background regions rather than textual structures. MNSP resolves this limitation by
+jointly learning cross-scale prediction and masked image reconstruction. NSP captures global layout
+priors across resolutions, while masked reconstruction imposes strong local constraints that guide
+attention toward informative text regions. A Multi-scale Linguistic Alignment module further
+maintains semantic consistency across different resolutions. Extensive experiments demonstrate that
+MNSP achieves state-of-the-art performance, reaching 86.2\% average accuracy on the challenging
+Union14M benchmark and 96.7\% across six standard datasets. Additional analyses show that our method
+improves robustness under extreme scale and layout variations. Code is available at
+https://github.com/CzhczhcHczh/MNSP
 
 ---
 
-### 3. Training Long-Context Vision-Language Models Effectively with Generalization Beyond 128K Context
+### 2. MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models
 
-- arXiv: [2605.13831v1](https://arxiv.org/abs/2605.13831v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.13831v1)
-- 作者: Zhaowei Wang, Lishu Luo, Haodong Duan, Weiwei Liu, Sijin Wu, Ji Luo, Shen Yan, Shuai Peng, Sihang Yuan, Chaoyi Huang, Yi Lin, Yangqiu Song
-- 发布时间: 2026-05-13T17:52:53Z
+- arXiv: [2605.14906v1](https://arxiv.org/abs/2605.14906v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.14906v1)
+- 作者: Xiyu Ren, Zhaowei Wang, Yiming Du, Zhongwei Xie, Chi Liu, Xinlin Yang, Haoyue Feng, Wenjun Pan, Tianshi Zheng, Baixuan Xu, Zhengnan Li, Yangqiu Song, Ginny Wong, Simon See
+- 发布时间: 2026-05-14T14:41:17Z
 - 分类: cs.CV
-- 相关性评分: 13
-- 主题标签: 长上下文LVLM、文档VQA、训练策略、数据混合、持续预训练
+- 相关性评分: 9
+- 主题标签: 多模态大模型、长期记忆、基准测试、多轮对话、视觉语言模型
 
 **中文摘要**
 
-> 针对长上下文视觉语言模型（LVLM）的训练策略进行了系统研究。通过将7B模型从32K扩展到128K上下文，进行了大量消融实验。关键发现：长文档VQA比OCR转录更有效；序列长度分布平衡的数据优于仅目标长度（如128K）的数据；检索是主要瓶颈，应优先使用检索密集型数据；纯长文档VQA可保留短上下文能力。基于此训练的MMProLong（Qwen2.5-VL-7B为基础，仅5B token预算）将长文档VQA分数提升7.1%，并泛化至256K和512K上下文。
+> 提出 MemLens 基准，系统评估长上下文 LVLM 和记忆增强代理在多模态多轮对话中的记忆能力，发现两者互补，混合架构是方向。
 
 **核心创新概述**
 
-> 系统性地探索了长上下文LVLM的continued pre-training策略，揭示数据组成的关键因素，并证明纯长文档VQA数据即可有效，无需过多短数据混合。
+> 首个针对多模态多轮对话中长时记忆能力的综合基准，包含跨模态 token 计数和图像消融验证。
 
 **创新点拆解**
 
-- 发现长文档VQA比OCR转录数据更有效
-- 提出序列长度分布平衡的数据策略优于聚焦长序列
-- 验证检索密集型数据混合优于推理密集型
-- 证明纯长文档VQA数据可保留短上下文性能
+- 设计跨模态 token 计数方案统一不同长度上下文
+- 图像消融实验证明任务必须依赖视觉证据
+- 覆盖 5 种记忆能力和 4 种上下文长度
 
 **当前局限**
 
-> 实验仅在7B模型上进行，更大模型可能有所不同；长上下文仅测试到512K，更极端长度未涉及。
+> 基准规模相对有限（789 题），未涵盖视频或音频等更多模态。
 
 **后续可改进方向**
 
-- 在更大规模模型上验证发现
-- 探索更长上下文（如1M）的训练方法
-- 研究不同长文档类型的异构性
+- 扩展到多模态长期记忆的其他场景（如视频理解）
+- 探索长上下文注意力与结构化多模态检索的混合架构
+- 研究记忆压缩策略在保持视觉保真度方面的优化
 
 **工程启发**
 
-> 为长上下文LVLM训练提供了实用配方针，可指导减少数据预算并保持性能，对文档理解和多模态智能体有直接应用。
+> 为多模态对话系统的记忆模块设计提供量化评估标准，指导实际部署中的架构选择。
 
 **为什么值得关注**
 
-> 针对长文档OCR/VQA提供高效训练策略，改进长上下文理解能力，直接适用于文档智能系统。
+> 聚焦长期记忆能力评估，对 OCR / 文档解析中需要跨多轮对话保持视觉信息一致性的场景有参考意义。
 
 **原始摘要**
 
-Long-context modeling is becoming a core capability of modern large vision-language models (LVLMs),
-enabling sustained context management across long-document understanding, video analysis, and multi-
-turn tool use in agentic workflows. Yet practical training recipes remain insufficiently explored,
-particularly for designing and balancing long-context data mixtures. In this work, we present a
-systematic study of long-context continued pre-training for LVLMs, extending a 7B model from 32K to
-128K context with extensive ablations on long-document data. We first show that long-document VQA is
-substantially more effective than OCR transcription. Building on this observation, our ablations
-further yield three key findings: i) for sequence-length distribution, balanced data outperforms
-target-length-focused data (e.g., 128K), suggesting that long-context ability requires generalizable
-key-information retrieval across various lengths and positions; ii) retrieval remains the primary
-bottleneck, favoring retrieval-heavy mixtures with modest reasoning data for task diversity; and
-iii) pure long-document VQA largely preserves short-context capabilities, suggesting that
-instruction-formatted long data reduces the need for short-data mixing. Based on these findings, we
-introduce MMProLong, obtained by long-context continued pre-training from Qwen2.5-VL-7B with only a
-5B-token budget. MMProLong improves long-document VQA scores by 7.1% and maintains strong
-performance at 256K and 512K contexts beyond its 128K training window, without additional training.
-It further generalizes to webpage-based multimodal needle retrieval, long-context vision-text
-compression, and long-video understanding without task-specific supervision. Overall, our study
-establishes a practical LongPT recipe and an empirical foundation for advancing long-context vision-
-language models.
-
----
-
-### 4. Qwen-Image-VAE-2.0 Technical Report
-
-- arXiv: [2605.13565v1](https://arxiv.org/abs/2605.13565v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.13565v1)
-- 作者: Zekai Zhang, Deqing Li, Kuan Cao, Yujia Wu, Chenfei Wu, Yu Wu, Liang Peng, Hao Meng, Jiahao Li, Jie Zhang, Kaiyuan Gao, Kun Yan, Lihan Jiang, Ningyuan Tang, Shengming Yin, Tianhe Wu, Xiao Xu, Xiaoyue Chen, Yan Shu, Yanran Zhang, Yilei Chen, Yixian Xu, Yuxiang Chen, Zhendong Wang, Zihao Liu, Zikai Zhou, Yiliang Gu, Yi Wang, Xiaoxiao Xu, Lin Qu
-- 发布时间: 2026-05-13T14:04:56Z
-- 分类: cs.CV
-- 相关性评分: 13
-- 主题标签: 变分自编码器、图像压缩、文本场景、扩散模型、合成数据
-
-**中文摘要**
-
-> 提出了Qwen-Image-VAE-2.0，一系列高压缩变分自编码器（VAE），通过全局跳跃连接（GSC）和扩展潜在通道改进重建质量；扩展到数十亿图像训练并引入合成渲染引擎提升文本场景性能；通过语义对齐策略增强潜在空间的可扩散性；采用非对称无注意力编码器-解码器骨干降低编码开销。在通用和文本丰富场景中实现最先进的重建性能，下游DiT实验显示其优越的可扩散性。
-
-**核心创新概述**
-
-> 针对高压缩VAE的重建瓶颈，提出全局跳跃连接和语义对齐策略，同时利用合成数据提升文本场景表现，并设计无注意力编码器降低计算开销。
-
-**创新点拆解**
-
-- 提出全局跳跃连接（GSC）架构改进高压缩VAE重建
-- 引入合成渲染引擎生成文本丰富场景训练数据
-- 实现语义对齐策略使潜在空间更适于扩散模型
-- 设计非对称无注意力编码器-解码器骨干降低编码成本
-
-**当前局限**
-
-> 高压缩率下文本细节重建可能仍有损失；依赖合成数据可能引入域差异。
-
-**后续可改进方向**
-
-- 探索更有效的文本区域感知压缩
-- 结合真实与合成数据平衡
-- 研究端到端训练与下游任务的联合优化
-
-**工程启发**
-
-> 高压缩VAE可显著降低图像Token数量，加速文档图像处理流程，尤其适合资源受限场景。
-
-**为什么值得关注**
-
-> 高压缩VAE是文档图像Token化步骤，直接影响OCR/文档理解系统的效率和性能。
-
-**原始摘要**
-
-We present Qwen-Image-VAE-2.0, a suite of high-compression Variational Autoencoders (VAEs) that
-achieve significant advances in both reconstruction fidelity and diffusability. To address the
-reconstruction bottlenecks of high compression, we adopt an improved architecture featuring Global
-Skip Connections (GSC) and expanded latent channels. Moreover, we scale training to billions of
-images and incorporate a synthetic rendering engine to improve performance in text-rich scenarios.
-To tackle the convergence challenges of high-dimensional latent space, we implement an enhanced
-semantic alignment strategy to make the latent space highly amenable to diffusion modeling. To
-optimize computational efficiency, we leverage an asymmetric and attention-free encoder-decoder
-backbone to minimize encoding overhead. We present a comprehensive evaluation of Qwen-Image-VAE-2.0
-on public reconstruction benchmarks. To evaluate performance in text-rich scenarios, we propose
-OmniDoc-TokenBench, a new benchmark comprising a diverse collection of real-world documents coupled
-with specialized OCR-based evaluation metrics. Qwen-Image-VAE-2.0 achieves state-of-the-art
-reconstruction performance, demonstrating exceptional capabilities in both general domains and text-
-rich scenarios at high compression ratio. Furthermore, downstream DiT experiments reveal our models
-possess superior diffusability, significantly accelerating convergence compared to existing high-
-compression baselines. These establish Qwen-Image-VAE-2.0 as a leading model with high compression,
-superior reconstruction, and exceptional diffusability.
-
----
-
-### 5. CiteVQA: Benchmarking Evidence Attribution for Trustworthy Document Intelligence
-
-- arXiv: [2605.12882v1](https://arxiv.org/abs/2605.12882v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.12882v1)
-- 作者: Dongsheng Ma, Jiayu Li, Zhengren Wang, Yijie Wang, Jiahao Kong, Weijun Zeng, Jutao Xiao, Jie Yang, Wentao Zhang, Bin Wang, Conghui He
-- 发布时间: 2026-05-13T01:54:42Z
-- 分类: cs.CL, cs.CV
-- 相关性评分: 11
-- 主题标签: 文档VQA、证据归因、归属幻觉、可信AI、基准评估
-
-**中文摘要**
-
-> 提出了CiteVQA基准，用于评估多模态大语言模型在文档VQA中的证据归因能力。要求模型为每个答案返回元素级边界框引用，并联合评估答案和引用正确性。数据集包含1897个问题，跨711个PDF、7个领域和2种语言，平均每文档40.6页。通过掩码消融自动生成引用并经专家验证。核心指标为严格归属准确率（SAA）。评估20个MLLM发现普遍的“归属幻觉”：答案正确但引用区域错误。性能最高者SAA仅76.0，最强开源模型SAA仅22.5。
-
-**核心创新概述**
-
-> 首次提出同时评估文档VQA答案和证据引用的基准，设计严格的SAA指标，并揭示了归属幻觉问题。
-
-**创新点拆解**
-
-- 提出元素级边界框引用作为答案的必备输出
-- 设计严格归属准确率（SAA）联合度量答案和引用正确性
-- 通过掩码消融管道自动生成高质量的引用标注
-
-**当前局限**
-
-> 仅包含PDF文档，未涵盖其他格式；引用形式限于边界框，可能遗漏更抽象的引用。
-
-**后续可改进方向**
-
-- 扩展至更多文档类型和引用形式（如段落、句子）
-- 研究减轻归属幻觉的方法
-- 建立与下游可靠性任务的关联
-
-**工程启发**
-
-> 为文档智能系统提供了可信评估工具，可直接用于检测和提升模型的证据归因能力，尤其适用于高领域。
-
-**为什么值得关注**
-
-> 关注OCR/文档理解中的关键可信问题：答案归因，直接关系到系统实用性和安全性。
-
-**原始摘要**
-
-Multimodal Large Language Models (MLLMs) have significantly advanced document understanding, yet
-current Doc-VQA evaluations score only the final answer and leave the supporting evidence unchecked.
-This answer-only approach masks a critical failure mode: a model can land on the correct answer
-while grounding it in the wrong passage -- a critical risk in high-stakes domains like law, finance,
-and medicine, where every conclusion must be traceable to a specific source region. To address this,
-we introduce CiteVQA, a benchmark that requires models to return element-level bounding-box
-citations alongside each answer, evaluating both jointly. CiteVQA comprises 1,897 questions across
-711 PDFs spanning seven domains and two languages, averaging 40.6 pages per document. To ensure
-fidelity and scalability, the ground-truth citations are generated by an automated pipeline-which
-identifies crucial evidence via masking ablation-and are subsequently validated through expert
-review. At the core of our evaluation is Strict Attributed Accuracy (SAA), which credits a
-prediction only when the answer and the cited region are both correct. Auditing 20 MLLMs reveals a
-pervasive Attribution Hallucination: models frequently produce the right answer while citing the
-wrong region. The strongest system (Gemini-3.1-Pro-Preview) achieves an SAA of only 76.0, and the
-strongest open-source MLLM reaches just 22.5. Ultimately, towards trustworthy document intelligence,
-CiteVQA exposes a reliability gap that answer-only evaluations overlook, providing the
-instrumentation needed to close it. Our repository is available at
-https://github.com/opendatalab/CiteVQA.
-
----
-
-### 6. A Multi-Agent Orchestration Framework for Venture Capital Due Diligence
-
-- arXiv: [2605.13110v1](https://arxiv.org/abs/2605.13110v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.13110v1)
-- 作者: Grigorios Alexandrou, Katerina Pramatari
-- 发布时间: 2026-05-13T07:20:16Z
-- 分类: cs.MA, cs.AI, cs.IR
-- 相关性评分: 10
-- 主题标签: 多智能体、尽职调查、金融OCR、LLM应用、数据提取
-
-**中文摘要**
-
-> 提出了一个用于风险投资尽职调查的自动化多智能体框架。系统采用事件驱动编排架构，结合LLM和实时网络检索，将非结构化数据整合为结构化投资情报。技术贡献包括逆向工程技术抽取希腊商业注册库的动态端点，获取官方财务文件，并用布局感知OCR解析器处理；结构回退机制显式标记数据缺失而非生成未验证数字，以减轻金融场景中的幻觉。所有工作流制品公开可用。
-
-**核心创新概述**
-
-> 将OCR与LLM结合用于自动化风险投资尽职调查，通过逆向工程获取动态数据端点，并用结构回退机制缓解幻觉。
-
-**创新点拆解**
-
-- 设计事件驱动的多智能体编排框架整合LLM和实时检索
-- 逆向工程爬取动态端点获取官方财务文件
-- 使用布局感知OCR解析器处理扫描文档
-- 引入结构回退机制显式标记缺失数据，避免幻觉
-
-**当前局限**
-
-> 仅针对希腊商业注册库；OCR解析质量依赖文档布局；未评估框架的泛化能力。
-
-**后续可改进方向**
-
-- 扩展到更多国家和数据库
-- 增强OCR对复杂布局的鲁棒性
-- 探索动态端点的通用逆向工程方法
-
-**工程启发**
-
-> 提供端到端自动化尽职调查解决方案，减少人工工作，提高金融分析效率。
-
-**为什么值得关注**
-
-> 展示了OCR在特定领域（金融文件处理）的工程应用，以及结合LLM的数据提取方法。
-
-**原始摘要**
-
-We present a fully automated multi-agent framework for corporate due diligence and market analysis
-in venture capital. The system runs on an event-driven orchestration architecture, combining Large
-Language Models (LLMs) with real-time web retrieval to synthesize unstructured data into structured
-investment intelligence. A central technical contribution is a programmatic extraction pipeline that
-reverse-engineers the frontend-to-backend communication of the Greek Business Registry ($Γ$.E.MH.),
-querying dynamic endpoints to retrieve official financial filings that are then parsed using a
-layout-aware OCR extractor. A structural fallback mechanism explicitly flags data absence rather
-than generating unverified figures, directly targeting hallucination in financial contexts. All
-workflow artifacts are publicly available to support replication.
-
----
-
-### 7. Concordance Comparison as a Means of Assembling Local Grammars
-
-- arXiv: [2605.11862v1](https://arxiv.org/abs/2605.11862v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.11862v1)
-- 作者: Juliana Pirovani, Elias de Oliveira, Eric Laporte
-- 发布时间: 2026-05-12T09:45:10Z
-- 分类: cs.CL
-- 相关性评分: 6
-- 主题标签: 命名实体识别、局部文法、一致性比较、文法组装、葡萄牙语
-
-**中文摘要**
-
-> 本文提出利用两个局部文法的一致性比较来辅助构建最优文法，应用于葡萄牙语文本中的人名命名实体识别。通过分析文法的包含、交集和析取关系，组合出最佳文法。在Second HAREM黄金数据集上，F值达到76.86，相比先前最优方法提升6个百分点。
-
-**核心创新概述**
-
-> 利用局部文法的一致性比较作为自动组合和优化文法的辅助手段，而非传统的手动调整。
-
-**创新点拆解**
-
-- 提出基于一致性比较的局部文法组装方法
-- 通过分析包含、交集、析取关系指导文法组合
-- 在葡萄牙语人名识别任务上取得性能提升
-
-**当前局限**
-
-> 方法依赖于已有的局部文法集合，且可能仅适用于特定语言或命名实体类型；比较过程可能引入额外计算开销。
-
-**后续可改进方向**
-
-- 将一致性比较扩展到多语言或多类型实体
-- 探索自动发现和生成候选局部文法的方法
-- 结合深度学习特征进行混合优化
-
-**工程启发**
-
-> 为低资源语言或规则与统计结合的系统提供了一种高效文法优化策略，减少人工试错成本。
-
-**为什么值得关注**
-
-> 涉及命名实体识别与语法优化，对OCR后文本中的专名识别有参考价值。
-
-**原始摘要**
-
-Named Entity Recognition for person names is an important but non-trivial task in information
-extraction. This article uses a tool that compares the concordances obtained from two local grammars
-(LG) and highlights the differences. We used the results as an aid to select the best of a set of
-LGs. By analyzing the comparisons, we observed relationships of inclusion, intersection and
-disjunction within each pair of LGs, which helped us to assemble those that yielded the best
-results. This approach was used in a case study on extraction of person names from texts written in
-Portuguese. We applied the enhanced grammar to the Gold Collection of the Second HAREM. The
-F-Measure obtained was 76.86, representing a gain of 6 points in relation to the state-of-the-art
-for Portuguese.
+Memory is essential for large vision-language models (LVLMs) to handle long, multimodal
+interactions, with two method directions providing this capability: long-context LVLMs and memory-
+augmented agents. However, no existing benchmark conducts a systematic comparison of the two on
+questions that genuinely require multimodal evidence. To close this gap, we introduce MEMLENS, a
+comprehensive benchmark for memory in multimodal multi-session conversations, comprising 789
+questions across five memory abilities (information extraction, multi-session reasoning, temporal
+reasoning, knowledge update, and answer refusal) at four standard context lengths (32K-256K tokens)
+under a cross-modal token-counting scheme. An image-ablation study confirms that solving MEMLENS
+requires visual evidence: removing evidence images drops two frontier LVLMs below 2% accuracy on the
+80.4% of questions whose evidence includes images. Evaluating 27 LVLMs and 7 memory-augmented
+agents, we find that long-context LVLMs achieve high short-context accuracy through direct visual
+grounding but degrade as conversations grow, whereas memory agents are length-stable but lose visual
+fidelity under storage-time compression. Multi-session reasoning caps most systems below 30%, and
+neither approach alone solves the task. These results motivate hybrid architectures that combine
+long-context attention with structured multimodal retrieval. Our code is available at
+https://github.com/xrenaf/MEMLENS.
 
 ---
