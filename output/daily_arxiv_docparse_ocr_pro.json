@@ -1,138 +1,19 @@
 {
   "meta": {
-    "report_date": "2026-05-16",
-    "generated_at_utc": "2026-05-16 04:37:16",
+    "report_date": "2026-05-17",
+    "generated_at_utc": "2026-05-17 05:00:49",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 2
+    "count": 0
   },
   "synthesis": {
-    "executive_summary": "今日 OCR 与文档解析研究聚焦于自监督场景文本识别和长期记忆多模态基准。Masked Next-Scale Prediction (MNSP) 通过跨尺度预测与掩码重建提升了场景文本识别的性能，而 MemLens 基准为评估多模态多轮对话中的记忆能力提供了标准。两者共同指向了更鲁棒和更具记忆能力的模型架构。",
-    "trend_summary": "自监督学习的应用从单尺度向多尺度分层表示演进，多模态大模型的研究焦点开始从单轮感知扩展至长期记忆与多轮交互能力。",
-    "common_innovations": [
-      "跨尺度预测与掩码重建的结合用于场景文本识别。",
-      "多尺度语言对齐模块保持不同分辨率间的语义一致性。",
-      "跨模态 token 计数方案统一不同长度上下文，用于记忆基准测试。",
-      "图像消融实验验证了视觉证据的必要性。",
-      "长期记忆与长上下文注意力的混合架构被提出作为方向。"
-    ],
-    "future_directions": [
-      "探索轻量级跨尺度融合结构以降低 MNSP 的计算成本。",
-      "将 MNSP 扩展到手写文本与多语言场景文本识别。",
-      "研究未标注数据多样性对自监督预训练效果的影响。",
-      "开发包含视频与音频的多模态长期记忆基准。",
-      "优化长上下文注意力与结构化多模态检索的混合架构。",
-      "研究记忆压缩策略在保持视觉保真度时的优化。"
-    ],
-    "engineering_takeaways": [
-      "MNSP 可减少对标注数据的依赖，提升工业场景文本识别模型的泛化能力。",
-      "MemLens 为多模态对话系统的记忆模块设计提供了量化评估标准，可指导实际部署中的架构选择。"
-    ],
-    "watchlist": [
-      {
-        "title": "Masked Next-Scale Prediction for Self-supervised Scene Text Recognition",
-        "watch_reason": "提出新颖的多尺度自监督框架，计算开销可能是工程部署的瓶颈，值得跟踪轻量化改进方向。"
-      },
-      {
-        "title": "MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models",
-        "watch_reason": "首个多模态记忆基准，其提出的混合架构和记忆压缩策略有望成为多模态文档对话系统的设计指南。"
-      }
-    ]
+    "executive_summary": "今日无新增论文情报，研究状态保持稳定。",
+    "trend_summary": "未检测到显著趋势变化。",
+    "common_innovations": [],
+    "future_directions": [],
+    "engineering_takeaways": [],
+    "watchlist": []
   },
-  "papers": [
-    {
-      "title": "Masked Next-Scale Prediction for Self-supervised Scene Text Recognition",
-      "summary": "Scene Text Recognition requires modeling visual structures that evolve from coarse layouts to fine-grained character strokes. Training such models relies on large amounts of annotated data. Recent self-supervised approaches, such as Masked Image Modeling (MIM), alleviate this dependency by leveraging large-scale unlabeled data. Yet most existing MIM methods operate at a single spatial scale and fail to capture the hierarchical nature of scene text. In this work, we introduce Masked Next-Scale Prediction (MNSP), a unified self-supervised framework designed to explicitly model cross-scale structural evolution. The framework incorporates Next-Scale Prediction (NSP), which learns hierarchical representations by predicting higher-resolution features from lower-resolution contexts. Naive scale prediction, however, tends to produce spatially diffuse attention, directing the model toward background regions rather than textual structures. MNSP resolves this limitation by jointly learning cross-scale prediction and masked image reconstruction. NSP captures global layout priors across resolutions, while masked reconstruction imposes strong local constraints that guide attention toward informative text regions. A Multi-scale Linguistic Alignment module further maintains semantic consistency across different resolutions. Extensive experiments demonstrate that MNSP achieves state-of-the-art performance, reaching 86.2\\% average accuracy on the challenging Union14M benchmark and 96.7\\% across six standard datasets. Additional analyses show that our method improves robustness under extreme scale and layout variations. Code is available at https://github.com/CzhczhcHczh/MNSP",
-      "link": "https://arxiv.org/abs/2605.14885v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.14885v1",
-      "authors": [
-        "Zhuohao Chen",
-        "Zeng Li",
-        "Yifei Zhang",
-        "Chang Liu",
-        "Yu Zhou"
-      ],
-      "published": "2026-05-14T14:28:55Z",
-      "updated": "2026-05-14T14:28:55Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2605.14885v1",
-      "score": 16,
-      "topic_tags": [
-        "场景文本识别",
-        "自监督学习",
-        "掩码图像建模",
-        "多尺度表示",
-        "预训练"
-      ],
-      "zh_summary": "提出了 Masked Next-Scale Prediction (MNSP) 自监督框架，通过跨尺度预测和掩码重建建模场景文本的分层视觉结构，在 Union14M 和标准数据集上达到 SOTA 性能。",
-      "novelty": "首次将跨尺度预测与掩码图像重建结合，解决单尺度 MIM 无法捕获分层结构的问题。",
-      "innovation_points": [
-        "Next-Scale Prediction 机制学习从低分辨率到高分辨率的层次表示",
-        "联合优化跨尺度预测和掩码重建，兼顾全局布局与局部细节",
-        "多尺度语言对齐模块保持不同分辨率间的语义一致性"
-      ],
-      "limitations": "在极端低质量或严重遮挡场景下准确率仍有下降；跨尺度预测的计算开销较大。",
-      "improvement_directions": [
-        "探索更轻量的跨尺度融合结构以降低计算成本",
-        "将 MNSP 扩展到手写文本或多语言场景文本识别",
-        "研究未标注数据的多样性对预训练效果的影响"
-      ],
-      "engineering_value": "可减少对标注数据的依赖，提升工业场景下文本识别模型的泛化能力和鲁棒性。",
-      "why_relevant": "直接面向场景文本识别，提出新的自监督预训练范式，对降低数据需求、提升模型性能有重要参考价值。"
-    },
-    {
-      "title": "MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models",
-      "summary": "Memory is essential for large vision-language models (LVLMs) to handle long, multimodal interactions, with two method directions providing this capability: long-context LVLMs and memory-augmented agents. However, no existing benchmark conducts a systematic comparison of the two on questions that genuinely require multimodal evidence. To close this gap, we introduce MEMLENS, a comprehensive benchmark for memory in multimodal multi-session conversations, comprising 789 questions across five memory abilities (information extraction, multi-session reasoning, temporal reasoning, knowledge update, and answer refusal) at four standard context lengths (32K-256K tokens) under a cross-modal token-counting scheme. An image-ablation study confirms that solving MEMLENS requires visual evidence: removing evidence images drops two frontier LVLMs below 2% accuracy on the 80.4% of questions whose evidence includes images. Evaluating 27 LVLMs and 7 memory-augmented agents, we find that long-context LVLMs achieve high short-context accuracy through direct visual grounding but degrade as conversations grow, whereas memory agents are length-stable but lose visual fidelity under storage-time compression. Multi-session reasoning caps most systems below 30%, and neither approach alone solves the task. These results motivate hybrid architectures that combine long-context attention with structured multimodal retrieval. Our code is available at https://github.com/xrenaf/MEMLENS.",
-      "link": "https://arxiv.org/abs/2605.14906v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.14906v1",
-      "authors": [
-        "Xiyu Ren",
-        "Zhaowei Wang",
-        "Yiming Du",
-        "Zhongwei Xie",
-        "Chi Liu",
-        "Xinlin Yang",
-        "Haoyue Feng",
-        "Wenjun Pan",
-        "Tianshi Zheng",
-        "Baixuan Xu",
-        "Zhengnan Li",
-        "Yangqiu Song",
-        "Ginny Wong",
-        "Simon See"
-      ],
-      "published": "2026-05-14T14:41:17Z",
-      "updated": "2026-05-14T14:41:17Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2605.14906v1",
-      "score": 9,
-      "topic_tags": [
-        "多模态大模型",
-        "长期记忆",
-        "基准测试",
-        "多轮对话",
-        "视觉语言模型"
-      ],
-      "zh_summary": "提出 MemLens 基准，系统评估长上下文 LVLM 和记忆增强代理在多模态多轮对话中的记忆能力，发现两者互补，混合架构是方向。",
-      "novelty": "首个针对多模态多轮对话中长时记忆能力的综合基准，包含跨模态 token 计数和图像消融验证。",
-      "innovation_points": [
-        "设计跨模态 token 计数方案统一不同长度上下文",
-        "图像消融实验证明任务必须依赖视觉证据",
-        "覆盖 5 种记忆能力和 4 种上下文长度"
-      ],
-      "limitations": "基准规模相对有限（789 题），未涵盖视频或音频等更多模态。",
-      "improvement_directions": [
-        "扩展到多模态长期记忆的其他场景（如视频理解）",
-        "探索长上下文注意力与结构化多模态检索的混合架构",
-        "研究记忆压缩策略在保持视觉保真度方面的优化"
-      ],
-      "engineering_value": "为多模态对话系统的记忆模块设计提供量化评估标准，指导实际部署中的架构选择。",
-      "why_relevant": "聚焦长期记忆能力评估，对 OCR / 文档解析中需要跨多轮对话保持视觉信息一致性的场景有参考意义。"
-    }
-  ]
+  "papers": []
 }
