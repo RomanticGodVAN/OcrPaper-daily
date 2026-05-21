@@ -1,363 +1,200 @@
-# OCR / 文档解析研究日报（2026-05-19）
+# OCR / 文档解析研究日报（2026-05-21）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-05-19 05:13:40`
+- 生成时间（UTC）：`2026-05-21 05:19:12`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日论文聚焦于提升多模态大模型在文档解析中的效率、视觉注意力质量与视觉一致性，同时提出了场景文本修复和高光谱图像分析的新数据集与模型。关键技术包括无需训练的KV缓存修剪、轻量级注意力重分配、解码阶段视觉注入、以及大规模风格化文本修复数据生成。这些工作为OCR和文档解析提供了即插即用的加速、优化和增强方案。
+> 今日论文聚焦于多模态信息提取中的视觉证据选择性融合、结构化布局先验、场景文本编辑基准以及漫画理解数据集更新。其中SAVER框架通过按需触发视觉证据，在降低计算开销的同时提升多模态IE性能，具有较高工程价值。
 
 ## 二、今日趋势判断
 
-当前趋势表明，研究重点正从纯OCR转向基于多模态大模型的端到端文档解析，关注推理加速、视觉注意力优化、长序列视觉一致性维持，以及数据生成与标准化基准的建立。
+当前研究趋势包括：1) 多模态模型中的视觉信息高效利用，如选择性融合和鲁棒布局先验；2) 特定领域（如漫画、社交媒体）的文档理解与数据集构建；3) 场景文本编辑等生成任务向高逼真度发展。
 
 ## 三、今日论文概览
 
-1. **FastOCR: Dynamic Visual Fixation via KV Cache Pruning for Efficient Document Parsing** | 标签：视觉语言模型、文档解析加速、KV缓存修剪、动态注意力
-2. **RAVE: Re-Allocating Visual Attention in Large Multimodal Models** | 标签：多模态大模型、注意力机制、视觉注意力重分配、文档理解
-3. **Vision Inference Former: Sustaining Visual Consistency in Multimodal Large Language Models** | 标签：多模态大模型、视觉一致性、解码阶段注入、OCR推理
-4. **StyleText: A Large-Scale Dataset and Benchmark for Stylized Scene Text Inpainting** | 标签：场景文本修复、数据集、风格化、OCR评估
-5. **HyperVision: A Channel-Adaptive Ground-Based Hyperspectral Vision Pre-trained Backbone** | 标签：高光谱图像、预训练骨干、通道自适应、知识蒸馏
+1. **Structured Layout Priors for Robust Out-of-Distribution Visual Document Understanding** | 标签：多模态信息提取、选择性融合、顺式预测、社交媒体
+2. **TextSculptor: Training and Benchmarking Scene Text Editing**
+3. **Manga109-v2026: Revisiting Manga109 Annotations for Modern Manga Understanding**
+4. **SAVER: Selective As-Needed Vision Evidence for Multimodal Information Extraction**
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 利用视觉注意力动态性进行KV缓存修剪实现推理加速。
-- 通过轻量级门控机制重新分配视觉注意力提升感知精度。
-- 在解码阶段持续注入视觉语义以维持视觉一致性。
-- 构建大规模合成数据集并设计自动化生成管道支持文本修复。
-- 提出通道自适应预训练策略应对异构输入（如高光谱图像）。
+- 提出按需触发视觉证据的融合框架，减少冗余与噪声干扰。
+- 利用结构化布局先验增强文档理解模型对分布外样本的鲁棒性。
+- 构建或更新专有数据集（如Manga109）以推动领域研究。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 探索融合KV缓存修剪与注意力重分配，实现更高效的文档解析推理。
-- 研究视觉注意力随生成长度的退化规律，设计自适应注入策略以维持一致性。
-- 将动态视觉注视机制从VLM推广到纯OCR模型，并降低动态选择开销。
-- 结合注意力重分配与视觉注入，提升多语言OCR和复杂表格理解等任务。
-- 扩展场景文本修复数据集到真实场景，并改进纹理一致性。
-- 针对高光谱图像探索自监督预训练，减少对伪标签依赖。
+- 探索弱监督或无监督的可接地性估计方法，降低对人工标注的依赖。
+- 优化子模选择算法效率，使其适应高并发在线推理场景。
+- 将选择性融合思想扩展到视频、音频等多模态输入。
+- 开发更鲁棒的布局先验模型，应对复杂版面、手写及艺术字体。
+- 构建更大规模、多样化的场景文本编辑基准，涵盖中英文等。
 
 ## 六、工程落地启发
 
-- FastOCR的KV缓存修剪方法可直接用于VLM的文档解析加速，适合高精度场景。
-- RAVE的成对门控模块易于集成到LMM中，提升OCR任务注意力质量。
-- VIF模块即插即用，提升长序列视觉一致性，减少幻觉。
-- StyleText数据集和评估协议为场景文本修复提供标准化基准。
-- HyperVision为地面高光谱分析提供预训练骨干，降低应用门槛。
+- SAVER的CGG门控和子模选择可直接用于现有多模态IE系统，降低算力成本。
+- 结构化布局先验模块可集成至OCR后处理管线，提升文档解析准确率。
+- Manga109 v2026数据集为漫画内容理解提供标准化评估，便于复现与对比。
 
 ## 七、优先关注论文
 
-- **FastOCR: Dynamic Visual Fixation via KV Cache Pruning for Efficient Document Parsing**：提出无需训练的推理加速方法，可直接降低VLM文档解析成本，且具备即插即用特性，工程价值高。
-- **RAVE: Re-Allocating Visual Attention in Large Multimodal Models**：轻量级注意力优化方法在OCR等任务上提升显著，且集成成本低，有望成为LMM的标准组件。
-- **Vision Inference Former: Sustaining Visual Consistency in Multimodal Large Language Models**：解决长序列视觉退化问题，对多页文档解析和复杂文档理解任务至关重要。
+- **Structured Layout Priors for Robust Out-of-Distribution Visual Document Understanding**：提出结构化布局先验增强分布外鲁棒性，对文档解析系统应对多样化真实场景具有重要参考价值。
+- **SAVER: Selective As-Needed Vision Evidence for Multimodal Information Extraction**：创新性按需触发视觉融合，显著降低计算开销，适合部署至资源受限或高吞吐系统。
 
 ## 八、论文逐篇解析
 
-### 1. FastOCR: Dynamic Visual Fixation via KV Cache Pruning for Efficient Document Parsing
+### 1. Structured Layout Priors for Robust Out-of-Distribution Visual Document Understanding
 
-- arXiv: [2605.17447v1](https://arxiv.org/abs/2605.17447v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.17447v1)
-- 作者: Zihan Tang, Leqi Shen, Hui Chen, Ao Wang, Ben Wan, Yan Feng, Ke Zhang, Sicheng Zhao, Tongxuan Liu, Guiguang Ding
-- 发布时间: 2026-05-17T13:39:47Z
-- 分类: cs.CV, cs.CL
-- 相关性评分: 28
-- 主题标签: 视觉语言模型、文档解析加速、KV缓存修剪、动态注意力
-
-**中文摘要**
-
-> 提出 FastOCR，一种无需训练的框架，通过动态视觉注视机制加速文档解析。利用 KV 缓存修剪，在解码阶段动态选择视觉 token，避免永久性信息丢失，实现了即插即用的加速效果。
-
-**核心创新概述**
-
-> 首次观察到文档图像中模型注意力具有时间稀疏性，将全局修剪问题转化为局部动态问题，并提出无需训练的 KV 缓存动态选择方法。
-
-**创新点拆解**
-
-- 提出动态视觉注视（Dynamic Visual Fixation）现象，揭示解码时注意力逐步移动的规律
-- 设计焦点引导修剪（Focal-Guided Pruning）和跨步注视复用（Cross-Step Fixation Reuse）两个互补模块
-- 无需训练，即插即用，避免永久性 token 丢弃导致的精度损失
-
-**当前局限**
-
-> 目前仅在视觉语言模型上验证，可能不适用于纯 OCR 模型；动态选择增加了解码计算开销，但总体仍显著加速。
-
-**后续可改进方向**
-
-- 探索更高效的注视预测方法，进一步降低动态选择开销
-- 将动态注视机制与 token 融合或压缩方法结合，进一步减少视觉 token 数量
-
-**工程启发**
-
-> 可直接用于现有视觉语言模型的文档解析加速，降低推理成本，适合高精度 OCR 场景。
-
-**为什么值得关注**
-
-> 直接针对 OCR 中视觉 token 过多导致的推理昂贵问题，提出高效加速方法。
-
-**原始摘要**
-
-Vision-Language Models (VLMs) have shown strong promise on Optical Character Recognition (OCR), yet
-the sheer number of visual tokens required to encode dense documents incurs prohibitive inference
-cost. Existing pruning methods rely on physical eviction, e.g., permanently discarding visual tokens
-during the prefill stage. While effective for natural images, this strategy fundamentally breaks
-down on OCR, where virtually every visual token may correspond to a character or structural element,
-and any irreversible loss leads to catastrophic accuracy degradation. We observe that, although
-document images appear globally dense and seemingly unprunable, the model's attention to them is in
-fact temporally sparse: at each decoding step it concentrates on a small region that shifts
-gradually across steps, much as a human reader fixates on successive words rather than perceiving an
-entire page at once. Motivated by this Dynamic Visual Fixation phenomenon, we recast the intractable
-global pruning problem as a tractable local, dynamic one and propose FastOCR, a training-free
-framework with two complementary modules. Specifically, Focal-Guided Pruning identifies a small set
-of focal layers and selects the most task-relevant visual tokens from them at each step, while
-Cross-Step Fixation Reuse exploits the gradual shift of fixation to warm-start each step from the
-previous one. By dynamically adjusting which tokens are attended rather than evicting any from the
-cache, FastOCR avoids permanent information loss. Extensive experiments show that FastOCR serves as
-a plug-and-play acceleration module, generalizing consistently across five VLMs of varying sizes and
-architectures. On Qwen2.5-VL, FastOCR retains 98% of the unpruned model's accuracy while attending
-to only 5% of the visual tokens per decoding step, reducing attention latency by 3.0$\times$.
-
----
-
-### 2. RAVE: Re-Allocating Visual Attention in Large Multimodal Models
-
-- arXiv: [2605.18359v1](https://arxiv.org/abs/2605.18359v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.18359v1)
-- 作者: Xi Leng, Xinhong Ma, Ziqiang Dong, Feng Zhang, Xiaoying Tang, Yang Yang, Guanjun Jiang
-- 发布时间: 2026-05-18T13:12:50Z
+- arXiv: [2605.19866v1](https://arxiv.org/abs/2605.19866v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.19866v1)
+- 作者: Peter El Hachem, Ahmed Nassar, A. Said Gurbuz, Christoph Auer, Peter W. J. Staar
+- 发布时间: 2026-05-19T13:58:24Z
 - 分类: cs.CV
-- 相关性评分: 16
-- 主题标签: 多模态大模型、注意力机制、视觉注意力重分配、文档理解
+- 相关性评分: 14
+- 主题标签: 多模态信息提取、选择性融合、顺式预测、社交媒体
 
 **中文摘要**
 
-> 提出 RAVE（Re-Allocating Visual Attention），一种轻量级成对门控机制，用于重新分配大多模态模型中的视觉注意力。通过添加可学习的查询-键偏置来改善视觉 token 间的注意力分布，在多语言 OCR、图表理解等任务上平均提升 3 个点。
+> 针对社交媒体多模态信息提取中视觉信息冗余或误导的问题，提出SAVER框架，通过顺式可接地性门控（CGG）选择性激活视觉证据，使用子模函数选择紧凑视觉子集，并设计能量得分头进行联合评分。在MNER和MRE任务上优于纯文本和全模态基线，同时降低AURC和计算开销。
 
 **核心创新概述**
 
-> 针对标准自注意力中视觉注意力的次优分配问题，提出轻量级门控机制，无需修改骨干网络架构。
+> 首次提出按需触发视觉证据的多模态IE框架，通过统计校准的门控机制和子模选择，实现高效且鲁棒的融合。
 
 **创新点拆解**
 
-- 提出成对门控（pair-gating）机制，基于预 RoPE 的查询和键特征学习偏置
-- 无需架构修改，可端到端训练
-- 在感知密集型任务上提升显著，尤其多语言 OCR 和文档 VQA
+- 顺式可接地性门控（CGG）估计span级视觉可接地性，校准激活阈值
+- 子模相关-多样性选择器选取紧凑视觉证据子集
+- 能量启发联合评分头，结合文本、视觉、一致性和稀疏路由
 
 **当前局限**
 
-> 仅在特定 LMM 架构上验证，对其他类型多模态模型的泛化性未知；门控增加了少量参数。
+> 门控机制依赖标注数据的可接地性标签，弱监督下性能可能下降。
 
 **后续可改进方向**
 
-- 探索更通用的注意力重分配方法，适应不同注意力机制
-- 研究注意力偏差与视觉语义对齐的关系，进一步优化视觉 grounding
+- 探索无监督或弱监督的可接地性估计方法
+- 扩展到更多模态（如音频、视频）
+- 优化子模选择效率，适应高并发场景
 
 **工程启发**
 
-> 轻量级改进，易于集成到现有 LMM 中，提升 OCR 相关任务的视觉注意力质量。
+> 降低计算开销的同时提升多模态IE性能，适用于社交媒体内容理解等实际系统。
 
 **为什么值得关注**
 
-> 直接改进多模态模型中的视觉注意力分配，对 OCR 任务中的视觉 grounding 至关重要。
+> 解决多模态信息提取中视觉信息冗余和误导的顽疾，方法新颖高效，具有工程部署价值。
 
 **原始摘要**
 
-Large multimodal models (LMMs) inherit the self-attention mechanism of pretrained language
-backbones, yet standard attention can exhibit suboptimal allocation, including cross-modal
-misallocation between textual and visual evidence and intra-visual imbalance among visual tokens. We
-propose RAVE (Re-Allocating Visual Attention), a lightweight pair-gating mechanism that adds a
-learned query--key bias to pre-softmax attention scores over visual keys, derived from pre-RoPE
-query and key features. RAVE requires no architectural modification to the backbone and can be
-trained end-to-end with the rest of the model. Across a suite of multimodal benchmarks, RAVE
-improves over standard attention by an average of 3 points, with the largest gains on perception-
-intensive tasks -- including multilingual OCR, chart understanding, document VQA, and scene text VQA
--- where accurate visual grounding is critical.
+Vision-Language Models (VLMs) parse documents end-to-end but frequently break down on layouts unlike
+those seen in training. We attribute this to a two-hop bottleneck: before the decoder can extract
+content (Hop 2), it must first classify and localize the enclosing layout entity (Hop 1), and when
+the first hop fails the second collapses into omissions, malformed structure, or autoregressive
+repetition. We pre-resolve Hop 1 outside the decoder by running a lightweight RT-DETR detector,
+serializing its outputs in the parser's native DocTags vocabulary, and injecting them into the
+prompt alongside the full page image. Unlike analyze-then-parse approaches that crop the page, or
+prior prompt-level priors written in plain text, our prior shares the decoder's generation space and
+leaves the global image in view as a fallback when detections are noisy. On a 10k-page structural
+out-of-distribution benchmark, markdown F1 rises from $0.37$ to $0.92$; on the Chinese subset of
+OmniDocBench, table TEDS rises from $0.01$ to $0.36$; and on the 26k-page ViDoRe V3 benchmark,
+infinite-loop decoding failures drop across every industrial domain tested. These gains cost $15\%$
+wall-clock latency and a median of $74$ prompt tokens, with no architectural change to the base VLM.
+An attention-level analysis further reveals a bimodal phase shift in which the decoder attends to
+injected layout tokens when emitting structure and to image patches when emitting content,
+consistent with the two-hop bottleneck being alleviated. Model weights will be released to support
+reproducibility.
 
 ---
 
-### 3. Vision Inference Former: Sustaining Visual Consistency in Multimodal Large Language Models
+### 2. TextSculptor: Training and Benchmarking Scene Text Editing
 
-- arXiv: [2605.18160v1](https://arxiv.org/abs/2605.18160v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.18160v1)
-- 作者: Xinpeng Dong, Min Zhang, Kairong Han, Xu Tan, Fei Wu, Kun Kuang
-- 发布时间: 2026-05-18T10:04:22Z
-- 分类: cs.CV, cs.AI
-- 相关性评分: 12
-- 主题标签: 多模态大模型、视觉一致性、解码阶段注入、OCR推理
-
-**中文摘要**
-
-> 提出 Vision Inference Former (VIF)，一种轻量级架构模块，在推理解码阶段持续注入视觉语义，以维持多模态大模型中视觉一致性。在 14 个基准任务上取得一致提升，包括 OCR、表格理解等。
-
-**核心创新概述**
-
-> 发现视觉信息在生成长序列时被弱化的问题，提出解码阶段持续注入视觉语义的轻量模块。
-
-**创新点拆解**
-
-- 设计 VIF 模块，在解码过程直接连接纯视觉表示和输出空间
-- 持续注入视觉语义，而非仅在预填充阶段使用
-- 模块轻量，可适配多种架构
-
-**当前局限**
-
-> 增加了少量推理开销；仅在部分 MLLM 架构上验证，通用性需进一步测试。
-
-**后续可改进方向**
-
-- 研究视觉一致性随生成长度的退化规律，设计自适应注入策略
-- 探索 VIF 与其他视觉增强方法（如注意力重分配）的联合使用
-
-**工程启发**
-
-> 即插即用模块，提升 MLLM 在 OCR 等视觉依赖任务中的长期视觉一致性，减少幻觉。
-
-**为什么值得关注**
-
-> 解决多模态模型在长文本生成中视觉信息丢失问题，直接提升 OCR 输出可靠性。
-
-**原始摘要**
-
-In recent years, multimodal large language models (MLLMs) have achieved remarkable progress,
-primarily attributed to effective paradigms for integrating visual and textual information. The
-dominant connector-based paradigm projects visual features into textual sequence, enabling unified
-multimodal alignment and reasoning within a generative architecture. However, our experiments reveal
-two key limitations: (1) Although visual information serves as the core evidential modality in
-MLLMs, it is treated on par with textual tokens, diminishing the unique contribution of the visual
-modality; (2) As generation length increases, particularly within a limited context window, the
-model's dependence on visual information progressively weakens, resulting in deteriorated vision-
-language alignment and reduced consistency between generated content and visual semantics. To
-address these challenges, we propose the Vision Inference Former (VIF), a lightweight architectural
-module that establishes a direct bridge between pure visual representations and the model's output
-space. Specifically, VIF continuously injects visual semantics throughout the decoding phase of the
-inference process, ensuring that the model remains firmly grounded in visual content during
-generation. We conduct experiments on 14 benchmark tasks covering general reasoning, OCR, table
-understanding, vision-centric evaluation, and hallucination. Experimental results show that VIF
-consistently improves model performance across diverse architectures while introducing minimal
-additional overhead. The code for this work is available at https://github.com/Dong-Xinpeng/VIF.
-
----
-
-### 4. StyleText: A Large-Scale Dataset and Benchmark for Stylized Scene Text Inpainting
-
-- arXiv: [2605.17309v1](https://arxiv.org/abs/2605.17309v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.17309v1)
-- 作者: Aleksandr Simonyan, Nipun Jindal
-- 发布时间: 2026-05-17T08:02:20Z
-- 分类: cs.CV, cs.AI
-- 相关性评分: 10
-- 主题标签: 场景文本修复、数据集、风格化、OCR评估
-
-**中文摘要**
-
-> 提出 StyleText，一个大规模风格化场景文本修复数据集和基准。包含 28,518 个图像-掩码-提示三元组，支持文本可读性和视觉一致性评估。基于 Flux+KV 缓存注入生成，提供标准化评估协议和基线模型。
-
-**核心创新概述**
-
-> 首个大规模风格化场景文本修复数据集，自动生成管道结合 LLM 提示模板、Flux 生成、OCR 过滤等。
-
-**创新点拆解**
-
-- 构建包含场景上下文的大规模文本修复数据集
-- 提出自动化的数据生成流水线（LLM + Flux + OCR）
-- 定义标准评估协议，使用 OCR 指标和 CLIP 相似度
-
-**当前局限**
-
-> 数据集来源为合成图像，真实场景泛化性待验证；修复质量依赖 Flux 模型能力。
-
-**后续可改进方向**
-
-- 扩展到真实场景文本修复，引入更多真实图像-掩码对
-- 改进修复模型以保持更精细的纹理和风格一致性
-
-**工程启发**
-
-> 为场景文本修复提供标准化基准和预训练数据，促进该领域研究。
-
-**为什么值得关注**
-
-> 场景文本修复是 OCR 后处理的重要环节，数据集与基准推动实用化。
-
-**原始摘要**
-
-We present StyleText, a large-scale dataset and benchmark for localized scene-text inpainting with
-style preservation. StyleText contains 28,518 image-mask-prompt triplets grouped into 9,932 scene
-families, enabling controlled evaluation of text legibility and visual consistency under shared
-scene context. We construct the dataset with an automated pipeline that combines LLM prompt
-templating, Flux-based source generation with key-value (KV) cache injection, OCR-based semantic
-filtering, polygon mask extraction, and mask-conditioned FluxFill augmentation. We define a
-reproducible evaluation protocol using normalized OCR metrics (word accuracy and character error
-rate) and CLIP image-image similarity with explicit preprocessing. A FluxFill+LoRA baseline trained
-on StyleText improves OCR accuracy substantially over initialization while maintaining scene style
-consistency, establishing a strong reference point for future comparisons.
-
----
-
-### 5. HyperVision: A Channel-Adaptive Ground-Based Hyperspectral Vision Pre-trained Backbone
-
-- arXiv: [2605.17286v1](https://arxiv.org/abs/2605.17286v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2605.17286v1)
-- 作者: Guanyiman Fu, Jingtao Li, Zihang Cheng, Zhuanfeng Li, Diqi Chen, Yan Xu, Fengchao Xiong, Jianfeng Lu, Jun Zhou
-- 发布时间: 2026-05-17T06:50:06Z
+- arXiv: [2605.21090v1](https://arxiv.org/abs/2605.21090v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.21090v1)
+- 作者: Yiheng Lin, Siyu Jiao, Xiaohan Lan, Wei Zhou, Qi She, Fei Yu, Heyun Chen, Zhengwei Wang, Jinghuan Chen, Moran Li, Yingchen Yu, Zijian Feng, Yao Zhao, Yunchao Wei, Yujie Zhong
+- 发布时间: 2026-05-20T12:22:26Z
 - 分类: cs.CV
-- 相关性评分: 3
-- 主题标签: 高光谱图像、预训练骨干、通道自适应、知识蒸馏
-
-**中文摘要**
-
-> 提出 HyperVision，首个地面高光谱图像预训练骨干网络。通过通道自适应动态嵌入、多源伪标签和跨模态知识蒸馏，在 15k 图像上预训练，仅需头部微调即可在三个下游任务上取得最优性能。
-
-**核心创新概述**
-
-> 首个地面高光谱预训练骨干，解决传感器配置差异、标签稀缺、数据集规模小等问题。
-
-**创新点拆解**
-
-- 通道自适应动态嵌入机制，统一异构输入
-- 多源伪标签融合 SAM2 空间结构和 HyperFree 光谱信息
-- 跨模态知识蒸馏从 RGB 模型迁移语义知识
-
-**当前局限**
-
-> 预训练图像规模仅 15k，相较于 RGB 预训练仍较小；依赖 SAM2 和 HyperFree 作为伪标签源。
-
-**后续可改进方向**
-
-- 扩大预训练数据规模和场景多样性
-- 探索自监督预训练策略，减少对伪标签的依赖
-
-**工程启发**
-
-> 为地面高光谱图像分析提供即用预训练模型，适用于材料识别、农业等场景。
-
-**为什么值得关注**
-
-> 高光谱图像在材料识别等领域与文档分析有相似需求，但非直接 OCR，作为背景信息。
+- 相关性评分: 13
 
 **原始摘要**
 
-While hyperspectral imaging provides rich spatial-spectral information across hundreds of narrow
-wavelength bands for precise material identification, ground-based hyperspectral pre-trained
-backbones remain absent, constrained by varying spectral configurations across sensors, the scarcity
-and inconsistency of labels, and the limited scale and scene diversity of existing datasets. To
-address these challenges and enable universal perception, we propose HyperVision, the first ground-
-based hyperspectral pre-trained backbone. First, to handle varying spectral configurations,
-HyperVision adopts a channel-adaptive dynamic embedding mechanism to map heterogeneous inputs into a
-unified token space. Second, to address the scarcity and inconsistency of labels, we introduce a
-multi-source pseudo-labeling method that fuses semantic representations from both spatial structures
-generated by SAM2 and fine-grained spectral material information extracted by HyperFree. Third, to
-compensate for limited dataset scale and enrich scene diversity, a cross-modal knowledge
-distillation mechanism is utilized to transfer rich semantic representations from a pre-trained RGB
-vision model to our hyperspectral backbone. Pre-trained on a collection of 15k images from 26
-diverse ground-based datasets, HyperVision demonstrates exceptional generalization. Requiring only
-efficient head-only adaptation without adjusting backbone parameters, it achieves state-of-the-art
-performance compared to task-specific methods across three downstream tasks under varying sensor
-configurations, yielding up to a 16.3% relative improvement in hyperspectral semantic segmentation
-$\mathrm{Acc}_{\mathrm{M}}$, a 2.1% relative gain in object tracking AUC, and a 35.5% reduction in
-salient object detection MAE. The source code and pre-trained model will be publicly available at
-https://github.com/lronkitty/HyperVision .
+Recent advances in Multimodal Large Language Models (MLLMs) and diffusion-based generative models
+have substantially improved prompt-driven image editing. However, scene text editing remains
+challenging, as it requires models to precisely modify textual content while preserving visual
+realism and non-target regions. Current open-source models still lag behind proprietary systems,
+largely due to the scarcity of high-quality training data and the lack of standardized benchmarks
+tailored to text editing. To address these challenges, we present TextSculptor, a comprehensive
+framework for data construction and evaluation of scene text editing. We first develop an automated
+data construction pipeline that combines text-aware image synthesis with programmatic text rendering
+and compositing. Based on this pipeline, we build TextSculpt-Data, a large-scale dataset containing
+3.2M training samples, including 1.2M OCR-verified text-to-image samples and 2M paired text editing
+samples with naturally aligned source-target images and strong background consistency. We further
+introduce TextSculpt-Bench, a benchmark covering four fundamental text editing tasks: text addition,
+text replacement, text removal, and hybrid editing. To support reliable evaluation, we design a
+tailored protocol that measures text accuracy, visual quality, and background preservation through
+OCR-based text alignment, multimodal judgment, and background-region similarity. Extensive
+experiments show that TextSculptor improves open-source text editing performance and narrows the gap
+to proprietary models. The data and benchmark are available at
+https://github.com/linyiheng123/TextSculptor.
+
+---
+
+### 3. Manga109-v2026: Revisiting Manga109 Annotations for Modern Manga Understanding
+
+- arXiv: [2605.21182v1](https://arxiv.org/abs/2605.21182v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.21182v1)
+- 作者: Jeonghun Baek, Atsuyuki Miyai, Shota Onohara, Hikaru Ikuta, Kiyoharu Aizawa
+- 发布时间: 2026-05-20T13:49:13Z
+- 分类: cs.CL, cs.AI, cs.CV
+- 相关性评分: 9
+
+**原始摘要**
+
+Manga is a culturally distinctive multimodal medium and one of the most influential forms of
+Japanese popular culture. As AI systems increasingly target manga understanding, OCR, and
+translation, Manga109 has become a foundational dataset for manga-related AI research. However, the
+current Manga109 dataset contains transcription errors and coarse annotations, which do not align
+well with modern OCR and multimodal manga understanding tasks. In this work, we revisit the dialogue
+text annotations of Manga109 and identify five categories of annotation issues, including
+transcription errors, missing text regions, overlapping dialogue and onomatopoeia, and under-
+segmented speech balloons. To address these issues, we combine OCR-based issue detection and manual
+revision to construct Manga109-v2026, revising approximately 29,000 dialogue annotations. Our
+revisions better align Manga109 with modern OCR and multimodal manga understanding systems while
+preserving expressive structures characteristic of manga.
+
+---
+
+### 4. SAVER: Selective As-Needed Vision Evidence for Multimodal Information Extraction
+
+- arXiv: [2605.20713v1](https://arxiv.org/abs/2605.20713v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2605.20713v1)
+- 作者: Miaobo Hu, Shuhao Hu, Bokun Wang, Rui Chen, Xin Wang, Xiaobo Guo, Daren Zha, Jun Xiao
+- 发布时间: 2026-05-20T05:10:18Z
+- 分类: cs.CV, cs.AI, cs.LG
+- 相关性评分: 6
+
+**原始摘要**
+
+Multimodal IE in social media is difficult because a post may attach multiple images that are weakly
+related, redundant, or even misleading with respect to the text. In this setting, always-on
+multimodal fusion wastes computation and can amplify spurious visual cues. The core challenge is to
+decide, for each candidate span or marked entity pair, whether vision should be consulted at all
+and, if so, which small subset of images provides trustworthy evidence. We propose SAVER, a
+selective vision-as-needed framework for multimodal named entity recognition and multimodal relation
+extraction. SAVER uses a Conformal Groundability Gate (CGG) to estimate span-level visual
+groundability in MNER, derive pair-level activation in MRE from the two marked entities, and
+calibrate the activation threshold on a held-out split via a conformal-style procedure with Clopper
+--Pearson upper bounds. When activated, a submodular relevance--diversity selector chooses a compact
+evidence subset across images, which is then aggregated by a Set Transformer. An energy-inspired
+joint scoring head combines text, optional visual evidence, text--image consistency, and sparse
+routing for entity typing or relation classification. Experiments show that SAVER consistently
+improves F1 over strong text-only and always-on multimodal baselines, while reducing AURC,
+increasing activation coverage at a fixed risk level, and lowering FLOPs and P90 latency.
 
 ---
