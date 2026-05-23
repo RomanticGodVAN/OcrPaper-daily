@@ -1,185 +1,184 @@
 {
   "meta": {
-    "report_date": "2026-05-21",
-    "generated_at_utc": "2026-05-21 05:19:12",
+    "report_date": "2026-05-23",
+    "generated_at_utc": "2026-05-23 04:52:28",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 4
+    "count": 3
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦于多模态信息提取中的视觉证据选择性融合、结构化布局先验、场景文本编辑基准以及漫画理解数据集更新。其中SAVER框架通过按需触发视觉证据，在降低计算开销的同时提升多模态IE性能，具有较高工程价值。",
-    "trend_summary": "当前研究趋势包括：1) 多模态模型中的视觉信息高效利用，如选择性融合和鲁棒布局先验；2) 特定领域（如漫画、社交媒体）的文档理解与数据集构建；3) 场景文本编辑等生成任务向高逼真度发展。",
+    "executive_summary": "今日 OCR/文档解析研究重点关注多页文档解析标准化基准的建立以及票据文档理解中层次化推理能力的提升。MPDocBench-Parse 首次系统评估了多页文档的语义连续性和层级结构恢复，揭示了现有模型的显著短板；ReceiptBench 通过细粒度子任务划分和度量感知 GRPO 训练方法，在复杂票据推理上超越闭源模型。此外，分布式图像压缩中引入多模态侧信息的技术为文档压缩与传输提供了新思路。",
+    "trend_summary": "文档解析正从单页、简单版面向多页、复杂语义和层级结构恢复演进，评估标准趋于细粒度、面向实际应用。文档理解方面，层次化推理和严格格式规范化成为关键挑战，强化学习与度量感知训练成为提升结构一致性的有效手段。多模态侧信息在图像压缩中的应用展示了跨模态信息融合在文档处理领域的潜力。",
     "common_innovations": [
-      "提出按需触发视觉证据的融合框架，减少冗余与噪声干扰。",
-      "利用结构化布局先验增强文档理解模型对分布外样本的鲁棒性。",
-      "构建或更新专有数据集（如Manga109）以推动领域研究。"
+      "构建大规模、多类型、多层次评估基准，覆盖多种文档类型和复杂版面。",
+      "设计细粒度、层次化的子任务划分（如基础感知、格式规范化、语义推理），推动模型能力的分级评估。",
+      "提出基于强化学习的训练方法（如度量感知GRPO），将评估指标直接转化为优化信号。",
+      "利用多模态侧信息（文本、视觉）增强极低比特率下的图像重建质量。"
     ],
     "future_directions": [
-      "探索弱监督或无监督的可接地性估计方法，降低对人工标注的依赖。",
-      "优化子模选择算法效率，使其适应高并发在线推理场景。",
-      "将选择性融合思想扩展到视频、音频等多模态输入。",
-      "开发更鲁棒的布局先验模型，应对复杂版面、手写及艺术字体。",
-      "构建更大规模、多样化的场景文本编辑基准，涵盖中英文等。"
+      "扩展MPDocBench-Parse基准至更多语种和文档类型（如古籍、表格密集文档），并加入用户感知质量评估。",
+      "设计能联合建模多页语义连贯性与层级结构的端到端文档解析模型，可考虑基于Transformer的序列到图架构。",
+      "将ReceiptBench的层次化任务范式推广到通用文档理解，并探索自动化度量定义以减少人工标注依赖。",
+      "利用扩散模型或LLM增强文档压缩中的语义重建，尤其在极低比特率下保持表格、公式等结构的保真度。",
+      "研究文档压缩与解析的联合优化框架，从压缩端提取语义侧信息辅助解析，或在解析中利用压缩先验。"
     ],
     "engineering_takeaways": [
-      "SAVER的CGG门控和子模选择可直接用于现有多模态IE系统，降低算力成本。",
-      "结构化布局先验模块可集成至OCR后处理管线，提升文档解析准确率。",
-      "Manga109 v2026数据集为漫画内容理解提供标准化评估，便于复现与对比。"
+      "评估多页文档解析时，必须包含语义连续性、截断内容合并和层级结构恢复的指标，避免仅用单页准确率误导。",
+      "ReceiptBench的度量感知GRPO框架可直接用于票据自动化处理系统，提升格式规范性和推理准确率。",
+      "极低比特率压缩场景下，可利用预训练的文生图模型（如扩散模型）结合文本侧信息进行高质量重建。"
     ],
     "watchlist": [
       {
-        "title": "Structured Layout Priors for Robust Out-of-Distribution Visual Document Understanding",
-        "watch_reason": "提出结构化布局先验增强分布外鲁棒性，对文档解析系统应对多样化真实场景具有重要参考价值。"
+        "title": "MPDocBench-Parse: Benchmarking Practical Multi-page Document Parsing",
+        "watch_reason": "为多页文档解析提供了首个系统级评估工具，其细粒度指标和实验结论直接揭示了当前模型的瓶颈，后续研究优化方向可参考其发现的不足（如语义连续性）。"
       },
       {
-        "title": "SAVER: Selective As-Needed Vision Evidence for Multimodal Information Extraction",
-        "watch_reason": "创新性按需触发视觉融合，显著降低计算开销，适合部署至资源受限或高吞吐系统。"
+        "title": "From Recognition to Reasoning: Benchmarking and Enhancing MLLMs on Real-World Receipt Document Understanding",
+        "watch_reason": "度量感知GRPO方法显著提升了结构化推理任务性能，其层次化任务划分范式（感知→格式→语义→结构）有望推广至其他文档类型，值得跟踪其在通用领域的扩展工作。"
+      },
+      {
+        "title": "Distributed Image Compression with Multimodal Side Information at Extremely Low Bitrates",
+        "watch_reason": "多模态侧信息融合策略在压缩场景的成功应用可能启发文档压缩与解析的联合优化，例如利用OCR文本作为侧信息改善文档图像的压缩与重建。"
       }
     ]
   },
   "papers": [
     {
-      "title": "Structured Layout Priors for Robust Out-of-Distribution Visual Document Understanding",
-      "summary": "Vision-Language Models (VLMs) parse documents end-to-end but frequently break down on layouts unlike those seen in training. We attribute this to a two-hop bottleneck: before the decoder can extract content (Hop 2), it must first classify and localize the enclosing layout entity (Hop 1), and when the first hop fails the second collapses into omissions, malformed structure, or autoregressive repetition. We pre-resolve Hop 1 outside the decoder by running a lightweight RT-DETR detector, serializing its outputs in the parser's native DocTags vocabulary, and injecting them into the prompt alongside the full page image. Unlike analyze-then-parse approaches that crop the page, or prior prompt-level priors written in plain text, our prior shares the decoder's generation space and leaves the global image in view as a fallback when detections are noisy. On a 10k-page structural out-of-distribution benchmark, markdown F1 rises from $0.37$ to $0.92$; on the Chinese subset of OmniDocBench, table TEDS rises from $0.01$ to $0.36$; and on the 26k-page ViDoRe V3 benchmark, infinite-loop decoding failures drop across every industrial domain tested. These gains cost $15\\%$ wall-clock latency and a median of $74$ prompt tokens, with no architectural change to the base VLM. An attention-level analysis further reveals a bimodal phase shift in which the decoder attends to injected layout tokens when emitting structure and to image patches when emitting content, consistent with the two-hop bottleneck being alleviated. Model weights will be released to support reproducibility.",
-      "link": "https://arxiv.org/abs/2605.19866v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.19866v1",
+      "title": "MPDocBench-Parse: Benchmarking Practical Multi-page Document Parsing",
+      "summary": "Document parsing converts visually rich documents into machine-readable structured representations, forming a crucial foundation for information systems. Although many benchmarks have been proposed for document parsing, they remain inadequate for realistic scenarios. Existing benchmarks either focus on specific tasks or assess only single-page, text-centric settings, making them insufficient for practical multi-page parsing. Moreover, they lack fine-grained evaluation of semantic continuity, hierarchical structure recovery, and visual content preservation. To address these gaps, we propose MPDocBench-Parse, a benchmark for multi-page document parsing in real-world applications. It contains 433 manually annotated documents with 3,246 pages, covering 15 document types in English and Chinese, with diverse layout styles, and supports document-level end-to-end evaluation. We further design a comprehensive protocol for content fidelity and logical structure, covering text, table, and formula recognition, truncated text and table merging, figure extraction, reading order, and heading hierarchy recovery. Experiments show that, while existing models perform well on basic text extraction, they still suffer clear limitations in semantic continuity integration, visual content parsing, and hierarchical structure recovery. MPDocBench-Parse provides a unified foundation for advancing document parsing toward more realistic scenarios.",
+      "link": "https://arxiv.org/abs/2605.22100v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.22100v1",
       "authors": [
-        "Peter El Hachem",
-        "Ahmed Nassar",
-        "A. Said Gurbuz",
-        "Christoph Auer",
-        "Peter W. J. Staar"
+        "Bangbang Zhou",
+        "Hangdi Xing",
+        "Yifan Chen",
+        "Jianjun Xu",
+        "Qi Zheng",
+        "Feiyu Gao",
+        "Zhibo Yang",
+        "Shuai Bai",
+        "Ming Yan",
+        "Jieping Ye",
+        "Hongtao Xie"
       ],
-      "published": "2026-05-19T13:58:24Z",
-      "updated": "2026-05-19T13:58:24Z",
+      "published": "2026-05-21T07:36:41Z",
+      "updated": "2026-05-21T07:36:41Z",
       "categories": [
-        "cs.CV"
+        "cs.AI"
       ],
-      "arxiv_id": "2605.19866v1",
-      "score": 14,
+      "arxiv_id": "2605.22100v1",
+      "score": 22,
       "topic_tags": [
-        "多模态信息提取",
-        "选择性融合",
-        "顺式预测",
-        "社交媒体"
+        "文档解析",
+        "多页文档",
+        "基准评估",
+        "语义连续性",
+        "版面分析"
       ],
-      "zh_summary": "针对社交媒体多模态信息提取中视觉信息冗余或误导的问题，提出SAVER框架，通过顺式可接地性门控（CGG）选择性激活视觉证据，使用子模函数选择紧凑视觉子集，并设计能量得分头进行联合评分。在MNER和MRE任务上优于纯文本和全模态基线，同时降低AURC和计算开销。",
-      "novelty": "首次提出按需触发视觉证据的多模态IE框架，通过统计校准的门控机制和子模选择，实现高效且鲁棒的融合。",
+      "zh_summary": "现有文档解析基准多聚焦单页或特定任务，缺乏对多页、复杂版面、语义连贯性和层级结构恢复的细粒度评估。因此提出MPDocBench-Parse，一个多页文档解析基准，包含433份文档（3246页），覆盖15种类型，支持文档级端到端评估，并设计了涵盖内容保真度和逻辑结构的评估协议。实验显示现有模型在语义连续性集成、视觉内容解析和层级结构恢复上存在显著局限。",
+      "novelty": "首次系统性地构建了面向多页文档解析的综合基准，并设计了细粒度评估协议，覆盖语义连续性、层级结构恢复等现有基准忽略的维度。",
       "innovation_points": [
-        "顺式可接地性门控（CGG）估计span级视觉可接地性，校准激活阈值",
-        "子模相关-多样性选择器选取紧凑视觉证据子集",
-        "能量启发联合评分头，结合文本、视觉、一致性和稀疏路由"
+        "构建了包含433份文档、3246页的多页文档解析基准，覆盖15种中英文文档类型",
+        "设计了文档级端到端评估协议，包含文本/表格/公式识别、截断内容合并、阅读顺序和标题层级恢复等",
+        "揭示了现有模型在语义连续性集成、视觉内容解析和层级结构恢复方面的明显不足"
       ],
-      "limitations": "门控机制依赖标注数据的可接地性标签，弱监督下性能可能下降。",
+      "limitations": "基准仅覆盖中英文文档，未包含更多语言和文档类型; 评估指标仍以标准格式为主，未纳入用户主观质量评估。",
       "improvement_directions": [
-        "探索无监督或弱监督的可接地性估计方法",
-        "扩展到更多模态（如音频、视频）",
-        "优化子模选择效率，适应高并发场景"
+        "扩展基准语言和文档类型覆盖",
+        "设计能更好处理语义连贯性和层级结构的文档解析模型",
+        "引入用户导向的评估方法，如感知质量评估"
       ],
-      "engineering_value": "降低计算开销的同时提升多模态IE性能，适用于社交媒体内容理解等实际系统。",
-      "why_relevant": "解决多模态信息提取中视觉信息冗余和误导的顽疾，方法新颖高效，具有工程部署价值。"
+      "engineering_value": "为多页文档解析提供了标准化评估工具，可帮助工业界评估和优化文档处理系统的性能。",
+      "why_relevant": "直接关联文档解析核心任务，提出的基准和评估协议对OCR研究者和工程师评估模型在实际多页文档场景中的表现有重要参考价值。"
     },
     {
-      "title": "TextSculptor: Training and Benchmarking Scene Text Editing",
-      "summary": "Recent advances in Multimodal Large Language Models (MLLMs) and diffusion-based generative models have substantially improved prompt-driven image editing. However, scene text editing remains challenging, as it requires models to precisely modify textual content while preserving visual realism and non-target regions. Current open-source models still lag behind proprietary systems, largely due to the scarcity of high-quality training data and the lack of standardized benchmarks tailored to text editing. To address these challenges, we present TextSculptor, a comprehensive framework for data construction and evaluation of scene text editing. We first develop an automated data construction pipeline that combines text-aware image synthesis with programmatic text rendering and compositing. Based on this pipeline, we build TextSculpt-Data, a large-scale dataset containing 3.2M training samples, including 1.2M OCR-verified text-to-image samples and 2M paired text editing samples with naturally aligned source-target images and strong background consistency. We further introduce TextSculpt-Bench, a benchmark covering four fundamental text editing tasks: text addition, text replacement, text removal, and hybrid editing. To support reliable evaluation, we design a tailored protocol that measures text accuracy, visual quality, and background preservation through OCR-based text alignment, multimodal judgment, and background-region similarity. Extensive experiments show that TextSculptor improves open-source text editing performance and narrows the gap to proprietary models. The data and benchmark are available at https://github.com/linyiheng123/TextSculptor.",
-      "link": "https://arxiv.org/abs/2605.21090v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.21090v1",
+      "title": "From Recognition to Reasoning: Benchmarking and Enhancing MLLMs on Real-World Receipt Document Understanding",
+      "summary": "Extracting structured information from visual documents (Visual Information Extraction, VIE) is a cornerstone of business automation. While recent Multimodal Large Language Models (MLLMs) have shown promising capabilities, existing benchmarks suffer from critical limitations in scale and realism, lack semantic granularity, and fail to cover diverse document types. To bridge this gap, we introduce ReceiptBench, a large-scale, human-annotated benchmark consisting of 10k diverse receipts, organizing information extraction into four hierarchical sub-tasks: (1) Basic Perception for raw text spotting, (2) Format Normalization for strictly following standardization instructions, (3) Semantic Reasoning for inferring implicit attributes from context, and (4) Structure Parsing for handling nested line items. Furthermore, we propose a two-stage training framework incorporating Metric-Aware Group Relative Policy Optimization (GRPO), which translates rigorous evaluation constraints into reinforcement learning signals to enhance structural consistency. Extensive experiments demonstrate that our method yields state-of-the-art performance, surpassing leading proprietary models on complex reasoning tasks. We release our datasets and code at https://github.com/wwwT0ri/ReceiptBench.",
+      "link": "https://arxiv.org/abs/2605.22413v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.22413v1",
       "authors": [
-        "Yiheng Lin",
-        "Siyu Jiao",
-        "Xiaohan Lan",
-        "Wei Zhou",
-        "Qi She",
-        "Fei Yu",
-        "Heyun Chen",
-        "Zhengwei Wang",
-        "Jinghuan Chen",
-        "Moran Li",
-        "Yingchen Yu",
-        "Zijian Feng",
-        "Yao Zhao",
-        "Yunchao Wei",
-        "Yujie Zhong"
+        "Yandi Wang",
+        "Libin Zhan",
+        "Ziwei Huang",
+        "Tiancheng Luo",
+        "Yuxuan Jiang",
+        "Wang Dong",
+        "Leilei Gan",
+        "Jun Chen"
       ],
-      "published": "2026-05-20T12:22:26Z",
-      "updated": "2026-05-20T12:22:26Z",
+      "published": "2026-05-21T12:37:03Z",
+      "updated": "2026-05-21T12:37:03Z",
       "categories": [
         "cs.CV"
       ],
-      "arxiv_id": "2605.21090v1",
-      "score": 13,
-      "topic_tags": null,
-      "zh_summary": null,
-      "novelty": null,
-      "innovation_points": null,
-      "limitations": null,
-      "improvement_directions": null,
-      "engineering_value": null,
-      "why_relevant": null
+      "arxiv_id": "2605.22413v1",
+      "score": 17,
+      "topic_tags": [
+        "文档理解",
+        "信息提取",
+        "票据OCR",
+        "层次化任务",
+        "强化学习"
+      ],
+      "zh_summary": "现有文档理解基准规模小、缺乏语义粒度，提出ReceiptBench基准（10k张真实票据），并划分四个层次子任务：基础感知、格式规范化、语义推理和结构解析。提出两阶段训练框架，包含度量感知GRPO，将评估约束转化为强化学习信号，提升结构一致性，在复杂推理任务上超越GPT-4V等闭源模型。",
+      "novelty": "首次构建大规模、细粒度层次化的票据文档理解基准，并提出度量感知GRPO训练方法，将严格的评估约束转化为强化学习信号。",
+      "innovation_points": [
+        "构建了10k张真实票据的基准，包含四个层次化子任务",
+        "提出度量感知GRPO训练框架",
+        "在复杂推理任务上达到最优，超越闭源模型"
+      ],
+      "limitations": "仅针对收据，未验证泛化到其他文档类型; GRPO依赖精确度量定义。",
+      "improvement_directions": [
+        "扩展到更多文档类型",
+        "探索自动化度量设计",
+        "结合语言模型增强推理能力"
+      ],
+      "engineering_value": "为票据自动化处理提供实用解决方案，适用于需要严格格式和结构一致性的商业场景。",
+      "why_relevant": "针对文档理解核心任务，提出基准和有效方法，对OCR实际应用有直接价值。"
     },
     {
-      "title": "Manga109-v2026: Revisiting Manga109 Annotations for Modern Manga Understanding",
-      "summary": "Manga is a culturally distinctive multimodal medium and one of the most influential forms of Japanese popular culture. As AI systems increasingly target manga understanding, OCR, and translation, Manga109 has become a foundational dataset for manga-related AI research. However, the current Manga109 dataset contains transcription errors and coarse annotations, which do not align well with modern OCR and multimodal manga understanding tasks. In this work, we revisit the dialogue text annotations of Manga109 and identify five categories of annotation issues, including transcription errors, missing text regions, overlapping dialogue and onomatopoeia, and under-segmented speech balloons. To address these issues, we combine OCR-based issue detection and manual revision to construct Manga109-v2026, revising approximately 29,000 dialogue annotations. Our revisions better align Manga109 with modern OCR and multimodal manga understanding systems while preserving expressive structures characteristic of manga.",
-      "link": "https://arxiv.org/abs/2605.21182v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.21182v1",
+      "title": "Distributed Image Compression with Multimodal Side Information at Extremely Low Bitrates",
+      "summary": "Distributed Image Compression (DIC) is crucial for multi-view transmission, especially when operating at extremely low bitrates (< 0.1 bpp). Its core challenge is effectively utilizing side information to achieve high-quality reconstruction under strict bitrate budgets. However, existing DIC approaches struggle to exploit global context and object-level details from side information, leading to local blurring and the loss of fine details in the reconstruction. To address these limitations, we propose a Multimodal DIC framework (MDIC), which, for the first time, leverages side information in a multimodal manner into the DIC paradigm, effectively preserving fine-grained local details and enhancing global perceptual quality in reconstructed images. Specifically, we introduce a text-to-image diffusion-based decoder conditioned on textual side information extracted from correlated images to capture shared global semantics. Moreover, we design a feature-mask generator, supervised by a multimodal fine-grained alignment task, to strengthen the exploitation of visual side information. The generated mask serves two purposes: first, it guides the extraction of fine-grained details from losslessly transmitted side information to preserve the semantic consistency of reconstructed details; second, it regulates the extraction of clustered feature representations from the quantized VQ-VAE embeddings, compensating for category information lost under the extreme compression of the primary image. Extensive experiments on the widely used KITTI Stereo and Cityscapes datasets demonstrate that MDIC achieves state-of-the-art perceptual quality at extremely low bitrates.",
+      "link": "https://arxiv.org/abs/2605.22061v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.22061v1",
       "authors": [
-        "Jeonghun Baek",
-        "Atsuyuki Miyai",
-        "Shota Onohara",
-        "Hikaru Ikuta",
-        "Kiyoharu Aizawa"
+        "Guojun Xu",
+        "Mingyang Zhang",
+        "Jianwen Xiang",
+        "Cheng Tan",
+        "Yanchao Yang",
+        "Junwei Zhou"
       ],
-      "published": "2026-05-20T13:49:13Z",
-      "updated": "2026-05-20T13:49:13Z",
+      "published": "2026-05-21T06:53:03Z",
+      "updated": "2026-05-21T06:53:03Z",
       "categories": [
-        "cs.CL",
-        "cs.AI",
         "cs.CV"
       ],
-      "arxiv_id": "2605.21182v1",
-      "score": 9,
-      "topic_tags": null,
-      "zh_summary": null,
-      "novelty": null,
-      "innovation_points": null,
-      "limitations": null,
-      "improvement_directions": null,
-      "engineering_value": null,
-      "why_relevant": null
-    },
-    {
-      "title": "SAVER: Selective As-Needed Vision Evidence for Multimodal Information Extraction",
-      "summary": "Multimodal IE in social media is difficult because a post may attach multiple images that are weakly related, redundant, or even misleading with respect to the text. In this setting, always-on multimodal fusion wastes computation and can amplify spurious visual cues. The core challenge is to decide, for each candidate span or marked entity pair, whether vision should be consulted at all and, if so, which small subset of images provides trustworthy evidence. We propose SAVER, a selective vision-as-needed framework for multimodal named entity recognition and multimodal relation extraction. SAVER uses a Conformal Groundability Gate (CGG) to estimate span-level visual groundability in MNER, derive pair-level activation in MRE from the two marked entities, and calibrate the activation threshold on a held-out split via a conformal-style procedure with Clopper--Pearson upper bounds. When activated, a submodular relevance--diversity selector chooses a compact evidence subset across images, which is then aggregated by a Set Transformer. An energy-inspired joint scoring head combines text, optional visual evidence, text--image consistency, and sparse routing for entity typing or relation classification. Experiments show that SAVER consistently improves F1 over strong text-only and always-on multimodal baselines, while reducing AURC, increasing activation coverage at a fixed risk level, and lowering FLOPs and P90 latency.",
-      "link": "https://arxiv.org/abs/2605.20713v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.20713v1",
-      "authors": [
-        "Miaobo Hu",
-        "Shuhao Hu",
-        "Bokun Wang",
-        "Rui Chen",
-        "Xin Wang",
-        "Xiaobo Guo",
-        "Daren Zha",
-        "Jun Xiao"
+      "arxiv_id": "2605.22061v1",
+      "score": 3,
+      "topic_tags": [
+        "分布式图像压缩",
+        "多模态",
+        "扩散模型",
+        "侧信息",
+        "极低比特率"
       ],
-      "published": "2026-05-20T05:10:18Z",
-      "updated": "2026-05-20T05:10:18Z",
-      "categories": [
-        "cs.CV",
-        "cs.AI",
-        "cs.LG"
+      "zh_summary": "针对极低比特率下的分布式图像压缩，提出多模态分布式图像压缩（MDIC）框架，首次在多模态方式下利用侧信息。通过文本到图像扩散解码器结合文本侧信息捕获全局语义，设计特征掩码生成器，利用多模态细粒度对齐任务强化视觉侧信息利用，在KITTI Stereo和Cityscapes数据集上取得显著性能提升。",
+      "novelty": "首次将多模态侧信息融入分布式图像压缩框架，通过文本到图像扩散解码器捕获全局语义，并设计特征掩码生成器强化视觉侧信息。",
+      "innovation_points": [
+        "提出文本到图像扩散解码器，利用文本侧信息捕获全局语义",
+        "设计特征掩码生成器，通过多模态细粒度对齐任务强化视觉侧信息利用",
+        "特征掩码同时用于从无损传输的侧信息提取细节和从量化VQ-VAE嵌入中补偿类别信息"
       ],
-      "arxiv_id": "2605.20713v1",
-      "score": 6,
-      "topic_tags": null,
-      "zh_summary": null,
-      "novelty": null,
-      "innovation_points": null,
-      "limitations": null,
-      "improvement_directions": null,
-      "engineering_value": null,
-      "why_relevant": null
+      "limitations": "仅验证了KITTI Stereo和Cityscapes两个自动驾驶数据集，需在更多场景验证; 依赖文本侧信息的提取质量。",
+      "improvement_directions": [
+        "探索更鲁棒的文本侧信息提取方法",
+        "扩展到更多任务和数据集",
+        "研究多模态融合的更深层次方式，如自适应权重分配"
+      ],
+      "engineering_value": "为极低带宽场景下的图像压缩提供新思路，尤其适用于多摄像头系统（如自动驾驶）的高效传输与重建。",
+      "why_relevant": "虽然主题为图像压缩，但其多模态侧信息利用的思想可启发文档解析中利用文本和视觉信息的融合策略。"
     }
   ]
 }
