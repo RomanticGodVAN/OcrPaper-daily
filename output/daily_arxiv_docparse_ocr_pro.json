@@ -1,100 +1,56 @@
 {
   "meta": {
-    "report_date": "2026-05-26",
-    "generated_at_utc": "2026-05-26 05:13:11",
+    "report_date": "2026-05-27",
+    "generated_at_utc": "2026-05-27 05:41:45",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 3
+    "count": 4
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦于文档解析的后处理、端到端临床文档理解及历史文档标注三方面创新。MinerU-Popo系统性地解决了跨页文档结构恢复问题，RAPTOR+强调了VLM在临床场景中的可审计性，而Double Triangle Annotation则提出了一种高效的人机协同标注框架。这些工作共同指向更鲁棒、更可信、更高效的文档解析路线。",
-    "trend_summary": "当前趋势包括：1) 从OCR+后处理向端到端VLM管线演进，但后处理模块仍为必要补充；2) 重视模型可解释性和可审计性，尤其在医疗等高风险领域；3) 利用模型间共识减少人工标注成本，实现可扩展的数据生产。",
+    "executive_summary": "今日研究聚焦于提升OCR和文档解析在实际场景中的鲁棒性、可审计性与效率。核心趋势包括：视觉语言模型正替代传统OCR+LLM流水线实现端到端文档理解，强调可验证的证据定位；多语言、多布局的标准化基准推动系统评估；通过显式视觉token监督或人机协同标注等创新方法提升细粒度理解与标注精度。这些成果为医疗、历史及多语言文档处理提供了更可靠、可扩展的解决方案。",
+    "trend_summary": "多模态大模型端到端用于文档理解并强调可解释性与审计性；构建大规模多语言真实文档基准以系统评估能力；探索直接在视觉token上施加监督信号以增强细粒度理解；利用跨模型共识的人机协同策略降低标注成本并提升精度。",
     "common_innovations": [
-      "将复杂文档解析任务分解为多个定义明确的子任务（如截断恢复、标题重建、证据定位），提升处理可控性",
-      "充分利用轻量级VLM（4B-8B参数）进行后处理或端到端抽取，平衡精度与效率",
-      "引入交叉验证或共识机制提高输出可靠性，特别在标注和人机协作场景"
+      "视觉语言模型取代传统OCR+LLM流水线，实现端到端文档理解并保留证据定位能力。",
+      "构建多语言、多布局的真实文档评估基准，推动标准化和可复现的ATR测评。",
+      "对视觉token施加显式逐token监督，无需额外标注或架构修改即可提升细粒度理解。",
+      "提出两层跨模型共识的人机协同标注框架，大幅减少人工审核量并保持高精度。"
     ],
     "future_directions": [
-      "研究MinerU-Popo与前端OCR模型的端到端联合训练，打破后处理对OCR输出质量的依赖",
-      "扩展后处理子任务类型至公式、脚注、边注等复杂元素，并探索子任务间的联合优化策略",
-      "将RAPTOR+的视觉定位评估框架推广至更多临床文档类型，并探索结合人类反馈循环提升安全性",
-      "开发面向长文档的高效动态分块与对齐算法，解决极端文档长度带来的效率瓶颈",
-      "研究模型相关性对Double Triangle Annotation共识机制的影响，设计更鲁棒的共识机制以适应非独立错误",
-      "探索合成数据或半监督方法增强临床和历史文档中稀缺领域的标注数据"
+      "探索高效微调策略（如LoRA与DV-SFT结合）以减少医疗等场景对大规模标注数据的依赖。",
+      "将RAPTOR+框架扩展至更多癌症类型及非结构化体检报告，并设计跨机构域适应方法。",
+      "在METATR基准中引入文档退化类型（墨迹、污损、折痕等）以评估模型鲁棒性。",
+      "将DV-SFT的视觉token监督推广到OCR之外的通用视觉理解任务（如图表、票据）。",
+      "研究双三角形标注框架中模型选择策略，最大化错误独立性以提升共识效率。",
+      "开发自适应共识阈值机制，动态平衡自动采纳率与人工审核成本。",
+      "结合结构化信息抽取任务设计面向文档的新评估指标（如提取准确率、字段完整性）。"
     ],
     "engineering_takeaways": [
-      "实现即插即用的文档级后处理模块MinerU-Popo，可直接集成到现有RAG管线中提升结构化输出质量",
-      "使用微调Qwen3-VL-8B替代传统OCR+LLM管线，在临床表单上获得96.1%读取精度并附带视觉证据",
-      "采用Double Triangle Annotation框架，仅需人工审核15%的字段即可达到0.003词错误率，大幅降低标注成本"
+      "RAPTOR+框架可直接用于开发可审计的医疗文档处理系统，减少人工审查80%以上。",
+      "METATR基准可作为选型依据，优先选择在目标语言和布局上表现稳定的VLM或序列模型。",
+      "DV-SFT方法可视为标准SFT的免费升级，在OCR类视觉理解任务中优先使用。",
+      "双三角形标注框架适合历史文档等标注资源稀缺场景，建议先作POC验证跨模型共识效果。"
     ],
     "watchlist": [
       {
-        "title": "MinerU-Popo: Universal Post-Processing Model for Structured Document Parsing",
-        "watch_reason": "提出首个系统化跨页文档结构恢复方法，可即插即用，对RAG等下游应用价值显著"
+        "title": "RAPTOR+: A Visually Grounded Vision-Language Framework to Improve Clinical Trust and Auditability in Automated Cancer Referral Processing",
+        "watch_reason": "医疗领域对可信提取需求高，RAPTOR+的端到端证据定位方案有潜力成为行业标杆，需关注后续跨癌种和跨机构泛化实验。"
       },
       {
-        "title": "RAPTOR+: A Visually Grounded Vision-Language Framework to Improve Clinical Trust and Auditability in Automated Cancer Referral Processing",
-        "watch_reason": "临床文档可审计AI的代表性工作，视觉定位评估框架有望成为行业标准"
+        "title": "METATR: A Multilingual, Evolving Benchmark for Automatic Text Recognition",
+        "watch_reason": "多语言基准是系统评估和选型关键，后续版本扩展语言和退化类型后将更具参考价值，建议跟进并贡献方言或罕见脚本数据。"
+      },
+      {
+        "title": "DV-SFT: Direct Vision Supervision for Fine-Grained Visual Understanding",
+        "watch_reason": "视觉token监督信号方法新颖且兼容现有训练流程，若扩展到通用视觉理解，可能成为MLLM微调标配，建议复现验证其效果。"
       },
       {
         "title": "Double Triangle Annotation: A Scalable Human-in-the-Loop Framework for High-Precision Historical Document Annotation",
-        "watch_reason": "高效标注框架，随模型能力提升自动扩展，对历史文档数字化有重要推动作用"
+        "watch_reason": "两层共识框架在历史文档上表现优异，后续如果推广到更多文档类型和模型组合，将显著影响标注行业成本结构。"
       }
     ]
   },
   "papers": [
-    {
-      "title": "MinerU-Popo: Universal Post-Processing Model for Structured Document Parsing",
-      "summary": "VLM-based OCR models have become the de facto choice for document parsing, as they can accurately extract page-level elements (e.g., paragraphs within individual pages) together with their bounding boxes and textual content. However, downstream applications such as RAG require coherent document-level information, whereas these models often break cross-page continuity and fail to recover disrupted structures, such as paragraphs and tables truncated by page boundaries. Such relationships are not confined to a single page; instead, they require joint analysis of titles, paragraphs, tables, and images spanning multiple pages. A natural solution is therefore to reuse existing OCR outputs and reconstruct document-level logical structures through post-processing. To this end, we propose MinerU-Popo, a lightweight and universal framework for POst-Processing OCR outputs, which converts page-level results from diverse parsers into coherent document-level structures. MinerU-Popo decomposes the problem into four focused subtasks: text truncation recovery, table truncation recovery, title hierarchy reconstruction, and image-text association. To address these effectively, we build a task-oriented data engine with task-specific input filtering, and use the generated data (30K) to fine-tune a lightweight post-processing model (Qwen3-VL-4B). To support long documents, we introduce dynamic chunking with overlap-based synchronization, which aligns chunk-level outputs from the fine-tuned model and preserves global consistency. Finally, we assemble the aligned outputs into a tree-structured document representation, further enriched with node chunking and summaries for downstream retrieval and analysis. Empirical results show MinerU-Popo improves title-hierarchy TEDS by at least 20% across all five tested OCR models, improves RAG accuracy and reduces per-query latency.",
-      "link": "https://arxiv.org/abs/2605.24973v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.24973v1",
-      "authors": [
-        "Bangrui Xu",
-        "Ziyang Miao",
-        "Xuanhe Zhou",
-        "Yiming Lin",
-        "Zirui Tang",
-        "Xiaomeng Zhao",
-        "Fan Wu",
-        "Cheng Tan",
-        "Fan Wu",
-        "Bin Wang",
-        "Conghui He"
-      ],
-      "published": "2026-05-24T10:00:28Z",
-      "updated": "2026-05-24T10:00:28Z",
-      "categories": [
-        "cs.CV",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "arxiv_id": "2605.24973v1",
-      "score": 21,
-      "topic_tags": [
-        "OCR后处理",
-        "文档结构化",
-        "跨页连续性",
-        "VLM微调",
-        "长文档处理"
-      ],
-      "zh_summary": "提出MinerU-Popo轻量后处理框架，将多种OCR解析器的页面级结果转换为连贯的文档级结构，通过四个子任务（文本截断恢复、表格截断恢复、标题层级重建、图文关联）和动态分块机制，利用30K数据微调Qwen3-VL-4B模型，实现跨页连续性恢复。",
-      "novelty": "将OCR后处理问题分解为四个明确子任务，并设计任务导向的数据引擎和动态分块对齐策略，首次系统解决跨页文档结构恢复。",
-      "innovation_points": [
-        "将后处理任务分解为文本/表格截断恢复、标题层级重建、图文关联四个子任务",
-        "构建任务导向的数据引擎，通过输入过滤生成30K微调数据",
-        "引入重叠动态分块机制，对齐块级输出并保持全局一致性",
-        "使用轻量级VLM（4B参数）进行后处理，适配长文档场景"
-      ],
-      "limitations": "['依赖现有OCR模型的输出质量，无法纠正OCR本身的错误', '动态分块策略可能对极端长文档存在效率问题', '四个子任务的联合优化可能相互影响']",
-      "improvement_directions": [
-        "探索与OCR模型端到端联合训练的可能性",
-        "研究更高效的长文档分块与对齐策略",
-        "扩展子任务覆盖更多文档元素类型（如公式、脚注）"
-      ],
-      "engineering_value": "为RAG等下游应用提供即插即用的文档级后处理方案，无需重新训练OCR模型即可提升结构化输出质量。",
-      "why_relevant": "直接针对OCR后处理中跨页连续性和结构恢复的痛点，是当前文档解析流水线中缺失的关键环节。"
-    },
     {
       "title": "RAPTOR+: A Visually Grounded Vision-Language Framework to Improve Clinical Trust and Auditability in Automated Cancer Referral Processing",
       "summary": "Urgent suspected colorectal cancer (CRC) referrals create operational bottlenecks because semi-structured clinical documents often require manual review and transcription. The original RAPTOR system used Large Language Models for structured extraction but relied on a separate OCR stage, making it vulnerable to handwriting, layout variation, and loss of visual evidence linkage. We present RAPTOR+, a multimodal extension that uses Vision-Language Models (VLMs) for end-to-end referral understanding. We evaluate fine-tuned VLMs, commercial and open-source zero-shot VLMs, and the original OCR-based pipeline on 223 clinically curated CRC urgent referral forms. We also introduce a grounding-aware evaluation framework that measures both extraction accuracy and evidence localisation. Results show a clear grounding gap in zero-shot models. Gemini 2.5 Flash achieved 92.6% Reading Accuracy but only 1.2% Strict Safety. In contrast, fine-tuned Qwen3-VL-8B achieved 96.1% Reading Accuracy and 60.6% Strict Safety, substantially improving verifiable evidence grounding. These findings show that task-specific fine-tuning is essential for reliable, auditable clinical document understanding. RAPTOR+ enables extracted referral decisions to be linked to visual evidence, supporting safer and more efficient cancer referral triage.",
@@ -120,27 +76,106 @@
       "score": 20,
       "topic_tags": [
         "临床文档理解",
-        "VLM",
-        "证据定位",
-        "可审计AI",
-        "OCR替代"
+        "视觉语言模型",
+        "端到端OCR",
+        "证据定位评估"
       ],
-      "zh_summary": "提出RAPTOR+多模态框架，使用VLM替代传统OCR管线实现端到端的临床转诊表单理解，评估显示微调Qwen3-VL-8B在读取精度（96.1%）和可验证证据定位（严格安全性60.6%）上显著优于零样本模型，证明了任务特定微调对于可审计临床文档处理的重要性。",
-      "novelty": "首次在临床转诊处理中引入视觉定位评估（grounding-aware evaluation），量化了VLM的证据可追溯性，揭示了零样本模型的定位缺陷。",
+      "zh_summary": "针对疑似结直肠癌转诊中半结构化文档人工审核负担重、原始RAPTOR系统依赖OCR易受手写和布局影响的问题，提出RAPTOR+多模态扩展，使用视觉语言模型进行端到端转诊理解。在223份临床转诊表单上，细调Qwen3-VL-8B实现96.1%读取准确率和60.6%严格安全性，显著优于零样本模型。引入可验证的证据定位评估框架。",
+      "novelty": "将视觉语言模型端到端应用于临床转诊文档理解，并设计考虑证据定位的评估方法。",
       "innovation_points": [
-        "设计多模态端到端框架替代传统OCR+LLM两阶段管线",
-        "提出基于证据定位的评估框架，同时衡量提取准确率和证据可追溯性",
-        "系统对比零样本与微调VLM在临床文档安全性和准确性上的差距",
-        "实现提取决策与视觉证据的显式链接，增强可审计性"
+        "提出多模态视觉语言模型RAPTOR+，替代OCR+LLM流水线进行端到端临床文档理解。",
+        "设计基于证据定位的评估框架，同时衡量提取准确性和证据定位能力。",
+        "在真实临床数据集上对比细调与零样本VLM性能，证明任务特定微调的必要性。"
       ],
-      "limitations": "['评估数据仅223例，样本量较小', '仅针对结直肠癌转诊表单，泛化性未知', '微调模型仍存在40%的严格安全性失败，可靠性有待提升']",
+      "limitations": "仅针对结直肠癌转诊场景，泛化到其他癌症类型或医疗文档有待验证；微调需要标注数据，实际部署成本较高。",
       "improvement_directions": [
-        "扩大临床文档类型和规模，验证方法泛化性",
-        "探索多任务微调或合成数据增强以提升证据定位能力",
-        "结合人类审核反馈循环，逐步提升模型安全性"
+        "探索更高效的微调策略，减少对大规模标注数据的依赖。",
+        "将框架扩展到更多类型的医疗文档和癌症筛查流程。",
+        "研究跨机构部署时的域适应问题。"
       ],
-      "engineering_value": "为临床文档自动化处理提供可审计、可追溯的解决方案，直接降低人工复核负担，提升转诊效率与安全性。",
-      "why_relevant": "展示了VLM在文档理解中替代传统OCR-LLM两阶段管线的潜力，并强调了证据定位对高风险场景的关键性。"
+      "engineering_value": "为医疗文档自动化处理提供可靠、可审计的解决方案，可减少人工审查工作量，提高转诊效率。",
+      "why_relevant": "直接面向OCR鲁棒性挑战，通过多模态方法提升文档理解的可信度，对工业级OCR系统有启发。"
+    },
+    {
+      "title": "METATR: A Multilingual, Evolving Benchmark for Automatic Text Recognition",
+      "summary": "Benchmarks that reflect the diversity and complexity of real-world documents are essential for accurately evaluating Automatic Text Recognition (ATR) systems, especially Vision-Large Language Models (vLLMs). Although recent models demonstrate impressive performance, they are often evaluated on datasets containing modern, printed texts mostly written in English, which limits their relevance to many practical applications. Therefore, selecting a model for a specific use case requires evaluating it on data that matches the target documents. This highlights the importance of representative benchmarks for real-world applications. In this paper, we introduce METATR (v1.0), a multilingual, evolving benchmark designed to evaluate ATR models across a wide range of documents, facilitating meaningful model comparison and selection. The benchmark was designed to maximize diversity by including documents from various public collections. These documents cover 29 languages and include texts with multiple scripts and layouts. Beyond the dataset itself, METATR defines a standardized prompting and normalization methodology and establishes a dynamic evaluation framework. This approach is intended to produce reproducible results while remaining extensible over time. We evaluated a wide range of state-of-the-art systems, including open-source models and closed-source models. Results are reported across various dimensions, including performance at the dataset and language levels, robustness to handwritten documents, and computational efficiency. Our findings show that, although proprietary models achieve the most consistent performance, substantial variability persists across scripts and layouts. Overall, METATR provides a multidimensional, practitioner-oriented framework for assessing multilingual ATR in real-world conditions and tracking progress as the field evolves.",
+      "link": "https://arxiv.org/abs/2605.26712v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.26712v1",
+      "authors": [
+        "Mélodie Boillet",
+        "Solène Tarride",
+        "Christopher Kermorvant"
+      ],
+      "published": "2026-05-26T08:53:34Z",
+      "updated": "2026-05-26T08:53:34Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2605.26712v1",
+      "score": 18,
+      "topic_tags": [
+        "文字识别基准",
+        "多语言OCR",
+        "评估协议",
+        "视觉语言模型"
+      ],
+      "zh_summary": "提出METATR多语言、渐进式自动文本识别基准，包含29种语言、多种手写和印刷文档。设计标准化提示和归一化方法，评估多种开源和闭源系统，揭示在多样化真实文档上模型性能的差异。",
+      "novelty": "构建覆盖多语言、多脚本、多布局的真实文档基准，并定义可复现的评估协议。",
+      "innovation_points": [
+        "构建包含29种语言、多种书写风格和布局的评估数据集。",
+        "设计标准化的提示词和归一化方法，确保评估结果可复现。",
+        "提出动态评估框架，支持未来扩展新模型和数据集。"
+      ],
+      "limitations": "当前版本v1.0，覆盖文档类型和语言有限；未深入评估模型对噪声和退化的鲁棒性。",
+      "improvement_directions": [
+        "扩展更多低资源语言和罕见脚本的样本。",
+        "引入更丰富的文档退化类型（如墨迹、污损）。",
+        "发展基于任务的评估指标，如信息提取准确率。"
+      ],
+      "engineering_value": "为ATR系统选型提供真实场景参考，促进模型在跨国、多语言文档处理中的应用。",
+      "why_relevant": "直接服务于OCR领域，解决现有基准缺乏多样性的问题，对任务模型评估和选择有实际指导意义。"
+    },
+    {
+      "title": "DV-SFT: Direct Vision Supervision for Fine-Grained Visual Understanding",
+      "summary": "Multimodal large language models are typically trained end-to-end to predict ground-truth answers, yet supervision signals are applied exclusively to text tokens. Visual tokens, the core carriers of visual information, are optimized only implicitly as part of the context, leading to coarse-grained visual understanding. Prior works attempt to supervise visual inputs but inevitably rely on auxiliary components such as additional decoders or forward passes, because visual tokens lack readily interpretable labels. This limits their practical applicability. In this work, we propose \\textbf{D}irect \\textbf{V}ision \\textbf{S}upervised \\textbf{F}ine-\\textbf{T}uning (DV-SFT), which constructs explicit, token-level supervision for visual tokens and trains them through the same next-token prediction objective used for text. Specifically, we exploit the direct vision--text correspondence in OCR-related scenarios and automatically label each visual token with the word in its corresponding image patch. DV-SFT treats the MLLM as a black box, requiring no architectural modifications or additional forward passes. Extensive experiments demonstrate the superiority of direct vision supervision. DV-SFT consistently outperforms standard SFT across three in-domain and four out-of-domain benchmarks. Further analyses show that vision supervision effectively enhances fine-grained visual understanding and achieves higher multimodal alignment efficiency.",
+      "link": "https://arxiv.org/abs/2605.26656v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.26656v1",
+      "authors": [
+        "Jianfei Zhao",
+        "Feng Zhang",
+        "Xin Sun",
+        "Chong Feng",
+        "Bing Wang",
+        "Zhixing Tan"
+      ],
+      "published": "2026-05-26T07:41:48Z",
+      "updated": "2026-05-26T07:41:48Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2605.26656v1",
+      "score": 12,
+      "topic_tags": [
+        "视觉监督",
+        "多模态微调",
+        "细粒度理解",
+        "视觉token"
+      ],
+      "zh_summary": "提出直接视觉监督微调方法，通过为视觉token构造显式token级监督信号，与文本token采用相同下一个词预测目标训练。利用OCR场景中视觉-文本对应关系自动标注视觉token，无需架构修改或额外前向传播。实验表明该方法在三个域内和四个域外基准上均优于标准SFT。",
+      "novelty": "首次在MLLM中对视觉token施加显式逐token监督，且不依赖额外组件。",
+      "innovation_points": [
+        "提出视觉token的显式逐token监督信号构造方法。",
+        "利用OCR场景的视觉-文本对应关系自动标注，实现零额外标注成本。",
+        "无需修改模型架构，兼容现有训练流程。"
+      ],
+      "limitations": "依赖OCR场景的视觉-文本对应关系，通用场景下难以直接应用；监督信号粒度与OCR标注质量相关。",
+      "improvement_directions": [
+        "探索将视觉监督扩展到OCR以外的通用视觉理解任务。",
+        "研究自动标注的质量控制机制，减少噪声。",
+        "结合自监督预训练，增强视觉token语义表达。"
+      ],
+      "engineering_value": "提供一种提升MLLM细粒度视觉理解能力的轻量训练方案，可无缝集成到现有微调流程。",
+      "why_relevant": "直接针对OCR场景中的视觉理解瓶颈，提出的方法可提升OCR相关任务性能。"
     },
     {
       "title": "Double Triangle Annotation: A Scalable Human-in-the-Loop Framework for High-Precision Historical Document Annotation",
@@ -158,28 +193,26 @@
       "arxiv_id": "2605.25781v1",
       "score": 10,
       "topic_tags": [
-        "历史文档标注",
-        "人机协同",
+        "人机协同标注",
+        "历史文档",
         "跨模型共识",
-        "结构化提取",
-        "标注框架"
+        "结构化抽取"
       ],
-      "zh_summary": "提出双三角形标注框架（Double Triangle Annotation），利用跨模型共识自动标注历史文档中的结构化信息，仅在分歧时引入人工审核，在法国医疗名录数据集上实现0.003的词错误率，自动接受超过85%的字段。",
-      "novelty": "设计两层人机协同标注框架，利用模型独立性假设通过交叉共识自动标注大部分数据，无需分布先验或任务特定校准。",
+      "zh_summary": "提出双三角形标注框架，利用跨模型共识实现高精度历史文档标注。两层人机协同：第一层两独立MLLM并行标注，一致则自动采纳，分歧交人工仲裁；第二层交叉检查两套系统，残余冲突由专家处理。在法国医学目录数据集上实现0.003词错误率，85%字段自动采纳。",
+      "novelty": "提出基于模型共识的两层人机协同标注框架，无需分布先验或任务特定校准。",
       "innovation_points": [
-        "两层交叉共识框架：第一层两模型并行标注，共识则自动接受，分歧交给人工；第二层跨系统交叉验证",
-        "依赖单一假设——模型错误独立性，无需预训练或校准",
-        "释放首个法国医疗名录结构化标注基准数据集",
-        "标注框架随着模型能力提升自动提高自主性"
+        "设计两层人机协同标注框架，利用跨模型共识减少人工投入。",
+        "假设模型间错误独立性，无需任务特定校准。",
+        "在历史文档上实现高精度标注，并释放首个结构化提取基准。"
       ],
-      "limitations": "['假设模型错误独立，实际可能违反（如共享训练数据）', '仅验证了单一语言和领域（法语历史医疗目录）', '人工审核瓶颈仍存在于分歧案例中']",
+      "limitations": "依赖多模型同时运行，计算成本较高；错误独立性假设在场景相似模型上可能不成立。",
       "improvement_directions": [
-        "研究模型相关性对框架有效性的影响，探索更鲁棒的共识机制",
-        "扩展到多语言、多类型历史文档",
-        "优化分歧案例的审核流程，结合主动学习减少人工工作量"
+        "研究模型选择策略，以最大化错误独立性。",
+        "探索模型共识阈值自适应调整方法。",
+        "应用到更广泛的历史文档类型和语言。"
       ],
-      "engineering_value": "为历史文档大规模结构化标注提供可扩展、成本效益高的方案，显著减少人工标注量同时保证高质量。",
-      "why_relevant": "针对OCR后结构化标注的标注成本和质量瓶颈，提出通用且自动化的解决方案。"
+      "engineering_value": "为大规模历史文档标注提供可扩展的解决方案，平衡成本与精度，适用于数字人文。",
+      "why_relevant": "解决历史文档OCR标注困难的问题，提供高精度数据生产方法，推动领域发展。"
     }
   ]
 }
