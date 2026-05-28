@@ -1,100 +1,98 @@
 {
   "meta": {
-    "report_date": "2026-05-27",
-    "generated_at_utc": "2026-05-27 05:41:45",
+    "report_date": "2026-05-28",
+    "generated_at_utc": "2026-05-28 05:20:06",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 4
+    "count": 6
   },
   "synthesis": {
-    "executive_summary": "今日研究聚焦于提升OCR和文档解析在实际场景中的鲁棒性、可审计性与效率。核心趋势包括：视觉语言模型正替代传统OCR+LLM流水线实现端到端文档理解，强调可验证的证据定位；多语言、多布局的标准化基准推动系统评估；通过显式视觉token监督或人机协同标注等创新方法提升细粒度理解与标注精度。这些成果为医疗、历史及多语言文档处理提供了更可靠、可扩展的解决方案。",
-    "trend_summary": "多模态大模型端到端用于文档理解并强调可解释性与审计性；构建大规模多语言真实文档基准以系统评估能力；探索直接在视觉token上施加监督信号以增强细粒度理解；利用跨模型共识的人机协同策略降低标注成本并提升精度。",
+    "executive_summary": "今日OCR和文档解析领域呈现三大趋势：端到端生成结构化文档、VLM视觉接地可靠性评估、以及细粒度视觉监督微调。ABot-OCR通过强化学习实现页面到Markdown的端到端生成；METATR提供了多语言基准；DV-SFT提出直接监督视觉token的方法，在OCR相关任务上显著提升性能。同时，古籍OCR研究揭示VLM存在视觉接地失败问题，提醒工程应用需谨慎。",
+    "trend_summary": "1）端到端文档解析成为研究热点，从模块化管线向单一VLM转变；2）VLM的视觉基础可靠性受到关注，尤其在低资源历史文档中；3）多语言、细粒度的基准和数据集不断涌现，推动更全面的评估；4）针对VLM的微调技术从文本向视觉token层面深化。",
     "common_innovations": [
-      "视觉语言模型取代传统OCR+LLM流水线，实现端到端文档理解并保留证据定位能力。",
-      "构建多语言、多布局的真实文档评估基准，推动标准化和可复现的ATR测评。",
-      "对视觉token施加显式逐token监督，无需额外标注或架构修改即可提升细粒度理解。",
-      "提出两层跨模型共识的人机协同标注框架，大幅减少人工审核量并保持高精度。"
+      "端到端模型通过强化学习或直接视觉监督，无需复杂管线即可生成结构化文档。",
+      "多语言、多脚本基准的出现促进了模型泛化能力评估。",
+      "token级视觉接地度量方法被提出用于诊断VLM的视觉依赖失败。",
+      "轻量适配器蒸馏结合检索架构在特定领域表现出高效性。"
     ],
     "future_directions": [
-      "探索高效微调策略（如LoRA与DV-SFT结合）以减少医疗等场景对大规模标注数据的依赖。",
-      "将RAPTOR+框架扩展至更多癌症类型及非结构化体检报告，并设计跨机构域适应方法。",
-      "在METATR基准中引入文档退化类型（墨迹、污损、折痕等）以评估模型鲁棒性。",
-      "将DV-SFT的视觉token监督推广到OCR之外的通用视觉理解任务（如图表、票据）。",
-      "研究双三角形标注框架中模型选择策略，最大化错误独立性以提升共识效率。",
-      "开发自适应共识阈值机制，动态平衡自动采纳率与人工审核成本。",
-      "结合结构化信息抽取任务设计面向文档的新评估指标（如提取准确率、字段完整性）。"
+      "设计轻量强化学习策略以降低端到端文档解析的训练开销。",
+      "扩展多语言基准到低资源、古籍和手写文档，并引入更细粒度的错误分析。",
+      "开发显式惩罚无图像支持的文本生成策略来增强VLM的视觉接地可靠性。",
+      "将DV-SFT方法推广到OCR以外的视觉任务如视觉问答，探索自动化token标注。",
+      "研究不同粒度（字符级、短语级）的视觉监督对细粒度理解的影响。",
+      "针对超长文档，设计滑动窗口或层次化编码以突破token长度限制。"
     ],
     "engineering_takeaways": [
-      "RAPTOR+框架可直接用于开发可审计的医疗文档处理系统，减少人工审查80%以上。",
-      "METATR基准可作为选型依据，优先选择在目标语言和布局上表现稳定的VLM或序列模型。",
-      "DV-SFT方法可视为标准SFT的免费升级，在OCR类视觉理解任务中优先使用。",
-      "双三角形标注框架适合历史文档等标注资源稀缺场景，建议先作POC验证跨模型共识效果。"
+      "ABot-OCR可直接用于文档数字化，减少管线维护，但需评估在极端版面（如手写混合）下的性能。",
+      "METATR基准可用于模型选型，但实际落地需根据任务调整评估指标。",
+      "在历史文档场景下应优先选择专门OCR模型，避免通用VLM的幻觉问题。",
+      "DV-SFT可实现黑盒调用，直接提升现有MLLM的OCR任务性能，推荐集成到微调管线。",
+      "PrionNER数据集贡献有限，但可作为罕见病领域NER的基准资源。"
     ],
     "watchlist": [
       {
-        "title": "RAPTOR+: A Visually Grounded Vision-Language Framework to Improve Clinical Trust and Auditability in Automated Cancer Referral Processing",
-        "watch_reason": "医疗领域对可信提取需求高，RAPTOR+的端到端证据定位方案有潜力成为行业标杆，需关注后续跨癌种和跨机构泛化实验。"
-      },
-      {
-        "title": "METATR: A Multilingual, Evolving Benchmark for Automatic Text Recognition",
-        "watch_reason": "多语言基准是系统评估和选型关键，后续版本扩展语言和退化类型后将更具参考价值，建议跟进并贡献方言或罕见脚本数据。"
+        "title": "ABot-OCR Technical Report",
+        "watch_reason": "端到端生成Markdown的架构结合强化学习，具有高工程价值，后续版本可能扩展更多文档类型或降低训练成本。"
       },
       {
         "title": "DV-SFT: Direct Vision Supervision for Fine-Grained Visual Understanding",
-        "watch_reason": "视觉token监督信号方法新颖且兼容现有训练流程，若扩展到通用视觉理解，可能成为MLLM微调标配，建议复现验证其效果。"
+        "watch_reason": "简单高效的微调方法，有望成为VLM在OCR任务中的标配技术，关注其推广到其他视觉任务的效果。"
       },
       {
-        "title": "Double Triangle Annotation: A Scalable Human-in-the-Loop Framework for High-Precision Historical Document Annotation",
-        "watch_reason": "两层共识框架在历史文档上表现优异，后续如果推广到更多文档类型和模型组合，将显著影响标注行业成本结构。"
+        "title": "METATR: A Multilingual, Evolving Benchmark for Automatic Text Recognition",
+        "watch_reason": "作为动态基准，未来版本可能覆盖更多低资源语言和文档类型，影响模型评估标准。"
+      },
+      {
+        "title": "Reading or Guessing? Visual Grounding Failures of Vision-Language Models for OCR in Ancient Greek Editions",
+        "watch_reason": "揭示VLM的关键缺陷，可能推动更可靠的视觉接地训练技术发展，对历史文档OCR应用有重要警示。"
       }
     ]
   },
   "papers": [
     {
-      "title": "RAPTOR+: A Visually Grounded Vision-Language Framework to Improve Clinical Trust and Auditability in Automated Cancer Referral Processing",
-      "summary": "Urgent suspected colorectal cancer (CRC) referrals create operational bottlenecks because semi-structured clinical documents often require manual review and transcription. The original RAPTOR system used Large Language Models for structured extraction but relied on a separate OCR stage, making it vulnerable to handwriting, layout variation, and loss of visual evidence linkage. We present RAPTOR+, a multimodal extension that uses Vision-Language Models (VLMs) for end-to-end referral understanding. We evaluate fine-tuned VLMs, commercial and open-source zero-shot VLMs, and the original OCR-based pipeline on 223 clinically curated CRC urgent referral forms. We also introduce a grounding-aware evaluation framework that measures both extraction accuracy and evidence localisation. Results show a clear grounding gap in zero-shot models. Gemini 2.5 Flash achieved 92.6% Reading Accuracy but only 1.2% Strict Safety. In contrast, fine-tuned Qwen3-VL-8B achieved 96.1% Reading Accuracy and 60.6% Strict Safety, substantially improving verifiable evidence grounding. These findings show that task-specific fine-tuning is essential for reliable, auditable clinical document understanding. RAPTOR+ enables extracted referral decisions to be linked to visual evidence, supporting safer and more efficient cancer referral triage.",
-      "link": "https://arxiv.org/abs/2605.25956v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.25956v1",
+      "title": "ABot-OCR Technical Report",
+      "summary": "We introduce ABot-OCR, an end-to-end vision-language model that transcribes a page image directly into clean Markdown in a single forward pass. By doing so, our approach completely eliminates the need for brittle modular orchestration. To maximize parsing fidelity, we develop a dedicated data engine to provide large-scale, structurally consistent supervision. Furthermore, we propose Decoupled Heterogeneous Document Optimization, a structure-constrained reinforcement learning method that sharpens textual accuracy and strictly enforces markup well-formedness beyond supervised fine-tuning alone. Extensive evaluations demonstrate the superior performance of our framework. On the OmniDocBench v1.5 and v1.6 benchmarks, ABot-OCR achieves state-of-the-art scores of 92.81 and 93.30 among all end-to-end systems, substantially narrowing the performance gap relative to strong pipeline baselines. Finally, comprehensive multilingual text recognition across ten diverse languages further confirms the robust generalizability of ABot-OCR.",
+      "link": "https://arxiv.org/abs/2605.27978v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.27978v1",
       "authors": [
-        "Sofiat Abioye",
-        "Ufaq Khan",
-        "Shazad Ashraf",
-        "Anusha Jose",
-        "Benjamin Wallace",
-        "William Poulett",
-        "Adam Byfield",
-        "Lukman Akanbi",
-        "Muhammad Bilal"
+        "Kaitao Jiang",
+        "Ruiyan Gong",
+        "Xiaolong Cheng",
+        "Kangning Niu",
+        "Tianlun Li",
+        "Mu Xu"
       ],
-      "published": "2026-05-25T15:30:02Z",
-      "updated": "2026-05-25T15:30:02Z",
+      "published": "2026-05-27T05:16:21Z",
+      "updated": "2026-05-27T05:16:21Z",
       "categories": [
         "cs.CV"
       ],
-      "arxiv_id": "2605.25956v1",
-      "score": 20,
+      "arxiv_id": "2605.27978v1",
+      "score": 23,
       "topic_tags": [
-        "临床文档理解",
-        "视觉语言模型",
         "端到端OCR",
-        "证据定位评估"
+        "视觉语言模型",
+        "结构化文档生成",
+        "强化学习",
+        "多语言识别"
       ],
-      "zh_summary": "针对疑似结直肠癌转诊中半结构化文档人工审核负担重、原始RAPTOR系统依赖OCR易受手写和布局影响的问题，提出RAPTOR+多模态扩展，使用视觉语言模型进行端到端转诊理解。在223份临床转诊表单上，细调Qwen3-VL-8B实现96.1%读取准确率和60.6%严格安全性，显著优于零样本模型。引入可验证的证据定位评估框架。",
-      "novelty": "将视觉语言模型端到端应用于临床转诊文档理解，并设计考虑证据定位的评估方法。",
+      "zh_summary": "ABot-OCR 是一个端到端的视觉-语言模型，能将页面图像直接转录为整洁的 Markdown 格式，无需模块化管线。通过专用数据引擎和一种结构约束强化学习方法（Decoupled Heterogeneous Document Optimization）提升文本准确性和标记格式规范性，在 OmniDocBench 上达到 SOTA，并在10种语言上表现鲁棒。",
+      "novelty": "提出端到端生成 Markdown 的范式，并引入结构约束强化学习替代传统微调来保证标记格式准确。",
       "innovation_points": [
-        "提出多模态视觉语言模型RAPTOR+，替代OCR+LLM流水线进行端到端临床文档理解。",
-        "设计基于证据定位的评估框架，同时衡量提取准确性和证据定位能力。",
-        "在真实临床数据集上对比细调与零样本VLM性能，证明任务特定微调的必要性。"
+        "端到端页面到 Markdown 的转换架构",
+        "DECOUPLED HETEROGENEOUS DOCUMENT OPTIMIZATION（结构约束强化学习方法）",
+        "大规模结构一致性数据引擎"
       ],
-      "limitations": "仅针对结直肠癌转诊场景，泛化到其他癌症类型或医疗文档有待验证；微调需要标注数据，实际部署成本较高。",
+      "limitations": "未提及与强管线系统在极端复杂版面（如手写混合、艺术字）上的差距；强化学习计算开销未报告。",
       "improvement_directions": [
-        "探索更高效的微调策略，减少对大规模标注数据的依赖。",
-        "将框架扩展到更多类型的医疗文档和癌症筛查流程。",
-        "研究跨机构部署时的域适应问题。"
+        "探索更轻量的强化学习策略以减少训练开销",
+        "针对手写或变形文本的场景进行适应性优化",
+        "扩展到更多文档类型（如表格、发票）的细粒度结构生成"
       ],
-      "engineering_value": "为医疗文档自动化处理提供可靠、可审计的解决方案，可减少人工审查工作量，提高转诊效率。",
-      "why_relevant": "直接面向OCR鲁棒性挑战，通过多模态方法提升文档理解的可信度，对工业级OCR系统有启发。"
+      "engineering_value": "高，可直接用于文档数字化、自动化排版等场景，减少管线维护成本。",
+      "why_relevant": "代表了端到端 OCR 的最新进展，方法具有可复现性，且强化学习策略可为同行借鉴。"
     },
     {
       "title": "METATR: A Multilingual, Evolving Benchmark for Automatic Text Recognition",
@@ -114,26 +112,70 @@
       "arxiv_id": "2605.26712v1",
       "score": 18,
       "topic_tags": [
-        "文字识别基准",
+        "文本识别基准",
         "多语言OCR",
-        "评估协议",
+        "评估框架",
         "视觉语言模型"
       ],
-      "zh_summary": "提出METATR多语言、渐进式自动文本识别基准，包含29种语言、多种手写和印刷文档。设计标准化提示和归一化方法，评估多种开源和闭源系统，揭示在多样化真实文档上模型性能的差异。",
-      "novelty": "构建覆盖多语言、多脚本、多布局的真实文档基准，并定义可复现的评估协议。",
+      "zh_summary": "METATR 是一个多语言、可演进的自动文本识别基准，包含29种语言、多种脚本和布局的文档。该基准采用标准化提示和归一化方法，并提供动态评估框架，以确保结果可重复且可扩展。评估了多种开源和闭源模型在数据集、语言级性能、手写鲁棒性和计算效率等方面的表现。",
+      "novelty": "构建了覆盖29种语言、具有动态可扩充性的文本识别基准，并定义了标准化的评估流程。",
       "innovation_points": [
-        "构建包含29种语言、多种书写风格和布局的评估数据集。",
-        "设计标准化的提示词和归一化方法，确保评估结果可复现。",
-        "提出动态评估框架，支持未来扩展新模型和数据集。"
+        "多语言（29种）、多脚本、多布局的文档集合",
+        "标准化的提示和归一化方法",
+        "可动态扩展的评估框架"
       ],
-      "limitations": "当前版本v1.0，覆盖文档类型和语言有限；未深入评估模型对噪声和退化的鲁棒性。",
+      "limitations": "当前仅发布 v1.0，覆盖的文档类型和领域可能有限；未提供对不同模型公平训练条件的保证。",
       "improvement_directions": [
-        "扩展更多低资源语言和罕见脚本的样本。",
-        "引入更丰富的文档退化类型（如墨迹、污损）。",
-        "发展基于任务的评估指标，如信息提取准确率。"
+        "扩充更多低资源语言和古籍类文档",
+        "引入更细粒度的错误类型分析（如拼写、风格、布局）",
+        "设计更贴近真实应用的评估指标（如后处理性能）"
       ],
-      "engineering_value": "为ATR系统选型提供真实场景参考，促进模型在跨国、多语言文档处理中的应用。",
-      "why_relevant": "直接服务于OCR领域，解决现有基准缺乏多样性的问题，对任务模型评估和选择有实际指导意义。"
+      "engineering_value": "中，为模型选型和性能对比提供参考基准，但具体工程落地需要结合实际任务调整。",
+      "why_relevant": "为多语言 OCR 评估提供了标准化平台，有助于推动社区研究的公平对比。"
+    },
+    {
+      "title": "Reading or Guessing? Visual Grounding Failures of Vision-Language Models for OCR in Ancient Greek Editions",
+      "summary": "Recent work has shown that Vision-Language Models (VLMs) used for optical character recognition (OCR) can generate plausible but visually unsupported text, suggesting reliance on language priors. Comparing open-weight VLMs with traditional OCR baselines on low-resource Ancient Greek critical editions, we show that VLM errors often remain fluent even when wrong, producing plausible Greek substitutions where traditional engines produce local recognition noise. To analyze visual evidence during decoding, we introduce controlled image perturbations and token-level grounding measures based on conditional versus image-free decoding distributions. Under character-level perturbations, VLMs diverge sharply from the perturbed ground truth while traditional OCR remains comparatively faithful; however, token-level analysis shows that prior reliance is model-specific: in an OCR-specialist model, fluent lexical errors are produced with little reliance on the image, whereas general-purpose VLMs remain conditioned on the visual input even when wrong. Decode-time interventions fail to reliably restore grounding, while post-OCR language-model correction improves several systems only by repairing text after generation. Our results extend prior evidence of OCR language-prior reliance to low-resource historical documents and a broader set of models, showing that fluent output is not necessarily visually grounded and motivating interpretability-driven evaluation beyond aggregate accuracy.",
+      "link": "https://arxiv.org/abs/2605.27750v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.27750v1",
+      "authors": [
+        "Antonia Karamolegkou",
+        "Nicolas Angleraud",
+        "Benoît Sagot",
+        "Thibault Clérice"
+      ],
+      "published": "2026-05-26T22:57:01Z",
+      "updated": "2026-05-26T22:57:01Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CV",
+        "cs.DL"
+      ],
+      "arxiv_id": "2605.27750v1",
+      "score": 17,
+      "topic_tags": [
+        "视觉语言模型",
+        "古籍OCR",
+        "视觉接地",
+        "语言先验",
+        "低资源识别"
+      ],
+      "zh_summary": "本文研究了视觉语言模型（VLM）在古希腊文古籍 OCR 中的视觉基础失败问题，发现 VLM 可能生成语言流畅但视觉上无依据的文本。通过引入受控图像扰动和基于解码分布的 token 级接地度量，分析了不同模型对语言先验的依赖程度。结果表明，专门 OCR 模型在错误时更少依赖图像，而通用 VLM 即使出错也保持视觉条件化；解码时干预难以可靠恢复接地。",
+      "novelty": "在低资源历史文档场景下，系统评估了 VLM 的视觉接地失败，并提出了 token 级接地度量方法。",
+      "innovation_points": [
+        "基于条件/无图像解码分布的 token 级接地度量",
+        "受控图像扰动实验设计",
+        "对传统 OCR 与 VLM 在低资源古籍上的对比分析"
+      ],
+      "limitations": "只针对古希腊文一种低资源语言；未提出有效的接地恢复方法。",
+      "improvement_directions": [
+        "设计更高效的视觉接地训练策略，例如在训练中显式惩罚无图像支持的文本生成",
+        "探索跨模态注意力监督来改善 VLM 的视觉依赖性",
+        "将接地度量集成到评估流程中作为性能指标"
+      ],
+      "engineering_value": "中，为 OCR 系统选择提供了经验依据，尤其是在历史文档场景下应避免盲目使用 VLM。",
+      "why_relevant": "揭示了 VLM 在 OCR 中存在的根本性问题，对模型设计和评估有重要警示作用。"
     },
     {
       "title": "DV-SFT: Direct Vision Supervision for Fine-Grained Visual Understanding",
@@ -156,63 +198,107 @@
       "arxiv_id": "2605.26656v1",
       "score": 12,
       "topic_tags": [
-        "视觉监督",
-        "多模态微调",
-        "细粒度理解",
-        "视觉token"
+        "视觉监督微调",
+        "多模态大模型",
+        "OCR",
+        "视觉 token",
+        "细粒度理解"
       ],
-      "zh_summary": "提出直接视觉监督微调方法，通过为视觉token构造显式token级监督信号，与文本token采用相同下一个词预测目标训练。利用OCR场景中视觉-文本对应关系自动标注视觉token，无需架构修改或额外前向传播。实验表明该方法在三个域内和四个域外基准上均优于标准SFT。",
-      "novelty": "首次在MLLM中对视觉token施加显式逐token监督，且不依赖额外组件。",
+      "zh_summary": "DV-SFT 提出直接对视觉 token 进行监督微调的方法，利用 OCR 场景下的图像-文本对应关系为每个视觉 token 自动标注对应的单词，并通过相同的下一个词预测目标进行训练。该方法无需修改模型架构，在多个 OCR 相关基准上超过标准 SFT，并有效提升了细粒度视觉理解和多模态对齐效率。",
+      "novelty": "首次直接在视觉 token 上施加显式监督，无需额外解码器或前向传播，且利用自标注实现。",
       "innovation_points": [
-        "提出视觉token的显式逐token监督信号构造方法。",
-        "利用OCR场景的视觉-文本对应关系自动标注，实现零额外标注成本。",
-        "无需修改模型架构，兼容现有训练流程。"
+        "直接视觉监督微调（DV-SFT）方法",
+        "基于图像块-单词对应关系的自动视觉 token 标注",
+        "跨模态对齐效率的显著提升"
       ],
-      "limitations": "依赖OCR场景的视觉-文本对应关系，通用场景下难以直接应用；监督信号粒度与OCR标注质量相关。",
+      "limitations": "方法目前依赖于 OCR 场景下的天然对应关系，推广到其他视觉任务（如目标检测）需要额外标注策略。",
       "improvement_directions": [
-        "探索将视觉监督扩展到OCR以外的通用视觉理解任务。",
-        "研究自动标注的质量控制机制，减少噪声。",
-        "结合自监督预训练，增强视觉token语义表达。"
+        "探索其他视觉任务（如视觉问答）的自动化 token 标注方法",
+        "结合对比学习或多任务损失来增强视觉 token 的语义表示",
+        "研究不同粒度（如字符级、短语级）的视觉监督效果"
       ],
-      "engineering_value": "提供一种提升MLLM细粒度视觉理解能力的轻量训练方案，可无缝集成到现有微调流程。",
-      "why_relevant": "直接针对OCR场景中的视觉理解瓶颈，提出的方法可提升OCR相关任务性能。"
+      "engineering_value": "高，实现简单（黑盒调用），可直接用于现有 MLLM 的微调管线，提升 OCR 相关任务性能。",
+      "why_relevant": "提供了一种轻量级、有效且易部署的多模态模型微调方法，尤其适用于 OCR。"
     },
     {
-      "title": "Double Triangle Annotation: A Scalable Human-in-the-Loop Framework for High-Precision Historical Document Annotation",
-      "summary": "Evaluating structured-information extraction from historical documents at scale requires high-precision ground-truth annotations, yet traditional manual labeling is expensive and fully automated pipelines built on large language models are prone to hallucination. We propose Double Triangle Annotation, a two-layer human-in-the-loop framework that leverages cross-model consensus to automate the majority of annotation work while ensuring high-precision outputs. In the first layer, two architecturally independent Multimodal Large Language Models annotate each document in parallel; when they agree, the label is auto-accepted, and disagreements are routed to a human jury. A second layer cross-checks two such systems against each other, escalating residual conflicts to a domain expert. The framework rests on a single assumption -- error independence between models -- requires no distributional priors or task-specific calibration, and becomes more autonomous as model capability improves. On the Guides Rosenwald, a corpus of French medical directories spanning 1887-1906, the framework achieves a final Word Error Rate of 0.003. Applied at scale, model consensus auto-accepts over 85% of 13,595 fields. We release the resulting benchmark -- the first structured-extraction ground truth for the Rosenwald Guides -- to support future work on historical document processing.",
-      "link": "https://arxiv.org/abs/2605.25781v1",
-      "pdf_url": "https://arxiv.org/pdf/2605.25781v1",
+      "title": "ClinicalEncoder26AM: A Multlilingual Diagnosable ColBERT Model; Evidences from the MultiClinNER Shared Task",
+      "summary": "ClinicalEncoder26AM is a multilingual Diagnosable ColBERT for clinical and biomedical texts, which aligns at multiple levels its token-level semantic with ClinicalMap25, a clinical latent space inspired by BioLORD-2023 and enriched with synthetic and annotated supervision. The post-training recipe builds upon BGE-M3, and combines synthetic clinical notes, patient--doctor conversations, and annotated resources such as MedMentions, while considering both named-entity-level and sentence-level representations in a multi-adapter distillation, along with a ColBERT-style retrieval objective. In this system demonstration paper, we evaluate the model in the MultiClinNER shared task by finetuning it as a BIO tagger for patient symptoms, disorders, and procedure spans, using a lightweight two-layer CNN head to improve local boundary detection. The resulting system remains simple, processes most documents in a single 8192-token window, and achieves state-of-the-art multilingual entity recall, while achieving Top 5 overall across all entity types and languages in Character-weighted F1 scores. Training curves further show that ClinicalEncoder26AM is markedly more data-efficient than the base M3 model, supporting the usefulness of its clinical post-training for downstream information extraction. The model can be downloaded on https://huggingface.co/Parallia/ClinicalEncoder26AM-Diagnosable-Colbert-L2-for-multilingual-medical-texts",
+      "link": "https://arxiv.org/abs/2605.28521v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.28521v1",
       "authors": [
-        "Yi Ren"
+        "François Remy"
       ],
-      "published": "2026-05-25T12:29:30Z",
-      "updated": "2026-05-25T12:29:30Z",
+      "published": "2026-05-27T14:20:45Z",
+      "updated": "2026-05-27T14:20:45Z",
       "categories": [
         "cs.CL"
       ],
-      "arxiv_id": "2605.25781v1",
+      "arxiv_id": "2605.28521v1",
       "score": 10,
       "topic_tags": [
-        "人机协同标注",
-        "历史文档",
-        "跨模型共识",
-        "结构化抽取"
+        "临床NLP",
+        "多语言信息抽取",
+        "ColBERT",
+        "适配器蒸馏",
+        "命名实体识别"
       ],
-      "zh_summary": "提出双三角形标注框架，利用跨模型共识实现高精度历史文档标注。两层人机协同：第一层两独立MLLM并行标注，一致则自动采纳，分歧交人工仲裁；第二层交叉检查两套系统，残余冲突由专家处理。在法国医学目录数据集上实现0.003词错误率，85%字段自动采纳。",
-      "novelty": "提出基于模型共识的两层人机协同标注框架，无需分布先验或任务特定校准。",
+      "zh_summary": "ClinicalEncoder26AM 是一个多语言临床文本诊断型 ColBERT 模型，通过在 BGE-M3 上结合合成临床笔记、医患对话和标注资源进行多适配器蒸馏训练，并采用 ColBERT 风格的检索目标。在 MultiClinNER 任务中作为 BIO 标注器微调，使用轻量 CNN 头改进边界检测，在 8192 token 窗口内处理多数文档，并在多语言实体召回和 F1 上取得 SOTA 或 Top5 成绩。训练曲线显示其数据效率高于基础模型。",
+      "novelty": "将 ColBERT 架构与多适配器蒸馏结合用于临床文本，并证明了其数据高效性。",
       "innovation_points": [
-        "设计两层人机协同标注框架，利用跨模型共识减少人工投入。",
-        "假设模型间错误独立性，无需任务特定校准。",
-        "在历史文档上实现高精度标注，并释放首个结构化提取基准。"
+        "多适配器蒸馏策略（实体/句子级）结合 ColBERT 目标",
+        "轻量 CNN 头用于 BIO 标注中的边界检测",
+        "在临床领域验证了 ColBERT 架构的优越数据效率"
       ],
-      "limitations": "依赖多模型同时运行，计算成本较高；错误独立性假设在场景相似模型上可能不成立。",
+      "limitations": "模型聚焦于临床和生物医学文本，泛化到其他领域可能受限；需要在 8192 token 内处理文档，超长文档可能需要截断或切片。",
       "improvement_directions": [
-        "研究模型选择策略，以最大化错误独立性。",
-        "探索模型共识阈值自适应调整方法。",
-        "应用到更广泛的历史文档类型和语言。"
+        "扩展到更长文本的建模（如滑动窗口或层次化编码）",
+        "融合更多样化的临床语料以增强跨疾病领域的能力",
+        "探索更高效的适配器结构以减少推理开销"
       ],
-      "engineering_value": "为大规模历史文档标注提供可扩展的解决方案，平衡成本与精度，适用于数字人文。",
-      "why_relevant": "解决历史文档OCR标注困难的问题，提供高精度数据生产方法，推动领域发展。"
+      "engineering_value": "中，可用于临床文本的信息抽取系统，但需要针对特定任务微调。",
+      "why_relevant": "展示了 ColBERT 架构在低资源医疗 NLP 中的潜力，对多语言临床信息抽取有参考价值。"
+    },
+    {
+      "title": "PrionNER: A Named Entity Recognition Dataset for Prion Disease Biomedical Literature",
+      "summary": "Prion diseases are rare, rapidly progressive, and fatal neurodegenerative disorders that remain difficult to diagnose, particularly in their early stages because of nonspecific clinical presentations. However, to our knowledge, there is no publicly available prion-disease-focused dataset designed to capture a broad range of clinically relevant entities from the biomedical literature. We introduce PrionNER, a manually annotated named entity recognition dataset for prion disease clinical information in PubMed abstracts. The current release comprises 317 abstracts, 2,943 sentences, and 6,955 text-bound entity annotations spanning 15 coarse-grained and 31 fine-grained clinically oriented entity types covering diseases, symptoms, diagnostics, findings, anatomy, treatments, and temporal and statistical evidence. Inter-annotator agreement reaches 81.78 exact-match F1, indicating strong annotation consistency. We benchmark supervised BERT baselines, W2NER, and zero-shot extractors on PrionNER. W2NER is the strongest supervised model, and Gemma-4-31B is the strongest zero-shot model, but the benchmark remains challenging, especially for structurally complex mentions and fine-grained clinically adjacent label distinctions. PrionNER provides a clinically grounded benchmark for prion-disease information extraction and supports research on rare-disease biomedical NLP under low-resource, fine-grained, and non-flat extraction conditions. The dataset, annotation guidelines, and evaluation scripts are available at https://github.com/daotuanan/PrionNER/.",
+      "link": "https://arxiv.org/abs/2605.28375v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.28375v1",
+      "authors": [
+        "An Dao",
+        "Nhan Ly",
+        "Thao Tran",
+        "Yuji Matsumoto",
+        "Akiko Aizawa"
+      ],
+      "published": "2026-05-27T12:15:36Z",
+      "updated": "2026-05-27T12:15:36Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2605.28375v1",
+      "score": 6,
+      "topic_tags": [
+        "命名实体识别",
+        "生物医学NLP",
+        "稀有疾病",
+        "数据集",
+        "细粒度实体"
+      ],
+      "zh_summary": "PrionNER 是一个专门针对朊病毒疾病生物医学文献的人工标注命名实体识别数据集，包含317篇摘要、2943个句子和6955个实体标注，覆盖15个大类、31个细粒度临床实体类型。标注一致性 F1 为81.78。基准测试显示 W2NER 为最强监督模型，Gemma-4-31B 为零样本最强，但任务仍具有挑战性，尤其对结构复杂提及和细粒度标签区分。",
+      "novelty": "首个面向朊病毒疾病的细粒度临床实体识别数据集，提供了严格标注和基准。",
+      "innovation_points": [
+        "手工标注的31个细粒度实体类型，涵盖症状、诊断、治疗等",
+        "对监督和零样本模型进行了全面基准测试",
+        "数据集开放获取，支持低资源、细粒度、非平坦信息抽取研究"
+      ],
+      "limitations": "仅包含 PubMed 摘要，可能缺失全文中的关键实体；规模较小（317篇），限制了深度学习模型的充分训练。",
+      "improvement_directions": [
+        "扩展数据集至全文文献以及更多语种",
+        "探索基于大语言模型的数据增强或远程监督方法",
+        "研究针对细粒度、嵌套实体的专用模型结构"
+      ],
+      "engineering_value": "低，直接用途有限，但可作为罕见病领域 NLP 的基准资源。",
+      "why_relevant": "为罕见病生物医学信息抽取提供了高质量标注数据，可用于评估和促进低资源场景下的 NER。"
     }
   ]
 }
