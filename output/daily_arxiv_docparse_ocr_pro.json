@@ -1,19 +1,332 @@
 {
   "meta": {
-    "report_date": "2026-06-08",
-    "generated_at_utc": "2026-06-08 06:06:06",
+    "report_date": "2026-06-09",
+    "generated_at_utc": "2026-06-09 05:16:39",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 0
+    "count": 6
   },
   "synthesis": {
-    "executive_summary": "今日无新增论文，暂无重要发现。",
-    "trend_summary": "暂无趋势分析。",
-    "common_innovations": [],
-    "future_directions": [],
-    "engineering_takeaways": [],
-    "watchlist": []
+    "executive_summary": "今日研究涵盖文档分析六大方向：历史手稿计量分析、低资源语言词典数字化、轻量级表格提取、VLM隐私保护、医疗智能体OCR与多模态理解、以及少数民族语言模因分析。核心创新集中在弱监督学习、轻量化模型、多阶段框架，以及特定场景的端到端解决方案。整体呈现从通用方法向特定领域深耕、追求低资源高效部署的趋势。",
+    "trend_summary": "研究趋势包括：1) 弱监督与原型学习减少标注依赖；2) 轻量级模型（<30M参数）实现高性能，降低部署成本；3) 多阶段框架将复杂任务分解为识别与理解子任务；4) 利用预训练LLM/VLM迁移至低资源场景；5) 从单纯文本识别转向文档结构理解（表格、页面布局）。",
+    "common_innovations": [
+      "结合Transformer检测与原型学习实现仅需行级标注的手写字符计量分析",
+      "两阶段多语言词典数字化框架，先字符识别后结构解析",
+      "轻量级图像到图模型用于页面级表格提取，参数仅29M",
+      "利用VLM输出边界框实现视觉隐私信息去标识",
+      "连续护理强化学习框架训练医疗智能体，集成多模态感知",
+      "集成学习策略在尼泊尔语模因仇恨检测中显著提升性能"
+    ],
+    "future_directions": [
+      "将原型线重建方法扩展至更多历史手稿，验证其泛化性并适配不同文字系统",
+      "针对极低资源词典，设计无需OCR直接从扫描图映射到词条结构的方法",
+      "在表格提取中整合图表、标题等元素，实现全页面文档结构解析",
+      "结合高精度OCR模型与VLM，提升复杂背景下的隐私文本检测鲁棒性",
+      "在真实临床环境中部署医疗智能体并评估长期护理效果",
+      "融合视觉特征与文本，提升少数民族语言模因的多模态分析能力"
+    ],
+    "engineering_takeaways": [
+      "弱监督方法（如原型学习）可大幅降低OCR标注成本，适合历史文档等标注稀缺场景",
+      "轻量级表格提取模型（如POTATR 29M）可直接集成至文档处理管线，替代重型MLLM",
+      "多阶段框架（先OCR后LLM解析）适合结构化文档数字化，如词典、表格",
+      "VLM输出边界框的方法可用于自动隐私保护，减少人工审核",
+      "医疗智能体系统设计需关注长期对话记忆和多轮推理，LLM+强化学习是有效方案",
+      "集成学习（Soft Voting）可在低资源语言任务中提升分类性能，但需适配任务复杂度"
+    ],
+    "watchlist": [
+      {
+        "title": "POTATR: A Lightweight Image-to-Graph Model for Page-Level Table Extraction",
+        "watch_reason": "轻量高性能表格提取模型，直接部署价值高，可跟踪其在复杂文档（如扫描PDF）上的表现以及后续扩展为通用文档结构解析模型的可能性。"
+      },
+      {
+        "title": "MUDIDI: A Two-Stage Framework for Multilingual Dictionary Digitization with Language Models",
+        "watch_reason": "系统的多语言词典数字化框架，为低资源语言文档处理提供基线，可关注其第二阶段结构解析的改进，对自动化语料库建设有重大意义。"
+      },
+      {
+        "title": "Vision Language Model Helps Private Information De-Identification in Vision Data",
+        "watch_reason": "VLM隐私保护方向实用性强，可追踪其扩展到多语言和复杂场景的进展，以及与其他OCR模型结合的效果。"
+      }
+    ]
   },
-  "papers": []
+  "papers": [
+    {
+      "title": "Leveraging Morphology for Historical Script Metrological Analysis",
+      "summary": "Advances in handwritten text recognition have enabled large-scale transcription of historical documents, but still provide limited access to interpretable visual measurements for paleography, the study of historical scripts. In this paper, our main insight is that morphological script analysis, in particular the capacity to learn character prototypes from line-level transcriptions, enables the definition of scalable, meaningful, and stable paleographic measurements. More precisely, we leverage a transformer-based detection architecture together with a prototype-based line reconstruction module to learn prototypical characters and their occurrence, deformation, and positioning. Our contributions are twofold. First, we introduce a deep architecture and learning methodology that enables efficient character modeling with only line-level transcription supervision, significantly improving over the Learnable Typewriter baseline and enabling accurate character bounding box prediction, unlocking its potential for paleographic measurements. Second, we introduce and demonstrate the paleographical relevance of automatic measurements enabled by our architecture for characters, bi-grams, and spaces between graphical units. For this demonstration, we extend the annotations of the codex Paris, BnF, fr. 2813, commissioned in the late fourteenth century by Charles V and copied by four hands, to 160 pages. We visualize our measurements over these pages, showing how they enable us not only to differentiate graphical profiles, but also to discover and analyze subtle variations. This case study outlines the scalability of our approach and its frugality in terms of required training data, since a single column of text is sufficient to compute our measurements on each of the 160 pages. Data and code are publicly available at: https://malamatenia.github.io/morphology4metrology-analysis.",
+      "link": "https://arxiv.org/abs/2606.09446v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.09446v1",
+      "authors": [
+        "Malamatenia Vlachou Efstathiou",
+        "Raphaël Baena",
+        "Dominique Stutzmann",
+        "Mathieu Aubry"
+      ],
+      "published": "2026-06-08T12:55:02Z",
+      "updated": "2026-06-08T12:55:02Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2606.09446v1",
+      "score": 17,
+      "topic_tags": [
+        "手写文本识别",
+        "古文字学",
+        "原型学习",
+        "弱监督检测",
+        "Transformer"
+      ],
+      "zh_summary": "本文提出利用形态学分析进行历史手稿计量分析。核心方法结合基于Transformer的检测架构和原型线重建模块，仅通过行级转录监督学习字符原型及其出现、变形和定位，实现对字符、双字母组和间距的自动计量测量。在14世纪手稿上验证了该方法可区分图形轮廓并发现细微变化。",
+      "novelty": "首次将基于原型的线重建方法与Transformer检测架构结合，实现仅需行级标注的高效字符建模，并应用于古文字学计量分析。",
+      "innovation_points": [
+        "方法设计：结合Transformer检测架构与原型线重建模块，从行级转录中学习字符原型",
+        "训练范式：仅需行级转录监督，无需字符级标注",
+        "任务定义：将古文字学计量分析定义为可自动测量的视觉任务"
+      ],
+      "limitations": "仅对单一手稿进行了验证，泛化性未知；实验规模较小（160页）。",
+      "improvement_directions": [
+        "扩展至更多历史手稿数据集以验证泛化性",
+        "探索无监督或半监督原型学习以减少标注需求",
+        "将方法应用于更多古文字学分析任务"
+      ],
+      "engineering_value": "自动化的古文字计量分析可替代人工测量，提高历史文献研究效率。",
+      "why_relevant": "提出了仅需行级标注即可实现字符级别检测的方法，对OCR中的弱监督检测有参考价值。"
+    },
+    {
+      "title": "MUDIDI: A Two-Stage Framework for Multilingual Dictionary Digitization with Language Models",
+      "summary": "Multilingual dictionaries are among the most valuable documentary resources for low-resource and endangered languages, yet many remain available only as scans. For many decades, their digitization and conversion into a machine-readable format was nearly impossible due to language-specific scripts, complex multi-column layouts full of entries with abbreviations and cross-references. Recent vision-language models offer a promising solution, but it is unclear how well they preserve characters, markup, and process lexicographic structure. We introduce MUDIDI, a two-stage framework for multi-lingual dictionary digitization. Stage One evaluates the quality of character recognition and markup preservation; Stage Two focuses on dictionary entry segmentation with subsequent mapping into a machine-readable lexicographic schema, SIL's Multi-Dictionary Formatter. We also release a dataset that consists of human-annotated lexicographic entries collected from 30 public-domain dictionaries featuring diverse writing systems, language families, and formats. We benchmark OCR systems, general-purpose Large Language Models (LLMs), and Vision Language Models (VLMs) on the dataset, demonstrating superior performance of LLMs across most writing systems and languages in both stages, and provide practical guidelines on improving the results for more challenging scenarios. Finally, we show that supplementing additional information, such as dictionary introduction, to the LLMs can improve the quality of the digitized dictionary. Github: https://github.com/DavidSamuell/MUDIDI-Pipeline-for-Digitization-of-Multilingual-Dictionary/",
+      "link": "https://arxiv.org/abs/2606.09435v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.09435v1",
+      "authors": [
+        "David Setiawan",
+        "Temuulen Khishigsuren",
+        "Milind Agarwal",
+        "Pagnarith Pit",
+        "Aso Mahmudi",
+        "Ekaterina Vylomova"
+      ],
+      "published": "2026-06-08T12:44:47Z",
+      "updated": "2026-06-08T12:44:47Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2606.09435v1",
+      "score": 17,
+      "topic_tags": [
+        "词典数字化",
+        "LLM",
+        "VLM",
+        "低资源语言",
+        "文档解析"
+      ],
+      "zh_summary": "提出MUDIDI，一个两阶段多语言词典数字化框架。第一阶段评估字符识别和标记保存质量，第二阶段进行词条分割并映射为机器可读的词典格式。构建了包含30本公共领域词典的人工标注数据集，评估了OCR、LLM和VLM，发现LLM在大多数书写系统中表现最优。",
+      "novelty": "首次系统研究多语言词典数字化中的字符保存、标记和词条结构恢复问题，并提供了基准数据集和两阶段框架。",
+      "innovation_points": [
+        "架构：两阶段框架，分别处理字符识别与结构解析",
+        "数据：构建了30本多语言词典的人工标注数据集",
+        "训练范式：利用LLM进行词典数字化，并引入字典前言信息提升效果"
+      ],
+      "limitations": "依赖于预训练LLM/VLM，对罕见书写系统效果未知；第二阶段词条分割仍存在挑战。",
+      "improvement_directions": [
+        "针对极低资源语言的词典数字化进行优化",
+        "改进词条边界检测方法，减少对后处理依赖",
+        "引入更丰富的词典结构信息（如交叉引用）"
+      ],
+      "engineering_value": "可直接应用于低资源语言词典的数字化，加速语言资源建设。",
+      "why_relevant": "涉及OCR在复杂多栏、缩写等场景下的应用，对文档解析中的结构化恢复有参考。"
+    },
+    {
+      "title": "POTATR: A Lightweight Image-to-Graph Model for Page-Level Table Extraction",
+      "summary": "Large-scale document processing requires contextually aware table extraction (TE) that is both accurate and efficient. Yet current approaches require billions of parameters, hundreds of autoregressive steps, or costly API inference. Motivated by this, we introduce the Page-Object Table Transformer (POTATR), a lightweight 29M parameter image-to-graph model that extends the Table Transformer (TATR) for contextualized page-level TE. POTATR outperforms all models tested on the PubTables-v2 Single Pages benchmark -- including frontier MLLMs -- achieving $\\textrm{GriTS}_\\textrm{Con}$ of 0.964 while running over 130$\\times$ faster at roughly 300$\\times$ lower cost. Further, POTATR's output is spatially grounded: every recognized element has a bounding box, enabling visual verification and geometric text assignment. As a result, POTATR performs unified page-level TE while composing with other models, enabling extension to scanned documents via external OCR and to full-document TE via techniques like cross-page merging. Code and models will be released.",
+      "link": "https://arxiv.org/abs/2606.09788v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.09788v1",
+      "authors": [
+        "Brandon Smock",
+        "Libin Liang",
+        "Max Sokolov",
+        "Amrit Ramesh",
+        "Valerie Faucon-Morin",
+        "Tayyibah Khanam",
+        "Maury Courtland"
+      ],
+      "published": "2026-06-08T17:43:44Z",
+      "updated": "2026-06-08T17:43:44Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2606.09788v1",
+      "score": 16,
+      "topic_tags": [
+        "表格提取",
+        "轻量级模型",
+        "图像到图",
+        "页面级理解",
+        "文档结构分析"
+      ],
+      "zh_summary": "提出POTATR，一个轻量级（29M参数）的图像到图模型，用于页面级表格提取。扩展了Table Transformer，在PubTables-v2上达到GriTS_Con 0.964，运行速度快130倍，成本降低约300倍。输出空间有界框，支持视觉验证和几何文本分配，易于扩展到扫描文档和跨页面合并。",
+      "novelty": "首个兼顾页面级表格提取的轻量级模型，性能超越前沿MLLM的同时大幅降低计算成本。",
+      "innovation_points": [
+        "架构：轻量级图像到图模型，基于TATR扩展",
+        "任务定义：页面级表格提取，输出空间有界框",
+        "训练范式：利用表格结构监督训练，无需预训练"
+      ],
+      "limitations": "仅针对表格提取，未涉及复杂文档布局的其他元素；跨页面合并依赖后处理。",
+      "improvement_directions": [
+        "扩展至包含多种文档元素（如图表、标题）的页面级理解",
+        "改进跨页面合并算法，提升全文档处理能力",
+        "探索更高效的图结构表示以处理更大规模文档"
+      ],
+      "engineering_value": "低资源需求、高性能的表格提取模型可直接部署于文档处理系统。",
+      "why_relevant": "接近实时的页面级表格提取对文档OCR后处理有重要意义。"
+    },
+    {
+      "title": "Vision Language Model Helps Private Information De-Identification in Vision Data",
+      "summary": "Visual Language Models (VLMs) have gained significant popularity due to their remarkable ability. While various methods exist to enhance privacy in text-based applications, privacy risks associated with visual inputs remain largely overlooked such as Protected Health Information (PHI) in medical images. To tackle this problem, two key tasks: accurately localizing sensitive text and processing it to ensure privacy protection should be performed. To address this issue, we introduce VisShield (Vision Privacy Shield), an end-to-end framework designed to enhance the privacy awareness of VLMs. Our framework consists of two key components: a specialized instruction-tuning dataset OPTIC (Optical Privacy Text Instruction Collection) and a tailored training methodology. The dataset provides diverse privacy-oriented prompts that guide VLMs to perform targeted Optical Character Recognition (OCR) for precise localization of sensitive text, while the training strategy ensures effective adaptation of VLMs to privacy-preserving tasks. Specifically, our approach ensures that VLMs recognize privacy-sensitive text and output precise bounding boxes for detected entities, allowing for effective masking of sensitive information. Extensive experiments demonstrate that our framework significantly outperforms existing approaches in handling private information, paving the way for privacy-preserving applications in vision-language models. Our dataset and code can be found here.",
+      "link": "https://arxiv.org/abs/2606.09132v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.09132v1",
+      "authors": [
+        "Tiejin Chen",
+        "Pingzhi Li",
+        "Kaixiong Zhou",
+        "Tianlong Chen",
+        "Hua Wei"
+      ],
+      "published": "2026-06-08T07:30:20Z",
+      "updated": "2026-06-08T07:30:20Z",
+      "categories": [
+        "cs.AI"
+      ],
+      "arxiv_id": "2606.09132v1",
+      "score": 16,
+      "topic_tags": [
+        "隐私保护",
+        "VLM",
+        "目标OCR",
+        "敏感文本检测",
+        "医疗图像"
+      ],
+      "zh_summary": "提出VisShield框架，用于增强VLM对视觉输入中隐私信息的保护。包含两个组件：OPTIC数据集，包含多样的隐私导向提示，引导VLM进行目标OCR以精确定位敏感文本；训练方法使VLM能输出敏感文本的边界框，便于掩码处理。实验表明在隐私保护任务上显著优于现有方法。",
+      "novelty": "首次系统性地处理VLM视觉输入中的隐私信息，结合目标OCR和边界框定位实现端到端保护。",
+      "innovation_points": [
+        "数据集：构建OPTIC，包含隐私文本OCR指令数据集",
+        "方法设计：端到端框架，VLM输出敏感文本边界框",
+        "任务定义：将隐私信息去标识定义为VLM的OCR与定位任务"
+      ],
+      "limitations": "依赖于预训练VLM的OCR性能，可能对模糊或复杂背景文本检测不佳；仅针对英文文本。",
+      "improvement_directions": [
+        "扩展至多语言场景",
+        "结合更高精度的OCR模型提升定位准确性",
+        "探索对抗性攻击下的鲁棒性"
+      ],
+      "engineering_value": "可用于医疗图像等敏感场景的自动隐私保护，降低人工审查成本。",
+      "why_relevant": "结合OCR与VLM进行隐私信息检测，为文档中的敏感文本处理提供思路。"
+    },
+    {
+      "title": "Baichuan-M4: A Clinical-Grade Medical Agent System for Continuous Care",
+      "summary": "Baichuan-M4 is Baichuan Intelligence's clinical-grade medical large model, designed for \\emph{continuous care} rather than single-turn medical question answering. It is built as a coordinated medical agent system around three pillars: \\textbf{Baichuan-Harness}, a unified runtime that keeps reinforcement-learning training and real-world deployment consistent while enforcing action constraints, tool use, long-term patient memory, and multi-agent coordination; a \\textbf{core reasoning model} trained with a continuous-care reinforcement-learning framework that integrates span-level reward modeling (SPAR++), reasoning-path compression, curriculum learning, and stabilized policy optimization; and a \\textbf{clinical tool layer} for patient-memory management, authoritative evidence-based retrieval, and multimodal medical perception across documents, X-rays, and dermatology. On a cross-dimensional medical evaluation suite, Baichuan-M4 attains leading results in static medical knowledge and safety, dynamic OSCE-style consultation, long-context clinical memory, evidence-based retrieval, medical document OCR, and multimodal image understanding, while lowering the hallucination rate to 3.3\\%.",
+      "link": "https://arxiv.org/abs/2606.08982v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.08982v1",
+      "authors": [
+        "Aiyuan Yang",
+        "Chengfeng Dou",
+        "Da Pan",
+        "Dian Wang",
+        "Fan Yang",
+        "Fei Deng",
+        "Fei Li",
+        "Guangwei Ai",
+        "Hui Liu",
+        "Hongda Zhang",
+        "Jinyang Tai",
+        "Kai Lu",
+        "Lijun Liu",
+        "Linwei Chen",
+        "Linyu Li",
+        "Meiqing Guo",
+        "Peidong Guo",
+        "Qiang Ju",
+        "Rihui Xin",
+        "Shuai Wang",
+        "XinKai Ma",
+        "Xudong Chen",
+        "Yichuan Mo",
+        "Canbin Piao",
+        "Leyi Pan",
+        "Yihe Luo",
+        "Zian Wang"
+      ],
+      "published": "2026-06-08T03:27:05Z",
+      "updated": "2026-06-08T03:27:05Z",
+      "categories": [
+        "cs.AI"
+      ],
+      "arxiv_id": "2606.08982v1",
+      "score": 10,
+      "topic_tags": [
+        "医疗智能体",
+        "持续护理",
+        "强化学习",
+        "多模态感知",
+        "文档OCR"
+      ],
+      "zh_summary": "介绍Baichuan-M4，一个面向持续护理的临床级医疗智能体系统。围绕三大支柱构建：Baichuan-Harness统一运行时、连续护理强化学习训练的核心推理模型、临床工具层。在静态医学知识、动态咨询、长上下文临床记忆、循证检索、医学文档OCR和多模态理解等基准上取得领先，幻觉率降至3.3%。",
+      "novelty": "首个专注于持续护理而非单轮问答的临床级医疗智能体系统，结合强化学习与多模态感知。",
+      "innovation_points": [
+        "训练范式：连续护理强化学习框架，引入跨度级奖励建模和推理路径压缩",
+        "架构：多智能体协调系统，集成患者记忆、检索和多模态感知",
+        "任务定义：面向长期连续护理的医疗对话"
+      ],
+      "limitations": "系统复杂度高，部署成本可能较高；未在真实临床环境中大规模验证。",
+      "improvement_directions": [
+        "简化系统架构以降低部署门槛",
+        "在真实医疗场景中进行前瞻性临床试验",
+        "增强对罕见病和长尾知识的处理"
+      ],
+      "engineering_value": "可作为医疗AI系统的基础架构，支持从问诊到长期管理的全流程。",
+      "why_relevant": "展示了医疗文档OCR在智能体中的应用，对文档解析服务于特定领域有参考。"
+    },
+    {
+      "title": "TeamHerald@CHIPSAL 2026: Hate Speech Detection and Sentiment Analysis of Nepali Memes using Transformer-based Architectures and Ensemble Learning",
+      "summary": "The analysis of internet memes in the Nepali language is complicated by frequent code-mixing and a lack of established baseline resources. While memes inherently combine visual and textual elements, this study focuses on a text-centric approach by extracting embedded text using an OCR layer and modeling it with Transformer-based architectures. We evaluate six distinct models and investigate the comparative effectiveness of Hard and Soft Voting ensemble strategies across two tasks: binary hate speech detection and three-class sentiment analysis. Experimental results show that a standalone decoder-only model achieved the highest performance for binary classification, whereas the Soft Voting ensemble performed best for the multi-class sentiment task, yielding a 15.8% relative improvement in Macro F1-score over the strongest standalone baseline. These findings suggest that ensemble strategies behave differently across binary and multi-class tasks, highlighting the importance of selecting aggregation methods suited to the classification objective.",
+      "link": "https://arxiv.org/abs/2606.08770v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.08770v1",
+      "authors": [
+        "Ashish Acharya",
+        "Anish Khatiwada",
+        "Rohit Khadka",
+        "Pragya Aryal"
+      ],
+      "published": "2026-06-07T18:20:19Z",
+      "updated": "2026-06-07T18:20:19Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "arxiv_id": "2606.08770v1",
+      "score": 9,
+      "topic_tags": [
+        "仇恨言论检测",
+        "情感分析",
+        "尼泊尔语",
+        "集成学习",
+        "模因分析"
+      ],
+      "zh_summary": "研究尼泊尔语网络模因中的仇恨语音检测和情感分析。采用文本中心方法，通过OCR提取嵌入文本，使用Transformer模型和集成学习。实验发现：解码器仅模型在二分类中最佳，Soft Voting集成在三分类中比基线Macro F1提升15.8%。",
+      "novelty": "首次系统探索尼泊尔语模因的文本分析，比较不同集成策略在二分类与多分类任务中的差异。",
+      "innovation_points": [
+        "训练范式：对比硬投票和软投票集成策略在不同分类任务中的效果",
+        "数据集：构建尼泊尔语模因文本提取与标注流程",
+        "模型应用：验证解码器仅模型在低资源语言模因分析中的有效性"
+      ],
+      "limitations": "仅使用文本信息，未利用视觉模态；数据集规模有限，可能未覆盖多样模因类型。",
+      "improvement_directions": [
+        "结合视觉特征进行多模态分析",
+        "扩展数据集以涵盖更多主题和风格",
+        "针对代码混合特点设计更优的语言模型"
+      ],
+      "engineering_value": "可为尼泊尔语社交媒体的仇恨言论监控提供技术方案。",
+      "why_relevant": "涉及OCR在低资源语言模因分析中的应用，展示了文本提取后处理对任务的影响。"
+    }
+  ]
 }
