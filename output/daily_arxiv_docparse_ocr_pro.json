@@ -1,51 +1,59 @@
 {
   "meta": {
-    "report_date": "2026-06-09",
-    "generated_at_utc": "2026-06-09 05:16:39",
+    "report_date": "2026-06-10",
+    "generated_at_utc": "2026-06-10 05:48:00",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
     "count": 6
   },
   "synthesis": {
-    "executive_summary": "今日研究涵盖文档分析六大方向：历史手稿计量分析、低资源语言词典数字化、轻量级表格提取、VLM隐私保护、医疗智能体OCR与多模态理解、以及少数民族语言模因分析。核心创新集中在弱监督学习、轻量化模型、多阶段框架，以及特定场景的端到端解决方案。整体呈现从通用方法向特定领域深耕、追求低资源高效部署的趋势。",
-    "trend_summary": "研究趋势包括：1) 弱监督与原型学习减少标注依赖；2) 轻量级模型（<30M参数）实现高性能，降低部署成本；3) 多阶段框架将复杂任务分解为识别与理解子任务；4) 利用预训练LLM/VLM迁移至低资源场景；5) 从单纯文本识别转向文档结构理解（表格、页面布局）。",
+    "executive_summary": "今日OCR/文档解析研究进展聚焦于多语言、历史文档和表格的结构化理解，以及隐私保护与图表数据校正。亮点包括轻量级表格提取模型POTATR凭借极高性价比超越MLLM，MUDIDI框架利用LLM实现多语言词典数字化，以及VisShield通过VLM进行敏感文本定位与去标识化。同时，形态学方法实现了历史手稿的自动计量，ChartLens则通过双分支框架增强了图表数据校正与摘要生成的事实性。技术趋势显示，基于Transformer和原型学习的细粒度文档分析、LLM在结构化抽取中的优势、以及融合OCR与视觉语言模型的隐私保护成为研究热点。",
+    "trend_summary": "1. 从行级标注到字符原型的弱监督学习成为历史手稿分析主流。2. LLM与轻量CNN/Transformers在文档结构化任务中表现互补，LLM擅长复杂结构理解，轻量模型在效率上优势明显。3. 视觉语言模型（VLM）正从通用理解向特定任务（隐私保护、图表校正）微调发展。4. 性能评估日益强调人类对齐与事实性，如DRG指标和OCR辅助证据归因。",
     "common_innovations": [
-      "结合Transformer检测与原型学习实现仅需行级标注的手写字符计量分析",
-      "两阶段多语言词典数字化框架，先字符识别后结构解析",
-      "轻量级图像到图模型用于页面级表格提取，参数仅29M",
-      "利用VLM输出边界框实现视觉隐私信息去标识",
-      "连续护理强化学习框架训练医疗智能体，集成多模态感知",
-      "集成学习策略在尼泊尔语模因仇恨检测中显著提升性能"
+      "弱监督从行级转录学习字符原型，降低对字符级标注的依赖。",
+      "利用LLM实现跨语言字典的结构化分割与映射，释放多语言数据集。",
+      "轻量图模型（如POTATR）以29M参数在表格提取上超越庞大MLLM，成本降低300倍。",
+      "VLM通过指令微调实现敏感文本的精确定位与去标识化，端到端处理。",
+      "双分支框架分别处理图表数据校正与摘要生成，结合OCR增强事实性。"
     ],
     "future_directions": [
-      "将原型线重建方法扩展至更多历史手稿，验证其泛化性并适配不同文字系统",
-      "针对极低资源词典，设计无需OCR直接从扫描图映射到词条结构的方法",
-      "在表格提取中整合图表、标题等元素，实现全页面文档结构解析",
-      "结合高精度OCR模型与VLM，提升复杂背景下的隐私文本检测鲁棒性",
-      "在真实临床环境中部署医疗智能体并评估长期护理效果",
-      "融合视觉特征与文本，提升少数民族语言模因的多模态分析能力"
+      "探索无监督/半监督的原型学习，减少对行级标注的依赖，应用于更多历史风格手稿。",
+      "将MUDIDI框架扩展到多列混合布局及手写词典，结合视觉-语言模型协同。",
+      "为POTATR集成端到端OCR，实现扫描文档表格的完全自动化提取，并研究跨页合并策略。",
+      "将VisShield扩展到多语言敏感文本检测，并测试对抗攻击下的鲁棒性。",
+      "利用DRG指标指导模型自适应分配测试时计算资源，优化推理效率。",
+      "为ChartLens引入端到端联合训练及图表类型检测，处理3D、嵌套等复杂图表。",
+      "研究跨语言词典实体对齐，降低LLM推理成本，推动低资源语言数字化。",
+      "结合形态学与深度学习，建模个体书写差异，提升历史文档字符级分析精度。"
     ],
     "engineering_takeaways": [
-      "弱监督方法（如原型学习）可大幅降低OCR标注成本，适合历史文档等标注稀缺场景",
-      "轻量级表格提取模型（如POTATR 29M）可直接集成至文档处理管线，替代重型MLLM",
-      "多阶段框架（先OCR后LLM解析）适合结构化文档数字化，如词典、表格",
-      "VLM输出边界框的方法可用于自动隐私保护，减少人工审核",
-      "医疗智能体系统设计需关注长期对话记忆和多轮推理，LLM+强化学习是有效方案",
-      "集成学习（Soft Voting）可在低资源语言任务中提升分类性能，但需适配任务复杂度"
+      "POTATR可直接集成到企业级文档流水线，提供高性价比的表格提取。",
+      "MUDIDI与LLM的组合适用于低资源语言词典的批量数字化。",
+      "VisShield可嵌入医疗影像系统，自动化PHI去标识化。",
+      "ChartLens适用于数据报告自动生成与验证，提升摘要事实性。",
+      "形态学方法可辅助古文字学家的量化分析，降低人工成本。"
     ],
     "watchlist": [
       {
-        "title": "POTATR: A Lightweight Image-to-Graph Model for Page-Level Table Extraction",
-        "watch_reason": "轻量高性能表格提取模型，直接部署价值高，可跟踪其在复杂文档（如扫描PDF）上的表现以及后续扩展为通用文档结构解析模型的可能性。"
+        "title": "Leveraging Morphology for Historical Script Metrological Analysis",
+        "watch_reason": "弱监督字符原型学习对历史文档分析具有泛化潜力，未来可能推动更多手写风格的自动化计量。"
       },
       {
         "title": "MUDIDI: A Two-Stage Framework for Multilingual Dictionary Digitization with Language Models",
-        "watch_reason": "系统的多语言词典数字化框架，为低资源语言文档处理提供基线，可关注其第二阶段结构解析的改进，对自动化语料库建设有重大意义。"
+        "watch_reason": "多语言词典数字化框架结合LLM，有望成为低资源语言数字化的标准方案，释放大量历史词典数据。"
+      },
+      {
+        "title": "POTATR: A Lightweight Image-to-Graph Model for Page-Level Table Extraction",
+        "watch_reason": "轻量级高精度表格提取模型，具有极高工程价值，其扩展至扫描文档和跨页合并的能力值得跟踪。"
       },
       {
         "title": "Vision Language Model Helps Private Information De-Identification in Vision Data",
-        "watch_reason": "VLM隐私保护方向实用性强，可追踪其扩展到多语言和复杂场景的进展，以及与其他OCR模型结合的效果。"
+        "watch_reason": "VLM在隐私保护中的新应用，医学影像领域需求强烈，其多语言扩展和鲁棒性研究将有重要影响。"
+      },
+      {
+        "title": "ChartLens: A Dual-Branch Framework for Chart Data Correction and Factual Summary Refinement",
+        "watch_reason": "图表理解中的数据校正与事实性增强是该领域痛点，其OCR辅助证据归因方法有参考价值。"
       }
     ]
   },
@@ -71,25 +79,24 @@
       "topic_tags": [
         "手写文本识别",
         "古文字学",
-        "原型学习",
-        "弱监督检测",
+        "字符原型学习",
         "Transformer"
       ],
-      "zh_summary": "本文提出利用形态学分析进行历史手稿计量分析。核心方法结合基于Transformer的检测架构和原型线重建模块，仅通过行级转录监督学习字符原型及其出现、变形和定位，实现对字符、双字母组和间距的自动计量测量。在14世纪手稿上验证了该方法可区分图形轮廓并发现细微变化。",
-      "novelty": "首次将基于原型的线重建方法与Transformer检测架构结合，实现仅需行级标注的高效字符建模，并应用于古文字学计量分析。",
+      "zh_summary": "本文提出一种基于形态学的历史手写文本计量分析方法，利用基于Transformer的检测架构和原型重建模块，仅需行级转录标注即可学习字符原型，并实现字符边界框预测，为古文字学提供可扩展、有意义的度量。方法在14世纪手稿上验证，能区分不同抄写员的图形特征并发现细微变化。",
+      "novelty": "将形态学分析与深度学习结合，提出从行级标注学习字符原型的方法，实现无需字符级标注的自动古文字测量。",
       "innovation_points": [
-        "方法设计：结合Transformer检测架构与原型线重建模块，从行级转录中学习字符原型",
-        "训练范式：仅需行级转录监督，无需字符级标注",
-        "任务定义：将古文字学计量分析定义为可自动测量的视觉任务"
+        "提出基于Transformer的检测架构+原型行重建模块，从行级转录监督学习字符原型及其位置与变形。",
+        "引入字符、双字母、间距等自动计量指标，并验证其古文字学意义。",
+        "扩展了14世纪手稿的标注至160页，用于验证方法有效性。"
       ],
-      "limitations": "仅对单一手稿进行了验证，泛化性未知；实验规模较小（160页）。",
+      "limitations": "当前方法依赖行级标注，可能对高度粘连或变形严重的字符建模困难；原型数量需预设，可能不适用于未知字符集。",
       "improvement_directions": [
-        "扩展至更多历史手稿数据集以验证泛化性",
-        "探索无监督或半监督原型学习以减少标注需求",
-        "将方法应用于更多古文字学分析任务"
+        "探索无监督或半监督的原型学习方法，减少对标注的依赖。",
+        "将方法推广到更多历史时期和手写风格的文档。",
+        "融合字形风格特征，提升对个体书写差异的建模能力。"
       ],
-      "engineering_value": "自动化的古文字计量分析可替代人工测量，提高历史文献研究效率。",
-      "why_relevant": "提出了仅需行级标注即可实现字符级别检测的方法，对OCR中的弱监督检测有参考价值。"
+      "engineering_value": "为历史手稿的数字化分析提供了一种自动化、定量化的工具，可辅助古文字学家进行大规模风格辨识和演变研究。",
+      "why_relevant": "涉及行级文本检测与字符建模，与OCR领域的端到端文档理解密切相关。"
     },
     {
       "title": "MUDIDI: A Two-Stage Framework for Multilingual Dictionary Digitization with Language Models",
@@ -114,25 +121,24 @@
       "topic_tags": [
         "词典数字化",
         "LLM",
-        "VLM",
-        "低资源语言",
-        "文档解析"
+        "多语言OCR",
+        "文档结构化"
       ],
-      "zh_summary": "提出MUDIDI，一个两阶段多语言词典数字化框架。第一阶段评估字符识别和标记保存质量，第二阶段进行词条分割并映射为机器可读的词典格式。构建了包含30本公共领域词典的人工标注数据集，评估了OCR、LLM和VLM，发现LLM在大多数书写系统中表现最优。",
-      "novelty": "首次系统研究多语言词典数字化中的字符保存、标记和词条结构恢复问题，并提供了基准数据集和两阶段框架。",
+      "zh_summary": "MUDIDI是一个两阶段多语言词典数字化框架：第一阶段评估字符识别与标记保留质量，第二阶段进行词典条目分割并映射到机器可读格式。释放了包含30种公开领域词典的人工标注数据集，基准测试显示LLM在多数语言中表现优于OCR和VLM。",
+      "novelty": "针对多语言词典数字化，提出了两阶段评估与转换框架，并构建了涵盖多语种、多格式的标注数据集。",
       "innovation_points": [
-        "架构：两阶段框架，分别处理字符识别与结构解析",
-        "数据：构建了30本多语言词典的人工标注数据集",
-        "训练范式：利用LLM进行词典数字化，并引入字典前言信息提升效果"
+        "提出两阶段框架，分别关注字符识别质量与词典结构理解。",
+        "构建了含30种不同语言和格式的词典数据集。",
+        "验证了LLM在词典结构化任务中的优势，并提出添加词典前言可改善结果。"
       ],
-      "limitations": "依赖于预训练LLM/VLM，对罕见书写系统效果未知；第二阶段词条分割仍存在挑战。",
+      "limitations": "主要针对公共领域单页词典扫描，对复杂布局或手写词典的适用性未充分测试；LLM推理成本可能较高。",
       "improvement_directions": [
-        "针对极低资源语言的词典数字化进行优化",
-        "改进词条边界检测方法，减少对后处理依赖",
-        "引入更丰富的词典结构信息（如交叉引用）"
+        "扩展到更复杂的页面布局（如多列混合），研究视觉-语言模型的协同。",
+        "探索更高效的小模型或知识蒸馏方法，降低推理成本。",
+        "研究跨语言词典的实体对齐与脱机技术。"
       ],
-      "engineering_value": "可直接应用于低资源语言词典的数字化，加速语言资源建设。",
-      "why_relevant": "涉及OCR在复杂多栏、缩写等场景下的应用，对文档解析中的结构化恢复有参考。"
+      "engineering_value": "为低资源语言和濒危语言的词典数字化提供了实用工具，可直接集成到现有文献保存工作流中。",
+      "why_relevant": "涉及OCR后处理与结构理解，是文档解析的重要应用场景。"
     },
     {
       "title": "POTATR: A Lightweight Image-to-Graph Model for Page-Level Table Extraction",
@@ -157,26 +163,25 @@
       "score": 16,
       "topic_tags": [
         "表格提取",
-        "轻量级模型",
-        "图像到图",
+        "轻量模型",
         "页面级理解",
-        "文档结构分析"
+        "文档处理"
       ],
-      "zh_summary": "提出POTATR，一个轻量级（29M参数）的图像到图模型，用于页面级表格提取。扩展了Table Transformer，在PubTables-v2上达到GriTS_Con 0.964，运行速度快130倍，成本降低约300倍。输出空间有界框，支持视觉验证和几何文本分配，易于扩展到扫描文档和跨页面合并。",
-      "novelty": "首个兼顾页面级表格提取的轻量级模型，性能超越前沿MLLM的同时大幅降低计算成本。",
+      "zh_summary": "POTATR是一个轻量级（29M参数）图像到图模型，用于页面级表格提取。在PubTables-v2单页基准上达到0.964 GriTS_Con，比前沿MLLM快130倍、成本低300倍。输出带边界框的空间定位，支持视觉验证和几何文本分配，可扩展至扫描文档和跨页合并。",
+      "novelty": "提出轻量级页面级表格提取模型，在保持高精度的同时大幅提升推理效率和降低成本。",
       "innovation_points": [
-        "架构：轻量级图像到图模型，基于TATR扩展",
-        "任务定义：页面级表格提取，输出空间有界框",
-        "训练范式：利用表格结构监督训练，无需预训练"
+        "扩展Table Transformer架构，实现页面级上下文表格提取。",
+        "29M参数即可超越庞大MLLM，同时速度和成本优势显著。",
+        "输出空间定位信息，支持视觉验证和与其他模型组合。"
       ],
-      "limitations": "仅针对表格提取，未涉及复杂文档布局的其他元素；跨页面合并依赖后处理。",
+      "limitations": "依赖于外部OCR处理扫描文档，对非规范表格（如手写表格）的鲁棒性未知。",
       "improvement_directions": [
-        "扩展至包含多种文档元素（如图表、标题）的页面级理解",
-        "改进跨页面合并算法，提升全文档处理能力",
-        "探索更高效的图结构表示以处理更大规模文档"
+        "集成端到端OCR模块，实现完全自动化的扫描文档表格提取。",
+        "研究跨页表格的合并策略，提升文档级表格重建完整性。",
+        "探索更复杂的表格结构（如合并单元格、不完整表格）的建模。"
       ],
-      "engineering_value": "低资源需求、高性能的表格提取模型可直接部署于文档处理系统。",
-      "why_relevant": "接近实时的页面级表格提取对文档OCR后处理有重要意义。"
+      "engineering_value": "高性能低成本，适合大规模文档处理，可直接用于企业级文档数字化流水线。",
+      "why_relevant": "直接针对文档中的表格提取，是OCR后结构理解的核心任务。"
     },
     {
       "title": "Vision Language Model Helps Private Information De-Identification in Vision Data",
@@ -200,133 +205,106 @@
       "topic_tags": [
         "隐私保护",
         "VLM",
-        "目标OCR",
-        "敏感文本检测",
-        "医疗图像"
+        "OCR",
+        "医疗影像"
       ],
-      "zh_summary": "提出VisShield框架，用于增强VLM对视觉输入中隐私信息的保护。包含两个组件：OPTIC数据集，包含多样的隐私导向提示，引导VLM进行目标OCR以精确定位敏感文本；训练方法使VLM能输出敏感文本的边界框，便于掩码处理。实验表明在隐私保护任务上显著优于现有方法。",
-      "novelty": "首次系统性地处理VLM视觉输入中的隐私信息，结合目标OCR和边界框定位实现端到端保护。",
+      "zh_summary": "VisShield是一个端到端框架，旨在增强视觉语言模型的隐私保护能力。通过专用指令微调数据集OPTIC和定制训练策略，使VLM能够精确定位并处理图像中的敏感文本（如医疗影像中的受保护健康信息），输出边界框以便后续遮盖。实验表明其在隐私保护任务上显著优于现有方法。",
+      "novelty": "将VLM用于视觉隐私保护，提出隐私导向的OCR任务微调方法，同时实现敏感文本定位与处理。",
       "innovation_points": [
-        "数据集：构建OPTIC，包含隐私文本OCR指令数据集",
-        "方法设计：端到端框架，VLM输出敏感文本边界框",
-        "任务定义：将隐私信息去标识定义为VLM的OCR与定位任务"
+        "构建了隐私文本指令微调数据集OPTIC，涵盖多种敏感文本类型。",
+        "提出训练策略使VLM能够输出敏感文本的精准边界框。",
+        "端到端框架无需额外模块，直接利用VLM进行隐私保护。"
       ],
-      "limitations": "依赖于预训练VLM的OCR性能，可能对模糊或复杂背景文本检测不佳；仅针对英文文本。",
+      "limitations": "依赖预训练VLM的OCR能力，对罕见字体或模糊图像可能定位不准；未考虑多语言场景。",
       "improvement_directions": [
-        "扩展至多语言场景",
-        "结合更高精度的OCR模型提升定位准确性",
-        "探索对抗性攻击下的鲁棒性"
+        "扩展到多语言敏感文本检测，适应全球医疗场景。",
+        "研究对抗性攻击下的鲁棒性，确保隐私保护不被绕过。",
+        "探索更精细的文本内容理解，区分需保留和需遮盖的信息。"
       ],
-      "engineering_value": "可用于医疗图像等敏感场景的自动隐私保护，降低人工审查成本。",
-      "why_relevant": "结合OCR与VLM进行隐私信息检测，为文档中的敏感文本处理提供思路。"
+      "engineering_value": "为医疗影像等隐私敏感场景提供自动化去标识化方案，具有直接应用价值。",
+      "why_relevant": "涉及OCR在视觉隐私保护中的角色，是文档安全处理的重要方向。"
     },
     {
-      "title": "Baichuan-M4: A Clinical-Grade Medical Agent System for Continuous Care",
-      "summary": "Baichuan-M4 is Baichuan Intelligence's clinical-grade medical large model, designed for \\emph{continuous care} rather than single-turn medical question answering. It is built as a coordinated medical agent system around three pillars: \\textbf{Baichuan-Harness}, a unified runtime that keeps reinforcement-learning training and real-world deployment consistent while enforcing action constraints, tool use, long-term patient memory, and multi-agent coordination; a \\textbf{core reasoning model} trained with a continuous-care reinforcement-learning framework that integrates span-level reward modeling (SPAR++), reasoning-path compression, curriculum learning, and stabilized policy optimization; and a \\textbf{clinical tool layer} for patient-memory management, authoritative evidence-based retrieval, and multimodal medical perception across documents, X-rays, and dermatology. On a cross-dimensional medical evaluation suite, Baichuan-M4 attains leading results in static medical knowledge and safety, dynamic OSCE-style consultation, long-context clinical memory, evidence-based retrieval, medical document OCR, and multimodal image understanding, while lowering the hallucination rate to 3.3\\%.",
-      "link": "https://arxiv.org/abs/2606.08982v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.08982v1",
+      "title": "KCSAT-ML: Probing Reasoning Models with Nationwide-Cohort Human Difficulty",
+      "summary": "Math reasoning benchmarks have proliferated, yet most lack a per-item difficulty signal grounded in actual human performance. We introduce KCSAT-ML, a decade (2014-2025) of Korean College Scholastic Ability Test (KCSAT; Suneung) mathematics: 664 problems with a 339-item core set carrying official per-item error rates from nationwide cohorts of hundreds of thousands of examinees. We pair the benchmark with Difficulty-aligned Reasoning Gain (DRG): a score-orthogonal metric that asks whether a model's mistakes concentrate on the items humans found hard, or on items humans found easy. Together they expose, across a wide range of VLMs (and LLMs via OCR), three patterns: (i) low-budget accuracy collapses on the high-human-error tail at every model size; (ii) test-time scaling (TTS) raises token use roughly linearly with cohort error rate, while accuracy gains follow a non-monotonic curve; (iii) within a single family, TTS flips between anti-scaling on the hardest items and overthinking on easier ones -- two faces of the same alignment failure. On DRG, models with near-identical accuracy can sit at near-opposite values: one model gets wrong what humans also find hard, while another solves the hardest items yet fails on items humans find easy -- a contrast that aggregate accuracy hides. Our code and dataset builder will be open-sourced at https://github.com/naver-ai/KCSAT-ML.",
+      "link": "https://arxiv.org/abs/2606.10403v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.10403v1",
       "authors": [
-        "Aiyuan Yang",
-        "Chengfeng Dou",
-        "Da Pan",
-        "Dian Wang",
-        "Fan Yang",
-        "Fei Deng",
-        "Fei Li",
-        "Guangwei Ai",
-        "Hui Liu",
-        "Hongda Zhang",
-        "Jinyang Tai",
-        "Kai Lu",
-        "Lijun Liu",
-        "Linwei Chen",
-        "Linyu Li",
-        "Meiqing Guo",
-        "Peidong Guo",
-        "Qiang Ju",
-        "Rihui Xin",
-        "Shuai Wang",
-        "XinKai Ma",
-        "Xudong Chen",
-        "Yichuan Mo",
-        "Canbin Piao",
-        "Leyi Pan",
-        "Yihe Luo",
-        "Zian Wang"
+        "Sanghee Park",
+        "Geewook Kim",
+        "Kee-Eung Kim"
       ],
-      "published": "2026-06-08T03:27:05Z",
-      "updated": "2026-06-08T03:27:05Z",
+      "published": "2026-06-09T04:25:44Z",
+      "updated": "2026-06-09T04:25:44Z",
       "categories": [
-        "cs.AI"
+        "cs.CL"
       ],
-      "arxiv_id": "2606.08982v1",
-      "score": 10,
-      "topic_tags": [
-        "医疗智能体",
-        "持续护理",
-        "强化学习",
-        "多模态感知",
-        "文档OCR"
-      ],
-      "zh_summary": "介绍Baichuan-M4，一个面向持续护理的临床级医疗智能体系统。围绕三大支柱构建：Baichuan-Harness统一运行时、连续护理强化学习训练的核心推理模型、临床工具层。在静态医学知识、动态咨询、长上下文临床记忆、循证检索、医学文档OCR和多模态理解等基准上取得领先，幻觉率降至3.3%。",
-      "novelty": "首个专注于持续护理而非单轮问答的临床级医疗智能体系统，结合强化学习与多模态感知。",
-      "innovation_points": [
-        "训练范式：连续护理强化学习框架，引入跨度级奖励建模和推理路径压缩",
-        "架构：多智能体协调系统，集成患者记忆、检索和多模态感知",
-        "任务定义：面向长期连续护理的医疗对话"
-      ],
-      "limitations": "系统复杂度高，部署成本可能较高；未在真实临床环境中大规模验证。",
-      "improvement_directions": [
-        "简化系统架构以降低部署门槛",
-        "在真实医疗场景中进行前瞻性临床试验",
-        "增强对罕见病和长尾知识的处理"
-      ],
-      "engineering_value": "可作为医疗AI系统的基础架构，支持从问诊到长期管理的全流程。",
-      "why_relevant": "展示了医疗文档OCR在智能体中的应用，对文档解析服务于特定领域有参考。"
-    },
-    {
-      "title": "TeamHerald@CHIPSAL 2026: Hate Speech Detection and Sentiment Analysis of Nepali Memes using Transformer-based Architectures and Ensemble Learning",
-      "summary": "The analysis of internet memes in the Nepali language is complicated by frequent code-mixing and a lack of established baseline resources. While memes inherently combine visual and textual elements, this study focuses on a text-centric approach by extracting embedded text using an OCR layer and modeling it with Transformer-based architectures. We evaluate six distinct models and investigate the comparative effectiveness of Hard and Soft Voting ensemble strategies across two tasks: binary hate speech detection and three-class sentiment analysis. Experimental results show that a standalone decoder-only model achieved the highest performance for binary classification, whereas the Soft Voting ensemble performed best for the multi-class sentiment task, yielding a 15.8% relative improvement in Macro F1-score over the strongest standalone baseline. These findings suggest that ensemble strategies behave differently across binary and multi-class tasks, highlighting the importance of selecting aggregation methods suited to the classification objective.",
-      "link": "https://arxiv.org/abs/2606.08770v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.08770v1",
-      "authors": [
-        "Ashish Acharya",
-        "Anish Khatiwada",
-        "Rohit Khadka",
-        "Pragya Aryal"
-      ],
-      "published": "2026-06-07T18:20:19Z",
-      "updated": "2026-06-07T18:20:19Z",
-      "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.CV",
-        "cs.LG"
-      ],
-      "arxiv_id": "2606.08770v1",
+      "arxiv_id": "2606.10403v1",
       "score": 9,
       "topic_tags": [
-        "仇恨言论检测",
-        "情感分析",
-        "尼泊尔语",
-        "集成学习",
-        "模因分析"
+        "数学推理",
+        "基准测试",
+        "人类对齐",
+        "测试时扩展"
       ],
-      "zh_summary": "研究尼泊尔语网络模因中的仇恨语音检测和情感分析。采用文本中心方法，通过OCR提取嵌入文本，使用Transformer模型和集成学习。实验发现：解码器仅模型在二分类中最佳，Soft Voting集成在三分类中比基线Macro F1提升15.8%。",
-      "novelty": "首次系统探索尼泊尔语模因的文本分析，比较不同集成策略在二分类与多分类任务中的差异。",
+      "zh_summary": "KCSAT-ML是基于韩国高考数学试题的推理基准，包含664道题，其中339道题具有官方每题错误率。提出难度对齐推理增益（DRG）指标用于评估模型错误与人类难易的对齐程度。实验发现：低预算模型在高错误率题目上崩溃；测试时计算扩展在难题上表现为反缩放，易题上过度思考；相同准确率的模型DRG可能截然相反。",
+      "novelty": "构建了带有全国规模人类错误率标注的数学推理基准，并提出了揭示模型与人类难度对齐的新指标DRG。",
       "innovation_points": [
-        "训练范式：对比硬投票和软投票集成策略在不同分类任务中的效果",
-        "数据集：构建尼泊尔语模因文本提取与标注流程",
-        "模型应用：验证解码器仅模型在低资源语言模因分析中的有效性"
+        "利用十年韩国高考数学题，首次提供基于数十万考生的大规模每题错误率。",
+        "提出DRG指标，从难度对齐角度评估模型，揭示准确率无法反映的差异。",
+        "发现测试时计算扩展在难题和易题上的非单调性及反缩放现象。"
       ],
-      "limitations": "仅使用文本信息，未利用视觉模态；数据集规模有限，可能未覆盖多样模因类型。",
+      "limitations": "仅覆盖数学推理，且为韩国高考风格，结论对其他学科或文化背景的泛化性需验证。",
       "improvement_directions": [
-        "结合视觉特征进行多模态分析",
-        "扩展数据集以涵盖更多主题和风格",
-        "针对代码混合特点设计更优的语言模型"
+        "将基准扩展到更多学科和语言，验证人类难度对齐的普遍性。",
+        "研究模型内部表征与人类认知难度的关系，指导训练策略改进。",
+        "探索利用DRG指导模型自适应分配计算资源。"
       ],
-      "engineering_value": "可为尼泊尔语社交媒体的仇恨言论监控提供技术方案。",
-      "why_relevant": "涉及OCR在低资源语言模因分析中的应用，展示了文本提取后处理对任务的影响。"
+      "engineering_value": "提供了评估模型人类对齐度的方法，可用于改进教育场景中的辅助工具。",
+      "why_relevant": "涉及OCR在数学文档理解中的应用，以及模型评估与文档内容难度分析。"
+    },
+    {
+      "title": "ChartLens: A Dual-Branch Framework for Chart Data Correction and Factual Summary Refinement",
+      "summary": "In this report, we present our champion solution for the DataMFM Challenge Track 2: Chart Understanding. This track requires models to recover structured chart data and generate faithful natural-language summaries from chart images. To address the complementary requirements of accurate data extraction and factual narration, we propose ChartLens, a dual-branch framework for chart data correction and summary refinement. ChartLens consists of two key modules: Structure-Aware CSV Verification and Correction (SAVC) and Text-Retention-Guided Summary Refinement (TRSR). SAVC improves the reliability of structured data extraction through verification and correction, while TRSR enhances summary generation by preserving critical textual and numerical evidence from charts. By combining model adaptation, correction-based generation, and OCR-assisted evidence grounding, ChartLens improves both structured data recovery and summary factuality. On the test set, our final system achieves an overall score of 69.10 and ranks first in Track 2, demonstrating its effectiveness for accurate chart understanding. Our code will be released at: https://github.com/iLearn-Lab/CVPRW26-ChartLens.",
+      "link": "https://arxiv.org/abs/2606.10640v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.10640v1",
+      "authors": [
+        "Hao Liu",
+        "Ruping Cao",
+        "Kun Wang",
+        "Zhiran Li",
+        "Fan Liu",
+        "Yupeng Hu",
+        "Liqiang Nie"
+      ],
+      "published": "2026-06-09T09:45:01Z",
+      "updated": "2026-06-09T09:45:01Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2606.10640v1",
+      "score": 8,
+      "topic_tags": [
+        "图表理解",
+        "数据校正",
+        "摘要生成",
+        "OCR"
+      ],
+      "zh_summary": "ChartLens是一个双分支框架，用于图表数据校正和事实性摘要精炼。包含结构感知CSV验证校正模块（SAVC）和文本保留引导摘要精炼模块（TRSR）。通过模型适配、校正生成和OCR辅助证据归因，在DataMFM挑战赛Track 2中获得第一名，总体得分69.10。",
+      "novelty": "提出双分支框架分别处理图表数据提取校正和摘要生成，结合OCR辅助的事实性增强。",
+      "innovation_points": [
+        "结构感知CSV验证与校正模块，提升结构化数据提取可靠性。",
+        "文本保留引导摘要精炼模块，强化关键数值和文本证据的保留。",
+        "将OCR结果作为证据归因，提升摘要事实性。"
+      ],
+      "limitations": "依赖OCR对图表中文字识别的准确性；对复杂图表（如3D、嵌套）的适用性未充分验证。",
+      "improvement_directions": [
+        "端到端联合训练数据提取与摘要生成，减少模块依赖。",
+        "引入图表类型检测与自适应策略，处理更多样化的图表风格。",
+        "探索图表中数值与文本的空间关系建模，提升结构化恢复精度。"
+      ],
+      "engineering_value": "为图表理解提供可靠的方法，可直接应用于数据报告自动生成与验证系统。",
+      "why_relevant": "涉及图表OCR与结构理解，是文档智能中信息提取与总结的典型任务。"
     }
   ]
 }
