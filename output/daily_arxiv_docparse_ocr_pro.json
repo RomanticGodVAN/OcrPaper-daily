@@ -1,267 +1,131 @@
 {
   "meta": {
-    "report_date": "2026-06-10",
-    "generated_at_utc": "2026-06-10 05:48:00",
+    "report_date": "2026-06-11",
+    "generated_at_utc": "2026-06-11 06:05:07",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 6
+    "count": 5
   },
   "synthesis": {
-    "executive_summary": "今日OCR/文档解析研究进展聚焦于多语言、历史文档和表格的结构化理解，以及隐私保护与图表数据校正。亮点包括轻量级表格提取模型POTATR凭借极高性价比超越MLLM，MUDIDI框架利用LLM实现多语言词典数字化，以及VisShield通过VLM进行敏感文本定位与去标识化。同时，形态学方法实现了历史手稿的自动计量，ChartLens则通过双分支框架增强了图表数据校正与摘要生成的事实性。技术趋势显示，基于Transformer和原型学习的细粒度文档分析、LLM在结构化抽取中的优势、以及融合OCR与视觉语言模型的隐私保护成为研究热点。",
-    "trend_summary": "1. 从行级标注到字符原型的弱监督学习成为历史手稿分析主流。2. LLM与轻量CNN/Transformers在文档结构化任务中表现互补，LLM擅长复杂结构理解，轻量模型在效率上优势明显。3. 视觉语言模型（VLM）正从通用理解向特定任务（隐私保护、图表校正）微调发展。4. 性能评估日益强调人类对齐与事实性，如DRG指标和OCR辅助证据归因。",
+    "executive_summary": "今日研究亮点集中在文档解析与多模态校正、图表理解、以及长文档推理三大方向。ParseFixer通过智能体框架实现选择性多模态校正，提升了Markdown文档恢复准确性；ChartLens在图表数据校正与摘要精炼方面取得领先性能；Doc-to-Atom则提出基于原子记忆的长文档推理新范式。这些工作均展现出从单一模型向复合系统、从粗粒度处理向精细校正发展的趋势。",
+    "trend_summary": "当前OCR与文档解析领域呈现三大趋势：一是智能体化，即通过多模块协同与迭代校正提升解析质量；二是精细化，从整体解析转向选择性校正、原子级记忆等细粒度操作；三是多模态融合，将视觉、文本、结构信息结合以增强理解。",
     "common_innovations": [
-      "弱监督从行级转录学习字符原型，降低对字符级标注的依赖。",
-      "利用LLM实现跨语言字典的结构化分割与映射，释放多语言数据集。",
-      "轻量图模型（如POTATR）以29M参数在表格提取上超越庞大MLLM，成本降低300倍。",
-      "VLM通过指令微调实现敏感文本的精确定位与去标识化，端到端处理。",
-      "双分支框架分别处理图表数据校正与摘要生成，结合OCR增强事实性。"
+      "多篇工作采用双模块或双分支框架，分别处理初步解析与后续校正或精炼。",
+      "普遍将开源模型作为可靠基础，再叠加专门优化模块，如ParseFixer使用MinerU2.5 Pro。",
+      "引入智能体或路由器机制，实现选择性处理（如仅校正高价值错误、组装相关记忆原子）。"
     ],
     "future_directions": [
-      "探索无监督/半监督的原型学习，减少对行级标注的依赖，应用于更多历史风格手稿。",
-      "将MUDIDI框架扩展到多列混合布局及手写词典，结合视觉-语言模型协同。",
-      "为POTATR集成端到端OCR，实现扫描文档表格的完全自动化提取，并研究跨页合并策略。",
-      "将VisShield扩展到多语言敏感文本检测，并测试对抗攻击下的鲁棒性。",
-      "利用DRG指标指导模型自适应分配测试时计算资源，优化推理效率。",
-      "为ChartLens引入端到端联合训练及图表类型检测，处理3D、嵌套等复杂图表。",
-      "研究跨语言词典实体对齐，降低LLM推理成本，推动低资源语言数字化。",
-      "结合形态学与深度学习，建模个体书写差异，提升历史文档字符级分析精度。"
+      "结合解析失败检测的置信度度量与多模态校正模型，实现对高噪声文档的鲁棒解析。",
+      "扩展ChartLens框架支持更多图表类型（如散点图、3D图），并探索无OCR的端到端图表理解方法。",
+      "研究文档解析中原子级记忆的动态粒度和高效检索机制，降低长文档推理的内存开销。",
+      "利用结构化语料库（如Structured PubMed）训练专门的文档结构解析模型，提升生物医学领域的解析精度。",
+      "开发面向表格、公式等复杂元素的端到端校正模块，替代当前两阶段流程。"
     ],
     "engineering_takeaways": [
-      "POTATR可直接集成到企业级文档流水线，提供高性价比的表格提取。",
-      "MUDIDI与LLM的组合适用于低资源语言词典的批量数字化。",
-      "VisShield可嵌入医疗影像系统，自动化PHI去标识化。",
-      "ChartLens适用于数据报告自动生成与验证，提升摘要事实性。",
-      "形态学方法可辅助古文字学家的量化分析，降低人工成本。"
+      "ParseFixer展示了一种实用的文档解析流水线，可直接集成MinerU等开源工具，值得工程团队参考。",
+      "ChartLens提供了完整的图表理解方案，可用于报表自动化与数据可视化审核。",
+      "Doc-to-Atom的长文档推理方法可降低上下文记忆成本，适合部署在文档问答系统。"
     ],
     "watchlist": [
       {
-        "title": "Leveraging Morphology for Historical Script Metrological Analysis",
-        "watch_reason": "弱监督字符原型学习对历史文档分析具有泛化潜力，未来可能推动更多手写风格的自动化计量。"
-      },
-      {
-        "title": "MUDIDI: A Two-Stage Framework for Multilingual Dictionary Digitization with Language Models",
-        "watch_reason": "多语言词典数字化框架结合LLM，有望成为低资源语言数字化的标准方案，释放大量历史词典数据。"
-      },
-      {
-        "title": "POTATR: A Lightweight Image-to-Graph Model for Page-Level Table Extraction",
-        "watch_reason": "轻量级高精度表格提取模型，具有极高工程价值，其扩展至扫描文档和跨页合并的能力值得跟踪。"
-      },
-      {
-        "title": "Vision Language Model Helps Private Information De-Identification in Vision Data",
-        "watch_reason": "VLM在隐私保护中的新应用，医学影像领域需求强烈，其多语言扩展和鲁棒性研究将有重要影响。"
+        "title": "ParseFixer: An Agentic Framework for Document Parsing via Selective Multimodal Correction",
+        "watch_reason": "提供可部署的文档解析多模态校正框架，适合工业文档数字化，后续可能改进检测策略和校正模型。"
       },
       {
         "title": "ChartLens: A Dual-Branch Framework for Chart Data Correction and Factual Summary Refinement",
-        "watch_reason": "图表理解中的数据校正与事实性增强是该领域痛点，其OCR辅助证据归因方法有参考价值。"
+        "watch_reason": "在图表理解挑战赛中取得第一，其双分支框架有潜力扩展到更多图表类型和更复杂的业务场景。"
+      },
+      {
+        "title": "Doc-to-Atom: Learning to Compile and Compose Memory Atoms",
+        "watch_reason": "提出参数记忆的新范式，可显著降低长文档推理成本，有望推动文档问答和RAG系统的进化。"
       }
     ]
   },
   "papers": [
     {
-      "title": "Leveraging Morphology for Historical Script Metrological Analysis",
-      "summary": "Advances in handwritten text recognition have enabled large-scale transcription of historical documents, but still provide limited access to interpretable visual measurements for paleography, the study of historical scripts. In this paper, our main insight is that morphological script analysis, in particular the capacity to learn character prototypes from line-level transcriptions, enables the definition of scalable, meaningful, and stable paleographic measurements. More precisely, we leverage a transformer-based detection architecture together with a prototype-based line reconstruction module to learn prototypical characters and their occurrence, deformation, and positioning. Our contributions are twofold. First, we introduce a deep architecture and learning methodology that enables efficient character modeling with only line-level transcription supervision, significantly improving over the Learnable Typewriter baseline and enabling accurate character bounding box prediction, unlocking its potential for paleographic measurements. Second, we introduce and demonstrate the paleographical relevance of automatic measurements enabled by our architecture for characters, bi-grams, and spaces between graphical units. For this demonstration, we extend the annotations of the codex Paris, BnF, fr. 2813, commissioned in the late fourteenth century by Charles V and copied by four hands, to 160 pages. We visualize our measurements over these pages, showing how they enable us not only to differentiate graphical profiles, but also to discover and analyze subtle variations. This case study outlines the scalability of our approach and its frugality in terms of required training data, since a single column of text is sufficient to compute our measurements on each of the 160 pages. Data and code are publicly available at: https://malamatenia.github.io/morphology4metrology-analysis.",
-      "link": "https://arxiv.org/abs/2606.09446v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.09446v1",
+      "title": "ParseFixer: An Agentic Framework for Document Parsing via Selective Multimodal Correction",
+      "summary": "In this report, we present our third-place solution for the DataMFM Challenge Track 1: Document Parsing. This track requires models to recover structured Markdown documents from document page images while preserving textual content and document structure. To address the complementary requirements of accurate content recovery and faithful structure reconstruction, we propose ParseFixer, an agentic framework for backbone parsing and selective correction. ParseFixer consists of two key modules: Full-Page Backbone Parsing (FBP) and Agentic Selective Correction (ASC). FBP produces stable initial Markdown outputs with MinerU2.5 Pro, while ASC detects high-value parsing failures and repairs them through a verify-and-rollback correction process. By placing selective multimodal correction after open-source backbone parsing, ParseFixer improves the recovery of key document elements without rewriting reliable backbone predictions. On the test set, our final system achieves an overall score of 61.78 and ranks third in Track 1, demonstrating its effectiveness for accurate document parsing. Our code will be released at: https://github.com/iLearn-Lab/CVPRW26-ParseFixer.",
+      "link": "https://arxiv.org/abs/2606.11977v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.11977v1",
       "authors": [
-        "Malamatenia Vlachou Efstathiou",
-        "Raphaël Baena",
-        "Dominique Stutzmann",
-        "Mathieu Aubry"
+        "LeKai Yu",
+        "Hao Liu",
+        "Kun Wang",
+        "Zhiran Li",
+        "Ruping Cao",
+        "Fan Liu",
+        "Yupeng Hu"
       ],
-      "published": "2026-06-08T12:55:02Z",
-      "updated": "2026-06-08T12:55:02Z",
+      "published": "2026-06-10T11:55:18Z",
+      "updated": "2026-06-10T11:55:18Z",
       "categories": [
         "cs.CV"
       ],
-      "arxiv_id": "2606.09446v1",
-      "score": 17,
+      "arxiv_id": "2606.11977v1",
+      "score": 12,
       "topic_tags": [
-        "手写文本识别",
-        "古文字学",
-        "字符原型学习",
-        "Transformer"
+        "文档解析",
+        "多模态校正",
+        "智能体框架",
+        "选择性校正",
+        "Markdown恢复"
       ],
-      "zh_summary": "本文提出一种基于形态学的历史手写文本计量分析方法，利用基于Transformer的检测架构和原型重建模块，仅需行级转录标注即可学习字符原型，并实现字符边界框预测，为古文字学提供可扩展、有意义的度量。方法在14世纪手稿上验证，能区分不同抄写员的图形特征并发现细微变化。",
-      "novelty": "将形态学分析与深度学习结合，提出从行级标注学习字符原型的方法，实现无需字符级标注的自动古文字测量。",
+      "zh_summary": "本文提出ParseFixer，一种用于文档解析的智能体框架，通过选择性多模态校正提高Markdown文档恢复的准确性。框架包含全页骨干解析（FBP）和智能体选择性校正（ASC）两个模块，FBP使用MinerU2.5 Pro生成稳定初始输出，ASC检测并修复高价值解析失败。在DataMFM Challenge Track 1测试集上取得61.78分，排名第三。",
+      "novelty": "将选择性多模态校正与开源骨干解析结合，形成验证-回滚的校正流程，避免重写可靠预测。",
       "innovation_points": [
-        "提出基于Transformer的检测架构+原型行重建模块，从行级转录监督学习字符原型及其位置与变形。",
-        "引入字符、双字母、间距等自动计量指标，并验证其古文字学意义。",
-        "扩展了14世纪手稿的标注至160页，用于验证方法有效性。"
+        "提出双模块智能体框架，结合全页骨干解析和选择性多模态校正",
+        "设计验证-回滚校正机制，仅修复高价值解析失败，保留可靠预测",
+        "采用MinerU2.5 Pro作为开源骨干解析器，确保稳定初始输出"
       ],
-      "limitations": "当前方法依赖行级标注，可能对高度粘连或变形严重的字符建模困难；原型数量需预设，可能不适用于未知字符集。",
+      "limitations": "整体分数61.78仍有提升空间，可能在高噪声或复杂布局文档上校正不足。",
       "improvement_directions": [
-        "探索无监督或半监督的原型学习方法，减少对标注的依赖。",
-        "将方法推广到更多历史时期和手写风格的文档。",
-        "融合字形风格特征，提升对个体书写差异的建模能力。"
+        "研究更精细的解析失败检测策略，如基于置信度或结构差异的度量",
+        "扩展多模态校正模型，支持更多文档类型（如表格、公式）",
+        "探索端到端训练框架，替代两阶段流程"
       ],
-      "engineering_value": "为历史手稿的数字化分析提供了一种自动化、定量化的工具，可辅助古文字学家进行大规模风格辨识和演变研究。",
-      "why_relevant": "涉及行级文本检测与字符建模，与OCR领域的端到端文档理解密切相关。"
+      "engineering_value": "提供一种实用且可部署的文档解析流水线，易于集成现有开源工具，适合工业文档数字化。",
+      "why_relevant": "直接针对文档解析任务，提出具创新性的智能体框架，对光学字符识别后处理及文档结构恢复有重要参考价值。"
     },
     {
-      "title": "MUDIDI: A Two-Stage Framework for Multilingual Dictionary Digitization with Language Models",
-      "summary": "Multilingual dictionaries are among the most valuable documentary resources for low-resource and endangered languages, yet many remain available only as scans. For many decades, their digitization and conversion into a machine-readable format was nearly impossible due to language-specific scripts, complex multi-column layouts full of entries with abbreviations and cross-references. Recent vision-language models offer a promising solution, but it is unclear how well they preserve characters, markup, and process lexicographic structure. We introduce MUDIDI, a two-stage framework for multi-lingual dictionary digitization. Stage One evaluates the quality of character recognition and markup preservation; Stage Two focuses on dictionary entry segmentation with subsequent mapping into a machine-readable lexicographic schema, SIL's Multi-Dictionary Formatter. We also release a dataset that consists of human-annotated lexicographic entries collected from 30 public-domain dictionaries featuring diverse writing systems, language families, and formats. We benchmark OCR systems, general-purpose Large Language Models (LLMs), and Vision Language Models (VLMs) on the dataset, demonstrating superior performance of LLMs across most writing systems and languages in both stages, and provide practical guidelines on improving the results for more challenging scenarios. Finally, we show that supplementing additional information, such as dictionary introduction, to the LLMs can improve the quality of the digitized dictionary. Github: https://github.com/DavidSamuell/MUDIDI-Pipeline-for-Digitization-of-Multilingual-Dictionary/",
-      "link": "https://arxiv.org/abs/2606.09435v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.09435v1",
+      "title": "Which Models Are Our Models Built On? Auditing Invisible Dependencies in Modern LLMs",
+      "summary": "Modern LLM training pipelines increasingly rely on other models to generate data, filter corpora, judge outputs, and guide development decisions. These dependencies are recursive: a model may depend on an upstream artifact whose own dependencies are documented only in separate releases and artifacts. As a result, the full dependency structure is fragmented across heterogeneous public artifacts, with complexity and recursive depth far outpacing humans' ability to trace. We introduce ModSleuth, an agentic system that recursively reconstructs LLM dependency graphs from public artifacts with source-grounded evidence. We find that the primary challenge is no longer information extraction, but defining what constitutes a dependency and reconciling artifact references across inconsistent documentation. We address these challenges through a formalization that distinguishes direct and indirect dependencies, represents heterogeneous pipeline roles through operation-centered relationships, and resolves artifact identities across names, versions, and repositories. Applying ModSleuth to four public-artifact-rich LLM releases, we recover 1,060 source-verified dependencies and construct large-scale dependency graphs of modern LLM development. These graphs reveal multi-hop license obligations, train-evaluation coupling, discrepancies between released and training-time artifacts, and documentation inconsistencies that would otherwise be difficult to uncover. We release ModSleuth and the resulting dependency graphs to support transparent analysis of the increasingly complex ecosystems underlying modern LLMs.",
+      "link": "https://arxiv.org/abs/2606.12385v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.12385v1",
       "authors": [
-        "David Setiawan",
-        "Temuulen Khishigsuren",
-        "Milind Agarwal",
-        "Pagnarith Pit",
-        "Aso Mahmudi",
-        "Ekaterina Vylomova"
+        "Sanjay Adhikesaven",
+        "Haoxiang Sun",
+        "Sewon Min"
       ],
-      "published": "2026-06-08T12:44:47Z",
-      "updated": "2026-06-08T12:44:47Z",
+      "published": "2026-06-10T17:47:59Z",
+      "updated": "2026-06-10T17:47:59Z",
       "categories": [
         "cs.CL"
       ],
-      "arxiv_id": "2606.09435v1",
-      "score": 17,
+      "arxiv_id": "2606.12385v1",
+      "score": 10,
       "topic_tags": [
-        "词典数字化",
-        "LLM",
-        "多语言OCR",
-        "文档结构化"
+        "LLM依赖分析",
+        "智能体系统",
+        "依赖图重建",
+        "许可审计",
+        "供应链透明度"
       ],
-      "zh_summary": "MUDIDI是一个两阶段多语言词典数字化框架：第一阶段评估字符识别与标记保留质量，第二阶段进行词典条目分割并映射到机器可读格式。释放了包含30种公开领域词典的人工标注数据集，基准测试显示LLM在多数语言中表现优于OCR和VLM。",
-      "novelty": "针对多语言词典数字化，提出了两阶段评估与转换框架，并构建了涵盖多语种、多格式的标注数据集。",
+      "zh_summary": "本文引入ModSleuth，一种智能体系统，用于从公开工件中递归重建LLM依赖图，并基于源证据。应用ModSleuth到四个LLM发布，恢复1060个源验证依赖，构建大规模依赖图，揭示多跳许可义务、训练-评估耦合等问题。",
+      "novelty": "形式化定义直接/间接依赖，引入操作中心关系表示，解决工件引用不一致问题。",
       "innovation_points": [
-        "提出两阶段框架，分别关注字符识别质量与词典结构理解。",
-        "构建了含30种不同语言和格式的词典数据集。",
-        "验证了LLM在词典结构化任务中的优势，并提出添加词典前言可改善结果。"
+        "提出智能体系统ModSleuth，递归重建LLM依赖图",
+        "形式化依赖类型（直接/间接）和操作中心关系",
+        "设计工件标识消歧机制，跨名称、版本、仓库解析"
       ],
-      "limitations": "主要针对公共领域单页词典扫描，对复杂布局或手写词典的适用性未充分测试；LLM推理成本可能较高。",
+      "limitations": "依赖人工定义依赖类型，可能遗漏隐含依赖；仅依赖公开工件，未涉及私有数据。",
       "improvement_directions": [
-        "扩展到更复杂的页面布局（如多列混合），研究视觉-语言模型的协同。",
-        "探索更高效的小模型或知识蒸馏方法，降低推理成本。",
-        "研究跨语言词典的实体对齐与脱机技术。"
+        "自动化依赖类型发现，减少人工干预",
+        "扩展至私有或半公开生态系统",
+        "结合代码分析工具，提升依赖图完整性"
       ],
-      "engineering_value": "为低资源语言和濒危语言的词典数字化提供了实用工具，可直接集成到现有文献保存工作流中。",
-      "why_relevant": "涉及OCR后处理与结构理解，是文档解析的重要应用场景。"
-    },
-    {
-      "title": "POTATR: A Lightweight Image-to-Graph Model for Page-Level Table Extraction",
-      "summary": "Large-scale document processing requires contextually aware table extraction (TE) that is both accurate and efficient. Yet current approaches require billions of parameters, hundreds of autoregressive steps, or costly API inference. Motivated by this, we introduce the Page-Object Table Transformer (POTATR), a lightweight 29M parameter image-to-graph model that extends the Table Transformer (TATR) for contextualized page-level TE. POTATR outperforms all models tested on the PubTables-v2 Single Pages benchmark -- including frontier MLLMs -- achieving $\\textrm{GriTS}_\\textrm{Con}$ of 0.964 while running over 130$\\times$ faster at roughly 300$\\times$ lower cost. Further, POTATR's output is spatially grounded: every recognized element has a bounding box, enabling visual verification and geometric text assignment. As a result, POTATR performs unified page-level TE while composing with other models, enabling extension to scanned documents via external OCR and to full-document TE via techniques like cross-page merging. Code and models will be released.",
-      "link": "https://arxiv.org/abs/2606.09788v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.09788v1",
-      "authors": [
-        "Brandon Smock",
-        "Libin Liang",
-        "Max Sokolov",
-        "Amrit Ramesh",
-        "Valerie Faucon-Morin",
-        "Tayyibah Khanam",
-        "Maury Courtland"
-      ],
-      "published": "2026-06-08T17:43:44Z",
-      "updated": "2026-06-08T17:43:44Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2606.09788v1",
-      "score": 16,
-      "topic_tags": [
-        "表格提取",
-        "轻量模型",
-        "页面级理解",
-        "文档处理"
-      ],
-      "zh_summary": "POTATR是一个轻量级（29M参数）图像到图模型，用于页面级表格提取。在PubTables-v2单页基准上达到0.964 GriTS_Con，比前沿MLLM快130倍、成本低300倍。输出带边界框的空间定位，支持视觉验证和几何文本分配，可扩展至扫描文档和跨页合并。",
-      "novelty": "提出轻量级页面级表格提取模型，在保持高精度的同时大幅提升推理效率和降低成本。",
-      "innovation_points": [
-        "扩展Table Transformer架构，实现页面级上下文表格提取。",
-        "29M参数即可超越庞大MLLM，同时速度和成本优势显著。",
-        "输出空间定位信息，支持视觉验证和与其他模型组合。"
-      ],
-      "limitations": "依赖于外部OCR处理扫描文档，对非规范表格（如手写表格）的鲁棒性未知。",
-      "improvement_directions": [
-        "集成端到端OCR模块，实现完全自动化的扫描文档表格提取。",
-        "研究跨页表格的合并策略，提升文档级表格重建完整性。",
-        "探索更复杂的表格结构（如合并单元格、不完整表格）的建模。"
-      ],
-      "engineering_value": "高性能低成本，适合大规模文档处理，可直接用于企业级文档数字化流水线。",
-      "why_relevant": "直接针对文档中的表格提取，是OCR后结构理解的核心任务。"
-    },
-    {
-      "title": "Vision Language Model Helps Private Information De-Identification in Vision Data",
-      "summary": "Visual Language Models (VLMs) have gained significant popularity due to their remarkable ability. While various methods exist to enhance privacy in text-based applications, privacy risks associated with visual inputs remain largely overlooked such as Protected Health Information (PHI) in medical images. To tackle this problem, two key tasks: accurately localizing sensitive text and processing it to ensure privacy protection should be performed. To address this issue, we introduce VisShield (Vision Privacy Shield), an end-to-end framework designed to enhance the privacy awareness of VLMs. Our framework consists of two key components: a specialized instruction-tuning dataset OPTIC (Optical Privacy Text Instruction Collection) and a tailored training methodology. The dataset provides diverse privacy-oriented prompts that guide VLMs to perform targeted Optical Character Recognition (OCR) for precise localization of sensitive text, while the training strategy ensures effective adaptation of VLMs to privacy-preserving tasks. Specifically, our approach ensures that VLMs recognize privacy-sensitive text and output precise bounding boxes for detected entities, allowing for effective masking of sensitive information. Extensive experiments demonstrate that our framework significantly outperforms existing approaches in handling private information, paving the way for privacy-preserving applications in vision-language models. Our dataset and code can be found here.",
-      "link": "https://arxiv.org/abs/2606.09132v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.09132v1",
-      "authors": [
-        "Tiejin Chen",
-        "Pingzhi Li",
-        "Kaixiong Zhou",
-        "Tianlong Chen",
-        "Hua Wei"
-      ],
-      "published": "2026-06-08T07:30:20Z",
-      "updated": "2026-06-08T07:30:20Z",
-      "categories": [
-        "cs.AI"
-      ],
-      "arxiv_id": "2606.09132v1",
-      "score": 16,
-      "topic_tags": [
-        "隐私保护",
-        "VLM",
-        "OCR",
-        "医疗影像"
-      ],
-      "zh_summary": "VisShield是一个端到端框架，旨在增强视觉语言模型的隐私保护能力。通过专用指令微调数据集OPTIC和定制训练策略，使VLM能够精确定位并处理图像中的敏感文本（如医疗影像中的受保护健康信息），输出边界框以便后续遮盖。实验表明其在隐私保护任务上显著优于现有方法。",
-      "novelty": "将VLM用于视觉隐私保护，提出隐私导向的OCR任务微调方法，同时实现敏感文本定位与处理。",
-      "innovation_points": [
-        "构建了隐私文本指令微调数据集OPTIC，涵盖多种敏感文本类型。",
-        "提出训练策略使VLM能够输出敏感文本的精准边界框。",
-        "端到端框架无需额外模块，直接利用VLM进行隐私保护。"
-      ],
-      "limitations": "依赖预训练VLM的OCR能力，对罕见字体或模糊图像可能定位不准；未考虑多语言场景。",
-      "improvement_directions": [
-        "扩展到多语言敏感文本检测，适应全球医疗场景。",
-        "研究对抗性攻击下的鲁棒性，确保隐私保护不被绕过。",
-        "探索更精细的文本内容理解，区分需保留和需遮盖的信息。"
-      ],
-      "engineering_value": "为医疗影像等隐私敏感场景提供自动化去标识化方案，具有直接应用价值。",
-      "why_relevant": "涉及OCR在视觉隐私保护中的角色，是文档安全处理的重要方向。"
-    },
-    {
-      "title": "KCSAT-ML: Probing Reasoning Models with Nationwide-Cohort Human Difficulty",
-      "summary": "Math reasoning benchmarks have proliferated, yet most lack a per-item difficulty signal grounded in actual human performance. We introduce KCSAT-ML, a decade (2014-2025) of Korean College Scholastic Ability Test (KCSAT; Suneung) mathematics: 664 problems with a 339-item core set carrying official per-item error rates from nationwide cohorts of hundreds of thousands of examinees. We pair the benchmark with Difficulty-aligned Reasoning Gain (DRG): a score-orthogonal metric that asks whether a model's mistakes concentrate on the items humans found hard, or on items humans found easy. Together they expose, across a wide range of VLMs (and LLMs via OCR), three patterns: (i) low-budget accuracy collapses on the high-human-error tail at every model size; (ii) test-time scaling (TTS) raises token use roughly linearly with cohort error rate, while accuracy gains follow a non-monotonic curve; (iii) within a single family, TTS flips between anti-scaling on the hardest items and overthinking on easier ones -- two faces of the same alignment failure. On DRG, models with near-identical accuracy can sit at near-opposite values: one model gets wrong what humans also find hard, while another solves the hardest items yet fails on items humans find easy -- a contrast that aggregate accuracy hides. Our code and dataset builder will be open-sourced at https://github.com/naver-ai/KCSAT-ML.",
-      "link": "https://arxiv.org/abs/2606.10403v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.10403v1",
-      "authors": [
-        "Sanghee Park",
-        "Geewook Kim",
-        "Kee-Eung Kim"
-      ],
-      "published": "2026-06-09T04:25:44Z",
-      "updated": "2026-06-09T04:25:44Z",
-      "categories": [
-        "cs.CL"
-      ],
-      "arxiv_id": "2606.10403v1",
-      "score": 9,
-      "topic_tags": [
-        "数学推理",
-        "基准测试",
-        "人类对齐",
-        "测试时扩展"
-      ],
-      "zh_summary": "KCSAT-ML是基于韩国高考数学试题的推理基准，包含664道题，其中339道题具有官方每题错误率。提出难度对齐推理增益（DRG）指标用于评估模型错误与人类难易的对齐程度。实验发现：低预算模型在高错误率题目上崩溃；测试时计算扩展在难题上表现为反缩放，易题上过度思考；相同准确率的模型DRG可能截然相反。",
-      "novelty": "构建了带有全国规模人类错误率标注的数学推理基准，并提出了揭示模型与人类难度对齐的新指标DRG。",
-      "innovation_points": [
-        "利用十年韩国高考数学题，首次提供基于数十万考生的大规模每题错误率。",
-        "提出DRG指标，从难度对齐角度评估模型，揭示准确率无法反映的差异。",
-        "发现测试时计算扩展在难题和易题上的非单调性及反缩放现象。"
-      ],
-      "limitations": "仅覆盖数学推理，且为韩国高考风格，结论对其他学科或文化背景的泛化性需验证。",
-      "improvement_directions": [
-        "将基准扩展到更多学科和语言，验证人类难度对齐的普遍性。",
-        "研究模型内部表征与人类认知难度的关系，指导训练策略改进。",
-        "探索利用DRG指导模型自适应分配计算资源。"
-      ],
-      "engineering_value": "提供了评估模型人类对齐度的方法，可用于改进教育场景中的辅助工具。",
-      "why_relevant": "涉及OCR在数学文档理解中的应用，以及模型评估与文档内容难度分析。"
+      "engineering_value": "提供透明化LLM供应链的审计工具，有助于许可证合规和风险评估。",
+      "why_relevant": "虽然不直接处理文档图像，但LLM依赖分析对于评估OCR后处理模型的可信度和版权合规有参考价值。"
     },
     {
       "title": "ChartLens: A Dual-Branch Framework for Chart Data Correction and Factual Summary Refinement",
@@ -287,24 +151,112 @@
       "topic_tags": [
         "图表理解",
         "数据校正",
-        "摘要生成",
-        "OCR"
+        "摘要精炼",
+        "OCR辅助",
+        "双分支框架"
       ],
-      "zh_summary": "ChartLens是一个双分支框架，用于图表数据校正和事实性摘要精炼。包含结构感知CSV验证校正模块（SAVC）和文本保留引导摘要精炼模块（TRSR）。通过模型适配、校正生成和OCR辅助证据归因，在DataMFM挑战赛Track 2中获得第一名，总体得分69.10。",
-      "novelty": "提出双分支框架分别处理图表数据提取校正和摘要生成，结合OCR辅助的事实性增强。",
+      "zh_summary": "本文提出ChartLens，一种用于图表理解的双分支框架，包含结构感知CSV验证与校正（SAVC）和文本保留引导摘要精炼（TRSR）模块。在DataMFM Challenge Track 2测试集上取得69.10分，排名第一。",
+      "novelty": "结合OCR辅助证据接地与校正生成，同时优化结构化数据提取和摘要事实性。",
       "innovation_points": [
-        "结构感知CSV验证与校正模块，提升结构化数据提取可靠性。",
-        "文本保留引导摘要精炼模块，强化关键数值和文本证据的保留。",
-        "将OCR结果作为证据归因，提升摘要事实性。"
+        "提出双分支框架，分别处理图表数据校正和摘要精炼",
+        "SAVC模块通过验证和校正提升结构化数据可靠性",
+        "TRSR模块利用关键文本和数值证据增强摘要事实性"
       ],
-      "limitations": "依赖OCR对图表中文字识别的准确性；对复杂图表（如3D、嵌套）的适用性未充分验证。",
+      "limitations": "依赖OCR质量，可能对低分辨率或手写图表效果有限。",
       "improvement_directions": [
-        "端到端联合训练数据提取与摘要生成，减少模块依赖。",
-        "引入图表类型检测与自适应策略，处理更多样化的图表风格。",
-        "探索图表中数值与文本的空间关系建模，提升结构化恢复精度。"
+        "融合更多图表类型（如散点图、3D图）的解析策略",
+        "引入对抗性验证提升校正鲁棒性",
+        "探索无OCR的端到端图表理解方法"
       ],
-      "engineering_value": "为图表理解提供可靠的方法，可直接应用于数据报告自动生成与验证系统。",
-      "why_relevant": "涉及图表OCR与结构理解，是文档智能中信息提取与总结的典型任务。"
+      "engineering_value": "提供完整的图表理解流水线，适合报表自动化、数据可视化审核等场景。",
+      "why_relevant": "直接针对图表理解任务，其数据校正和摘要精炼方法可借鉴于文档中图表区域的后处理。"
+    },
+    {
+      "title": "Doc-to-Atom: Learning to Compile and Compose Memory Atoms",
+      "summary": "Long input sequences are central to document understanding and multi-step reasoning in Large Language Models, yet the quadratic cost of attention makes inference both memory-intensive and slow. Context distillation mitigates this by compressing contextual information into model parameters, and recent work such as Doc-to-LoRA amortizes context distillation into a single forward pass that generates one LoRA adapter per document. However, producing a single monolithic adapter for all queries leads to irrelevant-query interference, limited compositional recall, and poor scalability to long-document reasoning. To address these challenges, we propose Doc-to-Atom (Doc2Atom), a compositional parametric memory framework that decomposes each document into semantically typed knowledge atoms. Each atom is compiled into an independent micro-LoRA adapter and a provenance retrieval key. At inference time, a lightweight query router selects and assembles only the relevant atoms into a query-specific adapter, which is then injected into a frozen base model. The entire system is trained end-to-end through a multi-objective distillation framework. Experiments on six diverse QA benchmarks demonstrate that Doc2Atom outperforms Doc-to-LoRA baselines while reducing the memory cost of document internalization.",
+      "link": "https://arxiv.org/abs/2606.12400v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.12400v1",
+      "authors": [
+        "Xingjian Diao",
+        "Wenbo Li",
+        "Yashas Malur Saidutta",
+        "Avinash Amballa",
+        "Lazar Valkov",
+        "Srinivas Chappidi"
+      ],
+      "published": "2026-06-10T17:58:20Z",
+      "updated": "2026-06-10T17:58:20Z",
+      "categories": [
+        "cs.CL",
+        "cs.IR"
+      ],
+      "arxiv_id": "2606.12400v1",
+      "score": 7,
+      "topic_tags": [
+        "参数记忆",
+        "上下文蒸馏",
+        "LoRA",
+        "长文档推理",
+        "组合式记忆"
+      ],
+      "zh_summary": "本文提出Doc-to-Atom（Doc2Atom），一种组合式参数记忆框架，将文档分解为语义类型知识原子，每个原子编译为独立微LoRA适配器和溯源检索键，推理时仅组装相关原子。在六个QA基准上优于Doc-to-LoRA基线，降低了文档内化内存成本。",
+      "novelty": "将上下文蒸馏分解为原子级参数记忆，实现查询自适应组合。",
+      "innovation_points": [
+        "提出原子级参数记忆，将文档分解为语义类型知识原子",
+        "每个原子编译为独立微LoRA和溯源键",
+        "轻量查询路由器选择并组装相关原子，实现查询定制",
+        "多目标蒸馏框架端到端训练系统"
+      ],
+      "limitations": "原子划分依赖语义类型预定义，可能不够灵活；微LoRA数量随文档长度线性增长。",
+      "improvement_directions": [
+        "学习动态原子粒度，自动确定分割策略",
+        "设计更高效的原子存储和检索机制，减少内存开销",
+        "扩展到多文档场景，支持跨文档知识组合"
+      ],
+      "engineering_value": "降低长文档推理内存和计算成本，适合文档问答、检索增强生成等应用。",
+      "why_relevant": "提出长文档高效推理方案，可应用于OCR文档的后处理理解，如长文档的问答或摘要。"
+    },
+    {
+      "title": "A PubMed-Scale Dataset of Structured Biomedical Abstracts",
+      "summary": "Structured abstracts are important for biomedical literature processing, by facilitating information retrieval, text mining, and knowledge synthesis. However, a vast portion of abstracts indexed in PubMed remain unstructured, presenting a significant bottleneck for downstream text-processing workflows and applications. To resolve this limitation, we introduce Structured PubMed, a comprehensive corpus of section-labeled biomedical abstracts compiled from the complete PubMed database, encompassing over 23.2 million research-article records. The corpus is divided into two distinct subsets: a collection of 5.9 million author-structured abstracts parsed from official XML files, and an automatically labeled collection of 17.2 million originally unstructured abstracts structured via a verbatim-extraction Large Language Model pipeline. Every record is harmonized under a unified five-section schema and mapped to its original PubMed identifier, publication type, and publication date. This dataset can be utilized to train sentence-classification models, benchmark text-segmentation architectures, and perform large-scale, section-specific information extraction at an unprecedented PubMed-wide scale.",
+      "link": "https://arxiv.org/abs/2606.11361v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.11361v1",
+      "authors": [
+        "Chia-Hsuan Chang",
+        "Haerin Song",
+        "Brian Ondov",
+        "Hua Xu"
+      ],
+      "published": "2026-06-09T18:42:20Z",
+      "updated": "2026-06-09T18:42:20Z",
+      "categories": [
+        "cs.IR",
+        "cs.CL"
+      ],
+      "arxiv_id": "2606.11361v1",
+      "score": 6,
+      "topic_tags": [
+        "生物医学摘要",
+        "结构化语料库",
+        "LLM标注",
+        "章节划分",
+        "信息提取"
+      ],
+      "zh_summary": "本文介绍Structured PubMed，一个包含超过2320万条结构化生物医学摘要的语料库，分为作者结构化的590万条和自动标注的1720万条。每条记录统一为五节模式，并提供原始PubMed ID等信息。可用于训练句子分类模型和进行大规模章节特定信息抽取。",
+      "novelty": "大规模覆盖完整PubMed数据库，提供统一结构化格式，并采用LLM自动标注未结构化摘要。",
+      "innovation_points": [
+        "构建最大规模的结构化生物医学摘要语料库，覆盖完整PubMed",
+        "采用LLM逐字提取管线自动标注未结构化摘要",
+        "统一五节模式，便于跨记录比较和下游使用"
+      ],
+      "limitations": "自动标注可能引入错误，尤其对复杂摘要结构；五节模式可能丢失原始章节细节。",
+      "improvement_directions": [
+        "开发自动标注质量评估方法，过滤低置信度条目",
+        "扩展更多章节类型（如方法子节）以增加丰富性",
+        "利用该语料训练专门的文档结构解析模型"
+      ],
+      "engineering_value": "为生物医学文本挖掘提供宝贵资源，可加速信息检索、知识图谱构建等。",
+      "why_relevant": "提供大量结构化文档示例，对文档解析中的章节划分和字段提取有参考价值。"
     }
   ]
 }
