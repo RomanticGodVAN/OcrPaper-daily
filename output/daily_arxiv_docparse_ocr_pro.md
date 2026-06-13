@@ -1,67 +1,56 @@
-# OCR / 文档解析研究日报（2026-06-12）
+# OCR / 文档解析研究日报（2026-06-13）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-06-12 06:00:54`
+- 生成时间（UTC）：`2026-06-13 05:45:44`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日论文聚焦于OCR集成、轻量模型、文档解析增强、金融/生物医学信息抽取。PP-OCRv6以34.5M参数超越超大VLM，展现了轻量OCR的潜力；ParseFixer和AGAR分别从选择性修正和注意力引导渲染提升文档解析与视觉文本理解；LEDGER和AAbAAC提供了领域特定基准；Agents-K1和Doc2Atom则探索了从文档到知识图谱和参数化记忆的新范式。
+> 今日论文聚焦于OCR轻量高精度模型、文档解析与知识图谱构建、以及特定领域数据集与信息提取。PP-OCRv6以34.5M参数超越亿级VLM，强调专用任务极致优化；Agents-K1提出端到端全论文级科学知识图谱管道；LEDGER提供财务年报KPI提取基准；AAbAAC构建自身免疫领域标注语料库；数学论坛平台创新集成OCR公式识别。整体趋势表明OCR/文档解析正向轻量化、多模态、领域专用和知识图谱方向演进。
 
 ## 二、今日趋势判断
 
-趋势一：轻量高效OCR模型持续逼近甚至超越大模型；趋势二：文档解析从全量重写转向选择性修正与自适应放大；趋势三：专有领域基准和数据集（金融、临床、自身免疫）不断涌现。
+轻量化OCR模型通过结构重参数化、MetaFormer等设计，在参数极少的情况下超越大规模视觉语言模型；文档解析从摘要级扩展至全论文级，融合多模态证据和引用关系，为智能体知识编排提供支撑；特定领域（金融、生物医学）数据集与基准不断涌现，推动端到端评估和应用落地；多模态、强化学习与知识图谱技术深度融合。
 
 ## 三、今日论文概览
 
-1. **A Mathematical Forum Platform for Collaborative Problem Solving and Dataset Generation for AI Reasoning** | 标签：OCR、数学公式识别、论坛集成、数据集生成、AI推理
-2. **LEDGER: A Long-Context Benchmark of Corporate Annual Reports for Grounded Financial Retrieval and Extraction** | 标签：文档解析、财务信息抽取、长上下文基准、OCR标注、检索
-3. **Magnifying What Matters: Attention-Guided Adaptive Rendering for Visual Text Comprehension** | 标签：视觉文本理解、VLM、注意力机制、自适应渲染、OCR增强
-4. **ParseFixer: An Agentic Framework for Document Parsing via Selective Multimodal Correction** | 标签：文档解析、选择性修正、Markdown恢复、竞赛方案
-5. **Agents-K1: Towards Agent-native Knowledge Orchestration** | 标签：知识图谱、科学文献解析、信息抽取、GRPO训练、智能体
-6. **Which Models Are Our Models Built On? Auditing Invisible Dependencies in Modern LLMs** | 标签：依赖图、LLM管线、透明度审计、信息提取
-7. **PP-OCRv6: From 1.5M to 34.5M Parameters, Surpassing Billion-Scale VLMs on OCR Tasks** | 标签：OCR、轻量级模型、MetaFormer、结构重参数化、模型压缩
-8. **Doc-to-Atom: Learning to Compile and Compose Memory Atoms** | 标签：文档理解、参数记忆、LoRA、长序列推理、组合性
-9. **AAbAAC: An Annotated Corpus for Autoimmunity Information Extraction** | 标签：信息提取、生物医学、语料库、NER、自身免疫
-10. **EDEN: A Large-Scale Corpus of Clinical Notes for Italian** | 标签：临床笔记、意大利语、语料库、信息提取、CRF
+1. **A Mathematical Forum Platform for Collaborative Problem Solving and Dataset Generation for AI Reasoning** | 标签：OCR、数学公式识别、论坛系统、数据集
+2. **LEDGER: A Long-Context Benchmark of Corporate Annual Reports for Grounded Financial Retrieval and Extraction** | 标签：OCR、财务报表、KPI提取、长文本基准
+3. **Agents-K1: Towards Agent-native Knowledge Orchestration** | 标签：文档解析、科学知识图谱、多模态、强化学习
+4. **PP-OCRv6: From 1.5M to 34.5M Parameters, Surpassing Billion-Scale VLMs on OCR Tasks** | 标签：OCR、轻量级模型、结构重参数化、MetaFormer
+5. **AAbAAC: An Annotated Corpus for Autoimmunity Information Extraction** | 标签：信息抽取、生物医学、NER、语料库
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- PP-OCRv6通过统一MetaFormer架构和结构重参数化，在极小参数量下达到超越大VLM的OCR性能。
-- ParseFixer采用选择性多模态修正，仅针对高价值错误进行验证-回滚修正，避免破坏正确预测。
-- AGAR利用VLM自身注意力图定位关键文本区域并放大重新推理，实现即插即用性能提升。
-- Agents-K1构建多模块解析管道，从完整论文中提取实体关系并编译为知识图谱。
-- Doc2Atom将文档分解为知识原子并编译为独立Lora适配器，实现高效组合式记忆。
+- 轻量化OCR系统通过统一MetaFormer结构块和结构重参数化实现高性能。
+- 文档解析向全论文级知识图谱构建扩展，整合多模态证据和引用关系。
+- 领域专用数据集（金融KPI、自身免疫实体）推动信息提取评估与应用。
+- OCR与论坛系统集成，实现实时公式转换和社区验证数据集生成。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 探索将AGAR的注意力引导渲染方法扩展到表格、图表等混合文档元素。
-- 将ParseFixer的选择性修正框架扩展至HTML、LaTeX等其他输出格式。
-- 结合PP-OCRv6的轻量设计，在移动端部署无需云服务的快速文档解析系统。
-- 基于LEDGER的长上下文基准，引入跨报告推理与时间序列分析任务。
-- 扩展现有领域语料库（如AAbAAC、EDEN）至多语言和更多临床情景。
-- 研究Doc2Atom中知识原子类型的自动发现，减少手动定义。
-- 利用Agents-K1的知识图谱，开发面向跨文档推理和知识融合的智能体。
+- 在公开OCR基准（如ICDAR）上评估PP-OCRv6以增强可比性，并探索更高效的压缩方法。
+- 将Agents-K1管道扩展至专利、技术报告等更多科学文档类型。
+- 扩展LEDGER数据集至多语言年报和其他财务文档类型，评估跨语言泛化能力。
+- 将AAbAAC语料库扩展至全文级，结合OCR处理非结构化临床文档。
+- 探索多OCR引擎融合以及用户反馈校正机制，提高公式识别鲁棒性和数据集质量。
+- 联合优化OCR与下游任务（如KPI提取、知识图谱构建），实现端到端学习。
 
 ## 六、工程落地启发
 
-- 采用选择性修正而非全量重写可降低文档解析的计算开销且性能更优。
-- VLM的中间注意力层可作为即插即用的关键区域检测器，无需额外训练。
-- 轻量OCR模型（如PP-OCRv6）在边缘设备上能实现高精度与实时性。
-- 文档分解为原子适配器的思路适合处理长文档、减少内存占用。
-- 社区驱动的数据集积累（如论坛数学公式）可持续优化模型。
-- 结构化CRF标注方案为信息抽取提供了新范式。
+- PP-OCRv6的轻量级架构为边缘部署提供了高性价比方案，可直接参考复制。
+- LEDGER提供标准化基准和工具链，便于评估大模型在金融文档理解上的能力。
+- Agents-K1的三源智能体接口统一搜索、图检索和遍历，可应用于科研辅助系统。
+- 数学论坛平台的OCR集成方案可复用至教育或内容社区场景。
 
 ## 七、优先关注论文
 
-- **PP-OCRv6: From 1.5M to 34.5M Parameters, Surpassing Billion-Scale VLMs on OCR Tasks**：展示了轻量OCR模型超越超大VLM的可能，直接影响OCR系统选型方向，需跟踪其在公开基准上的表现。
-- **Magnifying What Matters: Attention-Guided Adaptive Rendering for Visual Text Comprehension**：提出无训练、模型无关的VTC增强方法，可低成本集成，值得关注其与更多VLM的兼容性。
-- **ParseFixer: An Agentic Framework for Document Parsing via Selective Multimodal Correction**：竞赛验证的选择性修正方案，实用性强，需关注其扩展至其他输出格式的后续工作。
-- **LEDGER: A Long-Context Benchmark of Corporate Annual Reports for Grounded Financial Retrieval and Extraction**：首个长上下文财务文档基准，对评估文档解析系统有重要参考价值。
-- **Doc-to-Atom: Learning to Compile and Compose Memory Atoms**：长文档高效推理的新思路，未来可能影响文档检索与问答系统的架构设计。
+- **PP-OCRv6: From 1.5M to 34.5M Parameters, Surpassing Billion-Scale VLMs on OCR Tasks**：轻量级模型在专用任务上超越大模型，具有极强工程价值，需关注其公开基准评测和后续扩展。
+- **Agents-K1: Towards Agent-native Knowledge Orchestration**：开创全论文级知识图谱管道，与智能体结合紧密，可能成为科学知识发现基础设施。
+- **LEDGER: A Long-Context Benchmark of Corporate Annual Reports for Grounded Financial Retrieval and Extraction**：首个数字化年报KPI提取基准，填补金融领域评估空白，后续应用潜力大。
 
 ## 八、论文逐篇解析
 
@@ -73,40 +62,40 @@
 - 发布时间: 2026-06-11T07:10:04Z
 - 分类: cs.AI
 - 相关性评分: 16
-- 主题标签: OCR、数学公式识别、论坛集成、数据集生成、AI推理
+- 主题标签: OCR、数学公式识别、论坛系统、数据集
 
 **中文摘要**
 
-> 针对数学论坛中公式分享的痛点（手动LaTeX易错、OCR工具需切换平台、缺乏集成流程），提出一个将图像到LaTeX转换管道嵌入论坛发帖界面的统一系统。用户上传公式图像后，经Mathpix OCR API处理，自动标准化分隔符并渲染预览，支持桌面和移动端。系统架构分为图像处理、渲染和存储三层，已申请临时专利。该系统可生成社区验证的数学问题数据集，用于训练和评估AI推理能力。
+> 提出一个统一系统，将图像到LaTeX的转换管道嵌入论坛发帖界面，支持用户上传或拍摄数学表达式图像，通过Mathpix OCR API转换为LaTeX或Markdown，实现实时预览。系统由图像处理、渲染和存储三层松散耦合架构组成，已提交临时美国专利申请。
 
 **核心创新概述**
 
-> 将OCR转换直接嵌入论坛发帖流程，实现从拍照到渲染的无缝集成，并利用社区数据形成持续增长的数据集。
+> 创新性地将OCR公式识别与论坛发帖流程无缝集成，解决了数学内容在线分享中的格式转换痛点，并声称可生成社区验证的数学问题数据集用于AI推理训练。
 
 **创新点拆解**
 
-- 将OCR API嵌入论坛界面，消除平台切换
-- 自动检测输出类型并标准化分隔符
-- 三层次松耦合架构支持多端
-- 形成社区驱动的大规模数学问题数据集
+- 图像到LaTeX转换管道直接嵌入论坛发帖界面，无需平台切换
+- 基于OCR API的实时预览与自动分隔符规范化
+- 三层松散耦合架构支持桌面和移动端
+- 将论坛发帖转化为持续增长的数学问题数据集
 
 **当前局限**
 
-> 依赖Mathpix API，可能受限于API的识别准确率和成本；目前仅针对数学公式，未扩展到图表等其他内容。
+> 依赖单一OCR API（Mathpix），未讨论不同OCR引擎的鲁棒性；实际部署效果和数据集质量未在论文中量化评估。
 
 **后续可改进方向**
 
-- 支持更多OCR引擎以增强鲁棒性
-- 扩展到图表、手写笔记等混合内容
-- 利用用户反馈进行增量式模型微调
+- 探索多OCR引擎融合以提高公式识别的准确率和鲁棒性
+- 引入用户反馈机制校正OCR错误，提升数据集标注质量
+- 扩展至化学、物理等符号密集领域的公式识别
 
 **工程启发**
 
-> 提供可部署的论坛集成方案，降低数学内容共享门槛，并积累高质量推理数据集。
+> 提供了一套可复用的论坛集成OCR方案，降低数学内容分享门槛，同时催生大规模、社区验证的推理数据集，对教育平台和AI推理研究有实际价值。
 
 **为什么值得关注**
 
-> 涉及OCR技术在数学领域的应用，与文档解析中的公式识别直接相关。
+> 涉及OCR在特定场景（数学公式）的应用集成，与OCR技术在教育领域的落地直接相关。
 
 **原始摘要**
 
@@ -138,40 +127,40 @@ mathematical reasoning
 - 发布时间: 2026-06-11T09:28:43Z
 - 分类: cs.CL
 - 相关性评分: 13
-- 主题标签: 文档解析、财务信息抽取、长上下文基准、OCR标注、检索
+- 主题标签: OCR、财务报表、KPI提取、长文本基准
 
 **中文摘要**
 
-> 发布LEDGER基准数据集，包含4,999份数字化公司年报（含图表表格），标注31项财务KPI，并构建三个评估任务：页面级KPI检索（118,048个自然语言问题）、长文本“大海捞针”值查找、完整KPI抽取。提供人工OCR质量标注及完整工具链。案例研究显示CEO信函措辞与市场反应相关。
+> 发布LEDGER数据集，包含4,999份数字化企业年报（含图表、表格和叙事文本），每份标注31个财务KPI，并链接到业绩公布日的市场反应。基于此构建三个评估基准：页面级KPI检索、对话式“大海捞针”单值查找和完整KPI提取，并提供人工OCR质量标注。
 
 **核心创新概述**
 
-> 首个专注长上下文财务报告的多模态检索与抽取基准，包含完整文档而非仅SEC 10-K文本。
+> 首个将数字化年报（非纯文本SEC文件）与KPI提取及市场反应关联的公开数据集，提供多难度基准和完整工具链。
 
 **创新点拆解**
 
-- 包含图表表格的完整年报数据集
-- 多维度评估任务覆盖检索、抽取和推理
-- 提供人工OCR标注和完整工具链
-- 链接市场反应的数据集设计
+- 构建含图表、表格和叙事文本的数字化年报语料库
+- 标注31个财务KPI并与市场反应关联
+- 设计三个难度递增的评估基准
+- 提供人工OCR质量标注和完整工具链
 
 **当前局限**
 
-> 仅覆盖公司年报，领域局限；KPI定义可能不适用于所有行业；标注成本高。
+> 数据局限于企业年报领域，KPI定义可能不适用于其他财务文档；OCR质量标注基于人工，可能存在主观差异。
 
 **后续可改进方向**
 
-- 扩展到更多语言和地区报告
-- 引入时间序列和跨报告推理任务
-- 探索与结构化数据库的联合检索
+- 扩展至其他财务文档类型（如招股书、季报）
+- 引入多语言年报以评估跨语言泛化能力
+- 探索端到端OCR与KPI提取的联合优化
 
 **工程启发**
 
-> 为长上下文LLM和文档解析系统提供金融领域的标准化评测平台。
+> 为财务领域的长文本、多模态文档理解和检索任务提供标准化基准和资源，有助于评估大模型在实际金融场景中的表现。
 
 **为什么值得关注**
 
-> 直接涉及文档解析中的表格/数字抽取、OCR质量标注和长文档处理。
+> 涉及OCR数字化年报的标注与使用，是OCR在金融领域的典型应用。
 
 **原始摘要**
 
@@ -192,131 +181,7 @@ with a case study linking CEO-letter rhetoric to post-publication market impact.
 
 ---
 
-### 3. Magnifying What Matters: Attention-Guided Adaptive Rendering for Visual Text Comprehension
-
-- arXiv: [2606.12898v1](https://arxiv.org/abs/2606.12898v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2606.12898v1)
-- 作者: Shenglai Zeng, Qirui Wang, Kai Guo, Xinnan Dai, Xianxuan Long, Hui Liu
-- 发布时间: 2026-06-11T04:57:51Z
-- 分类: cs.CV, cs.CL
-- 相关性评分: 13
-- 主题标签: 视觉文本理解、VLM、注意力机制、自适应渲染、OCR增强
-
-**中文摘要**
-
-> 研究视觉文本理解（VTC）中VLM的内部机制，发现模型存在“定位但不利用”现象：中间层注意力可定位关键文本区域，但与答案正确性脱钩。提出AGAR方法，利用VLM自身注意力图识别重要图像块，将其对应文本区域放大后重新推理。在9个基准和4种VLM上验证了有效性，可即插即用提升性能。
-
-**核心创新概述**
-
-> 首次揭示VTC中注意力定位与利用的脱钩现象，并据此提出无训练、模型无关的自适应渲染方法。
-
-**创新点拆解**
-
-- 发现“定位但不利用”的注意力机制现象
-- 基于注意力图的自适应放大渲染策略
-- 即插即用，与后训练兼容
-- 多种退化场景下仍鲁棒
-
-**当前局限**
-
-> 依赖VLM自身注意力，可能受其质量影响；放大策略可能增加计算开销；未探索其他模态。
-
-**后续可改进方向**
-
-- 结合多尺度注意力以更精确定位
-- 设计轻量级注意力提取模块降低开销
-- 扩展到表格、图表等其他视觉文档元素
-
-**工程启发**
-
-> 可直接集成到现有VTC系统中，低成本提升OCR和文档问答性能。
-
-**为什么值得关注**
-
-> 核心关注VLM在处理视觉文本时的内部机制和优化方法，直接提升OCR和视觉问答。
-
-**原始摘要**
-
-Visual Text Comprehension (VTC) renders text into images for a vision-language model (VLM) to read,
-sidestepping LLM context-window limits and powering applications from long-page OCR to multi-page
-memory QA. Yet existing VTC pipelines treat rendering and layout as a fixed, content-agnostic
-preprocessing step and offer little mechanistic understanding of how VLMs internally process
-visualized text. Through a focused empirical study on VTC QA tasks, we reveal that VLMs exhibit a
-localization-without-utilization regime: evidence-localizing attention emerges sharply in the
-middle-to-late layers and is largely decoupled from answer correctness, yet simply enlarging the
-localized spans on the rendered page recovers a large fraction of the failures. Building on these
-observations, we propose AGAR (Attention-Guided Adaptive Rendering), a training-free, model-agnostic
-method that leverages a VLM's own middle-to-late layer attention to identify the top-K important
-visual patches, maps them back to word spans, and re-renders the page with those spans enlarged
-before re-inferring the answer. Extensive experiments across nine VTC benchmarks (short-form, long-
-context, and multi-page memory QA) and four VLM backbones show that AGAR (i)consistently improves
-off-the-shelf VLMs as a plug-and-play enhancement, (ii)composes with VLM post-training to yield
-further gains, and (iii)remains robust under both visual- and text-side input degradation.
-
----
-
-### 4. ParseFixer: An Agentic Framework for Document Parsing via Selective Multimodal Correction
-
-- arXiv: [2606.11977v1](https://arxiv.org/abs/2606.11977v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2606.11977v1)
-- 作者: LeKai Yu, Hao Liu, Kun Wang, Zhiran Li, Ruping Cao, Fan Liu, Yupeng Hu
-- 发布时间: 2026-06-10T11:55:18Z
-- 分类: cs.CV
-- 相关性评分: 12
-- 主题标签: 文档解析、选择性修正、Markdown恢复、竞赛方案
-
-**中文摘要**
-
-> 提出ParseFixer智能框架用于文档解析，由全页骨干解析（FBP）和智能选择性修正（ASC）两模块组成。FBP使用MinerU2.5 Pro生成初始Markdown，ASC检测高价值解析失败并通过验证-回滚修正。在DataMFM挑战赛Track 1中获得第三名（总分61.78）。
-
-**核心创新概述**
-
-> 结合开源解析器与选择性多模态修正，避免重写可靠预测，实现精确内容与结构恢复。
-
-**创新点拆解**
-
-- 双模块框架：骨干解析+选择性修正
-- 验证-回滚机制保证修正可靠性
-- 选择性修正避免破坏正确部分
-- 可集成不同骨干解析器
-
-**当前局限**
-
-> 依赖MinerU2.5 Pro，可能受其局限；修正过程增加计算时间；仅针对Markdown输出。
-
-**后续可改进方向**
-
-- 扩展至其他输出格式（如HTML、LaTeX）
-- 引入自适应阈值选择修正区域
-- 探索更轻量级的骨干模型以降低计算成本
-
-**工程启发**
-
-> 提供可落地的文档解析改进方案，在竞赛中验证有效性，适合实际部署。
-
-**为什么值得关注**
-
-> 直接解决文档解析中的内容恢复和结构重建问题。
-
-**原始摘要**
-
-In this report, we present our third-place solution for the DataMFM Challenge Track 1: Document
-Parsing. This track requires models to recover structured Markdown documents from document page
-images while preserving textual content and document structure. To address the complementary
-requirements of accurate content recovery and faithful structure reconstruction, we propose
-ParseFixer, an agentic framework for backbone parsing and selective correction. ParseFixer consists
-of two key modules: Full-Page Backbone Parsing (FBP) and Agentic Selective Correction (ASC). FBP
-produces stable initial Markdown outputs with MinerU2.5 Pro, while ASC detects high-value parsing
-failures and repairs them through a verify-and-rollback correction process. By placing selective
-multimodal correction after open-source backbone parsing, ParseFixer improves the recovery of key
-document elements without rewriting reliable backbone predictions. On the test set, our final system
-achieves an overall score of 61.78 and ranks third in Track 1, demonstrating its effectiveness for
-accurate document parsing. Our code will be released at: https://github.com/iLearn-
-Lab/CVPRW26-ParseFixer.
-
----
-
-### 5. Agents-K1: Towards Agent-native Knowledge Orchestration
+### 3. Agents-K1: Towards Agent-native Knowledge Orchestration
 
 - arXiv: [2606.13669v1](https://arxiv.org/abs/2606.13669v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2606.13669v1)
@@ -324,40 +189,40 @@ Lab/CVPRW26-ParseFixer.
 - 发布时间: 2026-06-11T17:58:35Z
 - 分类: cs.AI
 - 相关性评分: 10
-- 主题标签: 知识图谱、科学文献解析、信息抽取、GRPO训练、智能体
+- 主题标签: 文档解析、科学知识图谱、多模态、强化学习
 
 **中文摘要**
 
-> 提出Agents-K1端到端管道，将原始文档转换为智能体原生科学知识图谱。包含多模态解析器（5模块模式捕捉实体、多模态证据、引用和关系）、基于GRPO训练的4B信息抽取骨干（规则奖励）、以及三源智能体接口（统一网络搜索、多模态图谱检索和跨文档遍历）。构建了包含246万篇论文的Scholar-KG数据集。
+> 提出Agents-K1管道，将原始文档转化为智能体可用的科学知识图谱。包含多模态解析器（五模块模式覆盖实体、多模态证据、引用和关系）、基于GRPO训练的4B信息提取骨干网络，以及三源智能体接口（网络搜索、多模态图检索、跨文档遍历）。处理246万篇论文生成Scholar-KG，开源百万子集。
 
 **核心创新概述**
 
-> 面向科学推理的知识图谱构建管道，从完整论文中提取结构化实体和关系，而非仅摘要。
+> 将知识图谱构建从摘要级扩展到全论文级，并整合多模态证据和引用关系，同时通过强化学习训练轻量级信息提取模型。
 
 **创新点拆解**
 
-- 五模块解析模式覆盖完整论文
-- 使用GRPO训练4B级信息抽取模型
-- 三源智能体接口统一检索
-- 大规模科学知识图谱（246万篇）
+- 五模块多模态解析器解析全论文而非仅摘要
+- 基于GRPO和规则奖励的4B信息提取骨干网络
+- 三源智能体接口统一网络搜索、图检索和跨文档遍历
+- 构建涵盖246万篇论文的跨学科科学知识图谱
 
 **当前局限**
 
-> 4B模型在复杂推理上可能不及更大模型；知识图谱质量依赖解析精度；仅覆盖英文论文。
+> 知识图谱质量依赖解析器性能，解析错误会传播；GRPO训练的计算成本未详细说明；跨文档推理能力评估可能不够全面。
 
 **后续可改进方向**
 
-- 扩展到多语言和跨学科
-- 引入更精细的关系类型和因果关系
-- 增强跨文档推理和知识融合
+- 引入图纠错机制减少解析错误传播
+- 探索更高效的强化学习策略优化信息提取模型
+- 将该管道扩展到专利、技术报告等其他科学文档类型
 
 **工程启发**
 
-> 提供从文档到知识图谱的完整方案，可支撑科学文献分析、AI推理等应用。
+> 提供端到端的科学文献知识图谱构建方案，可用于辅助科研文献检索、综述生成和跨学科知识发现。
 
 **为什么值得关注**
 
-> 涉及文档解析中的信息抽取、实体关系建模，与OCR后处理高度相关。
+> 涉及文档解析和结构化知识提取，是OCR和文档智能领域的前沿方向。
 
 **原始摘要**
 
@@ -380,72 +245,7 @@ hop scientific reasoning.
 
 ---
 
-### 6. Which Models Are Our Models Built On? Auditing Invisible Dependencies in Modern LLMs
-
-- arXiv: [2606.12385v1](https://arxiv.org/abs/2606.12385v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2606.12385v1)
-- 作者: Sanjay Adhikesaven, Haoxiang Sun, Sewon Min
-- 发布时间: 2026-06-10T17:47:59Z
-- 分类: cs.CL
-- 相关性评分: 10
-- 主题标签: 依赖图、LLM管线、透明度审计、信息提取
-
-**中文摘要**
-
-> 提出ModSleuth智能体系统，从公开制品递归重建LLM依赖图。面对依赖定义模糊和引用不一致的挑战，通过形式化区分直接/间接依赖、操作中心关系和制品身份消歧。应用于四个LLM发布，恢复1,060个源验证依赖，揭示多跳许可义务、训练-评估耦合、制品版本不一致等问题。
-
-**核心创新概述**
-
-> 首次系统化追溯LLM训练管线中的隐式依赖关系，解决了碎片化文档中的依赖图重建难题。
-
-**创新点拆解**
-
-- 递归式依赖图重建智能体
-- 依赖形式化定义（直接/间接、操作角色）
-- 制品身份消歧机制
-- 大规模依赖图揭示隐蔽问题
-
-**当前局限**
-
-> 仅基于公开制品，可能遗漏私有依赖；依赖定义主观性；可扩展性待验证。
-
-**后续可改进方向**
-
-- 集成更多来源（如日志、版本库元数据）
-- 自动化依赖定义学习
-- 扩展到更广泛的ML系统（非仅LLM）
-
-**工程启发**
-
-> 为LLM生态系统透明度提供分析工具，辅助合规性审查和依赖管理。
-
-**为什么值得关注**
-
-> 涉及文档和制品信息抽取，与OCR后元数据提取有间接关联。
-
-**原始摘要**
-
-Modern LLM training pipelines increasingly rely on other models to generate data, filter corpora,
-judge outputs, and guide development decisions. These dependencies are recursive: a model may depend
-on an upstream artifact whose own dependencies are documented only in separate releases and
-artifacts. As a result, the full dependency structure is fragmented across heterogeneous public
-artifacts, with complexity and recursive depth far outpacing humans' ability to trace. We introduce
-ModSleuth, an agentic system that recursively reconstructs LLM dependency graphs from public
-artifacts with source-grounded evidence. We find that the primary challenge is no longer information
-extraction, but defining what constitutes a dependency and reconciling artifact references across
-inconsistent documentation. We address these challenges through a formalization that distinguishes
-direct and indirect dependencies, represents heterogeneous pipeline roles through operation-centered
-relationships, and resolves artifact identities across names, versions, and repositories. Applying
-ModSleuth to four public-artifact-rich LLM releases, we recover 1,060 source-verified dependencies
-and construct large-scale dependency graphs of modern LLM development. These graphs reveal multi-hop
-license obligations, train-evaluation coupling, discrepancies between released and training-time
-artifacts, and documentation inconsistencies that would otherwise be difficult to uncover. We
-release ModSleuth and the resulting dependency graphs to support transparent analysis of the
-increasingly complex ecosystems underlying modern LLMs.
-
----
-
-### 7. PP-OCRv6: From 1.5M to 34.5M Parameters, Surpassing Billion-Scale VLMs on OCR Tasks
+### 4. PP-OCRv6: From 1.5M to 34.5M Parameters, Surpassing Billion-Scale VLMs on OCR Tasks
 
 - arXiv: [2606.13108v1](https://arxiv.org/abs/2606.13108v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2606.13108v1)
@@ -453,39 +253,40 @@ increasingly complex ecosystems underlying modern LLMs.
 - 发布时间: 2026-06-11T09:35:16Z
 - 分类: cs.CV
 - 相关性评分: 9
-- 主题标签: OCR、轻量级模型、MetaFormer、结构重参数化、模型压缩
+- 主题标签: OCR、轻量级模型、结构重参数化、MetaFormer
 
 **中文摘要**
 
-> PP-OCRv6 是一个轻量级 OCR 系统，通过统一的 MetaFormer 风格块重新设计了骨干网络、检测颈和识别颈，并采用结构重参数化。它提供中、小、微三种模型，在内部基准上，中等模型以 34.5M 参数在识别准确率和检测 Hmean 上超越了 PP-OCRv5_server，并超过了 Qwen3-VL-235B 等大模型。微模型在 Intel Xeon CPU 上比 PP-OCRv5_mobile 快 3.9 倍，精度相当。
+> 提出PP-OCRv6轻量级OCR系统，通过在骨干网络、检测颈和识别颈中统一采用MetaFormer结构块+结构重参数化，并针对任务设置不同步长，实现从服务器到边缘的部署。Medium模型在内部基准上识别准确率83.2%，检测Hmean 86.2%，超越PP-OCRv5_server和多个亿级参数VLM；微型模型在CPU上推理速度提升3.9倍。
 
 **核心创新概述**
 
-> 将 MetaFormer 架构统一应用于 OCR 的检测和识别子任务，通过任务特定的步长配置实现任务解耦，并结合结构重参数化提升效率。
+> 在参数仅34.5M的情况下超越亿级参数VLM，证明了轻量级OCR系统在专用任务上的极致优化潜力。
 
 **创新点拆解**
 
-- 提出基于 MetaFormer 的统一架构块，同时支撑检测和识别任务
-- 采用结构重参数化技术提升推理效率
-- 设计了三个模型层级（中、小、微），覆盖从服务器到边缘的部署场景
+- 统一MetaFormer结构块+结构重参数化设计
+- 任务特定步长配置解耦空间和通道混合
+- 三个模型层级共享相同块原语，覆盖不同部署场景
+- 数据为中心的优化策略，训练数据从1.5M扩至34.5M
 
 **当前局限**
 
-> 仅基于内部基准评估，缺乏公开基准对比；与 VLM 的比较可能未使用完全一致的评估协议。
+> 基准测试为内部数据集，非公开标准基准；与VLM的比较可能受限于测试集领域；参数量级和精度对比可能存在不公平因素。
 
 **后续可改进方向**
 
-- 在公开 OCR 基准上进行系统评估
-- 探索更大规模的模型以进一步逼近 VLM 的性能
-- 研究更高效的训练策略以减少对大规模数据的依赖
+- 在公开OCR基准（如ICDAR）上进行评估以增强可比性
+- 探索更高效的网络结构压缩方法，进一步降低边缘设备延迟
+- 扩展至端到端文档理解任务（如表格识别、布局分析）
 
 **工程启发**
 
-> 提供轻量级、高性能的 OCR 解决方案，适用于资源受限设备，且易于工业部署。
+> 提供了轻量级高性能OCR系统的工程范例，适用于资源受限场景，对OCR产品落地有直接参考价值。
 
 **为什么值得关注**
 
-> 展示了如何通过架构创新和数据优化在 OCR 领域超越大型 VLM，对 OCR 研究和应用有直接参考价值。
+> 直接针对OCR系统改进，提出轻量化方案并证实超越大模型。
 
 **原始摘要**
 
@@ -505,68 +306,7 @@ accuracy.
 
 ---
 
-### 8. Doc-to-Atom: Learning to Compile and Compose Memory Atoms
-
-- arXiv: [2606.12400v1](https://arxiv.org/abs/2606.12400v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2606.12400v1)
-- 作者: Xingjian Diao, Wenbo Li, Yashas Malur Saidutta, Avinash Amballa, Lazar Valkov, Srinivas Chappidi
-- 发布时间: 2026-06-10T17:58:20Z
-- 分类: cs.CL, cs.IR
-- 相关性评分: 7
-- 主题标签: 文档理解、参数记忆、LoRA、长序列推理、组合性
-
-**中文摘要**
-
-> Doc2Atom 是一种组合式参数记忆框架，将文档分解为语义类型的知识原子，每个原子编译为独立的微 LoRA 适配器。推理时，轻量查询路由器选择相关原子并组装成查询特定的适配器，插入冻结的基础模型。多目标蒸馏框架实现端到端训练。在六个 QA 基准上优于 Doc-to-LoRA 基线，同时降低了文档内化的内存成本。
-
-**核心创新概述**
-
-> 将文档分解为独立可组合的原子记忆单元，通过动态选择适配器实现长文档的高效推理。
-
-**创新点拆解**
-
-- 提出基于知识原子的组合式参数记忆
-- 轻量查询路由器实现原子选择与组装
-- 多目标蒸馏框架用于端到端训练
-
-**当前局限**
-
-> 依赖预定义语义类型，可能不适用于类型多样的文档；适配器数量随文档长度线性增长。
-
-**后续可改进方向**
-
-- 自动发现语义类型以减少手动定义
-- 优化原子选择策略以提升推理速度
-- 扩展到多模态文档场景
-
-**工程启发**
-
-> 为长文档理解任务提供了高效的内存压缩方案，适合部署在有限资源环境中。
-
-**为什么值得关注**
-
-> 提出了一种新颖的文档压缩与检索范式，可应用于文档 OCR 后处理中的结构化信息提取。
-
-**原始摘要**
-
-Long input sequences are central to document understanding and multi-step reasoning in Large
-Language Models, yet the quadratic cost of attention makes inference both memory-intensive and slow.
-Context distillation mitigates this by compressing contextual information into model parameters, and
-recent work such as Doc-to-LoRA amortizes context distillation into a single forward pass that
-generates one LoRA adapter per document. However, producing a single monolithic adapter for all
-queries leads to irrelevant-query interference, limited compositional recall, and poor scalability
-to long-document reasoning. To address these challenges, we propose Doc-to-Atom (Doc2Atom), a
-compositional parametric memory framework that decomposes each document into semantically typed
-knowledge atoms. Each atom is compiled into an independent micro-LoRA adapter and a provenance
-retrieval key. At inference time, a lightweight query router selects and assembles only the relevant
-atoms into a query-specific adapter, which is then injected into a frozen base model. The entire
-system is trained end-to-end through a multi-objective distillation framework. Experiments on six
-diverse QA benchmarks demonstrate that Doc2Atom outperforms Doc-to-LoRA baselines while reducing the
-memory cost of document internalization.
-
----
-
-### 9. AAbAAC: An Annotated Corpus for Autoimmunity Information Extraction
+### 5. AAbAAC: An Annotated Corpus for Autoimmunity Information Extraction
 
 - arXiv: [2606.13051v1](https://arxiv.org/abs/2606.13051v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2606.13051v1)
@@ -574,39 +314,39 @@ memory cost of document internalization.
 - 发布时间: 2026-06-11T08:34:34Z
 - 分类: cs.AI
 - 相关性评分: 6
-- 主题标签: 信息提取、生物医学、语料库、NER、自身免疫
+- 主题标签: 信息抽取、生物医学、NER、语料库
 
 **中文摘要**
 
-> AAbAAC 是一个自身免疫领域的手动标注语料库，包含 115 篇 PubMed 摘要，标注了自身免疫疾病、自身抗体、分子靶点、身体位置和临床体征等实体及其关系。基于该语料库微调 NER 模型取得了性能提升，证实了小型标注语料在专业领域中的价值。
+> 构建AAbAAC语料库，包含115篇选自PubMed的自身免疫领域摘要，手工标注实体（自身免疫疾病、自身抗体、分子靶点、位置、临床体征）及其关系。微调后的NER模型性能提升，证明了小型标注语料库在专业领域的信息提取价值。
 
 **核心创新概述**
 
-> 首个专注于自身免疫领域的实体和关系标注语料库，覆盖了关键实体类型。
+> 聚焦自身免疫领域，提供首个包含多种实体和关系的手工标注语料库，并展示小样本学习在NER上的有效性。
 
 **创新点拆解**
 
-- 构建了自身免疫领域标注语料库 AAbAAC
-- 提供了实体和关系标注
-- 通过微调验证了语料库对 NER 任务的有效性
+- 手工标注自身免疫领域五种实体及其关系
+- 基于小规模语料微调NER模型取得性能提升
+- 公开语料库以促进该领域计算研究
 
 **当前局限**
 
-> 语料规模较小（115 篇摘要），可能限制模型泛化能力；仅包含英文摘要。
+> 语料规模小（115篇摘要），仅覆盖NER和关系提取；未探索大规模文档或全文的解析。
 
 **后续可改进方向**
 
-- 扩充语料库规模并覆盖更多文献类型
-- 引入更多语言以增加多样性
-- 探索预训练模型在零样本下的表现
+- 扩展语料库至全文级，并增加文档级关系抽取
+- 结合OCR技术处理非结构化临床文档（如医生笔记）
+- 探索基于规则和预训练模型混合的信息提取方法
 
 **工程启发**
 
-> 为自身免疫领域的信息提取提供了基础资源，可支持临床决策辅助系统。
+> 为自身免疫领域的文献挖掘和知识库构建提供基础资源，可辅助药物发现和临床研究。
 
 **为什么值得关注**
 
-> 展示了领域专用语料库对信息提取的重要性，OCR 系统可借鉴类似思路对医学文档进行专业化处理。
+> 涉及专用领域（医学）的文本解析和实体关系提取，与文档智能中的信息抽取任务相关。
 
 **原始摘要**
 
@@ -623,68 +363,5 @@ AAbAAC for information extraction in the domain of autoimmunity, showing expecte
 performance after finetuning. This illustrates the value of small-scale annotation efforts for
 specialized domains and contributes to the computational study of autoimmunity. The AAbAAC corpus is
 available at https://github.com/f-maury/AAbAAC.
-
----
-
-### 10. EDEN: A Large-Scale Corpus of Clinical Notes for Italian
-
-- arXiv: [2606.12569v1](https://arxiv.org/abs/2606.12569v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2606.12569v1)
-- 作者: Tiziano Labruna, Guido Bertolini, Pietro Ferrazzi, Bernardo Magnini
-- 发布时间: 2026-06-10T18:21:50Z
-- 分类: cs.CL, cs.AI
-- 相关性评分: 6
-- 主题标签: 临床笔记、意大利语、语料库、信息提取、CRF
-
-**中文摘要**
-
-> EDEN 是一个意大利语临床笔记大规模语料库，包含约 400 万份急诊科笔记。其中约 6000 份笔记由临床专家根据包含 132 个项目的结构化 CRF 进行了手动标注，覆盖呼吸困难和精神丧失两种情景。数据集填补了意大利语临床笔记的空白，并提供了 CRF 填充作为新的结构化信息提取基准，以及 Gemma-27B 和 MedGemma-27B 的零样本基线。
-
-**核心创新概述**
-
-> 最大的意大利语临床笔记语料库，具有结构化 CRF 标注，提出了 CRF 填充任务作为新的信息提取基准。
-
-**创新点拆解**
-
-- 构建大规模意大利语急诊临床笔记语料库（400 万篇）
-- 设计结构化 CRF 标注方案（132 项）
-- 提出 CRF 填充任务作为结构化信息提取基准
-
-**当前局限**
-
-> 类别不平衡严重；标注仅覆盖两种临床情景；零样本基线表现有限。
-
-**后续可改进方向**
-
-- 扩展标注到更多临床情景
-- 研究类别不平衡的处理方法
-- 探索微调策略以提升 CRF 填充性能
-
-**工程启发**
-
-> 为意大利语临床文本处理提供了基准资源，可支持医疗领域的 NLP 应用开发。
-
-**为什么值得关注**
-
-> 展示了临床文档的结构化信息提取挑战，OCR 系统可结合此类方法提取非结构化病历中的关键信息。
-
-**原始摘要**
-
-We present EDEN (Emergency Department Electronic Notes), a new and unique large-scale corpus of
-clinical notes produced in Emergency Departments of Italian hospitals. The corpus, in its current
-version, is composed of approximately 4 million clinical notes fully anonymized, covering diverse
-phases of patient care during the stay in the emergency department. In addition, a subset of about
-six thousand notes has been manually annotated by clinical experts through a structured Case Report
-Form (CRF) containing 132 items relevant for two patient situations in emergency departments,
-dyspnea and loss of consciousness. Items may assume numerical values (e.g., for blood saturation),
-categorical (e.g., for level of consciousness ), binary (e.g., for presence of traumas), and mixed
-value types. The annotation process involved multiple clinicians and underwent iterative revision to
-resolve ambiguities in item formulation, resulting in a richly structured (although high imbalanced)
-resource. The dataset aims to fill a relevant gap of data able to support both the development and
-the use of Large Language Models in concrete medical applications. We describe the data collection
-protocol, the on-site anonymisation pipeline, corpus statistics, and the annotation scheme. Finally,
-we propose CRF-filling as a novel structured information extraction benchmark, and provide zero-shot
-baseline resulting from Gemma-27B and MedGemma-27B. To the best of our knowledge, the EDEN dataset
-is the largest freely available corpus of clinical notes existing for the Italian language.
 
 ---
