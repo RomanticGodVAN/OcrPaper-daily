@@ -1,23 +1,25 @@
 {
   "meta": {
-    "report_date": "2026-06-14",
-    "generated_at_utc": "2026-06-14 06:04:03",
+    "report_date": "2026-06-15",
+    "generated_at_utc": "2026-06-15 06:37:22",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
     "count": 0
   },
   "synthesis": {
-    "executive_summary": "今日无新论文提交，暂无新发现或趋势更新。",
-    "trend_summary": "暂无趋势信息，需等待新论文补充。",
-    "common_innovations": [
-      "暂无创新点总结"
-    ],
+    "executive_summary": "今天暂无新增论文，OCR和文档解析领域未见新的突破或技术进展。团队应继续关注现有研究方向的持续优化。",
+    "trend_summary": "暂无趋势变化，保持对已有技术方向的跟踪。",
+    "common_innovations": [],
     "future_directions": [
-      "无新论文，未来方向待补充"
+      "探索基于Transformer的端到端文档解析模型",
+      "研究多模态预训练在混合文档理解中的应用",
+      "开发适应复杂版面（如表格、公式）的专项OCR技术",
+      "优化低资源语言与手写文本的识别精度"
     ],
     "engineering_takeaways": [
-      "暂无工程启示"
+      "加强现有OCR模型的抗噪声与版面自适应能力",
+      "持续集成最新开源的文档解析工具与基准测试"
     ],
     "watchlist": []
   },
