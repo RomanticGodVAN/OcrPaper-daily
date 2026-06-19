@@ -1,105 +1,139 @@
 {
   "meta": {
-    "report_date": "2026-06-18",
-    "generated_at_utc": "2026-06-18 06:09:21",
+    "report_date": "2026-06-19",
+    "generated_at_utc": "2026-06-19 06:30:35",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
     "count": 12
   },
   "synthesis": {
-    "executive_summary": "今日研究覆盖从预训练数据、低资源语言OCR到半监督标注、法律文本处理等多个方向，产出了多个高质量数据集和实用创新方法。斯坦福EDGAR数据集提供了金融领域长上下文预训练的新资源；阿拉伯语和乌尔都语手写识别工作填补了低资源语言基准空白；BBLP半监督框架显著降低了版面分析重标注成本；产品图像身份保持和文本到图像RL训练等工作则展示了多模态领域的最新进展。整体上，数据驱动与半监督/弱监督策略成为主流，低资源语言和多模态融合是关注焦点。",
-    "trend_summary": "数据构建向高质量、低污染、长上下文方向发展；低资源语言（如乌尔都语、阿拉伯语、欧洲葡萄牙语）的手写和印刷OCR基准持续涌现；半监督学习与标签传播技术被应用于减少人工标注成本；强化学习与扩散模型的结合在多模态生成任务中表现出潜力；法律、金融等专业领域文档处理需求推动专用数据集和模型开发。",
+    "executive_summary": "今日研究聚焦于多模态图表问答、学术手写表达式生成与识别、法律与金融领域文档解析、以及多语种OCR基准构建，普遍突出成本效率与可审计性。关键趋势包括：将OCR与轻量级语言模型结合实现成本自适应推理，利用结构先验提升生成质量，以及通过领域自适应微调小模型提升抽取性能。",
+    "trend_summary": "OCR与文档解析正从通用大模型转向级联、多智能体和领域微调架构，在平衡准确率与计算成本的同时强调部署透明性和可审计性。低资源语种和复杂布局（如数学公式、图表）仍是研究热点。",
     "common_innovations": [
-      "多篇论文通过构建高质量专用数据集（如SEFD、UKHD、PorTEXTO）填补长期空白",
-      "半监督和标签传播方法（如BBLP）被用于降低人工标注成本",
-      "利用LLM或多模态模型自动或辅助生成标注数据（如SAMA、PorTEXTO的标注流程）",
-      "跨脚本/跨语言的性能对比分析（如拉丁vs阿拉伯）揭示数据质量和视觉变异性是关键瓶颈"
+      "利用OCR提取结构化文本后结合轻量级路由或智能体决策而非直接使用大模型。",
+      "引入领域先验（如语法树、法律特征）提升生成或抽取的结构一致性与准确性。",
+      "构建面向低资源语种或特定领域（如金融、法律）的开源基准和数据集。",
+      "将推理过程拆分为多步并记录中间结果以增强可审计性和用户信任。"
     ],
     "future_directions": [
-      "探索将SEFD的数据构建方法扩展到其他语种（如中文、欧洲语言）的财务披露文件",
-      "结合字符频率分布和视觉变异性分析，设计针对阿拉伯语等重尾脚本的数据增强和模型结构改进",
-      "利用BBLP框架在多目标检测数据集上验证，并融入主动学习策略以最大化标注效率",
-      "扩展PorTEXTO基准到更多欧洲低资源语言，并研究跨语言迁移的OCR方法",
-      "将产品身份保持方法应用于视频商品编辑，跟踪目标在时序上的连续一致性",
-      "研究无注意力图依赖的空间奖励分配方法，提升文本到图像生成中复杂文本渲染的鲁棒性",
-      "构建多语言、多地区的地方法规语料库，并改进OCR后处理以获得更干净的文本",
-      "开发融合知识图谱的词典编码方案，超越TEI Lex-0对阿拉伯语语义关系的支持局限",
-      "结合卫星图像等多模态数据，增强IUU+系统对非文本事件来源的监测能力",
-      "将STAR中的时空自适应奖励分配方法扩展到视频生成和更复杂的多条件控制"
+      "开发跨语种、跨领域的自适应路由机制，降低对特定训练数据的依赖。",
+      "研究适用于复杂布局（如数学、图表）的结构感知生成与识别联合框架。",
+      "构建更大规模、多风格的低资源语种手写/印刷数据集与基线。",
+      "探索小语言模型在文档解析中的事实一致性校验与知识检索增强方法。",
+      "设计可扩展的人机回环机制，利用置信度信号提升验证自动化。",
+      "研究合成数据到真实场景的域适应技术，缩小性能差距。"
     ],
     "engineering_takeaways": [
-      "SEFD数据集可立即用于金融NLP的长上下文预训练，减少数据清洗和构建成本",
-      "UKHD和性能差距分析为乌尔都语/阿拉伯语HTR系统提供性能基准和优化方向",
-      "BBLP框架可集成到文档版面分析的数据标注管线中，显著降低重标注成本",
-      "PorTEXTO为欧洲葡萄牙语OCR提供标准评估，有助于在该语言上开展技术验证和改进",
-      "LOCUS法律语料库可用于法律AI模型的微调和评估，支持公共政策分析",
-      "SAMA数据增强方法可直接提升多模态信息抽取在低资源场景下的性能"
+      "级联OCR+文本LM+路由器架构可显著降低大模型调用成本（VLM调用率降至73.1%）。",
+      "采用结构先验的扩散生成能为下游OCR提供高质量合成训练数据。",
+      "多智能体分解+追踪记录（MEP）是实现可审计文档QA的有效工程模式。",
+      "现代葡萄牙语等低资源语种OCR需优先收集专业化多语言数据而非单纯增大模型尺寸。"
     ],
     "watchlist": [
       {
-        "title": "The Stanford EDGAR Filings Dataset: Reconstructing U.S. Corporate and Financial Disclosures into Layout-Faithful and Token-Efficient Pretraining Data",
-        "watch_reason": "高质量长上下文金融预训练数据集，可能推动金融领域LLM的进步，值得跟踪其扩展版本和下游任务评估结果。"
-      },
-      {
-        "title": "Urdu Katib Handwritten Dataset: A Historical Document Dataset for Offline Urdu Handwritten Text Recognition with CRNN-Based Baseline Evaluation",
-        "watch_reason": "首个乌尔都语历史手写数据集，为低资源手写识别树立基准，未来整合语言模型后的性能提升值得关注。"
-      },
-      {
-        "title": "Bounding Box Label Propagation for Re-Annotation of Document Layout Analysis Datasets",
-        "watch_reason": "高效的半监督重标注框架，若在更多数据集上验证并开源，将可能改变版面分析数据维护的工程实践。"
+        "title": "SAFE-Cascade: Cost-Adaptive Vision-Language Routing for Chart Question Answering",
+        "watch_reason": "提出成本自适应路由机制，直接关系到工程部署中准确率与计算成本的平衡，是未来智能OCR系统的关键架构方向。"
       },
       {
         "title": "Performance Gap Analysis between Latin and Arabic Scripts HTR",
-        "watch_reason": "系统性地揭示了拉丁与阿拉伯手写识别的性能差距成因，为后续阿拉伯语HTR优化提供路线图。"
+        "watch_reason": "系统量化了跨语种HTR性能差距及其根源，为多语种OCR系统的公平性提升和资源分配提供重要指导。"
       },
       {
         "title": "PorTEXTO: A European Portuguese Benchmark for Visual Text Extraction",
-        "watch_reason": "首个现代欧洲葡萄牙语OCR基准，可能带动低资源语言OCR评估标准化和模型改进。"
+        "watch_reason": "首个现代欧洲葡萄牙语OCR基准，其揭示的真实样本性能骤降及专业化数据的重要性对低资源语种OCR有普遍启示。"
       }
     ]
   },
   "papers": [
     {
-      "title": "The Stanford EDGAR Filings Dataset: Reconstructing U.S. Corporate and Financial Disclosures into Layout-Faithful and Token-Efficient Pretraining Data",
-      "summary": "As high-quality public web corpora become increasingly exhausted, clean long-context documents have become a scarce and expensive source of training data for large language models (LLMs). Existing long-context corpora are often proprietary and costly to acquire, synthetically generated, or concentrated in narrow domains such as programming. We introduce the Stanford EDGAR Filings Dataset (SEFD), an open reconstruction of SEC filings into layout-faithful MultiMarkdown for financial language modeling and evaluation. SEFD makes audited financial statements, risk disclosures, ownership reports, accounting notes, and market-moving event filings usable as long-context pretraining data and as a basis for financial reasoning, forecasting, compliance, and document understanding. The resulting corpus is token-efficient, model-ready, and has less than 0.1% overlap with Common Crawl-derived corpora. We release SEFD-v1, a 152B-token initial public snapshot, and provide corpus-level analyses of a larger 18.5M-filing archive estimated at 550B tokens. We further introduce two SEFD-derived benchmarks: EDGAR-Forecast, which evaluates filing-grounded numerical forecasting after model knowledge cutoffs, and EDGAR-OCR, which evaluates transcription of complex financial tables.",
-      "link": "https://arxiv.org/abs/2606.18192v2",
-      "pdf_url": "https://arxiv.org/pdf/2606.18192v2",
+      "title": "SAFE-Cascade: Cost-Adaptive Vision-Language Routing for Chart Question Answering",
+      "summary": "Vision-language models (VLMs) are powerful for chart question answering, but invoking a VLM for every query can be unnecessarily expensive when many questions are answerable from OCR text and lightweight language reasoning. We demonstrate SAFE-Cascade, an interactive system for cost-adaptive chart question answering. Given a chart image and a natural-language question, SAFE-Cascade first extracts chart text with OCR, obtains a provisional answer from a text-only language model, and then uses a learned router to decide whether to accept the text answer or escalate to a VLM. The demo exposes this decision process to users: OCR evidence, text-only answer, routing probability, escalation decision, final answer, estimated cost, and estimated latency are shown side by side. SAFE-Cascade is designed as a transparent interface for understanding when visual grounding is actually needed. Users can upload or select charts, ask questions, inspect the evidence used by each pathway, compare text-only and VLM answers, and adjust the escalation threshold to explore the accuracy-cost frontier. The system is implemented with Azure Document Intelligence for OCR, gpt-5-mini as the text-only model, gemini-2.5-flash-image as the VLM, and a Random Forest router trained on inference-time features. On a held-out ChartQA test split of 375 examples from a 2,500-example experiment, SAFE-Cascade achieves 69.1% unified accuracy with 73.1% VLM invocation, compared with 67.7% accuracy and 100% VLM invocation for the full-VLM baseline. The observed +1.4 percentage-point difference is statistically uncertain, so we interpret SAFE-Cascade as matching full-VLM performance while reducing VLM calls by 26.9% and estimated cost by 9.3%. The demonstration shows how selective modality routing can make multimodal knowledge systems more transparent, tunable, and cost-aware.",
+      "link": "https://arxiv.org/abs/2606.19646v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.19646v1",
       "authors": [
-        "Nick Bettencourt",
-        "Xiaowei Ding",
-        "Kay Giesecke"
+        "Ayush Dwivedi",
+        "Qixin Wang",
+        "Ashvi Soni",
+        "Ruoteng Wang",
+        "Han Li",
+        "Animesh Mahapatra",
+        "Neeraj Agrawal",
+        "Xintao Wu"
       ],
-      "published": "2026-06-16T17:22:34Z",
-      "updated": "2026-06-17T17:09:10Z",
+      "published": "2026-06-17T23:00:17Z",
+      "updated": "2026-06-17T23:00:17Z",
       "categories": [
-        "cs.AI"
+        "cs.IR",
+        "cs.CV"
       ],
-      "arxiv_id": "2606.18192v2",
-      "score": 17,
+      "arxiv_id": "2606.19646v1",
+      "score": 18,
       "topic_tags": [
-        "长上下文预训练",
-        "文档重建",
-        "金融NLP",
-        "数据集构建",
-        "基准测试"
+        "视觉语言模型",
+        "图表问答",
+        "成本自适应路由",
+        "OCR"
       ],
-      "zh_summary": "针对大语言模型中长上下文训练数据稀缺且昂贵的问题，提出斯坦福EDGAR文件数据集（SEFD），通过对SEC文件进行版面忠实的多标记重建，生成用于金融语言模型的长上下文预训练数据。该数据集与Common Crawl重叠不到0.1%，并提供两个衍生基准测试，用于文件基础数值预测和复杂财务表格转录。",
-      "novelty": "首次将SEC财务披露文件系统重建为布局保真、可token高效使用的长上下文预训练语料，且提供高覆盖率、低污染的公开数据集。",
+      "zh_summary": "提出SAFE-Cascade交互系统，用于图表问答中的成本自适应路由。系统首先通过OCR提取图表文本，用纯文本语言模型获得初步答案，再由学习路由器决定是否升级到视觉语言模型。在ChartQA测试集上，与全VLM基线相比，准确率提升1.4个百分点，同时VLM调用率降至73.1%。",
+      "novelty": "提出成本自适应的问答路由机制，通过学习路由器在文本模型和VLM之间动态选择，平衡准确率和计算成本。",
       "innovation_points": [
-        "基于SEC文件的多标记（MultiMarkdown）重建，保留原始布局并提高token效率",
-        "构建152B token初始快照和预估550B token的大规模档案，与Common Crawl语料重叠极低",
-        "定义文件接地数值预测和复杂财务表格转录两个新基准测试",
-        "将审计财务报告等专业文档用作LLM长上下文训练数据"
+        "设计OCR+文本LM+路由器的级联架构，根据问题复杂度动态选择推理路径",
+        "使用随机森林分类器作为路由器，训练于推理时特征",
+        "提供透明界面展示路由决策过程，包括OCR证据、路由概率等"
       ],
-      "limitations": "数据集目前仅覆盖美国SEC文件，可能不适用于其他国家的金融文档；版面重建可能丢失部分原始格式细节。",
+      "limitations": "路由器的泛化性可能受限于训练数据分布；实验规模较小（375样本测试集）；未讨论跨领域迁移能力。",
       "improvement_directions": [
-        "扩展至其他国家或地区的财务披露文件",
-        "探索更高效的版面保持与token压缩方法",
-        "进一步验证长上下文预训练在下游金融任务中的效果提升"
+        "探索更高效的路由器架构或元学习方法以增强泛化性",
+        "扩展至多轮对话场景中的自适应推理路径选择",
+        "研究路由器的可解释性以提升用户信任"
       ],
-      "engineering_value": "直接提供高质量、模型就绪的长上下文预训练数据，减少数据清洗和构建成本；支持金融领域LLM训练和评估。",
-      "why_relevant": "涉及文档重建、长上下文预训练数据处理，与OCR/文档分析领域的数据构建与评估紧密相关。"
+      "engineering_value": "可显著降低大模型调用成本，适用于资源受限的实时问答系统，具有实际部署潜力。",
+      "why_relevant": "针对文档理解中的成本效率问题，提出OCR与语言模型混合推理的实用方案，与OCR工作流优化直接相关。"
+    },
+    {
+      "title": "DiffMath: Symbol- and Graph-Aware Latent Diffusion Transformer for Handwritten Mathematical Expression Generation",
+      "summary": "Handwritten Mathematical Expression Generation (HMEG) is challenging due to the complex two-dimensional layouts and long-range structural dependencies of mathematical expressions. Existing methods typically rely on explicit spatial supervision, such as symbol-level bounding boxes, which incurs high annotation costs and limits scalability. In this work, we propose DiffMath, a symbol- and graph-aware latent diffusion framework that leverages the hierarchical structure inherent in LaTeX as a structural prior, eliminating the need for positional supervision. First, we design a Relational Abstract Syntax Tree (RelAST), a generation-oriented representation that distills MathML trees into compact triplet sequences [S, R, D], where each token directly encodes a symbol identity, spatial relation, or nesting depth. Second, we introduce MathVAE, which learns structure-preserving latent representations through symbol-aware and relation-aware perceptual regularization, ensuring that the latent space captures both character semantics and spatial topology. Third, MathDiT performs conditional denoising in this structured latent space, further guided by a global symbol-count prior via Adaptive Layer Normalization (AdaLN) to improve structural coherence. Experiments show that DiffMath produces structurally consistent handwritten expressions, achieves superior performance over existing methods, and improves the accuracy of downstream OCR models through synthetic data augmentation.",
+      "link": "https://arxiv.org/abs/2606.19939v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.19939v1",
+      "authors": [
+        "Wei Pan",
+        "Xuhan Zheng",
+        "Yilin Shi",
+        "Huiguo He",
+        "Hiuyi Cheng",
+        "Dezhi Peng",
+        "Minghui Liao",
+        "Lianwen Jin"
+      ],
+      "published": "2026-06-18T08:37:02Z",
+      "updated": "2026-06-18T08:37:02Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2606.19939v1",
+      "score": 15,
+      "topic_tags": [
+        "手写数学表达式",
+        "扩散模型",
+        "结构感知生成",
+        "OCR数据增强"
+      ],
+      "zh_summary": "提出DiffMath框架，用于手写数学表达式生成。利用LaTeX层级结构作为先验，无需符号级别位置标注。通过关系抽象语法树、结构保持潜空间学习及条件扩散模型，生成结构一致的手写数学表达式，并提升下游OCR模型性能。",
+      "novelty": "首次将数学表达式的层级结构以关系抽象语法树形式引入扩散生成，无需显式空间监督。",
+      "innovation_points": [
+        "提出关系抽象语法树，将MathML树压缩为紧凑三元组序列，编码符号、空间关系和嵌套深度",
+        "设计MathVAE，通过符号感知和关系感知正则化学习结构保持的潜表示",
+        "使用自适应层归一化引入全局符号计数先验，改善结构连贯性"
+      ],
+      "limitations": "生成质量依赖于LaTeX结构先验的准确性；对极端复杂或罕见布局的生成效果未充分验证。",
+      "improvement_directions": [
+        "探索更灵活的层级表示，适应更多样的数学表达式结构",
+        "结合对抗训练或强化学习优化生成的结构真实感",
+        "研究半监督或无监督方式减少对LaTeX标注的依赖"
+      ],
+      "engineering_value": "可生成高质量合成数据用于训练OCR模型，减少真实标注成本，提升手写数学识别准确率。",
+      "why_relevant": "聚焦手写数学表达式生成，其合成数据直接服务于OCR模型训练与数据增强。"
     },
     {
       "title": "Urdu Katib Handwritten Dataset: A Historical Document Dataset for Offline Urdu Handwritten Text Recognition with CRNN-Based Baseline Evaluation",
@@ -119,68 +153,25 @@
       "arxiv_id": "2606.19139v1",
       "score": 14,
       "topic_tags": [
-        "手写识别",
-        "乌尔都语",
-        "数据集",
+        "乌尔都语手写识别",
+        "历史文档",
         "CRNN",
-        "历史文档"
+        "数据集构建"
       ],
-      "zh_summary": "针对乌尔都语手写文本识别研究中基准数据集稀缺的问题，提出乌尔都语Katib手写数据集（UKHD），该数据集包含历史上使用平板笔书写的Nastalique字体变体。基于CRNN的混合模型评估显示，CNN-BGRU-CTC模型在字符错误率和词错误率上表现最佳。",
-      "novelty": "首次专门从历史文献中收集乌尔都语离线手写文本行数据集，聚焦于Nastalique书法风格中的平板笔书写变体。",
+      "zh_summary": "构建乌尔都语手写历史文档数据集UKHD，包含来自历史文献的行级文本。评估多种CRNN混合模型，发现CNN-BGRU-CTC架构在字符错误率和词错误率上表现最优，旨在推动乌尔都语手写识别研究。",
+      "novelty": "首个专门针对历史乌尔都语手写文本行的公开数据集，涵盖多种Nastalique书写变体。",
       "innovation_points": [
-        "构建了第一个面向历史乌尔都语手写的离线文本行数据集（UKHD），包含丰富的书写变化",
-        "对多种CRNN变体进行系统比较，确定CNN-BGRU-CTC架构的最优性能",
-        "数据集直接从历史Katib书写材料中提取，具有真实性和独特性"
+        "创建UKHD数据集，包含历史乌尔都语手写文本行，风格多样",
+        "系统评估CRNN混合模型（CNN-BGRU-CTC）在乌尔都语手写识别上的性能"
       ],
-      "limitations": "数据集规模可能有限，且仅覆盖特定历史时期和书法风格；基线模型尚未达到高精度。",
+      "limitations": "数据集规模有限；仅评估CRNN家族，未探索Transformer等架构；未提供基准模型开源。",
       "improvement_directions": [
-        "扩大UKHD数据集的规模和多样性，纳入更多历史时期和书写风格",
-        "探索结合语言模型或注意力机制的端到端识别方法",
-        "研究迁移学习或数据增强以缓解数据稀疏问题"
+        "扩增数据集以覆盖更多书写风格和噪声条件",
+        "探索结合注意力机制的端到端模型",
+        "研究无监督或半监督预训练方法以利用未标注数据"
       ],
-      "engineering_value": "为乌尔都语手写识别研究提供首个公开基准数据集和基线模型，促进该领域算法开发和性能对比。",
-      "why_relevant": "直接涉及手写文本识别数据集构建和模型评估，与OCR方向相关。"
-    },
-    {
-      "title": "Analyzing and Encoding the Al-Mawrid Arabic-English Dictionary with the ISO Language Markup Framework and TEI Lex-0",
-      "summary": "This paper presents a robust methodology for the systematic digitization and encoding of the Al-Mawrid Arabic-English dictionary, transforming it from a legacy print resource into a standardized computational lexicon. Addressing a significant gap in Arabic lexical infrastructure, the study adopts a dual-standard framing that aligns the ISO Lexical Markup Framework (LMF) with the Text Encoding Initiative TEI Lex-0 guidelines. By applying an editorial view to the dictionary's macro- and microstructure, the research resolves the structural ambiguities and punctuation inconsistencies typical of 20th-century bilingual dictionaries. The methodology is grounded in an empirical analysis of the dictionary's lexical knowledge density. Drawing on a representative sample (the letter Ayn, comprising 4.6% of the total volume), the study provides scientific weight to the encoding process, demonstrating a structural parsing accuracy of 91%. Quantitative evaluation of the information extraction rules reveals high performance, with 85% precision and 98% recall for synonyms, and 88% precision for other morpho-semantic features. Beyond technical description, the paper provides a critical comparison with existing Arabic lexical resources and discusses the limitations of TEI Lex-0 when modelling specific Arabic phenomena, such as implicit \"open set\" semantic relations and scattered morphological cues. Furthermore, the study explores the potential for Linguistic Linked Open Data (LLOD) integration by establishing a scalable prefix-based referencing system that facilitates the resource's inclusion in the semantic web. The result is an interoperable, machine-tractable resource that provides a reproducible workflow for the retro-digitization of complex legacy bilingual lexicons within the Arabic NLP and Digital Humanities communities.",
-      "link": "https://arxiv.org/abs/2606.18205v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.18205v1",
-      "authors": [
-        "Diaa Fayed",
-        "Laurent Romary"
-      ],
-      "published": "2026-06-16T17:35:11Z",
-      "updated": "2026-06-16T17:35:11Z",
-      "categories": [
-        "cs.CL"
-      ],
-      "arxiv_id": "2606.18205v1",
-      "score": 14,
-      "topic_tags": [
-        "数字化",
-        "词典编码",
-        "阿拉伯语处理",
-        "ISO标准",
-        "TEI",
-        "信息提取"
-      ],
-      "zh_summary": "提出一种系统方法论，将Al-Mawrid阿拉伯语-英语词典从印刷资源数字化编码为标准化计算词典，同时符合ISO词汇标记框架（LMF）和TEI Lex-0指南。基于字母Ayn样本的结构解析准确率达91%，同义词提取精度85%、召回率98%。并讨论了TEI Lex-0在建模阿拉伯语特有现象时的局限性。",
-      "novelty": "首次将20世纪双语阿拉伯语词典同时映射到ISO LMF和TEI Lex-0两种标准，并解决其结构歧义和标点不一致问题。",
-      "innovation_points": [
-        "采用双标准（LMF和TEI Lex-0）框架编码旧版双语词典",
-        "提出编辑视角解析词典宏观和微观结构，处理历史印刷问题",
-        "定量评估结构解析和信息提取性能（精度85%、召回率98%）",
-        "分析TEI Lex-0对阿拉伯语隐性开放集语义关系的建模不足"
-      ],
-      "limitations": "仅对字母Ayn样本进行了详细验证，未覆盖全部字母；TEI Lex-0对某些阿拉伯语现象支持有限。",
-      "improvement_directions": [
-        "扩展编码至整部词典，并验证其他字母的性能",
-        "改进TEI Lex-0或提出扩展以支持阿拉伯语特有语义关系",
-        "利用Linked Open Data集成，增强资源的互操作性和可发现性"
-      ],
-      "engineering_value": "为阿拉伯语计算词汇学提供高质量标准化词典资源，可用于NLP任务如机器翻译、语义分析。",
-      "why_relevant": "涉及数字化文档的结构化编码和信息提取，与文档理解相关。"
+      "engineering_value": "为乌尔都语手写识别提供标准基准数据集，促进文化遗产数字化。",
+      "why_relevant": "提供乌尔都语历史手写OCR数据集和基准模型，直接服务小语种OCR研究。"
     },
     {
       "title": "Freeing the Law with LOCUS: A Local Ordinance Corpus for the United States",
@@ -203,72 +194,112 @@
       "arxiv_id": "2606.19334v1",
       "score": 13,
       "topic_tags": [
-        "法律AI",
-        "语料库构建",
+        "法律文本",
         "OCR",
-        "法规分析",
-        "ModernBERT"
+        "语料库构建",
+        "法规分析"
       ],
-      "zh_summary": "为解决美国地方法规碎片化、不易获取的问题，构建LOCUS数据集，涵盖了9,239个市县的地方法典，并提供一个县级协调访问层覆盖大多数人口。使用OCR处理多种文档格式，并训练基于ModernBERT的分类器分析法规特征。",
-      "novelty": "首次大规模收集和统一处理美国市县地方法典，构建可用于法律AI研究的机器可读语料库。",
+      "zh_summary": "构建LOCUS语料库，涵盖美国9,239个市县的条例法规文本。通过OCR处理多种格式文档，并提供覆盖元数据。基于ModernBERT训练分类器分析法律文本的不透明性和家长主义等维度，推进法律AI研究。",
+      "novelty": "首个大规模美国地方法规机器可读语料库，覆盖范围广，并结合OCR解决格式多样性问题。",
       "innovation_points": [
-        "构建覆盖9,239个市县的地方法典原始语料库（LOCUS）",
-        "提供县级协调访问层，覆盖2,309个县",
-        "利用OCR处理异构文档格式，将法律文本转化为机器可读形式",
-        "训练ModernBERT分类器进行法规维度分析（如透明度、家长作风）"
+        "收集并OCR处理近万份市县法规文档，形成统一语料库",
+        "提供县级整合访问层，便于大规模分析",
+        "训练ModernBERT分类器用于法律文本多维度分析"
       ],
-      "limitations": "OCR可能引入错误，且仅覆盖美国地方法规；县级协调层仅包含前2,309个县，未全面覆盖。",
+      "limitations": "OCR质量可能受限于原始文档清晰度；语料库仅为英文；分析维度有限。",
       "improvement_directions": [
-        "改进OCR质量，减少转录错误",
-        "扩展覆盖范围，包括更多国家和更低层级立法",
-        "开发更细粒度的法律特征分析模型"
+        "提升OCR准确性以处理低质量文档",
+        "扩展至更多语言和地区",
+        "融入更多法律特征分析（如时间演化、跨地区比较）"
       ],
-      "engineering_value": "提供大规模法律文本语料库和预训练分类器，支持法律AI研究和公共政策分析。",
-      "why_relevant": "涉及OCR处理异构文档、法律文本语料构建，直接关联文档分析和OCR应用。"
+      "engineering_value": "为法律AI提供结构化数据资源，支持法规检索、分析与文本理解。",
+      "why_relevant": "涉及大规模OCR处理法律文档，解决格式多样性问题，为OCR在特定领域应用提供案例。"
     },
     {
-      "title": "Bounding Box Label Propagation for Re-Annotation of Document Layout Analysis Datasets",
-      "summary": "Datasets in practical document processing scenarios typically grow over time, and their class annotations undergo continuous refinement. This creates significant re-annotation efforts, which are time-consuming and costly. A promising remedy is to re-annotate only a small subset of available documents manually and apply semi-supervised learning techniques that leverage both labelled and unlabelled data. Although there are numerous approaches to tackle this problem for classification, there exists no adaptation for the problem of re-classifying object detection instances, e.g. for document layout analysis. To this end, we propose Bounding Box Label Propagation (BBLP), a pseudo-labelling framework for object detection. An object encoder integrates visual, textual, and positional embeddings from object detection samples to come up with a joint embedding that can be used for Label Propagation on partially annotated datasets in a plug-and-play fashion. Evaluation results indicate that the proposed approach produces high-quality class annotations of bounding boxes. In the D4LA layout analysis dataset, it achieves a mAP of 54.0%, corresponding to 81.6% of fully supervised performance, while using only 10% labelled data. Our work demonstrates the potential of Label Propagation for object detection and lays the groundwork for reducing manual annotation efforts in real-world document processing applications.",
-      "link": "https://arxiv.org/abs/2606.17644v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.17644v1",
+      "title": "FineREX: Fine-Tuned NER-RE for Human Smuggling Knowledge Graphs",
+      "summary": "Court proceedings contain valuable evidence about human smuggling networks, but this information is often buried within unstructured, jargon-heavy legal documents. While large language models (LLMs) can support knowledge graph construction through automated information extraction, existing approaches rely on general-purpose models that are not tailored to the entity and relationship definitions required in this domain. We introduce FineREX, a streamlined knowledge graph construction pipeline built around a fine-tuned LLM for named entity recognition and relationship extraction (NER-RE). Using a manually annotated dataset of $512$ text chunks, FineREX achieves absolute improvements of 15.50% and 31.46% in entity and relationship F1-score, respectively, compared to a larger general-purpose baseline. These gains translate into higher-quality knowledge graphs, reducing legal noise by nearly half and lowering node duplication on long documents from 17.78% to 11.17%. By eliminating document rewriting and redundant extraction stages, FineREX also reduces end-to-end processing time by 50.0%. Our results demonstrate that domain-specific fine-tuning can substantially outperform larger general-purpose models while improving both the quality and efficiency of knowledge graph construction for illicit network analysis.",
+      "link": "https://arxiv.org/abs/2606.19710v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.19710v1",
       "authors": [
-        "Nick Jochum",
-        "Tobias Alt-Veit",
-        "Christian Schön",
-        "Alexander Lück",
-        "René Schuster",
-        "Didier Stricker"
+        "Elijah Feldman",
+        "Dipak Meher",
+        "Carlotta Domeniconi"
       ],
-      "published": "2026-06-16T08:04:27Z",
-      "updated": "2026-06-16T08:04:27Z",
+      "published": "2026-06-18T02:09:33Z",
+      "updated": "2026-06-18T02:09:33Z",
       "categories": [
-        "cs.CV",
+        "cs.CL",
         "cs.AI"
       ],
-      "arxiv_id": "2606.17644v1",
-      "score": 11,
+      "arxiv_id": "2606.19710v1",
+      "score": 10,
       "topic_tags": [
-        "半监督学习",
-        "标签传播",
-        "文档布局分析",
-        "目标检测",
-        "重标注"
+        "命名实体识别",
+        "关系抽取",
+        "知识图谱",
+        "法律文档"
       ],
-      "zh_summary": "提出边界框标签传播（BBLP）框架，用于文档版面分析数据集的半监督重标注。设计目标编码器整合视觉、文本和位置嵌入，在仅10%标注数据的情况下，在D4LA数据集上达到全监督性能的81.6%。",
-      "novelty": "首次将标签传播方法应用于目标检测任务中的重分类，专门处理文档版面分析的半监督标注传播问题。",
+      "zh_summary": "提出FineREX流水线，通过微调大语言模型用于人口走私知识图谱的命名实体识别和关系抽取。在512个文本块数据集上，实体和关系F1分别提升15.50%和31.46%，处理时间减少50%，同时降低知识图谱噪声。",
+      "novelty": "针对特定领域（人口走私）微调LLM进行NER-RE，显著优于通用模型。",
       "innovation_points": [
-        "提出BBLP伪标签框架，以plug-and-play方式支持目标检测实例的重标注",
-        "设计融合视觉、文本和位置信息的目标编码器，生成联合嵌入用于标签传播",
-        "在10%标注数据下达到全监督81.6% mAP，验证有效性"
+        "基于小规模标注数据微调LLM实现领域自适应",
+        "消除文档重写和冗余抽取阶段，简化流水线",
+        "在知识图谱构建中降低法律噪声和节点重复率"
       ],
-      "limitations": "实验仅在单个D4LA数据集上验证，泛化性未知；未与其他半监督目标检测方法对比。",
+      "limitations": "依赖人工标注数据；泛化到其他非法网络分析领域需重新标注；未对比更大规模预训练模型。",
       "improvement_directions": [
-        "在更多文档版面数据集和实际场景中验证BBLP的泛化能力",
-        "探索更高效的目标编码器或传播策略以提升性能",
-        "结合主动学习进一步减少人工标注成本"
+        "探索少样本或零样本方法减少标注依赖",
+        "整合多模态信息（如表格、图像）提升抽取鲁棒性",
+        "研究跨领域迁移能力以扩展应用范围"
       ],
-      "engineering_value": "显著降低文档版面分析任务中重标注的人力成本，适用于持续增长的动态数据集。",
-      "why_relevant": "直接解决文档布局分析中标注稀疏和类别演化问题，与OCR预处理和版面理解相关。"
+      "engineering_value": "提升法律文档信息抽取效率和质量，支持执法和情报分析。",
+      "why_relevant": "涉及从非结构化法律文档中抽取实体和关系，与OCR后处理（信息抽取）紧密相关。"
+    },
+    {
+      "title": "Configurable Clinical Information Extraction with Agentic RAG: What Works, What Breaks, and Why",
+      "summary": "Patient contexts span hundreds of heterogeneous documents and thousands of structured data points, yet the document-level metadata that AI systems need for retrieval and triage is absent or incomplete. Standard retrieval-augmented generation fails on this data, mishandling temporal reasoning, cross-document dependencies, and missing metadata. We deploy ACIE (Agentic Clinical Information Extraction) at University Medicine Essen: an on-premise agentic RAG pipeline that reasons over complete patient contexts and grounds every answer in source passages for clinician verification. We quantify the metadata gap, trace the architectural decisions it shaped, and evaluate extraction alongside an independent retrospective lymphoma registry study, in which nuclear-medicine physicians verify every extracted value against its cited sources. Across 7,326 judgments, clinicians accepted 96.5\\% of extractions, with per-type acceptance ranging from 80\\% to 99\\%.",
+      "link": "https://arxiv.org/abs/2606.19602v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.19602v1",
+      "authors": [
+        "Osman Alperen Çinar-Koraş",
+        "Marie Bauer",
+        "Sameh Khattab",
+        "Merlin Engelke",
+        "Moon Kim",
+        "Stephan Settelmeier",
+        "Shigeyasu Sugawara",
+        "Fabian Freisleben",
+        "Felix Nensa",
+        "Jens Kleesiek"
+      ],
+      "published": "2026-06-17T21:12:35Z",
+      "updated": "2026-06-17T21:12:35Z",
+      "categories": [
+        "cs.AI"
+      ],
+      "arxiv_id": "2606.19602v1",
+      "score": 10,
+      "topic_tags": [
+        "临床信息抽取",
+        "智能体RAG",
+        "文档理解",
+        "知识验证"
+      ],
+      "zh_summary": "部署ACIE系统，基于智能体RAG的临床信息抽取流水线，用于处理复杂患者上下文。核医学医生验证7,326个抽取结果，接受率96.5%。系统解决元数据缺失、时序推理和跨文档依赖等问题。",
+      "novelty": "将智能体RAG应用于临床信息抽取，处理异构文档和缺失元数据问题，并由医生全面验证。",
+      "innovation_points": [
+        "设计智能体RAG流水线，在完整患者上下文中推理，并引用来源",
+        "量化元数据缺口并指导架构设计",
+        "独立的回顾性验证研究，提供医生判定的接受率"
+      ],
+      "limitations": "系统在单一医学中心部署；依赖本地部署，可扩展性未评估；验证仅针对淋巴瘤领域。",
+      "improvement_directions": [
+        "增强跨文档依赖和时间推理能力",
+        "探索自动元数据补全方法减少人工标注",
+        "扩展至多中心和多疾病领域验证泛化性"
+      ],
+      "engineering_value": "提供可靠的临床信息抽取方案，可辅助医学研究中的结构化数据提取，减少手动工作。",
+      "why_relevant": "涉及从多种文档中进行信息抽取，与OCR后处理和文档理解紧密相关。"
     },
     {
       "title": "Performance Gap Analysis between Latin and Arabic Scripts HTR",
@@ -288,77 +319,109 @@
       "arxiv_id": "2606.18884v1",
       "score": 10,
       "topic_tags": [
-        "手写识别",
-        "阿拉伯语",
-        "拉丁语",
-        "性能差距",
-        "CRNN",
-        "脚本差异"
+        "手写文本识别",
+        "多语种OCR",
+        "性能差距分析",
+        "阿拉伯语OCR"
       ],
-      "zh_summary": "通过统一CRNN模型对多数据集进行控制实验，分析拉丁文和阿拉伯文手写识别（HTR）的性能差距。结果表明，在低资源情况下差距大，全量数据下仍有5-7个CER点的差距；标注质量、视觉变异性和字符频率分布是影响因素。",
-      "novelty": "首次在统一框架下对拉丁和阿拉伯手写识别进行系统的控制对比，定量分析性能差距的成因。",
+      "zh_summary": "本文系统比较了阿拉伯语和拉丁语手写文本识别（HTR）的性能差距，使用统一CRNN模型在9个数据集上（含阿拉伯语、乌尔都语、波斯语、英语、德语等）进行实验。结果表明，差距在低资源场景下较大，随着数据增多而缩小，但即使在满量数据下仍存在5-7%的字符错误率（CER）差距。标注质量影响显著，清洗可缩小差距但无法消除；阿拉伯语视觉变异性更高，导致固定训练样本覆盖不足；阿拉伯语字符频率分布更为重尾。错误分析显示，阿拉伯语数据集约30%的替换错误源于视觉相似字符混淆，而拉丁语仅约15%。",
+      "novelty": "首次在可控实验下系统分析阿拉伯语与拉丁语HTR性能差距，并定量评估标注质量、数据量、视觉变异性、字符分布等因素的影响。",
       "innovation_points": [
-        "采用统一CRNN模型在9个数据集上对比拉丁和阿拉伯手写识别性能",
-        "发现性能差距随数据量增加而缩小但持续存在，定量为5-7 CER",
-        "揭示标注错误和视觉变异性是差距来源，清洗数据可缩小差距",
-        "通过字符频率分布分析说明阿拉伯语分布更重尾"
+        "统一CRNN架构进行跨语种手写识别对比",
+        "系统分析标注质量对性能差距的影响",
+        "揭示阿拉伯语视觉变异性更高导致样本覆盖不足",
+        "字符频率分布重尾特性分析",
+        "错误类型细粒度对比（混淆错误比例）"
       ],
-      "limitations": "仅使用单一CRNN架构，未测试Transformer等新型模型；部分数据集本身标注质量不一。",
+      "limitations": "仅针对特定CRNN架构，未考虑Transformer或其他更先进模型；数据集多样性有限，未涵盖所有阿拉伯语变体。",
       "improvement_directions": [
-        "在更大规模、多样化的数据集上验证差距普遍性",
-        "探索针对阿拉伯语视觉变异性的数据增强或模型结构改进",
-        "研究更先进的标注校正方法，提升数据质量",
-        "比较不同脚本的语言模型或后处理的影响"
+        "探索更多架构（如Transformer）对跨语种差距的影响",
+        "研究数据增强技术减少视觉变异性影响",
+        "开发针对重尾分布的采样策略或损失函数"
       ],
-      "engineering_value": "为阿拉伯语和类似复杂脚本的HTR系统优化提供指导，明确性能瓶颈和解决方向。",
-      "why_relevant": "直接对比不同脚本的OCR性能，分析差距原因，对多语言OCR系统开发有参考价值。"
+      "engineering_value": "为多语种OCR系统开发提供定量指导，指明低资源语种需要更多数据和更精细标注，有助于设计更公平的评估协议。",
+      "why_relevant": "直接关注OCR中的语种性能差异问题，与多语种文本识别研究高度相关。"
     },
     {
-      "title": "IUU+DB: Tracking Illegal, Unreported, and Unregulated Fishing, Seafood Fraud, and Labor Abuse through LLM-driven Information Extraction",
-      "summary": "Illegal, unreported, and unregulated fishing (IUU) traditionally refers to fishing activities that violate applicable laws or occur in areas that lack applicable laws. We propose the term IUU+ to capture a broader suite of fisheries sector environmental and associated supply chain trade-related crimes and behaviors. Although IUU+ activity is widely recognized as a serious threat to marine ecosystems, markets, and livelihoods, a quantitative understanding of these incidents, e.g., their frequency, geography, species, actors, and patterns in the type of illicit activity, remains difficult to obtain. We propose IUU+DB, a large language model driven system for building a global incident database of IUU+ activity. The system ingests heterogeneous documents, classifies whether they describe relevant incidents, extracts key data elements such as actors, locations, species, vessels, violations, and enforcement outcomes, and supports deduplication and trend analysis. Case studies and validation results show that IUU+DB can help organize fragmented evidence, surface geographic and behavioral hotspots, support fisheries-domain specific research in academia and non-government organizations, assist source and species risk assessments for industry, and provide support for policy implementation and targeted enforcement efforts to government agencies.",
-      "link": "https://arxiv.org/abs/2606.18181v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.18181v1",
+      "title": "AgentFinVQA: A Deployable Multi-Agent Pipeline for Auditable Financial Chart QA",
+      "summary": "Financial chart question answering in regulated settings demands more than accuracy: practitioners must know which answers to trust before acting on them, and many institutions cannot send client data to external model providers. Yet existing chart-QA agents are accuracy-focused and opaque, and most assume proprietary API access; to our knowledge, none combines auditability with on-premise deployability without significant accuracy compromise. We present AgentFinVQA, a multi-agent pipeline that decomposes each query into planning, OCR, legend grounding, visual inspection, and verification, recording every step in a traceable Model Evaluation Packet (MEP) per sample. On FinMME, AgentFinVQA improves $+7.68$ pp over a primary-backbone matched zero-shot baseline with a proprietary backbone (Gemini-3 Flash; 71.24% vs. 63.56%, McNemar $p \\approx 1.1 \\times 10^{-16}$), and $+4.84$ pp with open-weights Qwen3.6-27B-FP8 served locally. The verifier's verdict also serves as a useful confidence signal (68.2% vs. 55.6% exact accuracy on confirmed vs. revised answers), enabling human-in-the-loop review routing. Error analysis shows that question misunderstanding, legend confusion and extraction error account for nearly two-thirds of failures and are the categories least detected by the verifier, identifying clear directions for future work. Together these results show that auditable, on-premise financial chart QA is practical and that the open-weights system keeps most of the accuracy gains while enabling full data residency. We release our code to support reproducible evaluation.",
+      "link": "https://arxiv.org/abs/2606.19782v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.19782v1",
       "authors": [
-        "Henry Bodwell",
-        "Hong Yang",
-        "John C. Simeone",
-        "Kelvin Gorospe",
-        "Bella Sullivan",
-        "Lana Huang",
-        "Jessica Gephart",
-        "Sandy Aylesworth",
-        "Molly Masterton",
-        "Naren Ramakrishnan"
+        "Aravind Narayanan",
+        "Shaina Raza"
       ],
-      "published": "2026-06-16T17:16:05Z",
-      "updated": "2026-06-16T17:16:05Z",
+      "published": "2026-06-18T04:33:07Z",
+      "updated": "2026-06-18T04:33:07Z",
       "categories": [
-        "cs.IR",
         "cs.AI",
-        "cs.CY"
+        "cs.CL"
       ],
-      "arxiv_id": "2606.18181v1",
-      "score": 10,
+      "arxiv_id": "2606.19782v1",
+      "score": 9,
+      "topic_tags": [
+        "金融图表问答",
+        "多智能体",
+        "可审计AI",
+        "本地部署",
+        "OCR"
+      ],
+      "zh_summary": "本文提出AgentFinVQA，一个多智能体流水线用于金融图表问答，强调可审计性和本地部署。流水线分解查询为规划、OCR、图例定位、视觉检查和验证步骤，每步记录至可追踪的MEP（模型评估包）。在FinMME上，使用Gemini-3 Flash骨干相比零样本基线提升7.68个百分点，本地部署的Qwen3.6-27B-FP8提升4.84个百分点。验证者判决作为置信度信号，支持人机回环。错误分析表明问题误解、图例混淆和提取错误占失败近三分之二。",
+      "novelty": "首个将可审计性与本地部署兼容的金融图表问答系统，提出多智能体流水线+追踪记录框架。",
+      "innovation_points": [
+        "多智能体分解查询为规划、OCR、图例定位、视觉检查和验证",
+        "追踪记录每步的MEP（模型评估包）",
+        "使用验证者判决作为置信度信号",
+        "支持本地部署开源模型，保持大部分精度增益"
+      ],
+      "limitations": "错误分析显示问题误解、图例混淆和提取错误是主要失败来源，验证器对这些类别检测不足；性能仍与完全闭源模型有差距。",
+      "improvement_directions": [
+        "改进验证器对问题误解、图例混淆等类别的检测能力",
+        "增强OCR和视觉提取模块的鲁棒性",
+        "探索更高效的智能体协作策略以减少延迟"
+      ],
+      "engineering_value": "为金融领域提供可审计、可本地部署的图表问答解决方案，满足合规性和数据隐私要求。",
+      "why_relevant": "涉及OCR在金融图表中的实际应用，且针对部署可行性和可信度，与OCR系统落地密切相关。"
+    },
+    {
+      "title": "TerraMARS: A Domain-Adapted Small-Language-Model Pipeline for Mars Terraforming Literature",
+      "summary": "Researchers are interested in learning about Mars so that it may eventually become habitable for humans. To achieve this, there is a need for comprehensive knowledge of the planet's atmosphere, hydrology, surface chemistry, radiation environment, and spatial features through the scientific literature. These contain valuable information and meaningful quantitative constraints that can be used in other models and studies, such as habitability assessment and future terraforming studies. We present TerraMARS, an end-to-end information extraction pipeline that combines a domain-adapted Small Language Model to answer Mars terraforming-related questions and convert unstructured Mars science text into machine-readable structured outputs in JavaScript Object Notation (JSON) format. A corpus of open-access papers is collected and processed using a multistage retrieval and chunking framework. Google Gemma 3 1B was adapted to the domain using Quantized Low-Rank Adaptation (QLoRA) fine-tuning on Mars-specific question-answering and information extraction datasets. The resulting pipeline generates both types of output and provides a foundation for integrating knowledge from scientific literature into downstream applications like digital twins and habitability modeling for Mars. The output from this pipeline looks promising, but further improvements are needed to increase extraction accuracy and factual consistency.",
+      "link": "https://arxiv.org/abs/2606.19700v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.19700v1",
+      "authors": [
+        "Jyotsna Singh",
+        "Ash Black",
+        "Jeff Larsen",
+        "Scott R. Saleska"
+      ],
+      "published": "2026-06-18T01:52:36Z",
+      "updated": "2026-06-18T01:52:36Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2606.19700v1",
+      "score": 9,
       "topic_tags": [
         "信息抽取",
-        "大语言模型",
-        "渔业应用"
+        "小语言模型",
+        "领域自适应",
+        "火星科学"
       ],
-      "zh_summary": "提出IUU+概念，涵盖非法、无报告和无管制捕捞及相关供应链犯罪。基于大语言模型构建IUU+DB系统，从异构文档中提取事件关键要素（如行为者、地点、物种、船只等），支持去重和趋势分析。",
-      "novelty": "首次将非法捕捞概念扩展至IUU+，并利用LLM构建全球事件数据库。",
+      "zh_summary": "本文提出TerraMARS，一个面向火星改造文献的信息抽取流水线，结合领域自适应的小语言模型（SLM）和Google Gemma 3 1B，通过QLoRA微调适应火星特定问答和抽取任务。流水线从开放文献中检索、分块，输出结构化JSON。结果初步可行，但需进一步提升抽取准确性和事实一致性。",
+      "novelty": "将小语言模型应用于火星改造文献的端到端信息抽取，采用领域自适应微调（QLoRA）和结构化输出。",
       "innovation_points": [
-        "定义IUU+概念以覆盖更广泛渔业犯罪",
-        "基于LLM的信息抽取系统，处理异构文档",
-        "支持去重与趋势分析的数据库构建方法"
+        "端到端信息抽取流水线，整合检索、分块和SLM",
+        "使用QLoRA对Gemma 3 1B进行领域自适应微调",
+        "输出结构化JSON格式便于下游应用"
       ],
-      "limitations": "依赖文档质量，可能漏检非文本来源事件。",
+      "limitations": "抽取准确性和事实一致性尚需改进；仅面向火星改造场景，泛化性未验证。",
       "improvement_directions": [
-        "探索多模态信息融合（如卫星图像）",
-        "优化低资源语言场景下的抽取能力",
-        "增强实时监控与预警功能"
+        "引入更精确的实体识别和关系抽取方法",
+        "增强事实一致性校验机制（如检索增强生成）",
+        "扩展到其他行星科学文献领域"
       ],
-      "engineering_value": "为渔业监管、政策制定和供应链风险评估提供自动化数据支撑。",
-      "why_relevant": "展示LLM在特定领域文档解析与信息抽取中的应用，与OCR/文档解析技术的任务定义和工程实现相关。"
+      "engineering_value": "为科学文献自动信息提取提供轻量级可部署方案，可集成到数字孪生等下游系统。",
+      "why_relevant": "涉及文献中的文本提取与结构化，与OCR后续的信息处理链路相关。"
     },
     {
       "title": "ProductConsistency: Improving Product Identity Preservation in Instruction-Based Image Editing via SFT and RL",
@@ -380,24 +443,27 @@
       "score": 9,
       "topic_tags": [
         "图像编辑",
-        "产品身份保持",
-        "强化学习"
+        "产品身份保留",
+        "OCR",
+        "强化学习",
+        "数据集"
       ],
-      "zh_summary": "针对指令式图像编辑中产品身份保持难题，构建ProductConsistency数据集（87k监督样本、869张RL图像），并提出基于循环一致性的RL训练方法，显著提升产品一致性、文本渲染和视觉质量。",
-      "novelty": "首次聚焦产品级图像编辑中的身份保持问题，提出专用数据集和RL训练范式。",
+      "zh_summary": "本文提出ProductConsistency数据集和训练框架，用于改进指令式图像编辑中的产品身份保留（包括文字等纹理）。构建了87k训练样本和869张产品图像的强化学习数据集，并提出循环一致性奖励来保持产品语义。在Qwen-Image-Edit和Flux模型上微调，OCR和感知指标均有提升，字符准确率提升达5倍。",
+      "novelty": "首个面向产品图像编辑且强调文字完整性的数据集，结合SFT和RL训练，并提出循环一致性奖励。",
       "innovation_points": [
-        "构建产品编辑SFT数据集和RL数据集",
-        "提出循环一致性奖励用于保留产品身份",
-        "建立产品编辑基准测试集"
+        "构建专用于产品图像编辑的数据集（87k SFT + 869 RL）",
+        "提出循环一致性奖励（基于描述相似性）",
+        "结合监督微调与强化学习进行训练",
+        "建立评估基准（ProductConsistency Benchmark）"
       ],
-      "limitations": "数据集规模有限，可能未覆盖所有产品类型。",
+      "limitations": "数据集规模有限，仅覆盖部分产品类型；强化学习奖励依赖于图像描述模型，可能存在偏差。",
       "improvement_directions": [
-        "扩展产品类别和场景多样性",
-        "探索更细粒度的身份保持评估指标",
-        "结合多模态输入提升鲁棒性"
+        "扩大数据集覆盖更多产品类别和背景",
+        "探索更鲁棒的产品身份表示（如细粒度OCR特征）",
+        "优化RL奖励设计以更好权衡编辑准确性与身份保留"
       ],
-      "engineering_value": "提升电商场景下图像编辑工具的产品一致性，具有直接商业应用价值。",
-      "why_relevant": "涉及文本渲染（OCR相关能力）和指令编辑中的身份保持，与文档解析中的文本信息处理相关。"
+      "engineering_value": "提升电子商务等场景中图像编辑对产品文字和纹理的保持能力，具有商业应用价值。",
+      "why_relevant": "直接关注图像编辑中的OCR要求（文字完整性），与视觉文本生成和编辑技术相关。"
     },
     {
       "title": "PorTEXTO: A European Portuguese Benchmark for Visual Text Extraction",
@@ -421,25 +487,27 @@
       "arxiv_id": "2606.19096v1",
       "score": 9,
       "topic_tags": [
-        "OCR",
-        "低资源语言",
-        "基准数据集"
+        "OCR基准",
+        "欧洲葡萄牙语",
+        "低资源语种",
+        "视觉文本提取"
       ],
-      "zh_summary": "发布首个面向现代欧洲葡萄牙语的视觉文本提取基准PorTEXTO，包含文化和当代相关样本。采用前沿LVLM与母语者审查结合的标注流程，发现专用多语言数据比模型规模更关键。",
-      "novelty": "填补欧洲葡萄牙语在现代OCR场景中的基准缺失。",
+      "zh_summary": "本文介绍PorTEXTO，首个面向现代欧洲葡萄牙语（pt-PT）视觉文本提取的基准测试。采用前沿LVLM转录加母语者审核的标注流程。实验发现大多数模型在真实样本上性能骤降，且专业化多语言数据比模型尺寸或分辨率更能驱动pt-PT性能，因此开源pt-PT OCR资源价值大。",
+      "novelty": "首个针对现代欧洲葡萄牙语而非历史文献的OCR基准，揭示真实样本性能差距和专业化数据的重要性。",
       "innovation_points": [
-        "构建首个当代pt-PT视觉文本提取基准",
-        "设计人工与LVLM结合的标注流程",
-        "揭示多语言专用数据对性能的主导作用"
+        "建立现代葡萄牙语OCR基准（PorTEXTO）",
+        "采用LVLM+人工审核的高质量标注流程",
+        "系统评估合成与真实样本性能差异",
+        "发现专业化多语言数据优于模型尺寸和分辨率"
       ],
-      "limitations": "基准规模较小，仅覆盖有限场景。",
+      "limitations": "仅覆盖葡萄牙语，其他低资源语种未涉及；基准样本量可能有限。",
       "improvement_directions": [
-        "扩展覆盖更多领域和文本类型",
-        "研究低资源语言的跨域迁移方法",
-        "开发更高效的标注策略"
+        "扩展到其他低资源语种建立类似基准",
+        "研究合成数据到真实数据的域适应方法",
+        "利用开源资源训练更好的葡语OCR模型"
       ],
-      "engineering_value": "为欧洲葡萄牙语OCR系统提供标准化评估和资源，促进该语言方向的技术发展。",
-      "why_relevant": "直接针对OCR提取任务，提供低资源语言评估基准，与文档解析的文本提取和语言适应性相关。"
+      "engineering_value": "为葡萄牙语OCR研究提供标准化评估和开放资源，推动低资源语种OCR发展。",
+      "why_relevant": "直接关注低资源语种OCR基准构建和评估，与OCR评测和语种拓展相关。"
     },
     {
       "title": "Spotlight: Synergizing Seed Exploration and Spot GPUs for DiT RL Post-Training",
@@ -467,109 +535,28 @@
       "arxiv_id": "2606.19004v1",
       "score": 9,
       "topic_tags": [
-        "强化学习",
         "扩散模型",
-        "高效训练"
-      ],
-      "zh_summary": "提出Spotlight系统，利用spot GPU实现扩散变换器强化学习后训练的成本降低。通过种子探索的权重解耦和弹性序列并行技术，支持预抢占环境下的高效训练。",
-      "novelty": "首次实现spot GPU在DiT RL后训练中的应用，解决预抢占和拓扑碎片问题。",
-      "innovation_points": [
-        "提出可容忍过时权重的探索方法",
-        "设计弹性序列并行以快速恢复分组",
-        "开发基于bandit的探索规划器和预抢占感知调度器"
-      ],
-      "limitations": "仅验证于特定模型，通用性待考察。",
-      "improvement_directions": [
-        "扩展到更多模型架构",
-        "优化探索效率与训练稳定性的平衡",
-        "探索跨云环境的迁移性"
-      ],
-      "engineering_value": "显著降低DiT RL后训练成本，促进扩散模型在资源受限场景的应用。",
-      "why_relevant": "涉及训练范式的工程优化，虽非直接OCR但可启发文档分析模型的低成本训练。"
-    },
-    {
-      "title": "STAR: SpatioTemporal Adaptive Reward Allocation for Text-to-Image RL Post-Training",
-      "summary": "Existing RL post-training methods for text-to-image generation usually convert the final-image reward into a single scalar advantage and apply it with the same strength to the entire generative trajectory. However, text-to-image generation naturally has temporal and spatial structure: different denoising steps are responsible for different generation stages, and the content that truly determines text alignment often appears only in part of the image. This granularity mismatch makes it difficult for policy updates to focus on the generative components that actually affect the reward. To address this issue, we propose \\textbf{SpatioTemporal Adaptive Reward (STAR) Allocation} for RL post-training of text-to-image diffusion and flow models. STAR uses text-image attention inside the generative model and starts from the core content that the user truly cares about in the prompt. It constructs spatial allocation maps that dynamically vary across denoising steps and rollouts, and allocates the same group-relative advantage to more relevant latent regions with almost no additional computational overhead. STAR then applies stronger policy updates to these regions through a spatially resolved policy objective. We use Stable Diffusion 3.5 Medium as the base model and evaluate on three tasks: GenEval, OCR text rendering, and PickScore. Experimental results show that STAR improves compositional semantic alignment, text rendering, and preference optimization without changing the external reward source, achieving $\\mathbf{0.9759}$, $\\mathbf{0.9757}$, and $\\mathbf{23.60}$ on GenEval, OCR, and PickScore, respectively.",
-      "link": "https://arxiv.org/abs/2606.17979v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.17979v1",
-      "authors": [
-        "Jinjie Shen",
-        "Wei Deng",
-        "Xian Hu",
-        "Daiguo Zhou",
-        "Jian Luan"
-      ],
-      "published": "2026-06-16T14:30:12Z",
-      "updated": "2026-06-16T14:30:12Z",
-      "categories": [
-        "cs.AI"
-      ],
-      "arxiv_id": "2606.17979v1",
-      "score": 9,
-      "topic_tags": [
-        "图像生成",
         "强化学习",
-        "文本渲染"
+        "Spot GPU",
+        "训练效率",
+        "序列并行"
       ],
-      "zh_summary": "提出时空自适应奖励（STAR）分配方法，用于文本到图像生成模型的RL后训练。利用文本-图像注意力构建空间分配图，对与提示核心内容相关的潜层区域施加更强策略更新，提升语义对齐和文本渲染。",
-      "novelty": "首次在文本到图像RL后训练中引入时空细粒度的优势分配。",
+      "zh_summary": "本文提出Spotlight系统，首次利用廉价Spot GPU进行扩散Transformer（DiT）的强化学习后训练。通过两个关键洞察：探索可容忍过时模型权重，以及序列并行（SP）组可快速重配置。实现三种技术：基于Bandit的探索规划器、弹性序列并行、抢占感知请求调度器。在Qwen-Image后训练上评估，大幅降低成本。",
+      "novelty": "首次系统性地利用Spot GPU进行DiT的RL后训练，提出容忍过时权重的探索和快速SP重配置。",
       "innovation_points": [
-        "提出基于注意力的空间奖励分配图",
-        "设计区域解析的策略目标函数",
-        "在GenEval和OCR任务上显著提升性能"
+        "利用探索可容忍过时模型权重的特性，将探索任务卸载到Spot GPU",
+        "弹性序列并行支持在线重配置和快速恢复",
+        "基于Bandit的探索规划器最大化训练奖励方差",
+        "抢占感知的请求调度器"
       ],
-      "limitations": "依赖注意力图质量，可能受模型内部表示影响。",
+      "limitations": "仅针对DiT模型，未扩展到其他生成模型；依赖Spot GPU可用性。",
       "improvement_directions": [
-        "探索无注意力依赖的分配方法",
-        "扩展到视频生成等时序场景",
-        "结合人类偏好进行细粒度优化"
+        "推广到其他Transformer架构的RL训练",
+        "优化探索规划器以更好平衡探索与训练",
+        "增强容错机制以应对更多抢占模式"
       ],
-      "engineering_value": "提升文本到图像生成的质量和可控性，对广告、设计等应用有直接价值。",
-      "why_relevant": "OCR文本渲染是评估任务之一，其时空分配思想可迁移至文档图像生成的文本质量控制。"
-    },
-    {
-      "title": "SAMA: Semantic Anchor-aligned Augmentation for Unified Low-Resource Multimodal Information Extraction",
-      "summary": "Multimodal Information Extraction (MIE)-covering tasks such as Multimodal Named Entity Recognition (MNER), Relation Extraction (MRE), and Event Extraction (MEE)-is essential for understanding multimedia content but remains constrained by severe data scarcity. Although data augmentation is a promising remedy, existing approaches are impeded by coarse cross-modal alignment and fragmented, task-specific designs that fail to exploit shared semantic knowledge. To overcome these limitations, we introduce Semantic Anchor-aligned Multimodal Augmentation (SAMA), a unified framework for generating high-fidelity, task-aware synthetic data. SAMA constructs structured semantic anchors from ground-truth labels to guide a Collaborative Multi-Experts Multimodal Large Language Model (CME-MLLM), which integrates a Universal Adapter for shared semantics with Task-Specific Adapters to produce diverse yet constraint-compliant textual samples. For image synthesis, SAMA employs an Anchor-Preserving Diffusion mechanism that uses anchor-weighted prompts and latent conditioning to maintain critical semantic anchors while diversifying visual contexts. To eliminate the need for manual verification, SAMA further introduces a Dual-Constraint Filtering module that selects synthetic samples based on both cross-modal consistency and anchor fidelity. Extensive experiments across benchmark datasets for MNER, MRE, and MEE demonstrate that SAMA consistently outperforms state-of-the-art augmentation baselines under both fully supervised and low-resource settings, underscoring its versatility, robustness, and effectiveness.",
-      "link": "https://arxiv.org/abs/2606.18780v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.18780v1",
-      "authors": [
-        "Quanjiang Guo",
-        "Chong Mu",
-        "Jiazhou Pan",
-        "Ming Jia",
-        "Ling Tian",
-        "Hui Gao",
-        "Zhao Kang"
-      ],
-      "published": "2026-06-17T07:43:33Z",
-      "updated": "2026-06-17T07:43:33Z",
-      "categories": [
-        "cs.CV",
-        "cs.CL",
-        "cs.MM"
-      ],
-      "arxiv_id": "2606.18780v1",
-      "score": 6,
-      "topic_tags": [
-        "数据增强",
-        "多模态信息抽取",
-        "大语言模型"
-      ],
-      "zh_summary": "提出语义锚定对齐增强（SAMA）框架，用于多模态信息抽取的统一数据增强。构建结构化语义锚引导多专家大模型生成文本，并采用锚保持扩散机制合成图像，通过双约束过滤保证质量。",
-      "novelty": "首次提出统一的多模态数据增强框架，共享跨任务语义知识。",
-      "innovation_points": [
-        "设计语义锚构造方法指导数据生成",
-        "提出协作多专家多模态大模型",
-        "引入锚保持扩散和双约束过滤机制"
-      ],
-      "limitations": "合成数据与真实数据仍存在分布差异。",
-      "improvement_directions": [
-        "研究更逼真的图像合成技术",
-        "探索跨语言跨模态的扩展",
-        "增强小样本场景下的适应能力"
-      ],
-      "engineering_value": "缓解多模态信息抽取的数据稀缺问题，提升低资源下的抽取性能。",
-      "why_relevant": "多模态信息抽取依赖文本和图像理解，与文档解析中的联合建模相关。"
+      "engineering_value": "大幅降低扩散模型RL后训练的计算成本，有利于低成本部署和训练。",
+      "why_relevant": "尽管不直接处理文本，但涉及图像生成中的强化学习训练优化，与视觉文本生成（如OCR后处理）的潜在计算优化相关。"
     }
   ]
 }
