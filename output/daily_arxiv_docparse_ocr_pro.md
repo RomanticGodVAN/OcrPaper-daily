@@ -1,58 +1,66 @@
-# OCR / 文档解析研究日报（2026-06-23）
+# OCR / 文档解析研究日报（2026-06-24）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-06-23 05:13:42`
+- 生成时间（UTC）：`2026-06-24 05:11:39`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日研究集中在文档布局分析、低资源语言OCR、历史文档数字化、长文档高效推理等方向，多项工作引入新架构或数据集，提升了OCR系统的性能、效率或覆盖度。
+> 今日论文集中在文档布局分析、艺术字识别、置信度估计、手写识别、长文档OCR加速以及多模态推理等方面。多个工作强调端到端、轻量化和实时性，同时关注低资源语言和特殊场景。工程实用性强，可直接提升OCR流水线性能和可信度。
 
 ## 二、今日趋势判断
 
-趋势包括：1) 端到端多任务统一框架；2) 合成数据驱动低资源语言OCR；3) 状态空间模型在文本识别中的探索；4) 注意力机制改进长文档推理；5) 经典架构（如DETR）在新领域（楔形文字）的应用。
+端到端多任务统一架构（如RT-DocLayout），大型语言模型在文档字段提取中的置信度估计（ExtractConf），以及状态空间模型在长序列OCR中的探索。合成数据持续为低资源语言和特殊场景提供支撑。文档解析加速（猜测解码、多token预测）成为热点。
 
 ## 三、今日论文概览
 
 1. **RT-DocLayout: Real-Time End-to-End Document Layout Analysis with Reading Order in the Wild** | 标签：文档布局分析、端到端、实时、阅读顺序、多任务学习
-2. **Koshur Pixel: a large-scale synthetic ocr dataset for kashmiri** | 标签：合成数据集、低资源语言、克什米尔语、OCR、数据增强
-3. **Automated sign detection across the Electronic Babylonian Library: A large-scale dataset and end-to-end cuneiform OCR pipeline** | 标签：楔形文字、目标检测、DETR、数字化、历史文档
-4. **Scaling State-Space Models from Lines to Paragraphs: An Ablation of Mamba-based OCR** | 标签：状态空间模型、Mamba、OCR、长序列、消融研究
-5. **Unlimited OCR Works** | 标签：长文档OCR、注意力机制、高效推理、KV缓存、R-SWA
-6. **P-JEPA: Procedural Video Representation Learning via Joint Embedding Predictive Architecture** | 标签：程序性视频、表示学习、JEPA、动作分类、长视频
+2. **Advancing WordArt-Oriented Scene Text Recognition: Datasets and Methods** | 标签：艺术字识别、合成数据、自回归解码、场景文本识别、视觉语言模型
+3. **Beyond Logprobs: A Multi-Signal Confidence Engine for LLM-Based Document Field Extraction** | 标签：文档字段提取、置信度估计、LLM、人机协作、多模态
+4. **Koshur Pixel: a large-scale synthetic ocr dataset for kashmiri** | 标签：低资源语言、合成数据集、OCR、克什米尔语、数据增强
+5. **TrOCR for Medieval HTR: A Systematic Ablation Study with Cross-Dataset Validation** | 标签：手写文本识别、TrOCR、消融研究、中世纪手稿、微调策略
+6. **Latent Visual States for Efficient Multimodal Reasoning** | 标签：多模态推理、潜在视觉表征、连续表示、大语言模型、推理效率
+7. **Scaling State-Space Models from Lines to Paragraphs: An Ablation of Mamba-based OCR** | 标签：OCR、状态空间模型、手写文本识别、长序列建模
+8. **L3Cube-MahaPOS: A Marathi Part-of-Speech Tagging Dataset and BERT Models** | 标签：词性标注、低资源语言、数据集、马拉地语
+9. **Unlimited OCR Works** | 标签：OCR、长文档处理、注意力机制、推理加速
+10. **P-MTP: Efficient Document Parsing via Multi-Token Prediction with Progressive Depth Scaling** | 标签：文档解析、多token预测、推理加速、视觉语言模型
+11. **An LMM for Precisely Grounding Elements in Documents** | 标签：视觉定位、文档理解、多模态大模型、强化学习
+12. **AI-PAVE-Br: Leveraging Large Language Models for Enhanced Product Attribute Value Extraction through a Golden Set Approach** | 标签：信息抽取、电商、大语言模型、低资源语言
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 通过多任务查询解码器统一布局分析子任务，实现实时端到端处理。
-- 构建大规模合成数据集填补低资源语言OCR训练数据空白。
-- 将DETR迁移至楔形文字检测并集成完整流程。
-- 消融研究揭示Mamba在长序列OCR中数据饥饿特性。
-- 提出参考滑动窗口注意力实现恒定KV缓存，支持长文档高效推理。
+- 多任务统一架构避免误差累积和计算开销（RT-DocLayout）。
+- 双调用策略结合LLM不确定性增强置信度估计（ExtractConf）。
+- 系统消融研究揭示关键超参数和预处理依赖（TrOCR和Mamba OCR）。
+- 合成数据集为大规模和低资源场景提供基础（WATER-S, Koshur Pixel, 克什米尔语）。
+- 推理加速技术如参考滑动窗口注意力（Unlimited OCR）和多token预测（P-MTP）。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 研究更高效阅读顺序推理机制，结合文档结构先验扩展至多语言版面。
-- 探索混合状态空间模型与注意力架构，缓解数据稀缺下的性能下降。
-- 将R-SWA注意力扩展至更多自回归任务，并优化窗口设计以适应更大长度。
-- 融合多模态或语言模型辅助历史文档检测，增强对损坏文档的鲁棒性。
-- 开展合成数据与真实数据的域适应研究，提升低资源语言OCR真实性。
+- 探索弱监督或自监督方法减少版面分析和字段抽取的标注依赖。
+- 研究合成数据到真实数据的域适应技术，特别是在艺术字和历史文档场景。
+- 将文档布局分析与阅读顺序预测和OCR联合优化，实现端到端文档重建。
+- 开发混合架构结合Transformer注意力与状态空间模型（SSM）优势，平衡长序列精度和效率。
+- 利用潜在连续表示作为中间思维，提升多模态文档推理的效率和可解释性。
+- 针对极端长文档和密集表格结构，设计自适应注意力或分层处理策略。
 
 ## 六、工程落地启发
 
-- RT-DocLayout可直接作为文档解析前端，提升下游OCR效率。
-- Koshur Pixel数据集降低克什米尔语OCR标注成本。
-- 楔形文字检测流程支持大规模历史文档数字化。
-- Mamba的快速推理特性适用于数据充足场景。
-- Unlimited OCR大幅降低长文档内存占用，适合实际部署。
+- 可直接集成RT-DocLayout作为前端，以132 FPS实现实时版面分析并提升OCR质量。
+- ExtractConf可部署到文档处理流水线，自动判定字段置信度，减少人工审核成本。
+- P-MTP的推测解码可加速视觉语言模型文档解析至5倍，适合高吞吐场景。
+- Unlimited OCR的常数级KV缓存机制支持长文档单次处理，降低内存和延迟。
+- 在微调TrOCR时，可尝试去除CLAHE预处理并冻结解码器部分层以提高精度和迁移性。
 
 ## 七、优先关注论文
 
-- **RT-DocLayout: Real-Time End-to-End Document Layout Analysis with Reading Order in the Wild**：实时端到端框架潜力大，关注其在复杂版面和多语言扩展上的后续工作。
-- **Scaling State-Space Models from Lines to Paragraphs: An Ablation of Mamba-based OCR**：揭示SSM在真实数据上的不足，关注混合架构或训练策略改进。
-- **Unlimited OCR Works**：R-SWA机制有广泛应用前景，关注其通用性和窗口优化。
+- **RT-DocLayout: Real-Time End-to-End Document Layout Analysis with Reading Order in the Wild**：统一多任务且推理速度极高，有望成为OCR前端标准组件；关注其后续对复杂版面的扩展评估。
+- **Beyond Logprobs: A Multi-Signal Confidence Engine for LLM-Based Document Field Extraction**：置信度估计对高可靠性自动化至关重要，其双调用策略和多模态融合思路可迁移至更多场景；关注泛化至更多文档类型的表现。
+- **Scaling State-Space Models from Lines to Paragraphs: An Ablation of Mamba-based OCR**：SSM在长序列OCR的潜力与当前差距明确，后续混合架构或数据增强突破可能改变范式。
+- **P-MTP: Efficient Document Parsing via Multi-Token Prediction with Progressive Depth Scaling**：文档解析加速是关键工程需求，其渐进式课程损失和动态草稿机制直接可落地；关注与其他加速技术的组合效果。
 
 ## 八、论文逐篇解析
 
@@ -68,35 +76,35 @@
 
 **中文摘要**
 
-> 提出RT-DocLayout，一个33M参数的端到端文档布局分析框架，统一了分类、检测、分割和阅读顺序预测。基于RT-DETR，采用统一多任务查询解码器同时处理多个子任务，在公共基准上达到SOTA性能（132.1 FPS），并提升下游OCR的文档重建质量。
+> 本文提出RT-DocLayout，一个高效端到端的文档布局分析框架，用于文档解析预处理。它将分类、检测、像素级分割和阅读顺序预测统一在单架构（33M参数）中，基于RT-DETR查询解码器实现多任务联合优化，在真实文档畸变（如纸张弯曲、透视变化）下表现鲁棒。在公共基准上达到SOTA性能，推理速度132.1 FPS，结合下游OCR可提升文档重建质量。
 
 **核心创新概述**
 
-> 将阅读顺序推理与检测分割统一到单个解码器中，实现实时端到端布局分析。
+> 将分类、检测、分割和阅读顺序预测统一到单一架构，避免多阶段流水线的误差累积和计算开销。
 
 **创新点拆解**
 
-- 统一多任务查询解码器结构
-- 联合学习几何与结构表示的多任务优化
-- 轻量级33M参数实现实时推理（132.1 FPS）
+- 统一多任务公式：单查询解码器同时输出类别、边界框、掩码和阅读顺序关系。
+- 基于RT-DETR的端到端轻量框架，仅33M参数。
+- 多任务优化增强对真实文档几何畸变的鲁棒性。
 
 **当前局限**
 
-> 论文未提及在极端复杂版面（如手写混排）下的性能。
+> 论文未提及对极端复杂版面（如密集表格、手写与印刷混合）的性能评估，且阅读顺序预测方法在高度非结构化场景下可能退化。
 
 **后续可改进方向**
 
-- 探索更高效的阅读顺序推理机制
-- 融入文档结构先验知识（如模板）
-- 扩展至多语言场景
+- 探索更高效的解码器结构以处理更复杂的版面元素关系。
+- 引入弱监督或自监督方法减少对标注数据的依赖。
+- 扩展到多语言文档和混合手写/印刷内容。
 
 **工程启发**
 
-> 可作为文档解析前端，显著提升OCR系统的完整性和效率，适用于智能文档处理等工业场景。
+> 可直接作为OCR系统的前端，以高速度实现版面分析，显著提升文档重建质量，适用于实时文档数字化。
 
 **为什么值得关注**
 
-> 文档布局分析是OCR关键环节，该工作提供了实时统一的解决方案。
+> 直接涉及文档布局分析这一OCR核心环节，提出端到端实时方案，具有工程实用价值。
 
 **原始摘要**
 
@@ -120,7 +128,137 @@ scalable and practical foundation for real-world document intelligence systems.
 
 ---
 
-### 2. Koshur Pixel: a large-scale synthetic ocr dataset for kashmiri
+### 2. Advancing WordArt-Oriented Scene Text Recognition: Datasets and Methods
+
+- arXiv: [2606.24484v1](https://arxiv.org/abs/2606.24484v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2606.24484v1)
+- 作者: Xingsong Ye, Yongkun Du, Jiaxin Zhang, Haojie Zhang, Chong Sun, Chen Li, Jing Lyu, Zhineng Chen
+- 发布时间: 2026-06-23T12:18:50Z
+- 分类: cs.CV
+- 相关性评分: 22
+- 主题标签: 艺术字识别、合成数据、自回归解码、场景文本识别、视觉语言模型
+
+**中文摘要**
+
+> 本文面向艺术字场景文本识别（WATER），从数据和模型两个角度推进。构建了2M规模的合成数据集WATER-S，包含精确渲染的子集和基于大模型生成的覆盖多样化真实分布的子集。提出WATERec模型，采用任意形状视觉编码器和自回归解码器，突破固定模板STR在艺术字上的瓶颈。在WordArt-Bench上达90.40%准确率，远超通用和专用视觉语言模型。
+
+**核心创新概述**
+
+> 首次大规模合成艺术字数据集，并联合渲染管线与大模型数据生成，提出适合任意形状输入的解码器架构。
+
+**创新点拆解**
+
+- 构建2M级合成数据集WATER-S，含精确渲染和基于VLM生成的子集。
+- 提出WATERec模型：任意形状视觉编码器 + 自回归解码器，处理复杂布局。
+- 在WordArt-Bench上实现90.40%准确率，显著超越现有方法。
+
+**当前局限**
+
+> 艺术字数据集仍为合成数据，真实艺术字场景的领域差距未充分验证；自回归解码器推理速度可能较慢。
+
+**后续可改进方向**
+
+- 研究合成数据到真实数据的域适应方法。
+- 优化自回归解码器效率，或探索并行解码。
+- 扩展至更多艺术风格和语言的手写艺术字识别。
+
+**工程启发**
+
+> 为艺术字识别提供高质量数据和强基线模型，可直接部署于艺术字OCR场景。
+
+**为什么值得关注**
+
+> 专注艺术字这一OCR难点，提供数据集和方法，对场景文本识别有重要推进。
+
+**原始摘要**
+
+WordArt (artistic text) features highly customized fonts, textures, and layouts, making WordArt-
+oriented scene TExt Recognition (WATER) substantially more challenging than general Scene Text
+Recognition (STR). Existing STR datasets and methods, typically built around regular scene text and
+fixed-template inputs, struggle to scale to WATER. Thus, we aim to advance this task from both data
+and model perspectives. On the data side, we construct a 2M synthetic dataset, WATER-S, with the
+scale improved by hundreds of times compared to existing artistic text data. WATER-S consists of two
+complementary subsets. One rendered by an upgraded rendering pipeline (SynthWordArt), which provides
+highly accurate and controllable synthetic WordArt data. The other is generated by combining
+Qwen3-VL for prompt mining and Z-Image for image synthesis, which improves the coverage of realistic
+and diverse data. On the model side, we propose WATERec. It adopts an visual encoder supporting
+arbitrary-shaped inputs and an autoregressive decoder to model complex layouts, structurally
+breaking the bottleneck of fixed-template STR on WordArt. Experiments show that this architecture
+outperforms prior STR methods, achieving state-of-the-art performance on irregular texts such as
+WordArt. Together with WATER-R, carefully reorganized from existing real STR data, our strong
+baseline with the new synthetic data and model design reaches 90.40% accuracy on WordArt-Bench,
+surpassing both general-purpose and OCR-specialized vision-language models by a large margin. Code
+and data are available at https://github.com/YesianRohn/WATER.
+
+---
+
+### 3. Beyond Logprobs: A Multi-Signal Confidence Engine for LLM-Based Document Field Extraction
+
+- arXiv: [2606.24420v1](https://arxiv.org/abs/2606.24420v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2606.24420v1)
+- 作者: Nitesh Kumar
+- 发布时间: 2026-06-23T10:58:08Z
+- 分类: cs.CL
+- 相关性评分: 21
+- 主题标签: 文档字段提取、置信度估计、LLM、人机协作、多模态
+
+**中文摘要**
+
+> 本文提出ExtractConf，一个跨领域的字段级置信度估计引擎，用于LLM文档字段提取。通过Hunter和Mapper两种不同方式的调用产生不对称失败模式，融合跨调用不一致性、LLM内部不确定性、OCR和图像质量等特征，训练无需领域特性的分类器。在DocILE数据集上，ROC AUC达0.928，选择性预测风险降低70%，80%覆盖率下准确率99.1%，支持有效的“人机协作”。
+
+**核心创新概述**
+
+> 利用两种结构化不同的LLM调用方式产生不对称失败模式，将其不一致性作为置信度信号，结合多模态特征训练通用分类器。
+
+**创新点拆解**
+
+- 双调用策略：Hunter（字段引导）和Mapper（文档引导）产生不同失败模式。
+- 融合跨调用不一致性、LLM内在不确定性、OCR、图像质量和空间布局特征。
+- 无需领域规则或重新训练，跨域字段无关的置信度估计。
+
+**当前局限**
+
+> 依赖LLM两次调用增加计算开销；仅在发票类型文档上评估，其他领域泛化性待验证。
+
+**后续可改进方向**
+
+- 减少推理时计算开销，例如通过一次调用或共享中间表示。
+- 扩展到更多文档类型和语言。
+- 探索与主动学习结合，动态决定抽提后是否要人工校验。
+
+**工程启发**
+
+> 可集成到文档处理流水线中，自动决定字段是否可信，为高可靠性自动化提供保障。
+
+**为什么值得关注**
+
+> 解决LLM在文档提取中的可靠性问题，提供实用置信度估计方法。
+
+**原始摘要**
+
+In high-stakes document processing pipelines, including financial reconciliation, compliance
+verification, and procurement automation, an LLM extraction that is silently wrong is more dangerous
+than one that is visibly absent. The central challenge is not extraction accuracy alone but reliable
+confidence estimation: knowing, field by field, whether an extraction can be trusted for automation
+or deferred to human review. Token-level log-probabilities, verbalized confidence, and multi-sample
+self-consistency all collapse toward all-positive behaviour at practical thresholds, offering no
+reliable separation between trustworthy and untrustworthy extractions. We present ExtractConf, a
+cross-domain, field-agnostic confidence engine that grounds confidence estimation in two
+structurally different readings of the same document. A field-guided Hunter call extracts each field
+under schema-slot completion pressure; a document-guided Mapper call scans holistically and surfaces
+values grounded in document content. This asymmetry yields different failure modes: Hunter
+hallucinates values for absent fields, while Mapper misses visually non-salient ones. Their
+disagreement is independently informative. ExtractConf fuses cross-call disagreement, LLM-internal
+uncertainty, OCR, image quality, and spatial layout into a classifier requiring no domain-specific
+rules or retraining. On DocILE (55-field invoices, 26% failure rate), it achieves 0.928 ROC AUC and
+reduces selective prediction risk by 70% over logprob-mean. At 80% coverage, accuracy reaches 99.1%,
+enabling a practical human-in-the-loop workflow. Zero-shot transfer to CORD receipts achieves 0.858
+AUC; lightweight Lasso recalibration reduces ECE by 89% and Brier by 43%, confirming the signals
+generalise across document domains.
+
+---
+
+### 4. Koshur Pixel: a large-scale synthetic ocr dataset for kashmiri
 
 - arXiv: [2606.23144v1](https://arxiv.org/abs/2606.23144v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2606.23144v1)
@@ -128,39 +266,39 @@ scalable and practical foundation for real-world document intelligence systems.
 - 发布时间: 2026-06-22T10:42:36Z
 - 分类: cs.CV, cs.CL
 - 相关性评分: 17
-- 主题标签: 合成数据集、低资源语言、克什米尔语、OCR、数据增强
+- 主题标签: 低资源语言、合成数据集、OCR、克什米尔语、数据增强
 
 **中文摘要**
 
-> 介绍Koshur Pixel，首个大规模克什米尔语合成OCR数据集，包含613,078个图像-文本对，覆盖多种字体和文本粒度，使用超过25种数据增强模拟真实退化，为低资源语言OCR提供可扩展基础。
+> 本文介绍了Koshur Pixel，首个大规模克什米尔语合成OCR数据集，包含613,078个图像-文本对。数据集基于KS-PRET-5M语料库，使用SynthOCR-Gen框架生成，涵盖多种字体和文本粒度（词到整页），并采用超过25种数据增强模拟真实文档退化。该数据集为低资源语言克什米尔语的OCR系统训练和研究提供了基础资源。
 
 **核心创新概述**
 
-> 首次为克什米尔语构建大规模合成OCR数据集。
+> 首个克什米尔语大规模合成OCR数据集，专门针对Nastaliq字体和上下文字形变形等挑战。
 
 **创新点拆解**
 
-- 首个克什米尔语OCR数据集构建
-- 基于SynthOCR-Gen框架从5百万语料生成数据
-- 包含多种字体和文本粒度，增强策略丰富
+- 首个克什米尔语大规模合成OCR数据集（613K对）。
+- 利用SynthOCR-Gen框架，覆盖多字体和多粒度。
+- 25+种增强策略模拟真实退化。
 
 **当前局限**
 
-> 合成数据与真实场景存在域差异，真实性有限。
+> 数据集完全合成，可能无法覆盖真实场景所有退化；仅关注印刷体，未涉及手写。
 
 **后续可改进方向**
 
-- 结合少量真实标注进行域适应
-- 探索更逼真的退化模拟方法
-- 扩展至其他低资源语言
+- 收集部分真实数据并探索合成到真实的域适应。
+- 扩展到手写克什米尔语OCR数据集。
+- 结合语言模型利用上下文提高识别准确率。
 
 **工程启发**
 
-> 为克什米尔语数字化提供训练数据基础，降低人工标注成本。
+> 为低资源语言OCR提供训练数据基础，可推动克什米尔语文档数字化。
 
 **为什么值得关注**
 
-> 低资源语言OCR是重要方向，该数据集填补克什米尔语空白。
+> 聚焦低资源语言OCR数据构建，对OCR技术普惠有重要意义。
 
 **原始摘要**
 
@@ -178,68 +316,131 @@ for a severely under-resourced language.
 
 ---
 
-### 3. Automated sign detection across the Electronic Babylonian Library: A large-scale dataset and end-to-end cuneiform OCR pipeline
+### 5. TrOCR for Medieval HTR: A Systematic Ablation Study with Cross-Dataset Validation
 
-- arXiv: [2606.22608v1](https://arxiv.org/abs/2606.22608v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2606.22608v1)
-- 作者: Wentao Che, Esteban Garcés Arias, Asim Niaz, Andreas Bender, Enrique Jiménez
-- 发布时间: 2026-06-21T17:31:05Z
-- 分类: cs.CV, cs.CL
+- arXiv: [2606.24302v1](https://arxiv.org/abs/2606.24302v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2606.24302v1)
+- 作者: Sachin Sharma, Michele Flammini, Federico Simonetta
+- 发布时间: 2026-06-23T08:34:18Z
+- 分类: cs.CV, cs.DL
 - 相关性评分: 16
-- 主题标签: 楔形文字、目标检测、DETR、数字化、历史文档
+- 主题标签: 手写文本识别、TrOCR、消融研究、中世纪手稿、微调策略
 
 **中文摘要**
 
-> 提出基于DETR的楔形文字检测流程，使用最大规模标注数据集（173/106类），集成平板自动提取、行分组和n-gram文本相似度评估，在87,668个碎片上产生290万次检测，相较于先前工作提升28-37%。
+> 本文系统研究了微调TrOCR用于中世纪手写文本识别时，对比度归一化、数据增强和层冻结三个可控制因素对识别精度的影响。在13世纪意大利手稿和READ-16基准上进行消融实验，最佳配置CER为8.03%。实验发现冻结少量层不显著损害精度，而去除CLAHE反而达7.84% CER，表明强优化可减少预处理依赖。跨数据集验证表明解码器冻结阈值迁移更鲁棒。
 
 **核心创新概述**
 
-> 将DETR应用于楔形文字检测并实现大规模部署。
+> 对TrOCR在中世纪手写文本识别上的微调策略进行系统消融研究，并跨数据集验证。
 
 **创新点拆解**
 
-- 最大规模楔形文字标注数据集
-- 基于DETR的检测模型，两类粒度评估
-- 集成自动提取、行分组和n-gram评估的完整流程
+- 系统消融对比度归一化、数据增强和层冻结三个因素。
+- 发现去除CLAHE后性能提升，提示强优化可替代预处理。
+- 跨数据集验证表明解码器冻结阈值迁移更鲁棒。
 
 **当前局限**
 
-> 对平板损坏和布局变化敏感，缺少语言先验。
+> 仅在中世纪手稿和READ-16上评估，结论对其他手写变体（如近现代手写）的迁移性未知。
 
 **后续可改进方向**
 
-- 引入多模态或语言模型辅助
-- 增强对损坏文档的鲁棒性
-- 扩展至更多历史文字系统
+- 研究更少依赖预处理的训练策略，如直接应用域适应。
+- 探索更精细的层冻结策略（如逐层或基于梯度）。
+- 扩展至更多历史文档和手写风格。
 
 **工程启发**
 
-> 为楔形文字大规模数字化提供可行方案。
+> 为历史文档数字化中TrOCR模型调优提供实用指导，降低对预处理流水线的依赖。
 
 **为什么值得关注**
 
-> 展示了目标检测在古文识别领域的应用潜力。
+> 聚焦历史文档OCR微调策略，对文化遗产数字化有直接指导意义。
 
 **原始摘要**
 
-Learning to read cuneiform tablets is an extremely demanding task; consequently, of the roughly half
-million excavated tablets, only a small fraction has been analysed by Assyriologists. Computer
-vision offers a promising avenue for decipherment but requires large, densely annotated datasets. To
-address this limitation, the largest annotated cuneiform sign dataset to date is used, and a
-Deformable Detection Transformer (DETR)-based object detection model is evaluated under two class
-granularities of 173 and 106 classes. The proposed system integrates automatic tablet-side
-extraction, heuristic line grouping, and n-gram-based textual similarity evaluation to bridge visual
-sign detection and textual structure, and achieves consistent improvements of up to 28-37% over
-prior work on COCO-style detection metrics. At inference, the method is applied to 87,668 tablet
-fragments from the Electronic Babylonian Library (eBL) corpus, producing nearly 2.9 million sign
-detections. Although the approach operates without linguistic priors and remains sensitive to tablet
-damage and layout variability, it provides a scalable and interpretable foundation for corpus-wide
-cuneiform analysis and supports future integration with multimodal and linguistic modelling
-frameworks.
+Fine-tuning transformer-based handwritten text recognition (HTR) models on medieval manuscripts is
+challenging because these models are pre-trained on modern text and must adapt to a very different
+visual domain. This paper studies how three controllable fine-tuning choices (contrast
+normalization, data augmentation, and layer freezing) affect recognition accuracy when adapting
+TrOCR to small historical datasets. We run controlled experiments on a 13th-century Italian
+manuscript (I-CT 91 "Cortonese") and replicate the same experimental grid on the public READ-16
+benchmark as robustness evidence. On Cortonese, our best configuration achieves 8.03% character
+error rate (CER). Statistical comparisons across 13 configurations show that freezing up to three
+encoder layers or six decoder layers does not significantly harm accuracy, while deeper freezing
+becomes progressively detrimental. Removing contrast normalization (CLAHE) yields 7.84% CER,
+comparable to a domain-specialized baseline, suggesting strong optimization can reduce reliance on
+image preprocessing. Cross-dataset validation on READ-16 shows that decoder freezing thresholds
+transfer more robustly than encoder thresholds, and combined freezing strategies require dataset-
+specific re-validation. Finally, we use Grad-CAM gradient attributions and decoder cross-attention
+maps to diagnose error patterns and failure modes revealed by the ablations. Source code is
+available at https://github.com/LaudareProject/TrOCR-analysis
 
 ---
 
-### 4. Scaling State-Space Models from Lines to Paragraphs: An Ablation of Mamba-based OCR
+### 6. Latent Visual States for Efficient Multimodal Reasoning
+
+- arXiv: [2606.24233v1](https://arxiv.org/abs/2606.24233v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2606.24233v1)
+- 作者: Xiuwei Chen, Wentao Hu, Yongxin Wang, Zisheng Chen, Likui Zhang, Kun Xiang, Jianhua Han, Hui-Ling Zhen, Jingyuan Zou, Hang Xu, Xiaodan Liang
+- 发布时间: 2026-06-23T07:22:22Z
+- 分类: cs.CV
+- 相关性评分: 13
+- 主题标签: 多模态推理、潜在视觉表征、连续表示、大语言模型、推理效率
+
+**中文摘要**
+
+> 本文提出EVA框架，通过生成连续的潜在视觉表征（Latent Slot Tokens）作为推理过程中的中间视觉思维，避免离散输出（如代码或坐标）的延迟。Latent Slot Tokens与离散文本令牌联合训练，并针对过渡窗口中的策略偏差提出D-GSPO。构建EVA-230K多模态推理数据集，在多个基准上提升性能并提高推理效率。
+
+**核心创新概述**
+
+> 首次在LLM推理中引入连续的潜在视觉表征作为中间思维，替代离散工具调用，并解决联合训练的优化挑战。
+
+**创新点拆解**
+
+- 生成连续潜在视觉表征（Latent Slot Tokens）作为推理中间步骤。
+- 提出D-GSPO解决潜在与离散组件联合训练的优化偏差。
+- 构建EVA-230K高质量图文交错推理数据集。
+
+**当前局限**
+
+> 潜在表征的可解释性可能不如离散输出；仅在有限的视觉推理任务上评估，通用性待验证。
+
+**后续可改进方向**
+
+- 增强潜在视觉表征的可解释性和可视化。
+- 扩展到更多模态（如音频、视频）的推理。
+- 探索更高效的解码策略以减少推理开销。
+
+**工程启发**
+
+> 可提升多模态模型在文档、图表等任务中的推理效率，减少对工具调用的依赖。
+
+**为什么值得关注**
+
+> 提出新的多模态推理范式，对OCR相关场景（如文档推理）有潜在应用。
+
+**原始摘要**
+
+The integration of visual evidence has significantly enhanced the capabilities of large multimodal
+models. However, this integration predominantly relies on generating discrete outputs (etc., code or
+box coordinates) to invoke external tools, a process that introduces rigid dependencies and
+substantial latency. To overcome these limitations, we propose {EVA} (LatEnt Visual StAtes), a novel
+framework that natively generates continuous latent visual representations. These internal
+representations manifest as an adaptive sequence of Latent\_slot tokens, serving as intermediate
+visual thoughts during the reasoning process. These Latent\_slot tokens are then trained end-to-end
+with the discrete text tokens. This co-optimization, notably, causes extreme policy deviation in the
+'transition window' following the Latent\_slot tokens. We develop D-GSPO (Decouple-GSPO) to target
+this root cause by decoupling the optimization of latent and discrete components. To support SFT, we
+construct EVA-230K, a high-quality text-image interleaved CoT dataset encompassing a diverse range
+of real-world scenes, documents, charts and OCR tasks. Extensive experiments across multiple
+benchmarks confirm that EVA achieves significant performance gains while enhancing inference
+efficiency.
+
+---
+
+### 7. Scaling State-Space Models from Lines to Paragraphs: An Ablation of Mamba-based OCR
 
 - arXiv: [2606.23524v1](https://arxiv.org/abs/2606.23524v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2606.23524v1)
@@ -247,39 +448,37 @@ frameworks.
 - 发布时间: 2026-06-22T16:07:40Z
 - 分类: cs.CV
 - 相关性评分: 13
-- 主题标签: 状态空间模型、Mamba、OCR、长序列、消融研究
+- 主题标签: OCR、状态空间模型、手写文本识别、长序列建模
 
 **中文摘要**
 
-> 对基于Mamba的OCR识别器从行到段落的缩放行为进行消融研究。识别器在合成段落上保持低于1% CER，速度比Transformer快1.4-4.5倍，但在真实手写段落上CER为10.0%（Transformer为3.5%），表明SSM在数据稀缺时性能下降明显。
+> 研究了基于状态空间模型（Mamba）的光学字符识别（OCR）在从行到段落长度扩展时的表现。通过消融实验发现，循环状态维度和扩展因子是长序列精度的关键超参数。在合成数据上，SSM速度优于Transformer，但在真实手写文本上精度显著落后，原因主要是数据稀疏性。
 
 **核心创新概述**
 
-> 系统比较SSM与Transformer在长序列OCR中的行为差异。
+> 系统探索了Mamba-based OCR在段落级长序列上的行为，并识别了关键超参数。
 
 **创新点拆解**
 
-- Mamba参数（状态维数、扩展因子）对长序列精度的影响分析
-- SSM在合成与真实数据上的性能对比实验
-- 揭示SSM数据饥饿特性
+- 方法设计：对Mamba OCR解码器核心超参数进行系统消融实验。
+- 任务定义：将SSM应用于段落级手写文本识别。
 
 **当前局限**
 
-> SSM在真实手写数据上性能落后Transformer。
+> 在真实手写数据上精度显著低于Transformer基线，对长序列数据需求大。
 
 **后续可改进方向**
 
-- 增加训练数据量或采用数据增强
-- 探索状态空间模型与注意力的混合架构
-- 研究SSM对复杂书写变体的建模能力
+- 研究数据增强或半监督方法缓解SSM数据饥饿问题。
+- 探索混合架构结合Transformer注意力与SSM线性计算优势。
 
 **工程启发**
 
-> 为选择SSM作为OCR解码器提供实验依据，适合数据充足时的快速推理。
+> 为SSM在OCR长文本场景的应用提供实用指导，明确了适用条件和局限性。
 
 **为什么值得关注**
 
-> SSM是一种新兴高效序列模型，该工作评估其在OCR中的适用性。
+> 直接针对OCR序列建模效率问题，与文档解析中的文本转录任务高度相关。
 
 **原始摘要**
 
@@ -303,7 +502,67 @@ when SSMs are a practical choice for large-scale document transcription and when
 
 ---
 
-### 5. Unlimited OCR Works
+### 8. L3Cube-MahaPOS: A Marathi Part-of-Speech Tagging Dataset and BERT Models
+
+- arXiv: [2606.24825v1](https://arxiv.org/abs/2606.24825v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2606.24825v1)
+- 作者: Hariom Ingle, Ronit Ghode, Ishwari Gondkar, Jidnyasa Harad, Raviraj Joshi
+- 发布时间: 2026-06-23T17:10:46Z
+- 分类: cs.CL, cs.LG
+- 相关性评分: 11
+- 主题标签: 词性标注、低资源语言、数据集、马拉地语
+
+**中文摘要**
+
+> 介绍L3Cube-MahaPOS，一个针对马拉地语（Marathi）的词性标注数据集，包含32,354句新闻文本标注。使用16标签通用依赖对齐方案，并基于多种模型（HMM、CRF、BiLSTM、Transformer）进行基准测试，最佳模型达到88.67%准确率。
+
+**核心创新概述**
+
+> 构建了首个大规模马拉地语标准POS标注数据集，并提供了多种模型的基准。
+
+**创新点拆解**
+
+- 数据：构建了高质量、手工标注的马拉地语POS数据集。
+- 训练范式：使用Universal Dependencies对齐标签方案。
+
+**当前局限**
+
+> 仅覆盖新闻领域，可能无法泛化到其他文体；标签数有限（16个）。
+
+**后续可改进方向**
+
+- 扩展到更多领域（如社交媒体、口语）增强数据集覆盖面。
+- 探索跨语言迁移学习以缓解低资源语言标注不足问题。
+
+**工程启发**
+
+> 为马拉地语NLP提供了关键资源，支撑下游任务（机器翻译、信息抽取）。
+
+**为什么值得关注**
+
+> 文档解析中词性标注是基础任务，低资源语言数据集可直接用于相关系统开发。
+
+**原始摘要**
+
+Part-of-Speech (POS) tagging is a foundational NLP task underpinning machine translation,
+information extraction, and syntactic parsing. Despite Marathi being spoken by over 83 million
+people and ranking among the top twenty most spoken languages worldwide, it remains severely under-
+resourced in annotated corpora and standardised evaluation benchmarks. Marathi presents unique
+challenges for computational modelling owing to its rich morphology, relatively free word order,
+lack of capitalisation conventions, and pervasive code-mixing with Hindi and English. We introduce
+L3Cube-MahaPOS, a gold-standard POS tagging dataset for Marathi comprising 32,354 manually annotated
+sentences drawn from news text. Annotation was performed entirely manually by a team of Marathi-
+proficient annotators following a 16-tag Universal Dependencies-aligned scheme. A structured
+preprocessing pipeline covering Unicode normalisation, Devanagari-aware tokenisation, and noise
+filtering ensures label consistency across all splits. We benchmark the dataset across six model
+families spanning HMM, CRF, BiLSTM, BiLSTM+CharCNN, MuRIL, and the Marathi-specific transformer
+MahaBERT-v2. The best system achieves 88.67\% token-level accuracy and a macro-F1 of 81.67% over 15
+evaluated tag classes. We release the dataset, annotation guidelines, and trained model checkpoints
+to foster further research in Marathi NLP.
+
+---
+
+### 9. Unlimited OCR Works
 
 - arXiv: [2606.23050v1](https://arxiv.org/abs/2606.23050v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2606.23050v1)
@@ -311,39 +570,37 @@ when SSMs are a practical choice for large-scale document transcription and when
 - 发布时间: 2026-06-22T09:01:29Z
 - 分类: cs.CV, cs.CL
 - 相关性评分: 11
-- 主题标签: 长文档OCR、注意力机制、高效推理、KV缓存、R-SWA
+- 主题标签: OCR、长文档处理、注意力机制、推理加速
 
 **中文摘要**
 
-> 提出Unlimited OCR，通过参考滑动窗口注意力（R-SWA）替换LLM解码器的全注意力，保持恒定KV缓存，实现单次前向处理数十页文档（32K长度），降低内存消耗且不增加延迟。代码和模型已开源。
+> 提出Unlimited OCR模型，通过参考滑动窗口注意力（R-SWA）替换解码器中的全注意力，保持常数KV缓存，支持32K token内单次前向传递转录数十页文档。该方法借鉴人类解析工作记忆，降低长序列生成的内存和计算成本。
 
 **核心创新概述**
 
-> 提出R-SWA注意力机制解决长序列OCR中KV缓存增长问题。
+> 提出R-SWA机制实现常数级KV缓存，突破长文本OCR的内存瓶颈。
 
 **创新点拆解**
 
-- 参考滑动窗口注意力（R-SWA）代替全注意力
-- 解码过程保持恒定KV缓存
-- 支持32K长度单次前向处理
+- 架构：设计参考滑动窗口注意力（R-SWA）替代Transformer注意力。
+- 任务定义：将OCR扩展至超长文档（数十页）的单次处理。
 
 **当前局限**
 
-> 论文以DeepSeek OCR为基线，未在更多模型上验证通用性。
+> 未给出在复杂排版或低质量图像上的性能评估，滑动窗口可能丢失全局上下文。
 
 **后续可改进方向**
 
-- 将R-SWA扩展到其他AR任务（如ASR）
-- 结合更高效编码器进一步压缩长度
-- 探索更大的窗口设计
+- 探索自适应窗口大小或与全局注意力混合的策略。
+- 评估在密集文本（如表格、多栏）场景下的效果。
 
 **工程启发**
 
-> 大幅降低长文档OCR的内存和推理成本，适合实际部署。
+> 显著降低长文档OCR的推理延迟和内存占用，适用于大规模部署。
 
 **为什么值得关注**
 
-> 解决LLM-based OCR长序列推理效率的痛点。
+> 解决长文档OCR效率瓶颈，直接相关文档解析中的高吞吐量需求。
 
 **原始摘要**
 
@@ -365,65 +622,182 @@ available at http://github.com/baidu/Unlimited-OCR.
 
 ---
 
-### 6. P-JEPA: Procedural Video Representation Learning via Joint Embedding Predictive Architecture
+### 10. P-MTP: Efficient Document Parsing via Multi-Token Prediction with Progressive Depth Scaling
 
-- arXiv: [2606.23256v1](https://arxiv.org/abs/2606.23256v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2606.23256v1)
-- 作者: Felix Tristram, Stefano Gasperini, Benjamin Killeen, Marcel Walch, Christian Benz, Nassir Navab, Ghazal Ghazaei
-- 发布时间: 2026-06-22T12:38:36Z
-- 分类: cs.CV, cs.AI
-- 相关性评分: 3
-- 主题标签: 程序性视频、表示学习、JEPA、动作分类、长视频
+- arXiv: [2606.24447v1](https://arxiv.org/abs/2606.24447v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2606.24447v1)
+- 作者: Le Xiang, Chenxi Zhai, Shu Wei, Jingjing Wu, Qunyi Xie, Xiao Tan, Kunbin Chen, Wei He
+- 发布时间: 2026-06-23T11:34:28Z
+- 分类: cs.CV
+- 相关性评分: 9
+- 主题标签: 文档解析、多token预测、推理加速、视觉语言模型
 
 **中文摘要**
 
-> 提出P-JEPA，一种面向程序性视频的表示学习框架，通过将问题简化为密集帧对齐动作空间并预测池化掩码潜向量，支持长达30分钟的视频处理，在EgoExo4D细粒度动作分类上达到SOTA，参数比LLM方法少一个数量级。
+> 提出P-MTP框架，通过渐进式多token预测和信心门控动态草稿机制，在不损失精度情况下实现高达5倍的文档解析加速。引入渐进式课程损失稳定深层MTP训练，并自适应校准推测长度。
 
 **核心创新概述**
 
-> 将JEPA扩展到程序性视频表示学习，处理长程依赖。
+> 首次在文档解析领域成功应用深度多token预测（MTP），实现显著加速。
 
 **创新点拆解**
 
-- 程序性视频的帧对齐动作空间设计
-- 池化掩码潜向量预测框架
-- 支持30分钟以上视频的实时处理
+- 训练范式：提出渐进式课程损失稳定MTP训练。
+- 方法设计：信心门控动态草稿机制自适应调节推测长度。
 
 **当前局限**
 
-> 依赖预提取特征编码器，未实现端到端训练。
+> 加速效果依赖于具体架构和数据集，可能在极端长序列上仍有优化空间。
 
 **后续可改进方向**
 
-- 端到端特征学习
-- 结合时序建模更精细的动作分割
-- 扩展至更多程序性视频数据集
+- 结合其他加速技术如量化、剪枝进一步降低延迟。
+- 探索MTP在非自回归解码中的应用。
 
 **工程启发**
 
-> 适用于智能辅助系统中的多步骤任务理解。
+> 大幅提升VLM文档解析吞吐量，适合实时应用场景。
 
 **为什么值得关注**
 
-> 程序性视频理解是视觉语言融合的重要场景。
+> 直接面向文档解析加速，与高精度、高效率的OCR系统开发密切相关。
 
 **原始摘要**
 
-The increasing maturity of embodied AI platforms has driven a growing interest in procedural video
-representation learning to support intelligent assistance systems for complex, multi-step tasks.
-Leveraging large-scale latent predictive training, video foundation models capture video dynamics,
-enabling downstream tasks such as activity understanding, spatiotemporal localization, and
-predictive control. However, procedural videos include actions with long-range dependencies that
-these models do not support, due to the quadratic complexity of self-attention. Distinct actions,
-for example, may be visually similar despite appearing at different points in the procedure, such as
-turning the stove on versus off. Here, we propose a backbone-agnostic approach that learns long-
-duration video representations by reducing the problem to a dense, frame-aligned action space and
-predicting pooled masked latent vectors. This approach allows our Procedural Joint Embedding
-Predictive Architecture (P-JEPA) to ingest videos over 30 minutes long, enabling effective long-form
-understanding of procedural steps. We evaluate P-JEPA using features extracted with VJEPA2.1, TSM,
-and I3D over the EgoExo4D, EgoProceL, and Assembly101 datasets, finding that it consistently
-improves linear separability, streaming inference, and temporal action segmentation performance,
-achieving state-of-the-art results on EgoExo4D fine-grained action classification while using an
-order of magnitude fewer parameters than LLM-based methods and running in real time.
+Vision-Language Models (VLMs) have revolutionized document parsing by enabling end-to-end mapping
+from images to structured text, imposing a significant latency bottleneck, particularly for token-
+dense documents. While Multi-Token Prediction (MTP) has emerged as a promising approach for
+accelerating inference, its potential is constrained by optimization instability when scaling to
+deeper look-ahead depth. In this paper, we propose \textbf{P-MTP}, a framework that leverages
+\textbf{Progressive Multi-Token Prediction} with a lightweight MTP module to scale the look-ahead
+depth for high-throughput document parsing. Specifically, we introduce Progressive Curriculum Loss
+that adaptively re-weights different look-ahead depths using cumulative path reliability and
+retrospective target consistency. By effectively suppressing gradient noise in long-range
+predictions, P-MTP, facilitates an automated easy-to-hard optimization transition, enabling the
+model to master increasingly distant look-ahead depths. Furthermore, we propose Confidence-Gated
+Dynamic Drafting to maximize the effective look-ahead depth and acceptance rate by adaptively
+calibrating speculative length during inference, thereby minimizing computational waste and further
+pushing the boundaries of inference speedup. Experimental results across multiple benchmarks and
+architectures demonstrate that P-MTP, achieves up to a $5\times$ speedup with negligible loss in
+accuracy, providing the first successful validation of extensive look-ahead MTP in the document
+parsing domain.
+
+---
+
+### 11. An LMM for Precisely Grounding Elements in Documents
+
+- arXiv: [2606.24118v1](https://arxiv.org/abs/2606.24118v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2606.24118v1)
+- 作者: Yijian Lu, Chuangxin Zhao, Kai Sun, Lei Hou, Juanzi Li, Ji Qi
+- 发布时间: 2026-06-23T04:09:05Z
+- 分类: cs.CV
+- 相关性评分: 7
+- 主题标签: 视觉定位、文档理解、多模态大模型、强化学习
+
+**中文摘要**
+
+> 提出PreciseDoc，一种专门用于文档元素精确视觉定位的大多模态模型，通过构造含细粒度坐标的高质量训练数据（包括合成手写文档）和训练范式（联合强化学习监督定位与推理），提升在文档VQA任务中的定位精度。
+
+**核心创新概述**
+
+> 针对文档元素定位精度不足问题，提出专用LMM和改进的训练数据与范式。
+
+**创新点拆解**
+
+- 数据：构建含精细坐标的合成手写文档和真实文档数据。
+- 训练范式：强化学习联合监督视觉定位与推理。
+
+**当前局限**
+
+> 未提供在极端低质量或遮挡文档上的性能分析。
+
+**后续可改进方向**
+
+- 扩展到更多文档类型（如扫描件、票据）的定位任务。
+- 探索弱监督或无监督定位方法减少对精确标注的依赖。
+
+**工程启发**
+
+> 提升文档VQA和错误检测系统的定位可靠性，可用于自动化文档审核。
+
+**为什么值得关注**
+
+> 直接服务于文档理解和信息抽取中的空间定位需求。
+
+**原始摘要**
+
+Visual grounding in documents is a crucial ability for Large Multimodal Models (LMMs) in areas such
+as document understanding, deep research and document error detection. However, existing approaches
+exhibit poor grounding precision in text-rich document images, often failing to accurately locate
+the critical document elements needed for reliable reasoning. To address this gap, we introduce
+PreciseDoc, an LMM specifically designed for precise element grounding and can be further optimized
+for Document VQA tasks. Specifically, to enhance the basic localization capability, we construct
+challenging training data by two pipelines capable of mass-producing high-quality documents with
+paired metadata of fine-grained coordinates, including synthetic hand-filled documents with camera
+effects. The model develops more real-world functions beyond straightforward localization of single
+text, such as locating personal information from CVs. Furthermore, we introduce a training paradigm
+for visual grounded reasoning where the grounding and reasoning are supervised jointly with
+reinforcement learning to improve the contribution of the grounded evidence. A comprehensive
+evaluation on various benchmarks demonstrates the advantage of the proposed data and methods in
+document spatial grounding and document understanding.
+
+---
+
+### 12. AI-PAVE-Br: Leveraging Large Language Models for Enhanced Product Attribute Value Extraction through a Golden Set Approach
+
+- arXiv: [2606.24655v1](https://arxiv.org/abs/2606.24655v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2606.24655v1)
+- 作者: Murilo Gazzola, Hugo Gobato Souto, Samuel Silva, Júlia Schubert Peixoto, Felipe Siqueira, André Luis Pedroso de Morais, Caio Gomes
+- 发布时间: 2026-06-23T14:48:37Z
+- 分类: cs.CL, cs.AI, cs.LG, cs.PF
+- 相关性评分: 6
+- 主题标签: 信息抽取、电商、大语言模型、低资源语言
+
+**中文摘要**
+
+> 提出AI-PAVE-Br系统，利用大语言模型针对巴西葡萄牙语电商目录进行产品属性值提取，并引入Golden Set高质量标注数据集。实验表明，通过提示工程大幅优于传统命名实体识别（NER）方法。
+
+**核心创新概述**
+
+> 为巴西葡萄牙语电商领域构建了专用属性提取系统和基准数据集。
+
+**创新点拆解**
+
+- 数据：创建了手工标注的葡萄牙语产品属性值提取黄金数据集。
+- 方法设计：利用LLM和提示工程进行属性提取，避免复杂序列标注模型。
+
+**当前局限**
+
+> 仅针对葡萄牙语，模型可能无法直接迁移到其他语言；依赖LLM的提示设计。
+
+**后续可改进方向**
+
+- 探索多语言预训练模型以适应跨语言电商场景。
+- 集成结构化知识（如产品分类层次）提高提取准确性。
+
+**工程启发**
+
+> 为电商自动化信息抽取提供高效解决方案，尤其适用于非英语市场。
+
+**为什么值得关注**
+
+> 文档解析中的信息抽取任务，产品属性提取在电商文档处理中有直接应用。
+
+**原始摘要**
+
+The explosive growth and complexity of product data within the dynamic Brazilian e-commerce
+landscape demand robust and specialized methods for structured information extraction. Traditional
+approaches to Product Attribute Value Extraction (PAVE) often struggle with the linguistic nuances
+and sheer diversity of product descriptions in Portuguese. To address this critical gap, this paper
+introduces two major contributions. First, we present AI-PAVEBr, a specialized system engineered
+with Large Language Models (LLMs) to perform high-accuracy PAVE specifically for Brazilian
+e-commerce catalogs. Second, to facilitate reproducible research and provide a definitive benchmark,
+we introduce and share the Golden Set, a new, meticulously curated, and manually annotated dataset
+for PAVE in Portuguese. We detail the creation process and structure (Entity, Category,
+Subcategories) of this high-quality reference set. Our experiments conclusively show that AI-PAVE-
+Br, leveraging targeted prompt engineering, dramatically outperforms conventional Named Entity
+Recognition (NER) baselines. This work not only delivers a superior, scalable solution for a major
+non-English market but also enriches the NLP community with a valuable, publicly available resource
+for future PAVE research.
 
 ---
