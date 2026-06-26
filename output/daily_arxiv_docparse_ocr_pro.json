@@ -1,64 +1,52 @@
 {
   "meta": {
-    "report_date": "2026-06-25",
-    "generated_at_utc": "2026-06-25 05:15:30",
+    "report_date": "2026-06-26",
+    "generated_at_utc": "2026-06-26 05:21:35",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 12
+    "count": 8
   },
   "synthesis": {
-    "executive_summary": "今日论文集中在OCR鲁棒性评估、艺术字识别、置信度估计、手写识别微调、图像质量门控、多模态推理效率及文档解析加速等方面。核心趋势是向鲁棒性、小样本、低资源、快速推理和可靠置信度发展。",
-    "trend_summary": "多篇论文关注模型在真实场景中的鲁棒性与可靠性，如OCR-Robust基准、ExtractConf置信度引擎、MagikaDocumentFromPixel模糊门控。同时，针对特定领域（艺术字、中世纪手稿、低资源语言）的数据集和方法创新活跃。此外，推理加速（P-MTP）和高效微调（TrOCR消融）也是重要方向。",
+    "executive_summary": "今日的OCR/文档解析论文围绕多模态大模型鲁棒性、LLM驱动的信息抽取、图像质量门控、合成数据生成、历史文档关系抽取、多智能体审计系统等展开。核心发现包括：视觉语言模型的OCR推理易受常见图像扰动影响，分类准度不代表鲁棒性；LLM在金融文档理解中可达91%精度；轻量级模糊检测门控可有效提升预处理质量；合成数据及自家族蒸馏为实现小模型GUI推理提供了新路径。",
+    "trend_summary": "从传统的OCR识别转向更全面的文档理解与推理，强调鲁棒性、效率与泛化能力。亮点包括：对多模态模型在扰动下行为评估的重视；基于LLM的生成式抽取管线替代传统NER；轻量级图像预处理模块（如模糊门控）走俏；自动化数据集构建（如WinDOM）与多智能体协作成为降低成本的关键方向。",
     "common_innovations": [
-      "系统评估视觉扰动对OCR推理的影响并提出新指标（相对损坏保留等）。",
-      "合成大规模高质量数据集（WATER-S 200万、MahaPOS 3.2万、WinDOM 5.4万）以弥补真实标注不足。",
-      "融合多信号（不一致性、不确定性、OCR质量）进行置信度估计，无需领域规则。",
-      "通过消融实验总结微调策略（冻结层、对比度归一化），提供实用指导。",
-      "将经典图像处理（如拉普拉斯边缘检测）与深度网络结合，提升效率。",
-      "利用潜在连续表示（Latent_slot tokens）替代离散输出进行多模态推理。",
-      "提出渐进式多token预测和动态草稿机制加速文档解析推理。"
+      "将经典图像处理特征（如边缘检测）融入深度学习模型以提升鲁棒性或效率。",
+      "利用LLM进行生成式信息抽取，将复杂任务分解为多个子步骤以降低幻觉。",
+      "通过合成数据或自动标注方法减少对人工标注的依赖，如WinDOM和ProfileFoundry。",
+      "引入检索增强生成（RAG）为模型提供外部结构化知识。",
+      "采用多视角评估（准确率、效率、跨域泛化）来全面衡量系统性能。"
     ],
     "future_directions": [
-      "扩展OCR-Robust基准至语义扰动和对抗样本，结合图像质量门控构建鲁棒流水线。",
-      "收集真实艺术字标注数据并探索多语言艺术字识别模型的迁移能力。",
-      "设计无需黑盒模型内部信号的置信度方法，以适应更多API限制。",
-      "将TrOCR微调策略推广到更多历史文档类型，并研究LoRA等高效微调。",
-      "将运动模糊门控扩展到高斯模糊和散焦，并嵌入端到端训练。",
-      "提升潜在多模态表示的可解释性，并压缩序列长度以降低内存。",
-      "探索跨语言无监督域适应进一步降低低资源语言标注成本。",
-      "研究OCR噪声对特定关系抽取的影响并设计噪声鲁棒的抽取模型。",
-      "在更多安全标准和企业场景下验证多智能体自动化审计系统。",
-      "将P-MTP与硬件优化结合，实现更深展望的多token预测以进一步提升加速比。"
+      "研究轻量化鲁棒增强方法，例如在模型输入前端加入自适应图像净化模块。",
+      "开发针对文档结构敏感的鲁棒性增强技术，以应对PDF排版变化。",
+      "将LLM与结构化约束（如知识图谱）结合，减少金融文档抽取中的幻觉。",
+      "探索跨语言、跨文档的生成式抽取泛化能力，尤其针对历史文本。",
+      "设计统一的图像质量门控协议，支持多种模糊类型和置信度校准。",
+      "提升合成数据的逼真度和多样性，使其能够替代真实数据用于下游微调。",
+      "发展无需外部模型的同家族蒸馏框架，简化小模型训练流程。",
+      "构建端到端的多智能体文档审核系统，提高全流程自动化率。",
+      "为视频或动态文档引入物理感知和时间推理能力。"
     ],
     "engineering_takeaways": [
-      "部署OCR系统前应使用OCR-Robust基准评估鲁棒性，优先选择对扰动不敏感的模型。",
-      "艺术字识别WATERec模型可直接用于设计稿场景，合成数据WATER-S可辅助训练。",
-      "置信度引擎ExtractConf可集成到文档提取流水线，通过多信号融合降低自动化风险。",
-      "微调TrOCR时冻结少量编解码器层不影响精度，对比度归一化可被其他预处理替代。",
-      "使用MagikaDocumentFromPixel作为预处理门控，可快速过滤模糊图像节省下游资源。",
-      "EVA潜在推理框架可替代多模态链式调用，但需注意可解释性。",
-      "低资源语言POS标注可复用MahaPOS的预处理和模型策略。",
-      "HIPE-2026评测框架可用于历史文档关系抽取系统的性能与效率评估。",
-      "WinDOM数据采集方法可零成本获取GUI接地数据，适合低资源场景。",
-      "P-MTP多token预测可集成到文档解析VLM中，实现最高5倍加速。"
+      "可直接在OCR管道前集成MagikaDocumentFromPixel（7ms/图）来过滤模糊图像，降低后续处理开销。",
+      "金融机构可借鉴论文2的LLM-based管线实现证券文档自动化审核。",
+      "HIPE-2026的评估框架可用于衡量历史文档处理系统的跨域泛化能力。",
+      "WinDOM-SFD方法适用于资源受限设备的GUI grounding，无需GPU即可生成训练数据。",
+      "PhysRAG的RAG机制可以改进文档解析中的物理常识注入（如发票表格中的逻辑关系）。"
     ],
     "watchlist": [
       {
         "title": "How Robust is OCR-Reasoning? Evaluating OCR-Reasoning Robustness of Vision-Language Models under Visual Perturbations",
-        "watch_reason": "首个OCR推理鲁棒性基准，其指标和扰动集可能成为行业标准，后续扩展扰动类型后影响更大。"
+        "watch_reason": "系统评估了视觉扰动对VLM OCR推理的影响，提出的基准和指标可成为团队评估自研模型鲁棒性的标准工具。"
       },
       {
-        "title": "Advancing WordArt-Oriented Scene Text Recognition: Datasets and Methods",
-        "watch_reason": "艺术字识别突破性工作，合成数据WATER-S和WATERec模型可直接提升实际应用效果，关注后续真实数据发布。"
+        "title": "WinDOM: Self-Family Distillation for Small-Model GUI Grounding",
+        "watch_reason": "创新性地利用DOM解析自动构建GUI定位数据，结合自家族蒸馏和RL，实现了无需人工/OCR的小模型训练，对部署在边缘设备有直接价值。"
       },
       {
-        "title": "Beyond Logprobs: A Multi-Signal Confidence Engine for LLM-Based Document Field Extraction",
-        "watch_reason": "置信度估计是高可靠提取的关键，ExtractConf的创新多信号融合思路可能被广泛应用，关注其黑盒适配版本。"
-      },
-      {
-        "title": "P-MTP: Efficient Document Parsing via Multi-Token Prediction with Progressive Depth Scaling",
-        "watch_reason": "5倍加速效果明显，若能结合硬件优化将极大提升高吞吐文档解析性能，关注后续稳定性改进。"
+        "title": "ProfileFoundry: A Synthetic Person-Object Substrate for Privacy, Memory, and Tool-Use Evaluation in LLM Agent",
+        "watch_reason": "提供了一种安全可控的合成人物数据生成方案，可用于评估模型在文档理解等任务中的隐私保护能力。"
       }
     ]
   },
@@ -84,141 +72,63 @@
       "topic_tags": [
         "OCR鲁棒性",
         "视觉扰动",
-        "基准测评"
+        "视觉语言模型",
+        "评估基准"
       ],
-      "zh_summary": "提出OCR-Robust基准，系统评估视觉语言模型在视觉扰动下的OCR推理鲁棒性。包含812个样本，覆盖文档、场景文本、图表等，选择5种扰动类型、3种严重级别。实验发现高clean准确率不一定意味着强鲁棒性，图表比文档更脆弱。",
-      "novelty": "首个针对OCR推理鲁棒性的系统评估基准，定义了相对损坏保留等新指标。",
+      "zh_summary": "提出OCR-Robust基准，评估视觉语言模型在视觉扰动下的OCR推理鲁棒性，涵盖文档、场景文本、图表等8种类型，发现高准确率不一定意味着强鲁棒性，图表类比文档类更脆弱。",
+      "novelty": "首个系统研究视觉扰动对OCR推理鲁棒性的工作，构建包含多种扰动类型和严重等级的基准，提出CRI等复合指标。",
       "innovation_points": [
-        "构建了包含OCR1.0和OCR2.0两个子集的鲁棒性基准",
-        "通过预实验筛选出5种代表性扰动和3个严重级别",
-        "提出相对损坏保留、最坏情况保留和复合鲁棒性指数等新指标"
+        "构建OCR-Robust基准，包含OCR1.0和OCR2.0两个子集共812样本",
+        "通过预实验从18种扰动中筛选5种代表性类型",
+        "提出相对损坏保留率、最差保留率和复合损坏鲁棒性指数等评估指标"
       ],
-      "limitations": "扰动类型有限，仅针对视觉层面扰动，未涉及语义或对抗扰动。",
+      "limitations": "扰动类型和严重等级有限，未覆盖所有实际场景；模型泛化性有待验证。",
       "improvement_directions": [
-        "扩展扰动类型覆盖更多真实场景噪声",
-        "研究模型架构设计对鲁棒性的影响",
-        "探索鲁棒性增强方法如对抗训练"
+        "扩展扰动类型和数据集规模",
+        "研究模型架构层面提升鲁棒性的方法",
+        "开发针对结构敏感任务的专用鲁棒性增强技术"
       ],
-      "engineering_value": "为OCR系统部署提供鲁棒性评估工具，指导模型选择和优化。",
-      "why_relevant": "直接关注OCR推理鲁棒性，对实际文档分析系统的可靠性有重要参考价值。"
+      "engineering_value": "为OCR系统部署提供鲁棒性评估工具，指导模型选择和训练策略。",
+      "why_relevant": "直接关注OCR推理的鲁棒性问题，对实际OCR应用中的图像质量退化有启示。"
     },
     {
-      "title": "Advancing WordArt-Oriented Scene Text Recognition: Datasets and Methods",
-      "summary": "WordArt (artistic text) features highly customized fonts, textures, and layouts, making WordArt-oriented scene TExt Recognition (WATER) substantially more challenging than general Scene Text Recognition (STR). Existing STR datasets and methods, typically built around regular scene text and fixed-template inputs, struggle to scale to WATER. Thus, we aim to advance this task from both data and model perspectives. On the data side, we construct a 2M synthetic dataset, WATER-S, with the scale improved by hundreds of times compared to existing artistic text data. WATER-S consists of two complementary subsets. One rendered by an upgraded rendering pipeline (SynthWordArt), which provides highly accurate and controllable synthetic WordArt data. The other is generated by combining Qwen3-VL for prompt mining and Z-Image for image synthesis, which improves the coverage of realistic and diverse data. On the model side, we propose WATERec. It adopts an visual encoder supporting arbitrary-shaped inputs and an autoregressive decoder to model complex layouts, structurally breaking the bottleneck of fixed-template STR on WordArt. Experiments show that this architecture outperforms prior STR methods, achieving state-of-the-art performance on irregular texts such as WordArt. Together with WATER-R, carefully reorganized from existing real STR data, our strong baseline with the new synthetic data and model design reaches 90.40% accuracy on WordArt-Bench, surpassing both general-purpose and OCR-specialized vision-language models by a large margin. Code and data are available at https://github.com/YesianRohn/WATER.",
-      "link": "https://arxiv.org/abs/2606.24484v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.24484v1",
+      "title": "LLM-Based Examination of Eligibility Criteria from Securities Prospectuses at the German Central Bank",
+      "summary": "Verifying the eligibility of securities as collateral is a key responsibility of the German Central Bank. However, manually verifying these assets against legal and financial criteria within lengthy, semi-structured, and often bilingual prospectuses is a resource-intensive task. While previous efforts utilized traditional Named Entity Recognition (NER) for information extraction, these methods can struggle with OCR noise, linguistic variance, and rigid span-based constraints, and the need for manually annotated training data for each relevant annotation type. In this paper, we present the first case study applying Large Language Models (LLMs) to the eligibility examination process, shifting the paradigm toward a generative Information Extraction pipeline. Our approach decomposes the task into extraction, normalization, and interpretation, allowing for greater flexibility in handling noisy text and interleaved German-English content. We further introduce a value-based evaluation methodology using LLM-as-a-judge, which offers a more semantic assessment than location-based metrics. Our results demonstrate that LLM-based systems achieve high precision (up to 91%) in document-level eligibility, exhibiting a conservative operating profile that minimizes false acceptance.",
+      "link": "https://arxiv.org/abs/2606.27316v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.27316v1",
       "authors": [
-        "Xingsong Ye",
-        "Yongkun Du",
-        "Jiaxin Zhang",
-        "Haojie Zhang",
-        "Chong Sun",
-        "Chen Li",
-        "Jing Lyu",
-        "Zhineng Chen"
+        "Serhii Hamotskyi",
+        "Akash Kumar Gautam",
+        "Christian Hänig"
       ],
-      "published": "2026-06-23T12:18:50Z",
-      "updated": "2026-06-23T12:18:50Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2606.24484v1",
-      "score": 22,
-      "topic_tags": [
-        "艺术字识别",
-        "合成数据",
-        "场景文本识别"
-      ],
-      "zh_summary": "针对艺术字场景文本识别（WATER）任务，构建200万规模合成数据集WATER-S，并提出WATERec模型，采用支持任意形状输入的视觉编码器和自回归解码器，在WordArt-Bench上达到90.40%准确率，大幅超越通用和OCR专用视觉语言模型。",
-      "novelty": "首次系统解决艺术字识别难题，从数据和模型两方面突破固定模板STR瓶颈。",
-      "innovation_points": [
-        "构建200万规模艺术字合成数据集WATER-S，含SynthWordArt渲染和VLM生成两种子集",
-        "提出WATERec模型，采用适应任意形状输入的视觉编码器和自回归解码器",
-        "结合Qwen3-VL和Z-Image生成多样化真实感数据"
-      ],
-      "limitations": "主要依赖合成数据，真实艺术字数据的泛化性有待验证。",
-      "improvement_directions": [
-        "收集更多真实艺术字标注数据",
-        "探索轻量化模型结构以适应移动端部署",
-        "扩展到多语言艺术字识别"
-      ],
-      "engineering_value": "显著提升艺术字识别准确率，可直接应用于设计稿、广告等场景。",
-      "why_relevant": "针对OCR领域难例艺术字，提供数据和方法双重参考。"
-    },
-    {
-      "title": "Beyond Logprobs: A Multi-Signal Confidence Engine for LLM-Based Document Field Extraction",
-      "summary": "In high-stakes document processing pipelines, including financial reconciliation, compliance verification, and procurement automation, an LLM extraction that is silently wrong is more dangerous than one that is visibly absent. The central challenge is not extraction accuracy alone but reliable confidence estimation: knowing, field by field, whether an extraction can be trusted for automation or deferred to human review. Token-level log-probabilities, verbalized confidence, and multi-sample self-consistency all collapse toward all-positive behaviour at practical thresholds, offering no reliable separation between trustworthy and untrustworthy extractions. We present ExtractConf, a cross-domain, field-agnostic confidence engine that grounds confidence estimation in two structurally different readings of the same document. A field-guided Hunter call extracts each field under schema-slot completion pressure; a document-guided Mapper call scans holistically and surfaces values grounded in document content. This asymmetry yields different failure modes: Hunter hallucinates values for absent fields, while Mapper misses visually non-salient ones. Their disagreement is independently informative. ExtractConf fuses cross-call disagreement, LLM-internal uncertainty, OCR, image quality, and spatial layout into a classifier requiring no domain-specific rules or retraining. On DocILE (55-field invoices, 26% failure rate), it achieves 0.928 ROC AUC and reduces selective prediction risk by 70% over logprob-mean. At 80% coverage, accuracy reaches 99.1%, enabling a practical human-in-the-loop workflow. Zero-shot transfer to CORD receipts achieves 0.858 AUC; lightweight Lasso recalibration reduces ECE by 89% and Brier by 43%, confirming the signals generalise across document domains.",
-      "link": "https://arxiv.org/abs/2606.24420v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.24420v1",
-      "authors": [
-        "Nitesh Kumar"
-      ],
-      "published": "2026-06-23T10:58:08Z",
-      "updated": "2026-06-23T10:58:08Z",
+      "published": "2026-06-25T17:29:58Z",
+      "updated": "2026-06-25T17:29:58Z",
       "categories": [
         "cs.CL"
       ],
-      "arxiv_id": "2606.24420v1",
-      "score": 21,
-      "topic_tags": [
-        "置信度估计",
-        "文档字段提取",
-        "LLM"
-      ],
-      "zh_summary": "提出ExtractConf，一种跨领域、字段无关的置信度估计引擎，通过双通路（猎人-映射器）的不一致性、LLM内部不确定性、OCR和图像质量等多信号融合，在DocILE上ROC AUC达0.928，将选择性预测风险降低70%。",
-      "novelty": "利用双通路不同失效模式的互补性进行置信度估计，无需领域规则或重训练。",
-      "innovation_points": [
-        "设计猎人-映射器双通路架构，利用不对称失效模式进行置信度估计",
-        "融合跨调用不一致性、LLM不确定性、OCR质量等多维信号",
-        "无需领域规则或重训的场无关置信度分类器"
-      ],
-      "limitations": "依赖LLM内部不确定性信号，对黑盒模型不适用。",
-      "improvement_directions": [
-        "适配更多LLM架构和API",
-        "扩展到更复杂的嵌套字段提取",
-        "结合主动学习减少人工审核成本"
-      ],
-      "engineering_value": "为高可靠性文档提取系统提供实用置信度评估，减少自动化风险。",
-      "why_relevant": "解决OCR+LLM文档提取中的置信度估计关键问题，对生产级系统有直接价值。"
-    },
-    {
-      "title": "TrOCR for Medieval HTR: A Systematic Ablation Study with Cross-Dataset Validation",
-      "summary": "Fine-tuning transformer-based handwritten text recognition (HTR) models on medieval manuscripts is challenging because these models are pre-trained on modern text and must adapt to a very different visual domain. This paper studies how three controllable fine-tuning choices (contrast normalization, data augmentation, and layer freezing) affect recognition accuracy when adapting TrOCR to small historical datasets. We run controlled experiments on a 13th-century Italian manuscript (I-CT 91 \"Cortonese\") and replicate the same experimental grid on the public READ-16 benchmark as robustness evidence. On Cortonese, our best configuration achieves 8.03% character error rate (CER). Statistical comparisons across 13 configurations show that freezing up to three encoder layers or six decoder layers does not significantly harm accuracy, while deeper freezing becomes progressively detrimental. Removing contrast normalization (CLAHE) yields 7.84% CER, comparable to a domain-specialized baseline, suggesting strong optimization can reduce reliance on image preprocessing. Cross-dataset validation on READ-16 shows that decoder freezing thresholds transfer more robustly than encoder thresholds, and combined freezing strategies require dataset-specific re-validation. Finally, we use Grad-CAM gradient attributions and decoder cross-attention maps to diagnose error patterns and failure modes revealed by the ablations. Source code is available at https://github.com/LaudareProject/TrOCR-analysis",
-      "link": "https://arxiv.org/abs/2606.24302v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.24302v1",
-      "authors": [
-        "Sachin Sharma",
-        "Michele Flammini",
-        "Federico Simonetta"
-      ],
-      "published": "2026-06-23T08:34:18Z",
-      "updated": "2026-06-23T08:34:18Z",
-      "categories": [
-        "cs.CV",
-        "cs.DL"
-      ],
-      "arxiv_id": "2606.24302v1",
+      "arxiv_id": "2606.27316v1",
       "score": 16,
       "topic_tags": [
-        "手写文本识别",
-        "微调策略",
-        "中世纪手稿"
+        "LLM",
+        "信息抽取",
+        "文档审核",
+        "OCR后处理"
       ],
-      "zh_summary": "通过系统消融实验研究TrOCR在手写中世纪手稿识别中对比度归一化、数据增强和层冻结的影响。在13世纪意大利手稿上最佳配置CER为8.03%，发现冻结少量编解码器层不影响精度，对比度归一化可被优化替代。",
-      "novelty": "首次对TrOCR在中世纪手稿上的微调策略进行系统性消融和跨数据集验证。",
+      "zh_summary": "使用LLM从德国央行证券招募说明书中提取资格标准，采用生成式信息抽取管线，分解为抽取、归一化和解释步骤，利用LLM-as-a-judge进行语义评估，达到91%精度。",
+      "novelty": "首个将LLM应用于证券资格审核的案例，从NER转向生成式信息抽取，并引入语义评估方法。",
       "innovation_points": [
-        "系统对比了13种配置下冻结层数的影响",
-        "发现解码器冻结阈值比编码器更具跨数据集可迁移性",
-        "使用Grad-CAM和注意力图诊断错误模式"
+        "提出基于LLM的生成式信息抽取管线",
+        "将任务分解为抽取、归一化和解释三个子任务",
+        "引入LLM-as-a-judge进行基于语义的评估"
       ],
-      "limitations": "仅在单一手稿和READ-16数据集上验证，推广性有限。",
+      "limitations": "依赖LLM输出质量，可能存在幻觉；评估方法仍有主观性。",
       "improvement_directions": [
-        "扩展到更多历史文档类型和语言",
-        "探索更高效的微调方法如LoRA",
-        "结合无监督域适应减少标注依赖"
+        "结合结构化约束减少幻觉",
+        "探索跨语言和跨文档的泛化能力",
+        "改进评估方法的自动化与客观性"
       ],
-      "engineering_value": "为手写文本识别微调提供实用指导，减少调参成本。",
-      "why_relevant": "针对OCR中历史文档识别这一难点，提供微调策略参考。"
+      "engineering_value": "为金融机构自动化文档审核提供可行方案，降低人力成本。",
+      "why_relevant": "处理带OCR噪声的多语言文档，涉及信息抽取与筛选，对OCR后处理有借鉴意义。"
     },
     {
       "title": "Edges Before Embeddings: A Confidence-Aware Blur Gate for Vision-Language Pipelines",
@@ -239,111 +149,62 @@
       "topic_tags": [
         "图像质量评估",
         "模糊检测",
-        "流水线优化"
+        "OCR预处理",
+        "轻量级模型"
       ],
-      "zh_summary": "提出MagikaDocumentFromPixel，一种轻量级CPU友好图像模糊门控，约7ms判定单图清晰/模糊/不确定。通过46配置搜索发现输入分辨率是关键，设计边缘先验模块EPM利用拉普拉斯幅度辅助分类，在GoPro Large上F1=0.9803，模型仅17MB。",
-      "novelty": "采用边缘先验模块将经典模糊检测经验引入深度网络，实现高效门控。",
+      "zh_summary": "提出MagikaDocumentFromPixel，一个轻量级CPU图像质量门控，7毫秒内分类图像为清晰、模糊或不确定，采用MobileNetV3-Large加边缘先验模块，F1达0.9803。",
+      "novelty": "设计了高效的图像质量门控，结合经典模糊检测特征和深度学习，并指出该模式在多个系统中独立出现。",
       "innovation_points": [
-        "通过大规模配置搜索确定输入分辨率决定性能，容量仅在≥384px时有效",
-        "提出边缘先验模块（EPM），将拉普拉斯幅度作为辅助输入通道",
-        "设计基于选择性预测的置信度感知路由"
+        "边缘先验模块，将拉普拉斯幅度作为辅助输入通道",
+        "通过经验搜索确定输入分辨率是关键杠杆",
+        "置信度感知路由形式化，基于选择性预测理论"
       ],
-      "limitations": "仅评估运动模糊分布，实验依赖单种子，校准未量化。",
+      "limitations": "仅在单一运动模糊分布上评估，校准是定性的。",
       "improvement_directions": [
-        "扩展到高斯模糊、散焦等多种模糊类型",
-        "研究跨域迁移性",
-        "量化校准以实现更可靠的拒绝选项"
+        "扩展到多种模糊类型（散焦、高斯等）",
+        "量化校准并集成到更广泛的OCR管线",
+        "探索更轻量或更准确的架构"
       ],
-      "engineering_value": "提供低开销的图像质量门控，可嵌入预处理流水线节省下游计算资源。",
-      "why_relevant": "直接提升OCR/文档分析系统的鲁棒性，避免无效计算。"
+      "engineering_value": "可直接用于OCR预处理阶段，节省计算资源，提高下游质量。",
+      "why_relevant": "OCR流程中图像质量检测模块，直接影响OCR输入质量。"
     },
     {
-      "title": "Latent Visual States for Efficient Multimodal Reasoning",
-      "summary": "The integration of visual evidence has significantly enhanced the capabilities of large multimodal models. However, this integration predominantly relies on generating discrete outputs (etc., code or box coordinates) to invoke external tools, a process that introduces rigid dependencies and substantial latency. To overcome these limitations, we propose {EVA} (LatEnt Visual StAtes), a novel framework that natively generates continuous latent visual representations. These internal representations manifest as an adaptive sequence of Latent\\_slot tokens, serving as intermediate visual thoughts during the reasoning process. These Latent\\_slot tokens are then trained end-to-end with the discrete text tokens. This co-optimization, notably, causes extreme policy deviation in the 'transition window' following the Latent\\_slot tokens. We develop D-GSPO (Decouple-GSPO) to target this root cause by decoupling the optimization of latent and discrete components. To support SFT, we construct EVA-230K, a high-quality text-image interleaved CoT dataset encompassing a diverse range of real-world scenes, documents, charts and OCR tasks. Extensive experiments across multiple benchmarks confirm that EVA achieves significant performance gains while enhancing inference efficiency.",
-      "link": "https://arxiv.org/abs/2606.24233v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.24233v1",
+      "title": "ProfileFoundry: A Synthetic Person-Object Substrate for Privacy, Memory, and Tool-Use Evaluation in LLM Agent",
+      "summary": "Foundation-model research increasingly needs data about people: user state, personal histories, relationships, contact-like fields, documents, and longitudinal updates. Real user data is difficult to share, perturb, audit, or redistribute responsibly, while independently generated fake fields rarely preserve the cross-field and temporal consistency needed for controlled evaluation. We present PROFILEFOUNDRY, a deterministic generator and fixed reference release of 100,000 adult synthetic Person Objects across eight locales. Each object combines a typed current snapshot, household, family, and employer links, snapshot-aligned events, normalized relational views, and generation provenance. The release contains 709,228 events, 40,338 households, 52,491 employers, and 518,564 directed relationship edges. We report evidence in separate categories: selected population-marginal comparisons, per-object invariant checks, release-wide referential and temporal closure, and coincidence/provenance screens. PROFILEFOUNDRY is not a population-fidelity model, a rendered-text corpus, or a formal privacy mechanism. Instead, it is a responsible synthetic source layer for constructing downstream foundation-model evaluations involving memory, privacy, document understanding, record linkage, and agent state while keeping the synthetic person behind each artifact inspectable",
+      "link": "https://arxiv.org/abs/2606.26403v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.26403v1",
       "authors": [
-        "Xiuwei Chen",
-        "Wentao Hu",
-        "Yongxin Wang",
-        "Zisheng Chen",
-        "Likui Zhang",
-        "Kun Xiang",
-        "Jianhua Han",
-        "Hui-Ling Zhen",
-        "Jingyuan Zou",
-        "Hang Xu",
-        "Xiaodan Liang"
+        "Sriram Selvam",
+        "Anneswa Ghosh"
       ],
-      "published": "2026-06-23T07:22:22Z",
-      "updated": "2026-06-23T07:22:22Z",
+      "published": "2026-06-24T21:43:36Z",
+      "updated": "2026-06-24T21:43:36Z",
       "categories": [
-        "cs.CV"
+        "cs.CL"
       ],
-      "arxiv_id": "2606.24233v1",
-      "score": 13,
+      "arxiv_id": "2606.26403v1",
+      "score": 10,
       "topic_tags": [
-        "多模态推理",
-        "潜在表示",
-        "端到端优化"
+        "合成数据",
+        "人物对象",
+        "隐私评估",
+        "文档理解"
       ],
-      "zh_summary": "提出EVA框架，原生生成连续潜在视觉表示（Latent_slot tokens）作为中间视觉推理步骤，与文本token端到端训练。为克服过渡窗口策略偏离，提出解耦优化方法D-GSPO，并构建EVA-230K数据集，在多个基准上取得性能提升和效率改进。",
-      "novelty": "首次用连续潜在表示代替离散输出进行多模态推理，避免外部工具调用延迟。",
+      "zh_summary": "提出PROFILEFOUNDRY，一种确定性合成人物对象生成器，发布10万个跨八个地区的合成人物数据，包含快照、家庭、雇主、事件和关系，用于基础模型的内存、隐私、文档理解等评估。",
+      "novelty": "提供具有跨字段和时间一致性的合成人物数据，作为负责任的下游评估基础层。",
       "innovation_points": [
-        "提出Latent_slot tokens作为连续视觉中间表示",
-        "开发D-GSPO解耦优化方法解决策略偏离问题",
-        "构建EVA-230K高质量图文交错CoT数据集"
+        "确定性生成器保证可复现性",
+        "生成包含当前快照、家庭、雇主、事件和关系链的复杂人物对象",
+        "提供完整的生成出处和交叉引用检查"
       ],
-      "limitations": "潜在表示的可解释性不足，复杂推理场景下效果待验证。",
+      "limitations": "不是群体保真度模型，也不是正式隐私机制，合成数据与真实数据仍有差距。",
       "improvement_directions": [
-        "探索潜在状态的可视化和可解释性",
-        "扩展到更多模态（如音频）",
-        "进一步压缩潜在状态序列长度以提升效率"
+        "提高合成数据的真实性和多样性",
+        "集成隐私保护机制",
+        "扩展到更多地区和场景"
       ],
-      "engineering_value": "减少多模态推理对离散工具的依赖，提升推理速度和端到端能力。",
-      "why_relevant": "提出新的多模态推理范式，对OCR+推理场景有启发意义。"
-    },
-    {
-      "title": "L3Cube-MahaPOS: A Marathi Part-of-Speech Tagging Dataset and BERT Models",
-      "summary": "Part-of-Speech (POS) tagging is a foundational NLP task underpinning machine translation, information extraction, and syntactic parsing. Despite Marathi being spoken by over 83 million people and ranking among the top twenty most spoken languages worldwide, it remains severely under-resourced in annotated corpora and standardised evaluation benchmarks. Marathi presents unique challenges for computational modelling owing to its rich morphology, relatively free word order, lack of capitalisation conventions, and pervasive code-mixing with Hindi and English. We introduce L3Cube-MahaPOS, a gold-standard POS tagging dataset for Marathi comprising 32,354 manually annotated sentences drawn from news text. Annotation was performed entirely manually by a team of Marathi-proficient annotators following a 16-tag Universal Dependencies-aligned scheme. A structured preprocessing pipeline covering Unicode normalisation, Devanagari-aware tokenisation, and noise filtering ensures label consistency across all splits. We benchmark the dataset across six model families spanning HMM, CRF, BiLSTM, BiLSTM+CharCNN, MuRIL, and the Marathi-specific transformer MahaBERT-v2. The best system achieves 88.67\\% token-level accuracy and a macro-F1 of 81.67% over 15 evaluated tag classes. We release the dataset, annotation guidelines, and trained model checkpoints to foster further research in Marathi NLP.",
-      "link": "https://arxiv.org/abs/2606.24825v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.24825v1",
-      "authors": [
-        "Hariom Ingle",
-        "Ronit Ghode",
-        "Ishwari Gondkar",
-        "Jidnyasa Harad",
-        "Raviraj Joshi"
-      ],
-      "published": "2026-06-23T17:10:46Z",
-      "updated": "2026-06-23T17:10:46Z",
-      "categories": [
-        "cs.CL",
-        "cs.LG"
-      ],
-      "arxiv_id": "2606.24825v1",
-      "score": 11,
-      "topic_tags": [
-        "数据集",
-        "词性标注",
-        "低资源语言",
-        "Transformer"
-      ],
-      "zh_summary": "针对低资源语言马拉地语，构建了包含32,354条人工标注新闻句子的词性标注数据集MahaPOS，采用16标签通用依赖对齐方案。使用HMM、CRF、BiLSTM、BiLSTM+CharCNN、MuRIL及马拉地语专用Transformer MahaBERT-v2进行基准测试，最佳系统达到88.67%的token精度和81.67%的宏F1。",
-      "novelty": "首个大规模、高质量、人工标注的马拉地语POS标注数据集，并释放了数据集、标注指南和模型检查点。",
-      "innovation_points": [
-        "数据集构建：人工标注32k+新闻句子，16个UD对齐标签。",
-        "预处理管道：Unicode规范化、天城文感知分词、噪声过滤。",
-        "全面基准：覆盖传统模型和Transformer，包括马拉地语专属BERT。"
-      ],
-      "limitations": "数据集仅来自新闻文本，可能缺乏其他领域（如社交媒体、方言）的多样性。",
-      "improvement_directions": [
-        "扩展到更多领域和代码混合文本。",
-        "探索跨语言迁移或无监督方法以进一步降低标注成本。",
-        "结合更大语言模型提升长尾标签性能。"
-      ],
-      "engineering_value": "为马拉地语NLP下游任务（机器翻译、信息抽取）提供标准化评估资源。",
-      "why_relevant": "展示了OCR/文档解析中低资源语言数据集的构建和评估范式，对多语言文档分析有参考价值。"
+      "engineering_value": "为隐私、记忆、工具使用等评估提供安全可控的合成数据源，避免真实数据风险。",
+      "why_relevant": "涉及文档理解和记录关联，合成人物数据可用于OCR文档理解任务的评估。"
     },
     {
       "title": "Overview of HIPE-2026: Person-Place Relation Extraction from Multilingual Historical Texts",
@@ -370,24 +231,23 @@
         "关系抽取",
         "历史文档",
         "OCR噪声",
-        "多语言",
-        "评测"
+        "跨域泛化"
       ],
-      "zh_summary": "HIPE-2026评测聚焦从含噪历史多语言文档中抽取人物-地点关系（at/isAt），涉及法语、德语、英语，共17支队伍参与。数据集包含19-20世纪报纸和早期现代法语文学文本。评测框架涵盖预测准确性、计算效率、跨领域泛化。结果显示从大规模语言模型到轻量分类器的多种策略，揭示了历史关系抽取在准确率、效率与鲁棒性之间的权衡。",
-      "novelty": "首次将实体关系抽取引入历史文档评测，并包含时间约束的关系类型和跨领域泛化评估。",
+      "zh_summary": "HIPE-2026评测任务聚焦从多语言历史文本中提取人物-地点关系，涉及时间推理，17支队伍参与，采用三方面评估（准确率、效率、跨域泛化），揭示了LLM和轻量分类器之间的权衡。",
+      "novelty": "从命名实体识别转向实体间关系推理，引入时间维度，并结合跨领域泛化评估。",
       "innovation_points": [
-        "任务定义：时间感知的人物-地点关系抽取（at/isAt）。",
-        "多语言多领域：历史报纸+文学文本，包含OCR噪声和语言变体。",
-        "三维评估框架：准确性、效率、泛化性。"
+        "定义两种时间锚定关系类型：at和isAt",
+        "三面评估框架：预测准确率、计算效率、跨域泛化",
+        "包含历史语言变体、OCR噪声和间接上下文线索"
       ],
-      "limitations": "仅三种语言，泛化到其他历史语言或语域的能力未知。",
+      "limitations": "历史文本资源有限，跨域泛化挑战大，评估成本高。",
       "improvement_directions": [
-        "扩展到更多历史语言和文档类型。",
-        "探索和缓解OCR噪声对关系抽取的具体影响。",
-        "设计更高效的模型以处理大规模语料。"
+        "结合LLM和轻量模型优势",
+        "发展更鲁棒的跨语言和时间推理方法",
+        "处理OCR噪声和历史语言变化"
       ],
-      "engineering_value": "为文化遗产领域的大规模历史文档分析提供基准和洞见。",
-      "why_relevant": "直接处理OCR噪声下的文档解析，特别是关系抽取，对文档理解任务有启发。"
+      "engineering_value": "为文化遗产机构大规模处理历史文档提供关系抽取方案。",
+      "why_relevant": "直接处理OCR噪声和历史文档，涉及实体关系抽取，对OCR后理解任务有参考价值。"
     },
     {
       "title": "Probabilistic Agents in Deterministic Audits: Evaluating Multi-Agent Systems for Automated Audits Based on the German IT-Grundschutz",
@@ -408,25 +268,25 @@
       "score": 10,
       "topic_tags": [
         "多智能体系统",
-        "检索增强生成",
-        "自动化审计",
-        "文档处理"
+        "混合RAG",
+        "文档自动化",
+        "合规检查"
       ],
-      "zh_summary": "基于多智能体系统（MAS）和混合检索增强生成（HybridRAG）部分自动化德国IT-Grundschutz（IT-GS）认证，通过假设-验证循环和解耦推理管道减少幻觉并确保合规。利用BSI案例数据集评估结构分析、保护需求评估、建模和IT-GS检查阶段的精确率、召回率和F1。",
-      "novelty": "将MAS和HybridRAG技术应用于自动化IT安全认证流程，引入假设-验证循环和知识图谱交叉引用。",
+      "zh_summary": "实现并评估基于多智能体系统和混合RAG的IT-Grundschutz认证部分自动化方案，提出假设验证循环和解耦推理管线，在案例研究中取得一定效果。",
+      "novelty": "将多智能体系统与混合RAG结合用于IT安全认证自动化，提出了减少幻觉和保证合规的技术贡献。",
       "innovation_points": [
-        "架构设计：MAS+HybridRAG实现多阶段自动化。",
-        "假设-验证循环：减少推理中的幻觉。",
-        "解耦推理管道：分离语义提取和确定性推理。"
+        "假设验证循环，通过知识图谱交叉引用减少幻觉",
+        "解耦推理管线，分离语义提取和确定性保护需求继承",
+        "利用HybridRAG提升检索质量"
       ],
-      "limitations": "评估限于一个案例研究，泛化到其他组织或标准需验证。",
+      "limitations": "不同认证阶段性能有差异，完全自动化仍有挑战。",
       "improvement_directions": [
-        "在不同规模企业上测试系统的鲁棒性。",
-        "扩展到其他安全框架（如ISO 27001）。",
-        "优化效率以处理更大文档集。"
+        "优化智能体协作机制",
+        "提高跨阶段一致性",
+        "整合更多结构化知识源"
       ],
-      "engineering_value": "为安全合规自动化提供可实施的原型，减少人工工作量。",
-      "why_relevant": "展示了基于大型语言模型的文档分析在安全领域的具体应用，对OCR后处理有参考。"
+      "engineering_value": "为中小企业降低IT安全认证成本，提高效率。",
+      "why_relevant": "涉及文档理解、信息抽取和自动推理，可应用于复杂的OCR后处理场景。"
     },
     {
       "title": "WinDOM: Self-Family Distillation for Small-Model GUI Grounding",
@@ -448,118 +308,71 @@
       "arxiv_id": "2606.25964v1",
       "score": 9,
       "topic_tags": [
-        "GUI接地",
-        "蒸馏",
+        "GUI grounding",
+        "数据集构建",
+        "知识蒸馏",
         "强化学习",
-        "数据采集",
-        "小模型"
+        "小型模型"
       ],
-      "zh_summary": "提出WinDOM（54,425条记录）GUI接地语料库，通过无头Playwright驱动开源Windows 11网页实现，无需OCR或人工标注。提出了自我家族蒸馏（SFD）方法，仅使用教师（EMA或更大模型）初始化，并将饱和深度作为GRPO超参数。在Qwen3.5-2B上，欠饱和冷启动+早期RL比收敛冷启动+RL提升OOD平均5.4个点，EMA模式接近跨尺寸蒸馏效果。",
-      "novelty": "无需OCR和标注的GUI接地数据采集方法，以及将蒸馏冷启动深度作为强化学习超参数的新范式。",
+      "zh_summary": "提出WinDOM数据集和自家族蒸馏(SFD)方法，用于训练小规模(约2B参数)GUI定位智能体。WinDOM通过无头Playwright驱动开源Windows 11网页实现自动收集标注数据，无需人工或OCR。SFD采用拒绝采样冷启动，教师模型可选学生EMA或无外部模型的同家族大模型。利用SFD冷启动后的饱和度作为GRPO超参数，欠饱和冷启动比收敛冷启动更适合作为GRPO初始值，在Qwen2.5-2B上取得OOD平均提升+5.4。",
+      "novelty": "提出无需人工标注的GUI grounding数据集自动构建方法，以及结合蒸馏与强化学习的自家族蒸馏框架，并创新性利用冷启动饱和度作为RL初始化超参数。",
       "innovation_points": [
-        "数据采集：无OCR、无标注的DOM直读方法。",
-        "SFD训练：EMA或同族模型作为教师，冷启动后接RL。",
-        "训练范式：将RL初始器的饱和深度作为超参数。"
+        "提出WinDOM数据集，通过DOM解析直接获取边界框，无需OCR或人工标注",
+        "提出自家族蒸馏(SFD)方法，通过拒绝采样冷启动，教师可选择EMA或同家族大模型",
+        "将SFD冷启动的饱和度作为GRPO超参数，发现欠饱和冷启动优于收敛冷启动",
+        "在2B级小模型上实现跨大小教师的实用蒸馏，EMA模式无外部教师时性能接近跨大小变体"
       ],
-      "limitations": "仅针对Windows 11网页模拟，真实跨平台GUI可能不同；小模型性能仍有限。",
+      "limitations": "数据仅基于Windows 11网页实现，可能泛化到其他操作系统或原生应用时存在域差异；冷启动饱和度选择依赖于经验调参。",
       "improvement_directions": [
-        "扩展到真实操作系统和应用。",
-        "探索更高效的蒸馏策略以减少教师依赖。",
-        "结合多模态输入（屏幕截图+DOM）以提升鲁棒性。"
+        "探索跨平台、跨应用的GUI grounding泛化能力",
+        "自动化选择冷启动饱和度准则以减少人工调参",
+        "研究不同教师模型大小与蒸馏策略的trade-off"
       ],
-      "engineering_value": "为低资源场景下GUI代理训练提供低成本数据采集和高效训练方法。",
-      "why_relevant": "展示了一种免OCR的文档/界面解析方法，对OCR替代方案有启发。"
+      "engineering_value": "为资源受限设备的GUI grounding提供低成本、高质量的数据生成和监督训练范式，减少对大规模人工标注的依赖。",
+      "why_relevant": "涉及OCR-free的GUI元素定位，通过DOM结构替代文本检测，可直接用于自动化测试和无障碍工具。"
     },
     {
-      "title": "P-MTP: Efficient Document Parsing via Multi-Token Prediction with Progressive Depth Scaling",
-      "summary": "Vision-Language Models (VLMs) have revolutionized document parsing by enabling end-to-end mapping from images to structured text, imposing a significant latency bottleneck, particularly for token-dense documents. While Multi-Token Prediction (MTP) has emerged as a promising approach for accelerating inference, its potential is constrained by optimization instability when scaling to deeper look-ahead depth. In this paper, we propose \\textbf{P-MTP}, a framework that leverages \\textbf{Progressive Multi-Token Prediction} with a lightweight MTP module to scale the look-ahead depth for high-throughput document parsing. Specifically, we introduce Progressive Curriculum Loss that adaptively re-weights different look-ahead depths using cumulative path reliability and retrospective target consistency. By effectively suppressing gradient noise in long-range predictions, P-MTP, facilitates an automated easy-to-hard optimization transition, enabling the model to master increasingly distant look-ahead depths. Furthermore, we propose Confidence-Gated Dynamic Drafting to maximize the effective look-ahead depth and acceptance rate by adaptively calibrating speculative length during inference, thereby minimizing computational waste and further pushing the boundaries of inference speedup. Experimental results across multiple benchmarks and architectures demonstrate that P-MTP, achieves up to a $5\\times$ speedup with negligible loss in accuracy, providing the first successful validation of extensive look-ahead MTP in the document parsing domain.",
-      "link": "https://arxiv.org/abs/2606.24447v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.24447v1",
+      "title": "PhysRAG: Enhancing Physics-Awareness in Video Generation via Retrieval-Augmented Generation",
+      "summary": "Developing physically aware video generation models remains a significant challenge due to the difficulty in capturing diverse physical phenomena, such as thermal dynamics, mechanics, and optics. In this work, we introduce PhysRAG, a novel pipeline that enhances physical awareness in video generation through Retrieval-Augmented Generation (RAG). To address the issue of limited high-quality data, we design a two-stage data filtering pipeline based on the WISA-80K dataset, resulting in a curated set of 7K high-quality videos for training. Furthermore, we construct a physical video database and develop a mechanism to inject physical knowledge into a video diffusion model using learnable queries. Our method achieves state-of-the-art performance in both visual quality and physical rule compliance, surpassing existing models in benchmarks such as PhyGenBench and VBench. We conduct extensive ablation studies to validate the effectiveness of our key components, including the data filtering pipeline, RAG mechanism, and method for physical information extraction. To facilitate future research, our code, data, and models are prepared for release at https://github.com/sediment1024/PhysRAG.",
+      "link": "https://arxiv.org/abs/2606.26916v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.26916v1",
       "authors": [
-        "Le Xiang",
-        "Chenxi Zhai",
-        "Shu Wei",
-        "Jingjing Wu",
-        "Qunyi Xie",
-        "Xiao Tan",
-        "Kunbin Chen",
-        "Wei He"
+        "Kexu Cheng",
+        "Zicheng Liu",
+        "Mingju Gao",
+        "Chunhe Song",
+        "Hao Tang"
       ],
-      "published": "2026-06-23T11:34:28Z",
-      "updated": "2026-06-23T11:34:28Z",
+      "published": "2026-06-25T11:53:27Z",
+      "updated": "2026-06-25T11:53:27Z",
       "categories": [
         "cs.CV"
       ],
-      "arxiv_id": "2606.24447v1",
-      "score": 9,
-      "topic_tags": [
-        "文档解析",
-        "推理加速",
-        "多token预测",
-        "视觉语言模型"
-      ],
-      "zh_summary": "提出P-MTP框架，通过渐进式多token预测（MTP）加速视觉语言模型在文档解析中的推理。引入渐进式课程损失动态调整不同展望深度权重，以及置信度门控动态草稿机制自适应调整推理时的预测长度。在多个基准和架构上实现最高5倍加速，且精度损失可忽略。",
-      "novelty": "首次在文档解析领域成功验证大展望深度MTP，并通过渐进式课程学习解决不稳定性。",
-      "innovation_points": [
-        "渐进式课程损失：基于路径可靠性和目标一致性动态调整权重。",
-        "置信度门控动态草稿：自适应调整推理长度，减少计算浪费。",
-        "方法验证：在多种架构和基准上达到5倍加速。"
-      ],
-      "limitations": "加速比可能依赖于文档密度和模型架构；极深展望深度下精度仍有下降。",
-      "improvement_directions": [
-        "探索更优雅的损失函数以支持更深展望。",
-        "结合硬件特性优化推理实现。",
-        "扩展到多语言和复杂版面文档。"
-      ],
-      "engineering_value": "显著降低文档解析系统的推理延迟，适用于高吞吐场景。",
-      "why_relevant": "直接针对OCR/文档解析推理效率瓶颈，提供实用加速方案。"
-    },
-    {
-      "title": "AI-PAVE-Br: Leveraging Large Language Models for Enhanced Product Attribute Value Extraction through a Golden Set Approach",
-      "summary": "The explosive growth and complexity of product data within the dynamic Brazilian e-commerce landscape demand robust and specialized methods for structured information extraction. Traditional approaches to Product Attribute Value Extraction (PAVE) often struggle with the linguistic nuances and sheer diversity of product descriptions in Portuguese. To address this critical gap, this paper introduces two major contributions. First, we present AI-PAVEBr, a specialized system engineered with Large Language Models (LLMs) to perform high-accuracy PAVE specifically for Brazilian e-commerce catalogs. Second, to facilitate reproducible research and provide a definitive benchmark, we introduce and share the Golden Set, a new, meticulously curated, and manually annotated dataset for PAVE in Portuguese. We detail the creation process and structure (Entity, Category, Subcategories) of this high-quality reference set. Our experiments conclusively show that AI-PAVE-Br, leveraging targeted prompt engineering, dramatically outperforms conventional Named Entity Recognition (NER) baselines. This work not only delivers a superior, scalable solution for a major non-English market but also enriches the NLP community with a valuable, publicly available resource for future PAVE research.",
-      "link": "https://arxiv.org/abs/2606.24655v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.24655v1",
-      "authors": [
-        "Murilo Gazzola",
-        "Hugo Gobato Souto",
-        "Samuel Silva",
-        "Júlia Schubert Peixoto",
-        "Felipe Siqueira",
-        "André Luis Pedroso de Morais",
-        "Caio Gomes"
-      ],
-      "published": "2026-06-23T14:48:37Z",
-      "updated": "2026-06-23T14:48:37Z",
-      "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.LG",
-        "cs.PF"
-      ],
-      "arxiv_id": "2606.24655v1",
+      "arxiv_id": "2606.26916v1",
       "score": 6,
       "topic_tags": [
-        "属性抽取",
-        "电商",
-        "葡萄牙语",
-        "大语言模型",
-        "数据集"
+        "视频生成",
+        "物理感知",
+        "检索增强生成",
+        "数据过滤",
+        "扩散模型"
       ],
-      "zh_summary": "面向巴西电商葡萄牙语产品描述，构建了AI-PAVE-Br系统用于产品属性值抽取（PAVE），并创建了高质量人工标注的Golden Set数据集。采用大规模语言模型和提示工程，显著优于传统命名实体识别基线。",
-      "novelty": "首个针对巴西电商葡萄牙语的LLM-based PAVE系统及附带基准数据集。",
+      "zh_summary": "提出PhysRAG框架，通过检索增强生成(RAG)增强视频生成模型对物理规则的理解。构建两阶段数据过滤管道，从WISA-80K中筛选7K高质量视频；建立物理视频数据库并利用可学习查询注入物理知识。在PhyGenBench和VBench上达到最优视频质量和物理合规性。",
+      "novelty": "首次将RAG引入视频生成以增强物理感知，并设计可学习查询机制实现物理知识注入。",
       "innovation_points": [
-        "系统设计：LLM + 提示工程实现高精度属性抽取。",
-        "数据集：人工标注Portuguese PAVE黄金集，结构包含实体、类别、子类别。",
-        "实验对比：证明LLM方法远超传统NER。"
+        "提出RAG增强视频生成的物理感知框架PhysRAG",
+        "设计两阶段数据过滤管道，从大规模数据中筛选高质量物理相关视频",
+        "构建物理视频数据库并开发基于可学习查询的物理知识注入机制",
+        "在多个基准上实现视觉质量和物理合规性的SOTA"
       ],
-      "limitations": "仅覆盖巴西电商，其他葡萄牙语变体或领域未测试。",
+      "limitations": "依赖预定义的物理数据库，可能覆盖的物理现象有限；可学习查询的注入机制在复杂场景下的有效性有待验证。",
       "improvement_directions": [
-        "扩充数据集涵盖更多品类和语言变体。",
-        "探索少样本和零样本泛化能力。",
-        "结合结构化知识（如产品分类）提升抽取一致性。"
+        "扩展物理数据库覆盖面，包括更多动态物理现象",
+        "探索更灵活的物理知识表示与注入方式，如自适应查询",
+        "研究无外部数据库的在线物理知识检索方法"
       ],
-      "engineering_value": "为巴西电商平台提供可部署的属性抽取方案，节省人工。",
-      "why_relevant": "展示了大语言模型在文档结构化信息抽取中的优势，对OCR后结构化有参考。"
+      "engineering_value": "为视频生成模型提供系统性的物理知识增强方案，可直接用于教育、仿真和内容创作等需要物理真实感的领域。",
+      "why_relevant": "涉及视频生成中的物理规则理解，可通过检索文本知识增强模型对物理现象的建模能力，与多模态文档理解相关。"
     }
   ]
 }
