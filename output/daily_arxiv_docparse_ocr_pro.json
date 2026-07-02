@@ -1,39 +1,234 @@
 {
   "meta": {
-    "report_date": "2026-07-01",
-    "generated_at_utc": "2026-07-01 05:53:20",
+    "report_date": "2026-07-02",
+    "generated_at_utc": "2026-07-02 05:09:31",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 1
+    "count": 6
   },
   "synthesis": {
-    "executive_summary": "今日重点是一篇提出自进化多智能体框架DataEvolver的论文，该框架通过检索器、验证器、评论器和生成器协同工作，利用反馈记忆机制持续优化文本丰富图像的生成，在OCR-F1指标上提升高达85.3%，为数据构建提供了新的范式。",
-    "trend_summary": "当前研究趋势显示，文本图像生成领域正在从静态数据管道向动态自进化系统转变，多智能体协作与反馈驱动正成为提升数据质量和模型性能的关键技术。",
+    "executive_summary": "今日OCR/文档解析研究集中在阅读顺序重建、表格识别、低资源OCR及训练数据构建四个方向。阅读顺序方面，LLM与图模型方法分别针对历史文档和复杂版面取得显著改进；表格识别ConRTF以训练时损失函数实现高效精炼；低资源OCR通过合成数据+集成策略提升马耳他语性能；数据构建方法DataEvolver提出自演进多智能体框架。这些工作共同指向减少标注依赖、提升低资源场景性能的趋势。",
+    "trend_summary": "当前趋势：1) 利用LLM或轻量语言模型辅助阅读顺序推断；2) 无训练或训练时方法在保持效率的同时提升结构识别精度；3) 合成数据+集成策略成为低资源OCR的主流方案；4) 多智能体与自演进机制开始用于训练数据构建。",
     "common_innovations": [
-      "采用多智能体架构（检索、验证、评论、生成）实现数据构建的闭环优化",
-      "引入反馈记忆机制，利用失败样本引导后续生成，避免重复错误",
-      "通过策略演化替代传统的静态数据收集与过滤流程"
+      "引入语言模型信号（因果LM/BERT/LLM）增强版面理解，如阅读顺序重建与表格识别。",
+      "通过合成数据生成解决低资源或受限场景的数据匮乏问题，如马耳他语OCR与富文本图像生成。",
+      "采用投票集成或损失函数约束等低成本策略提升精度，不依赖模型架构改变。",
+      "语义信息（如文本内容、区域类型）与几何信息结合，超越纯几何方法。",
+      "多智能体或反馈循环机制优化数据质量，如DataEvolver。"
     ],
     "future_directions": [
-      "研究局部OCR错误类型（如字符级、字体级）的细粒度反馈信号，以提升数据构建精度",
-      "优化多智能体框架的计算开销与扩展性，使其适用于更大规模数据生成",
-      "将自进化范式推广至其他视觉-语言数据构建任务，如图表图像、文档版面分析",
-      "探索与其他生成模型（如扩散模型、自回归模型）的兼容性，增强框架泛化能力"
+      "探索LLM在阅读顺序重建中的更高效推理，如知识蒸馏或量化以减少计算开销。",
+      "将图框架与视觉特征（如CNN/Transformer编码）融合，处理无文本或手写区域。",
+      "扩展ConRTF支持合并单元格和旋转表格，结合文本语义辅助边界判断。",
+      "将马耳他语合成+集成方法泛化至更多低资源语种，并验证合成-真实分布差异。",
+      "简化DataEvolver智能体设计，降低计算开销，并适配文档图像生成场景。",
+      "研究CIM数据集蒸馏方法在文档图像压缩中的应用，评估对OCR训练的影响。",
+      "开发融合多模态（视觉+语义）的统一阅读顺序与表格结构识别模型。"
     ],
     "engineering_takeaways": [
-      "反馈驱动的数据构建可显著降低人工标注成本，提升端到端生成性能",
-      "多智能体协调机制为自动化数据管道提供了可复用的设计模式",
-      "失败样本的有效利用是提升数据质量的关键，应避免简单丢弃"
+      "低资源OCR可优先采用合成数据+多模型投票集成，如LV-ROVER，实现快速CER降低。",
+      "如果标注数据有限，图框架或引导策略（如语义引导LLM）可在无需大量标注下提升阅读顺序。",
+      "对实时表格识别场景，ConRTF的EFL损失函数是零推理开销的优选方案。",
+      "数据构建可引入反馈循环，利用拒绝样本信号提升生成数据质量。",
+      "数据集蒸馏对文档图像的有效性需验证，但CIM的高效性值得关注。"
     ],
     "watchlist": [
       {
+        "title": "Semantic-Guided Reading Order Reconstruction in Historical Armenian Newspapers with LLMs",
+        "watch_reason": "首次将LLM引入阅读顺序重建，方法可推广至其他低资源历史文档。"
+      },
+      {
+        "title": "ConRTF: Edge-Constrained Boundary Distribution Refinement for Realtime TransFormer Table Structure Recognition",
+        "watch_reason": "高效率表格识别方法，适合生产部署，关注其扩展至合并单元格等复杂情况。"
+      },
+      {
         "title": "DataEvolver: Self-Evolving Multi-Agent Data Construction for Text-Rich Image Generation",
-        "watch_reason": "提出新颖的自进化数据构建范式，在OCR-F1上显著提升，可能成为文本图像生成领域数据管道的标准方法，值得跟踪其在更广泛场景下的泛化性和工程实现"
+        "watch_reason": "自演进数据构建框架可能改变OCR训练数据获取范式，需跟踪其简化与文档领域适配。"
+      },
+      {
+        "title": "Condensing Large-Scale Datasets Directly with Minimal Information Loss",
+        "watch_reason": "高效数据集蒸馏方法，有望降低OCR标注成本，需验证文档图像适用性。"
       }
     ]
   },
   "papers": [
+    {
+      "title": "Semantic-Guided Reading Order Reconstruction in Historical Armenian Newspapers with LLMs",
+      "summary": "This paper addresses reading order reconstruction in historical Armenian newspapers, which combine complex layouts with limited language resources. We introduce a new annotated dataset of 66 pages and compare geometric heuristics, YOLO-based layout parsing, an end-to-end document model ECLAIR, and a hybrid method combining semantic zone detection with a generative LLM. Our hybrid method achieves the lowest error rates of all evaluated approaches, reducing ordering errors by up to 76% over the strongest geometric baseline, and remains robust in multi-page settings and under noisy OCR. Rather than targeting production the method is designed as a data bootstrapping strategy enabling rapid annotation in highly under-resourced scenarios. Alongside the dataset, we release a specialized Tesseract OCR model for historical Armenian print.",
+      "link": "https://arxiv.org/abs/2607.00596v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.00596v1",
+      "authors": [
+        "Chahan Vidal-Gorène",
+        "Nadi Tomeh",
+        "Victoria Khurshudyan"
+      ],
+      "published": "2026-07-01T08:19:00Z",
+      "updated": "2026-07-01T08:19:00Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2607.00596v1",
+      "score": 22,
+      "topic_tags": [
+        "阅读顺序重建",
+        "历史文档",
+        "低资源OCR",
+        "LLM",
+        "版面分析"
+      ],
+      "zh_summary": "本文针对历史亚美尼亚语报纸的阅读顺序重建问题，提出一种混合方法，结合语义区域检测与生成式大语言模型，在66页标注数据集上比几何基线减少76%排序错误，设计为数据引导策略适用于低资源场景。同时发布专用Tesseract OCR模型。",
+      "novelty": "首次将LLM引入历史报纸阅读顺序重建，以混合方法替代纯几何或纯端到端模型。",
+      "innovation_points": [
+        "提出语义区域检测+生成式LLM的混合框架",
+        "构建66页历史亚美尼亚语报纸标注数据集",
+        "训练专用Tesseract OCR模型",
+        "方法设计为低资源场景下的数据引导策略，非生产系统"
+      ],
+      "limitations": "['数据集规模小，仅66页', '方法设计为引导策略，不适合直接生产部署', '仅针对一种语言和报纸类型']",
+      "improvement_directions": [
+        "扩展数据集至更多语言和版面类型",
+        "将引导策略与微调结合，减少人工标注需求",
+        "探索更高效的LLM推理以减少计算成本"
+      ],
+      "engineering_value": "为超低资源语言的历史文档数字化提供可用的数据启动策略，节省人工标注成本。",
+      "why_relevant": "涉及版面分析中的阅读顺序重建，与文档解析核心技术相关。"
+    },
+    {
+      "title": "Reading Order Inference for Complex Document Layouts",
+      "summary": "Reading order inference remains a critical bottleneck in the digitization of complex historical manuscripts, where pages contain multiple spatially interleaved reading streams, the canonical example being the Glossa Ordinaria layout, in which a central text is surrounded by commentaries that wrap around it in non-rectangular, non-convex regions. We present a training-free, graph-based framework: each OCR text line becomes a node in a directed candidate-transition graph, edges are scored by a weighted additive ensemble of two lightweight language-model signals (causal language model conditional likelihood and BERT next-sentence prediction, NSP; a third sentence-embedding signal was evaluated but did not improve reading order), and the global reading order is recovered as a degree-constrained directed path cover. To avoid the cascading \"edge-theft\" failures of greedy edge selection, we propose a max-regret inference rule that prioritizes commitments with high opportunity cost. We evaluate on synthetic Glossa Ordinaria grid layouts, on 23 ALTO page geometries (10 historical source pages plus mirrored and flipped variants), and on a 140-page multi-column English subset of OmniDocBench, comparing our method against the canonical recursive XY-cut (PaddleOCR PP-StructureV3) and two LayoutReader variants (layout-only and text+layout) on identical inputs. On wrap-around Glossa layouts our method recovers 95% of ground-truth successor edges on average vs. XY-cut's 50%; on the OmniDocBench multi-column subset it reaches 88% macro edge accuracy versus XY-cut's 75% and LayoutReader's 25%. The LayoutReader baselines transfer poorly due to a word-level vs. line-level granularity mismatch. We additionally verify mirror-invariance under horizontal and vertical page reflections: Our method changes by less than 1 percentage point, classical XY-cut by 2 points, and LayoutReader-T by up to 8 points.",
+      "link": "https://arxiv.org/abs/2607.01018v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.01018v1",
+      "authors": [
+        "Iddo Hakim",
+        "Sharva Gogawale",
+        "Omer Ventura",
+        "Gal Grudka",
+        "Daria Vasyutinsky-Shapira",
+        "Berat Kurar-Barakat",
+        "Nachum Dershowitz"
+      ],
+      "published": "2026-07-01T14:52:00Z",
+      "updated": "2026-07-01T14:52:00Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CV",
+        "cs.DL"
+      ],
+      "arxiv_id": "2607.01018v1",
+      "score": 17,
+      "topic_tags": [
+        "阅读顺序推断",
+        "图模型",
+        "OCR",
+        "复杂版面",
+        "历史手稿"
+      ],
+      "zh_summary": "本文提出一种无训练的图框架，用于复杂版面文档的阅读顺序推断。将OCR文本行作为节点构建有向候选转移图，边得分由因果语言模型和BERT下一句预测组合加权，并通过最大遗憾规则解决边缘选择失败问题。在环绕式版面上恢复95%边，优于XY-cut的50%。",
+      "novelty": "提出无训练图方法，利用轻量语言模型信号和最大遗憾推理，解决阅读顺序中的长距离依赖和边缘偷窃问题。",
+      "innovation_points": [
+        "基于有向图的零训练阅读顺序推断框架",
+        "组合因果语言模型和BERT下一句预测作为边得分",
+        "提出最大遗憾推理规则替代贪心边缘选择",
+        "处理非矩形环绕式版面布局"
+      ],
+      "limitations": "['在完全无文本的版面区域可能失效', '语言模型信号依赖于OCR质量', '未在极端扭曲或手写文档上验证']",
+      "improvement_directions": [
+        "融合视觉特征以处理无文本区域",
+        "探索更鲁棒的语言模型信号组合",
+        "扩展到更多复杂版面类型如手写注释"
+      ],
+      "engineering_value": "作为预训练或标注工具的补充，可提升历史文档数字化流水线的阅读顺序准确率。",
+      "why_relevant": "直接解决文档解析中的阅读顺序瓶颈，适用于复杂历史手稿。"
+    },
+    {
+      "title": "ConRTF: Edge-Constrained Boundary Distribution Refinement for Realtime TransFormer Table Structure Recognition",
+      "summary": "Table Structure Recognition (TSR) aims to recover the row and column layout of tables from document images, a key step in document understanding pipelines. Accurate TSR depends on precise boundary localization: small errors in row or column boundaries can propagate into incorrect cell assignments and structural inconsistencies. Yet detection-based approaches treat table elements as generic objects, ignoring a fundamental property of table layout: rows and columns play structurally distinct roles and their boundaries carry unequal importance. We propose an Edge-constrained Fine-grained Localization loss (EFL) that formalizes this structural asymmetry by encoding table-specific geometric priors into the training objective: row-like elements are supervised with emphasis on their horizontal boundaries, while column-like elements prioritize vertical boundaries. Implemented within a real-time detector with distribution-based boundary refinement (D-FINE), EFL operates during training only and guides boundary refinement toward structurally meaningful adjustments with no change to the inference pipeline. The proposed approach, ConRTF, is also data-efficient, maintaining robust accuracy with as few as 2k--3k annotated tables. Experiments on PubTables-1M and two private datasets show consistent improvements over the optimized baseline and several real-time detectors including RT-DETRv2 and YOLOv10-11, with gains of up to +1.6 GriTS points at equal inference speed.",
+      "link": "https://arxiv.org/abs/2607.00734v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.00734v1",
+      "authors": [
+        "Eliott Thomas",
+        "Tri-Cong Pham",
+        "Mickael Coustaty",
+        "Aurelie Joseph",
+        "Gaspar Deloin",
+        "Vincent Poulain d'Andecy",
+        "Jean-Marc Ogier",
+        "Antoine Doucet"
+      ],
+      "published": "2026-07-01T10:18:12Z",
+      "updated": "2026-07-01T10:18:12Z",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "arxiv_id": "2607.00734v1",
+      "score": 14,
+      "topic_tags": [
+        "表格结构识别",
+        "边界精炼",
+        "实时检测",
+        "损失函数设计",
+        "数据高效"
+      ],
+      "zh_summary": "提出ConRTF，一种基于边缘约束边界分布精炼的实时表格结构识别方法。通过EFL损失函数编码行列边界不对称先验，仅训练时生效，不改变推理流程。在PubTables-1M上提升GriTS最高+1.6，且需少量数据（2k-3k标注表）。",
+      "novelty": "显式建模表格结构中行列边界重要性不对称，用训练时损失函数引导精炼，保持实时推理效率。",
+      "innovation_points": [
+        "提出边缘约束细粒度定位损失（EFL）",
+        "编码行列边界不对称先验",
+        "集成到实时检测器D-FINE，推理不变",
+        "数据高效，仅需2k-3k标注表"
+      ],
+      "limitations": "['仅适用于表格结构，不处理合并单元格', '依赖几何边界质量', '在极端噪声或旋转表格上未充分测试']",
+      "improvement_directions": [
+        "扩展至复杂表格如含合并单元格",
+        "结合文本语义信息辅助边界判断",
+        "探索无监督/半监督边界学习"
+      ],
+      "engineering_value": "提升表格识别精度，且计算开销小，适合生产部署。",
+      "why_relevant": "直接改进表格结构识别，是文档解析关键环节。"
+    },
+    {
+      "title": "LV-ROVER: Multi-Stream Tesseract Voting for Maltese Paragraph OCR",
+      "summary": "Maltese has decent text corpora and pretrained language models, but, like many languages outside the handful with large OCR benchmarks, only a single known real labelled PDF corpus for OCR training, 57 page, far below what paragraph-level training needs: low-resource for OCR specifically. With no real corpus to train on at scale, we built a synthetic training pipeline and a 5-stream Tesseract LV-ROVER ensemble, and report results on a 422-paragraph benchmark against a fine-tuned-Tesseract baseline of character error rate (CER) 0.0234. Ensemble recognition alone improves CER by 44 percent, to 0.01317; a five-stage post-processing chain brings the full pipeline to CER 0.00700, a 70 percent reduction. Most of that chain is typographic normalisation, but one stage recovers misread diacritics rather than aligning punctuation, so we report it as a recognition gain rather than folding the whole chain under one label. We treat the 44 percent figure as the portable estimate of what the recogniser learned, and the 70 percent figure as specific to this benchmark's label convention.",
+      "link": "https://arxiv.org/abs/2607.00250v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.00250v1",
+      "authors": [
+        "Adam Darmanin"
+      ],
+      "published": "2026-06-30T22:58:41Z",
+      "updated": "2026-06-30T22:58:41Z",
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "arxiv_id": "2607.00250v1",
+      "score": 11,
+      "topic_tags": [
+        "低资源OCR",
+        "马耳他语",
+        "Tesseract投票集成",
+        "合成数据",
+        "段落识别"
+      ],
+      "zh_summary": "针对马耳他语OCR低资源问题，构建合成训练流水线和5流Tesseract投票集成LV-ROVER，在422段基准上CER从0.0234降至0.00700，其中识别部分贡献44%改进，后处理贡献剩余。报告方法可迁移估计为44% CER降低。",
+      "novelty": "利用多流投票和合成数据解决极小语种的段落OCR，并区分识别与后处理增益。",
+      "innovation_points": [
+        "构建合成训练流水线克服无大规模真实训练语料",
+        "5流Tesseract投票集成LV-ROVER",
+        "设计后处理链恢复变音符号",
+        "区分识别增益和后处理增益，提供可迁移估计"
+      ],
+      "limitations": "['仅针对马耳他语，泛化性未验证', '合成数据与真实数据分布可能存在差异', '后处理链依赖于特定标注规范']",
+      "improvement_directions": [
+        "将方法推广至其他低资源语言",
+        "改进合成数据生成策略以更接近真实分布",
+        "探索端到端识别以减少后处理依赖"
+      ],
+      "engineering_value": "为低资源语言的OCR提供低成本提升方案，合成+集成策略易复制。",
+      "why_relevant": "解决低资源小语种OCR难题，与多语言文档解析相关。"
+    },
     {
       "title": "DataEvolver: Self-Evolving Multi-Agent Data Construction for Text-Rich Image Generation",
       "summary": "Text-rich image generation is one of the most challenging settings in image generation, since models must simultaneously produce visually realistic images and render legible, semantically aligned, and layout-consistent text. Existing data pipelines usually follow a static crawl-filter-freeze paradigm. They collect candidate samples, filter them once, and freeze the accepted data for training. However, rejected samples are usually discarded, although they often contain useful failure signals such as OCR errors and semantic mismatches. As a result, later construction rounds may repeat the same failure modes. To address these limitations, we propose DataEvolver, a self-evolving multi-agent framework for text-rich image data construction. DataEvolver treats data construction as feedback-driven construction policy evolution. A Retriever collects candidate samples, a Verifier assigns quality scores and rejection causes, a Critic summarizes round-level feedback into semantic feedback, and a Generator completes under-covered regions through targeted synthesis. The updated feedback memory then guides the next construction round. Experiments on text-rich image generation benchmarks show that DataEvolver produces more useful training data than fixed-dataset baselines under matched data budgets. At the 0.75M scale on PixArt-alpha, DataEvolver improves OCR-F1 over the strongest baseline by 85.3 percent on TextScenesHQ and 35.3 percent on LongTextBench. The improvements are consistent across both evaluated benchmarks and also transfer to Show-o2, indicating that the benefit of DataEvolver is not tied to a single downstream generator. These results suggest that rejected samples can provide actionable feedback for improving text-rich image data construction.",
@@ -55,27 +250,71 @@
       "arxiv_id": "2606.31537v1",
       "score": 10,
       "topic_tags": [
-        "文本图像生成",
-        "多智能体系统",
+        "富文本图像生成",
         "数据构建",
-        "反馈驱动",
-        "自进化学习"
+        "多智能体",
+        "自演进",
+        "OCR训练数据"
       ],
-      "zh_summary": "提出自进化多智能体框架DataEvolver，用于文本丰富图像数据构建。通过检索器、验证器、评论器和生成器四个智能体协同工作，利用反馈记忆指导下一轮数据构建，避免静态数据管道中丢弃失败样本的问题。在文本图像生成基准上，OCR-F1提升最高达85.3%。",
-      "novelty": "提出基于多智能体自进化的数据构建范式，通过反馈驱动的策略演化替代传统的静态收集-过滤-冻结流程。",
+      "zh_summary": "提出DataEvolver，一个自演进多智能体框架用于生成富文本图像训练数据。通过检索器、验证器、批评者和生成器循环迭代优化数据，利用拒绝样本中的失败信号。在0.75M规模下，OCR-F1比最强基线提升85.3%（TextScenesHQ）。",
+      "novelty": "将数据构建视为反馈驱动的策略演化，引入多智能体协作与循环自改进，利用原本丢弃的拒绝样本。",
       "innovation_points": [
-        "设计检索器、验证器、评论器、生成器四智能体协作框架",
-        "构建回合级反馈记忆机制，利用失败样本信号指导后续数据生成",
-        "提出反馈驱动的数据构建策略演化，避免重复失败模式"
+        "自演进多智能体框架用于数据构建",
+        "利用拒绝样本中的失败信号",
+        "检索器-验证器-批评者-生成器四角色协作",
+        "反馈记忆指导下一轮生成"
       ],
-      "limitations": "仅验证了特定模型（PixArt-alpha、Show-o2）上的效果，未讨论框架在更广泛生成模型或复杂场景下的泛化性。",
+      "limitations": "['框架复杂度高，依赖多个智能体协调', '仅验证在PixArt-alpha和Show-o2上', '计算开销随迭代轮次增加']",
       "improvement_directions": [
-        "探索更细粒度的失败信号（如局部OCR错误类型）利用方法",
-        "研究多智能体框架的计算开销与扩展性优化",
-        "将自进化范式推广至其他视觉-语言数据构建任务"
+        "简化智能体设计以降低复杂度",
+        "探索自监督或无监督的反馈生成",
+        "推广至其他图像生成任务如文档图像"
       ],
-      "engineering_value": "可直接用于提升文本丰富图像生成模型的训练数据质量，降低人工标注成本，提升端到端生成性能。",
-      "why_relevant": "涉及OCR任务中训练数据构建的关键问题，提出的反馈驱动演化范式对提升OCR模型在复杂文本场景下的鲁棒性有参考价值。"
+      "engineering_value": "提升富文本图像生成模型的数据质量和性能，减少人工标注。",
+      "why_relevant": "改善OCR训练数据生成质量，间接提升OCR性能。"
+    },
+    {
+      "title": "Condensing Large-Scale Datasets Directly with Minimal Information Loss",
+      "summary": "Recent advancements in scaling dataset distillation rely heavily on decoupled information extraction pipelines, comprising SQUEEZE, RECOVER, and RELABEL stages. Despite their scalability to large-scale datasets, these methods suffer from prohibitive computational overhead and poor cross-architecture generalization. In this paper, we reveal the root cause of these bottlenecks: the implicit dual-compression process, from data to model and back to images, inherently induces severe information loss. Crucially, we empirically and theoretically demonstrate that this loss creates a distribution shift that fundamentally compromises the widely adopted RELABEL strategy, transforming the pre-trained model into an unreliable labeler that yields sub-optimal labels. To overcome these critical flaws, we propose CIM, a novel, metric-driven framework that abandons the flawed dual-compression paradigm. Instead, CIM explicitly quantifies and minimizes the information gap between the original and synthetic datasets. By directly aligning the data distributions, our approach ensures high-fidelity information condensation and inherently satisfies the prerequisites for effective relabeling. Extensive experiments demonstrate that CIM establishes a new state-of-the-art. Notably, it distills ImageNet-1K at an IPC=10 in merely 80 minutes on a single RTX-4090 GPU, achieving an unprecedented 48.7% Top-1 accuracy on ResNet-18 and significantly outperforming previous SOTA approaches, such as NRR-DD and DELT, by 2.6% and 2.9%, respectively. Our code is available at https://github.com/LINs-lab/CIM.",
+      "link": "https://arxiv.org/abs/2607.00916v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.00916v1",
+      "authors": [
+        "Xinyi Shang",
+        "Peng Sun",
+        "Bei Shi",
+        "Zixuan Wang",
+        "Tao Lin"
+      ],
+      "published": "2026-07-01T13:21:44Z",
+      "updated": "2026-07-01T13:21:44Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2607.00916v1",
+      "score": 6,
+      "topic_tags": [
+        "数据集蒸馏",
+        "信息损失最小化",
+        "图像分类",
+        "数据压缩",
+        "度量学习"
+      ],
+      "zh_summary": "CIM提出基于度量的框架直接压缩数据集，最小化原始与合成数据的信息差距，避免现有双压缩范式的信息损失和标签不可靠问题。在ImageNet-1K IPC=10时48.7% Top-1准确率，训练时间仅80分钟，优于SOTA 2.6%。",
+      "novelty": "抛弃双压缩范式，直接通过度量对齐数据分布，实现高保真信息压缩并解决重标签失效问题。",
+      "innovation_points": [
+        "提出度量驱动框架直接最小化信息差距",
+        "放弃SQUEEZE-RECOVER-RELABEL范式",
+        "实证和理论分析双压缩导致分布偏移和重标签失效",
+        "高效压缩，80分钟完成ImageNet-1K IPC=10蒸馏"
+      ],
+      "limitations": "['主要验证在图像分类任务', '对复杂结构如文档图像的适用性未知', '当前仅支持固定IPC设置']",
+      "improvement_directions": [
+        "应用于文档图像数据集压缩",
+        "探索动态IPC适应不同任务",
+        "结合生成模型提升合成图像多样性"
+      ],
+      "engineering_value": "大幅降低数据集蒸馏的时间和计算成本，推动大规模蒸馏实用化。",
+      "why_relevant": "数据压缩技术可减少OCR训练数据存储和处理负担。"
     }
   ]
 }
