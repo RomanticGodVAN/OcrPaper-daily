@@ -1,61 +1,68 @@
-# OCR / 文档解析研究日报（2026-07-02）
+# OCR / 文档解析研究日报（2026-07-03）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-07-02 05:09:31`
+- 生成时间（UTC）：`2026-07-03 04:56:15`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日OCR/文档解析研究集中在阅读顺序重建、表格识别、低资源OCR及训练数据构建四个方向。阅读顺序方面，LLM与图模型方法分别针对历史文档和复杂版面取得显著改进；表格识别ConRTF以训练时损失函数实现高效精炼；低资源OCR通过合成数据+集成策略提升马耳他语性能；数据构建方法DataEvolver提出自演进多智能体框架。这些工作共同指向减少标注依赖、提升低资源场景性能的趋势。
+> 今日OCR与文档解析领域研究聚焦于阅读顺序重建、表格结构识别、低资源场景下的VLM应用及多模态持续学习。多篇论文提出免训练或轻量化方案应对复杂版面，强调数据效率与鲁棒性，同时揭示多模态模型在持续学习中的隐藏缺陷。
 
 ## 二、今日趋势判断
 
-当前趋势：1) 利用LLM或轻量语言模型辅助阅读顺序推断；2) 无训练或训练时方法在保持效率的同时提升结构识别精度；3) 合成数据+集成策略成为低资源OCR的主流方案；4) 多智能体与自演进机制开始用于训练数据构建。
+趋势包括：1) 阅读顺序重建中图框架与LLM混合方法兴起；2) 零样本VLM替代传统OCR管线在特定场景展现潜力；3) 表格结构识别轻量化、数据高效改进；4) 多模态持续学习关注证据保持而非仅准确率。
 
 ## 三、今日论文概览
 
-1. **Semantic-Guided Reading Order Reconstruction in Historical Armenian Newspapers with LLMs** | 标签：阅读顺序重建、历史文档、低资源OCR、LLM、版面分析
-2. **Reading Order Inference for Complex Document Layouts** | 标签：阅读顺序推断、图模型、OCR、复杂版面、历史手稿
-3. **ConRTF: Edge-Constrained Boundary Distribution Refinement for Realtime TransFormer Table Structure Recognition** | 标签：表格结构识别、边界精炼、实时检测、损失函数设计、数据高效
-4. **LV-ROVER: Multi-Stream Tesseract Voting for Maltese Paragraph OCR** | 标签：低资源OCR、马耳他语、Tesseract投票集成、合成数据、段落识别
-5. **DataEvolver: Self-Evolving Multi-Agent Data Construction for Text-Rich Image Generation** | 标签：富文本图像生成、数据构建、多智能体、自演进、OCR训练数据
-6. **Condensing Large-Scale Datasets Directly with Minimal Information Loss** | 标签：数据集蒸馏、信息损失最小化、图像分类、数据压缩、度量学习
+1. **Semantic-Guided Reading Order Reconstruction in Historical Armenian Newspapers with LLMs** | 标签：阅读顺序重建、历史文档、LLM、版面分析、低资源语言
+2. **Reading Order Inference for Complex Document Layouts** | 标签：阅读顺序推断、图框架、最大遗憾推理、复杂版面、历史文档
+3. **Evaluating Vision-Language Models as a Zero-Shot Learning Alternative to You Only Look Once and Optical Character Recognition for Nigerian License Plate Recognition** | 标签：车牌识别、VLM、零样本学习、YOLO+OCR、字符错误率
+4. **ConRTF: Edge-Constrained Boundary Distribution Refinement for Realtime TransFormer Table Structure Recognition** | 标签：表格结构识别、边界定位、实时检测、数据高效、结构不对称
+5. **Hidden Forgetting in Continual Multimodal Learning: When Accuracy Survives but Grounding Fails** | 标签：多模态持续学习、隐藏遗忘、证据依赖、RCL框架、反事实干预
+6. **DisciplineGen-1M: A Large-Scale Dataset for Multidisciplinary Visual Generation and Editing** | 标签：多学科数据集、视觉生成、图像编辑、OCR、知识驱动生成
+7. **Object Aligner: A Configurable JSON Schema Similarity Score for Graphs, Applied to LLM Prompt Optimization** | 标签：JSON相似度、结构对齐、图同构近似、LLM评估
+8. **Condensing Large-Scale Datasets Directly with Minimal Information Loss** | 标签：数据集蒸馏、信息损失最小化、分布对齐、图像分类
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 引入语言模型信号（因果LM/BERT/LLM）增强版面理解，如阅读顺序重建与表格识别。
-- 通过合成数据生成解决低资源或受限场景的数据匮乏问题，如马耳他语OCR与富文本图像生成。
-- 采用投票集成或损失函数约束等低成本策略提升精度，不依赖模型架构改变。
-- 语义信息（如文本内容、区域类型）与几何信息结合，超越纯几何方法。
-- 多智能体或反馈循环机制优化数据质量，如DataEvolver。
+- 多篇论文采用图或混合框架（如语义检测+LLM）解决阅读顺序问题，避免端到端训练的繁重标注
+- 表格结构识别引入先验知识（如边界不对称）以轻量训练提升精度
+- 零样本VLM评估证明其可替代传统OCR+YOLO方案，降低标注依赖
+- 多模态学习关注隐藏遗忘，提出保持证据路径的框架
+- 大规模多学科数据集推动知识驱动视觉生成与OCR编辑结合
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 探索LLM在阅读顺序重建中的更高效推理，如知识蒸馏或量化以减少计算开销。
-- 将图框架与视觉特征（如CNN/Transformer编码）融合，处理无文本或手写区域。
-- 扩展ConRTF支持合并单元格和旋转表格，结合文本语义辅助边界判断。
-- 将马耳他语合成+集成方法泛化至更多低资源语种，并验证合成-真实分布差异。
-- 简化DataEvolver智能体设计，降低计算开销，并适配文档图像生成场景。
-- 研究CIM数据集蒸馏方法在文档图像压缩中的应用，评估对OCR训练的影响。
-- 开发融合多模态（视觉+语义）的统一阅读顺序与表格结构识别模型。
+- 探索阅读顺序重建中的多模态图神经网络，同时整合文本语义与版面几何信息
+- 将LLM混合方法扩展至生产级文档解析系统，优化推理速度与成本
+- 研究VLM在更多地域车牌识别中的零样本迁移性，并微调以适应高精度需求
+- 表格结构识别中融入跨列合并等更复杂先验，扩展至弯曲与部分遮挡表格
+- 多模态持续学习设计无需回放的证据保持机制，结合参数隔离提升通用性
+- 利用DisciplineGen-1M数据集开发学科感知的OCR后校正模型，提升图表数字识别准确性
+- 基于Object Aligner开发面向OCR输出结构的自动评估与修复工具
+- 将CIM数据集蒸馏方法引入文档图像分类与版面分析任务，实现高效样本压缩
 
 ## 六、工程落地启发
 
-- 低资源OCR可优先采用合成数据+多模型投票集成，如LV-ROVER，实现快速CER降低。
-- 如果标注数据有限，图框架或引导策略（如语义引导LLM）可在无需大量标注下提升阅读顺序。
-- 对实时表格识别场景，ConRTF的EFL损失函数是零推理开销的优选方案。
-- 数据构建可引入反馈循环，利用拒绝样本信号提升生成数据质量。
-- 数据集蒸馏对文档图像的有效性需验证，但CIM的高效性值得关注。
+- Semantic-Guided Reading Order方法提供低资源场景的标注加速方案，可减少人工干预
+- Reading Order Inference图框架无需训练即可部署，适合历史文档复杂版面
+- VLM零样本车牌识别方案减少地域适配标注成本，但需注意小数据集局限
+- ConRTF的EFL损失轻量高效，可作为现有TSR系统的即插即用模块
+- RCL框架阻止多模态模型遗忘证据使用，提升文档图表等场景可靠性
+- DisciplineGen-1M数据集可直接用于训练学科图表生成与编辑模型
+- Object Aligner提供确定性JSON相似度，可用于LLM输出质量控制
+- CIM蒸馏方法在单GPU上80分钟完成ImageNet-1K蒸馏，降低训练数据成本
 
 ## 七、优先关注论文
 
-- **Semantic-Guided Reading Order Reconstruction in Historical Armenian Newspapers with LLMs**：首次将LLM引入阅读顺序重建，方法可推广至其他低资源历史文档。
-- **ConRTF: Edge-Constrained Boundary Distribution Refinement for Realtime TransFormer Table Structure Recognition**：高效率表格识别方法，适合生产部署，关注其扩展至合并单元格等复杂情况。
-- **DataEvolver: Self-Evolving Multi-Agent Data Construction for Text-Rich Image Generation**：自演进数据构建框架可能改变OCR训练数据获取范式，需跟踪其简化与文档领域适配。
-- **Condensing Large-Scale Datasets Directly with Minimal Information Loss**：高效数据集蒸馏方法，有望降低OCR标注成本，需验证文档图像适用性。
+- **Semantic-Guided Reading Order Reconstruction in Historical Armenian Newspapers with LLMs**：混合LLM方法在低资源历史文档阅读顺序重建上取得显著改进，可能推广至其他语言与复杂版面
+- **Reading Order Inference for Complex Document Layouts**：免训练图框架在特定版面超越传统方法，易于工程部署，关注其适用范围扩展
+- **Evaluating Vision-Language Models as a Zero-Shot Learning Alternative to YOLO+OCR for Nigerian License Plate Recognition**：VLM零样本车牌识别潜力大，但小数据集验证需扩大评估以确认泛化性
+- **ConRTF: Edge-Constrained Boundary Distribution Refinement for Realtime TransFormer Table Structure Recognition**：轻量边界损失显著提升表格结构识别，关注其与其他检测器的集成效果
+- **Hidden Forgetting in Continual Multimodal Learning**：揭示多模态模型隐藏遗忘问题，RCL框架为持续学习提供新思路，需关注更大规模的验证
 
 ## 八、论文逐篇解析
 
@@ -67,40 +74,39 @@
 - 发布时间: 2026-07-01T08:19:00Z
 - 分类: cs.CV
 - 相关性评分: 22
-- 主题标签: 阅读顺序重建、历史文档、低资源OCR、LLM、版面分析
+- 主题标签: 阅读顺序重建、历史文档、LLM、版面分析、低资源语言
 
 **中文摘要**
 
-> 本文针对历史亚美尼亚语报纸的阅读顺序重建问题，提出一种混合方法，结合语义区域检测与生成式大语言模型，在66页标注数据集上比几何基线减少76%排序错误，设计为数据引导策略适用于低资源场景。同时发布专用Tesseract OCR模型。
+> 本文针对历史亚美尼亚报纸中复杂版面与稀缺语言资源的阅读顺序重建问题，引入了一个包含66页的标注数据集，并比较了几何启发式、基于YOLO的版面分析、端到端文档模型ECLAIR以及结合语义区域检测与生成式LLM的混合方法。混合方法将排序错误最多减少76%，且在多页设置和噪声OCR下保持鲁棒性，旨在作为低资源场景下的数据引导策略。
 
 **核心创新概述**
 
-> 首次将LLM引入历史报纸阅读顺序重建，以混合方法替代纯几何或纯端到端模型。
+> 针对历史亚美尼亚报纸这一低资源语言与复杂版面场景，提出将语义区域检测与生成式LLM结合的混合方法用于阅读顺序重建，并发布专用Tesseract OCR模型。
 
 **创新点拆解**
 
-- 提出语义区域检测+生成式LLM的混合框架
-- 构建66页历史亚美尼亚语报纸标注数据集
-- 训练专用Tesseract OCR模型
-- 方法设计为低资源场景下的数据引导策略，非生产系统
+- 提出混合方法：语义区域检测+生成式LLM，用于阅读顺序重建
+- 构建66页亚美尼亚历史报纸标注数据集
+- 训练并公开面向历史亚美尼亚印刷体的专用Tesseract OCR模型
 
 **当前局限**
 
-> ['数据集规模小，仅66页', '方法设计为引导策略，不适合直接生产部署', '仅针对一种语言和报纸类型']
+> 方法并非面向生产环境，而是设计为数据引导策略；数据集规模较小（66页）。
 
 **后续可改进方向**
 
-- 扩展数据集至更多语言和版面类型
-- 将引导策略与微调结合，减少人工标注需求
-- 探索更高效的LLM推理以减少计算成本
+- 扩展数据集规模和语言多样性
+- 探索将混合方法迁移至端到端生产级系统
+- 研究LLM在阅读顺序任务中的更高效使用方法
 
 **工程启发**
 
-> 为超低资源语言的历史文档数字化提供可用的数据启动策略，节省人工标注成本。
+> 为低资源历史文档的阅读顺序重建提供低成本数据引导方案，可加速标注流程，减少人工干预。
 
 **为什么值得关注**
 
-> 涉及版面分析中的阅读顺序重建，与文档解析核心技术相关。
+> 直接解决OCR后处理中的阅读顺序重建难题，特别针对复杂版面与低资源语言场景，具有典型学术价值。
 
 **原始摘要**
 
@@ -124,40 +130,39 @@ specialized Tesseract OCR model for historical Armenian print.
 - 发布时间: 2026-07-01T14:52:00Z
 - 分类: cs.CL, cs.AI, cs.CV, cs.DL
 - 相关性评分: 17
-- 主题标签: 阅读顺序推断、图模型、OCR、复杂版面、历史手稿
+- 主题标签: 阅读顺序推断、图框架、最大遗憾推理、复杂版面、历史文档
 
 **中文摘要**
 
-> 本文提出一种无训练的图框架，用于复杂版面文档的阅读顺序推断。将OCR文本行作为节点构建有向候选转移图，边得分由因果语言模型和BERT下一句预测组合加权，并通过最大遗憾规则解决边缘选择失败问题。在环绕式版面上恢复95%边，优于XY-cut的50%。
+> 本文针对复杂文档版面（如Glossa Ordinaria布局）中的阅读顺序推断，提出一个免训练的基于图的框架。将每个OCR文本行作为节点，构建有向候选转移图，使用因果语言模型条件似然和BERT下一句预测得分加权集成作为边权重，通过最大遗憾推理规则恢复全局阅读顺序。在合成和真实数据集上优于递归XY-cut和LayoutReader。
 
 **核心创新概述**
 
-> 提出无训练图方法，利用轻量语言模型信号和最大遗憾推理，解决阅读顺序中的长距离依赖和边缘偷窃问题。
+> 提出免训练的图框架，利用轻量语言模型信号和最大遗憾推理规则，解决非矩形环绕版面的阅读顺序问题，无需额外训练数据。
 
 **创新点拆解**
 
-- 基于有向图的零训练阅读顺序推断框架
-- 组合因果语言模型和BERT下一句预测作为边得分
-- 提出最大遗憾推理规则替代贪心边缘选择
-- 处理非矩形环绕式版面布局
+- 构建基于有向图的候选转移框架
+- 提出最大遗憾推理规则避免贪婪边选择的错误累积
+- 集成因果语言模型和BERT NSP信号作为边权重
 
 **当前局限**
 
-> ['在完全无文本的版面区域可能失效', '语言模型信号依赖于OCR质量', '未在极端扭曲或手写文档上验证']
+> 在环绕版面（Glossa）上表现优秀，但对高度不规则或噪声版面可能仍需验证；语言模型信号可能依赖语言质量。
 
 **后续可改进方向**
 
-- 融合视觉特征以处理无文本区域
-- 探索更鲁棒的语言模型信号组合
-- 扩展到更多复杂版面类型如手写注释
+- 探索更丰富的语言模型信号（如跨模态特征）
+- 将框架扩展至多语种或更复杂的版面类型
+- 研究结合版面语义信息的端到端方法
 
 **工程启发**
 
-> 作为预训练或标注工具的补充，可提升历史文档数字化流水线的阅读顺序准确率。
+> 提供无需训练的阅读顺序推断方案，易于部署，尤其适用于历史文档和复杂版面数字化。
 
 **为什么值得关注**
 
-> 直接解决文档解析中的阅读顺序瓶颈，适用于复杂历史手稿。
+> 直接关联OCR阅读顺序推断这一核心问题，提出免训练且高效的解决方案，具有实用参考价值。
 
 **原始摘要**
 
@@ -184,7 +189,67 @@ classical XY-cut by 2 points, and LayoutReader-T by up to 8 points.
 
 ---
 
-### 3. ConRTF: Edge-Constrained Boundary Distribution Refinement for Realtime TransFormer Table Structure Recognition
+### 3. Evaluating Vision-Language Models as a Zero-Shot Learning Alternative to You Only Look Once and Optical Character Recognition for Nigerian License Plate Recognition
+
+- arXiv: [2607.02025v1](https://arxiv.org/abs/2607.02025v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.02025v1)
+- 作者: Ismail Ismail Tijjani, Ahmad Abubakar Mustapaha, Sunusi Ibrahim Muhammad, Muhammad Bashir Aliyu
+- 发布时间: 2026-07-02T10:55:24Z
+- 分类: cs.CV
+- 相关性评分: 16
+- 主题标签: 车牌识别、VLM、零样本学习、YOLO+OCR、字符错误率
+
+**中文摘要**
+
+> 本文探索视觉语言模型（VLM）作为零样本学习替代传统YOLO+OCR管线进行尼日利亚车牌识别的可能性。使用88张挑战性真实图像评估了五个VLM，基于字符错误率（CER），Gemini和Qwen在准确性和鲁棒性上显著优于其他模型，展示了VLM在无结构化环境中的优势。
+
+**核心创新概述**
+
+> 系统评估了多个先进VLM在尼日利亚车牌识别上的零样本性能，揭示了VLM相比YOLO+OCR的潜力与局限。
+
+**创新点拆解**
+
+- 首个针对尼日利亚车牌场景评估多个VLM零样本性能
+- 使用真实挑战性图像（88张）进行评测
+- 直接对比VLM与传统两阶段YOLO+OCR方案
+
+**当前局限**
+
+> 数据集规模较小（88张），仅覆盖尼日利亚场景，且未涉及模型微调或更多语言车牌。
+
+**后续可改进方向**
+
+- 扩大数据集规模和地域多样性
+- 探索VLM微调以进一步提升性能
+- 研究轻量化VLM在车牌识别中的实时部署可行性
+
+**工程启发**
+
+> 为车牌识别提供零样本VLM方案参考，减少标注依赖，适合快速部署至新地域。
+
+**为什么值得关注**
+
+> 展示VLM在OCR任务（车牌识别）中的零样本潜力，对低资源场景的OCR应用具有启示。
+
+**原始摘要**
+
+License Plate Recognition (LPR) systems are critical tools in traffic monitoring, security
+enforcement, and urban mobility management. Traditional LPR systems often rely on a multi-stage
+pipeline involving object detection using You Only Look Once (YOLO) and Optical Character
+Recognition (OCR), which suffer from limitations such as high resource demands, poor performance in
+unstructured environments, and the need for large annotated datasets. This study explores the
+potential of Vision-Language Models (VLMs) as a unified, zeroshot learning solution for Nigerian
+license plate recognition. Using a curated dataset of 88 challenging real-world images collected in
+Nigeria, we evaluate five selected VLMs: Gemini 2.0 Flash Exp (Google DeepMind),
+Qwen2.5-VL-7B-Instruct (Alibaba), GPT-4o (OpenAI), Claude 4 Sonnet (Anthropic), and Llama 3.2 Vision
+90b (Meta). Results based on Character Error Rate (CER) reveal that Gemini and Qwen significantly
+outperform other models in both accuracy and robustness, on the challenging image scenarios. This
+work highlights the practical advantages of VLMs over YOLO+OCR, questions the claims by model
+providers, and compares the performances of the VLMs.
+
+---
+
+### 4. ConRTF: Edge-Constrained Boundary Distribution Refinement for Realtime TransFormer Table Structure Recognition
 
 - arXiv: [2607.00734v1](https://arxiv.org/abs/2607.00734v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2607.00734v1)
@@ -192,40 +257,39 @@ classical XY-cut by 2 points, and LayoutReader-T by up to 8 points.
 - 发布时间: 2026-07-01T10:18:12Z
 - 分类: cs.CV, cs.AI
 - 相关性评分: 14
-- 主题标签: 表格结构识别、边界精炼、实时检测、损失函数设计、数据高效
+- 主题标签: 表格结构识别、边界定位、实时检测、数据高效、结构不对称
 
 **中文摘要**
 
-> 提出ConRTF，一种基于边缘约束边界分布精炼的实时表格结构识别方法。通过EFL损失函数编码行列边界不对称先验，仅训练时生效，不改变推理流程。在PubTables-1M上提升GriTS最高+1.6，且需少量数据（2k-3k标注表）。
+> 本文针对表格结构识别（TSR）中的边界定位问题，提出基于边界分布细化的边缘约束损失（EFL），利用表格中行列边界的不对称重要性：行元素强调水平边界，列元素强调垂直边界。在实时检测器D-FINE上实现，仅训练阶段生效，不改变推理管线，在PubTables-1M等数据集上提升+1.6 GriTS。
 
 **核心创新概述**
 
-> 显式建模表格结构中行列边界重要性不对称，用训练时损失函数引导精炼，保持实时推理效率。
+> 形式化表格结构中行列边界的不对称重要性，并提出边缘约束损失（EFL）在实时检测器中实现精细边界定位，数据高效（2000-3000标注表）。
 
 **创新点拆解**
 
-- 提出边缘约束细粒度定位损失（EFL）
-- 编码行列边界不对称先验
-- 集成到实时检测器D-FINE，推理不变
-- 数据高效，仅需2k-3k标注表
+- 提出边缘约束损失EFL，编码行列边界结构不对称先验
+- 在D-FINE实时检测器中集成EFL，训练后推理无开销
+- 实现高数据效率（2000-3000标注表即可保持精度）
 
 **当前局限**
 
-> ['仅适用于表格结构，不处理合并单元格', '依赖几何边界质量', '在极端噪声或旋转表格上未充分测试']
+> 主要针对边界定位，未涉及极端复杂表格（如部分遮挡、弯曲表格）的评估。
 
 **后续可改进方向**
 
-- 扩展至复杂表格如含合并单元格
-- 结合文本语义信息辅助边界判断
-- 探索无监督/半监督边界学习
+- 将EFL扩展到其他检测框架或端到端模型
+- 结合语义信息处理更多样化的表格样式
+- 研究更广泛的边界不对称定义（如跨列合并）
 
 **工程启发**
 
-> 提升表格识别精度，且计算开销小，适合生产部署。
+> 提供轻量化、高效的表格结构识别改进方案，易于集成到现有TSR系统中。
 
 **为什么值得关注**
 
-> 直接改进表格结构识别，是文档解析关键环节。
+> 直接提升表格识别核心性能，数据高效且推理无额外开销，实用价值高。
 
 **原始摘要**
 
@@ -248,134 +312,201 @@ inference speed.
 
 ---
 
-### 4. LV-ROVER: Multi-Stream Tesseract Voting for Maltese Paragraph OCR
+### 5. Hidden Forgetting in Continual Multimodal Learning: When Accuracy Survives but Grounding Fails
 
-- arXiv: [2607.00250v1](https://arxiv.org/abs/2607.00250v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.00250v1)
-- 作者: Adam Darmanin
-- 发布时间: 2026-06-30T22:58:41Z
-- 分类: cs.CL, cs.CV
-- 相关性评分: 11
-- 主题标签: 低资源OCR、马耳他语、Tesseract投票集成、合成数据、段落识别
-
-**中文摘要**
-
-> 针对马耳他语OCR低资源问题，构建合成训练流水线和5流Tesseract投票集成LV-ROVER，在422段基准上CER从0.0234降至0.00700，其中识别部分贡献44%改进，后处理贡献剩余。报告方法可迁移估计为44% CER降低。
-
-**核心创新概述**
-
-> 利用多流投票和合成数据解决极小语种的段落OCR，并区分识别与后处理增益。
-
-**创新点拆解**
-
-- 构建合成训练流水线克服无大规模真实训练语料
-- 5流Tesseract投票集成LV-ROVER
-- 设计后处理链恢复变音符号
-- 区分识别增益和后处理增益，提供可迁移估计
-
-**当前局限**
-
-> ['仅针对马耳他语，泛化性未验证', '合成数据与真实数据分布可能存在差异', '后处理链依赖于特定标注规范']
-
-**后续可改进方向**
-
-- 将方法推广至其他低资源语言
-- 改进合成数据生成策略以更接近真实分布
-- 探索端到端识别以减少后处理依赖
-
-**工程启发**
-
-> 为低资源语言的OCR提供低成本提升方案，合成+集成策略易复制。
-
-**为什么值得关注**
-
-> 解决低资源小语种OCR难题，与多语言文档解析相关。
-
-**原始摘要**
-
-Maltese has decent text corpora and pretrained language models, but, like many languages outside the
-handful with large OCR benchmarks, only a single known real labelled PDF corpus for OCR training, 57
-page, far below what paragraph-level training needs: low-resource for OCR specifically. With no real
-corpus to train on at scale, we built a synthetic training pipeline and a 5-stream Tesseract LV-
-ROVER ensemble, and report results on a 422-paragraph benchmark against a fine-tuned-Tesseract
-baseline of character error rate (CER) 0.0234. Ensemble recognition alone improves CER by 44
-percent, to 0.01317; a five-stage post-processing chain brings the full pipeline to CER 0.00700, a
-70 percent reduction. Most of that chain is typographic normalisation, but one stage recovers
-misread diacritics rather than aligning punctuation, so we report it as a recognition gain rather
-than folding the whole chain under one label. We treat the 44 percent figure as the portable
-estimate of what the recogniser learned, and the 70 percent figure as specific to this benchmark's
-label convention.
-
----
-
-### 5. DataEvolver: Self-Evolving Multi-Agent Data Construction for Text-Rich Image Generation
-
-- arXiv: [2606.31537v1](https://arxiv.org/abs/2606.31537v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2606.31537v1)
-- 作者: Siyu Yan, Yizhen Gao, Yilin Wang, Dongxing Mao, Alex Jinpeng Wang
-- 发布时间: 2026-06-30T11:52:22Z
-- 分类: cs.CV, cs.MA
-- 相关性评分: 10
-- 主题标签: 富文本图像生成、数据构建、多智能体、自演进、OCR训练数据
+- arXiv: [2607.02020v1](https://arxiv.org/abs/2607.02020v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.02020v1)
+- 作者: Qianyu Chen, Canran Xiao, Runxuan Tang
+- 发布时间: 2026-07-02T10:50:37Z
+- 分类: cs.AI
+- 相关性评分: 13
+- 主题标签: 多模态持续学习、隐藏遗忘、证据依赖、RCL框架、反事实干预
 
 **中文摘要**
 
-> 提出DataEvolver，一个自演进多智能体框架用于生成富文本图像训练数据。通过检索器、验证器、批评者和生成器循环迭代优化数据，利用拒绝样本中的失败信号。在0.75M规模下，OCR-F1比最强基线提升85.3%（TextScenesHQ）。
+> 本文揭示多模态大语言模型（MLLM）持续学习中一种被忽视的失败模式：隐藏的证据使用遗忘，即模型保持答案准确性但逐渐依赖不同或错误的多模态证据。提出RCL框架，冻结旧检查点作为参考，通过反事实通道干预估计师生证据依赖轮廓，联合优化任务学习、预测保持和证据保持，无需推理开销。在多个基准上减少遗忘。
 
 **核心创新概述**
 
-> 将数据构建视为反馈驱动的策略演化，引入多智能体协作与循环自改进，利用原本丢弃的拒绝样本。
+> 首次提出并量化多模态持续学习中的“隐藏证据使用遗忘”，并设计免回放的RCL框架来同时保持答案和证据路径。
 
 **创新点拆解**
 
-- 自演进多智能体框架用于数据构建
-- 利用拒绝样本中的失败信号
-- 检索器-验证器-批评者-生成器四角色协作
-- 反馈记忆指导下一轮生成
+- 识别隐藏证据使用遗忘问题：答案准确但证据通道漂移
+- 提出RCL框架：反事实通道干预+联合优化保持预测与证据
+- 无需回放或增加推理成本
 
 **当前局限**
 
-> ['框架复杂度高，依赖多个智能体协调', '仅验证在PixArt-alpha和Show-o2上', '计算开销随迭代轮次增加']
+> 实验基于特定MLLM架构和数据集，通用性需进一步验证；反事实干预计算成本可能随模态增多增加。
 
 **后续可改进方向**
 
-- 简化智能体设计以降低复杂度
-- 探索自监督或无监督的反馈生成
-- 推广至其他图像生成任务如文档图像
+- 扩展到更多模态和更大规模模型
+- 探索更高效的证据估计方法
+- 结合回放或参数隔离策略对比研究
 
 **工程启发**
 
-> 提升富文本图像生成模型的数据质量和性能，减少人工标注。
+> 为多模态连续学习提供保持证据路径的实用框架，提升模型在文档、图表等场景的可靠性。
 
 **为什么值得关注**
 
-> 改善OCR训练数据生成质量，间接提升OCR性能。
+> 直接关联OCR在多模态文档理解中的证据使用稳定性，对持续学习环境下的文档分析有重要启示。
 
 **原始摘要**
 
-Text-rich image generation is one of the most challenging settings in image generation, since models
-must simultaneously produce visually realistic images and render legible, semantically aligned, and
-layout-consistent text. Existing data pipelines usually follow a static crawl-filter-freeze
-paradigm. They collect candidate samples, filter them once, and freeze the accepted data for
-training. However, rejected samples are usually discarded, although they often contain useful
-failure signals such as OCR errors and semantic mismatches. As a result, later construction rounds
-may repeat the same failure modes. To address these limitations, we propose DataEvolver, a self-
-evolving multi-agent framework for text-rich image data construction. DataEvolver treats data
-construction as feedback-driven construction policy evolution. A Retriever collects candidate
-samples, a Verifier assigns quality scores and rejection causes, a Critic summarizes round-level
-feedback into semantic feedback, and a Generator completes under-covered regions through targeted
-synthesis. The updated feedback memory then guides the next construction round. Experiments on text-
-rich image generation benchmarks show that DataEvolver produces more useful training data than
-fixed-dataset baselines under matched data budgets. At the 0.75M scale on PixArt-alpha, DataEvolver
-improves OCR-F1 over the strongest baseline by 85.3 percent on TextScenesHQ and 35.3 percent on
-LongTextBench. The improvements are consistent across both evaluated benchmarks and also transfer to
-Show-o2, indicating that the benefit of DataEvolver is not tied to a single downstream generator.
-These results suggest that rejected samples can provide actionable feedback for improving text-rich
-image data construction.
+Multimodal large language models must continually adapt to evolving tasks and domains, yet standard
+continual learning metrics mainly measure whether old answers remain correct, leaving the stability
+of multimodal grounding largely unexamined. We study this overlooked failure mode and ask whether a
+continually adapted MLLM can preserve not only what it answers, but also how it uses visual,
+textual, OCR, chart, and document evidence. We identify \emph{hidden evidence-use forgetting}, where
+answer accuracy is retained while the model silently shifts toward different or less grounded
+evidence channels, and propose \textsc{RCL}, a replay-free reliance-constrained continual learning
+framework. \textsc{RCL} freezes the previous checkpoint as a behavioral reference, estimates teacher
+and student evidence-reliance profiles through counterfactual channel interventions, and jointly
+optimizes task learning, prediction preservation, and reliance preservation without adding
+inference-time cost. Across CoIN, COAST, MCITlib, and an evidence-sensitive multimodal stream,
+\textsc{RCL} consistently improves final performance and reduces forgetting over replay-free, PEFT,
+routing, and memory-assisted baselines, while substantially lowering modality reliance drift,
+dominant evidence flips, and hidden forgetting rates. These results suggest that robust continual
+multimodal learning requires preserving the evidence path behind correct answers, not merely the
+answers themselves.
 
 ---
 
-### 6. Condensing Large-Scale Datasets Directly with Minimal Information Loss
+### 6. DisciplineGen-1M: A Large-Scale Dataset for Multidisciplinary Visual Generation and Editing
+
+- arXiv: [2607.02290v1](https://arxiv.org/abs/2607.02290v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.02290v1)
+- 作者: Zhaokai Wang, Mingxin Liu, Zirun Zhu, Ziqian Fan, Yiguo He, Mohan Zhang, Leyao Gu, Xiangyu Zhao, Ning Liao, Shaofeng Zhang, Xuanhe Zhou, Zhihang Zhong, Junchi Yan, Xue Yang
+- 发布时间: 2026-07-02T15:07:47Z
+- 分类: cs.CV
+- 相关性评分: 9
+- 主题标签: 多学科数据集、视觉生成、图像编辑、OCR、知识驱动生成
+
+**中文摘要**
+
+> 本文发布DisciplineGen-1M，一个百万级多学科视觉生成与编辑数据集，涵盖数学、物理等10个学科。提出结合矢量图形渲染、OCR编辑等管道构建数据集。基于此，提出学科知情的推理生成模型，在学科基准上显著优于开源基线。
+
+**核心创新概述**
+
+> 构建大规模多学科知识密集型视觉生成数据集，并设计学科推理生成模型，推动图像生成从美学向知识可靠转变。
+
+**创新点拆解**
+
+- 构建120万样本的多学科视觉数据集DisciplineGen-1M
+- 设计可扩展的管道：矢量渲染+OCR编辑+程序合成+文本到图像过滤
+- 提出学科知情的推理生成模型用于文本到图像生成与编辑
+
+**当前局限**
+
+> 数据集主要覆盖常见学科，可能缺少新兴或交叉学科；生成的图像质量依赖管道各步骤质量。
+
+**后续可改进方向**
+
+- 扩展学科覆盖范围和样本多样性
+- 探索更精细的学科事实验证机制
+- 结合OCR和版面分析提升图表生成准确性
+
+**工程启发**
+
+> 为多学科文档图表生成提供大规模数据和模型基础，有助于学术可视化、教育材料自动生成。
+
+**为什么值得关注**
+
+> 数据集依赖OCR技术进行构建和编辑，同时涉及图表生成中的文字布局，对文档生成方向有参考。
+
+**原始摘要**
+
+Recent image generation and editing models can produce visually appealing natural images, yet they
+remain unreliable when the target image is a knowledge-intensive diagram whose correctness depends
+on disciplinary concepts, symbolic structure, and precise spatial relations. We introduce
+DisciplineGen-1M, a million-scale multidisciplinary dataset that supports text-to-image generation
+and image editing. It contains 1.2M samples spanning mathematics, physics, chemistry, biology,
+geography, computer science, economics, history, music, and sports. To construct the dataset, we
+design a scalable framework that combines vector-graphics rendering, OCR-based editing, curated
+programmatic synthesis, and large-scale text-to-image filtering. These pipelines produce captions,
+editing instructions, structured annotations, and paired images with controllable semantic
+differences. Building on DisciplineGen-1M, we further introduce a discipline-informed reasoning-
+generation model for both text-to-image generation and image editing. Experiments on discipline-
+related benchmarks, GenExam and GRADE, show substantial improvements over open-source baselines,
+while evaluations on general reasoning-informed benchmarks, WISE and RISE, further indicate broader
+transfer. The results suggest that large-scale structured academic visual data is a key ingredient
+for moving image generation from aesthetic plausibility toward verifiable knowledge-grounded visual
+creation. We will publicly release our dataset, model, and source code of the data curation pipeline
+to ensure reproducibility and benefit future research.
+
+---
+
+### 7. Object Aligner: A Configurable JSON Schema Similarity Score for Graphs, Applied to LLM Prompt Optimization
+
+- arXiv: [2607.01972v1](https://arxiv.org/abs/2607.01972v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.01972v1)
+- 作者: Jan Drchal
+- 发布时间: 2026-07-02T10:07:34Z
+- 分类: cs.CL, cs.AI, cs.LG
+- 相关性评分: 6
+- 主题标签: JSON相似度、结构对齐、图同构近似、LLM评估
+
+**中文摘要**
+
+> 本文提出Object Aligner，一个开源的Python库，用于确定性地计算两个JSON对象的相似度。它通过递归地对其树结构（无序集合使用匈牙利算法，有序序列使用序列对齐），并在模式声明的粒度上给予部分分数。核心贡献是引用对齐，通过Weisfeiler-Leman颜色细化近似图同构，推断金标准与候选标识符之间的双射，使分数对重新标记不变。该库还提供有序序列对齐和修复建议。
+
+**核心创新概述**
+
+> 提出引用对齐方法，通过Weisfeiler-Leman颜色细化处理图/超图结构的JSON相似度，解决了标识符重新标记导致的分数不稳定问题；配置方式完全基于JSON Schema扩展，无需编码。
+
+**创新点拆解**
+
+- 引用对齐：通过Weisfeiler-Leman颜色细化近似图同构，处理图/超图结构，使相似度分数对标识符重新标记不变
+- 可配置性：完全通过JSON Schema扩展配置，无需编写代码即可适应新任务
+- 递归对齐：结合匈牙利算法（无序）和序列对齐（有序），在模式声明的粒度上给予部分分数
+- 修复建议：对齐过程自动定位不匹配，无额外成本输出排名修复建议
+
+**当前局限**
+
+> 依赖图同构近似，精确恢复标识符双射是NP难问题，近似可能在某些复杂图上失效；仅适用于JSON Schema定义的结构化数据，对自由文本或非结构化数据不适用。
+
+**后续可改进方向**
+
+- 探索更高效的图同构近似方法，提升引用对齐的准确性和扩展性
+- 扩展对超图及更复杂结构的支持，例如带权图或动态图
+- 集成到LLM生成流程中，作为实时反馈或强化学习奖励信号
+- 开发自动Schema推断工具，减少人工标注成本
+
+**工程启发**
+
+> 提供开源、确定性的JSON相似度度量，可直接用于LLM输出验证、信息提取评估、工具调用质量监控等场景，避免昂贵且非确定的LLM裁判，降低工程成本。
+
+**为什么值得关注**
+
+> 直接解决了OCR文档解析中结构化输出（如JSON）与金标准的精确匹配问题，可用于评估解析结果的质量，以及指导解析模型的优化。
+
+**原始摘要**
+
+Large language models (LLMs) are often asked to produce JSON conforming to a fixed schema, powering
+information extraction, tool calling, agentic planning, and knowledge-graph construction. Measuring
+how closely an output matches a gold reference is essential yet surprisingly hard: exact match is
+brittle, text similarity ignores structure, and an LLM judge is expensive, opaque, and non-
+deterministic. We address this with Object Aligner (OA), an open-source Python library that scores
+two JSON objects deterministically by recursively aligning their trees (the Hungarian algorithm for
+unordered collections, sequence alignment for ordered ones) and awarding partial credit at the
+granularity the schema declares. The Object Aligner is configured entirely through a set of JSON
+Schema extensions, so adapting it to a new task involves annotating a schema rather than writing
+code. Complex structured data, however, are rarely flat trees: records may form graphs or
+hypergraphs keyed by arbitrary identifiers, breaking the assumptions of prior similarity metrics.
+Our central contribution, referential alignment, closes this gap by inferring a bijection between
+gold and candidate identifiers and scoring every reference through it, so the score is invariant to
+relabeling. Since recovering this bijection exactly is graph isomorphism, the Object Aligner
+approximates it with Weisfeiler-Leman color refinement. An order-sensitive sequence regime targets
+ranking and planning. Since the same alignment localizes every mismatch, the Object Aligner emits
+ranked repair suggestions at no extra cost. Used as a reward inside the GEPA prompt optimizer,
+Object Aligner helps or stays neutral across all datasets.
+
+---
+
+### 8. Condensing Large-Scale Datasets Directly with Minimal Information Loss
 
 - arXiv: [2607.00916v1](https://arxiv.org/abs/2607.00916v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2607.00916v1)
@@ -383,40 +514,41 @@ image data construction.
 - 发布时间: 2026-07-01T13:21:44Z
 - 分类: cs.CV
 - 相关性评分: 6
-- 主题标签: 数据集蒸馏、信息损失最小化、图像分类、数据压缩、度量学习
+- 主题标签: 数据集蒸馏、信息损失最小化、分布对齐、图像分类
 
 **中文摘要**
 
-> CIM提出基于度量的框架直接压缩数据集，最小化原始与合成数据的信息差距，避免现有双压缩范式的信息损失和标签不可靠问题。在ImageNet-1K IPC=10时48.7% Top-1准确率，训练时间仅80分钟，优于SOTA 2.6%。
+> 本文提出CIM框架，通过直接对齐原始数据集与合成数据集的分布，最小化信息损失，取代传统的SQUEEZE-RECOVER-RELABEL三阶段方法。实验表明，CIM在ImageNet-1K上以IPC=10仅需80分钟在单张RTX-4090上蒸馏，ResNet-18 Top-1准确率达48.7%，超过NRR-DD和DELT 2.6%和2.9%。
 
 **核心创新概述**
 
-> 抛弃双压缩范式，直接通过度量对齐数据分布，实现高保真信息压缩并解决重标签失效问题。
+> 揭示并解决了传统数据集蒸馏中双压缩过程导致的信息损失和分布偏移问题；提出基于度量的框架（CIM）直接优化信息差距，避免模型作为不可靠标签器的问题。
 
 **创新点拆解**
 
-- 提出度量驱动框架直接最小化信息差距
-- 放弃SQUEEZE-RECOVER-RELABEL范式
-- 实证和理论分析双压缩导致分布偏移和重标签失效
-- 高效压缩，80分钟完成ImageNet-1K IPC=10蒸馏
+- 直接信息对齐：抛弃双压缩范式，通过最小化原始与合成数据分布之间的信息间隙进行蒸馏
+- 度量驱动框架：显式量化并最小化信息损失，确保高保真度浓缩
+- 消除RELABEL缺陷：理论证明分布偏移使RELABEL策略失效，新框架自然满足重标记前提
+- 高效蒸馏：在单GPU上80分钟完成ImageNet-1K IPC=10蒸馏，达到SOTA准确率
 
 **当前局限**
 
-> ['主要验证在图像分类任务', '对复杂结构如文档图像的适用性未知', '当前仅支持固定IPC设置']
+> 仅在图像分类任务上验证，未探索更复杂的任务（如目标检测、语义分割）；计算开销可能随IPC增加而显著增长；未讨论跨任务迁移能力。
 
 **后续可改进方向**
 
-- 应用于文档图像数据集压缩
-- 探索动态IPC适应不同任务
-- 结合生成模型提升合成图像多样性
+- 扩展到更复杂的计算机视觉任务，如目标检测、实例分割
+- 研究不同IPC设置下的最优策略，平衡效率与保真度
+- 探索跨架构泛化能力，提升合成数据在不同模型上的性能
+- 融合自监督或无监督方法，进一步减少对原始标签的依赖
 
 **工程启发**
 
-> 大幅降低数据集蒸馏的时间和计算成本，推动大规模蒸馏实用化。
+> 显著降低大规模数据集蒸馏的时间和计算成本，单GPU即可完成ImageNet-1K蒸馏，为实际应用中的模型训练提供高效数据压缩方案。
 
 **为什么值得关注**
 
-> 数据压缩技术可减少OCR训练数据存储和处理负担。
+> 数据集蒸馏技术可应用于OCR文档解析中的训练数据生成，通过压缩真实文档数据集加速模型训练，同时保持解析精度。
 
 **原始摘要**
 
