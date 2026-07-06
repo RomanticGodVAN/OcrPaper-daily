@@ -1,25 +1,25 @@
 {
   "meta": {
-    "report_date": "2026-07-05",
-    "generated_at_utc": "2026-07-05 05:07:16",
+    "report_date": "2026-07-06",
+    "generated_at_utc": "2026-07-06 05:22:13",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
     "count": 0
   },
   "synthesis": {
-    "executive_summary": "今日无新增论文，团队应持续关注现有研究进展，暂无新动态报告。",
-    "trend_summary": "当前 OCR 和文档解析研究领域保持稳定，未见显著趋势变化。建议回顾近期文献以维持技术前沿。",
-    "common_innovations": [
-      "无新增创新点。"
-    ],
+    "executive_summary": "今日无新增相关论文，建议持续监控领域动态。",
+    "trend_summary": "无新趋势或论文涌现。",
+    "common_innovations": [],
     "future_directions": [
-      "建议探索低资源语言OCR的端到端训练方法。",
-      "关注文档布局理解中的图神经网络应用。",
-      "研究自监督预训练在文档图像上的效果。"
+      "探索基于大语言模型的端到端文档解析方法",
+      "提高复杂版面（如表格、公式）的OCR准确性",
+      "开发低资源语言的OCR模型",
+      "整合多模态信息以增强文档理解"
     ],
     "engineering_takeaways": [
-      "无实用技术产出。"
+      "评估现有OCR工具在混排文档中的鲁棒性",
+      "优化OCR后处理流程以提升结构化输出质量"
     ],
     "watchlist": []
   },
