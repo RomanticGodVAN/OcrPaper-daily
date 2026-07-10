@@ -1,103 +1,194 @@
 {
   "meta": {
-    "report_date": "2026-07-09",
-    "generated_at_utc": "2026-07-09 05:04:52",
+    "report_date": "2026-07-10",
+    "generated_at_utc": "2026-07-10 05:06:40",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 3
+    "count": 5
   },
   "synthesis": {
-    "executive_summary": "今日论文围绕视觉统一多模态生成、广告文本合规修正和Web Agent评估三个方向，展示了OCR与文档解析在更广泛AI系统中的集成趋势。统一多模态模型通过指令微调即可覆盖OCR等任务，降低工程定制成本；课程强化学习用于后处理修正，平衡合规性与语义保留；大规模基准关注Agent的交互上下文评估，为OCR在Web解析中的应用提供评测框架。",
-    "trend_summary": "当前研究趋势是OCR不再作为独立模块，而是作为多模态智能系统的一部分，通过指令学习、强化学习或评估框架与其他视觉语言任务协同。同时，合成数据和课程学习在解决实际部署中的合规性与性能平衡方面显现价值。",
+    "executive_summary": "今日文档解析研究集中在三个方面：Infinity-Parser2通过合成数据和强化学习刷新解析基准；ICDAR竞赛验证了LLM在历史文档OCR校正中的有效性；工业场景中联邦学习框架FedTR展示了结合迁移学习的潜力。同时，视频广告合规修正R^3和图像质量评估PreSPA提供了互补工具。趋势显示多模态大模型和合成数据愈发关键，但仍需解决低资源处理和幻觉问题。",
+    "trend_summary": "多模态大模型结合强化学习成为文档解析主流方法；合成数据驱动训练解决标注稀缺问题；LLM辅助OCR后校正开始专业化；联邦学习与迁移学习结合应对工业隐私需求；质量评估向轻量、无参考方向发展。",
     "common_innovations": [
-      "将OCR任务统一到多模态生成框架中，通过自然语言指令无需专用架构。",
-      "利用课程强化学习联合优化文本修正的合规性与语义一致性。",
-      "构建大规模交互上下文评估基准，推动Web Agent中信息提取任务的可靠评测。"
+      "多模态大模型与强化学习结合，实现感知-结构-推理联合优化",
+      "可控数据合成引擎生成高质量标注数据，降低人工成本",
+      "采用多任务、可验证的奖励系统支持多个协同目标的联合训练",
+      "将迁移学习与联邦学习结合，提升小样本场景下的OCR性能",
+      "课程强化学习策略应用于文本修正，平衡合规性与语义保留"
     ],
     "future_directions": [
-      "研究统一生成框架下OCR任务与其他视觉任务（如检测、分割）的正向迁移与负向干扰机制。",
-      "探索更高效的指令提示设计，提升细粒度OCR字符级准确率，尤其在复杂背景和多样化字体下。",
-      "将广告文本修正框架扩展到多语言场景，并引入用户反馈闭环以持续优化修正策略。",
-      "结合OCR与Web Agent，处理网页中图片文本信息，增强Agent对非文本内容的理解。",
-      "研究无监督或弱监督方法减少对合成数据的依赖，提升OCR后处理鲁棒性。"
+      "探索更高效的强化学习算法（如PPO变体）以降低Infinity-Parser2训练的计算成本",
+      "扩展文档解析模型至手写、高度退化文档及极低资源语言（如少数民族语言）",
+      "研究视觉-语言结合的方法，将文档版面图像作为额外输入，提升OCR后校正精度",
+      "利用合成数据与真实数据之间的域适应技术（如域对抗训练）缩小分布差异",
+      "设计针对OCR输出的专用图像质量评估指标，结合PreSPA结构-纹理框架",
+      "开发轻量化文档解析模型，通过知识蒸馏或剪枝实现端侧部署"
     ],
     "engineering_takeaways": [
-      "单一统一模型可替代多个专用OCR模型，减少部署和维护成本。",
-      "课程强化学习可有效用于OCR后处理，平衡合规性修正与原始语义保留。",
-      "大规模Web Agent评估基准可以直接用于检测产品中OCR相关模块的鲁棒性。"
+      "Infinity-Parser2提供开源双语数据集和可部署模型变体，适合文档数字化",
+      "LLM辅助OCR后校正可直接用于历史档案数字化，提升检索准确率",
+      "FedTR框架适用于工业质检中数据隐私敏感的文字识别场景",
+      "R^3课程强化学习流水线可集成到在线广告审核系统，减少人工成本",
+      "PreSPA质量评估方法可用作OCR系统输出的自动质量监控"
     ],
     "watchlist": [
       {
-        "title": "Vision as Unified Multimodal Generation",
-        "watch_reason": "其统一视觉任务生成范式可能成为未来OCR架构简化的重要方向，需关注其在复杂文本场景下的实际性能。"
+        "title": "Infinity-Parser2 Technical Report",
+        "watch_reason": "报告提出合成数据+多任务强化学习新范式，在多个基准上达到SOTA，其开源数据和模型对后续研究有重要影响"
       },
       {
-        "title": "R^3: Advertisement Compliance Rectification via Group-Relative Experience Extractor and Curriculum Reinforcement",
-        "watch_reason": "工业部署案例，课程强化学习方法可能推广到文档合规修正等其他文本后处理任务。"
+        "title": "ICDAR 2026 HIPE-OCRepair Competition",
+        "watch_reason": "竞赛结果提供了LLM在历史文档OCR校正中不同策略的对比基准，对应用落地有指导意义"
       },
       {
-        "title": "WebRetriever: A Large-Scale Comprehensive Benchmark for Efficient Web Agent Evaluation",
-        "watch_reason": "基准中包含网页文本提取任务，可评估OCR在Web自动化中的表现，对产品迭代有直接参考价值。"
+        "title": "FedTR: Federated Learning Framework with Transfer Learning for Industrial Visual Inspection",
+        "watch_reason": "联邦学习与迁移学习结合的框架在工业文字识别中表现优异，有望推广到更多隐私敏感场景"
       }
     ]
   },
   "papers": [
     {
-      "title": "Vision as Unified Multimodal Generation",
-      "summary": "We formulate computer vision as unified multimodal generation, where heterogeneous visual tasks are expressed in the native text and image generation spaces of a unified multimodal model, without task-specific architectures. Under this formulation, SenseNova-Vision uses natural-language instructions and optional visual prompts to specify tasks, target regions or views, and decoding conventions, and generates responses as text for symbolic outputs, images for dense spatial predictions, or mixed text-and-image outputs for compositional tasks. To support large-scale training, we convert diverse computer vision annotations into instruction-response examples compatible with these generation spaces, resulting in the SenseNova-Vision Corpus, a computer-vision instruction-response corpus spanning text, image, and mixed targets. Starting from an off-the-shelf pretrained unified multimodal model, SenseNova-Vision is trained primarily on this corpus, with auxiliary multimodal data used as a capability-preserving mixture, and requires no task-specific prediction heads or architectural modifications. The resulting model covers a broad range of vision tasks, including detection, OCR, keypoint estimation, segmentation, depth estimation, surface normal prediction, point maps, and camera pose estimation, while supporting language-defined variants that combine category, color, region, and other visual cues. Experiments show that a single unified model can match leading task-specialized systems across structured visual understanding, dense geometric prediction, segmentation, and multi-view visual geometry. These results suggest unified multimodal generation as a scalable route for integrating computer vision capabilities into general-purpose foundation models. The model and corpus are publicly available.",
-      "link": "https://arxiv.org/abs/2607.06560v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.06560v1",
+      "title": "Infinity-Parser2 Technical Report",
+      "summary": "We present Infinity-Parser2, a large multimodal model that couples a controllable data-synthesis pipeline with multi-task reinforcement learning for end-to-end document parsing, addressing the persistent scarcity of faithfully annotated parsing corpora. Our contributions are threefold. First, we build a scalable synthesis engine, pairing a controllable rendering framework with an iterative refinement loop, and use it to construct and open-source Infinity-Doc2-5M: a 5-million-sample bilingual (Chinese/English) corpus spanning diverse document types, annotated with element bounding boxes, canonical content forms (Markdown, HTML, LaTeX, SMILES, structured charts), and full-page reading order. Second, we introduce a verifiable, multi-task reward system that enables Joint Reinforcement Learning across eight co-trained objectives (document parsing, layout analysis, table parsing, math formula parsing, chart parsing, chemical formula parsing, document VQA, and general multimodal understanding), unifying perception, structure, and reasoning in a single optimization signal. Third, we release two variants under a shared architecture: Infinity-Parser2-Flash, optimized for low-latency inference with a $3.68\\times$ throughput gain over Infinity-Parser-7B, and Infinity-Parser2-Pro, engineered for precision-critical settings. Infinity-Parser2-Pro reaches state-of-the-art 87.6% on olmOCR-Bench and 74.3% on ParseBench, surpassing DeepSeek-OCR-2, PaddleOCR-VL-1.5, and MinerU2.5, with strong generalization to charts, chemical formulas, and document VQA.",
+      "link": "https://arxiv.org/abs/2607.07836v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07836v1",
       "authors": [
-        "Xiaoyang Han",
-        "Jianhua Li",
-        "Kewang Deng",
-        "Zukai Chen",
-        "Xuanke Shi",
-        "Sihan Wang",
-        "Boxuan Li",
-        "Linyan Wang",
-        "Siyi Xie",
-        "Xin You",
-        "Jinsheng Quan",
-        "Zhongang Cai",
-        "Haiwen Diao",
-        "Ziwei Liu",
-        "Lei Yang",
-        "Dahua Lin",
-        "Quan Wang"
+        "Zuming Huang",
+        "Jun Huang",
+        "Kexuan Ren",
+        "Baode Wang",
+        "Weizhen Li",
+        "Jianming Feng",
+        "Yu Wang",
+        "Yichen Yao",
+        "Shijun Lin",
+        "Yige Tang",
+        "Cheng Peng",
+        "Weidi Xu",
+        "Wei Chu",
+        "Yinghui Xu",
+        "Yuan Qi"
       ],
-      "published": "2026-07-07T17:58:33Z",
-      "updated": "2026-07-07T17:58:33Z",
+      "published": "2026-07-08T18:17:21Z",
+      "updated": "2026-07-08T18:17:21Z",
       "categories": [
-        "cs.CV"
+        "cs.AI"
       ],
-      "arxiv_id": "2607.06560v1",
-      "score": 9,
+      "arxiv_id": "2607.07836v1",
+      "score": 28,
       "topic_tags": [
-        "多模态生成",
-        "统一视觉任务",
-        "指令微调",
-        "视觉提示",
-        "跨任务学习"
+        "文档解析",
+        "多模态大模型",
+        "强化学习",
+        "数据合成"
       ],
-      "zh_summary": "本文将计算机视觉任务统一为多模态生成问题，利用统一多模态模型在文本和图像生成空间内表达不同视觉任务，无需任务专用架构。SenseNova-Vision 模型通过自然语言指令和可选视觉提示指定任务，输出文本、图像或文本-图像混合结果。训练使用大规模指令-响应语料库 SenseNova-Vision Corpus，涵盖文本、图像和混合目标，无需任务专用预测头或架构修改。模型覆盖检测、OCR、关键点估计、分割、深度估计等任务，实验表明单一统一模型可匹敌领先的专用系统。",
-      "novelty": "将计算机视觉任务统一表示为多模态生成，而非特定任务的输出头，创新性地利用统一多模态模型的固有生成能力。",
+      "zh_summary": "Infinity-Parser2 是一个大型多模态文档解析模型，通过可控数据合成流水线和多任务强化学习来应对标注数据稀缺问题。它构建了包含500万样本的双语数据集 Infinity-Doc2-5M，设计了可验证的多任务奖励系统，支持联合强化学习，在 olmOCR-Bench 和 ParseBench 上达到 SOTA，超越 DeepSeek-OCR-2 等模型。",
+      "novelty": "提出可扩展的合成引擎、迭代精炼循环和多任务强化学习奖励系统，实现感知、结构、推理的统一优化。",
       "innovation_points": [
-        "提出视觉任务统一为多模态生成范式，使用文本和图像生成空间表达异构视觉任务",
-        "构建大规模指令-响应语料库 SenseNova-Vision Corpus，覆盖文本、图像、混合目标",
-        "不依赖任务专用架构或预测头，仅通过统一预训练模型和指令微调实现多任务覆盖",
-        "支持灵活的语言定义变体，融合类别、颜色、区域等视觉线索"
+        "构建可控渲染与迭代精炼的数据合成引擎，开源5M双语标注数据集",
+        "设计可验证多任务奖励系统，支持8个协同目标的联合强化学习",
+        "发布低延迟和高精度两个变体，Flash版本吞吐量提升3.68倍"
       ],
-      "limitations": "论文未提及多任务之间的干扰或平衡问题，在极端复杂场景下统一生成可能引入误差；OCR 等序列预测任务在统一生成框架中具体性能细节未充分披露。",
+      "limitations": "报告未提及对极端低资源语言或高度退化文档的处理能力，强化学习训练计算开销可能较大。",
       "improvement_directions": [
-        "研究统一生成框架下不同任务间的正向迁移与负向干扰机制",
-        "探索更高效的指令提示设计以提升细粒度视觉理解（如 OCR 字符级准确率）",
-        "将统一生成范式扩展至视频等连续视觉数据",
-        "评估模型在低资源或域外场景下的泛化能力"
+        "探索更高效的强化学习算法以降低训练成本",
+        "扩展至更多小语种和手写文档类型",
+        "研究合成数据与真实数据的域适应问题"
       ],
-      "engineering_value": "提供了一种减少模型定制化成本的方案，工程上可通过单一模型支持多种视觉任务，便于部署和维护，尤其适合需要灵活任务切换的应用场景。",
-      "why_relevant": "该工作涉及多模态生成与视觉理解统一，OCR 作为其中的子任务被纳入统一框架，对于探索 OCR 与其他视觉任务的联合建模和知识共享具有参考价值。"
+      "engineering_value": "提供开源数据和可部署模型，适用于需要高精度文档解析的工业场景，如文档数字化和知识库构建。",
+      "why_relevant": "直接涉及OCR领域的文档解析任务，特别是通过强化学习优化端到端解析精度，对学术研究和工业应用均有参考价值。"
+    },
+    {
+      "title": "ICDAR 2026 HIPE-OCRepair Competition on LLM-Assisted OCR Post-Correction for Historical Documents",
+      "summary": "We present the results of HIPE-OCRepair-2026, an ICDAR competition on LLM-assisted OCR post-correction of historical documents. OCR post-correction remains a long-standing challenge in digital heritage: large-scale collections of digitized documents are affected by legacy OCR errors, while re-digitization at scale remains impractical. Large language models (LLMs) offers a major opportunity to revisit this challenge, yet their effectiveness across languages, document types, and noise conditions - and their tendency to hallucinate - remains insufficiently understood. HIPE-OCRepair-2026 pursues two objectives: (i) to evaluate the capabilities of modern OCR post-correction systems, and (ii) to provide a reproducible evaluation framework anchored in the HIPE-OCRepair-2026 dataset, a harmonized multilingual resource consolidating existing and newly curated historical datasets. Participants were tasked with correcting noisy OCR transcripts from historical newspapers and printed works in English, French, and German (17th-20th century), working at the level of coherent transcription units (paragraphs or articles) without access to source images. The evaluation adopts a retrieval-oriented rather than diplomatic scoring approach, reflecting the practical use case of search and access over digitized collections. Four teams submitted systems ranging from zero-shot prompting to continued pre-training and fine-tuning, offering insights into the merits of different adaptation strategies. Results show that modern LLM-assisted systems can significantly improve OCR quality, but performance varies across datasets, languages, and noise levels. Over-correction on low-noise inputs emerges as a recurring challenge, highlighting the importance of evaluation beyond character error reduction. The dataset, scorer, and evaluation pipeline are publicly released to support future research.",
+      "link": "https://arxiv.org/abs/2607.08143v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08143v1",
+      "authors": [
+        "Maud Ehrmann",
+        "Emanuela Boros",
+        "Juri Opitz",
+        "Andrianos Michail",
+        "Florian Wagner",
+        "Simon Clematide"
+      ],
+      "published": "2026-07-09T06:26:13Z",
+      "updated": "2026-07-09T06:26:13Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.IR"
+      ],
+      "arxiv_id": "2607.08143v1",
+      "score": 13,
+      "topic_tags": [
+        "OCR后校正",
+        "大语言模型",
+        "历史文档",
+        "竞赛"
+      ],
+      "zh_summary": "ICDAR 2026 HIPE-OCRepair 竞赛聚焦于利用大语言模型对历史文档进行OCR后校正。竞赛提供了多语言历史数据集，要求参赛系统在无图像信息下校正OCR转录错误。评估采用面向检索的评分方式。结果表明，LLM辅助系统能显著提升OCR质量，但不同适配策略效果各异。",
+      "novelty": "系统评估了LLM在历史文档OCR后校正中的表现，并建立了可复现的多语言基准。",
+      "innovation_points": [
+        "构建多语言历史文档OCR后校正数据集HIPE-OCRepair-2026",
+        "采用检索导向而非外交式评分，贴近实际搜索应用",
+        "评估了从零样本提示到微调等多种LLM适配策略"
+      ],
+      "limitations": "竞赛仅涉及新闻和印刷品，未覆盖手写或高度破损文档；无图像输入限制了模型利用视觉信息。",
+      "improvement_directions": [
+        "探索视觉-语言结合的方法以利用文档版面信息",
+        "研究LLM幻觉对校正准确率的影响及其缓解策略",
+        "扩展到更多历史语言和字体类型"
+      ],
+      "engineering_value": "为数字化图书馆和历史档案的OCR后处理提供评估基准和方法参考，提升检索结果质量。",
+      "why_relevant": "直接针对OCR后校正这一经典难题，引入LLM新范式，对OCR流程优化有重要指导意义。"
+    },
+    {
+      "title": "FedTR: Federated Learning Framework with Transfer Learning for Industrial Visual Inspection",
+      "summary": "Federated learning (FL) is a collaborative learning scheme to train deep learning models, where collaborating parties can consolidate their models without sharing local data with other parties, hence preserving data privacy. Nevertheless, when implementing FL in Industrial visual inspection (IVI), the constraints posed by limited data availability and the intricate nature of the inspection tasks significantly impact the performance of the resulting model. This paper introduces FedTR, a novel FL framework incorporating transfer learning designed for Autonomous IVI, focusing on the challenging task of identifying label defects through end-to-end text recognition. Transfer learning is a method that leverages the knowledge of a pre-trained model to adapt to a different dataset. FedTR initially trains the model using a publicly available dataset, after which performs the essential federated learning process with model fine-tuning on the distributed and limited private data. Extensive experiment results demonstrate the effectiveness and feasibility of FedTR on private ink cartridge datasets for label defect identification. FedTR achieves an end-to-end text recognition word-level accuracy of 95.5% and 94.2% on homogeneous and heterogeneous data respectively. Additionally, it attains performance levels that are on par with those achieved through centralized training.",
+      "link": "https://arxiv.org/abs/2607.08014v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08014v1",
+      "authors": [
+        "Vikash Sathiamoorthy",
+        "Shuo Huai",
+        "Hao Kong",
+        "Di Liu",
+        "Wendy Yong Yi Loy",
+        "Christian Makaya",
+        "Daren Ho",
+        "Ravi Subramaniam",
+        "Qian Lin",
+        "Weichen Liu"
+      ],
+      "published": "2026-07-09T00:40:33Z",
+      "updated": "2026-07-09T00:40:33Z",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "arxiv_id": "2607.08014v1",
+      "score": 8,
+      "topic_tags": [
+        "联邦学习",
+        "迁移学习",
+        "工业视觉检测",
+        "文字识别"
+      ],
+      "zh_summary": "FedTR 是一种面向工业视觉检测的联邦学习框架，结合迁移学习解决标签缺陷识别中的小样本和任务复杂性问题。先在公开数据集上预训练，再在分布式私有数据上微调，实现了95.5%的同质数据端到端文字识别准确率，性能媲美集中式训练。",
+      "novelty": "将迁移学习引入联邦学习框架，有效缓解工业视觉检测中数据稀缺和隐私限制问题。",
+      "innovation_points": [
+        "提出预训练+联邦微调两阶段训练范式，利用公开数据知识",
+        "专门针对标签缺陷识别中的端到端文字识别任务设计",
+        "在异质数据上达到94.2%准确率，接近集中式训练水平"
+      ],
+      "limitations": "实验仅基于墨盒标签数据集，泛化性未知；联邦通信开销和隐私保护强度未详细评估。",
+      "improvement_directions": [
+        "在更多工业视觉检测任务上验证框架有效性",
+        "研究异构数据和客户端数据分布差异下的优化策略",
+        "结合差分隐私等机制增强隐私保护"
+      ],
+      "engineering_value": "适用于工业场景中数据隐私敏感的视觉检测任务，尤其适合质检环节的文字识别。",
+      "why_relevant": "涉及OCR在工业检测中的应用，结合联邦学习解决数据分散和隐私问题，具有工程实践意义。"
     },
     {
       "title": "R^3: Advertisement Compliance Rectification via Group-Relative Experience Extractor and Curriculum Reinforcement",
@@ -123,79 +214,65 @@
       "arxiv_id": "2607.07318v1",
       "score": 8,
       "topic_tags": [
-        "视频广告合规",
+        "视频广告",
         "文本修正",
-        "课程强化学习",
-        "OCR后处理",
-        "语义保留"
+        "强化学习",
+        "内容合规"
       ],
-      "zh_summary": "本文针对视频广告中的文本违规（字幕和屏幕文本）提出 R^3 修正框架，旨在协调合规性与原始语义保留。核心创新包括：1) 基于组相对合规经验提取器的数据合成框架，引导高质量监督；2) 课程强化学习策略，层次化奖励以强制合规同时最大化语义一致性；3) 完整的视频修正流程，集成文本识别、改写和重新渲染。实验表明 R^3 在工业数据集和在线 A/B 测试中显著优于基线，实现违规修正与意图保留的最佳权衡。",
-      "novelty": "提出将课程强化学习应用于视频广告文本合规修正，并通过组相对经验提取器生成训练数据，解决了安全驱动过度编辑破坏原始语义的问题。",
+      "zh_summary": "R^3 是一个视频广告合规修正框架，针对视频中的文本违规（包括语音转录和屏幕文字）进行修正，同时保留原始语义意图。通过经验驱动的数据合成、课程强化学习和包含文字识别、改写、重渲染的整合适配，在工业数据集和线上A/B测试中表现最优。",
+      "novelty": "引入群组相对经验提取器和课程强化学习，实现违规修正与语义保留的平衡。",
       "innovation_points": [
-        "设计组相对合规经验提取器，用于引导高质量监督数据合成",
-        "提出课程强化学习策略，通过层次化奖励联合优化合规性和语义一致性",
-        "构建完整的视频文本修正流程，包括 OCR 识别、改写和重新渲染"
+        "设计群组相对经验提取器，基于合规经验合成高质量训练数据",
+        "提出课程强化学习策略，层次化奖励同时优化合规性和语义一致性",
+        "构建完整的视频修正流水线，集成文字识别、改写和重渲染"
       ],
-      "limitations": "方法依赖 OCR 识别准确率，若识别错误会导致后续修正偏差；课程强化学习策略的奖励设计可能需要针对不同广告领域调整。",
+      "limitations": "仅处理文本违规，未涉及图像或音频内容违规；对改写后的可读性和自然度评估不够深入。",
       "improvement_directions": [
-        "研究更鲁棒的 OCR 技术以应对视频中复杂背景和多样化字体",
-        "探索无监督或弱监督方法减少对合成数据的依赖",
-        "将修正框架扩展到多语言场景",
-        "引入用户反馈闭环以持续优化修正策略"
+        "扩展至多模态违规检测与修正",
+        "研究改写结果的语义保持度量化指标",
+        "探索更轻量的模型以降低工业部署成本"
       ],
-      "engineering_value": "直接面向工业部署，具备完整的文本识别-改写-渲染流程，可自动化处理大规模广告违规修正，减少人工审核成本，提升广告合规审核效率。",
-      "why_relevant": "该工作核心涉及视频广告中屏幕文本的识别与修正，OCR 是其关键上游模块；对 OCR 的准确率要求较高，且提出了结合语义理解的文本改写，与 OCR 后处理技术相关。"
+      "engineering_value": "直接应用于在线广告审核，减少人工修改成本，同时维持广告主意图，具有显著工业价值。",
+      "why_relevant": "涉及OCR文字识别和文本生成，专注于文本修正这一OCR下游任务，与视频内容理解结合紧密。"
     },
     {
-      "title": "WebRetriever: A Large-Scale Comprehensive Benchmark for Efficient Web Agent Evaluation",
-      "summary": "As web agents increasingly demonstrate capabilities in automated task execution, the development of robust evaluation frameworks for assessing their navigation and task completion performance has emerged as a critical research priority. However, existing benchmarks exhibit fundamental limitations. First, they suffer from insufficient scale and limited domain diversity, constraining comprehensive evaluation of cross-domain generalization. Second, prevailing LLM-as-Judge evaluation methodologies inadequately capture fine-grained interaction semantics, particularly regarding precise query formulation and filtering operations. Third, current benchmarks predominantly emphasize navigation success metrics while neglecting critical requirements for real-world deployment scenarios. To address these limitations, we introduce WebRetriever, a large-scale benchmark encompassing 800 websites and 1,550 tasks across diverse domains, including consumer, professional, and enterprise sectors, with comprehensive coverage of user intent patterns. We propose NavEval (Navigation Evaluation), a novel LLM-as-Judge framework that leverages rich interaction context beyond visual screenshots, achieving state-of-the-art alignment with human judgment across multiple evaluation datasets. Furthermore, we establish three complementary evaluation protocols that collectively provide holistic assessment of web agent capabilities: navigation proficiency, knowledge-assisted interaction, and end-to-end task completion with information extraction. Extensive experimental analysis reveals substantial performance disparities across evaluation protocols, demonstrating that navigation success alone is an insufficient predictor of real-world application effectiveness. WebRetriever delivers fine-grained diagnostic insights into agent capabilities and establishes a rigorous foundation for advancing web agent research and development.",
-      "link": "https://arxiv.org/abs/2607.06118v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.06118v1",
+      "title": "Partial-Reference IQA Based on Hermite-Gauss Structural Prediction and Texture Deviation",
+      "summary": "We propose PreSPA (Partial-Reference Structural Prediction Approach), a Partial-Reference Image Quality Assessment framework that decomposes perceptual quality into two complementary indices. A structure-aware index, operating in a No-Reference manner, captures structural degradation through Hermite-Gauss prediction of the distorted gradient field and the angular variance of its curvature. A texture-sensitive index estimates local noise through a scalar prior $μ$, obtained from energy differences between reference and distorted complex gradient maps on strong-edge regions and accumulated over weakly-structured ones, reflecting the perceptual leakage of degraded edges into surrounding textures. Crucially, $μ$ is the only information extracted from the reference and is computed once per image pair, reducing the reference footprint to its information-theoretic minimum. The final score is produced by an affine fusion with only three interpretable parameters, making the method compact, transparent, and computationally efficient, with the viewing distance embedded into the operator scale and no dataset-specific calibration. Extensive evaluations on six standard benchmarks show that PreSPA consistently rivals or exceeds leading No-Reference approaches, while in several cases matching the accuracy of Full-Reference models.",
+      "link": "https://arxiv.org/abs/2607.08563v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08563v1",
       "authors": [
-        "Wei Dong",
-        "Tianyu Fu",
-        "Zhe Yu",
-        "Hanning Wang",
-        "Anyang Su",
-        "Zhizhou Fang",
-        "Yuyang Chen",
-        "Shuo Wang",
-        "Minghui Wu",
-        "Ping Jiang",
-        "Zhen Lei",
-        "Chenxu Zhao"
+        "Paolo Giannitrapani",
+        "Elio D. Di Claudio",
+        "Giovanni Jacovitti"
       ],
-      "published": "2026-07-07T10:27:31Z",
-      "updated": "2026-07-07T10:27:31Z",
+      "published": "2026-07-09T14:54:16Z",
+      "updated": "2026-07-09T14:54:16Z",
       "categories": [
-        "cs.CV",
-        "cs.MM"
+        "eess.IV"
       ],
-      "arxiv_id": "2607.06118v1",
+      "arxiv_id": "2607.08563v1",
       "score": 6,
       "topic_tags": [
-        "web agent评估",
-        "基准构建",
-        "信息提取",
-        "LLM-as-Judge",
-        "交互上下文"
+        "图像质量评估",
+        "部分参考",
+        "结构预测",
+        "纹理分析"
       ],
-      "zh_summary": "本文提出 WebRetriever，一个包含 800 个网站和 1550 个任务的大规模 web agent 评估基准，覆盖消费、专业和企业领域。针对现有基准规模小、领域单一、评价方法忽略细粒度交互语义等问题，提出 NavEval 评价框架，利用丰富交互上下文（超越视觉截图）实现与人类判断的高度对齐。此外，建立三种互补评估协议：导航能力、知识辅助交互和端到端信息提取任务完成。实验分析揭示了现有 web agent 的性能差异。",
-      "novelty": "构建了较大规模的 web agent 评估基准，并提出了利用交互上下文而非仅视觉截图的 LLM-as-Judge 评估方法，更好地刻画细粒度交互语义。",
+      "zh_summary": "PreSPA 是一种部分参考图像质量评估方法，通过分解感知质量为结构感知和纹理敏感两个互补指标。结构感知指标无需参考，利用Hermite-Gauss预测失真梯度场；纹理敏感指标仅从参考图像提取标量先验，信息开销极小。在六个基准上媲美或超越无参考方法，部分情况达到全参考精度。",
+      "novelty": "提出结构预测和纹理偏差的双分量框架，参考信息量降至理论最小。",
       "innovation_points": [
-        "构建大规模多样化的 web 任务评估基准，覆盖 800 个网站和 1550 个任务",
-        "提出 NavEval 评估框架，利用交互上下文（如查询表述、过滤操作）提升评估与人类判断的一致性",
-        "设计三种互补评估协议，全面评估 web agent 导航、知识和信息提取能力"
+        "利用Hermite-Gauss预测和角方差进行无参考结构退化评估",
+        "从参考图像中仅提取标量μ作为纹理先验，信息紧凑",
+        "三参数仿射融合，模型透明且无需数据集特定校准"
       ],
-      "limitations": "基准集中于英语网站，对其他语言和动态内容（如 JavaScript 渲染）覆盖不足；评估依赖 LLM-as-Judge，可能受 LLM 偏见影响。",
+      "limitations": "主要针对自然图像，对文档图像（如OCR结果）的适用性未验证；纹理估计在强结构区域可能不够准确。",
       "improvement_directions": [
-        "扩展至多语言和多类型网站，包括动态渲染和单页应用",
-        "探索更自动化的评估方法，减少对 LLM 判断的依赖",
-        "研究 web agent 在复杂推理和信息提取任务中的能力边界",
-        "结合 OCR 技术处理网页中图片文本信息，增强 agent 对非文本内容的理解"
+        "评估在文档图像和OCR输出上的表现",
+        "扩展纹理先验以捕获更复杂的噪声模式",
+        "研究参数自适应融合策略以提高通用性"
       ],
-      "engineering_value": "提供了一个系统化的 web agent 评估平台，可用于自动化测试和比较不同 agent 的鲁棒性和效果，对工业界 web 自动化工具的开发与评测有直接参考价值。",
-      "why_relevant": "基准中涉及的信息提取任务可能依赖 OCR 技术识别网页图片中的文本，且评估协议强调查询和过滤操作，这些与 OCR 在网页信息提取中的应用密切相关。"
+      "engineering_value": "提供高效、透明的图像质量评估工具，可用于OCR系统的输出质量监控和优化。",
+      "why_relevant": "图像质量评估是OCR预处理和后处理的重要环节，部分参考方法可在参考可用时实现更优性能。"
     }
   ]
 }
