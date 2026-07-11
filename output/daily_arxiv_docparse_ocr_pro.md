@@ -1,126 +1,58 @@
-# OCR / 文档解析研究日报（2026-07-10）
+# OCR / 文档解析研究日报（2026-07-11）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-07-10 05:06:40`
+- 生成时间（UTC）：`2026-07-11 04:26:00`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日文档解析研究集中在三个方面：Infinity-Parser2通过合成数据和强化学习刷新解析基准；ICDAR竞赛验证了LLM在历史文档OCR校正中的有效性；工业场景中联邦学习框架FedTR展示了结合迁移学习的潜力。同时，视频广告合规修正R^3和图像质量评估PreSPA提供了互补工具。趋势显示多模态大模型和合成数据愈发关键，但仍需解决低资源处理和幻觉问题。
+> 今日焦点：ICDAR 2026 HIPE-OCRepair竞赛系统评估了大语言模型在历史文档OCR后纠正中的表现，证实LLM可提升OCR质量但受限于幻觉；PreSPA提出了一种低参考开销的图像质量评估方法，适合OCR预处理质量监控。两者共同指向：利用生成式AI和多模态信息优化OCR流程是当前热点，但幻觉和评估基准仍是关键挑战。
 
 ## 二、今日趋势判断
 
-多模态大模型结合强化学习成为文档解析主流方法；合成数据驱动训练解决标注稀缺问题；LLM辅助OCR后校正开始专业化；联邦学习与迁移学习结合应对工业隐私需求；质量评估向轻量、无参考方向发展。
+趋势一：大语言模型正被系统性地引入OCR后纠正领域，尤其是处理历史文档的噪声和低质量文本；趋势二：图像质量评估向局部参考或免参考、低计算量方向发展，以适配嵌入式或实时OCR系统；趋势三：任务趋向多语言、多世纪文档，要求模型具备更强的泛化能力。
 
 ## 三、今日论文概览
 
-1. **Infinity-Parser2 Technical Report** | 标签：文档解析、多模态大模型、强化学习、数据合成
-2. **ICDAR 2026 HIPE-OCRepair Competition on LLM-Assisted OCR Post-Correction for Historical Documents** | 标签：OCR后校正、大语言模型、历史文档、竞赛
-3. **FedTR: Federated Learning Framework with Transfer Learning for Industrial Visual Inspection** | 标签：联邦学习、迁移学习、工业视觉检测、文字识别
-4. **R^3: Advertisement Compliance Rectification via Group-Relative Experience Extractor and Curriculum Reinforcement** | 标签：视频广告、文本修正、强化学习、内容合规
-5. **Partial-Reference IQA Based on Hermite-Gauss Structural Prediction and Texture Deviation** | 标签：图像质量评估、部分参考、结构预测、纹理分析
+1. **ICDAR 2026 HIPE-OCRepair Competition on LLM-Assisted OCR Post-Correction for Historical Documents** | 标签：OCR后纠正、大语言模型、历史文档、数字文化遗产、测评基准
+2. **Partial-Reference IQA Based on Hermite-Gauss Structural Prediction and Texture Deviation** | 标签：图像质量评估、局部参考、Hermite-Gauss、纹理偏差、文档预处理
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 多模态大模型与强化学习结合，实现感知-结构-推理联合优化
-- 可控数据合成引擎生成高质量标注数据，降低人工成本
-- 采用多任务、可验证的奖励系统支持多个协同目标的联合训练
-- 将迁移学习与联邦学习结合，提升小样本场景下的OCR性能
-- 课程强化学习策略应用于文本修正，平衡合规性与语义保留
+- 利用大语言模型（零样本、微调等）进行OCR后纠正，显著提升历史文档识别准确率。
+- 提出基于Hermite-Gauss结构预测和纹理偏差的局部参考图像质量评估，仅需少量参考信息。
+- 构建多语言、跨世纪的历史文档OCR后纠正评估基准（HIPE-OCRepair-2026）。
+- 开发了可解释性强的图像质量评估框架，仅用三个参数即可感知质量。
+- 采用检索导向评分方法评估OCR后纠正效果，更贴近实际应用。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 探索更高效的强化学习算法（如PPO变体）以降低Infinity-Parser2训练的计算成本
-- 扩展文档解析模型至手写、高度退化文档及极低资源语言（如少数民族语言）
-- 研究视觉-语言结合的方法，将文档版面图像作为额外输入，提升OCR后校正精度
-- 利用合成数据与真实数据之间的域适应技术（如域对抗训练）缩小分布差异
-- 设计针对OCR输出的专用图像质量评估指标，结合PreSPA结构-纹理框架
-- 开发轻量化文档解析模型，通过知识蒸馏或剪枝实现端侧部署
+- 探索结合源图像、文本和上下文的多模态OCR后纠正方法，以降低LLM幻觉影响。
+- 针对历史文档语言和文化特异性，进行LLM领域自适应训练。
+- 设计量化LLM幻觉对OCR后纠正影响的鲁棒评分机制。
+- 将低级图像质量评估（如PreSPA）嵌入OCR预处理流水线，实现自适应文档增强。
+- 扩展图像质量评估基准至更多真实失真类型（如压缩伪影、混合失真）以验证泛化性。
+- 研究轻量化、可解释的局部参考图像质量指标，用于嵌入式OCR系统的实时质量监控。
 
 ## 六、工程落地启发
 
-- Infinity-Parser2提供开源双语数据集和可部署模型变体，适合文档数字化
-- LLM辅助OCR后校正可直接用于历史档案数字化，提升检索准确率
-- FedTR框架适用于工业质检中数据隐私敏感的文字识别场景
-- R^3课程强化学习流水线可集成到在线广告审核系统，减少人工成本
-- PreSPA质量评估方法可用作OCR系统输出的自动质量监控
+- 对于历史文档OCR项目，可在现有OCR引擎后串联LLM进行后纠正，优先评估零样本提示的效果。
+- 构建OCR质量监控系统时，可选用PreSPA这类低计算量的局部参考图像质量指标，仅需少量参考图像。
+- 利用HIPE-OCRepair-2026基准测试不同语言和文档类型的LLM纠正效果，指导模型选择。
+- LLM后纠正存在幻觉风险，需设计辅助验证步骤（如基于词典或规则的检查）。
+- 图像质量评估与OCR性能之间存在关联，可通过预处理提升OCR准确率。
 
 ## 七、优先关注论文
 
-- **Infinity-Parser2 Technical Report**：报告提出合成数据+多任务强化学习新范式，在多个基准上达到SOTA，其开源数据和模型对后续研究有重要影响
-- **ICDAR 2026 HIPE-OCRepair Competition**：竞赛结果提供了LLM在历史文档OCR校正中不同策略的对比基准，对应用落地有指导意义
-- **FedTR: Federated Learning Framework with Transfer Learning for Industrial Visual Inspection**：联邦学习与迁移学习结合的框架在工业文字识别中表现优异，有望推广到更多隐私敏感场景
+- **ICDAR 2026 HIPE-OCRepair Competition**：提供了多语言历史文档OCR后纠正的评估基准和基线方法，后续竞赛结果和方法迭代将直接影响数字文化遗产领域的文档处理方案。
+- **PreSPA: Partial-Reference IQA Based on Hermite-Gauss Structural Prediction**：其轻量级、可解释的图像质量评估方法有潜力集成到OCR预处理模块中，未来研究向更多失真类型和端到端流程的扩展值得跟踪。
 
 ## 八、论文逐篇解析
 
-### 1. Infinity-Parser2 Technical Report
-
-- arXiv: [2607.07836v1](https://arxiv.org/abs/2607.07836v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.07836v1)
-- 作者: Zuming Huang, Jun Huang, Kexuan Ren, Baode Wang, Weizhen Li, Jianming Feng, Yu Wang, Yichen Yao, Shijun Lin, Yige Tang, Cheng Peng, Weidi Xu, Wei Chu, Yinghui Xu, Yuan Qi
-- 发布时间: 2026-07-08T18:17:21Z
-- 分类: cs.AI
-- 相关性评分: 28
-- 主题标签: 文档解析、多模态大模型、强化学习、数据合成
-
-**中文摘要**
-
-> Infinity-Parser2 是一个大型多模态文档解析模型，通过可控数据合成流水线和多任务强化学习来应对标注数据稀缺问题。它构建了包含500万样本的双语数据集 Infinity-Doc2-5M，设计了可验证的多任务奖励系统，支持联合强化学习，在 olmOCR-Bench 和 ParseBench 上达到 SOTA，超越 DeepSeek-OCR-2 等模型。
-
-**核心创新概述**
-
-> 提出可扩展的合成引擎、迭代精炼循环和多任务强化学习奖励系统，实现感知、结构、推理的统一优化。
-
-**创新点拆解**
-
-- 构建可控渲染与迭代精炼的数据合成引擎，开源5M双语标注数据集
-- 设计可验证多任务奖励系统，支持8个协同目标的联合强化学习
-- 发布低延迟和高精度两个变体，Flash版本吞吐量提升3.68倍
-
-**当前局限**
-
-> 报告未提及对极端低资源语言或高度退化文档的处理能力，强化学习训练计算开销可能较大。
-
-**后续可改进方向**
-
-- 探索更高效的强化学习算法以降低训练成本
-- 扩展至更多小语种和手写文档类型
-- 研究合成数据与真实数据的域适应问题
-
-**工程启发**
-
-> 提供开源数据和可部署模型，适用于需要高精度文档解析的工业场景，如文档数字化和知识库构建。
-
-**为什么值得关注**
-
-> 直接涉及OCR领域的文档解析任务，特别是通过强化学习优化端到端解析精度，对学术研究和工业应用均有参考价值。
-
-**原始摘要**
-
-We present Infinity-Parser2, a large multimodal model that couples a controllable data-synthesis
-pipeline with multi-task reinforcement learning for end-to-end document parsing, addressing the
-persistent scarcity of faithfully annotated parsing corpora. Our contributions are threefold. First,
-we build a scalable synthesis engine, pairing a controllable rendering framework with an iterative
-refinement loop, and use it to construct and open-source Infinity-Doc2-5M: a 5-million-sample
-bilingual (Chinese/English) corpus spanning diverse document types, annotated with element bounding
-boxes, canonical content forms (Markdown, HTML, LaTeX, SMILES, structured charts), and full-page
-reading order. Second, we introduce a verifiable, multi-task reward system that enables Joint
-Reinforcement Learning across eight co-trained objectives (document parsing, layout analysis, table
-parsing, math formula parsing, chart parsing, chemical formula parsing, document VQA, and general
-multimodal understanding), unifying perception, structure, and reasoning in a single optimization
-signal. Third, we release two variants under a shared architecture: Infinity-Parser2-Flash,
-optimized for low-latency inference with a $3.68\times$ throughput gain over Infinity-Parser-7B, and
-Infinity-Parser2-Pro, engineered for precision-critical settings. Infinity-Parser2-Pro reaches
-state-of-the-art 87.6% on olmOCR-Bench and 74.3% on ParseBench, surpassing DeepSeek-OCR-2,
-PaddleOCR-VL-1.5, and MinerU2.5, with strong generalization to charts, chemical formulas, and
-document VQA.
-
----
-
-### 2. ICDAR 2026 HIPE-OCRepair Competition on LLM-Assisted OCR Post-Correction for Historical Documents
+### 1. ICDAR 2026 HIPE-OCRepair Competition on LLM-Assisted OCR Post-Correction for Historical Documents
 
 - arXiv: [2607.08143v1](https://arxiv.org/abs/2607.08143v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2607.08143v1)
@@ -128,39 +60,39 @@ document VQA.
 - 发布时间: 2026-07-09T06:26:13Z
 - 分类: cs.CL, cs.AI, cs.IR
 - 相关性评分: 13
-- 主题标签: OCR后校正、大语言模型、历史文档、竞赛
+- 主题标签: OCR后纠正、大语言模型、历史文档、数字文化遗产、测评基准
 
 **中文摘要**
 
-> ICDAR 2026 HIPE-OCRepair 竞赛聚焦于利用大语言模型对历史文档进行OCR后校正。竞赛提供了多语言历史数据集，要求参赛系统在无图像信息下校正OCR转录错误。评估采用面向检索的评分方式。结果表明，LLM辅助系统能显著提升OCR质量，但不同适配策略效果各异。
+> 本文介绍了ICDAR 2026 HIPE-OCRepair竞赛，该竞赛聚焦于利用大语言模型（LLM）对历史文档进行OCR后纠正。竞赛评估了多种方法（从零样本提示到持续预训练和微调）在不同语言、文档类型和噪声条件下的表现，并发布了多语言数据集HIPE-OCRepair-2026。结果表明LLM辅助系统能显著提升OCR质量，但性能仍受限于幻觉等问题。
 
 **核心创新概述**
 
-> 系统评估了LLM在历史文档OCR后校正中的表现，并建立了可复现的多语言基准。
+> 系统性地评估了LLM在历史文档OCR后纠正中的潜力与局限，并构建了可复现的多语言评测框架。
 
 **创新点拆解**
 
-- 构建多语言历史文档OCR后校正数据集HIPE-OCRepair-2026
-- 采用检索导向而非外交式评分，贴近实际搜索应用
-- 评估了从零样本提示到微调等多种LLM适配策略
+- 提出了基于LLM的OCR后纠正方法，涵盖零样本提示、持续预训练和微调等策略
+- 构建了多语言、跨世纪的历史文档数据集HIPE-OCRepair-2026
+- 采用检索导向评分方法，更贴近实际搜索应用场景
 
 **当前局限**
 
-> 竞赛仅涉及新闻和印刷品，未覆盖手写或高度破损文档；无图像输入限制了模型利用视觉信息。
+> LLM在处理历史文档时仍存在幻觉现象，导致纠正错误；不同语言和文档类型的表现差异未充分解释；未利用源图像信息，可能限制纠正效果。
 
 **后续可改进方向**
 
-- 探索视觉-语言结合的方法以利用文档版面信息
-- 研究LLM幻觉对校正准确率的影响及其缓解策略
-- 扩展到更多历史语言和字体类型
+- 探索结合源图像信息的多模态OCR后纠正方法
+- 针对历史文档语言和文化特异性进行LLM领域自适应
+- 设计更鲁棒的评分机制以量化幻觉影响
 
 **工程启发**
 
-> 为数字化图书馆和历史档案的OCR后处理提供评估基准和方法参考，提升检索结果质量。
+> 为数字文化遗产中的大规模OCR后纠正提供了实用评估基准和多种基线方法，对图书馆、档案馆的文档数字化处理有直接指导意义。
 
 **为什么值得关注**
 
-> 直接针对OCR后校正这一经典难题，引入LLM新范式，对OCR流程优化有重要指导意义。
+> 与OCR后纠正这一文档解析核心环节直接相关，且揭示了LLM在此任务中的最新进展和不足。
 
 **原始摘要**
 
@@ -187,130 +119,7 @@ pipeline are publicly released to support future research.
 
 ---
 
-### 3. FedTR: Federated Learning Framework with Transfer Learning for Industrial Visual Inspection
-
-- arXiv: [2607.08014v1](https://arxiv.org/abs/2607.08014v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.08014v1)
-- 作者: Vikash Sathiamoorthy, Shuo Huai, Hao Kong, Di Liu, Wendy Yong Yi Loy, Christian Makaya, Daren Ho, Ravi Subramaniam, Qian Lin, Weichen Liu
-- 发布时间: 2026-07-09T00:40:33Z
-- 分类: cs.CV, cs.LG
-- 相关性评分: 8
-- 主题标签: 联邦学习、迁移学习、工业视觉检测、文字识别
-
-**中文摘要**
-
-> FedTR 是一种面向工业视觉检测的联邦学习框架，结合迁移学习解决标签缺陷识别中的小样本和任务复杂性问题。先在公开数据集上预训练，再在分布式私有数据上微调，实现了95.5%的同质数据端到端文字识别准确率，性能媲美集中式训练。
-
-**核心创新概述**
-
-> 将迁移学习引入联邦学习框架，有效缓解工业视觉检测中数据稀缺和隐私限制问题。
-
-**创新点拆解**
-
-- 提出预训练+联邦微调两阶段训练范式，利用公开数据知识
-- 专门针对标签缺陷识别中的端到端文字识别任务设计
-- 在异质数据上达到94.2%准确率，接近集中式训练水平
-
-**当前局限**
-
-> 实验仅基于墨盒标签数据集，泛化性未知；联邦通信开销和隐私保护强度未详细评估。
-
-**后续可改进方向**
-
-- 在更多工业视觉检测任务上验证框架有效性
-- 研究异构数据和客户端数据分布差异下的优化策略
-- 结合差分隐私等机制增强隐私保护
-
-**工程启发**
-
-> 适用于工业场景中数据隐私敏感的视觉检测任务，尤其适合质检环节的文字识别。
-
-**为什么值得关注**
-
-> 涉及OCR在工业检测中的应用，结合联邦学习解决数据分散和隐私问题，具有工程实践意义。
-
-**原始摘要**
-
-Federated learning (FL) is a collaborative learning scheme to train deep learning models, where
-collaborating parties can consolidate their models without sharing local data with other parties,
-hence preserving data privacy. Nevertheless, when implementing FL in Industrial visual inspection
-(IVI), the constraints posed by limited data availability and the intricate nature of the inspection
-tasks significantly impact the performance of the resulting model. This paper introduces FedTR, a
-novel FL framework incorporating transfer learning designed for Autonomous IVI, focusing on the
-challenging task of identifying label defects through end-to-end text recognition. Transfer learning
-is a method that leverages the knowledge of a pre-trained model to adapt to a different dataset.
-FedTR initially trains the model using a publicly available dataset, after which performs the
-essential federated learning process with model fine-tuning on the distributed and limited private
-data. Extensive experiment results demonstrate the effectiveness and feasibility of FedTR on private
-ink cartridge datasets for label defect identification. FedTR achieves an end-to-end text
-recognition word-level accuracy of 95.5% and 94.2% on homogeneous and heterogeneous data
-respectively. Additionally, it attains performance levels that are on par with those achieved
-through centralized training.
-
----
-
-### 4. R^3: Advertisement Compliance Rectification via Group-Relative Experience Extractor and Curriculum Reinforcement
-
-- arXiv: [2607.07318v1](https://arxiv.org/abs/2607.07318v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.07318v1)
-- 作者: Yuan Chen, Zhenyu Hu, Mengge Xue, Te Cao, Liqun Liu, Peng Shu, Huan Yu, Jie Jiang
-- 发布时间: 2026-07-08T12:05:41Z
-- 分类: cs.CL, cs.LG
-- 相关性评分: 8
-- 主题标签: 视频广告、文本修正、强化学习、内容合规
-
-**中文摘要**
-
-> R^3 是一个视频广告合规修正框架，针对视频中的文本违规（包括语音转录和屏幕文字）进行修正，同时保留原始语义意图。通过经验驱动的数据合成、课程强化学习和包含文字识别、改写、重渲染的整合适配，在工业数据集和线上A/B测试中表现最优。
-
-**核心创新概述**
-
-> 引入群组相对经验提取器和课程强化学习，实现违规修正与语义保留的平衡。
-
-**创新点拆解**
-
-- 设计群组相对经验提取器，基于合规经验合成高质量训练数据
-- 提出课程强化学习策略，层次化奖励同时优化合规性和语义一致性
-- 构建完整的视频修正流水线，集成文字识别、改写和重渲染
-
-**当前局限**
-
-> 仅处理文本违规，未涉及图像或音频内容违规；对改写后的可读性和自然度评估不够深入。
-
-**后续可改进方向**
-
-- 扩展至多模态违规检测与修正
-- 研究改写结果的语义保持度量化指标
-- 探索更轻量的模型以降低工业部署成本
-
-**工程启发**
-
-> 直接应用于在线广告审核，减少人工修改成本，同时维持广告主意图，具有显著工业价值。
-
-**为什么值得关注**
-
-> 涉及OCR文字识别和文本生成，专注于文本修正这一OCR下游任务，与视频内容理解结合紧密。
-
-**原始摘要**
-
-Rigorous content moderation is crucial for online advertising but leads to millions of daily
-rejections. This scale renders manual rectification infeasible, particularly for video
-advertisements. However, existing safety-driven methods often suffer from aggressive over-editing,
-which compromises the advertiser's original semantic intent merely to satisfy compliance. In this
-work, we target the rectification of textual violations in video ads, covering both speech
-transcripts and on-screen text. We propose R^3, a novel framework designed to harmonize compliance
-with original semantic intent preservation. Our approach integrates three key innovations: (1) an
-experience-driven data synthesis framework that bootstraps high-quality supervision via a group-
-Relative compliance experience extractor; (2) a curriculum Reinforcement learning strategy with
-hierarchical rewards designed to enforce compliance while maximizing semantic consistency; and (3) a
-comprehensive video Rectification framework seamlessly integrating text recognition, rewriting, and
-re-rendering for industrial deployment. Extensive experiments on industrial datasets and online A/B
-testing demonstrate that R^3 significantly outperforms state-of-the-art baselines, achieving an
-optimal trade-off between violation rectification and intent preservation.
-
----
-
-### 5. Partial-Reference IQA Based on Hermite-Gauss Structural Prediction and Texture Deviation
+### 2. Partial-Reference IQA Based on Hermite-Gauss Structural Prediction and Texture Deviation
 
 - arXiv: [2607.08563v1](https://arxiv.org/abs/2607.08563v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2607.08563v1)
@@ -318,39 +127,39 @@ optimal trade-off between violation rectification and intent preservation.
 - 发布时间: 2026-07-09T14:54:16Z
 - 分类: eess.IV
 - 相关性评分: 6
-- 主题标签: 图像质量评估、部分参考、结构预测、纹理分析
+- 主题标签: 图像质量评估、局部参考、Hermite-Gauss、纹理偏差、文档预处理
 
 **中文摘要**
 
-> PreSPA 是一种部分参考图像质量评估方法，通过分解感知质量为结构感知和纹理敏感两个互补指标。结构感知指标无需参考，利用Hermite-Gauss预测失真梯度场；纹理敏感指标仅从参考图像提取标量先验，信息开销极小。在六个基准上媲美或超越无参考方法，部分情况达到全参考精度。
+> 本文提出PreSPA，一种基于Hermite-Gauss结构预测和纹理偏差的局部参考图像质量评估框架。它将感知质量分解为结构感知和纹理敏感两个互补指标，其中纹理指标仅从参考图像提取标量先验μ，实现了信息论最小参考量。方法简洁透明，仅含三个可解释参数，计算高效，在多个标准基准上性能接近甚至超越全参考方法。
 
 **核心创新概述**
 
-> 提出结构预测和纹理偏差的双分量框架，参考信息量降至理论最小。
+> 首次将Hermite-Gauss结构预测与纹理偏差结合用于图像质量评估，并实现了最小参考信息量的局部参考范式。
 
 **创新点拆解**
 
-- 利用Hermite-Gauss预测和角方差进行无参考结构退化评估
-- 从参考图像中仅提取标量μ作为纹理先验，信息紧凑
-- 三参数仿射融合，模型透明且无需数据集特定校准
+- 提出结构感知指标，基于Hermite-Gauss预测畸变梯度场及其曲率角方差
+- 提出纹理敏感指标，通过标量先验μ估计局部噪声，μ为唯一参考信息
+- 采用仿射融合三个可解释参数得到最终质量分数，无需数据集特定标定
 
 **当前局限**
 
-> 主要针对自然图像，对文档图像（如OCR结果）的适用性未验证；纹理估计在强结构区域可能不够准确。
+> 测试限于六个标准基准，未涉及真实场景中的复杂畸变（如压缩伪影、混合失真等）；参数空间小可能导致在某些失真类型上精度不足。
 
 **后续可改进方向**
 
-- 评估在文档图像和OCR输出上的表现
-- 扩展纹理先验以捕获更复杂的噪声模式
-- 研究参数自适应融合策略以提高通用性
+- 扩展至更多失真类型和真实应用场景的验证
+- 探索将PreSPA嵌入端到端图像处理或OCR预处理流程
+- 研究μ的先验分布与感知质量之间的更复杂映射关系
 
 **工程启发**
 
-> 提供高效、透明的图像质量评估工具，可用于OCR系统的输出质量监控和优化。
+> 提供了一种低参考开销、计算高效且可解释的图像质量评估方案，适合嵌入式或实时OCR系统中的质量监控。
 
 **为什么值得关注**
 
-> 图像质量评估是OCR预处理和后处理的重要环节，部分参考方法可在参考可用时实现更优性能。
+> 图像质量评估是文档预处理的重要组成部分，直接影响OCR系统性能；PreSPA的低参考特性在缺少参考图像的场景（如历史文档）具有独特优势。
 
 **原始摘要**
 
