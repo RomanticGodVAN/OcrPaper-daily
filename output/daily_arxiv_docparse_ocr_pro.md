@@ -1,184 +1,255 @@
-# OCR / 文档解析研究日报（2026-07-15）
+# OCR / 文档解析研究日报（2026-07-16）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-07-15 04:15:55`
+- 生成时间（UTC）：`2026-07-16 04:23:59`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日论文聚焦文档AI基础模型与评测：MonkeyOCRv2通过大规模多语言预训练和联合学习策略显著提升文档理解性能，并以极小参数量超越既往SOTA；GDP.pdf基准揭示当前前沿模型在专业PDF文档上的接地推理能力严重不足（最佳通过率仅15%）。同时，来自交通预测和工具调用领域的论文分别挑战了Transformer注意力在空间建模中的必要性、强调了视觉信息提取精度对智能体性能的关键影响。
+> 今日5篇论文覆盖了端到端文档解析、场景文本识别、低资源OCR、Transformer的空间信息提取有效性以及LLM作为优化信号的局限性。OvisOCR2（0.8B参数）在文档联合benchmark上首次超越流水线方法，表明端到端解析的可行性；2D-RoPE-STR通过轴向2D旋转位置编码提升了STR对弯曲等困难文本的识别；满文多专家路由系统利用迭代检查点实现了多风格低资源OCR；交通预测领域的分析揭示了注意力机制中的均匀聚合主导，提示在文档任务中可尝试简化空间建模；表格识别研究则警示了LLM作为反馈信号的不可靠性。整体趋势是追求更高效、更鲁棒的模型，并重新审视现有方法的必要性。
 
 ## 二、今日趋势判断
 
-文档AI领域呈现向大规模多语言预训练基础模型演进、以及构建更贴近真实场景的细粒度评测基准两大趋势。同时，视觉感知精度成为多模态系统瓶颈的共识日益突出。
+OCR/文档解析研究正从流水线向端到端Markdown转换演进，同时注重低资源场景和多专家路由；位置编码在STR中的轻量级改进、模型架构的简化分析以及优化信号的可靠性评估成为热点。
 
 ## 三、今日论文概览
 
-1. **MonkeyOCRv2: A Visual-Text Foundation Model for Document AI** | 标签：文档AI、视觉-文本预训练、多任务学习、大规模语料
-2. **GDP.pdf: Benchmarking Grounded Multimodal Reasoning over Professional PDF Documents** | 标签：文档理解、基准评测、多模态推理、PDF解析
-3. **Do We Really Need Transformers for Global Spatial Information Extraction in Traffic Forecasting?** | 标签：空间注意力、交通预测、模型效率、消融研究
-4. **MM-ToolSandBox: A Unified Framework for Evaluating Visual Tool-Calling Agents** | 标签：视觉工具调用、智能体评估、多模态、失败分析
+1. **OvisOCR2 Technical Report** | 标签：端到端文档解析、Markdown生成、数据引擎、强化学习、模型融合
+2. **2D Rotary Position Embedding for Scene Text Recognition with Transformers** | 标签：场景文本识别、旋转位置编码、Transformer、编码器-解码器、各向异性
+3. **Multi-Expert Routing for Multi-Domain Low-Resource OCR: A Manchu Case Study** | 标签：多专家路由、低资源OCR、多风格文本、满文、领域分类
+4. **Do We Really Need Transformers for Global Spatial Information Extraction in Traffic Forecasting?** | 标签：空间信息提取、Transformer、注意力机制、均匀聚合、交通预测
+5. **Evaluation Ability Does Not Imply Optimization Utility: LLM-as-a-Judge Signals in Closed-Loop Table Recognition** | 标签：LLM-as-a-judge、表格识别、闭环重生成、结构保留、优化实用性
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- MonkeyOCRv2联合图像生成与像素重建进行预训练，兼顾高层语义与低层细节
-- MonkeyOCRv2构建1.13亿张图、17种语言的大规模文档图像语料库
-- GDP.pdf采用多模型失败问题和原子判据评分，提升评测的挑战性和细粒度
+- 数据增强与合成数据的结合成为提升模型泛化能力的关键策略（OvisOCR2数据引擎）。
+- 利用训练过程中的中间检查点作为专家，无需额外训练即可处理多风格领域（满文路由）。
+- 参数自由的架构改进：2D-RoPE-STR不改变原模型结构，仅替换位置编码。
+- 模型融合与在线精炼被用于进一步提升端到端解析的最终性能（OvisOCR2）。
+- 控制消融框架用于分析注意力机制的实际贡献，揭示简单操作的潜力（交通预测）。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 研究面向文档AI的更高效预训练任务组合，以降低MonkeyOCRv2联合训练的计算开销
-- 针对低资源语言（如手写体、古文书）进行领域自适应，提升MonkeyOCRv2覆盖度
-- 扩展GDP.pdf基准至更多专业领域并自动化问题生成，增强评测体系
-- 探索在文档AI模型中用均匀混合等简单操作替代Transformer注意力，提升推理效率
-- 开发针对视觉工具调用智能体的视觉感知增强方法，解决精度瓶颈
+- 探索将均匀聚合等简化空间建模方法应用于文档版面分析和表格识别，以降低计算开销。
+- 设计结构感知的确定性指标（如结构保留率）与LLM结合，作为闭环优化中的可靠反馈信号。
+- 将2D-RoPE-STR扩展至竖排和任意方向文本，适应更复杂的文档场景。
+- 开发自适应路由机制，例如在字符级别或区域级别动态选择专家，提升低资源多风格OCR的细粒度处理能力。
+- 研究端到端文档解析模型在极端低资源手写场景的迁移能力，并通过数据引擎定向合成困难样本。
+- 构建跨行业/多语言的端到端文档解析基准，推动模型通用性评估。
+- 结合强化学习与结构保留指令，防止重生成过程中的结构破坏，提升表格识别闭环优化的可靠性。
+- 将OvisOCR2的模型融合策略系统化，形成可复用的端到端解析训练框架。
 
 ## 六、工程落地启发
 
-- MonkeyOCRv2作为0.7B模型可直接替换文档AI系统的视觉编码器，适合端侧部署
-- GDP.pdf基准可用于评估实测系统的接地推理能力，定位表格对齐、图表理解等关键故障点
-- 设计文档解析模型时，可考虑将全局空间建模简化为均匀混合以降低复杂度
+- OvisOCR2的0.8B模型已在Hugging Face开源，可作为工业级端到端文档解析的基座。
+- 2D-RoPE-STR可即插即用地替换现有STR模型的位置编码，显著提升弯曲文本识别。
+- 满文路由系统提供了低资源多风格OCR的实用模板——复用迭代检查点即可。
+- 交通预测论文提示：在空间特征提取中，尝试用均匀池化替代注意力可大幅降低计算量，且性能不减。
+- 表格识别研究警告：不要轻易将LLM作为闭环优化的唯一信号，应搭配确定性指标进行验证。
 
 ## 七、优先关注论文
 
-- **MonkeyOCRv2: A Visual-Text Foundation Model for Document AI**：代表文档AI基础模型方向，发布大规模预训练语料与联合学习策略，后续开源与扩展值得跟进
-- **GDP.pdf: Benchmarking Grounded Multimodal Reasoning over Professional PDF Documents**：揭示了当前主流模型在专业PDF上的严重短板，将推动文档理解评测标准的发展
+- **OvisOCR2 Technical Report**：首个在文档联合benchmark上超越流水线的端到端模型，且已开源，值得跟踪其后续版本和应用案例。
+- **2D Rotary Position Embedding for Scene Text Recognition with Transformers**：提供轻量级、即插即用的STR改进方案，可快速集成到现有系统，且对困难样本有效。
+- **Multi-Expert Routing for Multi-Domain Low-Resource OCR: A Manchu Case Study**：提出创新的专家路由策略，无需额外训练即可处理多风格文本，可推广到其他低资源语言。
+- **Evaluation Ability Does Not Imply Optimization Utility: LLM-as-a-Judge Signals in Closed-Loop Table Recognition**：警示LLM反馈的不可靠性，对设计闭环优化系统有重要参考价值。
 
 ## 八、论文逐篇解析
 
-### 1. MonkeyOCRv2: A Visual-Text Foundation Model for Document AI
+### 1. OvisOCR2 Technical Report
 
-- arXiv: [2607.11562v1](https://arxiv.org/abs/2607.11562v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.11562v1)
-- 作者: Yuliang Liu, Zhang Li, Ziyang Zhang, Shuo Zhang, Qiang Liu, Jiajun Song, Zidun Guo, Xinhan Wang, Handong Zheng, Yang Liu, Dongliang Luo, Zhiyin Ma, Jiarui Zhang, Xiang Bai
-- 发布时间: 2026-07-13T13:43:39Z
-- 分类: cs.CV
-- 相关性评分: 32
-- 主题标签: 文档AI、视觉-文本预训练、多任务学习、大规模语料
+- arXiv: [2607.13639v1](https://arxiv.org/abs/2607.13639v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.13639v1)
+- 作者: Shiyin Lu, Yinglun Li, Yu Xia, Yuhui Chen, An-Yang Ji, Jun-Peng Jiang, Qing-Guo Chen, Jianshan Zhao, En Lin, Haijun Li, Cheng Qin, Zhao Xu, Weihua Luo
+- 发布时间: 2026-07-15T09:32:33Z
+- 分类: cs.CV, cs.AI
+- 相关性评分: 24
+- 主题标签: 端到端文档解析、Markdown生成、数据引擎、强化学习、模型融合
 
 **中文摘要**
 
-> 提出MonkeyOCRv2，一种面向文档AI的视觉-文本基础模型。针对主流视觉编码器难以处理文档图像中密集文本和细粒度字符笔画的问题，构建了包含1.13亿张图像、覆盖17种语言的MonkeyDoc v2预训练语料库。提出联合学习图像到文本生成与像素级文档重建的预训练策略，前者对齐视觉与文本表示，后者保留字符笔画和布局细节。在文本识别、公式识别、文本检测、文档篡改检测和重叠文本分割五个任务上验证了有效性。作为多模态大语言模型的视觉编码器，与轻量级语言模型组成0.7B参数的文档解析模型，在MDPBench上达到开源新SOTA（超越此前最佳3B模型2.8%绝对提升，编码器尺寸小约11倍）。
+> OvisOCR2是一个0.8B参数的端到端文档解析模型，能将文档页面图像转换为按自然阅读顺序排列的Markdown表示，涵盖文本、公式、表格和视觉区域。通过构建数据引擎（结合真实文档标注和合成数据）、采用监督微调、强化学习（4B分支，多组件奖励设计）、在线精炼和模型融合等策略，在OmniDocBench v1.6上以96.58总分取得领先，超越传统流水线方法。
 
 **核心创新概述**
 
-> 构建了目前最大规模（1.13亿张图像、17种语言）的文档图像预训练语料；提出图像生成与像素重建联合预训练策略。
+> 首个在文档解析联合benchmark上超越流水线方法的端到端模型，展示了端到端解析的潜力。
 
 **创新点拆解**
 
-- 构建大规模多语言文档图像预训练语料库MonkeyDoc v2
-- 联合图像到文本生成与像素级文档重建的预训练方法
+- 结合真实文档标注和合成数据的数据引擎
+- 多组件奖励设计的强化学习训练
+- 在线精炼与模型融合策略
+- 0.8B参数下的高精度文档解析
 
 **当前局限**
 
-> 论文未明确说明，但可推断：模型在极端低资源语言或高度退化文档上的表现可能受限；联合训练策略的计算开销较大；像素级重建可能对噪声敏感。
+> 论文未明确讨论模型在极端低资源或手写场景的性能。
 
 **后续可改进方向**
 
-- 探索更高效的预训练任务组合，减少计算开销
-- 针对低资源语言或写本文档进行领域自适应
-- 研究像素级重建对不同噪声类型的鲁棒性
+- 探索更高效的模型架构以降低计算开销
+- 扩展到更多语言和复杂版面类型
+- 增强对长尾和挑战性场景的鲁棒性
+- 研究跨模态（如图文混合）的联合优化
 
 **工程启发**
 
-> 为文档AI提供可直接替换的视觉编码器，显著提升多任务性能；0.7B模型在端侧部署具有潜力。
+> 提供了一种可行的端到端文档解析方案，适合工业部署，且模型已在Hugging Face开源。
 
 **为什么值得关注**
 
-> 关注文档图像预训练与多任务泛化，与OCR基础模型构建直接相关。
+> 直接相关，本文提出先进的端到端OCR文档解析模型，是OCR领域的前沿工作。
 
 **原始摘要**
 
-Mainstream visual encoders are pretrained on natural images and cannot be effectively applied to
-document images without document-oriented adaptation, as dense text and fine-grained character
-strokes demand character-level visual perception. We present MonkeyOCRv2, a visual-text pretrained
-model for document AI. First, we construct MonkeyDoc v2, to our knowledge the largest document-image
-pretraining corpus, comprising 113 million images spanning 17 languages. Second, we propose a
-pretraining strategy that jointly learns image-to-text generation and pixel-level document
-reconstruction: the former aligns visual representations with textual content, while the latter
-preserves character strokes and layout details. Extensive experiments are conducted on five
-representative document analysis tasks, including text recognition, formula recognition, text
-detection, document tampering detection, and overlapping text segmentation. Replacing the original
-encoders with MonkeyOCRv2 consistently improves performance across all five tasks. Finally, we
-validate its effectiveness as the vision encoder of multimodal large language models on the more
-challenging tasks of document parsing and document understanding. Kept frozen and paired with a
-lightweight language model, it yields a 0.7B document parsing model that sets a new open-source
-state-of-the-art on MDPBench, a recent benchmark spanning digital-born and photographed documents
-across 17 languages, surpassing the previous best 3B dots.mocr by 2.8% absolute with a vision
-encoder roughly 11$\times$ smaller. The frozen encoder also powers a document understanding model
-that outperforms counterparts built on CLIP, DINO, and SAM across eight benchmarks under identical
-training settings. These results suggest that document-oriented visual pretraining can serve as a
-foundation for document intelligence in its own right.
+We introduce OvisOCR2, a 0.8B document parsing model. OvisOCR2 is designed as an end-to-end parser:
+given a document page image, it generates a Markdown representation in natural reading order,
+covering text, formulas, tables, and visual regions. We build a data engine that combines filtered
+real-document annotations with synthetic pages whose rendered images and Markdown targets are
+derived from the same HTML source. The training recipe includes supervised fine-tuning,
+reinforcement learning on a 4B branch with a multi-component reward design, on-policy distillation
+into the 0.8B model, and model fusion. On OmniDocBench v1.6, OvisOCR2 achieves a state-of-the-art
+overall score of 96.58, placing an end-to-end model at the top of this leaderboard previously
+dominated by pipeline methods and highlighting the potential of end-to-end document parsing. On
+PureDocBench, OvisOCR2 also achieves the highest Avg3 score of 75.06. Beyond these two public
+benchmarks, we evaluate OvisOCR2 on an in-house benchmark designed to cover a broader set of long-
+tail and challenging scenarios. OvisOCR2 obtains the best overall performance among the compared
+methods, providing further evidence of its generalization and robustness. OvisOCR2 is available at
+https://huggingface.co/ATH-MaaS/OvisOCR2.
 
 ---
 
-### 2. GDP.pdf: Benchmarking Grounded Multimodal Reasoning over Professional PDF Documents
+### 2. 2D Rotary Position Embedding for Scene Text Recognition with Transformers
 
-- arXiv: [2607.11192v2](https://arxiv.org/abs/2607.11192v2)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.11192v2)
-- 作者: Suhaas Garre, Emily Ritchie, Sushant Mehta, Edwin Chen
-- 发布时间: 2026-07-13T07:44:07Z
+- arXiv: [2607.13458v1](https://arxiv.org/abs/2607.13458v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.13458v1)
+- 作者: Zobeir Raisi
+- 发布时间: 2026-07-15T05:38:24Z
 - 分类: cs.CV
 - 相关性评分: 19
-- 主题标签: 文档理解、基准评测、多模态推理、PDF解析
+- 主题标签: 场景文本识别、旋转位置编码、Transformer、编码器-解码器、各向异性
 
 **中文摘要**
 
-> 提出GDP_pdf基准，用于评估多模态模型在专业PDF文档上的接地多模态推理能力。基准由10个专业领域的从业者编写问答对，仅保留至少两个前沿模型失败的题目，覆盖11种能力（文本提取、表格/图表理解、交叉引用、空间推理等）。评估7个前沿模型，最佳通过率仅15%，最差1%。错误原因主要为表格对齐错误、图表误读、忽略脚注/例外、计数错误、扫描噪声及文本修正被忽略等。
+> 提出2D-RoPE-STR，将轴向2D旋转位置编码适配到场景文本识别（STR）的编码器-解码器Transformer中。主要创新为：根据文本长宽比进行各向异性的行列维度分配，并将旋转耦合扩展到编码器-解码器交叉注意力。该方法参数自由，无需修改架构，在六个标准benchmark上验证了有效性，尤其对弯曲、旋转和透视图畸变文本有改善。
 
 **核心创新概述**
 
-> 构建面向真实专业场景的PDF问答基准，由领域专家设计问题，并设置严格筛选标准（多模型失败才入选）；提供详细能力分类和分级评分。
+> 首次将2D旋转位置编码适配到STR的编码器-解码器结构，并针对文本各向异性特征进行维度分配。
 
 **创新点拆解**
 
-- 由十领域专业人士创建的真实PDF问答数据集
-- 基于原子判据的分级评分体系与能力分类法
+- 各向异性的行列维度分配以适应文本长宽比
+- 将旋转位置编码扩展到交叉注意力
+- 参数自由，不改变原有架构
 
 **当前局限**
 
-> 基准规模较小（100题），可能不足以全面评估模型能力；问题来源偏向某些领域；依赖人工构建，扩展性有限。
+> 论文未报告在极端长文本或超宽长宽比下的性能。
 
 **后续可改进方向**
 
-- 扩展至更多领域和文档类型
-- 自动化生成高质量问题以扩大规模
-- 引入更多细粒度能力分类和错误分析维度
+- 探索自适应长宽比的分辨率调整策略
+- 将2D位置编码扩展到多方向文本（如竖排）
+- 结合语言模型进一步提升解码准确性
+- 在更多STR benchmark上进行验证
 
 **工程启发**
 
-> 为文档AI系统提供真实场景评测工具，揭示模型在实际应用中的关键瓶颈。
+> 轻量级改进，易于集成到现有Transformer-based STR系统中，提升弯曲等困难样本的识别效果。
 
 **为什么值得关注**
 
-> 直接面向PDF文档的理解与推理，是文档AI的重要评测基准。
+> 直接相关，提出了一种针对文本场景的新位置编码方法，提升OCR识别能力。
 
 **原始摘要**
 
-A large share of day-to-day work in professional domains happens inside PDF files: benefits packets,
-leases, datasheets, clinical guidelines, construction plans. Benchmarks for document AI have
-generally measured the required capabilities in isolation: OCR, layout analysis, chart reasoning,
-table QA, document VQA. A high score on any one of them does not necessarily reveal whether a model
-can answer a realistic question that someone in the field would actually ask about a specific PDF.
-GDP_pdf is a benchmark built to measure this directly. It consists of question-document pairs
-authored by working professionals in ten fields, and a candidate question was kept only when at
-least two frontier multimodal models failed it in a way that mattered: a wrong answer, missed
-decisive evidence, or a fabricated claim, rather than a superficial difference such as style. Each
-item comes with a rubric of atomic criteria, so we can report a graded rubric score as well as a
-strict task-level pass rate, and each item is tagged against a taxonomy of eleven capabilities in
-three tiers, spanning text extraction and grounding, table and chart comprehension, cross-
-referencing, spatial reasoning, and abstention on unsupported queries. We evaluated seven frontier
-models on the 100-item benchmark. The best model passed only 15% of the items and the worst passed
-1%. Most errors trace back to a small set of recurring loss patterns: misaligned tables, misread
-charts, skipped footnotes and exclusions, miscounted floor-plan symbols, scan noise, and amendments
-that supersede earlier text.
+Scene Text Recognition (STR) remains challenging due to the diversity of text appearances, including
+curvature, rotation, and perspective distortion. Recent Transformer-based approaches perform well
+but usually rely on one-dimensional positional encodings that ignore the 2D spatial structure of
+text images. Axial 2D extensions of Rotary Position Embedding (RoPE) exist for vision Transformers,
+but they assume roughly square, isotropic image content and apply the rotation only within encoder
+self-attention. Scene text violates both assumptions: crops are markedly anisotropic, and STR models
+are encoder-decoder, so the decoder must relate its queries to the encoder's 2D layout through
+cross-attention. We introduce 2D-RoPE-STR, which adapts axial 2D-RoPE to this setting through (1) an
+anisotropic row/column dimension allocation matched to the aspect ratio of text, and (2) an
+extension of the rotary coupling into encoder-decoder cross-attention, letting autoregressive
+decoding steps attend to encoder tokens by their 2D layout, a setting not addressed by prior
+encoder-only formulations. Both changes are essentially parameter-free and require no architectural
+redesign beyond the positional-encoding module. We further introduce a diagnostic protocol (a
+controlled ablation pair isolating only the positional encoding, an image-level net-win disagreement
+analysis, and encoder attention visualization) that identifies where and why relative 2D position
+helps: curved, rotated, and perspective-distorted layouts where reading order departs from a
+straight horizontal line. On six standard benchmarks (IIIT5K, SVT, ICDAR 2013, ICDAR 2015, CUTE80,
+SVTP), gains concentrate on exactly these irregular layouts, with ablations isolating each design
+choice against 1D RoPE and 2D sinusoidal and learnable alternatives.
 
 ---
 
-### 3. Do We Really Need Transformers for Global Spatial Information Extraction in Traffic Forecasting?
+### 3. Multi-Expert Routing for Multi-Domain Low-Resource OCR: A Manchu Case Study
+
+- arXiv: [2607.14041v1](https://arxiv.org/abs/2607.14041v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.14041v1)
+- 作者: Zhan Chen, Jiqiao Ma, Chih-wen Kuo
+- 发布时间: 2026-07-15T17:12:37Z
+- 分类: cs.CV, cs.AI, cs.LG
+- 相关性评分: 9
+- 主题标签: 多专家路由、低资源OCR、多风格文本、满文、领域分类
+
+**中文摘要**
+
+> 针对满文历史文档OCR面临多种书写风格（楷书、行书、草书）且标注数据有限的问题，提出了一种多专家路由系统。利用迭代微调过程中的检查点作为领域专家，并通过轻量级页面级图像分类器进行路由。在三个冻结测试集上，路由系统在字符错误率（CER）上匹配了所选专家，页面级领域分类准确率达99.3%。
+
+**核心创新概述**
+
+> 利用迭代微调过程中的检查点作为领域专家，无需额外训练特定领域专家。
+
+**创新点拆解**
+
+- 多专家路由系统复用迭代微调检查点
+- 轻量级页面级图像分类器进行风格路由
+- 在低资源场景下有效处理多风格文本
+
+**当前局限**
+
+> 仅针对满文，且需要初始迭代微调过程产生的检查点池。
+
+**后续可改进方向**
+
+- 扩展到其他低资源语言或文字变体
+- 探索更细粒度的字符级路由
+- 研究在线适应新风格的新策略
+- 减少对迭代微调过程的依赖
+
+**工程启发**
+
+> 提供了一种低资源多风格OCR的实用方案，可复用已有训练过程中的模型。
+
+**为什么值得关注**
+
+> 直接相关，专注于OCR任务中的多风格文本识别，并针对低资源问题提出了解决方案。
+
+**原始摘要**
+
+Historical Manchu OCR must accommodate various visually distinct writing styles, including regular
+script, running script, and the semi-cursive chancery hand used in palace memorials, despite limited
+labeled data. We study a multi-expert system that reuses checkpoints from an iterative fine-tuning
+process as domain specialists and uses a lightweight page-level image classifier to dispatch pages
+by visual style. When the checkpoint pool lacks a suitable specialist, we train an additional expert
+for that domain. On three frozen test sets, the routed system matches the selected specialist for
+each style at two-decimal precision: 0.30 percent CER on regular script, 1.57 percent on memorials,
+and 4.83 percent on running script. The router achieves 99.3 percent page-level domain accuracy and
+matches the domain-label oracle at the same precision. Two of the three selected specialists were
+not trained specifically for their final domain; only the running-script expert was trained with
+that domain as its target. We report the evaluation protocol, router design, and per-page
+predictions to make the comparison reproducible.
+
+---
+
+### 4. Do We Really Need Transformers for Global Spatial Information Extraction in Traffic Forecasting?
 
 - arXiv: [2607.12462v1](https://arxiv.org/abs/2607.12462v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2607.12462v1)
@@ -186,37 +257,40 @@ that supersede earlier text.
 - 发布时间: 2026-07-14T07:44:01Z
 - 分类: cs.AI
 - 相关性评分: 9
-- 主题标签: 空间注意力、交通预测、模型效率、消融研究
+- 主题标签: 空间信息提取、Transformer、注意力机制、均匀聚合、交通预测
 
 **中文摘要**
 
-> 研究交通预测中全局空间信息提取是否必须使用Transformer注意力机制。设计可控消融框架，仅替换空间混合模块，对比全范围均匀混合与标准空间注意力。在6个交通基准上，两者平均MAE仅差0.14%，且均匀混合将节点级别复杂度从O(N²)降至O(N)。机制分析将空间注意力分解为行均匀全局背景与非均匀残差，残差贡献不稳定，表明空间注意力应仅在稳定增益超过均匀背景时才被采用。
+> 本文质疑交通预测中是否需要Transformer来提取全局空间信息。通过设计控制消融框架，比较标准空间注意力与均匀全局聚合操作，发现在6个基准上，均匀聚合与标准注意力性能相近，但复杂度从O(N^2)降至O(N)。机制分析表明，空间注意力可分解为均匀全局背景和非均匀残差，后者贡献有限，暗示应谨慎使用空间注意力。
 
 **核心创新概述**
 
-> 质疑Transformer在交通预测全局空间建模中的必要性，通过严格消融实验发现简单均匀混合即可达到相当性能。
+> 揭示了空间注意力中的均匀全局背景主导信息提取，挑战了需用高自由度注意力建模全局依赖的普遍认知。
 
 **创新点拆解**
 
-- 设计可控消融框架分离空间注意力与非注意力全局建模
-- 提出空间注意力的行均匀分解分析与残差贡献评估方法
+- 设计控制消融框架区分均匀聚合与注意力
+- 机制分解将空间注意力拆分为行均匀背景与残差
+- 发现均匀聚合在多数指标上性能不输注意力
 
 **当前局限**
 
-> 仅针对交通预测任务，结论可能不适用于其他序列建模；未考虑长距离动态依赖的建模。
+> 实验仅在交通预测领域，未在其他空间关系任务上验证。
 
 **后续可改进方向**
 
-- 在更多图结构任务上验证均匀混合的适用性
-- 探索在需要动态全局建模时如何有效结合注意力
+- 在更广泛的空间建模任务中验证均匀聚合的适用性
+- 探索自适应选择全局聚合或注意力的混合策略
+- 研究非均匀残差在哪些场景下确实重要
+- 将分析框架推广到其他领域（如图像、文档）
 
 **工程启发**
 
-> 提示交通预测模型设计可简化空间模块，降低计算成本，提升部署效率。
+> 提出了一种高效的空间信息提取替代方案，可降低计算成本，适用于资源受限场景。
 
 **为什么值得关注**
 
-> 虽非直接OCR，但涉及注意力机制在空间信息提取中的必要性分析，对文档布局理解中的全局建模有参考价值。
+> 间接相关，尽管领域不同，但其对空间信息提取的质疑和简化思路可能启发OCR中更高效的空间建模。
 
 **原始摘要**
 
@@ -237,65 +311,66 @@ corresponding source code is publicly available at: https://github.com/uuesti/U-
 
 ---
 
-### 4. MM-ToolSandBox: A Unified Framework for Evaluating Visual Tool-Calling Agents
+### 5. Evaluation Ability Does Not Imply Optimization Utility: LLM-as-a-Judge Signals in Closed-Loop Table Recognition
 
-- arXiv: [2607.11818v1](https://arxiv.org/abs/2607.11818v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.11818v1)
-- 作者: Kaixin Ma, Di Feng, Alexander Metz, Jiarui Lu, Eshan Verma, Afshin Dehghan
-- 发布时间: 2026-07-13T17:13:09Z
-- 分类: cs.CV, cs.AI
-- 相关性评分: 9
-- 主题标签: 视觉工具调用、智能体评估、多模态、失败分析
+- arXiv: [2607.13347v1](https://arxiv.org/abs/2607.13347v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.13347v1)
+- 作者: Donghwan Kim
+- 发布时间: 2026-07-15T00:14:31Z
+- 分类: cs.CL, cs.AI, cs.LG
+- 相关性评分: 3
+- 主题标签: LLM-as-a-judge、表格识别、闭环重生成、结构保留、优化实用性
 
 **中文摘要**
 
-> 提出MM-ToolSandBox，用于评估视觉工具调用智能体的基准和框架。包含500+工具、16个应用域，支持多图多轮任务，需智能体将渐进输入的视觉信息转换为可执行工具调用，并处理目标修订、错误纠正等对话现象。自动化场景生成流水线产出258个人工验证场景和50个UI交互变体。评估12个模型（4B开源至前沿闭源），最佳成功率低于50%。失败分析发现，53%失败源于视觉信息提取错误而非规划错误，且小模型主要失败在规划，大模型主要失败在视觉感知。
+> 研究了LLM-as-a-judge在表格识别闭环重生成中作为反馈信号的有效性。使用确定性TEDS评估发现：法官信号弱（分数常并列、排名不可复现）、重生成可能导致严重损失（结构保留指令可减少损失但无提升），且评估能力并不等价于优化实用性。迭代改善需更可靠的信号检查结构变化。
 
 **核心创新概述**
 
-> 首个支持多图多轮、带状态执行的视觉工具调用基准；揭示视觉精度而非规划是当前大模型的主要瓶颈。
+> 首次在表格识别任务中质疑LLM作为优化信号的有效性，并揭示评估能力与优化实用性的分离。
 
 **创新点拆解**
 
-- 构建包含500+工具的多域可执行环境
-- 自动化场景生成与多阶段质量过滤
-- 失败模式的规划-精度交叉分析
+- 在表格识别任务中系统验证LLM-as-a-judge的闭环反馈效用
+- 发现重生成中的结构保留失败是严重损失的直接机制
+- 提出评估能力不等于优化实用性的观点
 
 **当前局限**
 
-> 场景数量有限（258+50）；工具覆盖可能偏向常见应用；真实部署中环境交互复杂性可能更高。
+> 仅针对表格识别，且使用特定数据集和实验设置。
 
 **后续可改进方向**
 
-- 扩展工具种类和场景数量
-- 研究提升视觉信息提取精度的方法
-- 针对不同规模模型设计互补的增强策略
+- 设计更可靠的验证信号（如结构感知指标）
+- 探索将LLM判断与确定性指标结合的策略
+- 研究在重生成中确保目标保留的方法
+- 在更广泛的OCR任务中验证此发现
 
 **工程启发**
 
-> 为构建可靠的视觉工具调用智能体提供评测标准和诊断工具，指导后续模型改进方向。
+> 警示了在工程中过度依赖LLM反馈的风险，建议结合确定性指标进行闭环优化。
 
 **为什么值得关注**
 
-> 涉及文档类任务中的视觉工具调用，对文档AI中的多步操作和视觉理解有参考价值。
+> 直接相关，研究LLM在OCR任务（表格识别）中的优化应用，对设计可靠的OCR系统有指导意义。
 
 **原始摘要**
 
-We introduce MM-ToolSandBox, a benchmark and evaluation framework for visually grounded tool-calling
-agents. The framework provides a stateful execution environment spanning 500+ tools across 16
-application domains, supporting multi-image, multi-turn tasks where agents must ground progressively
-arriving visual inputs into executable tool calls while handling realistic conversational phenomena
-(goal revisions, error corrections, state mutations). An automated scenario generation pipeline
-produces diverse, visually grounded scenarios through information-flow-guided planning and multi-
-stage quality filtering, yielding 258 human-verified nominal scenarios and 50 variants targeting
-interactive UI applications. Evaluating 12 state-of-the-art models, from 4B open-weight to frontier
-proprietary systems, shows that current models still lack robust visual tool-calling capability:
-even the best model achieves below 50% success rate. Our failure analysis further reveals that
-visual precision, not only planning, is a primary bottleneck for capable models: 53% of failures
-stem from incorrect information extraction from images despite otherwise correct task workflows. A
-planning-to-precision crossover emerges with scale: smaller models fail at deciding what to do,
-while larger models fail at perceiving what they see, suggesting fundamentally different research
-directions for improving models at different capability levels. The framework and the benchmark are
-publicly available at https://github.com/apple/ml-mmtoolsandbox
+LLM-as-a-judge is widely used to provide feedback and selection signals in closedloop regeneration,
+but this use remains insufficiently validated. We study it in table recognition, where deterministic
+TEDS evaluation provides a controlled testbed, using FinTabNet and OmniDocBench. Three findings
+emerge. First, judge signals were weak on both datasets: scores frequently tied, rankings were not
+reproducible, and the only selection policy that beat random on both datasets depended on an
+earliest-iteration tie rule, so its advantage cannot be attributed to the judge scores alone.
+Iteration produced better candidates, but the judge failed to recover them. Second, severe losses
+occurred even without specific judge feedback. A structurepreserving instruction significantly
+reduced the severe-loss rate on FinTabNet and was directionally consistent on OmniDocBench. The
+contrasts support target-preservation failure under unconstrained regeneration as a proximate
+mechanism of the observed severe losses. Third, the structure-preservation constraint reduced the
+severe-loss tail but produced no improvement. In an exploratory 2x2 analysis, the same protection
+was not stably observed when judge feedback was retained. These results do not dispute the value of
+LLMs as evaluators. Instead, they show that evaluation ability does not imply optimization utility.
+Iterative refinement requires, at minimum, a verification signal that deterministically detects
+structural change, rather than judge scores alone.
 
 ---
