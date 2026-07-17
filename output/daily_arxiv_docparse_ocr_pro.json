@@ -1,58 +1,13 @@
 {
   "meta": {
-    "report_date": "2026-07-16",
-    "generated_at_utc": "2026-07-16 04:23:59",
+    "report_date": "2026-07-17",
+    "generated_at_utc": "2026-07-17 04:23:15",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
-    "llm_enabled": true,
-    "llm_note": null,
+    "llm_enabled": false,
+    "llm_note": "DeepSeek 处理失败：Expecting ',' delimiter: line 99 column 3 (char 3747)",
     "count": 5
   },
-  "synthesis": {
-    "executive_summary": "今日5篇论文覆盖了端到端文档解析、场景文本识别、低资源OCR、Transformer的空间信息提取有效性以及LLM作为优化信号的局限性。OvisOCR2（0.8B参数）在文档联合benchmark上首次超越流水线方法，表明端到端解析的可行性；2D-RoPE-STR通过轴向2D旋转位置编码提升了STR对弯曲等困难文本的识别；满文多专家路由系统利用迭代检查点实现了多风格低资源OCR；交通预测领域的分析揭示了注意力机制中的均匀聚合主导，提示在文档任务中可尝试简化空间建模；表格识别研究则警示了LLM作为反馈信号的不可靠性。整体趋势是追求更高效、更鲁棒的模型，并重新审视现有方法的必要性。",
-    "trend_summary": "OCR/文档解析研究正从流水线向端到端Markdown转换演进，同时注重低资源场景和多专家路由；位置编码在STR中的轻量级改进、模型架构的简化分析以及优化信号的可靠性评估成为热点。",
-    "common_innovations": [
-      "数据增强与合成数据的结合成为提升模型泛化能力的关键策略（OvisOCR2数据引擎）。",
-      "利用训练过程中的中间检查点作为专家，无需额外训练即可处理多风格领域（满文路由）。",
-      "参数自由的架构改进：2D-RoPE-STR不改变原模型结构，仅替换位置编码。",
-      "模型融合与在线精炼被用于进一步提升端到端解析的最终性能（OvisOCR2）。",
-      "控制消融框架用于分析注意力机制的实际贡献，揭示简单操作的潜力（交通预测）。"
-    ],
-    "future_directions": [
-      "探索将均匀聚合等简化空间建模方法应用于文档版面分析和表格识别，以降低计算开销。",
-      "设计结构感知的确定性指标（如结构保留率）与LLM结合，作为闭环优化中的可靠反馈信号。",
-      "将2D-RoPE-STR扩展至竖排和任意方向文本，适应更复杂的文档场景。",
-      "开发自适应路由机制，例如在字符级别或区域级别动态选择专家，提升低资源多风格OCR的细粒度处理能力。",
-      "研究端到端文档解析模型在极端低资源手写场景的迁移能力，并通过数据引擎定向合成困难样本。",
-      "构建跨行业/多语言的端到端文档解析基准，推动模型通用性评估。",
-      "结合强化学习与结构保留指令，防止重生成过程中的结构破坏，提升表格识别闭环优化的可靠性。",
-      "将OvisOCR2的模型融合策略系统化，形成可复用的端到端解析训练框架。"
-    ],
-    "engineering_takeaways": [
-      "OvisOCR2的0.8B模型已在Hugging Face开源，可作为工业级端到端文档解析的基座。",
-      "2D-RoPE-STR可即插即用地替换现有STR模型的位置编码，显著提升弯曲文本识别。",
-      "满文路由系统提供了低资源多风格OCR的实用模板——复用迭代检查点即可。",
-      "交通预测论文提示：在空间特征提取中，尝试用均匀池化替代注意力可大幅降低计算量，且性能不减。",
-      "表格识别研究警告：不要轻易将LLM作为闭环优化的唯一信号，应搭配确定性指标进行验证。"
-    ],
-    "watchlist": [
-      {
-        "title": "OvisOCR2 Technical Report",
-        "watch_reason": "首个在文档联合benchmark上超越流水线的端到端模型，且已开源，值得跟踪其后续版本和应用案例。"
-      },
-      {
-        "title": "2D Rotary Position Embedding for Scene Text Recognition with Transformers",
-        "watch_reason": "提供轻量级、即插即用的STR改进方案，可快速集成到现有系统，且对困难样本有效。"
-      },
-      {
-        "title": "Multi-Expert Routing for Multi-Domain Low-Resource OCR: A Manchu Case Study",
-        "watch_reason": "提出创新的专家路由策略，无需额外训练即可处理多风格文本，可推广到其他低资源语言。"
-      },
-      {
-        "title": "Evaluation Ability Does Not Imply Optimization Utility: LLM-as-a-Judge Signals in Closed-Loop Table Recognition",
-        "watch_reason": "警示LLM反馈的不可靠性，对设计闭环优化系统有重要参考价值。"
-      }
-    ]
-  },
+  "synthesis": null,
   "papers": [
     {
       "title": "OvisOCR2 Technical Report",
@@ -82,30 +37,14 @@
       ],
       "arxiv_id": "2607.13639v1",
       "score": 24,
-      "topic_tags": [
-        "端到端文档解析",
-        "Markdown生成",
-        "数据引擎",
-        "强化学习",
-        "模型融合"
-      ],
-      "zh_summary": "OvisOCR2是一个0.8B参数的端到端文档解析模型，能将文档页面图像转换为按自然阅读顺序排列的Markdown表示，涵盖文本、公式、表格和视觉区域。通过构建数据引擎（结合真实文档标注和合成数据）、采用监督微调、强化学习（4B分支，多组件奖励设计）、在线精炼和模型融合等策略，在OmniDocBench v1.6上以96.58总分取得领先，超越传统流水线方法。",
-      "novelty": "首个在文档解析联合benchmark上超越流水线方法的端到端模型，展示了端到端解析的潜力。",
-      "innovation_points": [
-        "结合真实文档标注和合成数据的数据引擎",
-        "多组件奖励设计的强化学习训练",
-        "在线精炼与模型融合策略",
-        "0.8B参数下的高精度文档解析"
-      ],
-      "limitations": "论文未明确讨论模型在极端低资源或手写场景的性能。",
-      "improvement_directions": [
-        "探索更高效的模型架构以降低计算开销",
-        "扩展到更多语言和复杂版面类型",
-        "增强对长尾和挑战性场景的鲁棒性",
-        "研究跨模态（如图文混合）的联合优化"
-      ],
-      "engineering_value": "提供了一种可行的端到端文档解析方案，适合工业部署，且模型已在Hugging Face开源。",
-      "why_relevant": "直接相关，本文提出先进的端到端OCR文档解析模型，是OCR领域的前沿工作。"
+      "topic_tags": null,
+      "zh_summary": null,
+      "novelty": null,
+      "innovation_points": null,
+      "limitations": null,
+      "improvement_directions": null,
+      "engineering_value": null,
+      "why_relevant": null
     },
     {
       "title": "2D Rotary Position Embedding for Scene Text Recognition with Transformers",
@@ -122,29 +61,40 @@
       ],
       "arxiv_id": "2607.13458v1",
       "score": 19,
-      "topic_tags": [
-        "场景文本识别",
-        "旋转位置编码",
-        "Transformer",
-        "编码器-解码器",
-        "各向异性"
+      "topic_tags": null,
+      "zh_summary": null,
+      "novelty": null,
+      "innovation_points": null,
+      "limitations": null,
+      "improvement_directions": null,
+      "engineering_value": null,
+      "why_relevant": null
+    },
+    {
+      "title": "Tactile: Giving Computer-Using Agents Hands and Feet",
+      "summary": "Computer-use agents are becoming capable software operators, but their interface to desktop applications is still often a brittle motor layer: they look at screenshots, predict coordinates, click, and hope that the visible state changed as intended. This collapses target grounding, action execution, and outcome verification into a single ambiguous operation. We present Tactile, an open-source tool layer that gives agents a more reliable \"hands and feet\" for desktop use. Tactile converts heterogeneous UI evidence--operating-system accessibility semantics, OCR-grounded text, and visual fallback regions--into action-grounded interface states: compact target candidates with source labels, roles or text, state, geometry, executable affordances, and verification cues. Agents operate through an observe-ground-act-verify loop that prefers native semantic actions when available, falls back to OCR-grounded coordinates when visible text is the best evidence, and keeps full provenance for replay and failure attribution. On macOSWorld-style tasks, adding Tactile improves Codex Success@100 from 41.1% to 50.0% overall and from 45.2% to 55.3% on accessibility-adapted tasks; a 96-task cross-agent subset shows consistent gains across Codex, Claude Code, OpenCode, and Goose. These results suggest that reliable computer use requires not only stronger models, but also a reusable execution substrate that exposes software actions as semantic, verifiable, and auditable objects rather than anonymous screen coordinates.",
+      "link": "https://arxiv.org/abs/2607.14443v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14443v1",
+      "authors": [
+        "Yong Liu",
+        "Zhenyi Zhong",
+        "Zhanpeng Shi"
       ],
-      "zh_summary": "提出2D-RoPE-STR，将轴向2D旋转位置编码适配到场景文本识别（STR）的编码器-解码器Transformer中。主要创新为：根据文本长宽比进行各向异性的行列维度分配，并将旋转耦合扩展到编码器-解码器交叉注意力。该方法参数自由，无需修改架构，在六个标准benchmark上验证了有效性，尤其对弯曲、旋转和透视图畸变文本有改善。",
-      "novelty": "首次将2D旋转位置编码适配到STR的编码器-解码器结构，并针对文本各向异性特征进行维度分配。",
-      "innovation_points": [
-        "各向异性的行列维度分配以适应文本长宽比",
-        "将旋转位置编码扩展到交叉注意力",
-        "参数自由，不改变原有架构"
+      "published": "2026-07-16T00:35:25Z",
+      "updated": "2026-07-16T00:35:25Z",
+      "categories": [
+        "cs.AI"
       ],
-      "limitations": "论文未报告在极端长文本或超宽长宽比下的性能。",
-      "improvement_directions": [
-        "探索自适应长宽比的分辨率调整策略",
-        "将2D位置编码扩展到多方向文本（如竖排）",
-        "结合语言模型进一步提升解码准确性",
-        "在更多STR benchmark上进行验证"
-      ],
-      "engineering_value": "轻量级改进，易于集成到现有Transformer-based STR系统中，提升弯曲等困难样本的识别效果。",
-      "why_relevant": "直接相关，提出了一种针对文本场景的新位置编码方法，提升OCR识别能力。"
+      "arxiv_id": "2607.14443v1",
+      "score": 9,
+      "topic_tags": null,
+      "zh_summary": null,
+      "novelty": null,
+      "innovation_points": null,
+      "limitations": null,
+      "improvement_directions": null,
+      "engineering_value": null,
+      "why_relevant": null
     },
     {
       "title": "Multi-Expert Routing for Multi-Domain Low-Resource OCR: A Manchu Case Study",
@@ -165,114 +115,39 @@
       ],
       "arxiv_id": "2607.14041v1",
       "score": 9,
-      "topic_tags": [
-        "多专家路由",
-        "低资源OCR",
-        "多风格文本",
-        "满文",
-        "领域分类"
-      ],
-      "zh_summary": "针对满文历史文档OCR面临多种书写风格（楷书、行书、草书）且标注数据有限的问题，提出了一种多专家路由系统。利用迭代微调过程中的检查点作为领域专家，并通过轻量级页面级图像分类器进行路由。在三个冻结测试集上，路由系统在字符错误率（CER）上匹配了所选专家，页面级领域分类准确率达99.3%。",
-      "novelty": "利用迭代微调过程中的检查点作为领域专家，无需额外训练特定领域专家。",
-      "innovation_points": [
-        "多专家路由系统复用迭代微调检查点",
-        "轻量级页面级图像分类器进行风格路由",
-        "在低资源场景下有效处理多风格文本"
-      ],
-      "limitations": "仅针对满文，且需要初始迭代微调过程产生的检查点池。",
-      "improvement_directions": [
-        "扩展到其他低资源语言或文字变体",
-        "探索更细粒度的字符级路由",
-        "研究在线适应新风格的新策略",
-        "减少对迭代微调过程的依赖"
-      ],
-      "engineering_value": "提供了一种低资源多风格OCR的实用方案，可复用已有训练过程中的模型。",
-      "why_relevant": "直接相关，专注于OCR任务中的多风格文本识别，并针对低资源问题提出了解决方案。"
+      "topic_tags": null,
+      "zh_summary": null,
+      "novelty": null,
+      "innovation_points": null,
+      "limitations": null,
+      "improvement_directions": null,
+      "engineering_value": null,
+      "why_relevant": null
     },
     {
-      "title": "Do We Really Need Transformers for Global Spatial Information Extraction in Traffic Forecasting?",
-      "summary": "Existing traffic forecasting models commonly focus on extracting spatial dependencies, particularly global spatial information, which characterizes the representations obtained through interactions between each individual node and all nodes across the traffic network. However, the underlying mechanism by which such global information is modeled and extracted remains insufficiently investigated. Whether global information must be extracted by high-degree-of-freedom adaptive attention or can be captured by a simple global aggregation operator remains unclear. For this purpose, we design a controlled ablation framework that replaces only the spatial mixing module to test attention-based global interaction. Across six traffic benchmarks, uniform full-range mixing and standard spatial attention each achieve lower MAE on three datasets, with only a 0.14% difference in mean MAE, while the former reduces node-scale spatial mixing complexity from O(N2) to O(N). Mechanism analysis further decomposes spatial attention into a row-uniform global background and a non-uniform residual. The residual shows dataset-dependent marginal value, suggesting that spatial attention should be justified by stable gains beyond a row-uniform global background. The corresponding source code is publicly available at: https://github.com/uuesti/U-Trans",
-      "link": "https://arxiv.org/abs/2607.12462v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.12462v1",
+      "title": "CIPHER: A Decoupled Exploration-Selection Framework for Test-Time Scaling of Data Science Agents",
+      "summary": "Data science tasks span from closed-ended information extraction to open-ended analysis, presenting significant challenges for automation. Recent AI agents powered by language models show promise for handling such complex tasks. However, existing agents typically rely on a single initial state that conditions the entire agent's execution, making them vulnerable to cascading errors initiated by a suboptimal initial state. To mitigate this, we present CIPHER, an automated data science agent that leverages test-time scaling through the generation and selection of multiple initial states for concurrent execution. Unlike existing works on test-time scaling of AI agents, CIPHER explicitly decouples the generation of candidate initial states from their strategic selection for parallel execution. Through extensive evaluation on two benchmarks (closed-form and open-form tasks), we demonstrate that CIPHER exceeds state-of-the-art performance in matched-model comparisons, and remains competitive against larger-model baselines despite relying on a substantially smaller base LM. Our empirical study characterizes the design space of the Decoupled Exploration-Selection (DES) framework: we quantify how generation strategy, selection strategy, and aggregator model capacity contribute to overall performance, and derive actionable design recommendations for practitioners.",
+      "link": "https://arxiv.org/abs/2607.14386v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14386v1",
       "authors": [
-        "Qihang Zhang",
-        "Siyao Zhang",
-        "Letao Kang",
-        "Wenzhe Liang",
-        "Miao Zhang",
-        "Zhao Zhang"
+        "Maxime Heuillet",
+        "Sharadind Peddiraju"
       ],
-      "published": "2026-07-14T07:44:01Z",
-      "updated": "2026-07-14T07:44:01Z",
+      "published": "2026-07-15T22:01:21Z",
+      "updated": "2026-07-15T22:01:21Z",
       "categories": [
         "cs.AI"
       ],
-      "arxiv_id": "2607.12462v1",
-      "score": 9,
-      "topic_tags": [
-        "空间信息提取",
-        "Transformer",
-        "注意力机制",
-        "均匀聚合",
-        "交通预测"
-      ],
-      "zh_summary": "本文质疑交通预测中是否需要Transformer来提取全局空间信息。通过设计控制消融框架，比较标准空间注意力与均匀全局聚合操作，发现在6个基准上，均匀聚合与标准注意力性能相近，但复杂度从O(N^2)降至O(N)。机制分析表明，空间注意力可分解为均匀全局背景和非均匀残差，后者贡献有限，暗示应谨慎使用空间注意力。",
-      "novelty": "揭示了空间注意力中的均匀全局背景主导信息提取，挑战了需用高自由度注意力建模全局依赖的普遍认知。",
-      "innovation_points": [
-        "设计控制消融框架区分均匀聚合与注意力",
-        "机制分解将空间注意力拆分为行均匀背景与残差",
-        "发现均匀聚合在多数指标上性能不输注意力"
-      ],
-      "limitations": "实验仅在交通预测领域，未在其他空间关系任务上验证。",
-      "improvement_directions": [
-        "在更广泛的空间建模任务中验证均匀聚合的适用性",
-        "探索自适应选择全局聚合或注意力的混合策略",
-        "研究非均匀残差在哪些场景下确实重要",
-        "将分析框架推广到其他领域（如图像、文档）"
-      ],
-      "engineering_value": "提出了一种高效的空间信息提取替代方案，可降低计算成本，适用于资源受限场景。",
-      "why_relevant": "间接相关，尽管领域不同，但其对空间信息提取的质疑和简化思路可能启发OCR中更高效的空间建模。"
-    },
-    {
-      "title": "Evaluation Ability Does Not Imply Optimization Utility: LLM-as-a-Judge Signals in Closed-Loop Table Recognition",
-      "summary": "LLM-as-a-judge is widely used to provide feedback and selection signals in closedloop regeneration, but this use remains insufficiently validated. We study it in table recognition, where deterministic TEDS evaluation provides a controlled testbed, using FinTabNet and OmniDocBench. Three findings emerge. First, judge signals were weak on both datasets: scores frequently tied, rankings were not reproducible, and the only selection policy that beat random on both datasets depended on an earliest-iteration tie rule, so its advantage cannot be attributed to the judge scores alone. Iteration produced better candidates, but the judge failed to recover them. Second, severe losses occurred even without specific judge feedback. A structurepreserving instruction significantly reduced the severe-loss rate on FinTabNet and was directionally consistent on OmniDocBench. The contrasts support target-preservation failure under unconstrained regeneration as a proximate mechanism of the observed severe losses. Third, the structure-preservation constraint reduced the severe-loss tail but produced no improvement. In an exploratory 2x2 analysis, the same protection was not stably observed when judge feedback was retained. These results do not dispute the value of LLMs as evaluators. Instead, they show that evaluation ability does not imply optimization utility. Iterative refinement requires, at minimum, a verification signal that deterministically detects structural change, rather than judge scores alone.",
-      "link": "https://arxiv.org/abs/2607.13347v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.13347v1",
-      "authors": [
-        "Donghwan Kim"
-      ],
-      "published": "2026-07-15T00:14:31Z",
-      "updated": "2026-07-15T00:14:31Z",
-      "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.LG"
-      ],
-      "arxiv_id": "2607.13347v1",
-      "score": 3,
-      "topic_tags": [
-        "LLM-as-a-judge",
-        "表格识别",
-        "闭环重生成",
-        "结构保留",
-        "优化实用性"
-      ],
-      "zh_summary": "研究了LLM-as-a-judge在表格识别闭环重生成中作为反馈信号的有效性。使用确定性TEDS评估发现：法官信号弱（分数常并列、排名不可复现）、重生成可能导致严重损失（结构保留指令可减少损失但无提升），且评估能力并不等价于优化实用性。迭代改善需更可靠的信号检查结构变化。",
-      "novelty": "首次在表格识别任务中质疑LLM作为优化信号的有效性，并揭示评估能力与优化实用性的分离。",
-      "innovation_points": [
-        "在表格识别任务中系统验证LLM-as-a-judge的闭环反馈效用",
-        "发现重生成中的结构保留失败是严重损失的直接机制",
-        "提出评估能力不等于优化实用性的观点"
-      ],
-      "limitations": "仅针对表格识别，且使用特定数据集和实验设置。",
-      "improvement_directions": [
-        "设计更可靠的验证信号（如结构感知指标）",
-        "探索将LLM判断与确定性指标结合的策略",
-        "研究在重生成中确保目标保留的方法",
-        "在更广泛的OCR任务中验证此发现"
-      ],
-      "engineering_value": "警示了在工程中过度依赖LLM反馈的风险，建议结合确定性指标进行闭环优化。",
-      "why_relevant": "直接相关，研究LLM在OCR任务（表格识别）中的优化应用，对设计可靠的OCR系统有指导意义。"
+      "arxiv_id": "2607.14386v1",
+      "score": 6,
+      "topic_tags": null,
+      "zh_summary": null,
+      "novelty": null,
+      "innovation_points": null,
+      "limitations": null,
+      "improvement_directions": null,
+      "engineering_value": null,
+      "why_relevant": null
     }
   ]
 }
