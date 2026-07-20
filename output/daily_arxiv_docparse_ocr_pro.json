@@ -1,25 +1,35 @@
 {
   "meta": {
-    "report_date": "2026-07-18",
-    "generated_at_utc": "2026-07-18 04:12:16",
+    "report_date": "2026-07-20",
+    "generated_at_utc": "2026-07-20 04:49:48",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
     "count": 0
   },
   "synthesis": {
-    "executive_summary": "今日未收到新的论文更新，研究进展无新增内容，建议关注现有工作的持续优化与跟踪。",
-    "trend_summary": "无新趋势出现，当前研究方向保持稳定。",
-    "common_innovations": [],
+    "executive_summary": "今日无新增论文，整体技术动态平稳，主要关注已有方向的持续优化与应用落地。",
+    "trend_summary": "暂无显著新趋势，行业焦点仍集中在文档理解、多模态模型及低资源场景适配。",
+    "common_innovations": [
+      "当前无新论文，无共通创新点。"
+    ],
     "future_directions": [
-      "探索基于自监督学习的文档图像预训练方法以减少标注需求",
-      "研究面向手写体与历史文档的高鲁棒性OCR模型",
-      "开发集成版面分析与表格解析的端到端文档理解系统"
+      "探索基于视觉-语言预训练模型（如CLIP）的文档版面解析统一框架。",
+      "开发端到端的文档解析系统，将OCR、版面分析、语义理解深度融合。",
+      "研究面向复杂表格、公式及手写文档的高精度识别与结构化方法。",
+      "推动合成数据与自监督预训练在文档领域的应用，降低对标注数据的依赖。",
+      "优化文档解析在移动端和低算力设备的实时性能与模型轻量化。"
     ],
     "engineering_takeaways": [
-      "无需变更现有工程架构，持续监控性能即可"
+      "关注多模态大模型在文档理解中的实用化部署，如基于LLM的文档QA。",
+      "评估现有OCR引擎对不同字体、版式的鲁棒性，必要时采用集成策略。"
     ],
-    "watchlist": []
+    "watchlist": [
+      {
+        "title": "暂无新论文，待后续更新。",
+        "watch_reason": "无新增需关注论文。"
+      }
+    ]
   },
   "papers": []
 }
