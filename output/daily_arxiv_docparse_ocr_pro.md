@@ -1,10 +1,176 @@
-# OCR / 文档解析研究日报（2026-07-20）
+# OCR / 文档解析研究日报（2026-07-21）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-07-20 04:49:48`
+- 生成时间（UTC）：`2026-07-21 04:29:43`
 - 大模型综合分析：`开启`
 
-今天没有筛到符合条件的新论文。
+## 一、今日执行摘要
+
+> 今日OCR与文档解析研究聚焦于ESG报告中的结构化信息提取与多模态视频个性化，其中Scope3Trace通过证据驱动框架整合OCR、LLM和表格重建，实现了温室气体排放的可解释提取；HOMIE则利用MLLM增强视频个性化生成，体现了OCR在跨模态对齐中的应用潜力。
+
+## 二、今日趋势判断
+
+当前趋势为OCR与LLM、多模态模型深度融合，从单纯的文本识别转向知识驱动的结构化信息提取，并拓展至视频等动态场景，强调证据可追溯性和跨模态语义对齐。
+
+## 三、今日论文概览
+
+1. **Scope3Trace: Evidence-Based Identification and Extraction of Scope 3 GHG Emissions from Sustainability Reports** | 标签：OCR、信息提取、ESG报告、证据驱动、表格重建
+2. **HOMIE: Human-object Centric Video Personalization via Multimodal Intelligent Enchancement** | 标签：视频生成、个性化、多模态学习、OCR、MLLM
+
+## 四、今天 OCR / 文档解析论文里的主要创新点
+
+- 证据驱动的信息提取框架，结合OCR、LLM和规则，实现可解释可追溯的提取。
+- 混合规则-LLM的排放提取与证据验证机制，提升信息提取的准确性和可信度。
+- MLLM集成策略，在不牺牲文本编码器可控性前提下提取参考级关系。
+- 自注意力中引入全局多模态引导以对齐MLLM语义特征与VAE token。
+
+## 五、后续 OCR 领域值得推进的改进方向
+
+- 探索更鲁棒的OCR和表格解析方法以处理多样化的报告格式，如复杂表格和混合布局。
+- 引入无监督或半监督学习减少对标注数据的依赖，降低领域迁移成本。
+- 扩展至更多维度的ESG信息披露提取，如碳排放核算的自动标注与验证。
+- 研究如何减少对多模态参考的依赖，提升视频个性化生成的鲁棒性。
+- 探索更细粒度的MLLM特征融合机制，以处理复杂场景文本与视觉关联。
+
+## 六、工程落地启发
+
+- 证据驱动框架可直接复用，支持自动化ESG合规分析，降低人工核查成本。
+- 混合规则-LLM提取范式可推广至其他结构化文档信息提取任务。
+- MLLM集成策略可用于提升多模态生成任务中文本与视觉的对齐效果。
+- 多模态数据集构建方法可为后续评估提供基准。
+
+## 七、优先关注论文
+
+- **Scope3Trace: Evidence-Based Identification and Extraction of Scope 3 GHG Emissions from Sustainability Reports**：提出的证据驱动框架具有强实用性，可关注其后续对复杂报告格式的鲁棒性改进，以及向其他ESG维度扩展的研究。
+- **HOMIE: Human-object Centric Video Personalization via Multimodal Intelligent Enchancement**：MLLM集成策略在多模态生成中具有创新性，可关注其如何在无需精准文本描述的场景下保持主体保真度，对OCR在视频理解中的应用有启示。
+
+## 八、论文逐篇解析
+
+### 1. Scope3Trace: Evidence-Based Identification and Extraction of Scope 3 GHG Emissions from Sustainability Reports
+
+- arXiv: [2607.17122v1](https://arxiv.org/abs/2607.17122v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.17122v1)
+- 作者: Siyuan Zheng, Yifan Duan, Chao Xue, Flora D. Salim
+- 发布时间: 2026-07-19T08:13:54Z
+- 分类: cs.CL
+- 相关性评分: 26
+- 主题标签: OCR、信息提取、ESG报告、证据驱动、表格重建
+
+**中文摘要**
+
+> 提出Scope3Trace框架，用于从ESG报告中提取范围3温室气体排放信息。该框架整合PDF收集、OCR解析、LLM辅助页面定位与表格重建、混合规则-LLM提取和证据验证，实现可解释可追溯的提取。同时贡献了一个多模态数据集。
+
+**核心创新概述**
+
+> 提出证据驱动的信息提取框架，结合OCR、LLM和规则，实现范围3排放的可解释提取，并构建多模态数据集。
+
+**创新点拆解**
+
+- 证据驱动的提取框架，集成PDF解析、OCR、LLM页面定位和表格重建
+- 混合规则-LLM的排放提取与证据验证机制
+- 双层（组织级和建筑级）证据化多模态数据集构建
+
+**当前局限**
+
+> 未明确说明局限性，但可能存在对复杂报告格式的鲁棒性不足。
+
+**后续可改进方向**
+
+- 探索更鲁棒的OCR和表格解析方法以处理多样化的报告格式
+- 引入无监督或半监督学习减少对标注数据的依赖
+- 扩展至更多维度的ESG信息披露提取
+
+**工程启发**
+
+> 提供可复用的工业级信息提取框架，支持自动化ESG合规分析，降低人工核查成本。
+
+**为什么值得关注**
+
+> 论文涉及OCR在复杂文档（ESG报告）中的实际应用，包括表格重建和混合规则-LLM提取方法，对文档OCR落地有参考价值。
+
+**原始摘要**
+
+Scope 3 greenhouse gas (GHG) emissions account for the majority of corporate carbon footprints, yet
+remain difficult to analyze at scale due to sparse disclosures, heterogeneous report document
+formats, and limited evidence traceability. Existing approaches typically rely on large language
+models to extract emissions information from ESG reports, but often lack explicit evidence grounding
+or depend on costly manual annotation and verification to ensure extraction reliability. To address
+these challenges, we propose Scope3Trace, an evidence-grounded information extraction framework
+designed to extract interpretable and traceable Scope 3 emissions information from real-world ESG
+and sustainability reports. The framework integrates a document information extraction pipeline that
+performs PDF collection and OCR parsing, LLM-assisted page localization and table reconstruction,
+and hybrid rule-LLM extraction of organization- and building-level emissions disclosures with
+evidence-grounded verification. Building upon this framework, we further contribute a dual-level,
+evidence-grounded, multimodal dataset comprising organization-level Scope 3 disclosures extracted
+from heterogeneous sustainability reports. Scope3Trace enables reliable extraction and transparent
+integration of heterogeneous sustainability disclosures, achieving high accuracy in extracting Scope
+1-3 totals and category-level disclosures from sustainability reports.
+
+---
+
+### 2. HOMIE: Human-object Centric Video Personalization via Multimodal Intelligent Enchancement
+
+- arXiv: [2607.18217v1](https://arxiv.org/abs/2607.18217v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.18217v1)
+- 作者: Yiyang Cai, Nan Chen, Rongchang Xie, Junwen Pan, Chunyang Jiang, Cheng Chen, Wen Zhou, Zhenbang Sun, Wei Xue, Wenhan Luo, Yike Guo
+- 发布时间: 2026-07-20T17:51:35Z
+- 分类: cs.CV
+- 相关性评分: 9
+- 主题标签: 视频生成、个性化、多模态学习、OCR、MLLM
+
+**中文摘要**
+
+> 提出HOMIE框架，用于人-物中心的视频个性化生成，统一处理主体间和主体内参考输入。通过MLLM集成策略、全局多模态引导和模态参考嵌入，提升主体保真度和交互模式准确性。
+
+**核心创新概述**
+
+> 提出统一处理主体间和主体内参考的视频个性化框架，利用MLLM提取关系知识并保持文本编码器可控性。
+
+**创新点拆解**
+
+- 统一处理主体间和主体内参考输入的视频个性化框架
+- MLLM集成策略，在不牺牲文本编码器可控性前提下提取参考级关系
+- 自注意力中引入全局多模态引导以对齐MLLM语义特征与VAE token
+- 模态参考嵌入以区分和关联不同来源的token
+
+**当前局限**
+
+> 未明确说明局限性，但可能对复杂人-物交互或抽象概念（如logo）的保真度仍有提升空间。
+
+**后续可改进方向**
+
+- 探索更细粒度的MLLM特征融合机制
+- 扩展至更多类型的主体间交互场景
+- 研究如何减少对多模态参考的依赖
+
+**工程启发**
+
+> 提供可实现的视频个性化生成方案，适用于内容创作和广告等应用，降低对精准文本描述的需求。
+
+**为什么值得关注**
+
+> 论文涉及OCR（OCR maps作为主体内参考）在视频生成中的应用，展示了如何利用OCR提升主体保真度，对多模态理解有参考意义。
+
+**原始摘要**
+
+Human-object centric video personalization (HOCVP) is a core task within subject-driven video
+generation. However, existing methods suffer from two key limitations. First, most approaches
+focusing on inter-subject personalization still struggle to strike a balance between high subject
+fidelity and accurate interaction patterns between humans and diverse objects, especially when
+objects represent abstract concepts such as logos. Second, while intra-subject references (e.g., OCR
+maps, multi-view inputs) are expected to enhance subject fidelity, most existing works lack
+mechanisms to understand such latent correspondence. To address both challenges, we propose HOMIE,
+an HOCVP framework that tackles both inter- and intra-subject input settings in a unified manner.
+Compared to previous approaches, HOMIE proposes a better MLLM integration strategy to extract
+knowledge of reference-level relationships without compromising the controllability of text encoders
+or incurring costly re-alignment. Specifically, we introduce global multimodal guidance within self-
+attention to better align MLLM-derived semantic features with VAE tokens. Furthermore, we propose
+modality-reference embedding to differentiate tokens from MLLM features and VAE tokens and associate
+intra-subject reference image tokens. Extensive experiments validate that our method achieves state-
+of-the-art performance across various HOCVP tasks. Project Page: https://yiyangcai.github.io/homie-
+page.github.io/
+
+---
