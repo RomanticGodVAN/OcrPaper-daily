@@ -1,158 +1,218 @@
-# OCR / 文档解析研究日报（2026-07-21）
+# OCR / 文档解析研究日报（2026-07-22）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-07-21 04:29:43`
+- 生成时间（UTC）：`2026-07-22 04:32:26`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日OCR与文档解析研究聚焦于ESG报告中的结构化信息提取与多模态视频个性化，其中Scope3Trace通过证据驱动框架整合OCR、LLM和表格重建，实现了温室气体排放的可解释提取；HOMIE则利用MLLM增强视频个性化生成，体现了OCR在跨模态对齐中的应用潜力。
+> 今日论文聚焦工程图纸自动化、文档解析效率优化、数据筛选与大规模信息提取。关键进展包括：RF-DETR在工程布局检测达到高精度，揭示了通用模型的域干扰问题；HPD-Parsing通过层次化并行解码将文档解析吞吐量提升3倍；ERank指标可低成本筛选OCR训练样本；以及从76,000篇文献中自动提取结构化数据的工程实践。这些工作共同推动OCR/文档解析向领域专用、高效、自适应方向发展。
 
 ## 二、今日趋势判断
 
-当前趋势为OCR与LLM、多模态模型深度融合，从单纯的文本识别转向知识驱动的结构化信息提取，并拓展至视频等动态场景，强调证据可追溯性和跨模态语义对齐。
+当前趋势包括：(1) 领域专用模型与数据集构建成为主流，以解决通用模型在特定领域的性能瓶颈；(2) 解析效率成为核心优化目标，并行化解码、多令牌预测等技术显著降低延迟；(3) 数据驱动的自动化提取方法从单一文档扩展到大规模文献挖掘；(4) 复杂度度量工具被引入用于数据选择与模型训练优化。
 
 ## 三、今日论文概览
 
-1. **Scope3Trace: Evidence-Based Identification and Extraction of Scope 3 GHG Emissions from Sustainability Reports** | 标签：OCR、信息提取、ESG报告、证据驱动、表格重建
-2. **HOMIE: Human-object Centric Video Personalization via Multimodal Intelligent Enchancement** | 标签：视频生成、个性化、多模态学习、OCR、MLLM
+1. **Benchmarking Deep Learning Approaches for AEC Engineering Drawing Layout Detection and Information Extraction** | 标签：工程图纸、布局检测、信息提取、域干扰、RF-DETR
+2. **HPD-Parsing: Hierarchical Parallel Document Parsing** | 标签：文档解析、并行解码、VLM、高效推理、版面分析
+3. **HOMIE: Human-object Centric Video Personalization via Multimodal Intelligent Enhancement** | 标签：视频生成、个性生成、多模态大模型、交互建模
+4. **ERank in Latent Space as an Image-Complexity and Richness Measure** | 标签：图像复杂度、数据选择、OCR、有效秩、预训练
+5. **Automated Extraction of Techno-Economic Data from 76,000 Energy System Studies** | 标签：信息提取、自动化数据采集、能源系统、文献挖掘、FAIR数据
+6. **Relay-Bench: Evaluating LLMs on Multi-Domain Reasoning Chains** | 标签：LLM评估、多领域推理、复合问题、信息提取、基准测试
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 证据驱动的信息提取框架，结合OCR、LLM和规则，实现可解释可追溯的提取。
-- 混合规则-LLM的排放提取与证据验证机制，提升信息提取的准确性和可信度。
-- MLLM集成策略，在不牺牲文本编码器可控性前提下提取参考级关系。
-- 自注意力中引入全局多模态引导以对齐MLLM语义特征与VAE token。
+- 将深度学习检测器与视觉语言模型应用于专业领域（工程图纸）的布局检测与信息提取。
+- 提出并行或层次化解码架构替代全页自回归生成，大幅提升文档解析推理速度。
+- 利用预训练特征的无标签指标（如ERank）指导数据筛选，低成本提升OCR训练效率。
+- 构建大规模结构化数据库，从海量文献中自动化提取数值与表格数据。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 探索更鲁棒的OCR和表格解析方法以处理多样化的报告格式，如复杂表格和混合布局。
-- 引入无监督或半监督学习减少对标注数据的依赖，降低领域迁移成本。
-- 扩展至更多维度的ESG信息披露提取，如碳排放核算的自动标注与验证。
-- 研究如何减少对多模态参考的依赖，提升视频个性化生成的鲁棒性。
-- 探索更细粒度的MLLM特征融合机制，以处理复杂场景文本与视觉关联。
+- 开发消除通用文档预训练模型在工程图纸等专业领域的域干扰迁移学习方法。
+- 将并行解码架构扩展到包含图表、公式的复杂文档，并优化内存占用。
+- 探索ERank复杂度度量在文档图像质量评估、自适应OCR模型训练中的应用。
+- 将大规模自动化文献提取方法迁移至医学、法律等其他学科，并提升复杂表格的提取准确率。
+- 设计多模态组合推理基准，评估LLM在包含图表、图像的真实复合任务上的表现。
 
 ## 六、工程落地启发
 
-- 证据驱动框架可直接复用，支持自动化ESG合规分析，降低人工核查成本。
-- 混合规则-LLM提取范式可推广至其他结构化文档信息提取任务。
-- MLLM集成策略可用于提升多模态生成任务中文本与视觉的对齐效果。
-- 多模态数据集构建方法可为后续评估提供基准。
+- RF-DETR可直接部署于工程图纸布局检测，提供基线模型。
+- HPD-Parsing的并行解码架构适合高吞吐量文档解析场景，可集成到生产系统。
+- ERank可嵌入训练pipeline，自动过滤高复杂度难样本，提升OCR收敛速度。
+- 大规模文献提取方法的代码与数据库可复用，节省人工数据采集成本。
 
 ## 七、优先关注论文
 
-- **Scope3Trace: Evidence-Based Identification and Extraction of Scope 3 GHG Emissions from Sustainability Reports**：提出的证据驱动框架具有强实用性，可关注其后续对复杂报告格式的鲁棒性改进，以及向其他ESG维度扩展的研究。
-- **HOMIE: Human-object Centric Video Personalization via Multimodal Intelligent Enchancement**：MLLM集成策略在多模态生成中具有创新性，可关注其如何在无需精准文本描述的场景下保持主体保真度，对OCR在视频理解中的应用有启示。
+- **Benchmarking Deep Learning Approaches for AEC Engineering Drawing Layout Detection and Information Extraction**：提供了AEC工程图纸的专用数据集和基线模型，后续可能扩展至端到端信息提取及域干扰消除方法。
+- **HPD-Parsing: Hierarchical Parallel Document Parsing**：层次化并行解码显著提升解析速度，未来有望扩展到多模态文档并优化内存，成为高效解析的新范式。
+- **ERank in Latent Space as an Image-Complexity and Richness Measure**：无标签复杂度度量低成本且有效，可能在文档图像预训练、数据筛选领域广泛应用。
 
 ## 八、论文逐篇解析
 
-### 1. Scope3Trace: Evidence-Based Identification and Extraction of Scope 3 GHG Emissions from Sustainability Reports
+### 1. Benchmarking Deep Learning Approaches for AEC Engineering Drawing Layout Detection and Information Extraction
 
-- arXiv: [2607.17122v1](https://arxiv.org/abs/2607.17122v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.17122v1)
-- 作者: Siyuan Zheng, Yifan Duan, Chao Xue, Flora D. Salim
-- 发布时间: 2026-07-19T08:13:54Z
-- 分类: cs.CL
-- 相关性评分: 26
-- 主题标签: OCR、信息提取、ESG报告、证据驱动、表格重建
+- arXiv: [2607.18997v1](https://arxiv.org/abs/2607.18997v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.18997v1)
+- 作者: Tianyang Huang, Alessio Lombardi, Ahmed Elnagar, Ahmed Zalouk, George Paul, Sepehr Najjarpour, Arvid Sigurdsson, Khalid Ismail, Mohamed Ragab, Edlira Vakaj
+- 发布时间: 2026-07-21T11:30:32Z
+- 分类: cs.CV, cs.CE, cs.LG
+- 相关性评分: 14
+- 主题标签: 工程图纸、布局检测、信息提取、域干扰、RF-DETR
 
 **中文摘要**
 
-> 提出Scope3Trace框架，用于从ESG报告中提取范围3温室气体排放信息。该框架整合PDF收集、OCR解析、LLM辅助页面定位与表格重建、混合规则-LLM提取和证据验证，实现可解释可追溯的提取。同时贡献了一个多模态数据集。
+> 本研究为建筑、工程与施工（AEC）领域的工程图纸构建了专用布局数据集，并评估了五种深度学习架构。RF-DETR在布局检测任务中达到mAP50=0.949，视觉语言模型Qwen3-VL的F1分数为0.911。研究发现，通用文档数据集预训练的模型存在“领域干扰”问题，导致性能下降。该工作为AEC图纸的自动化信息提取提供了技术基础。
 
 **核心创新概述**
 
-> 提出证据驱动的信息提取框架，结合OCR、LLM和规则，实现范围3排放的可解释提取，并构建多模态数据集。
+> 构建了首个AEC专用工程图纸布局数据集，并系统评估了深度学习方法，揭示了通用文档模型在工程图纸领域的域干扰现象。
 
 **创新点拆解**
 
-- 证据驱动的提取框架，集成PDF解析、OCR、LLM页面定位和表格重建
-- 混合规则-LLM的排放提取与证据验证机制
-- 双层（组织级和建筑级）证据化多模态数据集构建
+- 构建AEC专用数据集
+- 评估包括检测器和VLM在内的多种架构
+- 发现域干扰导致通用模型性能退化
 
 **当前局限**
 
-> 未明确说明局限性，但可能存在对复杂报告格式的鲁棒性不足。
+> ['数据集规模有限', '未涉及复杂表格或手写文字', '仅针对布局检测，未完整端到端信息提取']
 
 **后续可改进方向**
 
-- 探索更鲁棒的OCR和表格解析方法以处理多样化的报告格式
-- 引入无监督或半监督学习减少对标注数据的依赖
-- 扩展至更多维度的ESG信息披露提取
+- 扩大数据集覆盖更多图纸类型
+- 研究消除域干扰的迁移学习方法
+- 结合布局与文字识别进行端到端提取
 
 **工程启发**
 
-> 提供可复用的工业级信息提取框架，支持自动化ESG合规分析，降低人工核查成本。
+> 为AEC图纸自动信息提取提供高精度基线方案，RF-DETR可直接用于工程应用。
 
 **为什么值得关注**
 
-> 论文涉及OCR在复杂文档（ESG报告）中的实际应用，包括表格重建和混合规则-LLM提取方法，对文档OCR落地有参考价值。
+> 论文研究了工程图纸的布局检测与信息提取，与OCR领域处理非文本文档（技术图纸）密切相关。
 
 **原始摘要**
 
-Scope 3 greenhouse gas (GHG) emissions account for the majority of corporate carbon footprints, yet
-remain difficult to analyze at scale due to sparse disclosures, heterogeneous report document
-formats, and limited evidence traceability. Existing approaches typically rely on large language
-models to extract emissions information from ESG reports, but often lack explicit evidence grounding
-or depend on costly manual annotation and verification to ensure extraction reliability. To address
-these challenges, we propose Scope3Trace, an evidence-grounded information extraction framework
-designed to extract interpretable and traceable Scope 3 emissions information from real-world ESG
-and sustainability reports. The framework integrates a document information extraction pipeline that
-performs PDF collection and OCR parsing, LLM-assisted page localization and table reconstruction,
-and hybrid rule-LLM extraction of organization- and building-level emissions disclosures with
-evidence-grounded verification. Building upon this framework, we further contribute a dual-level,
-evidence-grounded, multimodal dataset comprising organization-level Scope 3 disclosures extracted
-from heterogeneous sustainability reports. Scope3Trace enables reliable extraction and transparent
-integration of heterogeneous sustainability disclosures, achieving high accuracy in extracting Scope
-1-3 totals and category-level disclosures from sustainability reports.
+Information Extraction (IE) from Architecture, Engineering, and Construction (AEC) drawings remains
+hindered by manual inefficiency, while Layout Detection, a vital 'middleware' organizing graphical
+and textual hierarchies, is underexplored. General document layout models, optimized for text-
+centric content, lack validation on engineering drawings. This study constructs a custom AEC-
+specific layouts dataset and benchmarks five deep learning architectures. RF-DETR achieves state-of-
+the-art performance with an $mAP_{50}$ of 0.949, while the Vision-Language Model Qwen3-VL attains a
+leading F1-score of 0.911. Conversely, models pre-trained on general document datasets suffer from
+"domain interference", causing performance degradation. This establishes a robust technical
+foundation for automated IE in AEC.
 
 ---
 
-### 2. HOMIE: Human-object Centric Video Personalization via Multimodal Intelligent Enchancement
+### 2. HPD-Parsing: Hierarchical Parallel Document Parsing
 
-- arXiv: [2607.18217v1](https://arxiv.org/abs/2607.18217v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.18217v1)
+- arXiv: [2607.18839v1](https://arxiv.org/abs/2607.18839v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.18839v1)
+- 作者: Shu Wei, Jingjing Wu, Lingshu Zhang, Qunyi Xie, Hao Zou, Le Xiang, Xu Fan, Yangliu Xu, Manhui Lin, Xiaolong Ma, Cheng Cui, Tengyu Du, YY
+- 发布时间: 2026-07-21T08:25:32Z
+- 分类: cs.CL
+- 相关性评分: 13
+- 主题标签: 文档解析、并行解码、VLM、高效推理、版面分析
+
+**中文摘要**
+
+> 提出HPD-Parsing，一种基于VLM的统一文档解析方法，采用层次化并行解码范式。主布局分支全局分析结构并动态分配块级内容解码到并发分支，同时引入渐进式多令牌预测减少解码步长。在公共基准上达到每秒4752个令牌的吞吐量，是现有最快模型和基线模型的2.62倍和3.06倍，同时保持竞争性解析精度。
+
+**核心创新概述**
+
+> 首次将层次化并行解码引入VLM文档解析，替代全页自回归生成，显著提升解码速度。
+
+**创新点拆解**
+
+- 层次化并行解码架构
+- 动态分配块级内容到并发分支
+- 渐进式多令牌预测减少解码步数
+- 实现3倍以上吞吐量提升
+
+**当前局限**
+
+> ['仅验证了文本密集型文档，未处理复杂图表', '并行解码可能增加内存占用']
+
+**后续可改进方向**
+
+- 扩展到多模态文档（含图表、公式）
+- 优化内存效率与并行度
+- 探索更灵活的任务分配策略
+
+**工程启发**
+
+> 显著提升文档解析效率，适用于高吞吐量生产环境。
+
+**为什么值得关注**
+
+> 提出层次化并行解码加速文档解析，直接提升OCR后处理（如版面分析、内容提取）效率。
+
+**原始摘要**
+
+Efficient teamwork typically combines global coordination with parallel execution, a principle not
+yet fully reflected in unified Vision-Language Model (VLM)-based document parsers. Existing unified
+parsers process an entire page jointly but generate its output through a single token-by-token
+autoregressive trajectory, creating a sequential bottleneck that grows with document length. Such
+full-page sequential generation overlooks a key property of document parsing: layout must be
+analyzed globally, whereas block content can be parsed in parallel. Based on this observation, we
+introduce HPD-Parsing, which replaces full-page autoregressive generation with a Hierarchical
+Parallel Decoding paradigm. A main layout branch organizes the overall document structure and
+dynamically assigns block-level content decoding to concurrent branches, while progressive multi-
+token prediction (P-MTP) further reduces the decoding steps within each branch. Experiments on
+public benchmarks show that HPD-Parsing achieves 4,752 tokens per second, delivering $2.62\times$
+the throughput of the fastest existing document parsing model and $3.06\times$ that of the vanilla
+autoregressive baseline, while maintaining competitive parsing accuracy. These results establish
+hierarchical parallel decoding as an effective alternative to full-page autoregressive generation,
+opening a new direction for efficient unified document parsing.
+
+---
+
+### 3. HOMIE: Human-object Centric Video Personalization via Multimodal Intelligent Enhancement
+
+- arXiv: [2607.18217v2](https://arxiv.org/abs/2607.18217v2)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.18217v2)
 - 作者: Yiyang Cai, Nan Chen, Rongchang Xie, Junwen Pan, Chunyang Jiang, Cheng Chen, Wen Zhou, Zhenbang Sun, Wei Xue, Wenhan Luo, Yike Guo
 - 发布时间: 2026-07-20T17:51:35Z
 - 分类: cs.CV
 - 相关性评分: 9
-- 主题标签: 视频生成、个性化、多模态学习、OCR、MLLM
+- 主题标签: 视频生成、个性生成、多模态大模型、交互建模
 
 **中文摘要**
 
-> 提出HOMIE框架，用于人-物中心的视频个性化生成，统一处理主体间和主体内参考输入。通过MLLM集成策略、全局多模态引导和模态参考嵌入，提升主体保真度和交互模式准确性。
+> 提出HOMIE，一个面向以人或物为中心的视频个性生成框架，统一处理主体间和主体内输入。通过多模态大模型集成策略提取参考级关系知识，在自注意力中引入全局多模态引导，并提出模态参考嵌入以区分令牌。在多种任务上达到最新性能。
 
 **核心创新概述**
 
-> 提出统一处理主体间和主体内参考的视频个性化框架，利用MLLM提取关系知识并保持文本编码器可控性。
+> 统一处理主体间和主体内输入的视频个性生成，通过多模态大模型有效融合语义信息。
 
 **创新点拆解**
 
-- 统一处理主体间和主体内参考输入的视频个性化框架
-- MLLM集成策略，在不牺牲文本编码器可控性前提下提取参考级关系
-- 自注意力中引入全局多模态引导以对齐MLLM语义特征与VAE token
-- 模态参考嵌入以区分和关联不同来源的token
+- 统一处理主体间和主体内输入的框架
+- 多模态大模型集成策略提取参考级关系
+- 全局多模态引导与模态参考嵌入
 
 **当前局限**
 
-> 未明确说明局限性，但可能对复杂人-物交互或抽象概念（如logo）的保真度仍有提升空间。
+> ['主要面向视频生成，不直接涉及文档/OCR', '对抽象概念（如logo）的交互仍有限']
 
 **后续可改进方向**
 
-- 探索更细粒度的MLLM特征融合机制
-- 扩展至更多类型的主体间交互场景
-- 研究如何减少对多模态参考的依赖
+- 将方法迁移到文档视频或屏幕录制场景
+- 提升对抽象实体的交互建模
 
 **工程启发**
 
-> 提供可实现的视频个性化生成方案，适用于内容创作和广告等应用，降低对精准文本描述的需求。
+> 为视频个性化生成提供高效方案，可应用于广告生成、虚拟角色等。
 
 **为什么值得关注**
 
-> 论文涉及OCR（OCR maps作为主体内参考）在视频生成中的应用，展示了如何利用OCR提升主体保真度，对多模态理解有参考意义。
+> 论文涉及多模态理解与生成，与OCR的跨模态对齐技术相关，但OCR领域相关性较弱。
 
 **原始摘要**
 
@@ -172,5 +232,177 @@ modality-reference embedding to differentiate tokens from MLLM features and VAE 
 intra-subject reference image tokens. Extensive experiments validate that our method achieves state-
 of-the-art performance across various HOCVP tasks. Project Page: https://yiyangcai.github.io/homie-
 page.github.io/
+
+---
+
+### 4. ERank in Latent Space as an Image-Complexity and Richness Measure
+
+- arXiv: [2607.19315v1](https://arxiv.org/abs/2607.19315v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.19315v1)
+- 作者: Maksim Smirnov, Grigory Kononov, Anastasiia Linich, Egor Surkov, Egor Shvetsov
+- 发布时间: 2026-07-21T17:32:44Z
+- 分类: cs.CV
+- 相关性评分: 6
+- 主题标签: 图像复杂度、数据选择、OCR、有效秩、预训练
+
+**中文摘要**
+
+> 提出有效秩（ERank）作为图像视觉丰富度的无标签度量，基于预训练编码器特征图的通道协方差计算。ERank与图像复杂度相关，在数据选择中：移除低ERank样本提升超分辨率，移除高ERank样本提升OCR。所提指标计算高效，有助于根据输入丰富度匹配任务难度。
+
+**核心创新概述**
+
+> 提出基于特征图通道协方差的ERank指标，简单高效地度量图像复杂度，并展示其在OCR任务数据选择中的有效性。
+
+**创新点拆解**
+
+- ERank作为无标签复杂度度量
+- 单次前馈计算，无需额外训练
+- 揭示移除高复杂度样本可提升OCR性能
+
+**当前局限**
+
+> ['仅实验了超分辨率和OCR任务', '未充分分析不同预训练编码器的影响']
+
+**后续可改进方向**
+
+- 探索ERank在文档图像（如扫描件）上的适用性
+- 结合ERank进行自适应OCR模型训练
+
+**工程启发**
+
+> 提供廉价数据筛选工具，帮助OCR系统在训练/微调时剔除高复杂度难样本，提升效率。
+
+**为什么值得关注**
+
+> 直接证明移除高ERank样本可提升OCR，为OCR训练数据选择提供新思路。
+
+**原始摘要**
+
+We propose the effective rank (ERank) of the channel covariance of an image's deep feature map as a
+per-sample, label-free measure of visual richness, computed from a single forward pass through a
+frozen pretrained encoder. ERank counts how many decorrelated channel directions an image activates,
+and we characterize its properties, including its behavior under noise. Empirically, ERank orders
+images from plain to visually rich, correlates with codec bitrate, sharpness, and edge density, and
+correlates with human complexity annotations on IC9600 with $r = 0.72$. As a data-selection
+criterion, removing low-ERank samples improves super-resolution and removing high-ERank samples
+improves OCR, in both pretraining and finetuning, while selection does not help classification,
+segmentation, or denoising. ERank is thus a cheap richness signal, useful exactly when task
+difficulty is governed by input richness.
+
+---
+
+### 5. Automated Extraction of Techno-Economic Data from 76,000 Energy System Studies
+
+- arXiv: [2607.19178v1](https://arxiv.org/abs/2607.19178v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.19178v1)
+- 作者: Maxime Gorres, Jan Göpfert, Patrick Kuckertz, Noor Titan Putri Hartono, Heidi Heinrichs, Jochen Linßen, Iain Staffel, Jann Michael Weinand
+- 发布时间: 2026-07-21T15:14:32Z
+- 分类: cs.CL
+- 相关性评分: 6
+- 主题标签: 信息提取、自动化数据采集、能源系统、文献挖掘、FAIR数据
+
+**中文摘要**
+
+> 从76,000篇能源系统研究中自动提取技术经济数据，构建含320万结构化数据点和2000万元数据的FAIR数据库。方法实现高精度自动化提取，揭示学术假设与经验数据的偏差，以及不同技术、地区和时间的研究优先级差异。
+
+**核心创新概述**
+
+> 大规模自动化提取能源系统文献中的定量数据，将文献本身作为可分析对象，提供FAIR数据库。
+
+**创新点拆解**
+
+- 自动化提取技术经济数据的方法
+- 构建大型结构化数据库
+- 跨尺度分析研究优先级与假设偏差
+
+**当前局限**
+
+> ['主要针对能源领域，方法可迁移性未知', '数据质量依赖自动化提取精度']
+
+**后续可改进方向**
+
+- 将方法扩展到其他学科（如医学、工程）
+- 改进提取准确率处理复杂表格
+
+**工程启发**
+
+> 为能源系统建模提供大规模可信数据来源，减少人工收集成本。
+
+**为什么值得关注**
+
+> 论文涉及的自动化信息提取技术与文档解析、OCR数据提取紧密相关，方法可借鉴于技术文档信息抽取。
+
+**原始摘要**
+
+Energy system models guide societally important decisions, but their credibility rests on
+quantitative assumptions that are difficult to source and audit. Meta-analyses can improve
+transparency and modeling practices, but the rapid growth of publications makes manual information
+extraction increasingly impractical. Consequently, databases are updated infrequently and efforts
+are often duplicated across research groups. Here, we demonstrate the highly accurate automated
+extraction of quantitative information from 76,000 energy system studies published since 2010. We
+compile 3.2 million structured quantitative data points together with 20 million associated metadata
+entries, spanning a broad spectrum of technologies, methodological approaches and system
+characteristics. Beyond providing input data for models, the resulting FAIR database make the energy
+systems literature itself analysable. We show where academic assumptions diverge from empirical
+observed data, and how research priorities vary at scale across technologies, regions and time. To
+facilitate broad use within the community, the database is provided through an interactive
+dashboard, enabling users to filter, analyse and download data according to their specific research
+needs.
+
+---
+
+### 6. Relay-Bench: Evaluating LLMs on Multi-Domain Reasoning Chains
+
+- arXiv: [2607.18438v1](https://arxiv.org/abs/2607.18438v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.18438v1)
+- 作者: Liam Swayne
+- 发布时间: 2026-07-20T18:46:17Z
+- 分类: cs.CL, cs.AI, cs.LG
+- 相关性评分: 6
+- 主题标签: LLM评估、多领域推理、复合问题、信息提取、基准测试
+
+**中文摘要**
+
+> 提出Relay-Bench，评估LLM在单提示中跨多领域推理能力的基准测试，包括视觉推理、编程、数学、信息提取等。当前最佳模型GPT-5.5得分43.3%。基准问题由2-13个子问题组成，并加入提示编码和上下文膨胀增加难度。
+
+**核心创新概述**
+
+> 设计覆盖多领域且未饱和的推理基准，强调组合推理能力，测试集完全由复合问题组成。
+
+**创新点拆解**
+
+- 跨多领域组合推理基准
+- 复合问题设计（2-13个子问题）
+- 提示编码与上下文膨胀增加难度
+
+**当前局限**
+
+> ['仅限文本，无多模态', '基准难度高导致性能天花板']
+
+**后续可改进方向**
+
+- 引入多模态子问题（如图表、图像）
+- 设计更多真实场景的复合任务
+
+**工程启发**
+
+> 为评估LLM综合推理能力提供严格测试，推动多领域协作模型发展。
+
+**为什么值得关注**
+
+> 涉及信息提取作为子任务，与OCR后处理（如文档理解）相关。
+
+**原始摘要**
+
+Introducing Relay-Bench, an unsaturated, holistic, text-only benchmark that measures LLMs' ability
+to complete an assortment of tasks from distinct domains in a single prompt. The leading model,
+GPT-5.5 (xHigh), scores 43.3%. The test set entirely consists of composite problems: groups of
+single-domain subproblems that are strung together into challenges that require reasoning across
+multiple domains in combination. Many of these problems then have layers of complexity added through
+prompt encoding and deliberate context bloat. Domains tested include visual reasoning, coding, math,
+information extraction (with a focus on web search), problem-solving, general knowledge, and data
+analysis. No restrictions are imposed outside of the model harness, and models are explicitly
+encouraged to leverage code-execution, web searches, and all available tools. All problems are
+composed of two to thirteen subproblems and do not require multi-modal input or output.
 
 ---
