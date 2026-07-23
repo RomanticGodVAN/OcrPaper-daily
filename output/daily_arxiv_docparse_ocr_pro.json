@@ -1,50 +1,96 @@
 {
   "meta": {
-    "report_date": "2026-07-22",
-    "generated_at_utc": "2026-07-22 04:32:26",
+    "report_date": "2026-07-23",
+    "generated_at_utc": "2026-07-23 04:31:55",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 6
+    "count": 7
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦工程图纸自动化、文档解析效率优化、数据筛选与大规模信息提取。关键进展包括：RF-DETR在工程布局检测达到高精度，揭示了通用模型的域干扰问题；HPD-Parsing通过层次化并行解码将文档解析吞吐量提升3倍；ERank指标可低成本筛选OCR训练样本；以及从76,000篇文献中自动提取结构化数据的工程实践。这些工作共同推动OCR/文档解析向领域专用、高效、自适应方向发展。",
-    "trend_summary": "当前趋势包括：(1) 领域专用模型与数据集构建成为主流，以解决通用模型在特定领域的性能瓶颈；(2) 解析效率成为核心优化目标，并行化解码、多令牌预测等技术显著降低延迟；(3) 数据驱动的自动化提取方法从单一文档扩展到大规模文献挖掘；(4) 复杂度度量工具被引入用于数据选择与模型训练优化。",
+    "executive_summary": "今日论文集中展示了OCR/文档解析在数据集构建、特定领域应用、高效解码架构和鲁棒性提升等方面的进展：波斯语合成数据集Persian Pixel填补了低资源语言数据空缺；AEC工程图纸基准测试揭示了通用模型的域干扰问题；HPD-Parsing通过层次化并行解码大幅提升解析吞吐量；两步法职业编码增强了对OCR噪声的鲁棒性；ERank作为无标签图像复杂度度量可用于数据筛选；大规模能源系统数据提取展示了文档解析在科学文献中的应用价值；病理注意力对齐训练提高了报告生成的可解释性。总体趋势是向更高效、更鲁棒、更领域适配的方向发展，合成数据与域适应仍是关键挑战。",
+    "trend_summary": "当前OCR/文档解析研究呈现三大趋势：1) 合成数据集构建与退化模拟日益精细化，以弥合合成-真实域差距；2) 领域特异性增强，针对工程图纸、医学报告等场景设计专用模型或适配策略；3) 效率与可解释性双提升，如并行解码、注意力对齐等新范式出现。",
     "common_innovations": [
-      "将深度学习检测器与视觉语言模型应用于专业领域（工程图纸）的布局检测与信息提取。",
-      "提出并行或层次化解码架构替代全页自回归生成，大幅提升文档解析推理速度。",
-      "利用预训练特征的无标签指标（如ERank）指导数据筛选，低成本提升OCR训练效率。",
-      "构建大规模结构化数据库，从海量文献中自动化提取数值与表格数据。"
+      "大规模合成数据集生成结合多样化退化模拟是解决低资源语言和复杂文档类型的主要手段。",
+      "层次化解码和并行化策略显著提升文档解析吞吐量，逐步替代传统的自回归生成。",
+      "针对OCR噪声的鲁棒设计（如两步法、显式去噪）成为实际系统部署的关键考量。",
+      "基于无标签度量的数据筛选（如ERank）为训练数据优化提供新思路。",
+      "引入人类注意力或布局先验进行模型对齐，提升了输出结果的可解释性和临床可信度。"
     ],
     "future_directions": [
-      "开发消除通用文档预训练模型在工程图纸等专业领域的域干扰迁移学习方法。",
-      "将并行解码架构扩展到包含图表、公式的复杂文档，并优化内存占用。",
-      "探索ERank复杂度度量在文档图像质量评估、自适应OCR模型训练中的应用。",
-      "将大规模自动化文献提取方法迁移至医学、法律等其他学科，并提升复杂表格的提取准确率。",
-      "设计多模态组合推理基准，评估LLM在包含图表、图像的真实复合任务上的表现。"
+      "研究自适应字体/手写体合成框架，自动扩展合成数据覆盖更多书写风格。",
+      "开发针对工程图纸、乐谱等非典型文档的专用布局解析与信息提取方法。",
+      "探索动态并行度自适应解码策略，在吞吐量和精度间取得更好平衡。",
+      "设计端到端与两步法混合的职业编码系统，兼顾效率与OCR鲁棒性。",
+      "将ERank等无标签度量与任务特定数据选择相结合，优化训练集构成。",
+      "扩展到多语言、多类型科学文献的大规模信息提取，并建立专家验证机制。",
+      "研究注意力对齐机制在多模态医疗文档解析中的通用性，减少人工标注依赖。",
+      "开发域适应与迁移学习新方法，解决通用模型在特定域（如AEC）上的域干扰问题。"
     ],
     "engineering_takeaways": [
-      "RF-DETR可直接部署于工程图纸布局检测，提供基线模型。",
-      "HPD-Parsing的并行解码架构适合高吞吐量文档解析场景，可集成到生产系统。",
-      "ERank可嵌入训练pipeline，自动过滤高复杂度难样本，提升OCR收敛速度。",
-      "大规模文献提取方法的代码与数据库可复用，节省人工数据采集成本。"
+      "生成含25种以上退化模拟的合成数据集是提升OCR模型的实用手段。",
+      "对工程图纸场景，RF-DETR在布局检测上表现优秀，但需注意通用VLM的域干扰。",
+      "HPD-Parsing的层次化并行解码可直接用于大规模文档解析系统，提升每秒处理文档数。",
+      "两步法（NER+分类）可有效处理OCR噪声，适合对鲁棒性要求高的实体提取任务。",
+      "ERank可作为轻量级数据筛选工具，用于去除低复杂度或高OCR错误率的样本。",
+      "大规模文献自动提取需搭配高质量的PDF解析和表格识别管线，可复用现有FAIR数据库。",
+      "病理报告生成中，注意力对齐损失可作为微调插件，显著提升临床相关指标。"
     ],
     "watchlist": [
       {
-        "title": "Benchmarking Deep Learning Approaches for AEC Engineering Drawing Layout Detection and Information Extraction",
-        "watch_reason": "提供了AEC工程图纸的专用数据集和基线模型，后续可能扩展至端到端信息提取及域干扰消除方法。"
-      },
-      {
         "title": "HPD-Parsing: Hierarchical Parallel Document Parsing",
-        "watch_reason": "层次化并行解码显著提升解析速度，未来有望扩展到多模态文档并优化内存，成为高效解析的新范式。"
+        "watch_reason": "提出创新的层次化并行解码范式，吞吐量提升显著，后续若扩展到更多文档类型和语言，可能成为通用文档解析的基座架构。"
       },
       {
         "title": "ERank in Latent Space as an Image-Complexity and Richness Measure",
-        "watch_reason": "无标签复杂度度量低成本且有效，可能在文档图像预训练、数据筛选领域广泛应用。"
+        "watch_reason": "无标签、低成本的图像复杂度度量对数据筛选和预处理有潜在广泛影响，未来研究其与其他任务的结合值得关注。"
+      },
+      {
+        "title": "Benchmarking Deep Learning Approaches for AEC Engineering Drawing Layout Detection and Information Extraction",
+        "watch_reason": "AEC领域布局检测的专门化研究为工业应用提供基线，域干扰问题的揭示将推动通用文档模型改进。"
       }
     ]
   },
   "papers": [
+    {
+      "title": "Persian Pixel: A large-scale synthetic OCR dataset for Persian language",
+      "summary": "Optical Character Recognition (OCR) for Persian remains substantially less mature than for Latin-script languages despite Persian being spoken by more than 110 million people across multiple countries. This gap arises from two fundamental challenges: the intrinsic complexity of the Perso-Arabic writing system and the limited availability of large-scale, high-quality annotated datasets. Persian script exhibits obligatory cursive connectivity, context-dependent glyph shaping, extensive ligatures, diacritic placement, and stylistic variation across writing forms such as Naskh and Nastaliq, all of which significantly complicate text recognition. At the same time, the high cost and labor-intensive nature of manual annotation have created a persistent data bottleneck, limiting the development of robust OCR systems and slowing progress in Persian document digitization.In this paper, we introduce Persian Pixel, a comprehensive synthetic OCR dataset specifically designed to address these challenges. Comprising over 343,000 high-fidelity image text pairs, the dataset spans sentence, paragraph, and full-page document layouts generated from a carefully curated seven-million-word Persian corpus using the SynthOCR-Gen rendering framework. The generation pipeline faithfully models the typographic characteristics of Persian script, including contextual character joining, positional glyph variants, diacritic placement, and multiple representative Persian typefaces. To bridge the synthetic-to-real domain gap, the rendered images are further enriched with more than twenty-five stochastic degradation models that emulate realistic document acquisition artifacts, including ink bleed, paper aging, blur, illumination variation, scanner imperfections, compression artifacts, and multiple noise processes.By overcoming the long-standing scarcity of annotated Persian OCR data, Persian Pixel provides a scalable and openly available resource for training and fine-tuning modern OCR architectures, including transformer-based models such as TrOCR and Donut. The dataset establishes a strong foundation for research in Persian document analysis, historical manuscript digitization, and end-to-end document understanding, while demonstrating that programmatic synthetic data generation offers a practical, cost-effective, and scalable alternative to manual annotation for advancing OCR in low-resource and typographically complex scripts.",
+      "link": "https://arxiv.org/abs/2607.20385v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.20385v1",
+      "authors": [
+        "Pouria Mahdi",
+        "Haq Nawaz Malik"
+      ],
+      "published": "2026-07-22T17:13:25Z",
+      "updated": "2026-07-22T17:13:25Z",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "arxiv_id": "2607.20385v1",
+      "score": 29,
+      "topic_tags": [
+        "合成数据集",
+        "波斯语OCR",
+        "数据增强",
+        "文档分析"
+      ],
+      "zh_summary": "波斯语OCR因文字系统复杂和标注数据稀缺而发展滞后。本文提出Persian Pixel大规模合成数据集，包含34.3万图像-文本对，通过SynthOCR-Gen框架生成，模拟波斯文字特征，并引入25种以上随机退化以弥合合成与真实域差距。该数据集为波斯语OCR研究提供了高质量训练资源。",
+      "novelty": "7",
+      "innovation_points": [
+        "构建了波斯语首个大规模合成OCR数据集，包含句、段、页多级布局",
+        "提出SynthOCR-Gen渲染框架，精准模拟波斯文字连笔、变体、连字与变音符号等特征",
+        "采用25种以上随机退化策略增强合成数据的真实感"
+      ],
+      "limitations": "数据集仅涵盖Naskh和Nastaliq两种常见字体，未覆盖手写体等其他风格；合成数据与真实数据间仍可能存在域差距。",
+      "improvement_directions": [
+        "扩展字体种类和手写体样本",
+        "引入更复杂的版面噪声模拟",
+        "探索域适应方法以进一步提升真实场景泛化能力"
+      ],
+      "engineering_value": "为波斯语OCR系统提供大规模可用的训练数据，降低标注成本，推动波斯语文档数字化应用。",
+      "why_relevant": "直接解决波斯语OCR的数据瓶颈问题，提供高质量合成数据集和渲染框架，对提升波斯语OCR系统性能具有重要参考价值。"
+    },
     {
       "title": "Benchmarking Deep Learning Approaches for AEC Engineering Drawing Layout Detection and Information Extraction",
       "summary": "Information Extraction (IE) from Architecture, Engineering, and Construction (AEC) drawings remains hindered by manual inefficiency, while Layout Detection, a vital 'middleware' organizing graphical and textual hierarchies, is underexplored. General document layout models, optimized for text-centric content, lack validation on engineering drawings. This study constructs a custom AEC-specific layouts dataset and benchmarks five deep learning architectures. RF-DETR achieves state-of-the-art performance with an $mAP_{50}$ of 0.949, while the Vision-Language Model Qwen3-VL attains a leading F1-score of 0.911. Conversely, models pre-trained on general document datasets suffer from \"domain interference\", causing performance degradation. This establishes a robust technical foundation for automated IE in AEC.",
@@ -72,27 +118,26 @@
       "arxiv_id": "2607.18997v1",
       "score": 14,
       "topic_tags": [
-        "工程图纸",
         "布局检测",
-        "信息提取",
-        "域干扰",
-        "RF-DETR"
+        "工程图纸",
+        "视觉语言模型",
+        "域干扰"
       ],
-      "zh_summary": "本研究为建筑、工程与施工（AEC）领域的工程图纸构建了专用布局数据集，并评估了五种深度学习架构。RF-DETR在布局检测任务中达到mAP50=0.949，视觉语言模型Qwen3-VL的F1分数为0.911。研究发现，通用文档数据集预训练的模型存在“领域干扰”问题，导致性能下降。该工作为AEC图纸的自动化信息提取提供了技术基础。",
-      "novelty": "构建了首个AEC专用工程图纸布局数据集，并系统评估了深度学习方法，揭示了通用文档模型在工程图纸领域的域干扰现象。",
+      "zh_summary": "AEC工程图纸的信息提取因手动处理低效而受限，布局检测作为中间步骤未被充分研究。本文构建了AEC专用布局数据集，并基准测试了五种深度学习架构。RF-DETR在mAP50上达到0.949，视觉语言模型Qwen3-VL的F1分数最高为0.911。通用文档模型存在域干扰导致性能下降。",
+      "novelty": "7",
       "innovation_points": [
-        "构建AEC专用数据集",
-        "评估包括检测器和VLM在内的多种架构",
-        "发现域干扰导致通用模型性能退化"
+        "构建了首个面向AEC工程图纸的专用布局检测数据集",
+        "系统比较了五种深度学习方法在AEC图纸布局检测与信息提取上的表现",
+        "揭示了通用文档模型在工程图纸上的域干扰现象"
       ],
-      "limitations": "['数据集规模有限', '未涉及复杂表格或手写文字', '仅针对布局检测，未完整端到端信息提取']",
+      "limitations": "数据集规模有限，未覆盖所有AEC图纸类型；基准测试未包含更多最新的端到端方法。",
       "improvement_directions": [
-        "扩大数据集覆盖更多图纸类型",
-        "研究消除域干扰的迁移学习方法",
-        "结合布局与文字识别进行端到端提取"
+        "扩展数据集覆盖更多图纸类型和领域变体",
+        "探索减少域干扰的迁移学习或域适应策略",
+        "研究结合布局与文本的联合建模方法"
       ],
-      "engineering_value": "为AEC图纸自动信息提取提供高精度基线方案，RF-DETR可直接用于工程应用。",
-      "why_relevant": "论文研究了工程图纸的布局检测与信息提取，与OCR领域处理非文本文档（技术图纸）密切相关。"
+      "engineering_value": "为AEC领域自动化信息提取提供了可靠的布局检测基线和技术选型参考，有助于提升工程设计文档处理效率。",
+      "why_relevant": "聚焦工程图纸这一垂直领域的OCR与布局分析，解决了通用模型适用性不足的实际问题，具有强工程应用背景。"
     },
     {
       "title": "HPD-Parsing: Hierarchical Parallel Document Parsing",
@@ -124,72 +169,63 @@
       "topic_tags": [
         "文档解析",
         "并行解码",
-        "VLM",
-        "高效推理",
-        "版面分析"
+        "视觉语言模型",
+        "效率优化"
       ],
-      "zh_summary": "提出HPD-Parsing，一种基于VLM的统一文档解析方法，采用层次化并行解码范式。主布局分支全局分析结构并动态分配块级内容解码到并发分支，同时引入渐进式多令牌预测减少解码步长。在公共基准上达到每秒4752个令牌的吞吐量，是现有最快模型和基线模型的2.62倍和3.06倍，同时保持竞争性解析精度。",
-      "novelty": "首次将层次化并行解码引入VLM文档解析，替代全页自回归生成，显著提升解码速度。",
+      "zh_summary": "现有统一视觉语言模型的文档解析采用逐token自回归生成，存在顺序瓶颈。本文提出HPD-Parsing，采用层次化并行解码：主布局分支全局分析结构，并行动态分配块级内容解码。引入渐进式多token预测减少解码步数。在公开基准上达到每秒4752个token，吞吐量提升2.62倍，保持竞争性解析精度。",
+      "novelty": "9",
       "innovation_points": [
-        "层次化并行解码架构",
-        "动态分配块级内容到并发分支",
-        "渐进式多令牌预测减少解码步数",
-        "实现3倍以上吞吐量提升"
+        "提出层次化并行解码范式，用分层并行生成替代全页自回归生成",
+        "设计动态块级内容分配机制实现并行解码",
+        "引入渐进式多token预测进一步加速解码过程"
       ],
-      "limitations": "['仅验证了文本密集型文档，未处理复杂图表', '并行解码可能增加内存占用']",
+      "limitations": "并行解码可能引入块间依赖误差；实验仅在部分公开基准上进行，未覆盖所有文档类型。",
       "improvement_directions": [
-        "扩展到多模态文档（含图表、公式）",
-        "优化内存效率与并行度",
-        "探索更灵活的任务分配策略"
+        "探索更高效的块间同步与冲突解决机制",
+        "研究动态并行度自适应策略",
+        "扩展到更多文档类型和语言场景"
       ],
-      "engineering_value": "显著提升文档解析效率，适用于高吞吐量生产环境。",
-      "why_relevant": "提出层次化并行解码加速文档解析，直接提升OCR后处理（如版面分析、内容提取）效率。"
+      "engineering_value": "显著提升文档解析吞吐量，降低推理延迟，适合大规模文档处理场景。",
+      "why_relevant": "针对当前统一文档解析器的速度瓶颈，提出创新的并行解码架构，具有高工程实用价值。"
     },
     {
-      "title": "HOMIE: Human-object Centric Video Personalization via Multimodal Intelligent Enhancement",
-      "summary": "Human-object centric video personalization (HOCVP) is a core task within subject-driven video generation. However, existing methods suffer from two key limitations. First, most approaches focusing on inter-subject personalization still struggle to strike a balance between high subject fidelity and accurate interaction patterns between humans and diverse objects, especially when objects represent abstract concepts such as logos. Second, while intra-subject references (e.g., OCR maps, multi-view inputs) are expected to enhance subject fidelity, most existing works lack mechanisms to understand such latent correspondence. To address both challenges, we propose HOMIE, an HOCVP framework that tackles both inter- and intra-subject input settings in a unified manner. Compared to previous approaches, HOMIE proposes a better MLLM integration strategy to extract knowledge of reference-level relationships without compromising the controllability of text encoders or incurring costly re-alignment. Specifically, we introduce global multimodal guidance within self-attention to better align MLLM-derived semantic features with VAE tokens. Furthermore, we propose modality-reference embedding to differentiate tokens from MLLM features and VAE tokens and associate intra-subject reference image tokens. Extensive experiments validate that our method achieves state-of-the-art performance across various HOCVP tasks. Project Page: https://yiyangcai.github.io/homie-page.github.io/",
-      "link": "https://arxiv.org/abs/2607.18217v2",
-      "pdf_url": "https://arxiv.org/pdf/2607.18217v2",
+      "title": "Two-Step Occupation Coding",
+      "summary": "Occupation coding links job titles in free text to occupational taxonomies and is a core task in labor market research. Existing approaches typically address this problem in a single end-to-end step, jointly identifying job titles and assigning occupational codes. This paper presents a novel two-step approach that separates these tasks. In the first step, a domain-specific Named Entity Recognition (NER) model identifies occupational titles in continuous text, even under noise such as OCR errors. In the second step, the extracted job titles are mapped to a taxonomy, enabling the classifier to focus exclusively on this mapping. We demonstrate that this separation improves accuracy, robustness, and interpretability compared to single-step approaches. The method has been developed for German documents but is transferable to other languages. We further introduce a margin-based confidence criterion for occupation coding, replacing common absolute thresholds. To support reproducibility, we publish the source code and evaluation scripts.",
+      "link": "https://arxiv.org/abs/2607.20101v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.20101v1",
       "authors": [
-        "Yiyang Cai",
-        "Nan Chen",
-        "Rongchang Xie",
-        "Junwen Pan",
-        "Chunyang Jiang",
-        "Cheng Chen",
-        "Wen Zhou",
-        "Zhenbang Sun",
-        "Wei Xue",
-        "Wenhan Luo",
-        "Yike Guo"
+        "Alexander M. Esser",
+        "Jens Dörpinghaus"
       ],
-      "published": "2026-07-20T17:51:35Z",
-      "updated": "2026-07-21T02:55:50Z",
+      "published": "2026-07-22T12:55:34Z",
+      "updated": "2026-07-22T12:55:34Z",
       "categories": [
-        "cs.CV"
+        "cs.CL",
+        "cs.IR"
       ],
-      "arxiv_id": "2607.18217v2",
-      "score": 9,
+      "arxiv_id": "2607.20101v1",
+      "score": 10,
       "topic_tags": [
-        "视频生成",
-        "个性生成",
-        "多模态大模型",
-        "交互建模"
+        "职业编码",
+        "命名实体识别",
+        "两步法",
+        "OCR鲁棒性"
       ],
-      "zh_summary": "提出HOMIE，一个面向以人或物为中心的视频个性生成框架，统一处理主体间和主体内输入。通过多模态大模型集成策略提取参考级关系知识，在自注意力中引入全局多模态引导，并提出模态参考嵌入以区分令牌。在多种任务上达到最新性能。",
-      "novelty": "统一处理主体间和主体内输入的视频个性生成，通过多模态大模型有效融合语义信息。",
+      "zh_summary": "职业编码将职位名称链接到分类系统，现有方法采用单步端到端方式。本文提出两步法：首先用NER模型识别职位名称（可处理OCR噪声），然后将提取的职位名称映射到分类体系。该方法提高了准确率、鲁棒性和可解释性。针对德语开发，但可迁移至其他语言。还引入了基于边际的置信度准则。",
+      "novelty": "6",
       "innovation_points": [
-        "统一处理主体间和主体内输入的框架",
-        "多模态大模型集成策略提取参考级关系",
-        "全局多模态引导与模态参考嵌入"
+        "将职业编码拆分为NER和分类两个独立步骤，提升模块可解释性和抗噪性",
+        "在第一步中显式处理OCR错误，增强系统鲁棒性",
+        "提出基于边际的置信度准则替代传统绝对阈值"
       ],
-      "limitations": "['主要面向视频生成，不直接涉及文档/OCR', '对抽象概念（如logo）的交互仍有限']",
+      "limitations": "方法仅在德语文档上验证，未提供多语言实验结果；依赖高质量NER模型。",
       "improvement_directions": [
-        "将方法迁移到文档视频或屏幕录制场景",
-        "提升对抽象实体的交互建模"
+        "扩展至多语言场景并评估迁移效果",
+        "研究端到端与两步法的融合方案以兼顾效率与精度",
+        "探索更复杂的NER与分类交互机制"
       ],
-      "engineering_value": "为视频个性化生成提供高效方案，可应用于广告生成、虚拟角色等。",
-      "why_relevant": "论文涉及多模态理解与生成，与OCR的跨模态对齐技术相关，但OCR领域相关性较弱。"
+      "engineering_value": "提供一种鲁棒、可解释的职业编码方案，适合处理含OCR噪声的文本，可部署于劳动力市场分析系统。",
+      "why_relevant": "展示了OCR后处理中结构化信息抽取的一种有效范式，对文档分析中的分类任务有借鉴意义。"
     },
     {
       "title": "ERank in Latent Space as an Image-Complexity and Richness Measure",
@@ -212,25 +248,25 @@
       "score": 6,
       "topic_tags": [
         "图像复杂度",
-        "数据选择",
-        "OCR",
         "有效秩",
-        "预训练"
+        "数据选择",
+        "无标签度量"
       ],
-      "zh_summary": "提出有效秩（ERank）作为图像视觉丰富度的无标签度量，基于预训练编码器特征图的通道协方差计算。ERank与图像复杂度相关，在数据选择中：移除低ERank样本提升超分辨率，移除高ERank样本提升OCR。所提指标计算高效，有助于根据输入丰富度匹配任务难度。",
-      "novelty": "提出基于特征图通道协方差的ERank指标，简单高效地度量图像复杂度，并展示其在OCR任务数据选择中的有效性。",
+      "zh_summary": "本文提出有效秩(ERank)作为图像丰富度的无标签度量，通过预训练编码器单次前向传播计算特征图通道协方差的秩。ERank能区分图像复杂程度，与编码码率、清晰度、边缘密度等相关，并在IC9600上与人眼复杂度标注相关系数达0.72。实验表明，去除低ERank样本提升超分辨率，去除高ERank样本提升OCR，但ERank在分类、分割、去噪中无效。",
+      "novelty": "8",
       "innovation_points": [
-        "ERank作为无标签复杂度度量",
-        "单次前馈计算，无需额外训练",
-        "揭示移除高复杂度样本可提升OCR性能"
+        "提出通道协方差有效秩作为图像丰富度的无标签、低成本度量",
+        "系统刻画了ERank在噪声下的行为及其与多种视觉属性的关系",
+        "验证了ERank在数据选择中的任务特定有效性"
       ],
-      "limitations": "['仅实验了超分辨率和OCR任务', '未充分分析不同预训练编码器的影响']",
+      "limitations": "ERank在分类、分割等任务中无帮助；度量依赖于预训练编码器的选择。",
       "improvement_directions": [
-        "探索ERank在文档图像（如扫描件）上的适用性",
-        "结合ERank进行自适应OCR模型训练"
+        "研究ERank与预训练模型架构的关系，探索自适应编码器选择",
+        "扩展ERank到更多任务并分析其失效原因",
+        "结合其他度量构建更全面的图像复杂度评估"
       ],
-      "engineering_value": "提供廉价数据筛选工具，帮助OCR系统在训练/微调时剔除高复杂度难样本，提升效率。",
-      "why_relevant": "直接证明移除高ERank样本可提升OCR，为OCR训练数据选择提供新思路。"
+      "engineering_value": "提供一种轻量级图像质量/复杂度评估方法，可用于数据筛选、预处理等工程环节。",
+      "why_relevant": "提供一种新颖的图像复杂度度量，在OCR任务上验证了数据选择的有效性，对优化OCR训练数据有参考价值。"
     },
     {
       "title": "Automated Extraction of Techno-Economic Data from 76,000 Energy System Studies",
@@ -255,65 +291,78 @@
       "arxiv_id": "2607.19178v1",
       "score": 6,
       "topic_tags": [
-        "信息提取",
-        "自动化数据采集",
         "能源系统",
-        "文献挖掘",
-        "FAIR数据"
+        "信息提取",
+        "大规模数据挖掘",
+        "科学文献分析"
       ],
-      "zh_summary": "从76,000篇能源系统研究中自动提取技术经济数据，构建含320万结构化数据点和2000万元数据的FAIR数据库。方法实现高精度自动化提取，揭示学术假设与经验数据的偏差，以及不同技术、地区和时间的研究优先级差异。",
-      "novelty": "大规模自动化提取能源系统文献中的定量数据，将文献本身作为可分析对象，提供FAIR数据库。",
+      "zh_summary": "能源系统模型依赖难以获取和审计的定量假设。本文从2010年以来发表的7.6万篇能源系统研究中自动提取技术经济数据，构建了320万结构化数据点和2000万元数据条目的FAIR数据库。数据库涵盖技术、方法、系统特征等广泛范围，并展示了分析结果：学术假设与实证数据的偏差、研究优先级随技术/区域/时间的变化。提供交互式仪表盘供用户使用。",
+      "novelty": "7",
       "innovation_points": [
-        "自动化提取技术经济数据的方法",
-        "构建大型结构化数据库",
-        "跨尺度分析研究优先级与假设偏差"
+        "从7.6万篇论文中自动化提取大规模结构化技术经济数据",
+        "构建了兼容FAIR原则的能源系统文献数据库",
+        "通过交互式仪表盘提供数据访问和分析功能"
       ],
-      "limitations": "['主要针对能源领域，方法可迁移性未知', '数据质量依赖自动化提取精度']",
+      "limitations": "数据提取的准确性受限于源论文的PDF质量和OCR精度；未详细评估提取方法的误提率。",
       "improvement_directions": [
-        "将方法扩展到其他学科（如医学、工程）",
-        "改进提取准确率处理复杂表格"
+        "改进OCR和表格解析算法以处理更复杂的文档布局",
+        "引入专家验证或众包机制提升数据质量",
+        "扩展到更多类型的能源系统文献和报告"
       ],
-      "engineering_value": "为能源系统建模提供大规模可信数据来源，减少人工收集成本。",
-      "why_relevant": "论文涉及的自动化信息提取技术与文档解析、OCR数据提取紧密相关，方法可借鉴于技术文档信息抽取。"
+      "engineering_value": "为能源系统建模提供丰富、可复用的数据源，减少手动收集工作量，促进研究透明度和可重复性。",
+      "why_relevant": "展示了大规模文档OCR与信息提取在特定科学领域的实际应用，具有跨学科参考价值。"
     },
     {
-      "title": "Relay-Bench: Evaluating LLMs on Multi-Domain Reasoning Chains",
-      "summary": "Introducing Relay-Bench, an unsaturated, holistic, text-only benchmark that measures LLMs' ability to complete an assortment of tasks from distinct domains in a single prompt. The leading model, GPT-5.5 (xHigh), scores 43.3%. The test set entirely consists of composite problems: groups of single-domain subproblems that are strung together into challenges that require reasoning across multiple domains in combination. Many of these problems then have layers of complexity added through prompt encoding and deliberate context bloat. Domains tested include visual reasoning, coding, math, information extraction (with a focus on web search), problem-solving, general knowledge, and data analysis. No restrictions are imposed outside of the model harness, and models are explicitly encouraged to leverage code-execution, web searches, and all available tools. All problems are composed of two to thirteen subproblems and do not require multi-modal input or output.",
-      "link": "https://arxiv.org/abs/2607.18438v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.18438v1",
+      "title": "Pathologist Attention-Aligned Report Generation for Prostate Histopathology",
+      "summary": "The allocation of visual attention by pathologists during cancer diagnosis is a highly selective process that critically shapes the information extracted from whole-slide images (WSIs). Human attention helps medical imaging tasks such as classification and segmentation, and becomes a strong semantic cue for identifying diagnostically informative regions for report generation. In this paper, we introduce human attention into the training of pathologist report generation models. To this end, we collected a multimodal human-attention dataset of 121 prostate WSIs annotated with pathologists' multi-scale viewport trajectories synchronized with the pathologists' verbal descriptions and cursor movements for five clinically relevant components (e.g., Gleason patterns). Using this dataset, we finetune two report generation models with an attention-alignment loss that regularizes the model attention over image patches to match the distribution of pathologist attention. We evaluate our approach on prostate cancer report generation and visual question answering using two models with different internal attention mechanisms (i.e., how image tokens are integrated into the language decoder). Experiments show average gains of 10.9% on NLP-based metrics and 19.3% in accuracy across five clinically relevant report components. Further, model attention maps extracted at inference time, with minimal computational overhead, align more closely with pathologist attention, providing stronger visual support for the generated reports by highlighting the regions that most influence the output.",
+      "link": "https://arxiv.org/abs/2607.19624v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.19624v1",
       "authors": [
-        "Liam Swayne"
+        "Ruoyu Xue",
+        "Suryakant Singh",
+        "Souradeep Chakraborty",
+        "Pierre Marza",
+        "Oksana Yaskiv",
+        "Constantin Friedman",
+        "Natallia Sheuka",
+        "Paul Friedman",
+        "Bharat Ramlal",
+        "Beatrice Knudsen",
+        "Rajarsi Gupta",
+        "Joel Saltz",
+        "Prateek Prasanna",
+        "Gregory Zelinsky",
+        "Dimitris Samaras"
       ],
-      "published": "2026-07-20T18:46:17Z",
-      "updated": "2026-07-20T18:46:17Z",
+      "published": "2026-07-21T23:08:20Z",
+      "updated": "2026-07-21T23:08:20Z",
       "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.LG"
+        "cs.CV"
       ],
-      "arxiv_id": "2607.18438v1",
-      "score": 6,
+      "arxiv_id": "2607.19624v1",
+      "score": 3,
       "topic_tags": [
-        "LLM评估",
-        "多领域推理",
-        "复合问题",
-        "信息提取",
-        "基准测试"
+        "报告生成",
+        "视觉注意力",
+        "病理图像",
+        "多模态学习",
+        "注意力对齐"
       ],
-      "zh_summary": "提出Relay-Bench，评估LLM在单提示中跨多领域推理能力的基准测试，包括视觉推理、编程、数学、信息提取等。当前最佳模型GPT-5.5得分43.3%。基准问题由2-13个子问题组成，并加入提示编码和上下文膨胀增加难度。",
-      "novelty": "设计覆盖多领域且未饱和的推理基准，强调组合推理能力，测试集完全由复合问题组成。",
+      "zh_summary": "本文提出通过引入病理学家的视觉注意力来训练前列腺全切片图像报告生成模型。收集了121张前列腺全切片图像的多模态注意力数据集，包含病理学家多尺度视口轨迹、口头描述和光标移动。使用注意力对齐损失微调两个报告生成模型，使模型注意力匹配病理学家注意力分布。在前列腺癌报告生成和视觉问答任务上，NLP指标平均提升10.9%，临床相关组件的准确率提升19.3%。推理时提取的注意力图与病理学家注意力更一致。",
+      "novelty": "首次将人类注意力（病理学家视觉注意力）引入病理报告生成模型的训练，通过注意力对齐损失实现模型注意力分布与专家注意力分布的匹配。",
       "innovation_points": [
-        "跨多领域组合推理基准",
-        "复合问题设计（2-13个子问题）",
-        "提示编码与上下文膨胀增加难度"
+        "收集了包含病理学家多尺度视口轨迹、口头描述和光标移动的多模态注意力数据集（121张前列腺全切片图像）",
+        "提出注意力对齐损失，正则化模型对图像块的注意力以匹配病理学家注意力分布",
+        "在两种不同内部注意力机制的报告生成模型上进行微调，验证了方法的通用性"
       ],
-      "limitations": "['仅限文本，无多模态', '基准难度高导致性能天花板']",
+      "limitations": "数据集规模较小（仅121张图像），可能限制泛化性；未在更大队列或不同癌种上验证。",
       "improvement_directions": [
-        "引入多模态子问题（如图表、图像）",
-        "设计更多真实场景的复合任务"
+        "扩展数据集规模，涵盖更多病理病例和不同器官",
+        "探索人类注意力与模型注意力对齐的因果影响，减少对人工标注的依赖",
+        "将注意力对齐应用于其他医学影像任务（如检测、分割）"
       ],
-      "engineering_value": "为评估LLM综合推理能力提供严格测试，推动多领域协作模型发展。",
-      "why_relevant": "涉及信息提取作为子任务，与OCR后处理（如文档理解）相关。"
+      "engineering_value": "提供了一种即插即用的训练策略，可在推理时以极小计算开销获得更具可解释性的注意力图，增强报告的可信度。",
+      "why_relevant": "展示了人类注意力如何提升文档生成任务（报告生成）的性能和可解释性，对提升OCR/文档解析中语义理解具有借鉴意义。"
     }
   ]
 }
