@@ -1,64 +1,48 @@
-# OCR / 文档解析研究日报（2026-07-23）
+# OCR / 文档解析研究日报（2026-07-24）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-07-23 04:31:55`
+- 生成时间（UTC）：`2026-07-24 04:30:05`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日论文集中展示了OCR/文档解析在数据集构建、特定领域应用、高效解码架构和鲁棒性提升等方面的进展：波斯语合成数据集Persian Pixel填补了低资源语言数据空缺；AEC工程图纸基准测试揭示了通用模型的域干扰问题；HPD-Parsing通过层次化并行解码大幅提升解析吞吐量；两步法职业编码增强了对OCR噪声的鲁棒性；ERank作为无标签图像复杂度度量可用于数据筛选；大规模能源系统数据提取展示了文档解析在科学文献中的应用价值；病理注意力对齐训练提高了报告生成的可解释性。总体趋势是向更高效、更鲁棒、更领域适配的方向发展，合成数据与域适应仍是关键挑战。
+> 今日论文主要关注OCR数据增强（波斯文合成数据集）、文档分析中的鲁棒编码（两步法职业编码）以及AI系统的可解释性。其中，Persian Pixel数据集为低资源语言OCR提供了重要资源，两步职业编码方法提升了噪声文档处理的鲁棒性，可解释性框架则面向策略约束智能体。整体趋势显示，OCR研究正从通用模型向低资源语言和域适应方向发展，工程化方面注重合成数据与鲁棒性设计。
 
 ## 二、今日趋势判断
 
-当前OCR/文档解析研究呈现三大趋势：1) 合成数据集构建与退化模拟日益精细化，以弥合合成-真实域差距；2) 领域特异性增强，针对工程图纸、医学报告等场景设计专用模型或适配策略；3) 效率与可解释性双提升，如并行解码、注意力对齐等新范式出现。
+OCR领域向低资源语言和合成数据驱动方向发展，文档分析任务更关注鲁棒性与模块化解耦，AI系统可解释性成为跨领域关注点。
 
 ## 三、今日论文概览
 
-1. **Persian Pixel: A large-scale synthetic OCR dataset for Persian language** | 标签：合成数据集、波斯语OCR、数据增强、文档分析
-2. **Benchmarking Deep Learning Approaches for AEC Engineering Drawing Layout Detection and Information Extraction** | 标签：布局检测、工程图纸、视觉语言模型、域干扰
-3. **HPD-Parsing: Hierarchical Parallel Document Parsing** | 标签：文档解析、并行解码、视觉语言模型、效率优化
-4. **Two-Step Occupation Coding** | 标签：职业编码、命名实体识别、两步法、OCR鲁棒性
-5. **ERank in Latent Space as an Image-Complexity and Richness Measure** | 标签：图像复杂度、有效秩、数据选择、无标签度量
-6. **Automated Extraction of Techno-Economic Data from 76,000 Energy System Studies** | 标签：能源系统、信息提取、大规模数据挖掘、科学文献分析
-7. **Pathologist Attention-Aligned Report Generation for Prostate Histopathology** | 标签：报告生成、视觉注意力、病理图像、多模态学习、注意力对齐
+1. **Persian Pixel: A large-scale synthetic OCR dataset for Persian language** | 标签：OCR、合成数据集、低资源语言、波斯文
+2. **Two-Step Occupation Coding** | 标签：文档分析、命名实体识别、职业编码、鲁棒性
+3. **Explainability Framework for Policy-Aware Autonomous Agents** | 标签：可解释AI、策略推理、反事实解释、ASP
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 大规模合成数据集生成结合多样化退化模拟是解决低资源语言和复杂文档类型的主要手段。
-- 层次化解码和并行化策略显著提升文档解析吞吐量，逐步替代传统的自回归生成。
-- 针对OCR噪声的鲁棒设计（如两步法、显式去噪）成为实际系统部署的关键考量。
-- 基于无标签度量的数据筛选（如ERank）为训练数据优化提供新思路。
-- 引入人类注意力或布局先验进行模型对齐，提升了输出结果的可解释性和临床可信度。
+- 利用大规模合成数据解决低资源语言OCR的标注难题
+- 将复杂编码任务解耦为NER和分类映射两步骤提升鲁棒性
+- 引入反事实对比解释提升策略约束AI系统的可解释性
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 研究自适应字体/手写体合成框架，自动扩展合成数据覆盖更多书写风格。
-- 开发针对工程图纸、乐谱等非典型文档的专用布局解析与信息提取方法。
-- 探索动态并行度自适应解码策略，在吞吐量和精度间取得更好平衡。
-- 设计端到端与两步法混合的职业编码系统，兼顾效率与OCR鲁棒性。
-- 将ERank等无标签度量与任务特定数据选择相结合，优化训练集构成。
-- 扩展到多语言、多类型科学文献的大规模信息提取，并建立专家验证机制。
-- 研究注意力对齐机制在多模态医疗文档解析中的通用性，减少人工标注依赖。
-- 开发域适应与迁移学习新方法，解决通用模型在特定域（如AEC）上的域干扰问题。
+- 探索半监督或域适应方法，利用少量真实数据微调合成预训练模型以弥合域间隙
+- 研究多语言NER模型以适应不同语言的职业编码场景，并评估其对OCR噪声的鲁棒性
+- 开发更高效的反事实搜索算法，降低策略约束智能体解释生成的计算开销
 
 ## 六、工程落地启发
 
-- 生成含25种以上退化模拟的合成数据集是提升OCR模型的实用手段。
-- 对工程图纸场景，RF-DETR在布局检测上表现优秀，但需注意通用VLM的域干扰。
-- HPD-Parsing的层次化并行解码可直接用于大规模文档解析系统，提升每秒处理文档数。
-- 两步法（NER+分类）可有效处理OCR噪声，适合对鲁棒性要求高的实体提取任务。
-- ERank可作为轻量级数据筛选工具，用于去除低复杂度或高OCR错误率的样本。
-- 大规模文献自动提取需搭配高质量的PDF解析和表格识别管线，可复用现有FAIR数据库。
-- 病理报告生成中，注意力对齐损失可作为微调插件，显著提升临床相关指标。
+- 合成数据生成需注重模拟真实域噪声（如随机失活技术）以提升模型泛化能力
+- 两步法编码设计可应用于其他文档分析任务（如地址解析、实体标准化）提高鲁棒性
+- 基于ASP的反事实推理框架可集成到文档处理流水线中用于策略合规性检查
 
 ## 七、优先关注论文
 
-- **HPD-Parsing: Hierarchical Parallel Document Parsing**：提出创新的层次化并行解码范式，吞吐量提升显著，后续若扩展到更多文档类型和语言，可能成为通用文档解析的基座架构。
-- **ERank in Latent Space as an Image-Complexity and Richness Measure**：无标签、低成本的图像复杂度度量对数据筛选和预处理有潜在广泛影响，未来研究其与其他任务的结合值得关注。
-- **Benchmarking Deep Learning Approaches for AEC Engineering Drawing Layout Detection and Information Extraction**：AEC领域布局检测的专门化研究为工业应用提供基线，域干扰问题的揭示将推动通用文档模型改进。
+- **Persian Pixel: A large-scale synthetic OCR dataset for Persian language**：该数据集为波斯语OCR提供了首个大规模合成资源，其渲染方法和域适应策略可推广至其他低资源语言（如阿拉伯语、乌尔都语），关注后续真实场景评估结果及开源情况。
+- **Two-Step Occupation Coding**：两步法编码范式在噪声文本中的鲁棒性表现值得关注，特别是其NER模块对OCR错误的容忍度，可能成为文档解析中实体标准化任务的通用方案。
 
 ## 八、论文逐篇解析
 
@@ -70,39 +54,39 @@
 - 发布时间: 2026-07-22T17:13:25Z
 - 分类: cs.CV, cs.AI
 - 相关性评分: 29
-- 主题标签: 合成数据集、波斯语OCR、数据增强、文档分析
+- 主题标签: OCR、合成数据集、低资源语言、波斯文
 
 **中文摘要**
 
-> 波斯语OCR因文字系统复杂和标注数据稀缺而发展滞后。本文提出Persian Pixel大规模合成数据集，包含34.3万图像-文本对，通过SynthOCR-Gen框架生成，模拟波斯文字特征，并引入25种以上随机退化以弥合合成与真实域差距。该数据集为波斯语OCR研究提供了高质量训练资源。
+> 针对波斯语OCR因文字复杂和标注数据稀缺而进展缓慢的问题，本文提出大规模合成数据集Persian Pixel，包含34.3万高保真图文对，覆盖句子、段落和整页布局。通过SynthOCR-Gen渲染框架和精心挑选的700万单词语料库生成，模拟了波斯文上下文连接、字形变体、变音符号及多种字体样式，并引入25种以上随机失活技术缩小合成到真实域的差距。
 
 **核心创新概述**
 
-> 7
+> 提出首个大规模波斯语合成OCR数据集，专门针对波斯-阿拉伯文字系统的复杂性设计渲染流程，并系统性地模拟了多种书写风格和版面布局。
 
 **创新点拆解**
 
-- 构建了波斯语首个大规模合成OCR数据集，包含句、段、页多级布局
-- 提出SynthOCR-Gen渲染框架，精准模拟波斯文字连笔、变体、连字与变音符号等特征
-- 采用25种以上随机退化策略增强合成数据的真实感
+- 构建了344K规模的高质量合成图文数据集，涵盖句子、段落、整页三种粒度
+- 开发了SynthOCR-Gen渲染框架，精确建模波斯文字符连接、字形变体、连字和变音符号
+- 采用了超过25种随机失活技术以弥合合成与真实域的差距
 
 **当前局限**
 
-> 数据集仅涵盖Naskh和Nastaliq两种常见字体，未覆盖手写体等其他风格；合成数据与真实数据间仍可能存在域差距。
+> 数据集完全由合成生成，可能与真实场景存在域间隙，且未公开真实数据上的评估结果。
 
 **后续可改进方向**
 
-- 扩展字体种类和手写体样本
-- 引入更复杂的版面噪声模拟
-- 探索域适应方法以进一步提升真实场景泛化能力
+- 可结合少量真实标注数据采用半监督或域适应方法进一步提升真实场景性能
+- 研究更高效的渲染策略以覆盖更多稀有字体和手写风格
+- 探索基于该合成数据集的预训练模型在多种真实波斯文OCR任务上的迁移效果
 
 **工程启发**
 
-> 为波斯语OCR系统提供大规模可用的训练数据，降低标注成本，推动波斯语文档数字化应用。
+> 为波斯语OCR研究提供了大规模、高质量的训练资源，可显著降低真实数据标注成本，推动波斯文文档数字化。
 
 **为什么值得关注**
 
-> 直接解决波斯语OCR的数据瓶颈问题，提供高质量合成数据集和渲染框架，对提升波斯语OCR系统性能具有重要参考价值。
+> 聚焦低资源语言OCR数据集构建问题，其合成数据生成方法和域适应策略对类似非拉丁文字OCR任务有参考价值。
 
 **原始摘要**
 
@@ -134,125 +118,7 @@ to manual annotation for advancing OCR in low-resource and typographically compl
 
 ---
 
-### 2. Benchmarking Deep Learning Approaches for AEC Engineering Drawing Layout Detection and Information Extraction
-
-- arXiv: [2607.18997v1](https://arxiv.org/abs/2607.18997v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.18997v1)
-- 作者: Tianyang Huang, Alessio Lombardi, Ahmed Elnagar, Ahmed Zalouk, George Paul, Sepehr Najjarpour, Arvid Sigurdsson, Khalid Ismail, Mohamed Ragab, Edlira Vakaj
-- 发布时间: 2026-07-21T11:30:32Z
-- 分类: cs.CV, cs.CE, cs.LG
-- 相关性评分: 14
-- 主题标签: 布局检测、工程图纸、视觉语言模型、域干扰
-
-**中文摘要**
-
-> AEC工程图纸的信息提取因手动处理低效而受限，布局检测作为中间步骤未被充分研究。本文构建了AEC专用布局数据集，并基准测试了五种深度学习架构。RF-DETR在mAP50上达到0.949，视觉语言模型Qwen3-VL的F1分数最高为0.911。通用文档模型存在域干扰导致性能下降。
-
-**核心创新概述**
-
-> 7
-
-**创新点拆解**
-
-- 构建了首个面向AEC工程图纸的专用布局检测数据集
-- 系统比较了五种深度学习方法在AEC图纸布局检测与信息提取上的表现
-- 揭示了通用文档模型在工程图纸上的域干扰现象
-
-**当前局限**
-
-> 数据集规模有限，未覆盖所有AEC图纸类型；基准测试未包含更多最新的端到端方法。
-
-**后续可改进方向**
-
-- 扩展数据集覆盖更多图纸类型和领域变体
-- 探索减少域干扰的迁移学习或域适应策略
-- 研究结合布局与文本的联合建模方法
-
-**工程启发**
-
-> 为AEC领域自动化信息提取提供了可靠的布局检测基线和技术选型参考，有助于提升工程设计文档处理效率。
-
-**为什么值得关注**
-
-> 聚焦工程图纸这一垂直领域的OCR与布局分析，解决了通用模型适用性不足的实际问题，具有强工程应用背景。
-
-**原始摘要**
-
-Information Extraction (IE) from Architecture, Engineering, and Construction (AEC) drawings remains
-hindered by manual inefficiency, while Layout Detection, a vital 'middleware' organizing graphical
-and textual hierarchies, is underexplored. General document layout models, optimized for text-
-centric content, lack validation on engineering drawings. This study constructs a custom AEC-
-specific layouts dataset and benchmarks five deep learning architectures. RF-DETR achieves state-of-
-the-art performance with an $mAP_{50}$ of 0.949, while the Vision-Language Model Qwen3-VL attains a
-leading F1-score of 0.911. Conversely, models pre-trained on general document datasets suffer from
-"domain interference", causing performance degradation. This establishes a robust technical
-foundation for automated IE in AEC.
-
----
-
-### 3. HPD-Parsing: Hierarchical Parallel Document Parsing
-
-- arXiv: [2607.18839v1](https://arxiv.org/abs/2607.18839v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.18839v1)
-- 作者: Shu Wei, Jingjing Wu, Lingshu Zhang, Qunyi Xie, Hao Zou, Le Xiang, Xu Fan, Yangliu Xu, Manhui Lin, Xiaolong Ma, Cheng Cui, Tengyu Du, YY
-- 发布时间: 2026-07-21T08:25:32Z
-- 分类: cs.CL
-- 相关性评分: 13
-- 主题标签: 文档解析、并行解码、视觉语言模型、效率优化
-
-**中文摘要**
-
-> 现有统一视觉语言模型的文档解析采用逐token自回归生成，存在顺序瓶颈。本文提出HPD-Parsing，采用层次化并行解码：主布局分支全局分析结构，并行动态分配块级内容解码。引入渐进式多token预测减少解码步数。在公开基准上达到每秒4752个token，吞吐量提升2.62倍，保持竞争性解析精度。
-
-**核心创新概述**
-
-> 9
-
-**创新点拆解**
-
-- 提出层次化并行解码范式，用分层并行生成替代全页自回归生成
-- 设计动态块级内容分配机制实现并行解码
-- 引入渐进式多token预测进一步加速解码过程
-
-**当前局限**
-
-> 并行解码可能引入块间依赖误差；实验仅在部分公开基准上进行，未覆盖所有文档类型。
-
-**后续可改进方向**
-
-- 探索更高效的块间同步与冲突解决机制
-- 研究动态并行度自适应策略
-- 扩展到更多文档类型和语言场景
-
-**工程启发**
-
-> 显著提升文档解析吞吐量，降低推理延迟，适合大规模文档处理场景。
-
-**为什么值得关注**
-
-> 针对当前统一文档解析器的速度瓶颈，提出创新的并行解码架构，具有高工程实用价值。
-
-**原始摘要**
-
-Efficient teamwork typically combines global coordination with parallel execution, a principle not
-yet fully reflected in unified Vision-Language Model (VLM)-based document parsers. Existing unified
-parsers process an entire page jointly but generate its output through a single token-by-token
-autoregressive trajectory, creating a sequential bottleneck that grows with document length. Such
-full-page sequential generation overlooks a key property of document parsing: layout must be
-analyzed globally, whereas block content can be parsed in parallel. Based on this observation, we
-introduce HPD-Parsing, which replaces full-page autoregressive generation with a Hierarchical
-Parallel Decoding paradigm. A main layout branch organizes the overall document structure and
-dynamically assigns block-level content decoding to concurrent branches, while progressive multi-
-token prediction (P-MTP) further reduces the decoding steps within each branch. Experiments on
-public benchmarks show that HPD-Parsing achieves 4,752 tokens per second, delivering $2.62\times$
-the throughput of the fastest existing document parsing model and $3.06\times$ that of the vanilla
-autoregressive baseline, while maintaining competitive parsing accuracy. These results establish
-hierarchical parallel decoding as an effective alternative to full-page autoregressive generation,
-opening a new direction for efficient unified document parsing.
-
----
-
-### 4. Two-Step Occupation Coding
+### 2. Two-Step Occupation Coding
 
 - arXiv: [2607.20101v1](https://arxiv.org/abs/2607.20101v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2607.20101v1)
@@ -260,39 +126,39 @@ opening a new direction for efficient unified document parsing.
 - 发布时间: 2026-07-22T12:55:34Z
 - 分类: cs.CL, cs.IR
 - 相关性评分: 10
-- 主题标签: 职业编码、命名实体识别、两步法、OCR鲁棒性
+- 主题标签: 文档分析、命名实体识别、职业编码、鲁棒性
 
 **中文摘要**
 
-> 职业编码将职位名称链接到分类系统，现有方法采用单步端到端方式。本文提出两步法：首先用NER模型识别职位名称（可处理OCR噪声），然后将提取的职位名称映射到分类体系。该方法提高了准确率、鲁棒性和可解释性。针对德语开发，但可迁移至其他语言。还引入了基于边际的置信度准则。
+> 针对文本中的职业编码任务，现有方法通常端到端进行，本文提出两步法：先使用领域命名实体识别模型识别职业名称（可容忍OCR错误），再将提取的职业名称映射到分类法。分离步骤将分类器聚焦于映射过程，提高了准确率、鲁棒性和可解释性。方法基于德语数据开发，但可迁移至其他语言，并引入基于边界的置信度标准。
 
 **核心创新概述**
 
-> 6
+> 将职业编码解耦为实体识别和分类映射两个独立子任务，首次在噪声文本（如OCR错误）下进行鲁棒职业编码，并引入基于边界的置信度准则。
 
 **创新点拆解**
 
-- 将职业编码拆分为NER和分类两个独立步骤，提升模块可解释性和抗噪性
-- 在第一步中显式处理OCR错误，增强系统鲁棒性
-- 提出基于边际的置信度准则替代传统绝对阈值
+- 提出两步分离式职业编码范式，将NER与分类映射解耦
+- 设计领域NER模型以应对OCR错误等噪声
+- 引入基于边界的置信度准则替代传统绝对阈值
 
 **当前局限**
 
-> 方法仅在德语文档上验证，未提供多语言实验结果；依赖高质量NER模型。
+> 实验仅在德语数据上进行，跨语言泛化性有待验证；NER步骤的边界可能影响后续映射性能。
 
 **后续可改进方向**
 
-- 扩展至多语言场景并评估迁移效果
-- 研究端到端与两步法的融合方案以兼顾效率与精度
-- 探索更复杂的NER与分类交互机制
+- 研究多语言NER模型以适应不同语言的职业名称识别
+- 探索端到端与两步法的混合架构以结合两者优势
+- 在更复杂的OCR噪声场景下评估NER鲁棒性
 
 **工程启发**
 
-> 提供一种鲁棒、可解释的职业编码方案，适合处理含OCR噪声的文本，可部署于劳动力市场分析系统。
+> 提高职业编码在真实噪声文档中的准确性和可解释性，可直接应用于劳动力市场分析和简历解析等场景。
 
 **为什么值得关注**
 
-> 展示了OCR后处理中结构化信息抽取的一种有效范式，对文档分析中的分类任务有借鉴意义。
+> 展示了OCR后处理中NER与分类任务的协同设计思路，对文档结构化信息提取有借鉴意义。
 
 **原始摘要**
 
@@ -310,184 +176,63 @@ support reproducibility, we publish the source code and evaluation scripts.
 
 ---
 
-### 5. ERank in Latent Space as an Image-Complexity and Richness Measure
+### 3. Explainability Framework for Policy-Aware Autonomous Agents
 
-- arXiv: [2607.19315v1](https://arxiv.org/abs/2607.19315v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.19315v1)
-- 作者: Maksim Smirnov, Grigory Kononov, Anastasiia Linich, Egor Surkov, Egor Shvetsov
-- 发布时间: 2026-07-21T17:32:44Z
-- 分类: cs.CV
+- arXiv: [2607.21209v1](https://arxiv.org/abs/2607.21209v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.21209v1)
+- 作者: Heather Merhout, Daniela Inclezan
+- 发布时间: 2026-07-23T11:22:25Z
+- 分类: cs.LO, cs.AI
 - 相关性评分: 6
-- 主题标签: 图像复杂度、有效秩、数据选择、无标签度量
+- 主题标签: 可解释AI、策略推理、反事实解释、ASP
 
 **中文摘要**
 
-> 本文提出有效秩(ERank)作为图像丰富度的无标签度量，通过预训练编码器单次前向传播计算特征图通道协方差的秩。ERank能区分图像复杂程度，与编码码率、清晰度、边缘密度等相关，并在IC9600上与人眼复杂度标注相关系数达0.72。实验表明，去除低ERank样本提升超分辨率，去除高ERank样本提升OCR，但ERank在分类、分割、去噪中无效。
+> 本文提出一种可解释性框架，用于为具有策略约束的自主智能体生成可理解的解释。基于社会科学中的解释理论，利用Answer Set Programming实现决策逻辑，并结合Python进行信息提取和自然语言生成。通过检测违反策略的惩罚事件，构建反事实对比解释，例如“智能体执行此动作，因为否则会导致不希望事件X”。通过用户调查评估框架效果。
 
 **核心创新概述**
 
-> 8
+> 将反事实推理与策略惩罚相结合，为策略感知智能体生成对比性解释，并集成到ASP中实现可执行框架。
 
 **创新点拆解**
 
-- 提出通道协方差有效秩作为图像丰富度的无标签、低成本度量
-- 系统刻画了ERank在噪声下的行为及其与多种视觉属性的关系
-- 验证了ERank在数据选择中的任务特定有效性
+- 提出了针对策略约束智能体的反事实对比解释生成方法
+- 利用策略惩罚事件自动检测反事实场景
+- 将社会科学解释原则融入ASP编程框架
 
 **当前局限**
 
-> ERank在分类、分割等任务中无帮助；度量依赖于预训练编码器的选择。
+> 目前仅对特定策略规则和反事实场景有效，泛化到复杂环境可能受限；用户调查规模较小。
 
 **后续可改进方向**
 
-- 研究ERank与预训练模型架构的关系，探索自适应编码器选择
-- 扩展ERank到更多任务并分析其失效原因
-- 结合其他度量构建更全面的图像复杂度评估
+- 扩展到连续动作空间和部分可观测环境下的反事实生成
+- 开发更高效的反事实搜索算法以降低计算开销
+- 结合用户反馈自适应调整解释的粒度和形式
 
 **工程启发**
 
-> 提供一种轻量级图像质量/复杂度评估方法，可用于数据筛选、预处理等工程环节。
+> 为需要策略合规性的AI系统（如自动驾驶、机器人）提供了可解释性组件，增强系统透明度和用户信任。
 
 **为什么值得关注**
 
-> 提供一种新颖的图像复杂度度量，在OCR任务上验证了数据选择的有效性，对优化OCR训练数据有参考价值。
+> 虽然非OCR直接相关，但其解释框架可应用于OCR系统的故障诊断和结果解释，例如解释为何识别错误。
 
 **原始摘要**
 
-We propose the effective rank (ERank) of the channel covariance of an image's deep feature map as a
-per-sample, label-free measure of visual richness, computed from a single forward pass through a
-frozen pretrained encoder. ERank counts how many decorrelated channel directions an image activates,
-and we characterize its properties, including its behavior under noise. Empirically, ERank orders
-images from plain to visually rich, correlates with codec bitrate, sharpness, and edge density, and
-correlates with human complexity annotations on IC9600 with $r = 0.72$. As a data-selection
-criterion, removing low-ERank samples improves super-resolution and removing high-ERank samples
-improves OCR, in both pretraining and finetuning, while selection does not help classification,
-segmentation, or denoising. ERank is thus a cheap richness signal, useful exactly when task
-difficulty is governed by input richness.
-
----
-
-### 6. Automated Extraction of Techno-Economic Data from 76,000 Energy System Studies
-
-- arXiv: [2607.19178v1](https://arxiv.org/abs/2607.19178v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.19178v1)
-- 作者: Maxime Gorres, Jan Göpfert, Patrick Kuckertz, Noor Titan Putri Hartono, Heidi Heinrichs, Jochen Linßen, Iain Staffel, Jann Michael Weinand
-- 发布时间: 2026-07-21T15:14:32Z
-- 分类: cs.CL
-- 相关性评分: 6
-- 主题标签: 能源系统、信息提取、大规模数据挖掘、科学文献分析
-
-**中文摘要**
-
-> 能源系统模型依赖难以获取和审计的定量假设。本文从2010年以来发表的7.6万篇能源系统研究中自动提取技术经济数据，构建了320万结构化数据点和2000万元数据条目的FAIR数据库。数据库涵盖技术、方法、系统特征等广泛范围，并展示了分析结果：学术假设与实证数据的偏差、研究优先级随技术/区域/时间的变化。提供交互式仪表盘供用户使用。
-
-**核心创新概述**
-
-> 7
-
-**创新点拆解**
-
-- 从7.6万篇论文中自动化提取大规模结构化技术经济数据
-- 构建了兼容FAIR原则的能源系统文献数据库
-- 通过交互式仪表盘提供数据访问和分析功能
-
-**当前局限**
-
-> 数据提取的准确性受限于源论文的PDF质量和OCR精度；未详细评估提取方法的误提率。
-
-**后续可改进方向**
-
-- 改进OCR和表格解析算法以处理更复杂的文档布局
-- 引入专家验证或众包机制提升数据质量
-- 扩展到更多类型的能源系统文献和报告
-
-**工程启发**
-
-> 为能源系统建模提供丰富、可复用的数据源，减少手动收集工作量，促进研究透明度和可重复性。
-
-**为什么值得关注**
-
-> 展示了大规模文档OCR与信息提取在特定科学领域的实际应用，具有跨学科参考价值。
-
-**原始摘要**
-
-Energy system models guide societally important decisions, but their credibility rests on
-quantitative assumptions that are difficult to source and audit. Meta-analyses can improve
-transparency and modeling practices, but the rapid growth of publications makes manual information
-extraction increasingly impractical. Consequently, databases are updated infrequently and efforts
-are often duplicated across research groups. Here, we demonstrate the highly accurate automated
-extraction of quantitative information from 76,000 energy system studies published since 2010. We
-compile 3.2 million structured quantitative data points together with 20 million associated metadata
-entries, spanning a broad spectrum of technologies, methodological approaches and system
-characteristics. Beyond providing input data for models, the resulting FAIR database make the energy
-systems literature itself analysable. We show where academic assumptions diverge from empirical
-observed data, and how research priorities vary at scale across technologies, regions and time. To
-facilitate broad use within the community, the database is provided through an interactive
-dashboard, enabling users to filter, analyse and download data according to their specific research
-needs.
-
----
-
-### 7. Pathologist Attention-Aligned Report Generation for Prostate Histopathology
-
-- arXiv: [2607.19624v1](https://arxiv.org/abs/2607.19624v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.19624v1)
-- 作者: Ruoyu Xue, Suryakant Singh, Souradeep Chakraborty, Pierre Marza, Oksana Yaskiv, Constantin Friedman, Natallia Sheuka, Paul Friedman, Bharat Ramlal, Beatrice Knudsen, Rajarsi Gupta, Joel Saltz, Prateek Prasanna, Gregory Zelinsky, Dimitris Samaras
-- 发布时间: 2026-07-21T23:08:20Z
-- 分类: cs.CV
-- 相关性评分: 3
-- 主题标签: 报告生成、视觉注意力、病理图像、多模态学习、注意力对齐
-
-**中文摘要**
-
-> 本文提出通过引入病理学家的视觉注意力来训练前列腺全切片图像报告生成模型。收集了121张前列腺全切片图像的多模态注意力数据集，包含病理学家多尺度视口轨迹、口头描述和光标移动。使用注意力对齐损失微调两个报告生成模型，使模型注意力匹配病理学家注意力分布。在前列腺癌报告生成和视觉问答任务上，NLP指标平均提升10.9%，临床相关组件的准确率提升19.3%。推理时提取的注意力图与病理学家注意力更一致。
-
-**核心创新概述**
-
-> 首次将人类注意力（病理学家视觉注意力）引入病理报告生成模型的训练，通过注意力对齐损失实现模型注意力分布与专家注意力分布的匹配。
-
-**创新点拆解**
-
-- 收集了包含病理学家多尺度视口轨迹、口头描述和光标移动的多模态注意力数据集（121张前列腺全切片图像）
-- 提出注意力对齐损失，正则化模型对图像块的注意力以匹配病理学家注意力分布
-- 在两种不同内部注意力机制的报告生成模型上进行微调，验证了方法的通用性
-
-**当前局限**
-
-> 数据集规模较小（仅121张图像），可能限制泛化性；未在更大队列或不同癌种上验证。
-
-**后续可改进方向**
-
-- 扩展数据集规模，涵盖更多病理病例和不同器官
-- 探索人类注意力与模型注意力对齐的因果影响，减少对人工标注的依赖
-- 将注意力对齐应用于其他医学影像任务（如检测、分割）
-
-**工程启发**
-
-> 提供了一种即插即用的训练策略，可在推理时以极小计算开销获得更具可解释性的注意力图，增强报告的可信度。
-
-**为什么值得关注**
-
-> 展示了人类注意力如何提升文档生成任务（报告生成）的性能和可解释性，对提升OCR/文档解析中语义理解具有借鉴意义。
-
-**原始摘要**
-
-The allocation of visual attention by pathologists during cancer diagnosis is a highly selective
-process that critically shapes the information extracted from whole-slide images (WSIs). Human
-attention helps medical imaging tasks such as classification and segmentation, and becomes a strong
-semantic cue for identifying diagnostically informative regions for report generation. In this
-paper, we introduce human attention into the training of pathologist report generation models. To
-this end, we collected a multimodal human-attention dataset of 121 prostate WSIs annotated with
-pathologists' multi-scale viewport trajectories synchronized with the pathologists' verbal
-descriptions and cursor movements for five clinically relevant components (e.g., Gleason patterns).
-Using this dataset, we finetune two report generation models with an attention-alignment loss that
-regularizes the model attention over image patches to match the distribution of pathologist
-attention. We evaluate our approach on prostate cancer report generation and visual question
-answering using two models with different internal attention mechanisms (i.e., how image tokens are
-integrated into the language decoder). Experiments show average gains of 10.9% on NLP-based metrics
-and 19.3% in accuracy across five clinically relevant report components. Further, model attention
-maps extracted at inference time, with minimal computational overhead, align more closely with
-pathologist attention, providing stronger visual support for the generated reports by highlighting
-the regions that most influence the output.
+In the field of Artificial Intelligence, an agent is a system which is able to autonomously make
+decisions in order to reach a desired goal. As these systems grow more prevalent in our day-to-day
+lives, there has been an increased need to add explainability features which can provide an account
+for an agent's behavior. We therefore propose a framework that outlines how to produce
+comprehensible explanations for policy-aware agents, or agents which have rule-enforcing policies
+incorporated in their decision-making framework. This framework is designed using insights from the
+social sciences on how to produce good explanations. It is implemented in the Answer Set Programming
+language while using Python to assist with information extraction and natural-language translation.
+Because these agents incur penalties when violating policies, we are able to leverage these
+penalties to detect undesirable events in scenarios that are counterfactual to the agents' original
+actions. This lends itself to creating contrastive explanations (e.g., "the agent performed this
+action because, had it not, undesirable event X would have occurred."), which formulate the core
+component for our explainability framework. The framework is evaluated using a survey wherein human
+participants provide feedback on our program-generated explanations.
 
 ---
