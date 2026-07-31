@@ -1,183 +1,386 @@
-# OCR / 文档解析研究日报（2026-07-30）
+# OCR / 文档解析研究日报（2026-07-31）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-07-30 04:17:36`
+- 生成时间（UTC）：`2026-07-31 04:37:34`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日论文覆盖多模态上下文学习基准、任务驱动图像复原、高效序列标注、科学图表竞赛及两步验证信息抽取。整体趋势从单一模型能力评估走向系统性基准建设与轻量化、推理高效的工程方案。值得注意的是，多模态上下文学习和科学图表理解仍是难点，直接偏好优化和扩散LoRA等新范式正在进入文档解析领域。
+> 今日论文集中在OCR与文档解析领域，涉及场景文本识别、信息抽取、科学图形理解等。主要进展包括：强化学习优化视觉令牌接地提升场景文本识别精度；多粒度事件分析基准与金融新闻结构化信息抽取展示LLM在信息抽取中的潜力；科学过程模式集与图纸数字化框架促进结构化数据生成；直接解码框架提高序列标注效率；科学图形竞赛反映多模态模型在领域推理上的不足。
 
 ## 二、今日趋势判断
 
-1) 多模态上下文学习成为评估模型在文档和图表任务中能力的新维度；2) 扩散模型结合适配模块（LoRA）用于文档图像复原及OCR预处理；3) 大语言模型在信息抽取中追求高效推理与对齐；4) 科学文档的深度理解（包括数据提取和推理）形成独立研究分支；5) 级联或混合模型策略在低资源场景下表现突出。
+趋势显示，LLM正被广泛应用于OCR和文档解析，如利用视觉令牌、结构化抽取和代码生成。强化学习、直接偏好优化等训练技术用于提升对齐和推理效率。跨文档和多粒度分析成为新关注点。结构化输出如JSON模式和图谱受到重视。
 
 ## 三、今日论文概览
 
-1. **CLBench-V: Evaluating Multimodal Context Learning from Grounding to Knowledge Acquisition** | 标签：多模态上下文学习、基准测试、文档理解、视觉问答
-2. **Noise-Free One-Step LoRA for Task-Driven Image Restoration with Diffusion Priors** | 标签：图像复原、扩散模型、LoRA、任务驱动、OCR预处理
-3. **DIRECT: Direct Decoding for Efficient and Aligned Sequence Labeling with Large Language Models** | 标签：序列标注、大语言模型、直接偏好优化、高效推理、信息抽取
-4. **ICDAR 2026 Competition on Information Extraction from Atomic Layer Deposition/Etching (ALD/E) Scientific Figures** | 标签：科学图表理解、信息提取、视觉问答、基准测试、ICDAR竞赛
-5. **Enhancing Generative Information Extraction with Two-step Validation: A Product Attribute Use Case** | 标签：信息抽取、大语言模型、预训练语言模型、产品数字护照、两步验证
+1. **One Patch Is Enough: Reinforcement-Optimized Visual Token Grounding for MLLM-Based Scene Text Spotting** | 标签：场景文本识别、多模态大语言模型、视觉令牌接地、强化学习、方向嵌入
+2. **From Single- to Cross-Document: Benchmarking Multi-Granularity Event Analysis of Large Language Models** | 标签：事件分析、大型语言模型、基准、信息抽取、检索增强生成
+3. **Beyond Sentiment: Structured Information Extraction from Financial News** | 标签：金融新闻、信息抽取、大型语言模型、情感分析、股票预测
+4. **SciSchema.org: A Multidisciplinary Collection of Schemas for Structured Scientific Process Descriptions** | 标签：科学过程、模式、跨学科、信息抽取、知识图谱
+5. **Drawing-Recode: Annotation Grounding for Parametric CAD Code Generation from Raster 2D CAD Drawings** | 标签：参数化CAD、图纸重编码、光栅图像、标注接地、大型语言模型
+6. **DIRECT: Direct Decoding for Efficient and Aligned Sequence Labeling with Large Language Models** | 标签：序列标注、直接偏好优化、受控解码、大型语言模型、效率
+7. **ICDAR 2026 Competition on Information Extraction from Atomic Layer Deposition/Etching (ALD/E) Scientific Figures** | 标签：科学图形理解、信息抽取、多模态AI、基准数据集、竞赛
+8. **Enhancing Generative Information Extraction with Two-step Validation: A Product Attribute Use Case** | 标签：生成式信息抽取、大型语言模型、产品属性、数据稀缺、数字产品护照
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 基于扩散先验的任务驱动图像复原与文档预处理：利用LoRA实现快速、无噪声的文档图像增强，直接服务OCR。
-- 高效的序列标注解码机制：通过模板填充和直接偏好优化（DPO）使LLM在实体识别等任务中兼顾速度与效果。
-- 多模态上下文学习能力分解与基准建设：系统评估模型在文档和图表上的定位、应用和新知识学习。
-- 级联两步验证提升信息抽取鲁棒性：利用PLM提取+LLM校正的策略在弱实体场景中效果显著。
-- 科学图表理解竞赛驱动领域评估：从分类、摘要到数据提取和视觉问答，全面反映多模态模型在科学文档上的不足。
+- 强化学习用于优化视觉令牌选择，提升场景文本识别精度。
+- LLM结合交叉注意力实现几何信息与语义的融合。
+- 结构化信息抽取框架利用LLM提取多维度语义特征。
+- 人机回环模式挖掘结合LLM生成和专家审核创建模式集。
+- 两步验证机制结合轻量模型与LLM提升抽取可靠性。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 探索专门针对科学图表中密集数值和关系的数据提取架构，例如结合OCR坐标的图神经网络或结构化解码器。
-- 将多模态上下文学习能力集成到文档解析系统中，设计少样本或零样本适应新文档布局的元学习框架。
-- 开发确定性单步扩散模型作为OCR预处理的通用模块，并通过任务保留GAN训练进一步适配下游（如手写识别）。
-- 研究基于DPO的序列标注统一框架，将其扩展到嵌套实体、非连续实体以及端到端文档理解任务。
-- 结合视觉定位与语言推理的混合专家模型，以解决科学图表中隐式推理（如趋势判断、异常检测）问题。
+- 探索融合领域知识的视觉-语言模型，提升科学图形推理能力。
+- 研究自适应锚定令牌选择策略，减少对固定数量依赖。
+- 将方向嵌入对齐扩展到多模态场景，验证通用性。
+- 开发自动化模式挖掘工具，减少人工成本并扩展领域。
+- 改进标注接地损失以支持更多标注类型，增强图纸数字化鲁棒性。
+- 结合知识图谱增强事件关系推理和未来预测能力。
+- 利用直接偏好优化与受控解码组合，开发统一序列标注框架。
 
 ## 六、工程落地启发
 
-- CLBench-V可用于评估多模态模型在实际文档任务中的上下文学习能力，指导模型选型。
-- Noise-Free One-Step LoRA可直接作为OCR预处理模块，大幅减少推理开销且提升图片质量。
-- DIRECT框架可直接替换传统CRF/序列标注模块，尤其适合需要快速迭代的工业信息抽取流水线。
-- ICDAR竞赛基准可用于验收科学文档理解系统的完备性，特别是数据提取与推理。
-- 两步验证方案轻量实用，尤其适合产品属性抽取等低资源场景，可通过中等LLM获得大模型效果。
+- 单补丁视觉令牌接地可降低冗余噪声，适合小文本高密度场景。
+- 结构化信息抽取（如六维度）能提升金融预测性能。
+- 模板填充机制结合KV缓存可显著提升序列标注推理效率。
+- 生成式IE的两步验证可提升低显著性实体抽取，适合数据稀缺领域。
+- 模式集和基准数据集（如SciSchema、ScImpact）可标准化文档解析任务。
 
 ## 七、优先关注论文
 
-- **CLBench-V: Evaluating Multimodal Context Learning from Grounding to Knowledge Acquisition**：首个系统性多模态上下文学习基准，其三个诊断维度可直接用于文档解答模型的故障分析，且暴露了现有模型巨大不足，改进潜力大。
-- **ICDAR 2026 Competition on Information Extraction from Atomic Layer Deposition/Etching (ALD/E) Scientific Figures**：科学图表理解竞赛结果揭示了当前模型在数据提取和推理上的瓶颈，未来优胜方案可能成为领域标杆。
+- **One Patch Is Enough: Reinforcement-Optimized Visual Token Grounding for MLLM-Based Scene Text Spotting**：提出的单补丁框架可能成为场景文本识别新范式，且代码即将发布，需关注其实际效果。
+- **From Single- to Cross-Document: Benchmarking Multi-Granularity Event Analysis of Large Language Models**：多粒度事件分析基准或成为信息抽取领域标准，对文档解析应用有参考价值。
+- **ICDAR 2026 Competition on Information Extraction from Atomic Layer Deposition/Etching (ALD/E) Scientific Figures**：竞赛揭示了多模态模型在科学图形推理上的不足，为后续技术发展指明方向。
 
 ## 八、论文逐篇解析
 
-### 1. CLBench-V: Evaluating Multimodal Context Learning from Grounding to Knowledge Acquisition
+### 1. One Patch Is Enough: Reinforcement-Optimized Visual Token Grounding for MLLM-Based Scene Text Spotting
 
-- arXiv: [2607.25294v1](https://arxiv.org/abs/2607.25294v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.25294v1)
-- 作者: Lai Wei, Chengqi Li, Jiapeng Li, Ruina Hu, Yue Wang, Weiran Huang
-- 发布时间: 2026-07-28T05:06:43Z
-- 分类: cs.CV, cs.AI, cs.CL, cs.LG
-- 相关性评分: 10
-- 主题标签: 多模态上下文学习、基准测试、文档理解、视觉问答
-
-**中文摘要**
-
-> 提出多模态上下文学习基准CLBench-V，评估模型在上下文定位、新信息应用和新知识学习三个维度的能力。实验发现现有模型表现不佳（最佳得分仅0.2847），InternVL3.5在定位和知识学习上领先，Qwen3.5-Plus在新信息应用上最优。
-
-**核心创新概述**
-
-> 首个系统评估多模态上下文学习能力的基准，涵盖科学、金融、长文档、空间推理和网页VQA，并引入自动构建流程降低成本。
-
-**创新点拆解**
-
-- 构建多模态上下文学习基准，包含人工构建和自动构造的数据集
-- 将上下文学习分解为三个可诊断维度：上下文定位、新信息应用、新知识学习
-- 使用自动过滤流程创建领域特定任务数据
-
-**当前局限**
-
-> 当前模型整体得分低，表明多模态上下文学习远未饱和；自动构建数据质量可能受限。
-
-**后续可改进方向**
-
-- 探索模型架构或训练策略以增强上下文定位能力
-- 研究更高效的新知识学习方法以提升少样本泛化
-- 扩展基准覆盖更多模态和领域
-
-**工程启发**
-
-> 为多模态模型在真实场景（如文档理解、图表问答）中的上下文学习能力提供评估工具，指导模型选型和优化。
-
-**为什么值得关注**
-
-> 聚焦于多模态信息抽取与理解，与文档解析（如表格、图表）中的上下文学习场景高度相关。
-
-**原始摘要**
-
-Real-world tasks often require models to learn from task-specific context rather than relying only
-on pre-trained knowledge. While recent work has highlighted this capability as context learning,
-existing evaluations mainly focus on textual contexts. In many practical settings, however, the
-context to be learned from is multimodal: scientific findings are conveyed through figures and
-tables, financial indicators are scattered across converted reports, and spatial decisions depend on
-maps, scenes, or web pages. We introduce CLBench-V, a benchmark for multimodal context learning that
-addresses the difficulty of localizing where context use breaks down by organizing tasks around
-three dimensions: context grounding, new information application, and new knowledge learning.
-CLBench-V combines converted public benchmarks with newly constructed datasets spanning domains such
-as science, finance, long-document understanding, spatial reasoning, and web-based visual question
-answering. To reduce the cost of constructing domain-specific context-learning tasks, we further use
-automated construction and filtering procedures for our newly built datasets. Across 3,443 instances
-and six recent multimodal models, the best overall score is only 0.2847, indicating that multimodal
-context learning remains far from saturated. Moreover, InternVL3.5-30B-A3B performs best on context
-grounding and new knowledge learning, while Qwen3.5-Plus performs best on new information
-application. We further analyze judge reliability, context length, image count, and representative
-failure cases. Code is available at https://github.com/IamLihua/CLBench-V.
-
----
-
-### 2. Noise-Free One-Step LoRA for Task-Driven Image Restoration with Diffusion Priors
-
-- arXiv: [2607.25390v1](https://arxiv.org/abs/2607.25390v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2607.25390v1)
-- 作者: Jaeha Kim, Kyoung Mu Lee
-- 发布时间: 2026-07-28T07:51:44Z
+- arXiv: [2607.27902v1](https://arxiv.org/abs/2607.27902v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.27902v1)
+- 作者: Rui Tang, Wentao Yang, Peirong Zhang, Yongxin Shi, Shun Zhang, Huiguo He, Lianwen Jin
+- 发布时间: 2026-07-30T09:17:48Z
 - 分类: cs.CV
-- 相关性评分: 9
-- 主题标签: 图像复原、扩散模型、LoRA、任务驱动、OCR预处理
+- 相关性评分: 16
+- 主题标签: 场景文本识别、多模态大语言模型、视觉令牌接地、强化学习、方向嵌入
 
 **中文摘要**
 
-> 提出一种基于扩散先验的无噪声单步前向传播方法用于任务驱动图像复原，发现LoRA适配模块效果优于ControlNet，并引入任务保留GAN训练提升感知质量。在分类、分割、检测及真实退化图像和OCR上均优于先前方法。
+> 场景文本识别要求文本识别与空间定位的高精度对齐。虽然视觉令牌接地已成为多模态大语言模型的一种有前景的方案，但先前的多补丁范式往往引入冗余噪声和定位模糊，尤其对于密集或小文本实例。为此，我们提出单补丁文本识别框架，一种以视觉为中心的框架，通过单个锚定视觉令牌路由每个文本实例，然后通过全图像细化恢复几何信息。为了在没有标签的情况下准确识别该锚定，我们引入单补丁选择性优化，一种使用补丁级奖励优化离散视觉令牌选择的强化学习框架。为了进一步提高表示鲁棒性和定位精度，我们引入方向嵌入对齐以通过解耦特征幅度和方向来抑制不稳定的范数偏差，以及补丁增强解码以将路由锚定与语言语义融合，并对全图像特征图进行交叉注意力以实现几何感知的边界回归，超越坐标空间的替代方案。大量实验表明，我们的方法始终且显著优于前沿闭源多模态大语言模型和OCR多模态大语言模型。代码将很快发布。
 
 **核心创新概述**
 
-> 揭示LoRA在任务驱动图像复原中优于ControlNet，并首次实现确定性单步扩散推理。
+> 提出单补丁视觉令牌接地范式，仅使用单个锚定令牌即可实现精确的场景文本识别，替代多补丁方案，减少噪声与定位歧义。
 
 **创新点拆解**
 
-- 确定性无噪声单步前向传播替代多步扩散采样提升任务一致性
-- 比较LoRA与ControlNet适配模块并发现LoRA更有效
-- 任务保留GAN训练策略在提升感知质量时不牺牲下游任务性能
+- 提出单补丁文本识别框架，利用单个锚定视觉令牌路由文本实例，并通过全图像细化恢复几何。
+- 引入单补丁选择性优化，一个基于强化学习的框架，通过补丁级奖励优化离散视觉令牌的选择。
+- 引入方向嵌入对齐，通过解耦特征幅度和方向抑制不稳定的范数偏差。
+- 提出补丁增强解码，将路由锚定与语言语义融合，并在全图像特征图上进行交叉注意力，实现几何感知的边界回归。
 
 **当前局限**
 
-> 依赖预训练扩散模型；对严重退化图像效果可能受限。
+> 该框架仍依赖于视觉令牌選択的初始合理性，可能需要精细的奖励设计；且对极端密集或极小文本的鲁棒性有待进一步验证。
 
 **后续可改进方向**
 
-- 探索更高效的适配模块以替代LoRA
-- 结合多尺度或注意力机制处理复杂退化
-- 扩展到视频或3D图像复原场景
+- 探索自适应锚定令牌选择策略，减少对固定数量令牌的依赖。
+- 将方向嵌入对齐扩展到其他视觉-语言任务中，验证其通用性。
+- 研究在不同场景文本数据集上的泛化能力，包括多语言和弯曲文本。
+- 结合时序信息或视频输入，扩展到动态场景文本检测。
 
 **工程启发**
 
-> 为OCR预处理、低质量文档图像复原提供高效且任务对齐的方案，可直接提升下游识别性能。
+> 提供了一种高效且鲁棒的场景文本识别方法，可应用于自动文档处理、智能交通、增强现实等领域，尤其适合小文本和高密度场景。
 
 **为什么值得关注**
 
-> 直接涉及图像复原对OCR任务的提升，方法可应用于文档图像增强。
+> 对OCR领域有直接贡献，提出了新的视觉令牌接地范式，显著提升多模态大语言模型在场景文本识别上的性能，为后续研究提供了新思路。
 
 **原始摘要**
 
-Degraded images not only reduce visual quality but also impair downstream high-level vision tasks.
-Task-driven image restoration (TDIR) addresses this issue by jointly optimizing restoration quality
-and task performance. Recent works show that pretrained diffusion priors benefit TDIR, yet
-diffusion-based restoration is inherently stochastic, as the sampling process depends on a random
-noise term, which can undermine task consistency. In this paper, we show that a deterministic,
-noise-free one-step forward pass with pretrained diffusion priors can substantially improve TDIR,
-but the benefit critically depends on the adaptation module: LoRA yields consistent gains, whereas
-ControlNet-style conditioning does not. This enables one-step forwarding that surpasses conventional
-multi-step diffusion TDIR baselines. Furthermore, we introduce a task-preserving GAN training
-strategy that improves perceptual quality without sacrificing task performance. Extensive
-experiments on classification, segmentation, and detection demonstrate consistent gains over prior
-TDIR methods, and we further validate generalization on real-world degraded images and OCR.
+Scene text spotting requires high-precision alignment between textual recognition and spatial
+localization. While visual-token grounding has emerged as a promising formulation for Multimodal
+Large Language Models (MLLMs), the previous multi-patch paradigm often introduces redundant noise
+and localization ambiguity, particularly for dense or small text instances. To address this, we
+propose Single-Patch Text Spotting (SPaTS), a vision-centric framework that routes each text
+instance through a single anchor visual token and then recovers geometry via full-image refinement.
+To accurately identify this anchor without oracle labels, we introduce Single-Patch Selective
+Optimization (SPaSO), a reinforcement learning framework that optimizes discrete visual-token
+selection using patch-level rewards. To further improve representation robustness and localization
+precision, we introduce Directional Embedding Alignment (DEA) to suppress unstable norm bias by
+decoupling feature magnitude and direction, and Patch-Enhanced Decoding (PED) to fuse the routed
+anchor with language semantics and cross-attend over the full-image feature map for geometry-aware
+boundary regression beyond coordinate-space surrogates. Extensive experiments demonstrate that SPaTS
+consistently and significantly outperforms both frontier closed-source MLLMs and OCR MLLMs. Code
+will be released soon.
 
 ---
 
-### 3. DIRECT: Direct Decoding for Efficient and Aligned Sequence Labeling with Large Language Models
+### 2. From Single- to Cross-Document: Benchmarking Multi-Granularity Event Analysis of Large Language Models
+
+- arXiv: [2607.27654v1](https://arxiv.org/abs/2607.27654v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.27654v1)
+- 作者: Tao Wen, Shuai Shao, Pei Ke, Xu Han, Jie Zou, Guannan Li, Tao Tian, Jinjie Qiu, Lan Wang, Ke Qin
+- 发布时间: 2026-07-30T04:06:55Z
+- 分类: cs.CL, cs.AI
+- 相关性评分: 10
+- 主题标签: 事件分析、大型语言模型、基准、信息抽取、检索增强生成
+
+**中文摘要**
+
+> 事件分析是信息抽取中一个重要且基础的方向，涉及文档不同粒度上的各种事件中心任务。虽然大型语言模型在部分任务上初步取得了可喜的性能，但由于现有基准的文档粒度、任务设计和数据源受限，其事件分析能力仍缺乏全面理解。为了解决这些问题，我们引入了多粒度事件分析基准，一个系统评估大型语言模型在多粒度事件分析中性能的基准。为了支持大规模评估，我们首先开发了一个由大型语言模型驱动的自校正标注框架，称为多粒度事件分析流水线，能够以自动标签可扩展地获取高质量的源数据。然后，我们在基准中设计了四个核心任务，即事件检测、关系推理、结构归纳和未来预测，以探测模型在不同层面的能力，从原子事件细节到复杂的跨文档叙事。对最先进的大型语言模型和检索增强生成方法的大量实验描绘了当前的能力边界，并识别了关键缺陷，为未来改进大型语言模型在具有挑战性的事件分析任务中的表现提供了见解。
+
+**核心创新概述**
+
+> 首个覆盖单文档到跨文档多粒度事件分析的系统基准，包含四个核心任务，并引入可扩展的标注流水线。
+
+**创新点拆解**
+
+- 提出多粒度事件分析基准，覆盖事件检测、关系推理、结构归纳和未来预测四个核心任务。
+- 开发了基于大型语言模型的自校正标注框架，可大规模生成高质量事件数据。
+- 通过大规模实验评估了多种先进大型语言模型和检索增强生成方法，揭示了当前能力边界。
+
+**当前局限**
+
+> 基准任务设计可能仍受限于现有事件本体，未能完全覆盖所有跨文档事件关系类型。
+
+**后续可改进方向**
+
+- 扩展事件本体，加入更细粒度的事件类型和关系。
+- 探索多语言和多模态事件分析基准。
+- 改进事件未来预测的任务设计，引入更多实际应用场景。
+- 研究如何将标注流水线推广到其他信息抽取任务。
+
+**工程启发**
+
+> 为事件分析研究提供了标准化评测基准，可用于评估和改进大型语言模型在信息抽取上的能力，推动实际应用如舆情监控和信息挖掘。
+
+**为什么值得关注**
+
+> 提供全面的事件分析基准，有助于OCR文档解析中的信息抽取任务，尤其涉及文档结构理解和事件关系推理。
+
+**原始摘要**
+
+Event analysis is an essential and fundamental direction of information extraction, involving
+various event-centric tasks at different granularity of documents. While large language models
+(LLMs) have preliminarily achieved promising performance in part of these tasks individually, their
+capability in event analysis still lacks comprehensive understanding due to restricted document
+granularity, task designs, and data source of existing benchmarks. To address these limitations, we
+introduce MiGUE-Bench, a systematic benchmark for assessing the performance of LLMs in multi-
+granularity event analysis. To support large-scale evaluation, we first develop an LLM-driven self-
+correcting annotation framework called MiGUE-Pipeline, enabling scalable acquisition of high-quality
+source data of events with automatic labels. Then, we design four core tasks in our benchmark, i.e.,
+event detection, relation reasoning, structure induction, and future prediction, to probe model
+competence at different levels, from atomic event details to complex cross-document narratives.
+Extensive experiments on state-of-the-art LLMs and retrieval-augmented generation (RAG) methods
+delineate the current capability boundary and identify critical deficiencies, providing insights
+into the future improvement of LLMs in challenging event analysis tasks.
+
+---
+
+### 3. Beyond Sentiment: Structured Information Extraction from Financial News
+
+- arXiv: [2607.28496v1](https://arxiv.org/abs/2607.28496v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.28496v1)
+- 作者: Daohan Zhu, Sitong Ge, Ruofei Wang, Honggu Chen, Yubo Hou, Tao Wan, Zengchang Qin
+- 发布时间: 2026-07-30T16:41:55Z
+- 分类: cs.CL
+- 相关性评分: 9
+- 主题标签: 金融新闻、信息抽取、大型语言模型、情感分析、股票预测
+
+**中文摘要**
+
+> 金融情感分析已成为新闻驱动股票预测的标准组成部分，但它将丰富、多维的新闻文章简化为单一极性分数。我们假设金融新闻编码了多个正交的信息维度——事件类型、影响范围、时间范围和语义置信度——这些维度是情感无法单独捕获的，并且这些维度具有独立的预测价值。为了验证这一假设，我们提出了一个结构化信息提取框架，利用大型语言模型从金融新闻中提取六个语义维度。通过对数据集中41,618个新闻-股票对的大规模实验，我们发现（i）金融情感特征在非线性模型下表现出强大的预测能力（F1=0.576），但在线性模型下则明显较弱（F1=0.230），揭示了一种高度非线性的情感-收益关系；（ii）大型语言模型提取的结构化特征虽然单独较弱，但捕获了与情感正交的信息，这可以通过两种方法之间53.5%的系统性分歧率来证明；（iii）将两种信号源结合起来得到F1=0.600，显著优于单独任何一种（p < 0.0001），在全部七种事件类型中一致改进。消融实验证实，非情感结构维度（事件类型、影响主体、时间范围、置信度）在金融情感独立贡献+ΔF1。特征重要性分析显示，所有六个提取维度（14-21%）的贡献平衡。
+
+**核心创新概述**
+
+> 提出超越情感分析的结构化信息提取框架，从金融新闻中提取六个语义维度，并证明这些维度具有独立于情感的预测价值。
+
+**创新点拆解**
+
+- 提出结构化信息提取框架，利用大型语言模型提取金融新闻中的六个语义维度。
+- 通过大规模实验验证了结构特征与情感特征的正交性，并证明组合使用能显著提升预测性能。
+- 提供了基于线性与非线性模型的对比分析，揭示了金融情感与收益关系的非线性。
+
+**当前局限**
+
+> 实验基于单一数据集，可能限制泛化性；提取的六个维度可能未完全覆盖金融新闻的所有信息面。
+
+**后续可改进方向**
+
+- 引入更多金融语料，验证框架的鲁棒性。
+- 探索动态时间窗口或事件演化模式。
+- 将结构化信息用于更细粒度的投资决策模型。
+- 结合知识图谱增强维度间的关联推理。
+
+**工程启发**
+
+> 可应用于金融舆情分析、智能投顾和风险预警系统，提升股票预测的准确性。
+
+**为什么值得关注**
+
+> 展示了大型语言模型在从非结构化文本中提取结构化信息的能力，对文档理解有参考价值。
+
+**原始摘要**
+
+Financial sentiment analysis has become a standard component in news-driven stock prediction, yet it
+reduces rich, multi-dimensional news articles to a single polarity score. We hypothesize that
+financial news encodes multiple orthogonal information dimensions---event type, impact scope,
+temporal horizon, and semantic confidence---that sentiment alone cannot capture, and that these
+dimensions carry independent predictive value. To test this hypothesis, we propose a structured
+information extraction framework that leverages LLaMA-3.1-70B to extract six semantic dimensions
+from financial news. Through large-scale experiments on 41,618 news--stock pairs from the FNSPID
+dataset, we find that (i) FinBERT sentiment features exhibit strong predictive power under nonlinear
+models (F1=0.576) but substantially weaker performance under linear models (F1=0.230), revealing a
+highly nonlinear sentiment--return relationship; (ii) LLM-extracted structured features, while
+individually weaker, capture information orthogonal to sentiment, as evidenced by a 53.5% systematic
+disagreement rate between the two approaches; and (iii) combining both signal sources yields
+F1=0.600, significantly outperforming either alone ($p < 0.0001$), with consistent improvements
+across all seven event types. Ablation experiments confirm that non-sentiment structural dimensions
+(event type, impact subject, time horizon, confidence) independently contribute $Δ\text{F1} =
++0.019$ beyond FinBERT alone. Feature importance analysis reveals balanced contributions from all
+six extracted dimensions (14--21%), demonstrating that compressing news into a single sentiment
+score incurs substantial information loss. Our results suggest that the sentiment--semantics
+decoupling in financial text is systematic and exploitable, opening a new direction for multi-
+dimensional financial NLP.
+
+---
+
+### 4. SciSchema.org: A Multidisciplinary Collection of Schemas for Structured Scientific Process Descriptions
+
+- arXiv: [2607.27955v1](https://arxiv.org/abs/2607.27955v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.27955v1)
+- 作者: Jennifer D'Souza, Sameer Sadruddin, Anisa Rula, Ana Bossler, Andrés Fullana, Enric Bas, Syed Ather, Defne Circi, Anlan Chen, L. Catherine Brinson, Alyssa Columbus, George Demetriou, Dongjun Jeong, Tarun Kumar, Frank Krüger, Sascha Genehr, Kai Budde-Sagert, Anamaria Leonescu, Francesco Lodola, Chiara Florindi, Gagana Balasubramanya Murthy, Samson Oluwapelumi Olagbile, Nazia Riasat, Yan Sha, Kevin Shen, Shaokai Yang
+- 发布时间: 2026-07-30T10:04:05Z
+- 分类: cs.DL, cs.AI, cs.CL, cs.IR
+- 相关性评分: 9
+- 主题标签: 科学过程、模式、跨学科、信息抽取、知识图谱
+
+**中文摘要**
+
+> 科学过程通常以异构的文章话语描述，用于比较、可重复性、重用和自动化的细节分散在散文、表格、图形、协议和补充文件中。我们提供了科学过程结构化描述的跨学科模式集，这是首个版本，包括16个人工专家注释的模式，涵盖生物学与生物技术、材料与化学、成像与测量、物理和心理学。每个模式定义了描述过程实例的可复用字段，包括输入、输出、材料、仪器或软件、参数、条件、程序步骤、测量和来源相关信息。这些模式是通过人工在环的模式挖掘工作流创建的，其中大型语言模型从过程规范、科学文章和专家反馈中生成候选结构，然后由领域专家构建最终主模式。数据集包含最终模式（JSON Schema和SHACL格式）、中间模型生成的模式、专家反馈记录、源论文元数据、社区开发材料和分析脚本。技术验证评估了模式结构、开发来源、专家评审和语法合规性。该集合支持结构化注释、元数据丰富、科学知识图谱、信息抽取、语义出版和跨研究比较。
+
+**核心创新概述**
+
+> 首次发布一个跨学科、专家注释的科学过程模式集，支持结构化描述，涵盖多个领域。
+
+**创新点拆解**
+
+- 构建了包含16个专家注释模式的跨学科数据集，覆盖多个科学领域。
+- 采用人机回环的模式挖掘工作流，结合大型模型生成和专家审核。
+- 提供了多种格式（JSON Schema, SHACL）和完整的过程元数据，促进复用。
+
+**当前局限**
+
+> 模式集尚处于初步发布，领域覆盖有限，可能未包含所有科学过程类型。
+
+**后续可改进方向**
+
+- 扩展更多学科领域，增加模式数量。
+- 开发自动化模式挖掘工具，减少人工成本。
+- 研究与现有本体如SOP的映射。
+- 提供更多案例和教程，促进社区应用。
+
+**工程启发**
+
+> 为科学文档的机器可读描述提供标准化结构，支持可重复性、知识图谱构建和跨研究比较。
+
+**为什么值得关注**
+
+> 为OCR和文档分析提供结构化模式，有助于从科学论文中提取过程信息。
+
+**原始摘要**
+
+Scientific processes are often described in heterogeneous article discourse, with details needed for
+comparison, reproducibility, reuse, and automation dispersed across prose, tables, figures,
+protocols, and supplementary files. We present the first release of SciSchema.org, a
+multidisciplinary collection of 16 expert-annotated schemas spanning Biology & Biotechnology,
+Materials & Chemistry, Imaging & Measurement, Physics, and Psychology. Each schema defines reusable
+fields for describing process instances, including inputs, outputs, materials, instruments or
+software, parameters, conditions, procedural steps, measurements, and provenance-related
+information. The schemas were created through a human-in-the-loop schema-mining workflow in which
+large language models generated candidate structures from process specifications, scientific
+articles, and expert feedback, followed by domain-expert construction of final master schemas. The
+dataset contains final schemas in JSON Schema and SHACL formats, intermediate model-generated
+schemas, expert-feedback records, source-paper metadata, community-development materials, and
+analysis scripts. Technical validation assessed schema structure, development provenance, expert
+review, and syntactic conformance. The collection supports structured annotation, metadata
+enrichment, scientific knowledge graphs, information extraction, semantic publishing, and cross-
+study comparison.
+
+---
+
+### 5. Drawing-Recode: Annotation Grounding for Parametric CAD Code Generation from Raster 2D CAD Drawings
+
+- arXiv: [2607.27558v1](https://arxiv.org/abs/2607.27558v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2607.27558v1)
+- 作者: Mingi Kim, Yongjun Kim, Hyungki Kim
+- 发布时间: 2026-07-30T01:05:27Z
+- 分类: cs.CV, cs.AI
+- 相关性评分: 8
+- 主题标签: 参数化CAD、图纸重编码、光栅图像、标注接地、大型语言模型
+
+**中文摘要**
+
+> 从数字化转型前积累的光栅格式的2D计算机辅助设计图纸中恢复参数化计算机辅助设计序列，对于零件复制和制造过程自动化具有重要意义。然而，现有研究要么仅处理矢量图纸，要么局限于特定领域，且未能将尺寸标注与几何信息明确连接，限制了它们利用尺寸信息进行3D参数化计算机辅助设计序列恢复的能力。我们提出了图纸重编码，一个从光栅2D计算机辅助设计图纸生成参数化计算机辅助设计序列（作为计算机辅助设计代码）的框架。图纸重编码通过图像编码器提取几何特征，并通过单独的文本识别模块识别标注，然后使用交叉注意力和我们提出的标注接地损失，将标注明确地接地到几何信息。得到的特征被馈送到大型语言模型以生成结构化参数化计算机辅助设计代码格式的计算机辅助设计代码。实验表明，图纸重编码优于现有基线，并且在模拟工业条件的扫描图纸上保持鲁棒性。我们期望图纸重编码有助于工业环境中光栅2D计算机辅助设计图纸的数字化，以及零件复制和制造自动化。
+
+**核心创新概述**
+
+> 提出一种从光栅2D CAD图纸恢复参数化CAD序列的框架，通过标注接地将尺寸信息与几何特征结合，创新性地用于CAD代码生成。
+
+**创新点拆解**
+
+- 提出图纸重编码框架，结合图像编码器和文本识别模块，实现几何与标注的联合处理。
+- 引入交叉注意力机制和标注接地损失，将尺寸标注显式连接到几何信息。
+- 利用大型语言模型生成结构化参数化计算机辅助设计代码，提高可解释性和兼容性。
+
+**当前局限**
+
+> 当前方法依赖光栅图纸质量，模糊或低分辨率图纸可能影响性能；且处理复杂几何时可能受限于大型语言模型能力。
+
+**后续可改进方向**
+
+- 增强图像编码器以处理更复杂的图纸，如加入几何先验。
+- 扩展标注接地损失以支持多样化的标注类型。
+- 探索端到端的训练范式，避免传统分割流程。
+- 引入增量学习方法，适应新的图纸风格。
+
+**工程启发**
+
+> 可自动化数字化老旧图纸，加速制造流程，减少人工重建成本，适用于工业零件库建设。
+
+**为什么值得关注**
+
+> 直接涉及从光栅图像中抽取结构化信息，与OCR文档解析相关联，尤其在工程图纸领域。
+
+**原始摘要**
+
+Recovering Parametric CAD sequences from raster-format 2D Computer-Aided Design (CAD) drawings
+accumulated prior to digital transformation is important for part reproduction and manufacturing
+process automation. However, existing studies either process only vector drawings or are limited to
+specific domains, and fail to explicitly connect dimensional annotations to geometric information,
+limiting their use of dimensional information for 3D Parametric CAD sequences recovery. We propose
+Drawing-Recode, a framework that generates Parametric CAD sequences as CAD code from raster 2D CAD
+drawings. Drawing-Recode extracts geometric features via an image encoder and recognizes annotations
+through a separate text recognition module, then explicitly grounds annotations to geometric
+information using cross-attention and our proposed Annotation Grounding Loss (AGL). The resulting
+features are fed into a Large Language Model (LLM) to generate CAD code in the Structured Parametric
+CAD Code (SPCC) format. Experiments show that Drawing-Recode outperforms existing baselines and
+remains robust on scanned drawings resembling industrial conditions. We expect Drawing-Recode
+contributes to digitizing raster 2D CAD drawings in industrial settings and to part reproduction and
+manufacturing automation.
+
+---
+
+### 6. DIRECT: Direct Decoding for Efficient and Aligned Sequence Labeling with Large Language Models
 
 - arXiv: [2607.26891v1](https://arxiv.org/abs/2607.26891v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2607.26891v1)
@@ -185,39 +388,40 @@ TDIR methods, and we further validate generalization on real-world degraded imag
 - 发布时间: 2026-07-29T13:23:30Z
 - 分类: cs.CL
 - 相关性评分: 6
-- 主题标签: 序列标注、大语言模型、直接偏好优化、高效推理、信息抽取
+- 主题标签: 序列标注、直接偏好优化、受控解码、大型语言模型、效率
 
 **中文摘要**
 
-> 提出DIRECT框架，结合直接偏好优化（DPO）和受控解码提升大语言模型在序列标注任务中的对齐效果与推理效率。通过模板填充机制仅生成标签token，利用KV缓存减少计算冗余。在八个数据集上取得性能和效率双提升。
+> 序列标注是一项细粒度的信息抽取任务，但现有基于大型语言模型的方法存在领域对齐不足和推理效率低的问题。为了解决这些问题，我们提出了直接解码框架，通过训练时优化和推理时校正来解决这些问题。具体而言，它在监督微调后执行直接偏好优化以加强任务与人类偏好的对齐，并引入一种受控解码过程，强制执行固定输出格式并将预测限制在候选集内。为了进一步提高效率，模板填充机制要求模型仅生成标签令牌，同时通过键值缓存重用前缀内容，从而减少冗余计算。在八个数据集上的实验结果表明，与现有方法相比，我们的方法在性能和效率方面都取得了显著改进。
 
 **核心创新概述**
 
-> 将DPO应用于序列标注任务，并设计模板填充解码机制大幅提升效率。
+> 提出一种结合直接偏好优化和受控解码的框架，用于序列标注任务，显著提高性能并加速推理。
 
 **创新点拆解**
 
-- 使用DPO进行任务对齐训练以强化人类偏好
-- 受控解码强制固定输出格式并限制候选集
-- 模板填充机制仅生成标签token，复用前缀内容于KV缓存
+- 提出直接解码框架，在监督微调后进行直接偏好优化以对齐任务和人类偏好。
+- 引入受控解码过程，强制输出格式并限制预测到候选集，确保合法性。
+- 设计模板填充机制，利用键值缓存减少冗余计算，提高推理效率。
 
 **当前局限**
 
-> 仅适用于固定格式序列标注；对长文本或复杂标签结构可能效率下降。
+> 框架高度依赖候选集的质量，在开放域序列标注任务中可能受限；且直接偏好优化需精心构建偏好数据。
 
 **后续可改进方向**
 
-- 扩展至嵌套或非连续实体标注场景
-- 利用稀疏注意力或量化进一步加速推理
-- 研究多任务联合对齐策略
+- 探究自适应候选集生成方法，减少人工干预。
+- 将框架扩展到更多序列标注任务，如嵌套命名实体识别。
+- 结合知识蒸馏，压缩模型大小，提升部署便利性。
+- 研究直接偏好优化损失的改进，以适应多任务设置。
 
 **工程启发**
 
-> 为信息抽取（如命名实体识别、关系抽取）提供高效且精准的LLM解决方案，适合工业部署。
+> 为序列标注提供高效且准确的解决方案，可应用于中文分词、命名实体识别、词性标注等实际任务。
 
 **为什么值得关注**
 
-> 序列标注是文档信息抽取的核心技术，DIRECT的优化方法可直接应用于文档解析。
+> 序列标注是OCR后处理的关键环节，用于标注提取的文本，该方法可提升准确性和速度。
 
 **原始摘要**
 
@@ -234,7 +438,7 @@ achieves significant improvements in both performance and efficiency compared to
 
 ---
 
-### 4. ICDAR 2026 Competition on Information Extraction from Atomic Layer Deposition/Etching (ALD/E) Scientific Figures
+### 7. ICDAR 2026 Competition on Information Extraction from Atomic Layer Deposition/Etching (ALD/E) Scientific Figures
 
 - arXiv: [2607.26848v1](https://arxiv.org/abs/2607.26848v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2607.26848v1)
@@ -242,39 +446,39 @@ achieves significant improvements in both performance and efficiency compared to
 - 发布时间: 2026-07-29T12:35:31Z
 - 分类: cs.CV
 - 相关性评分: 6
-- 主题标签: 科学图表理解、信息提取、视觉问答、基准测试、ICDAR竞赛
+- 主题标签: 科学图形理解、信息抽取、多模态AI、基准数据集、竞赛
 
 **中文摘要**
 
-> 介绍ICDAR 2026科学图表理解竞赛和Sci-ImageMiner基准，包含四项互补任务。结果发现多模态模型在分类和摘要上表现较好，但在数据提取和科学推理（视觉问答）上表现不足，揭示了领域感知多模态系统的局限性。
+> 本文介绍了ICDAR 2026竞赛，该竞赛聚焦于原子层沉积/蚀刻（ALD/E）科学图形的信息抽取。竞赛基于Sci-ImageMiner基准数据集，包含四个端到端互补任务，由专家注释。共有68名活跃参与者和1263次提交。结果显示，最先进的多模态模型在分类和摘要任务上表现良好，但在数据抽取和科学推理（特别是视觉问答）方面存在困难。该基准和竞赛为推进科学图形理解与推理研究提供了平台，并揭示了领域感知多模态AI系统的局限与改进机会。
 
 **核心创新概述**
 
-> 首个覆盖原子层沉积/刻蚀领域图表的全面基准和竞赛，任务设计涵盖提取、推理等多维度。
+> 提出了一个针对科学图形理解与推理的综合性基准数据集Sci-ImageMiner，并组织了社区驱动的竞赛，涵盖四个互补任务，超越了以往的科学竞赛。
 
 **创新点拆解**
 
-- 构建专家标注的科学图表数据集，涵盖四项端到端任务
-- 组织竞赛吸引大量参与者，系统评估模型在科学图表理解上的能力
+- 构建了专家注释的ALD/E科学图形数据集，覆盖四个端到端任务。
+- 组织了大规模的社区竞赛，吸引68名参与者，进行了1263次提交。
+- 评估了最先进的多模态模型在科学图形任务上的性能，揭示了其优势与不足。
 
 **当前局限**
 
-> 模型在数据提取和科学推理任务上表现不佳；领域迁移性待验证。
+> 最先进的多模态模型在数据抽取和科学推理（特别是视觉问答）上表现不佳，表明现有模型缺乏领域特定推理能力。
 
 **后续可改进方向**
 
-- 设计针对数据提取的专用视觉-语言架构
-- 增强模型对科学图表中数值和关系的推理能力
-- 引入领域知识图谱或预训练策略
-- 探索混合专家模型处理多任务
+- 探索结合领域知识（如ALD/E工艺）的视觉-语言模型，以提升科学推理能力。
+- 开发针对科学图形的专用数据抽取方法，改进视觉问答的准确性和可解释性。
+- 利用竞赛数据进一步训练和微调模型，增强对科学图形的理解。
 
 **工程启发**
 
-> 为科学文档数字化和图表信息自动抽取提供评估基准，推动领域AI发展。
+> 该基准和竞赛为评估和改进科学图形理解系统提供了标准化的测试平台，有助于推动自动化科学文献分析工具的发展。
 
 **为什么值得关注**
 
-> 直接关注科学图表的信息提取与推理，与文档解析中的图表理解紧密相关。
+> 对于OCR和文档解析领域，科学图形中的信息抽取是一个关键挑战，本工作提供了数据集和评估方法，为开发更强大的文档理解系统提供了参考。
 
 **原始摘要**
 
@@ -294,7 +498,7 @@ challenging and complex research area.
 
 ---
 
-### 5. Enhancing Generative Information Extraction with Two-step Validation: A Product Attribute Use Case
+### 8. Enhancing Generative Information Extraction with Two-step Validation: A Product Attribute Use Case
 
 - arXiv: [2607.26780v1](https://arxiv.org/abs/2607.26780v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2607.26780v1)
@@ -302,40 +506,39 @@ challenging and complex research area.
 - 发布时间: 2026-07-29T11:23:10Z
 - 分类: cs.CL
 - 相关性评分: 6
-- 主题标签: 信息抽取、大语言模型、预训练语言模型、产品数字护照、两步验证
+- 主题标签: 生成式信息抽取、大型语言模型、产品属性、数据稀缺、数字产品护照
 
 **中文摘要**
 
-> 提出两步验证方法用于产品属性信息抽取：首步用预训练语言模型(PLM)获取初始提取，第二步用大语言模型(LLM)进行校正。发现该方法能提升弱表达实体抽取性能，中等模型可达更大模型效果，但小模型提升有限。
+> 本文针对数字产品护照（DPP）应用中的产品属性抽取问题，提出了一种生成式信息抽取方法，并集成了两步验证机制。该方法首先使用预训练语言模型（PLM）进行初步抽取，然后利用大型语言模型（LLM）进行验证和修正。实验发现，这种验证步骤能提升LLM在低显著性实体上的抽取性能，中型模型的效果可接近大型模型，但对最小开源LLM（如Llama-3.2 3B）影响有限。基于研究，开发了一个利用本地部署LLM的产品信息抽取演示应用。
 
 **核心创新概述**
 
-> 将PLM与LLM级联用于生成式信息抽取，利用LLM的校正能力增强弱实体抽取。
+> 在生成式IE中引入两步验证方法，整合PLM和LLM，专门针对低显著性实体的抽取，并应用于新兴DPP领域。
 
 **创新点拆解**
 
-- 两步验证流程：PLM初步提取 + LLM验证校正
-- 将验证任务作为提升LLM抽取性能的手段
-- 聚焦数字产品护照的低资源场景
+- 提出两步验证的生成式IE框架，先由PLM生成初始预测，再由LLM修正。
+- 在DPP产品属性抽取场景中验证了方法，有效提升了弱表达实体的抽取性能。
+- 探索了不同规模LLM在验证任务中的效果，发现中型模型可接近大型模型性能。
 
 **当前局限**
 
-> 对最小LLM（3B）效果有限；依赖PLM初始质量。
+> 最小LLM（3B参数）的改进有限，且方法可能受到PLM初始预测质量的影响。
 
 **后续可改进方向**
 
-- 探索更轻量级验证方法或知识蒸馏
-- 引入主动学习或数据增强缓解标注稀缺
-- 设计多轮迭代验证机制
-- 扩展到更多实体类型和语言
+- 研究更有效的提示策略或训练机制，以增强小模型在验证任务中的能力。
+- 探索将领域知识融入验证过程，提高对专业性实体的抽取准确性。
+- 扩展方法到更多领域，并评估在真实DPP系统中的部署效果。
 
 **工程启发**
 
-> 为低资源域信息抽取提供实用方案，尤其适合工业产品属性自动化抽取。
+> 为数字产品护照等数据稀缺场景提供了高效、可本地部署的抽取方案，减少了数据标注需求，同时兼顾隐私保护。
 
 **为什么值得关注**
 
-> 涉及文档中的产品属性信息抽取，可应用于发票、说明书等文档解析。
+> 对于OCR和文档解析，产品属性抽取常结合文本识别，本研究提出的生成式IE方法可为从文档中提取结构化信息提供新思路。
 
 **原始摘要**
 
