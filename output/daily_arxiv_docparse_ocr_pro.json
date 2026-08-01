@@ -1,50 +1,42 @@
 {
   "meta": {
-    "report_date": "2026-07-31",
-    "generated_at_utc": "2026-07-31 04:37:34",
+    "report_date": "2026-08-01",
+    "generated_at_utc": "2026-08-01 04:34:03",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 8
+    "count": 3
   },
   "synthesis": {
-    "executive_summary": "今日论文集中在OCR与文档解析领域，涉及场景文本识别、信息抽取、科学图形理解等。主要进展包括：强化学习优化视觉令牌接地提升场景文本识别精度；多粒度事件分析基准与金融新闻结构化信息抽取展示LLM在信息抽取中的潜力；科学过程模式集与图纸数字化框架促进结构化数据生成；直接解码框架提高序列标注效率；科学图形竞赛反映多模态模型在领域推理上的不足。",
-    "trend_summary": "趋势显示，LLM正被广泛应用于OCR和文档解析，如利用视觉令牌、结构化抽取和代码生成。强化学习、直接偏好优化等训练技术用于提升对齐和推理效率。跨文档和多粒度分析成为新关注点。结构化输出如JSON模式和图谱受到重视。",
+    "executive_summary": "今日研究聚焦于提升OCR和文档解析的精度与结构化程度。SPaTS通过单锚点视觉token和强化学习优化场景文本识别，显著提升密集和微小文本的定位精度。SciSchema.org提出多学科科学过程模式集合，为科学文档的结构化解析提供标准。金融信息提取研究则展示了LLM在非结构化文本中提取多维结构化信息的潜力。整体趋势是从简单的文本识别向高精度定位和深层语义结构化发展，强化学习（RL）和大型语言模型（LLM）成为核心驱动力。",
+    "trend_summary": "1. 追求高精度：通过精细化机制（如单锚点）和优化算法（如RL）提升文本定位和识别性能。2. 结构化信息提取：使用LLM从非结构化文本中提取多维语义信息，超越传统情感或类别标签。3. 模式标准化：定义跨学科的模式（如SciSchema.org）以支持自动化解析和知识图谱构建。4. 人机协同：结合LLM自动生成与专家验证，提高效率与可靠性。",
     "common_innovations": [
-      "强化学习用于优化视觉令牌选择，提升场景文本识别精度。",
-      "LLM结合交叉注意力实现几何信息与语义的融合。",
-      "结构化信息抽取框架利用LLM提取多维度语义特征。",
-      "人机回环模式挖掘结合LLM生成和专家审核创建模式集。",
-      "两步验证机制结合轻量模型与LLM提升抽取可靠性。"
+      "利用强化学习优化离散决策（如视觉token选择）以提升定位精度。",
+      "引入解耦特征（如幅度与方向）增强表示鲁棒性，缓解范数偏差。",
+      "使用LLM自动生成结构化模式，并通过专家反馈迭代优化。",
+      "融合多源信息（如锚点与全局特征、情感与结构化特征）提升性能。"
     ],
     "future_directions": [
-      "探索融合领域知识的视觉-语言模型，提升科学图形推理能力。",
-      "研究自适应锚定令牌选择策略，减少对固定数量依赖。",
-      "将方向嵌入对齐扩展到多模态场景，验证通用性。",
-      "开发自动化模式挖掘工具，减少人工成本并扩展领域。",
-      "改进标注接地损失以支持更多标注类型，增强图纸数字化鲁棒性。",
-      "结合知识图谱增强事件关系推理和未来预测能力。",
-      "利用直接偏好优化与受控解码组合，开发统一序列标注框架。"
+      "探索自适应锚点数量或多粒度token选择，平衡噪声与细节捕捉。",
+      "设计更稳定的RL奖励机制，避免训练波动，并扩展到更多视觉任务。",
+      "将结构化信息提取框架扩展到金融以外的领域，如医学、法律等，并验证其普适性。",
+      "扩展SciSchema.org至更多学科，并开发自动化工具将科学文献映射至模式。",
+      "研究LLM提取信息的置信度估计与纠错机制，降低噪音影响。"
     ],
     "engineering_takeaways": [
-      "单补丁视觉令牌接地可降低冗余噪声，适合小文本高密度场景。",
-      "结构化信息抽取（如六维度）能提升金融预测性能。",
-      "模板填充机制结合KV缓存可显著提升序列标注推理效率。",
-      "生成式IE的两步验证可提升低显著性实体抽取，适合数据稀缺领域。",
-      "模式集和基准数据集（如SciSchema、ScImpact）可标准化文档解析任务。"
+      "基于MLLM的视觉token grounding可作为场景文本spotting的高效方案，SPaTS方法可集成到OCR管线。",
+      "强化学习可用于优化OCR中的离散化操作（如锚点选择），但需关注训练稳定性。",
+      "LLM在结构化信息提取中有效，但需结合领域专家验证以确保准确性。",
+      "标准化的schema（如JSON Schema）可促进不同文档解析系统的互操作性和集成。"
     ],
     "watchlist": [
       {
         "title": "One Patch Is Enough: Reinforcement-Optimized Visual Token Grounding for MLLM-Based Scene Text Spotting",
-        "watch_reason": "提出的单补丁框架可能成为场景文本识别新范式，且代码即将发布，需关注其实际效果。"
+        "watch_reason": "SPaTS在场景文本识别上取得显著提升，其单锚点与RL优化技术可能成为未来OCR系统升级的关键，值得跟踪代码发布和后续扩展。"
       },
       {
-        "title": "From Single- to Cross-Document: Benchmarking Multi-Granularity Event Analysis of Large Language Models",
-        "watch_reason": "多粒度事件分析基准或成为信息抽取领域标准，对文档解析应用有参考价值。"
-      },
-      {
-        "title": "ICDAR 2026 Competition on Information Extraction from Atomic Layer Deposition/Etching (ALD/E) Scientific Figures",
-        "watch_reason": "竞赛揭示了多模态模型在科学图形推理上的不足，为后续技术发展指明方向。"
+        "title": "SciSchema.org: A Multidisciplinary Collection of Schemas for Structured Scientific Process Descriptions",
+        "watch_reason": "该模式集合为科学文档解析提供标准框架，对知识图谱构建和语义出版有重要价值，需持续关注其扩展和应用案例。"
       }
     ]
   },
@@ -73,76 +65,25 @@
       "topic_tags": [
         "场景文本识别",
         "多模态大语言模型",
-        "视觉令牌接地",
         "强化学习",
-        "方向嵌入"
+        "视觉 token grounding"
       ],
-      "zh_summary": "场景文本识别要求文本识别与空间定位的高精度对齐。虽然视觉令牌接地已成为多模态大语言模型的一种有前景的方案，但先前的多补丁范式往往引入冗余噪声和定位模糊，尤其对于密集或小文本实例。为此，我们提出单补丁文本识别框架，一种以视觉为中心的框架，通过单个锚定视觉令牌路由每个文本实例，然后通过全图像细化恢复几何信息。为了在没有标签的情况下准确识别该锚定，我们引入单补丁选择性优化，一种使用补丁级奖励优化离散视觉令牌选择的强化学习框架。为了进一步提高表示鲁棒性和定位精度，我们引入方向嵌入对齐以通过解耦特征幅度和方向来抑制不稳定的范数偏差，以及补丁增强解码以将路由锚定与语言语义融合，并对全图像特征图进行交叉注意力以实现几何感知的边界回归，超越坐标空间的替代方案。大量实验表明，我们的方法始终且显著优于前沿闭源多模态大语言模型和OCR多模态大语言模型。代码将很快发布。",
-      "novelty": "提出单补丁视觉令牌接地范式，仅使用单个锚定令牌即可实现精确的场景文本识别，替代多补丁方案，减少噪声与定位歧义。",
+      "zh_summary": "场景文本 spotting 需要文本识别和空间定位之间的高精度对齐。虽然视觉 token grounding 已成为多模态大语言模型的一种有前景的公式，但先前的多 patch 范式通常会引入冗余噪声和定位模糊，特别是对于密集或小型文本实例。为此，作者提出了 Single-Patch Text Spotting (SPaTS)，这是一种以视觉为中心的框架，通过单个锚定视觉 token 路由每个文本实例，然后通过全图像细化恢复几何。为了在没有 oracle 标签的情况下准确识别该锚点，作者引入了 Single-Patch Selective Optimization (SPaSO)，这是一种强化学习框架，使用 patch 级奖励优化离散视觉 token 选择。为了进一步提高表示鲁棒性和定位精度，作者引入了 Directional Embedding Alignment (DEA)，通过解耦特征幅度和方向来抑制不稳定的范数偏差，以及 Patch-Enhanced Decoding (PED)，将路由的锚点与语言语义融合，并对全图像特征图进行交叉关注，以实现超越坐标空间代理的几何感知边界回归。大量实验表明，SPaTS 持续且显著优于前沿闭源多模态 LLM 和 OCR LLM。代码即将发布。",
+      "novelty": "提出一种新的视觉 token 路由范式，使用单锚点 patch 代替多 patch，并结合强化学习优化离散选择，以及方向嵌入对齐和 patch 增强解码的新机制。",
       "innovation_points": [
-        "提出单补丁文本识别框架，利用单个锚定视觉令牌路由文本实例，并通过全图像细化恢复几何。",
-        "引入单补丁选择性优化，一个基于强化学习的框架，通过补丁级奖励优化离散视觉令牌的选择。",
-        "引入方向嵌入对齐，通过解耦特征幅度和方向抑制不稳定的范数偏差。",
-        "提出补丁增强解码，将路由锚定与语言语义融合，并在全图像特征图上进行交叉注意力，实现几何感知的边界回归。"
+        "提出单 patch 文本 spotting 框架 (SPaTS)，每个文本实例只使用一个锚定视觉 token，减少冗余噪声和定位模糊。",
+        "引入强化学习框架 (SPaSO) 优化离散视觉 token 选择，无需 oracle 标签，使用 patch 级奖励。",
+        "提出方向嵌入对齐 (DEA) 解耦特征幅度和方向，抑制范数偏差，提高表示鲁棒性。",
+        "提出 patch 增强解码 (PED) 融合路由的锚点与语言语义，并对全图特征进行交叉关注，实现几何感知边界回归。"
       ],
-      "limitations": "该框架仍依赖于视觉令牌選択的初始合理性，可能需要精细的奖励设计；且对极端密集或极小文本的鲁棒性有待进一步验证。",
+      "limitations": "单锚点 token 可能不足以捕捉复杂的文本实例几何；强化学习训练可能不稳定；依赖 MLLM 架构，泛化性需要进一步验证。",
       "improvement_directions": [
-        "探索自适应锚定令牌选择策略，减少对固定数量令牌的依赖。",
-        "将方向嵌入对齐扩展到其他视觉-语言任务中，验证其通用性。",
-        "研究在不同场景文本数据集上的泛化能力，包括多语言和弯曲文本。",
-        "结合时序信息或视频输入，扩展到动态场景文本检测。"
+        "探索自适应锚点数量以平衡噪声和细节。",
+        "优化强化学习奖励设计以提高训练稳定性和效率。",
+        "将 SPaTS 扩展到其他视觉任务如目标检测和分割。"
       ],
-      "engineering_value": "提供了一种高效且鲁棒的场景文本识别方法，可应用于自动文档处理、智能交通、增强现实等领域，尤其适合小文本和高密度场景。",
-      "why_relevant": "对OCR领域有直接贡献，提出了新的视觉令牌接地范式，显著提升多模态大语言模型在场景文本识别上的性能，为后续研究提供了新思路。"
-    },
-    {
-      "title": "From Single- to Cross-Document: Benchmarking Multi-Granularity Event Analysis of Large Language Models",
-      "summary": "Event analysis is an essential and fundamental direction of information extraction, involving various event-centric tasks at different granularity of documents. While large language models (LLMs) have preliminarily achieved promising performance in part of these tasks individually, their capability in event analysis still lacks comprehensive understanding due to restricted document granularity, task designs, and data source of existing benchmarks. To address these limitations, we introduce MiGUE-Bench, a systematic benchmark for assessing the performance of LLMs in multi-granularity event analysis. To support large-scale evaluation, we first develop an LLM-driven self-correcting annotation framework called MiGUE-Pipeline, enabling scalable acquisition of high-quality source data of events with automatic labels. Then, we design four core tasks in our benchmark, i.e., event detection, relation reasoning, structure induction, and future prediction, to probe model competence at different levels, from atomic event details to complex cross-document narratives. Extensive experiments on state-of-the-art LLMs and retrieval-augmented generation (RAG) methods delineate the current capability boundary and identify critical deficiencies, providing insights into the future improvement of LLMs in challenging event analysis tasks.",
-      "link": "https://arxiv.org/abs/2607.27654v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.27654v1",
-      "authors": [
-        "Tao Wen",
-        "Shuai Shao",
-        "Pei Ke",
-        "Xu Han",
-        "Jie Zou",
-        "Guannan Li",
-        "Tao Tian",
-        "Jinjie Qiu",
-        "Lan Wang",
-        "Ke Qin"
-      ],
-      "published": "2026-07-30T04:06:55Z",
-      "updated": "2026-07-30T04:06:55Z",
-      "categories": [
-        "cs.CL",
-        "cs.AI"
-      ],
-      "arxiv_id": "2607.27654v1",
-      "score": 10,
-      "topic_tags": [
-        "事件分析",
-        "大型语言模型",
-        "基准",
-        "信息抽取",
-        "检索增强生成"
-      ],
-      "zh_summary": "事件分析是信息抽取中一个重要且基础的方向，涉及文档不同粒度上的各种事件中心任务。虽然大型语言模型在部分任务上初步取得了可喜的性能，但由于现有基准的文档粒度、任务设计和数据源受限，其事件分析能力仍缺乏全面理解。为了解决这些问题，我们引入了多粒度事件分析基准，一个系统评估大型语言模型在多粒度事件分析中性能的基准。为了支持大规模评估，我们首先开发了一个由大型语言模型驱动的自校正标注框架，称为多粒度事件分析流水线，能够以自动标签可扩展地获取高质量的源数据。然后，我们在基准中设计了四个核心任务，即事件检测、关系推理、结构归纳和未来预测，以探测模型在不同层面的能力，从原子事件细节到复杂的跨文档叙事。对最先进的大型语言模型和检索增强生成方法的大量实验描绘了当前的能力边界，并识别了关键缺陷，为未来改进大型语言模型在具有挑战性的事件分析任务中的表现提供了见解。",
-      "novelty": "首个覆盖单文档到跨文档多粒度事件分析的系统基准，包含四个核心任务，并引入可扩展的标注流水线。",
-      "innovation_points": [
-        "提出多粒度事件分析基准，覆盖事件检测、关系推理、结构归纳和未来预测四个核心任务。",
-        "开发了基于大型语言模型的自校正标注框架，可大规模生成高质量事件数据。",
-        "通过大规模实验评估了多种先进大型语言模型和检索增强生成方法，揭示了当前能力边界。"
-      ],
-      "limitations": "基准任务设计可能仍受限于现有事件本体，未能完全覆盖所有跨文档事件关系类型。",
-      "improvement_directions": [
-        "扩展事件本体，加入更细粒度的事件类型和关系。",
-        "探索多语言和多模态事件分析基准。",
-        "改进事件未来预测的任务设计，引入更多实际应用场景。",
-        "研究如何将标注流水线推广到其他信息抽取任务。"
-      ],
-      "engineering_value": "为事件分析研究提供了标准化评测基准，可用于评估和改进大型语言模型在信息抽取上的能力，推动实际应用如舆情监控和信息挖掘。",
-      "why_relevant": "提供全面的事件分析基准，有助于OCR文档解析中的信息抽取任务，尤其涉及文档结构理解和事件关系推理。"
+      "engineering_value": "提高场景文本 spotting 的精度，特别是在密集和小文本场景下，可改进 OCR 系统，有实际应用价值。",
+      "why_relevant": "针对 MLLM 在 OCR 任务中的视觉 token 选择进行优化，对后续 MLLM 用于 OCR 的研究有直接启发。"
     },
     {
       "title": "Beyond Sentiment: Structured Information Extraction from Financial News",
@@ -166,28 +107,26 @@
       "arxiv_id": "2607.28496v1",
       "score": 9,
       "topic_tags": [
-        "金融新闻",
-        "信息抽取",
-        "大型语言模型",
-        "情感分析",
+        "金融情感分析",
+        "结构化信息提取",
+        "大语言模型",
         "股票预测"
       ],
-      "zh_summary": "金融情感分析已成为新闻驱动股票预测的标准组成部分，但它将丰富、多维的新闻文章简化为单一极性分数。我们假设金融新闻编码了多个正交的信息维度——事件类型、影响范围、时间范围和语义置信度——这些维度是情感无法单独捕获的，并且这些维度具有独立的预测价值。为了验证这一假设，我们提出了一个结构化信息提取框架，利用大型语言模型从金融新闻中提取六个语义维度。通过对数据集中41,618个新闻-股票对的大规模实验，我们发现（i）金融情感特征在非线性模型下表现出强大的预测能力（F1=0.576），但在线性模型下则明显较弱（F1=0.230），揭示了一种高度非线性的情感-收益关系；（ii）大型语言模型提取的结构化特征虽然单独较弱，但捕获了与情感正交的信息，这可以通过两种方法之间53.5%的系统性分歧率来证明；（iii）将两种信号源结合起来得到F1=0.600，显著优于单独任何一种（p < 0.0001），在全部七种事件类型中一致改进。消融实验证实，非情感结构维度（事件类型、影响主体、时间范围、置信度）在金融情感独立贡献+ΔF1。特征重要性分析显示，所有六个提取维度（14-21%）的贡献平衡。",
-      "novelty": "提出超越情感分析的结构化信息提取框架，从金融新闻中提取六个语义维度，并证明这些维度具有独立于情感的预测价值。",
+      "zh_summary": "金融情感分析已成为新闻驱动股票预测的标准组成部分，但它将丰富多维的新闻文章简化为单一极性分数。作者假设金融新闻编码多个正交信息维度——事件类型、影响范围、时间范围和语义置信度——这些是情感分析无法单独捕捉的，并且这些维度具有独立的预测价值。为了验证这一假设，他们提出了一种结构化信息提取框架，利用 LLaMA-3.1-70B 从金融新闻中提取六个语义维度。通过在 FNSPID 数据集的 41,618 个新闻-股票对上大规模实验，他们发现：(i) FinBERT 情感特征在非线性模型下表现出强预测能力 (F1=0.576)，但在线性模型下表现明显较弱 (F1=0.230)，揭示高度非线性的情感-回报关系；(ii) LLM 提取的结构化特征虽然单独较弱，但捕捉了情感之外的信息，两种方法之间系统性分歧率达 53.5%；(iii) 结合两种信号源得到 F1=0.600，显著优于单独任何一方 (p<0.0001)，在所有七种事件类型上均一致性提升。消融实验证实非情感结构维度（事件类型、影响主体、时间范围、置信度）在 FinBERT 基础上独立贡献 ΔF1=+0.019。特征重要性分析显示六个提取维度的贡献平衡 (14-21%)。",
+      "novelty": "不再将金融新闻视为单一情感维度，而是提取结构化、多维、正交的信息特征，并证明其独立于情感的预测价值。",
       "innovation_points": [
-        "提出结构化信息提取框架，利用大型语言模型提取金融新闻中的六个语义维度。",
-        "通过大规模实验验证了结构特征与情感特征的正交性，并证明组合使用能显著提升预测性能。",
-        "提供了基于线性与非线性模型的对比分析，揭示了金融情感与收益关系的非线性。"
+        "提出结构化信息提取框架，利用 LLM 从新闻中提取六个语义维度（如事件类型、影响范围等）。",
+        "系统比较了情感特征和结构化特征的预测能力，并证明其正交性。",
+        "通过特征组合显著提升预测性能，超越了单一情感分析。"
       ],
-      "limitations": "实验基于单一数据集，可能限制泛化性；提取的六个维度可能未完全覆盖金融新闻的所有信息面。",
+      "limitations": "依赖 LLM 提取可能引入噪音或遗漏；实验只在特定数据集上验证；未完全探索所有可能的信息维度。",
       "improvement_directions": [
-        "引入更多金融语料，验证框架的鲁棒性。",
-        "探索动态时间窗口或事件演化模式。",
-        "将结构化信息用于更细粒度的投资决策模型。",
-        "结合知识图谱增强维度间的关联推理。"
+        "探索更多信息维度以提高预测能力。",
+        "改进 LLM 提取的准确性和鲁棒性。",
+        "将方法应用于其他领域的文本挖掘。"
       ],
-      "engineering_value": "可应用于金融舆情分析、智能投顾和风险预警系统，提升股票预测的准确性。",
-      "why_relevant": "展示了大型语言模型在从非结构化文本中提取结构化信息的能力，对文档理解有参考价值。"
+      "engineering_value": "提升金融新闻驱动的股票预测准确率，对金融风险管理和投资决策有应用价值。",
+      "why_relevant": "展示了 LLM 在结构化信息提取中的潜力，对文档解析中的信息抽取有借鉴意义。"
     },
     {
       "title": "SciSchema.org: A Multidisciplinary Collection of Schemas for Structured Scientific Process Descriptions",
@@ -233,194 +172,26 @@
       "arxiv_id": "2607.27955v1",
       "score": 9,
       "topic_tags": [
-        "科学过程",
-        "模式",
-        "跨学科",
-        "信息抽取",
+        "科学模式",
+        "结构化信息",
+        "语义出版",
         "知识图谱"
       ],
-      "zh_summary": "科学过程通常以异构的文章话语描述，用于比较、可重复性、重用和自动化的细节分散在散文、表格、图形、协议和补充文件中。我们提供了科学过程结构化描述的跨学科模式集，这是首个版本，包括16个人工专家注释的模式，涵盖生物学与生物技术、材料与化学、成像与测量、物理和心理学。每个模式定义了描述过程实例的可复用字段，包括输入、输出、材料、仪器或软件、参数、条件、程序步骤、测量和来源相关信息。这些模式是通过人工在环的模式挖掘工作流创建的，其中大型语言模型从过程规范、科学文章和专家反馈中生成候选结构，然后由领域专家构建最终主模式。数据集包含最终模式（JSON Schema和SHACL格式）、中间模型生成的模式、专家反馈记录、源论文元数据、社区开发材料和分析脚本。技术验证评估了模式结构、开发来源、专家评审和语法合规性。该集合支持结构化注释、元数据丰富、科学知识图谱、信息抽取、语义出版和跨研究比较。",
-      "novelty": "首次发布一个跨学科、专家注释的科学过程模式集，支持结构化描述，涵盖多个领域。",
+      "zh_summary": "科学过程通常以异构的文章话语描述，比较、复现、重用和自动化所需的详细信息分散在散文、表格、图表、协议和补充文件中。作者提出了 SciSchema.org 的首个版本，这是一个多学科的 16 个专家注释模式集合，涵盖生物学与生物技术、材料与化学、成像与测量、物理和心理学。每个模式定义了用于描述过程实例的可复用字段，包括输入、输出、材料、仪器或软件、参数、条件、程序步骤、测量和溯源相关信息。这些模式是通过人工介入的模式挖掘工作流程创建的，其中 LLM 从过程规范、科学文章和专家反馈中生成候选结构，然后由领域专家构建最终主模式。数据集包含 JSON Schema 和 SHACL 格式的最终模式、中间模型生成模式、专家反馈记录、源论文元数据、社区开发材料和脚本。技术验证评估了模式结构、开发来源、专家评审和语法一致性。该集合支持结构化注释、元数据丰富、科学知识图谱、信息提取、语义出版和跨研究比较。",
+      "novelty": "提供了一个多学科、专家验证的科学过程模式集合，并用 LLM 辅助模式挖掘，支持结构化描述和自动化。",
       "innovation_points": [
-        "构建了包含16个专家注释模式的跨学科数据集，覆盖多个科学领域。",
-        "采用人机回环的模式挖掘工作流，结合大型模型生成和专家审核。",
-        "提供了多种格式（JSON Schema, SHACL）和完整的过程元数据，促进复用。"
+        "创建了覆盖多个学科的科学过程模式集合，每个模式定义详细字段。",
+        "开发了结合 LLM 和领域专家的人机协同模式挖掘流程。",
+        "提供了多种格式的模式和数据，支持多种应用。"
       ],
-      "limitations": "模式集尚处于初步发布，领域覆盖有限，可能未包含所有科学过程类型。",
+      "limitations": "模式可能不全面，需要持续更新；LLM 生成模式可能不充分；专家注释成本高。",
       "improvement_directions": [
-        "扩展更多学科领域，增加模式数量。",
-        "开发自动化模式挖掘工具，减少人工成本。",
-        "研究与现有本体如SOP的映射。",
-        "提供更多案例和教程，促进社区应用。"
+        "扩展模式覆盖更多学科和更多类型的科学过程。",
+        "改进模式挖掘流程的效率，减少专家负担。",
+        "利用模式促进自动化信息提取和知识图谱构建。"
       ],
-      "engineering_value": "为科学文档的机器可读描述提供标准化结构，支持可重复性、知识图谱构建和跨研究比较。",
-      "why_relevant": "为OCR和文档分析提供结构化模式，有助于从科学论文中提取过程信息。"
-    },
-    {
-      "title": "Drawing-Recode: Annotation Grounding for Parametric CAD Code Generation from Raster 2D CAD Drawings",
-      "summary": "Recovering Parametric CAD sequences from raster-format 2D Computer-Aided Design (CAD) drawings accumulated prior to digital transformation is important for part reproduction and manufacturing process automation. However, existing studies either process only vector drawings or are limited to specific domains, and fail to explicitly connect dimensional annotations to geometric information, limiting their use of dimensional information for 3D Parametric CAD sequences recovery. We propose Drawing-Recode, a framework that generates Parametric CAD sequences as CAD code from raster 2D CAD drawings. Drawing-Recode extracts geometric features via an image encoder and recognizes annotations through a separate text recognition module, then explicitly grounds annotations to geometric information using cross-attention and our proposed Annotation Grounding Loss (AGL). The resulting features are fed into a Large Language Model (LLM) to generate CAD code in the Structured Parametric CAD Code (SPCC) format. Experiments show that Drawing-Recode outperforms existing baselines and remains robust on scanned drawings resembling industrial conditions. We expect Drawing-Recode contributes to digitizing raster 2D CAD drawings in industrial settings and to part reproduction and manufacturing automation.",
-      "link": "https://arxiv.org/abs/2607.27558v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.27558v1",
-      "authors": [
-        "Mingi Kim",
-        "Yongjun Kim",
-        "Hyungki Kim"
-      ],
-      "published": "2026-07-30T01:05:27Z",
-      "updated": "2026-07-30T01:05:27Z",
-      "categories": [
-        "cs.CV",
-        "cs.AI"
-      ],
-      "arxiv_id": "2607.27558v1",
-      "score": 8,
-      "topic_tags": [
-        "参数化CAD",
-        "图纸重编码",
-        "光栅图像",
-        "标注接地",
-        "大型语言模型"
-      ],
-      "zh_summary": "从数字化转型前积累的光栅格式的2D计算机辅助设计图纸中恢复参数化计算机辅助设计序列，对于零件复制和制造过程自动化具有重要意义。然而，现有研究要么仅处理矢量图纸，要么局限于特定领域，且未能将尺寸标注与几何信息明确连接，限制了它们利用尺寸信息进行3D参数化计算机辅助设计序列恢复的能力。我们提出了图纸重编码，一个从光栅2D计算机辅助设计图纸生成参数化计算机辅助设计序列（作为计算机辅助设计代码）的框架。图纸重编码通过图像编码器提取几何特征，并通过单独的文本识别模块识别标注，然后使用交叉注意力和我们提出的标注接地损失，将标注明确地接地到几何信息。得到的特征被馈送到大型语言模型以生成结构化参数化计算机辅助设计代码格式的计算机辅助设计代码。实验表明，图纸重编码优于现有基线，并且在模拟工业条件的扫描图纸上保持鲁棒性。我们期望图纸重编码有助于工业环境中光栅2D计算机辅助设计图纸的数字化，以及零件复制和制造自动化。",
-      "novelty": "提出一种从光栅2D CAD图纸恢复参数化CAD序列的框架，通过标注接地将尺寸信息与几何特征结合，创新性地用于CAD代码生成。",
-      "innovation_points": [
-        "提出图纸重编码框架，结合图像编码器和文本识别模块，实现几何与标注的联合处理。",
-        "引入交叉注意力机制和标注接地损失，将尺寸标注显式连接到几何信息。",
-        "利用大型语言模型生成结构化参数化计算机辅助设计代码，提高可解释性和兼容性。"
-      ],
-      "limitations": "当前方法依赖光栅图纸质量，模糊或低分辨率图纸可能影响性能；且处理复杂几何时可能受限于大型语言模型能力。",
-      "improvement_directions": [
-        "增强图像编码器以处理更复杂的图纸，如加入几何先验。",
-        "扩展标注接地损失以支持多样化的标注类型。",
-        "探索端到端的训练范式，避免传统分割流程。",
-        "引入增量学习方法，适应新的图纸风格。"
-      ],
-      "engineering_value": "可自动化数字化老旧图纸，加速制造流程，减少人工重建成本，适用于工业零件库建设。",
-      "why_relevant": "直接涉及从光栅图像中抽取结构化信息，与OCR文档解析相关联，尤其在工程图纸领域。"
-    },
-    {
-      "title": "DIRECT: Direct Decoding for Efficient and Aligned Sequence Labeling with Large Language Models",
-      "summary": "Sequence labeling is a fine-grained information extraction task, yet existing large language model-based approaches suffer from insufficient domain alignment and low inference efficiency. To address these issues, we propose DIRECT, a framework that addresses these issues through training-time optimization and inference-time rectification. Specifically, DIRECT performs Direct Preference Optimization (DPO) after supervised fine-tuning to strengthen task alignment with human preferences, and introduces a controlled decoding process that enforces fixed output formats and restricts predictions to candidate sets. To further improve efficiency, a template-filling mechanism requires the model to generate only label tokens while reusing prefixed content through the KV Cache, thus reducing redundant computation. Experimental results on eight datasets demonstrate that DIRECT achieves significant improvements in both performance and efficiency compared to existing methods.",
-      "link": "https://arxiv.org/abs/2607.26891v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.26891v1",
-      "authors": [
-        "Yilei Wang",
-        "Jiaxin Gan",
-        "Kexuan Zhang",
-        "Ling Li",
-        "Wentao Zhang",
-        "Peichao Lai"
-      ],
-      "published": "2026-07-29T13:23:30Z",
-      "updated": "2026-07-29T13:23:30Z",
-      "categories": [
-        "cs.CL"
-      ],
-      "arxiv_id": "2607.26891v1",
-      "score": 6,
-      "topic_tags": [
-        "序列标注",
-        "直接偏好优化",
-        "受控解码",
-        "大型语言模型",
-        "效率"
-      ],
-      "zh_summary": "序列标注是一项细粒度的信息抽取任务，但现有基于大型语言模型的方法存在领域对齐不足和推理效率低的问题。为了解决这些问题，我们提出了直接解码框架，通过训练时优化和推理时校正来解决这些问题。具体而言，它在监督微调后执行直接偏好优化以加强任务与人类偏好的对齐，并引入一种受控解码过程，强制执行固定输出格式并将预测限制在候选集内。为了进一步提高效率，模板填充机制要求模型仅生成标签令牌，同时通过键值缓存重用前缀内容，从而减少冗余计算。在八个数据集上的实验结果表明，与现有方法相比，我们的方法在性能和效率方面都取得了显著改进。",
-      "novelty": "提出一种结合直接偏好优化和受控解码的框架，用于序列标注任务，显著提高性能并加速推理。",
-      "innovation_points": [
-        "提出直接解码框架，在监督微调后进行直接偏好优化以对齐任务和人类偏好。",
-        "引入受控解码过程，强制输出格式并限制预测到候选集，确保合法性。",
-        "设计模板填充机制，利用键值缓存减少冗余计算，提高推理效率。"
-      ],
-      "limitations": "框架高度依赖候选集的质量，在开放域序列标注任务中可能受限；且直接偏好优化需精心构建偏好数据。",
-      "improvement_directions": [
-        "探究自适应候选集生成方法，减少人工干预。",
-        "将框架扩展到更多序列标注任务，如嵌套命名实体识别。",
-        "结合知识蒸馏，压缩模型大小，提升部署便利性。",
-        "研究直接偏好优化损失的改进，以适应多任务设置。"
-      ],
-      "engineering_value": "为序列标注提供高效且准确的解决方案，可应用于中文分词、命名实体识别、词性标注等实际任务。",
-      "why_relevant": "序列标注是OCR后处理的关键环节，用于标注提取的文本，该方法可提升准确性和速度。"
-    },
-    {
-      "title": "ICDAR 2026 Competition on Information Extraction from Atomic Layer Deposition/Etching (ALD/E) Scientific Figures",
-      "summary": "Scientific figure comprehension and reasoning using multimodal AI requires integrating visual perception with domain-specific reasoning to extract meaningful knowledge, often not presented in the text of a research publication. The Sci-ImageMiner benchmark dataset, accompanied by a community-driven competition, raises the bar over prior scientific competitions by curating a comprehensive, expert-annotated dataset across four end-to-end complementary tasks. The competition attracted 68 active participants and 1,263 public/private submissions from 9th January 2026 to 8th April 2026. Our results show that state-of-the-art multimodal models perform well on classification and summarization tasks but struggle with data extraction and scientific reasoning, particularly in visual question-answering. These findings reveal key limitations and highlight challenges and opportunities for improving domain-aware multimodal AI systems. Overall, the Sci-ImageMiner benchmark and competition establish a rigorous platform for advancing research in scientific figure comprehension and reasoning and demonstrate the potential of state-of-the-art approaches for a challenging and complex research area.",
-      "link": "https://arxiv.org/abs/2607.26848v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.26848v1",
-      "authors": [
-        "Fahad Ahmed",
-        "Sören Auer",
-        "Jennifer D'Souza"
-      ],
-      "published": "2026-07-29T12:35:31Z",
-      "updated": "2026-07-29T12:35:31Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2607.26848v1",
-      "score": 6,
-      "topic_tags": [
-        "科学图形理解",
-        "信息抽取",
-        "多模态AI",
-        "基准数据集",
-        "竞赛"
-      ],
-      "zh_summary": "本文介绍了ICDAR 2026竞赛，该竞赛聚焦于原子层沉积/蚀刻（ALD/E）科学图形的信息抽取。竞赛基于Sci-ImageMiner基准数据集，包含四个端到端互补任务，由专家注释。共有68名活跃参与者和1263次提交。结果显示，最先进的多模态模型在分类和摘要任务上表现良好，但在数据抽取和科学推理（特别是视觉问答）方面存在困难。该基准和竞赛为推进科学图形理解与推理研究提供了平台，并揭示了领域感知多模态AI系统的局限与改进机会。",
-      "novelty": "提出了一个针对科学图形理解与推理的综合性基准数据集Sci-ImageMiner，并组织了社区驱动的竞赛，涵盖四个互补任务，超越了以往的科学竞赛。",
-      "innovation_points": [
-        "构建了专家注释的ALD/E科学图形数据集，覆盖四个端到端任务。",
-        "组织了大规模的社区竞赛，吸引68名参与者，进行了1263次提交。",
-        "评估了最先进的多模态模型在科学图形任务上的性能，揭示了其优势与不足。"
-      ],
-      "limitations": "最先进的多模态模型在数据抽取和科学推理（特别是视觉问答）上表现不佳，表明现有模型缺乏领域特定推理能力。",
-      "improvement_directions": [
-        "探索结合领域知识（如ALD/E工艺）的视觉-语言模型，以提升科学推理能力。",
-        "开发针对科学图形的专用数据抽取方法，改进视觉问答的准确性和可解释性。",
-        "利用竞赛数据进一步训练和微调模型，增强对科学图形的理解。"
-      ],
-      "engineering_value": "该基准和竞赛为评估和改进科学图形理解系统提供了标准化的测试平台，有助于推动自动化科学文献分析工具的发展。",
-      "why_relevant": "对于OCR和文档解析领域，科学图形中的信息抽取是一个关键挑战，本工作提供了数据集和评估方法，为开发更强大的文档理解系统提供了参考。"
-    },
-    {
-      "title": "Enhancing Generative Information Extraction with Two-step Validation: A Product Attribute Use Case",
-      "summary": "The ability of large language models (LLMs) to process and generate text has introduced potential for applications in information extraction (IE). While it's debated whether LLMs outperform smaller fine-tuned models for classification tasks, their strong generalization capability makes them promising for domains with limited labeled data available for fine-tuning. This advantage is particularly relevant for the emerging application of the digital product passport (DPP), where the problem space is broad but domain-specific data remains scarce. Motivated by this use case, we apply generative IE to the product domain, explicitly addressing efficiency, generalizability, and data privacy constraints. We propose a two-step validation method that integrates a PLM block into the generative IE pipeline and thereby leverages LLMs' correction capability. We discover that such a validation task enhances LLM performance, particularly on the extraction of weakly expressed, low-salience entities that appear sparsely throughout the text. For certain entities, the performance of mid-size models can even reach levels comparable to larger models, and the improvement of first-step PLM predictions also enhance the final LLM output. Nevertheless, the effects on the smallest open-source LLMs (e.g., Llama-3.2 3B) is limited. Based on the findings, we develop a demo application for product information extraction that utilizes locally deployed LLMs, targeting further adaptations to real-world DPP use cases.",
-      "link": "https://arxiv.org/abs/2607.26780v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.26780v1",
-      "authors": [
-        "Yi-Sheng Hsu",
-        "Nermeen Abou Baker",
-        "Uwe Handmann"
-      ],
-      "published": "2026-07-29T11:23:10Z",
-      "updated": "2026-07-29T11:23:10Z",
-      "categories": [
-        "cs.CL"
-      ],
-      "arxiv_id": "2607.26780v1",
-      "score": 6,
-      "topic_tags": [
-        "生成式信息抽取",
-        "大型语言模型",
-        "产品属性",
-        "数据稀缺",
-        "数字产品护照"
-      ],
-      "zh_summary": "本文针对数字产品护照（DPP）应用中的产品属性抽取问题，提出了一种生成式信息抽取方法，并集成了两步验证机制。该方法首先使用预训练语言模型（PLM）进行初步抽取，然后利用大型语言模型（LLM）进行验证和修正。实验发现，这种验证步骤能提升LLM在低显著性实体上的抽取性能，中型模型的效果可接近大型模型，但对最小开源LLM（如Llama-3.2 3B）影响有限。基于研究，开发了一个利用本地部署LLM的产品信息抽取演示应用。",
-      "novelty": "在生成式IE中引入两步验证方法，整合PLM和LLM，专门针对低显著性实体的抽取，并应用于新兴DPP领域。",
-      "innovation_points": [
-        "提出两步验证的生成式IE框架，先由PLM生成初始预测，再由LLM修正。",
-        "在DPP产品属性抽取场景中验证了方法，有效提升了弱表达实体的抽取性能。",
-        "探索了不同规模LLM在验证任务中的效果，发现中型模型可接近大型模型性能。"
-      ],
-      "limitations": "最小LLM（3B参数）的改进有限，且方法可能受到PLM初始预测质量的影响。",
-      "improvement_directions": [
-        "研究更有效的提示策略或训练机制，以增强小模型在验证任务中的能力。",
-        "探索将领域知识融入验证过程，提高对专业性实体的抽取准确性。",
-        "扩展方法到更多领域，并评估在真实DPP系统中的部署效果。"
-      ],
-      "engineering_value": "为数字产品护照等数据稀缺场景提供了高效、可本地部署的抽取方案，减少了数据标注需求，同时兼顾隐私保护。",
-      "why_relevant": "对于OCR和文档解析，产品属性抽取常结合文本识别，本研究提出的生成式IE方法可为从文档中提取结构化信息提供新思路。"
+      "engineering_value": "为科学文档的结构化解析提供了标准模式，有助于实现科学数据的自动化处理、语义出版和知识图谱构建。",
+      "why_relevant": "为文档解析中的结构化信息提取提供模式资源和方法论，直接促进文档理解和知识抽取。"
     }
   ]
 }
