@@ -1,10 +1,296 @@
-# OCR / 文档解析研究日报（2026-08-03）
+# OCR / 文档解析研究日报（2026-08-04）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-08-03 04:45:06`
+- 生成时间（UTC）：`2026-08-04 04:29:00`
 - 大模型综合分析：`开启`
 
-今天没有筛到符合条件的新论文。
+## 一、今日执行摘要
+
+> 今日研究聚焦于OCR与文档解析中视觉语言模型（VLM/MLLM）的性能评估与优化，提出新的基准和方法以提升置信度校准、压缩评估和推理效率。
+
+## 二、今日趋势判断
+
+研究趋势强调对VLM/MLLM在文档任务中的可信度与效率的细粒度评估，通过基准创新和动态策略优化推动实际应用落地。
+
+## 三、今日论文概览
+
+1. **Can You Trust the Confidence? ConfBench for Vision-Language Models on Document Extraction** | 标签：置信度校准、文档提取、VLM、基准测试
+2. **Decoupling semantics from vision: A framework for faithful visual-text compression evaluation** | 标签：视觉文本压缩、评估框架、MLLM、基准测试
+3. **Unsupervised Multidomain Approaches to Named Entity Recognition with Small Datasets** | 标签：命名实体识别、迁移学习、无监督、小数据集
+4. **ET-Prune: Evidence-Aware Dynamic Budgeting for Visual Token Pruning in Text-Rich MLLMs** | 标签：令牌剪枝、OCR、MLLM、推理加速
+
+## 四、今天 OCR / 文档解析论文里的主要创新点
+
+- 构建专用基准（如ConfBench、ZeroSense）以隔离特定能力，提供更准确的评估。
+- 引入动态机制（如证据感知剪枝）提升推理效率，同时保持性能。
+- 采用解耦评估框架，分离模型能力与任务性能。
+
+## 五、后续 OCR 领域值得推进的改进方向
+
+- 扩展ConfBench，纳入更多真实噪声模式和更多VLM，开发自动化校准策略。
+- 将ZeroSense框架推广至更多压缩方法，并探讨解耦评估对算法设计的指导。
+- 优化无监督预训练策略，并在真实多领域数据集上验证NER迁移方法。
+- 探索ET-Prune与微调结合，并在更多骨干模型和任务上验证泛化性。
+- 研究动态剪枝与置信度估计的联合优化，实现资源自适应分配。
+
+## 六、工程落地启发
+
+- 选择置信度估计方法时，优先考虑OCR+图像模态，并对模型进行重新缩放校准。
+- 评估VTC时，使用ZeroSense可避免语言先验干扰，得到纯压缩质量指标。
+- 对于小样本NER，结合无监督预训练和迁移学习可降低标注成本。
+- 采用ET-Prune进行令牌剪枝，可在减少一半视觉令牌时保持或提升文档性能。
+
+## 七、优先关注论文
+
+- **Can You Trust the Confidence? ConfBench for Vision-Language Models on Document Extraction**：为VLM置信度提供基准，直接关系到自动化流程的可靠性。
+- **ET-Prune: Evidence-Aware Dynamic Budgeting for Visual Token Pruning in Text-Rich MLLMs**：实现推理加速，对高分辨率文档处理有显著工程价值。
+
+## 八、论文逐篇解析
+
+### 1. Can You Trust the Confidence? ConfBench for Vision-Language Models on Document Extraction
+
+- arXiv: [2608.01792v1](https://arxiv.org/abs/2608.01792v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.01792v1)
+- 作者: Priyashree Roy, Sujitha Martin, Mohammad Rostami, Spencer Romo, Renhao Xue, Bob Strahan, Diego A. Socolinsky, Boyi Xie, Md Mofijul Islam
+- 发布时间: 2026-08-03T07:03:51Z
+- 分类: cs.AI, cs.CL
+- 相关性评分: 16
+- 主题标签: 置信度校准、文档提取、VLM、基准测试
+
+**中文摘要**
+
+> 本文提出了 ConfBench，首个针对关键信息提取（KIE）的校准专用基准。通过应用20种受控退化流程，构建了1,346个变体和70K+实体级评估，覆盖完整精度谱。评估了四种专有和三种开放权重VLM，在语言化和对数概率置信度估计方法及三种输入模态下，发现：OCR+图像模态产生更准确的置信度估计；模型能力是置信度质量的主导因素，Claude家族中置信度随能力单调提升，而参数数量并非跨家族的可靠预测指标；校准质量在模型间差异巨大，从近乎完美到严重过度自信，且逐模型的后处理校正可重新缩放置信度值用于基于阈值的路由，而不改变排名操作指标；对数概率与首令牌聚合优于均值令牌和边际聚合。同时引入ECARB指标，将区分性收益转化为运营节省。ConfBench已公开，以促进置信度估计器和校准的系统研究。
+
+**核心创新概述**
+
+> 首次提出针对文档提取中VLM置信度校准的专用基准，通过受控退化生成覆盖全精度谱的测试样本，弥补现有基准在低精度区域样本稀疏的不足。
+
+**创新点拆解**
+
+- 构建包含20种退化流程和1,346个变体的校准基准ConfBench
+- 引入ECARB审查预算指标，将区分性收益转化为运营节省
+- 系统比较了语言化和对数概率置信度估计方法在三种输入模态下的表现
+
+**当前局限**
+
+> 基准构建基于受控退化，可能与真实场景的噪声分布存在差异；评估的VLM数量和类型有限。
+
+**后续可改进方向**
+
+- 扩展退化流程以更贴近真实文档噪声模式
+- 纳入更多VLM和置信度估计方法
+- 研究自动化的置信度校准策略
+
+**工程启发**
+
+> 为文档处理系统选择置信度估计方法提供指导，有助于优化自动化与人工审核的路由策略，降低运营成本。
+
+**为什么值得关注**
+
+> 直接针对文档提取中的置信度校准问题，为OCR-LLM系统提供评估基准和方法论，提升系统可靠性。
+
+**原始摘要**
+
+Intelligent document processing (IDP) with vision-language models (VLMs) hinges on confidence scores
+trustworthy enough to route extractions between automation and human review. Existing document
+benchmarks are dominated by clean, high-quality samples, leaving low accuracy regions too sparse for
+calibration assessment. We introduce ConfBench, the first calibration-specific benchmark for key
+information extraction (KIE), built by applying 20 controlled degradation pipelines to a diverse
+document set, yielding 1,346 variants and 70K+ entity-level evaluations spanning the full accuracy
+spectrum. We evaluate four proprietary and three open-weight VLMs under verbalized and log-
+probability confidence estimation methods across three input modalities, and find: (i) OCR+Image
+modality results in more accurate confidence estimates; (ii) model capability is the dominant
+factor: within the Claude family confidence quality scales monotonically with capability, while
+across families parameter count is a poor predictor; (iii) calibration quality varies widely across
+models, from near-perfect to severely overconfident, and per-model post-hoc correction rescales
+these absolute confidence values for threshold-based routing without altering ranking-based
+operational metrics; and (iv) log-probability with first-token aggregation consistently outperforms
+mean-token and margin aggregations. We also introduce ECARB, a review-budget metric translating
+discriminative gains into operational savings. We release ConfBench publicly to enable systematic
+study of confidence estimators and calibration methods for trustworthy IDP application deployment.
+
+---
+
+### 2. Decoupling semantics from vision: A framework for faithful visual-text compression evaluation
+
+- arXiv: [2608.01848v1](https://arxiv.org/abs/2608.01848v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.01848v1)
+- 作者: Yonghan Gao, Zehong Chen, Lijian Xu, Jingzhi Chen, Jingwei Guan, Xingyu Zeng
+- 发布时间: 2026-08-03T07:56:43Z
+- 分类: cs.CV
+- 相关性评分: 9
+- 主题标签: 视觉文本压缩、评估框架、MLLM、基准测试
+
+**中文摘要**
+
+> 本文提出一种解耦视觉-文本压缩（VTC）质量评估的新框架，将MLLM的语义推理能力与视觉文本压缩质量分离。现有评估协议依赖下游任务性能，受MLLM语言先验影响，无法准确衡量文本保留程度。作者引入ZeroSense基准，确保测试样本的低语义相关性，从而消除文本依赖，使评估结果纯粹反映VTC质量。实验表明VTC质量与下游任务准确率存在显著差异，验证了解耦评估框架的必要性。
+
+**核心创新概述**
+
+> 首次针对视觉文本压缩评估，提出解耦MLLM语义能力与压缩质量的框架，并构建低语义相关性基准ZeroSense。
+
+**创新点拆解**
+
+- 设计解耦评估框架，分离MLLM语义推理与VTC质量
+- 提出ZeroSense基准，确保测试样本低语义相关性
+- 跨数据集实验证明VTC质量与下游任务性能不一致
+
+**当前局限**
+
+> ZeroSense基准的构建可能受限于合成样本，且评估框架主要针对文本保留，其他方面未覆盖。
+
+**后续可改进方向**
+
+- 扩展基准覆盖更多压缩方法和场景
+- 探究解耦评估对VTC算法设计的指导作用
+- 引入更丰富的指标评价VTC的多个方面
+
+**工程启发**
+
+> 为VTC方法提供更准确的评估手段，避免因MLLM语义推理导致的夸大性能，指导压缩算法在真实场景中的选型和优化。
+
+**为什么值得关注**
+
+> 关于DeepSeek-OCR等VTC方法的评估，与OCR文档压缩和高效推理相关，有助于理解压缩质量与下游任务的关系。
+
+**原始摘要**
+
+Recent visual-text compression (VTC) methods, typified by DeepSeek-OCR, report impressive high token
+compression ratios for long-context modeling tasks by leveraging text-to-image rendering. However,
+existing evaluation protocols heavily rely on downstream task performance. Such evaluation metrics
+fail to accurately measure text preservation due to the strong inherent linguistic priors of
+Multimodal Large Language Models (MLLMs). In this work, we introduce a new evaluation framework that
+decouples MLLMs' capabilities to faithfully assess VTC quality. Within this framework, we further
+introduce the ZeroSense Benchmark to ensure low semantic correlation of testing samples. By
+eliminating textual dependencies, our benchmark guarantees that the evaluation results are purely
+reflective of VTC quality, unaffected by the semantic inference capabilities of downstream models.
+Extensive experiments across multiple datasets demonstrate that VTC quality and downstream task
+accuracy diverge significantly, highlighting the necessity of our decoupled evaluation framework.
+
+---
+
+### 3. Unsupervised Multidomain Approaches to Named Entity Recognition with Small Datasets
+
+- arXiv: [2608.00984v1](https://arxiv.org/abs/2608.00984v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.00984v1)
+- 作者: Israel Fianyi, James Montgomery, Soonja Yeom
+- 发布时间: 2026-08-02T04:33:21Z
+- 分类: cs.CL, cs.NE
+- 相关性评分: 9
+- 主题标签: 命名实体识别、迁移学习、无监督、小数据集
+
+**中文摘要**
+
+> 本文探讨在小规模无标注数据集上学习多领域命名实体识别（NER）的挑战和方法。采用迁移学习，先通过无监督预训练在无标注数据上识别实体，再针对不同小规模数据集进行迁移。研究针对领域变异性、数据稀疏和过拟合，探索数据增强、少样本学习和领域对抗训练等技术，旨在提升资源受限场景下NER系统的性能和泛化能力。
+
+**核心创新概述**
+
+> 结合无监督预训练和迁移学习，针对小规模无标注数据集的多领域NER，提出多种学习策略。
+
+**创新点拆解**
+
+- 采用无监督预训练方式识别实体，减少对标注数据的依赖
+- 探索数据增强、少样本学习和领域对抗训练等技术的集成
+- 针对多领域小数据集场景设计迁移学习框架
+
+**当前局限**
+
+> 实验可能仅基于模拟的有限数据集，未验证在真实大规模多领域数据上的效果；技术集成缺乏系统性对比。
+
+**后续可改进方向**
+
+- 在更多真实领域数据集上验证方法
+- 进一步优化无监督预训练策略以适应小数据
+- 评估不同组合技术的效果并给出选择指南
+
+**工程启发**
+
+> 为资源受限的领域（如小众业务场景）提供NER解决方案，减少标注成本，提升系统适应性。
+
+**为什么值得关注**
+
+> 涉及NER和迁移学习，与文档理解中的实体抽取任务相关，适用于无标注数据场景下的信息抽取。
+
+**原始摘要**
+
+This paper explores the challenges and the methodologies associated with learning quality
+representations in scenarios with unlabelled small or limited datasets for downstream information
+extraction task (Multidomain Named Entity Recognition (NER). The study adopts a Transfer Learning on
+small datasets. Traditional NER systems often rely on large, labelled data, which is impractical for
+many domains. This study, therefore, applies an unsupervised pre-training approach to precondition
+and identify entities without annotated datasets, then applies transfer learning models to different
+simulated limited datasets for a named entity recognition task. Entity Recognition (NER) is
+essential in natural language processing (NLP), it identifies and classifies related entities within
+the text. This study addresses the complexities of domain variability, data sparsity, and
+overfitting and investigates innovative approaches such as data augmentation, few-shot learning, and
+domain adversarial training. Integrating these techniques promises to enhance the performance and
+generalizability of NER systems across diverse and resource-constrained domains, paving the way for
+more efficient and adaptable NLP applications.
+
+---
+
+### 4. ET-Prune: Evidence-Aware Dynamic Budgeting for Visual Token Pruning in Text-Rich MLLMs
+
+- arXiv: [2608.01979v1](https://arxiv.org/abs/2608.01979v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.01979v1)
+- 作者: Zizhong Ding, Junxian Li, Kai Liu, Shaoqiu Zhang, Xiao Xiao, Linghe Kong, Yulun Zhang
+- 发布时间: 2026-08-03T09:42:34Z
+- 分类: cs.CV, cs.CL
+- 相关性评分: 6
+- 主题标签: 令牌剪枝、OCR、MLLM、推理加速
+
+**中文摘要**
+
+> 本文提出ET-Prune，一种无需训练的可视令牌剪枝框架，针对文本丰富的MLLM，将剪枝视为证据分配。通过从解码器侧部分查询-键块提取问题条件证据，保护文本状空间区域，并将证据不确定性和密度转换为样本特定的令牌下限。三个渐进中间层事件推动序列向该预算移动，对弥散或文本密集证据保留更多令牌，对集中证据更激进剪枝。在六个骨干-基准比较中，ET-Prune在约一半令牌下领先或持平于其他剪枝方法。在OCRBench-v2上，Qwen3-VL-8B和InternVL3.5-8B分别领先最强剪枝基线1.80和0.68个百分点，同时保留约一半视觉令牌；MMBench v1.1上以54.45%令牌保留达到0.8467圆形精确匹配准确率，高于Vanilla的0.8437。
+
+**核心创新概述**
+
+> 提出证据感知的动态预算剪枝框架，为文本丰富场景定制，无需训练即可适配不同输入。
+
+**创新点拆解**
+
+- 将剪枝建模为证据分配，从解码器侧提取问题条件证据
+- 引入证据不确定性和密度转换为样本特定令牌下限
+- 设计三个渐进中间层事件动态调整令牌预算
+
+**当前局限**
+
+> 观察结果基于单次确定性传递的点估计，可能受随机性影响；评估主要集中在特定骨干和基准。
+
+**后续可改进方向**
+
+- 在更多模型和任务上验证方法泛化性
+- 探索无监督或自适应确定证据的方法
+- 结合训练或微调进一步优化剪枝决策
+
+**工程启发**
+
+> 有效降低MLLM推理成本，同时保持或提升OCR相关任务性能，适用于高分辨率文档处理。
+
+**为什么值得关注**
+
+> 直接针对OCR任务中视觉令牌冗余问题，提高效率，与文档智能处理密切相关。
+
+**原始摘要**
+
+Visual token pruning reduces the inference cost of multimodal large language models, but a fixed
+token ratio is poorly matched to text-rich inputs. In OCR-centric tasks, decisive evidence can be a
+small number, label, or field whose relevance is specified by the question; indiscriminate pruning
+can erase that evidence while retaining visually salient but irrelevant regions. We present ET-
+Prune, a training-free framework that casts pruning as evidence allocation. It derives question-
+conditioned evidence from a decoder-side partial query-key block, safeguards text-like spatial
+regions, and converts evidence uncertainty and density into a sample-specific token floor. Three
+progressive middle-layer events then move the sequence toward this budget, retaining more tokens for
+diffuse or text-dense evidence and pruning concentrated evidence more aggressively. At the observed
+point estimates from one deterministic pass per configuration, ET-Prune leads or ties among pruned
+methods in all six backbone-benchmark comparisons at roughly half tokens. On OCRBench-v2, it leads
+the strongest pruned baselines by 1.80 and 0.68 percentage points on Qwen3-VL-8B and InternVL3.5-8B,
+respectively, while retaining about half of the visual tokens; on MMBench v1.1, it reaches 0.8467
+circular exact-matching accuracy versus 0.8437 for Vanilla at 54.45% average visual-token retention.
+These results show a favorable observed quality-cost trade-off for evidence-aware dynamic budgeting
+in text-rich multimodal inference.
+
+---
