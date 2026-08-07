@@ -1,234 +1,111 @@
 {
   "meta": {
-    "report_date": "2026-08-06",
-    "generated_at_utc": "2026-08-06 04:29:42",
+    "report_date": "2026-08-07",
+    "generated_at_utc": "2026-08-07 04:03:39",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 12
+    "count": 11
   },
   "synthesis": {
-    "executive_summary": "今日OCR与文档解析研究主要集中在基准构建、领域专用解析、长文档推理、超分辨率、结构边界识别以及多模态推理优化等方面。值得关注的是，BanglaWild基准挑战了连字错误假设，MinerU.Chem将文档解析扩展至化学领域，DocTrace和ADOPD 2026推动文档理解向可溯源和推理化发展，DualTSR实现了高效超分辨率，Right Reset提供了无监督文档结构切分方法。总体而言，研究趋势指向更鲁棒、更高效、更可解释的文档解析系统。",
-    "trend_summary": "1) 从通用OCR走向领域专用解析，如化学文档解析（MinerU.Chem）。2) 从简单文本识别升级到高级推理与可溯源问答，如DocTrace、ADOPD 2026。3) 重视低资源语言和复杂场景的基准建设，如BanglaWild。4) 引入高效生成方法，如扩散模型超分辨率（DualTSR）与蒸馏（STEP-OPD）。5) 无监督或弱监督方法日益增多，如Right Reset。6) 多模态推理中通过显式证据图或视觉锚点提升可解释性与效率。",
+    "executive_summary": "今日OCR与文档解析研究聚焦于提升效率、增强推理能力以及拓展到低资源场景。PaDoc通过布局引导的并行解码显著加速文档解析，而Thinking-with-Anchors等基准则推动了文档理解向推理迈进。多篇论文探索了多模态大模型在文档处理中的应用，包括超分辨率、信息抽取和视觉推理。此外，针对低资源语言（如亚美尼亚语、意第绪语）和特殊任务（如手写伪造字符检测）的研究也取得了进展，体现了技术的多样性和实际应用价值。",
+    "trend_summary": "当前研究趋势显示，文档解析正从传统的流水线（OCR→布局→内容）转向端到端的多模态大模型方法，并强调效率优化（如并行解码）和推理能力（如区域级语义理解）。同时，基准和评估方法受到重视，出现了针对文档推理的专用基准（如ADOPD 2026）和语义评估框架。此外，对于资源稀缺的语言和特殊文档类型（如历史报刊、手写文本）的关注增加，利用VLM和生成式AI克服数据限制。另一个趋势是基于查询的策略（如Q-CueGraph）和提示干预（如VTS）来提升多模态模型的视觉语义理解。",
     "common_innovations": [
-      "多数工作引入基准数据集或评估协议，如BanglaWild、ADOPD 2026。",
-      "均强调鲁棒性，应对真实场景、低质量图像或复杂布局。",
-      "利用视觉语言模型（VLM）或多模态大模型（MLLM）进行文档理解和推理。",
-      "普遍采用模块化、分阶段处理，如DocTrace和MinerU.Chem的流水线设计。",
-      "注重效率优化，降低参数和延迟，如DualTSR显著降低计算开销。"
+      "利用多模态大型语言模型（如PaDoc、DTPR）实现端到端文档解析和推理。",
+      "开发并行解码或流匹配等技术以提升处理速度和效率（PaDoc、DualTSR）。",
+      "引入锚点或接地机制，统一视觉与文本表示，增强空间理解（Thinking-with-Anchors、Q-CueGraph）。",
+      "利用模式或Schema引导生成式AI进行结构化信息提取，支持零样本学习（Schema-Guided）。",
+      "针对低资源语言，采用持续预训练或VLM数据引导策略构建模型。（MameLoshnLM、Mapping Armenian Paris）"
     ],
     "future_directions": [
-      "扩展多语言、多场景基准，如增加低资源语言和复杂文档类型。",
-      "开发更精细的错误分类与诊断工具，用于识别和纠正视觉误识别。",
-      "研究化学结构识别等垂直领域的深度解析，并集成到通用文档解析系统。",
-      "探索利用证据图或思维链提升长文档问答的可解释性与准确性。",
-      "将文档结构识别与无监督方法结合，减少对标注数据的依赖。",
-      "优化超分辨率与生成模型的蒸馏技术，以平衡质量和效率。",
-      "开发无OCR依赖的多模态推理方法，增强端到端能力。",
-      "研究跨模态语义对齐，提高MLLM对视觉任务指令的响应。",
-      "推动GUI接地和文档布局分析在自动化中的应用，结合粗到细策略。",
-      "建立更全面的评估指标，除编辑距离外引入语义和推理准确度。"
+      "结合布局与语义信息，开发通用的并行解码框架，以适配更复杂文档结构（如表格、多栏）。",
+      "构建更大规模的文档推理基准，覆盖更多任务和语言，以模拟真实场景。",
+      "探索文档解析中的可解释推理，如生成思维链或提供结构证据，增强模型可信度。",
+      "设计更高效的轻量级模型，用于移动端和实时应用，如场景文本超分辨率。",
+      "利用弱监督或自监督方法减少对标注数据的依赖，尤其是在低资源领域。",
+      "研究跨领域和语言的泛化能力，通过迁移学习或多任务训练提升模型鲁棒性。",
+      "开发评估框架，自动化、高效地验证文档解析与信息抽取的质量。"
     ],
     "engineering_takeaways": [
-      "BanglaWild提供野外基准，有助于评估VLM和传统OCR的鲁棒性。",
-      "MinerU.Chem展示如何将通用解析流水线扩展至化学领域，提升知识库构建效率。",
-      "经过验证的DocTrace框架可提升长文档VQA的可追溯性，适合企业知识管理。",
-      "DualTSR实现高精度低延迟超分辨率，可直接用于OCR预处理。",
-      "Right Reset提供无监督文档结构重建方法，简化后处理流程。",
-      "Q-CueGraph通过选择性观察降低高分辨率图像推理成本，适合移动或边缘设备。"
+      "PaDoc的并行解码方案可提升页面吞吐量67%-118%，降低P95延迟，适合大规模部署。",
+      "采用模式引导的框架可显著减少人工标注成本，提取速度提升约30倍。",
+      "DualTSR的轻量级STISR模型（203M参数）实现高精度低延迟，适合资源受限设备。",
+      "VLM可作为数据生成工具为低资源语言创建训练数据，降低数字化成本。",
+      "Q-CueGraph的方法可减少图像处理面积，提高推理效率，而无需额外标注。",
+      "STEP-OPD蒸馏方案可改善文本渲染与OCR，提升生成模型的实用性。"
     ],
     "watchlist": [
       {
-        "title": "BanglaWild: An In-the-Wild Bengali Scene Text Recognition Benchmark for OCR and Vision-Language Models",
-        "watch_reason": "首次系统评估VLM在低资源语言野外场景的OCR性能，挑战传统假设，对模型鲁棒性研究有重要参考。"
+        "title": "PaDoc: Layout-Grounded Parallel Decoding for Document Parsing",
+        "watch_reason": "提出的并行解码技术显著提升文档解析效率，有望成为未来标准范式，关注其通用性和扩展性。"
       },
       {
-        "title": "MinerU.Chem: A High-Precision System for Optical Chemical Structure and Reaction Recognition",
-        "watch_reason": "将文档解析引入化学领域，具有强实用价值，未来可能推动化学知识库自动构建。"
+        "title": "Thinking with Anchors: Grounded and Efficient Document Reasoning",
+        "watch_reason": "引入新基准ADOPD 2026，推动文档理解从定位转向推理，后续模型性能提升将受此影响。"
       },
       {
-        "title": "DocTrace: Towards Traceable Long Document VQA via Hierarchical Evidence Graph Reasoning",
-        "watch_reason": "提出显式证据图推理，显著提升长文档VQA准确度，可追溯性对合规场景至关重要。"
-      },
-      {
-        "title": "When Prompts Become Pixels: Prompt-Region Grounding for Multimodal Reasoning",
-        "watch_reason": "揭示MLLM在视觉任务中的通道差距，提出训练干预方法，对端到端OCR有启发。"
+        "title": "DTRNet: Dual Text-Radical Decoding for Handwritten Chinese Text Recognition with Faked Character Detection",
+        "watch_reason": "手写识别中伪造字符检测是实用难题，该方法提供可解释证据，可能应用于教育评估。"
       },
       {
         "title": "Coupled Continuous-Discrete Generation for Scene Text Image Super-Resolution",
-        "watch_reason": "创新的超分辨率方法，性能提升显著且效率高，可广泛应用于OCR预处理。"
+        "watch_reason": "在STISR中实现高效高精度，可能替代传统OCR前端，关注其在真实场景中的性能。"
+      },
+      {
+        "title": "Schema-Guided Hierarchical Information Extraction and Semantic Evaluation Using Generative AI",
+        "watch_reason": "基于模式的信息提取框架具有高通用性，零样本提取和语义评估可能革新文档处理管线。"
       }
     ]
   },
   "papers": [
     {
-      "title": "BanglaWild: An In-the-Wild Bengali Scene Text Recognition Benchmark for OCR and Vision-Language Models",
-      "summary": "In-the-wild Bengali scene text recognition is largely unmeasured: existing resources target handwritten documents or constrained sign-board parsing, report only aggregate edit-distance metrics, and evaluate either conventional OCR or VLMs, never both on the same in-the-wild data. To address this gap, we introduce BANGLAWILD, a benchmark of 2,535 Bengali scene text images, each paired with a verbatim gold transcription, two categorical axes, four diagnostic attributes, and an orthographically standard form where the in-image text deviates from canonical spelling. We evaluate fifteen VLMs and three conventional OCR systems under three prompting strategies, fine-tune 6 open-source models with LoRA, and complement edit-distance metrics with an LLM-as-a-Judge evaluation. Our results reveal a persistent gap in which larger models within the same family do not outperform smaller ones. Our fifteen-class error taxonomy shows that visual mis-recognition accounts for ~60% of errors in the strongest systems, while conjunct-related errors contribute under 2%, challenging a long-standing assumption in Bengali OCR research; the same visual dominant profile also holds across architectures, including the one conventional baseline that reads Bengali reliably. Prompt language mainly affects cross-script drift and LoRA reduces catastrophic failures in weak models without lifting the ceiling on already competent ones. Code and data will be publicly released.",
-      "link": "https://arxiv.org/abs/2608.03884v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.03884v1",
+      "title": "PaDoc: Layout-Grounded Parallel Decoding for Document Parsing",
+      "summary": "End-to-end document parsers provide a unified interface, but serialize page layouts and regional contents into one autoregressive sequence. This formulation forces independent regions onto a decoding path whose length grows with the total content, whereas crop-based two-stage parsers expose region-level parallelism at the cost of repeated visual prefills and fragmented page context. To retain full-page context while removing dependencies, we propose PaDoc, a layout-grounded parser that treats the predicted layout as a branching structure over a shared page representation. Under a region-sufficiency assumption, we derive a prefix-conditioned factorization in which the layout stream and regional content branches advance concurrently, reducing the decoding depth to the longest layout-content path. We realize this factorization within a single MLLM: packed variable-length ancestor attention preserves the visibility under standard next-token training, while masked parallel decoding creates branches that the evaluated vLLM backend serves as concurrent requests with cache-resident shared-prefix reuse. On OmniDocBench Full, PaDoc attains an Overall layout F1 of 91.1 and, among end-to-end parsers, a top-tier Overall score of 94.24 together with the best Text Edit (0.038) and Formula CDM (95.59). On a 384-page subset and one A800 GPU, it is the fastest end-to-end parser at five concurrency levels, improving valid-page throughput by 67.4-118% and reducing P95 latency by 39.2-54.9% relative to a same-backbone Sequential SFT baseline. Code is available at https://github.com/Longin-Yu/Padoc",
+      "link": "https://arxiv.org/abs/2608.06146v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.06146v1",
       "authors": [
-        "Sadab Shiper",
-        "Tawsif Tashwar Dipto",
-        "Mir Md Inzamam",
-        "Eshat Tanzeem"
+        "Hao Yu",
+        "Jiabo Zhan",
+        "Kang Liu",
+        "Linnan Zhao",
+        "Dongxu Yue",
+        "Rui Chen",
+        "Jinglin Wang",
+        "Chong Sun",
+        "Chen Li",
+        "Jing Lyu",
+        "Chun Yuan"
       ],
-      "published": "2026-08-04T16:20:53Z",
-      "updated": "2026-08-04T16:20:53Z",
+      "published": "2026-08-06T15:16:18Z",
+      "updated": "2026-08-06T15:16:18Z",
       "categories": [
-        "cs.CV",
-        "cs.CL"
+        "cs.AI"
       ],
-      "arxiv_id": "2608.03884v1",
-      "score": 29,
-      "topic_tags": [
-        "场景文本识别",
-        "基准",
-        "视觉语言模型",
-        "OCR",
-        "孟加拉语"
-      ],
-      "zh_summary": "提出了孟加拉语场景文本识别基准BANGLAWILD，包含2535张野外图像，配有逐字标注、分类轴、诊断属性和标准拼写。评估了15个VLM和3个传统OCR系统，采用三种提示策略和LoRA微调，并使用LLM作为评判。发现同族大模型性能不一定优于小模型，视觉误识别占错误约60%，连字相关错误不足2%，挑战了传统假设。提示语言影响跨脚本漂移，LoRA可减少弱模型的灾难性失败。",
-      "novelty": "首次对VLM和传统OCR在同一野外孟加拉语场景文本数据上进行系统评估，引入15类错误分类法，挑战了连字错误主导的传统假设。",
-      "innovation_points": [
-        "构建了包含分类轴和诊断属性的野外基准数据集",
-        "引入LLM-as-a-Judge评估指标",
-        "提出15类错误分类法",
-        "跨模型类型（VLM和传统OCR）的系统比较"
-      ],
-      "limitations": "基准规模有限（2535张图像），可能无法完全代表真实世界多样性；评估主要基于编辑距离和LLM评判，缺乏更全面的语义指标。",
-      "improvement_directions": [
-        "扩展基准到更多语言和场景",
-        "探索多模态错误分析工具",
-        "开发针对视觉误识别的鲁棒性增强方法"
-      ],
-      "engineering_value": "为孟加拉语场景文本识别提供了公开基准和评估协议，有助于开发更鲁棒的OCR和VLM系统。",
-      "why_relevant": "填补了野外孟加拉语场景文本识别基准缺失的空白，并提供了跨模型类型的系统性评估，对多语言OCR研究有重要参考价值。"
-    },
-    {
-      "title": "MinerU.Chem: A High-Precision System for Optical Chemical Structure and Reaction Recognition",
-      "summary": "In organic chemistry papers and patents, molecular structures, reaction schemes, and experimental conditions are often presented as molecular structure depictions, reaction diagrams, and complex tables or figures. Such information is difficult for general-purpose document parsing systems to directly convert into machine-readable data. This limits data production for organic chemistry knowledge base construction and for AI for Chemistry tasks such as reaction prediction, retrosynthesis, condition recommendation, molecular property prediction, and drug molecule design. This report introduces MinerU-Chem, a document parsing system for organic chemistry literature integrated into the MinerU online platform. Built on top of MinerU's general document parsing pipeline, MinerU-Chem adds five chemistry-specific modules: chemistry relevance filtering, molecular structure detection, molecule identifier extraction, molecular structure recognition, and reaction scheme parsing. Together, these modules convert organic-chemistry-related image regions in documents into a Molecule Summary List and a Reaction Summary List. For molecular structure recognition, MinerU-Chem uses CARBON (Complex Atomic Representation and Bonding Object Notation) as its core representation. CARBON enables recognition results to preserve both the visual layout of the original image and complex chemical semantics, while supporting the export of standard downstream formats such as MolFile and SMILES. On the SMILES-evaluable subset of MolRecBench-Wild (N=2,392), MinerU-Chem's molecular structure recognition module achieves a SMILES exact-match accuracy of 93.02%, outperforming the best evaluated comparison system, GPT-5.6-Sol (74.87%), by 18.15 percentage points. The system has been integrated into the MinerU online platform and is available at https://mineru.net/OpenSourceTools/Extractor .",
-      "link": "https://arxiv.org/abs/2608.03525v2",
-      "pdf_url": "https://arxiv.org/pdf/2608.03525v2",
-      "authors": [
-        "Haote Yang",
-        "Jiang Wu",
-        "Jingchao Wang",
-        "Xingjian Wei",
-        "Lixin Ma",
-        "Linye Li",
-        "Chen Zhu",
-        "Xiaolong Wu",
-        "Yuheng Lu",
-        "Ziran Zhu",
-        "Junyuan Gao",
-        "Lingli Ge",
-        "Yuan Xu",
-        "Huijie Ao",
-        "QianQian Wu",
-        "Dechen Lin",
-        "Huaiyu Gu",
-        "Lu Chen",
-        "Shengxin Lu",
-        "ShaSha Wang",
-        "Yuanyuan Cao",
-        "Zhejia Yu",
-        "Ruijie Zhang",
-        "Zimai Tian",
-        "Jiaxing Sun",
-        "Yinfan Wang",
-        "Jiahe Song",
-        "Chuang Wang",
-        "Yubin Wang",
-        "Rui Nie",
-        "Hao Zheng",
-        "Bowen Jiang",
-        "Hongbin Lai",
-        "Yifan He",
-        "Chengjin Liu",
-        "Tingting Zhang",
-        "Liqun Wei",
-        "Lijun Wu",
-        "Bin Wang",
-        "Yuqiang Li",
-        "Guangyu Wang",
-        "Wei Li",
-        "Bowen Zhou",
-        "Dahua Lin",
-        "Conghui He"
-      ],
-      "published": "2026-08-04T12:09:02Z",
-      "updated": "2026-08-05T02:35:44Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2608.03525v2",
-      "score": 19,
+      "arxiv_id": "2608.06146v1",
+      "score": 16,
       "topic_tags": [
         "文档解析",
-        "化学结构识别",
-        "反应方案",
-        "CARBON",
-        "MinerU"
+        "并行解码",
+        "布局感知",
+        "多模态大模型",
+        "效率优化"
       ],
-      "zh_summary": "MinerU.Chem是一个用于有机化学文献的文档解析系统，基于MinerU通用解析流水线，增加了化学相关性过滤、分子结构检测、分子标识符提取、分子结构识别和反应方案解析五个模块。使用CARBON表示分子结构，支持导出MolFile和SMILES等格式。在MolRecBench-Wild的SMILES可评估子集上展示了性能。",
-      "novelty": "将通用文档解析扩展到化学领域，专门处理分子结构和反应方案，并引入CARBON表示以保留视觉布局和化学语义。",
+      "zh_summary": "PaDoc提出了一种布局引导的并行解码方法用于文档解析。它将预测的布局视为共享页面表示上的分支结构，基于区域充分性假设推导出前缀条件分解，使布局流和区域内容分支并发推进，从而将解码深度减少到最长布局-内容路径。该方法在单个多模态大语言模型（MLLM）中实现，利用打包的可变长度祖先注意力保持可见性，并使用掩码并行解码创建分支，由vLLM后端作为并发请求处理。在OmniDocBench Full上，PaDoc实现了91.1的整体布局F1分数，并在端到端解析器中取得领先的整体得分94.24，以及最优的文本编辑距离（0.038）和公式CDM（95.59）。在384页子集和单张A800 GPU上，它是五个并发级别下最快的端到端解析器，相比同骨干的序列SFT基线，有效页面吞吐量提升67.4%-118%，P95延迟降低39.2%-54.9%。",
+      "novelty": "首次将布局预测作为一种分支结构来引导并行解码，实现了端到端文档解析中的区域级并行，同时保持全页上下文，解决了传统序列化解析中解码路径长和两阶段解析器上下文碎片化的问题。",
       "innovation_points": [
-        "集成化学相关模块到通用文档解析流水线",
-        "提出CARBON核心表示用于分子结构识别",
-        "支持多种下游格式导出",
-        "针对化学文献的端到端解析系统"
+        "提出布局接地并行解码框架，将预测布局视为分支结构，实现布局流与区域内容分支并发推进。",
+        "推导出前缀条件分解，将解码深度减少到最长布局-内容路径，提升了效率。",
+        "设计了打包的可变长度祖先注意力，在标准下一词训练下保持可见性。",
+        "使用掩码并行解码和缓存共享前缀复用，通过vLLM后端实现并发请求处理。"
       ],
-      "limitations": "摘要未提供具体性能数字，可能受限于特定化学图像类型；对复杂反应方案的解析能力尚待验证。",
+      "limitations": "['依赖于区域充分性假设，可能不适用于区域间存在复杂依赖的场景。', '实验主要在特定基准（OmniDocBench）上进行，泛化性有待验证。', '焦点在效率提升，未详细讨论对极端复杂页面布局的适应性。']",
       "improvement_directions": [
-        "扩展CARBON表示以支持更复杂的化学语义",
-        "优化反应方案解析的准确性",
-        "在更大规模化学文献数据集上评估"
+        "探索更通用的条件分解，以放宽区域充分性假设。",
+        "在不同类型文档（如手写、多栏）上验证方法的鲁棒性。",
+        "研究如何将并行解码扩展至更细粒度的结构（如表格单元格）。"
       ],
-      "engineering_value": "为化学文献知识库构建和AI化学任务（如反应预测）提供关键的数据生产工具，具有高实用价值。",
-      "why_relevant": "面向化学领域的高精度文档解析系统，填补了通用解析器对分子结构识别不足的空白，对专业OCR方向有启发。"
-    },
-    {
-      "title": "Evidence-Grounded Multimodal Knowledge Graph Construction for Multi-Lecture Educational Reasoning",
-      "summary": "Lecture videos distribute knowledge across speech, slide text, diagrams, equations, and presentation order, which transcript-only retrieval does not fully preserve. This paper presents an evidence-grounded multimodal pipeline that transcribes lectures, selects semantic anchors, applies optical character recognition (OCR), and uses a vision-language model to extract only concepts and typed relationships supported by transcript, OCR, or visual evidence. Mentions are validated and canonicalized into a provenance-rich knowledge graph. On three neural-network lectures, the pipeline processed 3,118 frames, 756 transcript segments, and 559 anchors. It retained 1,022 concept and 312 relationship mentions, yielding 172 canonical concepts and 282 relationships with 90.38% endpoint coverage. A preliminary three question retrieval test achieved 100% top-1 and top-3 accuracy and 100% mean top-5 recall. The contribution is an auditable construction method rather than a state-of-the-art performance claim.",
-      "link": "https://arxiv.org/abs/2608.03161v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.03161v1",
-      "authors": [
-        "Sahil Al Farib",
-        "Momota Ahsana Meem",
-        "Sheikh Redwanul Islam",
-        "Md. Tanvir Raihan"
-      ],
-      "published": "2026-08-04T05:48:05Z",
-      "updated": "2026-08-04T05:48:05Z",
-      "categories": [
-        "cs.AI",
-        "cs.CL"
-      ],
-      "arxiv_id": "2608.03161v1",
-      "score": 19,
-      "topic_tags": [
-        "知识图谱",
-        "多模态",
-        "讲座视频",
-        "OCR",
-        "视觉语言模型"
-      ],
-      "zh_summary": "提出了一种基于证据的多模态流水线，用于从讲座视频构建知识图谱：转录语音、选择语义锚点、应用OCR，并使用视觉语言模型提取有据可查的概念和关系。在三场神经网络讲座上处理了3118帧等，保留1022个概念和312个关系提及，最终获得172个规范概念和282个关系，端点覆盖率达90.38%，初步检索测试取得高准确率。",
-      "novelty": "强调基于证据的知识提取，仅保留有转录、OCR或视觉证据的概念与关系，提高了知识图谱的可审计性。",
-      "innovation_points": [
-        "设计证据驱动的多模态知识提取流水线",
-        "结合OCR和视觉语言模型提取概念关系",
-        "构建带来源的知识图谱",
-        "提出端点覆盖率评估指标"
-      ],
-      "limitations": "仅在三场讲座上评估，规模有限；初步检索测试仅三个问题，统计显著性不足。",
-      "improvement_directions": [
-        "扩大数据集规模，覆盖更多学科",
-        "完善证据验证机制",
-        "探索更高效的知识图融合方法"
-      ],
-      "engineering_value": "可为教育内容自动构建结构化知识库，支持语义检索和智能问答，有教育技术应用前景。",
-      "why_relevant": "展示了OCR在视频文档理解中的一种应用，通过多模态证据构建知识图谱，为文档推理提供新思路。"
+      "engineering_value": "为文档解析系统提供了一种高效的端到端并行解码方案，可直接应用于大规模文档处理，显著提升吞吐量和降低延迟，适合生产环境部署。",
+      "why_relevant": "针对文档解析效率瓶颈提出创新架构，对OCR和文档理解领域具有直接借鉴价值。"
     },
     {
       "title": "Thinking with Anchors: Grounded and Efficient Document Reasoning",
@@ -261,28 +138,69 @@
       "arxiv_id": "2608.04424v1",
       "score": 16,
       "topic_tags": [
-        "文档理解",
-        "推理",
+        "文档推理",
         "视觉锚点",
+        "语义标签",
         "密集计数",
-        "布局分析"
+        "基准数据集"
       ],
-      "zh_summary": "提出了ADOPD 2026，一个面向推理的文档理解基准，扩展了ADOPD 2024，将页面分解转化为空间接地文档理解。为页面锚点添加了人工清洗的标题、语义标签和基于区域的思维链轨迹。将文本块、视觉实体、语义标签、边界框和多边形掩码统一为视觉锚点词汇表，支持区域级语义标签、统一视觉语言接地和密集计数任务。发现现有模型在密集计数上表现不佳，提出了Thinking-with-Anchors流水线。",
-      "novelty": "将文档理解从单纯定位页面元素转向联合推理区域语义、空间关系和视觉结构，引入视觉锚点统一表示。",
+      "zh_summary": "本文提出了ADOPD 2026，一个面向推理的文档理解基准，扩展自ADOPD 2024，将页面分解转化为空间接地的文档理解。数据集包含人工清洗的标题、语义标签和基于文档区域生成的思维链（CoT）轨迹，并将文本块、视觉实体、语义标签、边界框和多边形掩码视为共享的视觉锚点词汇。该表示支持三个关联能力：区域级语义标签、统一视觉-语言接地和密集计数（DocCount基准）。实验表明，现有最先进模型在密集计数任务上仍有困难，凸显了Thinking-with-Anchors流程在文档语义理解中的需求。",
+      "novelty": "提出了一个将页面分解与推理能力相结合的新基准，将视觉锚点作为统一表示，连接了区域语义、空间关系和视觉结构，推动文档理解从定位向推理的转变。",
       "innovation_points": [
-        "构建推理导向的文档理解基准ADOPD 2026",
-        "提出视觉锚点的统一表示",
-        "引入密集计数任务DocCount",
-        "生成接地思维链轨迹"
+        "构建ADOPD 2026数据集，包含人类整理的标题、语义标签和区域接地的思维链轨迹。",
+        "提出视觉锚点的共享词汇表，统一了文本块、视觉实体、语义标签、边界框和多边形掩码。",
+        "定义三个互相关联的任务：区域级语义标签、统一视觉-语言接地和密集计数。",
+        "引入DocCount基准，专门评估密集计数能力。"
       ],
-      "limitations": "摘要未提供具体性能对比，密集计数任务可能受限于模型能力；基准的泛化性待验证。",
+      "limitations": "['密集计数任务上现有模型表现不佳，基准难度可能偏高。', '数据集规模和多样性未详细说明，可能影响泛化性。', '思维链轨迹的生成依赖大模型，可能引入噪声。']",
       "improvement_directions": [
-        "扩展基准到更多文档类型",
-        "改进密集计数方法",
-        "探索思维链在文档推理中的应用"
+        "扩大数据集规模并增加文档类型多样性。",
+        "改进锚点表示以支持更复杂的推理路径。",
+        "探索更有效的计数方法，结合结构先验或自监督学习。"
       ],
-      "engineering_value": "为文档理解提供更高级的推理基准，推动模型从定位到语义理解的进化。",
-      "why_relevant": "展示了文档理解从布局分析到语义推理的新方向，对OCR后处理和信息提取有指导意义。"
+      "engineering_value": "为文档智能系统提供了新的评估基准和训练信号，有助于开发能进行深层语义理解的应用，如智能文档检索和问答。",
+      "why_relevant": "聚焦文档推理能力，是OCR技术向更高层次发展的重要方向。"
+    },
+    {
+      "title": "DTRNet: Dual Text-Radical Decoding for Handwritten Chinese Text Recognition with Faked Character Detection",
+      "summary": "In K-12 educational scenarios, handwritten Chinese text recognition should not only transcribe student writing, but also detect faked characters. However, existing recognition models are usually confined to a predefined set of normal characters and therefore cannot explicitly identify faked characters. Existing detection methods exhibit complementary limitations: character-level methods provide interpretable structural evidence but suffer from low efficiency, whereas line-level methods are efficient but rely heavily on confidence scores, making them prone to missed detections and lacking explicit structural evidence. Thus, the key challenge is to preserve character-structural evidence independent of contextual inference while maintaining line-level efficiency. To this end, we propose DTRNet, a dual Text-Radical decoding framework for line-level faked character detection. DTRNet decouples context-aware text recognition from character-wise structural verification, where the text branch performs line-level transcription and the radical branch predicts legal Ideographic Description Sequences (IDS) for lexicon-based faked character judgment. We further introduce IDS-Guided Confidence Adjustment (IGCA) to refine text predictions using structural evidence during inference. Experimental results demonstrate that DTRNet effectively detects faked characters while maintaining strong recognition performance and providing interpretable radical-level evidence. Code, checkpoints, and the processed dataset are publicly available at https://github.com/BNU-ERC-ITEA/DTRNet.",
+      "link": "https://arxiv.org/abs/2608.05848v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05848v1",
+      "authors": [
+        "Runrui Li",
+        "Lin Zhu",
+        "Hua Huang"
+      ],
+      "published": "2026-08-06T10:21:45Z",
+      "updated": "2026-08-06T10:21:45Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2608.05848v1",
+      "score": 13,
+      "topic_tags": [
+        "手写识别",
+        "伪造字符检测",
+        "双分支解码",
+        "IDC序列",
+        "中文处理"
+      ],
+      "zh_summary": "DTRNet提出了一个双文本-部首解码框架，用于行级手写中文文本识别和伪造字符检测。它解耦了上下文感知的文本识别与字符级结构验证，其中文本分支执行行级转录，部首分支预测合法的表意文字描述序列（IDS）以进行基于词典的伪造字符判断。此外，还引入了IDS引导的置信度调整（IGCA），在推理过程中使用结构证据来细化文本预测。实验表明，DTRNet能有效检测伪造字符，同时保持较强的识别性能，并提供可解释的部首级证据。",
+      "novelty": "针对手写中文识别中的伪造字符检测问题，首次提出双分支解码框架，结合字符结构信息与上下文识别，在保持行级效率的同时提供可解释的结构证据。",
+      "innovation_points": [
+        "提出双文本-部首解码框架，将上下文感知的文本识别与字符级结构验证解耦。",
+        "使用表意文字描述序列（IDS）作为结构表示，用于基于词典的伪造字符判断。",
+        "设计IDS引导的置信度调整（IGCA），融合结构证据优化文本预测。",
+        "提供了公开代码、检查点和处理后的数据集。"
+      ],
+      "limitations": "['方法可能依赖词典，对未登录词处理有限。', '实验场景聚焦K-12教育，泛化性需进一步验证。', '双分支架构可能增加计算开销。']",
+      "improvement_directions": [
+        "探索如何扩展至开放词汇的伪造字符检测。",
+        "优化双分支融合策略以提升端到端效率。",
+        "在更多手写场景（如历史文档）上测试。"
+      ],
+      "engineering_value": "为教育场景中的手写识别提供了可靠且可解释的伪造检测方案，具有实际应用价值。",
+      "why_relevant": "直接改进手写OCR的可靠性和可解释性，对考试自动阅卷等场景有重要价值。"
     },
     {
       "title": "Coupled Continuous-Discrete Generation for Scene Text Image Super-Resolution",
@@ -307,110 +225,112 @@
       "topic_tags": [
         "场景文本超分辨率",
         "连续-离散生成",
-        "扩散模型",
         "流匹配",
-        "OCR增强"
+        "离散扩散",
+        "多模态"
       ],
-      "zh_summary": "提出了DualTSR，一个统一的场景文本图像超分辨率框架，将STISR建模为耦合的连续-离散生成：条件流匹配恢复连续图像潜在变量，吸收态离散扩散重建文本令牌。两者共享多模态Transformer骨干，在生成过程中交互，无需外部OCR先验。在CTR-TSR和RealCE子集上取得最佳指标，相比DiffTSR在X4下ACC提升12.78个百分点，参数从1.23B降至203M，端到端延迟从13.3s降至132ms。",
-      "novelty": "首次将连续-离散生成耦合用于STISR，无需外部OCR先验，实现高效高性能的超分辨率。",
+      "zh_summary": "DualTSR提出了一个统一的场景文本图像超分辨率（STISR）框架，将问题表述为耦合的连续-离散生成。条件流匹配恢复连续图像潜变量，而吸收态离散扩散重建文本标记。两个过程共享一个多模态Transformer骨干，使图像和文本状态在生成过程中相互作用，无需外部OCR先验。在CTR-TSR上，DualTSR在X2和X4下均取得最佳FID、LPIPS、ACC和NED；在RealCE子集上，也取得最佳FID、ACC和NED。相比DiffTSR在X4下，ACC提升12.78个百分点，参数从1.23B减至203M，延迟从13.3秒减至132毫秒。",
+      "novelty": "首次将STISR视为连续-离散联合生成问题，通过流匹配和离散扩散在单一框架内交互生成，消除了对外部OCR先验的依赖，同时显著提升效率和准确性。",
       "innovation_points": [
-        "提出耦合连续-离散生成框架",
-        "设计共享多模态Transformer骨干",
-        "联合建模图像和文本状态",
-        "显著降低参数和延迟"
+        "提出耦合连续-离散生成框架，联合优化图像恢复和文本重建。",
+        "使用条件流匹配恢复图像潜变量，吸收态离散扩散重建文本。",
+        "共享多模态Transformer骨干，促进图像和文本状态交互。",
+        "无需外部OCR先验，实现端到端推理，大幅降低参数量和延迟。"
       ],
-      "limitations": "实验可能仅限于特定超分辨率倍数和数据集，真实世界场景多样性有待进一步验证。",
+      "limitations": "['实验仅在特定基准（CTR-TSR和RealCE）上验证，泛化性未知。', '方法可能对文本区域检测敏感。', '与更先进的单任务模型相比，针对性优化可能不足。']",
       "improvement_directions": [
-        "探索更复杂的文本语义建模",
-        "扩展到其他退化类型",
-        "优化连续-离散生成过程的融合"
+        "在更多退化类型（如模糊、噪声）上测试。",
+        "探索更高效的离散扩散模型以进一步提升速度。",
+        "考虑与识别任务联合优化，以更好地保留语义。"
       ],
-      "engineering_value": "提供高精度低延迟的STISR方案，可提升OCR系统对低质量文本图像的识别效果。",
-      "why_relevant": "面向OCR的预处理优化，通过超分辨率提升文本可读性，与OCR技术紧密相关。"
+      "engineering_value": "提供了一种高效且准确的STISR方法，适用于移动设备等资源受限场景，具有实用价值。",
+      "why_relevant": "直接改进场景文本的可读性和识别准确性，对OCR前处理和后处理有重要贡献。"
     },
     {
-      "title": "Right Reset: Chunking by Prefix Removal",
-      "summary": "Removing the left context from a causal language model reveals a useful kind of boundary: an edge where the model processes the same right-hand tokens with little change. We turn this observation into prefix-removal probing and introduce Right Reset (RR), which measures preservation of the right-hand hidden-state trajectory. A dynamic program converts RR edge scores into variable-length chunks. On flattened text formed by concatenating topically similar records after deleting their separators and layout, RR recovers 47.7% of the original records as clean units, versus 25.9% for a BGE embedding boundary, the strongest tested conventional baseline without task-specific model training. The gain persists after rendering and OCR. Passive scores from the same Qwen3-4B layer and direct prompting of a same-scale instruction model perform substantially worse on flattened records. Across six language models, RR-selected cuts also undergo consistently less local output disruption than unselected candidate edges. An observed-token likelihood-ratio readout is competitive in some architectures, indicating that the central contribution is the intervention: context dependence itself can provide a boundary signal when surface structure is weak.",
-      "link": "https://arxiv.org/abs/2608.04330v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.04330v1",
+      "title": "Schema-Guided Hierarchical Information Extraction and Semantic Evaluation Using Generative AI",
+      "summary": "We present a schema-based framework for extracting complex, structured information from unstructured text documents using generative AI, followed by automated semantic evaluation of the extracted information against a gold standard. The schema, serving as an information model encoding domain knowledge, provides a unified, systematic, and consistent framework for extraction of hierarchical, nested information, with attributes of variable cardinality, and subsequent evaluation of the results. Information extraction from a document is performed in a single call to the model, in zero-shot mode. In the evaluation step, we introduce a path-based semantic matching algorithm to align the nested, variable-cardinality attributes in the extracted results with those in the gold standard. We use generative AI for semantic comparison of the extracted and gold standard values of an attribute, and introduce a rubric to classify the result of the comparison, according to domain-specific considerations, as an exact, semantic, useful, or non-match. We were able to extract 12 out of 14 attributes with an F1 score of $>$90\\% from documents published by the health technology assessment organisation NICE, using the generative AI model Claude Opus 3. The time needed to extract the attributes from a document was $\\sim$30 times lower than the time taken by a human domain expert. We further demonstrate generalisability of this framework across different generative AI models and transferability across different HTA organisations and languages.",
+      "link": "https://arxiv.org/abs/2608.06167v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.06167v1",
       "authors": [
-        "Mike Vegeto"
+        "Modhurita Mitra",
+        "Jan-Willem Versteeg",
+        "Maarten D. Schermer",
+        "Shiva Nadi Najafabadi",
+        "Marie L. De Bruin",
+        "Lourens T. Bloem"
       ],
-      "published": "2026-08-05T01:17:12Z",
-      "updated": "2026-08-05T01:17:12Z",
+      "published": "2026-08-06T15:33:30Z",
+      "updated": "2026-08-06T15:33:30Z",
       "categories": [
-        "cs.CL",
-        "cs.LG"
+        "cs.AI",
+        "cs.CL"
       ],
-      "arxiv_id": "2608.04330v1",
-      "score": 13,
+      "arxiv_id": "2608.06167v1",
+      "score": 10,
       "topic_tags": [
-        "文档结构",
-        "上下文边界",
-        "语言模型",
-        "无监督切分",
-        "OCR后处理"
+        "模式引导",
+        "信息抽取",
+        "语义评估",
+        "生成式AI",
+        "零样本"
       ],
-      "zh_summary": "提出前缀移除探针方法Right Reset，通过测量因果语言模型右侧隐藏状态轨迹的保留程度来识别上下文边界，并利用动态规划将边界分数转换为可变长度块。在拼接的扁平文本上，能恢复47.7%的原始记录，优于基线BGE嵌入的25.9%。跨六个语言模型验证，RR选择的切分点局部输出干扰更小。核心贡献在于干预本身：上下文依赖性可作为边界信号。",
-      "novelty": "首次利用隐藏状态轨迹对右侧上下文的保留程度作为文档结构边界信号，无需任务特定训练。",
+      "zh_summary": "本文提出了一种基于模式（schema）的框架，用于从非结构化文本中提取复杂结构化信息，并利用生成式AI进行自动化语义评估。模式作为编码领域知识的信息模型，提供统一、系统、一致的提取框架，支持层次化、嵌套信息及可变基数属性，且一次性零样本完成提取。评估步骤中引入基于路径的语义匹配算法对齐嵌套属性，并使用生成式AI进行语义比较，定义精确、语义、有用或无匹配的划分。在健康技术评估组织NICE的文档上，14个属性中12个F1>90%，提取时间比人类专家快约30倍，并展示了跨模型、跨组织和语言的泛化性。",
+      "novelty": "提出一个基于模式的通用信息提取与评估框架，利用生成式AI实现零样本一次调用提取嵌套结构，并引入路径语义匹配和分层评估规则。",
       "innovation_points": [
-        "提出前缀移除探针Right Reset",
-        "基于动态规划的块分割方法",
-        "跨多种模型验证鲁棒性",
-        "在OCR渲染文本上仍有优势"
+        "设计模式作为信息模型，支持层次化嵌套信息提取，统一提取和评估。",
+        "实现零样本单次调用提取，显著提高效率。",
+        "提出路径级语义匹配算法，处理嵌套和可变基数属性。",
+        "引入基于生成式AI的语义比较和四类匹配规则。"
       ],
-      "limitations": "恢复率仍不到50%，实际应用可能需要结合其他信号；对于没有明显上下文变化的文本可能失效。",
+      "limitations": "['实验数据来自特定领域（HTA），泛化性需要更多领域验证。', '依赖生成式AI的语义比较，可能受模型偏见影响。', '评估规则需要领域专家定义，成本较高。']",
       "improvement_directions": [
-        "结合显式布局信息",
-        "探索更多语言和文档类型",
-        "优化动态规划的多尺度切分"
+        "扩展到更多领域和语言，验证框架通用性。",
+        "探索减少人工制定规则的方法，如自适应rubric。",
+        "优化模式设计以支持更复杂的提取场景。"
       ],
-      "engineering_value": "为文档结构化提供无监督方法，可用于从OCR输出中重建原始文档结构，减少后处理负担。",
-      "why_relevant": "提供了一种基于LLM内部状态的文档结构识别方法，有助于OCR后的文档重组和语义理解。"
+      "engineering_value": "为文档信息抽取提供了高效且一致的框架，可快速部署到新领域，大幅减少人工成本和时间。",
+      "why_relevant": "展示了生成式AI在结构化信息提取中的潜力，是OCR后处理的重要环节。"
     },
     {
-      "title": "DocTrace: Towards Traceable Long Document VQA via Hierarchical Evidence Graph Reasoning",
-      "summary": "Long Document Visual Question Answering (LongDocVQA) requires Multimodal Large Language Models (MLLMs) to locate, integrate, and reason over heterogeneous document elements distributed across multiple pages. Existing approaches, including end-to-end MLLMs, retrieval-augmented generation (RAG) pipelines, and document agents, often lack explicit mechanisms to represent and verify how grounded evidence is progressively composed during reasoning, limiting both answer accuracy and traceability. In this paper, we cast LongDocVQA as an explicit evidence graph reasoning problem rather than implicit answer prediction. To this end, we propose DocTrace, a hierarchical framework that progressively performs evidence localization, structured document parsing, and evidence graph reasoning to enable explicit evidence provenance. To effectively learn these capabilities, we develop a two-stage training framework: joint Supervised Fine-Tuning (SFT) first initializes evidence localization and graph reasoning abilities, followed by task-specific Group Relative Policy Optimization (GRPO) with dedicated rewards to further optimize these capabilities. Extensive experiments on MMLongBench-Doc, LongDocURL, and SlideVQA demonstrate that DocTrace consistently outperforms both existing open-source baselines and proprietary MLLMs. Compared with the Qwen3-VL-8B-Instruct backbone, DocTrace achieves absolute improvements of 14.4, 11.3, and 11.7 points on the three benchmarks, respectively. Beyond competitive performance, DocTrace constructs traceable evidence graphs with explicit node-level provenance, enabling transparent and verifiable reasoning for long document understanding.",
-      "link": "https://arxiv.org/abs/2608.03292v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.03292v1",
+      "title": "Mapping Armenian Paris: Extracting and Geocoding Commercial Advertisements from the 20th-Century Diaspora Press",
+      "summary": "This paper presents an end-to-end, IIIF-based pipeline that turns the digitised Armenian press of France into an interactive map of the 20th-century Parisian Armenian commercial community. On each page, commercial advertisements are located, read, and parsed into structured records, which are then geocoded and placed on the map. Western Armenian is under-resourced and unsupported by off-the-shelf layout and OCR models, so the pipeline uses vision-language models (VLMs) as a data-bootstrapping strategy: they produce usable structured records at a scale hand annotation could not reach, and stay reliable on the strongly curved scans where conventional line-level CRNN OCR breaks down. The contribution includes a 500-page Western Armenian press corpus with 3,270 advertisement-level annotations, a Label Studio template that captures detection and semantic fields in a single annotation pass, and a reproducible workflow transposable to other under-resourced historical corpora. More broadly, the work shows that VLM-driven data bootstrapping is an effective lever for under-resourced historical languages such as (Western) Armenian.",
+      "link": "https://arxiv.org/abs/2608.05911v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05911v1",
       "authors": [
-        "Le Xiang",
-        "Zhicheng Guan",
-        "Hong Chen",
-        "Xiaocong Lin",
-        "Zhenghua Lei",
-        "Teng Hu",
-        "Bolei He",
-        "Long Zeng"
+        "Chahan Vidal-Gorène",
+        "Seda Kirakosyan",
+        "Edita Matevosyan"
       ],
-      "published": "2026-08-04T08:04:59Z",
-      "updated": "2026-08-04T08:04:59Z",
+      "published": "2026-08-06T11:39:41Z",
+      "updated": "2026-08-06T11:39:41Z",
       "categories": [
-        "cs.AI"
+        "cs.CV"
       ],
-      "arxiv_id": "2608.03292v1",
-      "score": 12,
+      "arxiv_id": "2608.05911v1",
+      "score": 10,
       "topic_tags": [
-        "长文档VQA",
-        "证据图推理",
-        "多模态LLM",
-        "强化学习"
+        "历史文档",
+        "VLM引导",
+        "地理解码",
+        "资源稀缺语言",
+        "数字人文"
       ],
-      "zh_summary": "DocTrace 提出了一种用于长文档视觉问答（LongDocVQA）的分层证据图推理框架。它将 LongDocVQA 视为显式证据图推理问题，而非隐式答案预测。该框架依次执行证据定位、结构化文档解析和证据图推理，以实现显式证据溯源。训练采用两阶段范式：联合监督微调初始化定位与推理能力，随后通过任务特定的组相对策略优化（GRPO）进一步优化。在 MMLongBench-Doc、LongDocURL 和 SlideVQA 基准上，DocTrace 优于现有的开源基线和专有 MLLM，相比 Qwen3-VL-8B-Instruct 基座分别提升 14.4、11.3 和 11.7 个绝对点。",
-      "novelty": "将 LongDocVQA 任务重新定义为显式证据图推理问题，提供节点级溯源，而非隐式答案预测。",
+      "zh_summary": "本文介绍了一个基于IIIF的端到端流水线，将法国亚美尼亚数字报刊转换为20世纪巴黎亚美尼亚商业社区的交互式地图。在每页上，商业广告被定位、读取并解析为结构化记录，然后进行地理编码并映射。由于西亚美尼亚语资源稀缺且不受现成布局和OCR模型支持，流水线使用视觉语言模型（VLM）作为数据引导策略，在无法人工标注的规模下生成可用的结构化记录，并在弯曲扫描中保持可靠性。贡献包括一个500页的西亚美尼亚语报刊语料库（含3270个广告级注释）、一个标签工作室模板，以及可复现的工作流。",
+      "novelty": "展示了VLM驱动的数据引导策略在资源稀缺的历史语言（西亚美尼亚语）中的应用，提供了一个完整的、可迁移的流程，将数字化报刊转化为结构化地图。",
       "innovation_points": [
-        "提出分层证据图推理框架，整合证据定位、结构化解析和图推理。",
-        "设计两阶段训练：联合 SFT 初始化能力，再使用 GRPO 与专门奖励优化。",
-        "构建可溯源的证据图，提供显式节点级来源验证。"
+        "构建了500页西亚美尼亚语报刊语料库，包含3270个广告级注释。",
+        "利用视觉语言模型作为数据引导方法，克服了传统OCR的局限。",
+        "设计Label Studio模板，在一次注释中捕获检测和语义字段。",
+        "提供可复现的工作流，适用于其他资源稀缺的历史语料。"
       ],
-      "limitations": "在三个基准上的提升虽显著，但可能受限于特定文档类型；证据图构建的额外计算开销未提及；泛化性需进一步验证。",
+      "limitations": "['依赖VLM的准确性，可能引入错误。', '语料库规模仍有限，可能影响统计意义。', '地理编码准确性和历史地址匹配挑战未深入探讨。']",
       "improvement_directions": [
-        "探索证据图构建的轻量化方法，减少计算开销。",
-        "将框架扩展到更多文档类型和跨领域场景。",
-        "研究证据图的可解释性对用户信任度的影响。"
+        "扩展语料库规模和时间范围。",
+        "优化VLM提示和微调以适应更多历史语言变体。",
+        "结合传统OCR和VLM的混合方法提高鲁棒性。"
       ],
-      "engineering_value": "适用于长文档智能问答系统，提升复杂文档理解的准确性和可追溯性，对文档自动化处理领域有实际应用价值。",
-      "why_relevant": "直接针对长文档 VQA 中的证据推理和可追溯性问题，创新性地结合分层图推理和强化学习，是该领域的前沿进展。"
+      "engineering_value": "为历史文档数字化提供了低成本的可用数据生成方法，可推动数字人文学科研究。",
+      "why_relevant": "展示了VLM在资源稀缺OCR任务中的潜力，为多语言OCR提供了新思路。"
     },
     {
       "title": "When Prompts Become Pixels: Prompt-Region Grounding for Multimodal Reasoning",
@@ -435,26 +355,26 @@
       "arxiv_id": "2608.04726v1",
       "score": 10,
       "topic_tags": [
-        "多模态推理",
-        "视觉任务语义",
-        "行为干预",
-        "提示区域接地"
+        "多模态大模型",
+        "视觉语义理解",
+        "提示工程",
+        "OCR"
       ],
-      "zh_summary": "本文引入可视化任务语义（VTS）干预方法，将问题从文本移入图像，保持源问题和答案不变，以探究多模态大语言模型（MLLM）是否在不同通道上同等使用指令。实验表明，在 6 个 MLLM 和 4 个基准上，所有 24 个模型-任务对的准确率均下降，平均下降 17.8 点。模型常能正确转录视觉问题但未使用它，揭示了超越 OCR 的语义通道差距。为缩小该差距，作者提出提示区域接地（prompt-region grounding），其核心设计对齐问题区域与类型化语义，并从掩码视图恢复干净表示。在相同训练成本下，该方法将四个基准的 VTS 准确率从 58.0 提升至 66.3，且保持原始界面准确率，推理时无需 OCR 或区域元数据。",
-      "novelty": "首次系统性地测量问题嵌入图像时 MLLM 性能下降，并提出针对性的训练方法。",
+      "zh_summary": "提出可视化任务语义（VTS）干预方法，将问题以像素形式嵌入图像，发现多模态大模型在全部24个模型-任务组合中准确率平均下降17.8分，且模型能正确转录视觉问题但未能使用它，表明存在超越OCR的语义通道鸿沟。为缩小鸿沟，提出提示区域接地方法，将问题区域与输入语义对齐，并从遮罩视图恢复其干净表示，在相同训练成本下将VTS准确率从58.0提高到66.3，且推理时无需OCR或区域元数据。",
+      "novelty": "首次系统性地将问题文本嵌入图像以评估多模态模型的指令遵循能力，揭示模型在阅读任务文本与将其作为指令进行推理之间存在能力鸿沟。",
       "innovation_points": [
-        "引入 VTS 干预方法，控制问题位置以评估通道差异。",
-        "提出 prompt-region grounding 训练策略，对齐视觉问题区域与语义表示。",
-        "在推理时无需额外元数据，训练成本匹配。"
+        "提出可视化任务语义（VTS）干预方法，将问题嵌入图像，保持源问题和答案固定。",
+        "揭示多模态大模型存在语义通道鸿沟，即正确转录视觉问题但无法有效利用。",
+        "提出提示区域接地方法，对齐问题区域与输入语义，从遮罩视图恢复干净表示。"
       ],
-      "limitations": "VTS 干预可能未覆盖所有任务类型；提升准确率仍低于原始文本任务；对 OCR 性能的依赖未完全消除。",
+      "limitations": "['仅评估了六种多模态模型和四个基准，可能不具有广泛代表性。', '方法需在训练时使用VTS数据，对数据规模和多样性有依赖。']",
       "improvement_directions": [
-        "将方法扩展到更复杂任务和真实场景。",
-        "探索跨通道语义对齐的更深层机制。",
-        "减轻对 OCR 的依赖，增强端到端能力。"
+        "探索更细粒度的语义对齐策略，如结合注意力机制或图神经网络。",
+        "将方法扩展到动态图像或视频任务。",
+        "研究如何在不依赖训练干预的情况下，提升模型对视觉提示的利用能力。"
       ],
-      "engineering_value": "对依赖截图或文档图像中任务指令的自动化系统有借鉴意义，可提升 MLLM 在视觉任务上的鲁棒性。",
-      "why_relevant": "揭示了 MLLM 在视觉任务指令理解上的关键缺陷，并提出解决方法，对多模态推理研究有重要意义。"
+      "engineering_value": "为多模态大模型在截图、文档等视觉场景中的推理能力提供诊断工具和改进方案，可应用于自动文档理解、视觉问答等系统。",
+      "why_relevant": "直接涉及OCR相关的语义理解能力，突出视觉文本理解与推理的区分，对多模态文档解析有重要参考价值。"
     },
     {
       "title": "Q-CueGraph: Query-Conditioned Visual Evidence Graphs for Multimodal Reasoning",
@@ -475,26 +395,26 @@
       "arxiv_id": "2608.04452v1",
       "score": 10,
       "topic_tags": [
-        "视觉证据图",
-        "选择性观察",
         "多模态推理",
-        "预算限制"
+        "视觉定位",
+        "OCR布局图",
+        "高效推理"
       ],
-      "zh_summary": "Q-CueGraph 提出查询条件下的视觉证据图方法，用于多模态推理中的选择性观察。它根据问题与图像表示生成预算化的坐标级观察，供冻结的阅读器使用。对于文本丰富的图像，利用可复用的 OCR/布局图；对于自然图像，实例化查询条件下的视觉节点，并共享选择、组合和预算接口。可选的功能细化通过训练答案正确性学习冻结阅读器可用的候选裁剪，无需区域框监督。使用冻结的 Qwen2.5-VL-7B，Q-CueGraph 在 V*Bench 上达到 0.833 准确率，而全图推理为 0.696，且预算仅占图像面积的 19%。在 InfographicVQA 上，使用约一半图像面积达到全图 ANLS 的 92%。在六个基准上，显式观察在证据可定位、问题区分位置且分辨率限制全图读取时最有价值。",
-      "novelty": "将观察决策变为显式查询条件图，可迁移于不同图像类型，无需区域框监督。",
+      "zh_summary": "提出Q-CueGraph方法，将问题映射到预算内的坐标级观察，为冻结的阅读器提供任务条件化策略，决定在何处检查图像。文本丰富图像使用可复用OCR/布局图，自然图像搜索则实例化查询条件视觉节点。在V*Bench上以19%图像面积预算达到0.833准确率，并达到InfographicVQA上全图ANLS的92%且使用一半面积。",
+      "novelty": "将多模态推理中的视觉观察决策显式建模为查询条件策略，结合OCR布局和视觉图，实现高效、可解释的证据收集。",
       "innovation_points": [
-        "提出查询条件视觉证据图，明确预算化观察。",
-        "统一处理文本丰富图像和自然图像。",
-        "利用训练答案正确性优化候选裁剪，无需额外监督。"
+        "提出查询条件视觉证据图，融合OCR/布局图与视觉搜索。",
+        "采用预算机制控制观察区域，提高推理效率。",
+        "可选效用细化从训练答案正确性学习判断候选裁剪，无需区域框监督。"
       ],
-      "limitations": "依赖冻结阅读器，可能无法适应特定领域；预算分配策略的通用性需验证；未涉及极端复杂场景。",
+      "limitations": "['依赖外部视觉表示和图构建，可能引入额外计算开销。', '在证据不可定位或问题不具区分度时，性能提升有限。']",
       "improvement_directions": [
-        "研究动态预算分配策略，适应不同复杂度。",
-        "扩展至更多任务和基准，验证泛化性。",
-        "探索与可学习阅读器的联合训练。"
+        "探索自适应预算调整，根据问题难度动态分配观察资源。",
+        "增强图构建的鲁棒性，处理低质量或遮挡图像。",
+        "将方法扩展到视频或多模态序列。"
       ],
-      "engineering_value": "可提高高分辨率图像理解效率，降低计算成本，适用于视觉问答、文档分析等领域。",
-      "why_relevant": "针对多模态推理中的观察策略问题，提出高效且可解释的方案，在多个基准上取得显著提升。"
+      "engineering_value": "提高多模态模型在视觉问答和文档理解中的效率与准确率，尤其适合高分辨率图像或文档场景。",
+      "why_relevant": "针对文本丰富图像，利用OCR布局指导观察策略，与文档智能解析紧密相关。"
     },
     {
       "title": "STEP-OPD: Rethinking Output Targets and Internal Dynamics in On-Policy Distillation for Diffusion Models",
@@ -519,116 +439,109 @@
       "arxiv_id": "2608.04887v1",
       "score": 9,
       "topic_tags": [
-        "蒸馏",
         "扩散模型",
-        "多任务学习",
-        "文本渲染"
+        "知识蒸馏",
+        "文本渲染",
+        "多任务学习"
       ],
-      "zh_summary": "STEP-OPD 提出一种用于扩散模型同策略蒸馏（OPD）的新框架。现有方法主要使学生匹配教师的输出速度，但输出级监督无法充分约束学生块级表示演化。STEP-OPD 扩展学习目标，使用教师与共享基座模型之间的速度差作为进一步学习方向，并加入教师速度的缩放版本。同时，对齐学生和教师表示变化的方向和幅度，使学生学习跨网络块的渐进表示变换。在组合对齐、文本渲染和人类偏好实验上，方法一致优于标准 OPD，如将 DiffusionOPD 的 GenEval 得分从 0.927 提升至 0.961，并改善 OCR 和所有偏好指标。统一学生模型在三个能力组上均超越对应单任务教师。",
-      "novelty": "突破教师上限，通过速度差引导学习，并显式约束中间层表示演化。",
+      "zh_summary": "提出STEP-OPD，一种用于扩散模型的自蒸馏框架，在输出层监督之外，增加对内部表示演化的显式约束。利用教师与共享基础模型的速率差作为学习方向，并对齐学生与教师表示变化的方向和幅度。在组合对齐、文本渲染和人类偏好等任务上，一致提升标准OPD方法性能，如GenEval分数从0.927升至0.961，同时改善OCR和偏好指标。",
+      "novelty": "首次在扩散模型蒸馏中超越教师输出限制，并引入块级表示演化约束，提升多任务学生模型的综合能力。",
       "innovation_points": [
-        "利用教师与基座速度差作为扩展学习目标。",
-        "对齐学生和教师块级表示变换的方向和幅度。",
-        "在多个任务上实现学生超越教师。"
+        "将学习目标扩展到教师之外，利用速率差引导进一步学习。",
+        "约束学生与教师表示变化的方向和幅度，促进逐层能力迁移。",
+        "在多个任务（含OCR）上验证一致改进。"
       ],
-      "limitations": "主要针对图像生成，对其他模态适用性未知；对计算资源要求可能较高；速度差的缩放因子需经验调整。",
+      "limitations": "['仅评估了图像生成相关的多任务，未涉及其它模态。', '方法依赖多个教师模型，训练成本可能较高。']",
       "improvement_directions": [
-        "探索自动调节缩放因子的方法。",
-        "将框架推广至其他生成任务（如文本、音频）。",
-        "减少额外计算开销，提升训练效率。"
+        "探索单教师或无教师设置下的内部演化约束。",
+        "将方法扩展到文本到音频或视频生成。",
+        "研究更细粒度的块级对齐策略以进一步提升性能。"
       ],
-      "engineering_value": "可提升统一图像生成模型的质量，尤其在文本渲染和偏好匹配上，对工业级生成模型部署有价值。",
-      "why_relevant": "改进扩散模型蒸馏范式，突破教师性能上限，对多任务统一模型构建有重要影响。"
+      "engineering_value": "为生成模型的多任务知识整合提供高效方案，适用于文本渲染和OCR相关的图像生成系统。",
+      "why_relevant": "通过提升扩散模型的文本渲染能力，直接影响OCR自然场景图像的生成质量，对文档合成和数据增强有价值。"
     },
     {
-      "title": "GUI-Lens: Coarse-to-Fine Cropping for GUI Grounding with General-Purpose VLMs",
-      "summary": "GUI grounding maps natural-language instructions to click locations and is essential for reliable GUI agents. The task remains difficult on high-resolution, densely populated interfaces because a vision-language model (VLM) may recognize a requested control without locating it precisely enough for interaction. Most existing methods provide various forms of localization assistance, but still rely on a direct click prediction, allowing visual ambiguity or an inaccurate initial estimate to propagate to the final result. In this paper, we introduce GUI-Lens, a coarse-to-fine grounding framework that allows a general-purpose VLM to determine the target through active visual observations. Specifically, GUI-Lens extracts OCR text and detected UI components from the screenshot and presents their positions as coordinate references. Using the instruction, the current view, and these references, the VLM selects the region and scale of the next view, which is cropped and enlarged to provide finer visual details. This process continues over successively focused views until the target is determined. Proposed crops and clicks are checked against the instruction throughout the process, and the final local position is mapped back to the original screen coordinates. Experiments on four GUI grounding benchmarks and three general-purpose VLM backends show that GUI-Lens improves overall grounding accuracy by up to 24.9 percentage points and achieves state-of-the-art performance with GPT-5.5.",
-      "link": "https://arxiv.org/abs/2608.03270v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.03270v1",
+      "title": "Topology-Aware Neighborhood Learning for Source-Free Cross-Scene Hyperspectral Image Classification",
+      "summary": "Domain adaptation has advanced cross-scene hyperspectral image classification, significantly improving discriminative capability in complex scenarios. However, privacy rules or storage limits often block access to data from the source domain. Conventional domain adaptation methods become impractical, severely restricting their utility in realistic remote sensing scenarios. To tackle this challenge, we propose a topology-aware source-free learning framework. We first introduce the entropy momentum pseudo-labeling (EMP) to refine k-means assignments by leveraging entropy-aware confidence and temporal prediction momentum. Under the guidance of the refined pseudo-labels, we further utilize the contextual neighborhood topology (CNT) to exploit the intrinsic geometric structure of the target feature space. Combining the global structural information extracted by collaborative representation with the local similarity information modeled by nearest neighbor search, the CNT accomplishes the comprehensive encoding of manifold-level geometric properties in the target domain feature space. The overall objective integrates cross-entropy on refined pseudo-labels, log inner product-based topology consistency, and an information-maximization term for balanced classification, ensuring stable adaptation in the source-free setting. Extensive experiments on three typical cross-scenarios demonstrate that the proposed method exceeds state-of-the-art performance, and ablation studies further validate the contribution of each module. The results highlight the critical role of topology-aware modeling in achieving robust and accurate classification without source data.",
+      "link": "https://arxiv.org/abs/2608.05964v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05964v1",
       "authors": [
-        "Zichuan Fu",
-        "Shirong Wang",
-        "Wenlin Zhang",
-        "Guojing Li",
-        "Yimin Deng",
-        "Jingtong Gao",
-        "Junjia Qi",
-        "Hanyu Yan",
-        "Yefeng Zheng",
-        "Xiaopeng Li",
-        "Wanyu Wang",
-        "Xian Wu",
-        "Xiangyu Zhao"
+        "Qingmei Li",
+        "Juepeng Zheng",
+        "Jiarui Zhang",
+        "Jianxi Huang",
+        "Haohuan Fu"
       ],
-      "published": "2026-08-04T07:47:37Z",
-      "updated": "2026-08-04T07:47:37Z",
+      "published": "2026-08-06T12:40:06Z",
+      "updated": "2026-08-06T12:40:06Z",
       "categories": [
-        "cs.CV",
-        "cs.AI"
+        "cs.CV"
       ],
-      "arxiv_id": "2608.03270v1",
-      "score": 9,
-      "topic_tags": [
-        "GUI接地",
-        "粗到细裁剪",
-        "视觉语言模型",
-        "主动观察"
-      ],
-      "zh_summary": "GUI-Lens 提出用于 GUI 接地的粗到细裁剪框架。GUI 接地将自然语言指令映射到点击位置，在高分辨率密集界面上具有挑战性。现有方法依赖直接点击预测，错误传播至最终结果。GUI-Lens 允许通用 VLM 通过主动视觉观察确定目标：提取 OCR 文本和 UI 组件位置作为坐标参考，VLM 选择下一视图的区域和尺度，裁剪放大以提供更细粒度细节，逐步聚焦至目标确定。过程中对提议裁剪和点击进行指令检查，并映射回原始坐标。在四个 GUI 基准和三个 VLM 后端上，GUI-Lens 将接地准确率提升最多 24.9 个百分点，GPT-5.5 下达到最先进性能。",
-      "novelty": "通过主动视觉观察分解点击预测，利用 OCR 和 UI 组件定位参考，实现逐步聚焦。",
-      "innovation_points": [
-        "提出粗到细裁剪策略，通过多步观察确定目标。",
-        "利用 OCR 文本和 UI 组件位置作为坐标参考。",
-        "对裁剪和点击进行指令检查，保证一致性。"
-      ],
-      "limitations": "依赖 OCR 和 UI 组件检测的准确性；用于多个 VLM 后端，但计算成本可能较高；步骤选择需人工设计。",
-      "improvement_directions": [
-        "自动化步骤选择策略，减少人工干预。",
-        "提高对 OCR 错误的鲁棒性。",
-        "扩展至动态界面和移动应用场景。"
-      ],
-      "engineering_value": "可增强 GUI 代理的交互准确性，适用于自动化测试和辅助软件。",
-      "why_relevant": "解决了 GUI 接地中的定位精度问题，通过主动观察提升准确率，对智能代理领域有直接价值。"
-    },
-    {
-      "title": "Neighborhood-Aware Dual Biomedical Entity Linking",
-      "summary": "Biomedical entity linking grounds mentions in clinical and scientific text to entities in a curated knowledge base (KB) with ontological structure, which supports downstream applications such as literature-scale information extraction and patient-record normalization. The task has several challenges at once: the KB contains large numbers of entities, mentions are often ambiguous, and gold labels follow annotation conventions specific to each corpus. To address these challenges, we propose PILOT, a three-stage framework made up of neighborhood-aware retrieval, dual reranking, and score fusion. The retriever injects ontological structure from both the query and KB side, by reformulating mentions and pooling entity embeddings. The retrieved pool is then scored from two complementary views, one over surface forms and one over context, and fused together. PILOT achieves the state of the art on average across five widely-used benchmarks and remains efficient at inference.",
-      "link": "https://arxiv.org/abs/2608.04144v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.04144v1",
-      "authors": [
-        "Yicheng Tao",
-        "Jie Liu"
-      ],
-      "published": "2026-08-04T18:55:14Z",
-      "updated": "2026-08-04T18:55:14Z",
-      "categories": [
-        "cs.IR",
-        "cs.CL",
-        "cs.LG"
-      ],
-      "arxiv_id": "2608.04144v1",
+      "arxiv_id": "2608.05964v1",
       "score": 6,
       "topic_tags": [
-        "实体链接",
-        "生物医学",
-        "本体结构",
-        "重排序"
+        "高光谱图像",
+        "领域适应",
+        "拓扑学习",
+        "无监督"
       ],
-      "zh_summary": "PILOT 提出邻域感知双生物医学实体链接框架。生物医学实体链接将临床和科学文本中的提及映射到知识库（KB）实体，面临大规模实体、歧义性和标注约定差异等挑战。PILOT 包含三阶段：邻域感知检索、双重重排序和分数融合。检索器从查询和 KB 两端注入本体结构，通过改写提及和池化实体嵌入。检索到的候选从表面形式和上下文两个互补视角打分并融合。PILOT 在五个基准上平均达到最先进性能，同时保持推理效率。",
-      "novelty": "首次将本体结构注入检索与重排序，结合双视角打分，实现高效准确的实体链接。",
+      "zh_summary": "提出面向源自由跨场景高光谱图像分类的拓扑感知邻域学习框架。引入熵动量伪标记（EMP）细化k-means分配，利用上下文邻域拓扑（CNT）挖掘目标特征空间的几何结构。综合交叉熵、拓扑一致性和信息最大化目标，在三个跨场景数据集上超越现有方法。",
+      "novelty": "在源域数据不可得的情况下，利用拓扑感知学习实现高光谱图像分类的适应，强调流形几何结构。",
       "innovation_points": [
-        "邻域感知检索，同时利用查询和 KB 端本体结构。",
-        "双重重排序，表面形式与上下文互补。",
-        "分数融合策略整合两类评分。"
+        "提出熵动量伪标记（EMP），结合熵感知置信度和时序预测动量。",
+        "利用上下文邻域拓扑（CNT）融合全局结构与局部相似性。",
+        "联合优化交叉熵、拓扑一致性和信息最大化目标。"
       ],
-      "limitations": "依赖本体结构质量；测试基准数量有限；对特定标注约定可能过拟合。",
+      "limitations": "['依赖伪标签质量，初始分配可能影响最终性能。', '计算复杂度较高，因涉及邻域搜索和拓扑编码。']",
       "improvement_directions": [
-        "探索自适应本体结构注入方式。",
-        "扩展到更多领域和语言。",
-        "强化对歧义提及的处理。"
+        "探索更鲁棒的伪标签生成策略，如基于置信度阈值的动态调整。",
+        "加速邻域搜索算法，适用于大规模遥感场景。",
+        "将方法扩展到多模态或高维数据。"
       ],
-      "engineering_value": "可应用于文献信息抽取和患者记录规范化，提升知识库链接效率。",
-      "why_relevant": "将本体感知和双视角融合引入实体链接，显著提升性能，是本领域值得关注的进展。"
+      "engineering_value": "为遥感图像分类提供无需源数据的隐私保护方案，具有实际部署价值。",
+      "why_relevant": "虽然针对高光谱图像，但其源自由适应和拓扑学习思想可借鉴于文档图像的特征迁移。"
+    },
+    {
+      "title": "MameLoshnLM: Yiddish Language Model and Evaluation Benchmark",
+      "summary": "We present MameLoshnLM, the first open-source 8B-parameter language model built specifically for Yiddish. Despite Yiddish's rich textual tradition, its limited digital presence and the scarcity of reliable evaluation resources have constrained progress in Yiddish language modeling. Existing multilingual corpora and benchmarks are often poor proxies for the language, containing substantial amounts of noisy, machine-translated, and misclassified text. We address these gaps by introducing Oytser, a high-quality Yiddish pretraining corpus that combines contemporary web-native sources with literary materials, and Kashes, a multi-task benchmark spanning translation, linguistic analysis, information extraction, and language understanding. Using these resources, we continue pretraining Llama 3.1 8B to obtain MameLoshnLM. Across the tasks in the benchmark, MameLoshnLM outperforms open baselines of similar scale. Our analyses show that these gains are not only quantitative: relative to general-purpose multilingual models, MameLoshnLM better captures language-defining lexical and morphological patterns, pointing to a broader failure mode of noisy web-scale multilingual data for low-resource languages. Our results provide both a foundation for Yiddish NLP and a practical template for language model development in historically rich but digitally underrepresented languages.",
+      "link": "https://arxiv.org/abs/2608.05850v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05850v1",
+      "authors": [
+        "Uri Katz",
+        "Omer Goldman",
+        "Tomasz Limisiewicz",
+        "Reut Tsarfaty",
+        "Noah A. Smith"
+      ],
+      "published": "2026-08-06T10:24:08Z",
+      "updated": "2026-08-06T10:24:08Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "arxiv_id": "2608.05850v1",
+      "score": 6,
+      "topic_tags": [
+        "低资源语言",
+        "语言模型预训练",
+        "评估基准",
+        "多语言OCR"
+      ],
+      "zh_summary": "发布MameLoshnLM，首个开源8B参数意第绪语大模型，及其预训练语料库Oytser和评估基准Kashes。基于Llama 3.1 8B持续预训练，在该语言的多项任务上优于相似规模基线，并更好地捕获语言特征，为资源稀缺语言模型开发提供模板。",
+      "novelty": "填补意第绪语NLP空白，提供高质量语料和基准，强调低资源语言建模需超越噪声多语言数据。",
+      "innovation_points": [
+        "构建高质量意第绪语预训练语料Oytser，结合当代网络与文学资源。",
+        "建立多任务评估基准Kashes。",
+        "基于Llama 3.1持续预训练，获得优于基线的性能。"
+      ],
+      "limitations": "['模型规模8B，可能不适用于所有低资源场景。', '评估基准覆盖任务有限。']",
+      "improvement_directions": [
+        "探索更大规模模型或数据增强技术。",
+        "扩展基准到更多任务和更广泛的语言现象。",
+        "研究多语言模型在低资源语言上的知识迁移机制。"
+      ],
+      "engineering_value": "为其他低资源语言提供开发经验，促进语言技术多样性。",
+      "why_relevant": "与多语言OCR和文档处理相关，强调低资源语言的数字化需求，为OCR系统提供语言资源支撑。"
     }
   ]
 }
