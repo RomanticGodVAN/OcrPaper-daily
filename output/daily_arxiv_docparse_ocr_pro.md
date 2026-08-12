@@ -1,72 +1,132 @@
-# OCR / 文档解析研究日报（2026-08-11）
+# OCR / 文档解析研究日报（2026-08-12）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-08-11 03:11:01`
+- 生成时间（UTC）：`2026-08-12 03:29:07`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日OCR与文档解析研究聚焦多模态模型的可解释性、鲁棒性与工程部署效率。关键发现包括：多模态SAE可有效隔离和操纵OCR相关特征；文档转数据库基准Doc2DB-Bench强调关系忠实性；LVLM存在捷径学习现象，OCR线索影响预测；视觉文本压缩中的代理策略差距可通过自蒸馏缓解；时间演进文档版本解析成为新挑战；工程领域推理基准显示模型与人类专家差距巨大；SciNER通过类型驱动多任务学习提升实体识别性能；评估应引入验证成本维度。
+> 今日OCR与文档解析研究聚焦于多方向文本识别、表格结构识别、长文档理解、多模态模型可解释性及提示优化等方向，并引入了新的基准（FormStruct-Bench、MMArch）以评估这些任务。工作进展包括提出具备理论保证旋转不变性的文本识别器（RISTER）、用于表格结构识别的层次化基准、以及长文档理解的智能体视觉感知框架（InSight-doc），后者通过动态分辨率控制显著降低推理成本并减少幻觉。关键词包括：旋转不变性、结构识别基准、智能体感知、模型差异分析、讽刺检测。
 
 ## 二、今日趋势判断
 
-研究趋势从单一OCR准确率转向多模态推理、鲁棒性与实用化评估，强调跨模态特征差异、时间版本解析、关系型数据库构建、代理策略差距及验证成本。
+当前趋势强调端到端与理论保证的性能提升（如旋转不变性），同时注重构建诊断性基准以揭示模型在结构化文档（表格、长文档）中的深层缺陷。多模态模型的研究聚焦于特征级控制（SAE）和鲁棒性评估（讽刺检测）。此外，利用智能体框架（如RLMOpt、InSight-doc）优化推理效率和提示工程成为新热点。
 
 ## 三、今日论文概览
 
-1. **Multimodal Model Diffing for Feature Discovery and Control** | 标签：多模态、可解释性、稀疏自编码器、OCR
-2. **Beyond Tables: Doc2DB-Bench for Relationally Faithful Document-to-Database Construction** | 标签：文档理解、数据库构建、基准测试、关系抽取
-3. **PragMatch: Separating Pragmatic Incongruity from Cross-Modal Mismatch in Large Vision-Language Models** | 标签：多模态、讽刺检测、捷径学习、OCR
-4. **Reading is not Reasoning: Bridging the Agentic Policy Gap in Vision-Text Compression** | 标签：多模态LLM、自蒸馏、上下文压缩、OCR
-5. **Time Present and Time Past: Benchmarking Large Language Models on Temporally Evolving Document Understanding** | 标签：时间推理、文档理解、版本解析、OCR
-6. **MMArch: Benchmarking Multimodal Reasoning Grounded in Architectural Evidence** | 标签：多模态推理、工程文档、基准测试、OCR
-7. **Enhancing Scientific Named Entity Recognition via Large Language Models: A Type-driven Multi-task Learning Approach** | 标签：科学命名实体识别、大语言模型、多任务学习、提示工程
-8. **AI Evaluation Should Measure Verification Cost, Not Correctness Alone** | 标签：AI评估、验证成本、可靠性、生成模型
+1. **Embedding Rotation Invariance for Provable Multi-Oriented Scene Text Recognition** | 标签：场景文本识别、旋转不变性、等变卷积、交叉注意力、端到端网络
+2. **Multimodal Model Diffing for Feature Discovery and Control** | 标签：多模态大模型、稀疏自编码器、特征发现、模型差异分析、OCR
+3. **FormStruct-Bench:A Hierarchical and Diagnostic Benchmark for Table-Form Document Structure Recognition** | 标签：表格结构识别、基准测试、文档解析、层次结构、诊断评估
+4. **PragMatch: Separating Pragmatic Incongruity from Cross-Modal Mismatch in Large Vision-Language Models** | 标签：多模态理解、讽刺检测、快捷学习、基准测试、OCR线索
+5. **RLMOpt: Adaptive Prompt Optimization via Recursive Language Models** | 标签：提示优化、递归语言模型、信息抽取、自动化、语言模型代理
+6. **MMArch: Benchmarking Multimodal Reasoning Grounded in Architectural Evidence** | 标签：多模态推理、建筑图纸理解、基准评估、工程文档、视觉-语言模型
+7. **InSight-doc: Agentic Visual Perception for Long-Document Understanding** | 标签：长文档理解、智能体视觉感知、分辨率自适应、SFT+RL、文档VQA、推理效率
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 构建受控或合成基准以分离捷径线索与真实推理，如PragMatch、TIDE。
-- 利用对比分析或差异挖掘识别因果特征，如MMDiff。
-- 采用多任务学习或自蒸馏迁移策略，如TdSciNER、CAPS。
-- 强调评估的可靠性与部署相关性，引入验证成本等新维度。
+- 多个研究提出基于智能体或自动搜索的框架（如RLMOpt、InSight-doc），用于动态优化推理过程以减少成本并改进性能。
+- 新基准（如FormStruct-Bench、MMArch）强调诊断性评估，细分到组件级或特定领域，以揭示现有模型的系统性失败。
+- 理论保证与可解释性技术（如旋转等变卷积、稀疏自编码器）被引入，以提升模型的可控性与鲁棒性。
+- 跨模态和文档结构推理（如表格结构、工程图纸）成为共同关注点，推动多模态模型在专业领域的应用。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 开发多模态模型特征级控制方法，用于偏置移除和任务性能提升，如MMDiff中特征操纵。
-- 扩展文档转数据库基准到更多模式和关系类型，研究端到端构建可查询数据库的方法。
-- 设计减少LVLM捷径学习的训练策略，如对抗训练，并探索OCR线索的因果影响。
-- 研究跨模态自蒸馏机制，结合强化学习优化视觉历史压缩下的代理策略。
-- 改进时间敏感文档的版本解析模型，利用版本链接信息增强检索与推理结合。
-- 构建跨图证据整合能力，提升MLLM在专业领域的多模态推理性能。
-- 优化类型过滤与示例选择策略，提高LLM在低资源场景下的NER准确性。
-- 将验证成本作为标准评估指标，发展自动估计方法以便集成到模型选择中。
+- 开发能够处理弯曲文本或复杂版面且保持旋转不变性的模型，并通过无监督或自监督方式增强泛化。
+- 将多模态稀疏自编码器与特征控制用于文档解析任务，以实现可控的版面理解与错误纠正。
+- 构建更全面的表格结构识别基准，纳入更多语言和文档类型，并定义细化到单元格级关系评估。
+- 研究减少视觉语言模型对表面线索（如OCR文本、风格）的依赖，提升深层语用和上下文推理。
+- 探索在长文档理解中利用强化学习训练智能体，以自适应选择放大区域，同时融合跨页上下文。
+- 将提示优化技术（如RLMOpt）应用于文档信息抽取，实现自动化的高精度抽取流程。
+- 开发专用于建筑图纸等专业文档的多模态推理模型，结合领域知识图谱提升跨图证据组合能力。
 
 ## 六、工程落地启发
 
-- 利用MMDiff工具审计和调试多模态OCR模型，选择性移除特征以阻断特定行为。
-- 采用Doc2DB-Bench框架评估文档处理系统，优先关注跨表关系一致性。
-- 通过PragMatch检测LVLM的捷径学习，部署时警惕表面线索导致的误判。
-- 应用CAPS框架压缩视觉历史上下文，可显著降低成本同时保持代理能力。
-- 开发版本感知文档QA系统，需先解析查询日期对应的正确文档版本。
-- 针对工程文档处理，需提升模型跨图组合证据能力，而非仅定位信息。
-- 在LLM-NER系统中，先过滤实体类型可提升准确性，尤其是类型较多场景。
-- 评估AI系统时，考虑验证成本，优先选择高效可验证的模型。
+- RISTER可应用于文档数字化和自动驾驶标志识别，减少对方向校正依赖。
+- MMDiff提供特征级工具，可用于错误分析、安全控制以及性能提升。
+- FormStruct-Bench作为标准化测试平台，帮助识别表格识别系统的结构性弱点。
+- PragMatch的评估方法可用于鲁棒性测试，防止模型过度拟合表面线索。
+- RLMOpt可显著提升提示优化效率，适用于临床信息抽取等任务。
+- MMArch为工程图纸理解提供评估基准，指导开发辅助设计审查系统。
+- InSight-doc框架可直接部署于资源受限的OCR平台，降低推理延迟且保持准确率。
 
 ## 七、优先关注论文
 
-- **Multimodal Model Diffing for Feature Discovery and Control**：提出多模态SAE特征级控制方法，可直接应用于OCR任务，具工程价值，后续版本可能优化训练效率。
-- **Beyond Tables: Doc2DB-Bench for Relationally Faithful Document-to-Database Construction**：首个文档转数据库基准，为系统评估提供标准，后续可能扩展覆盖更多关系和领域。
-- **PragMatch: Separating Pragmatic Incongruity from Cross-Modal Mismatch in Large Vision-Language Models**：揭示LVLM捷径学习现象，对OCR集成模型有警示作用，相关方法可能用于鲁棒性提升。
-- **Reading is not Reasoning: Bridging the Agentic Policy Gap in Vision-Text Compression**：自蒸馏框架可显著降低上下文成本，适合大规模代理应用，工程价值高。
-- **Time Present and Time Past: Benchmarking Large Language Models on Temporally Evolving Document Understanding**：时间版本解析是文档处理新方向，对法律、金融领域关键，模型表现亟待提升。
-- **AI Evaluation Should Measure Verification Cost, Not Correctness Alone**：评估新视角影响模型选型标准，可能改变行业评估实践，跟踪具体度量方法发展。
+- **MMArch: Benchmarking Multimodal Reasoning Grounded in Architectural Evidence**：基准显示模型在专业领域推理显著落后于人类专家，关注后续改进可能推动领域专用模型发展。
+- **FormStruct-Bench:A Hierarchical and Diagnostic Benchmark for Table-Form Document Structure Recognition**：强调结构识别底层缺陷，可能促使新架构出现，对文档解析技术影响深远。
+- **InSight-doc: Agentic Visual Perception for Long-Document Understanding**：主动感知框架显著降低推理成本，可能成为长文档处理的标准范式，值得跟踪其代码开源和后续优化。
 
 ## 八、论文逐篇解析
 
-### 1. Multimodal Model Diffing for Feature Discovery and Control
+### 1. Embedding Rotation Invariance for Provable Multi-Oriented Scene Text Recognition
+
+- arXiv: [2608.10684v1](https://arxiv.org/abs/2608.10684v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.10684v1)
+- 作者: Zhibin Ma, Pengwen Dai, Yi Liu, Xugong Qin, Chenyun Yu, Xiaochun Cao
+- 发布时间: 2026-08-11T09:06:46Z
+- 分类: cs.CV
+- 相关性评分: 12
+- 主题标签: 场景文本识别、旋转不变性、等变卷积、交叉注意力、端到端网络
+
+**中文摘要**
+
+> 提出旋转不变场景文本识别网络（RISTER），通过理论保证的旋转不变性解决多方向文本识别问题。编码器采用旋转等变卷积与自注意力结合，解码器利用交叉注意力的旋转不变性，实现端到端训练，无需额外推理计算或数据驱动的方向校正，在标准和多方向基准上达到最先进性能。
+
+**核心创新概述**
+
+> 首次将旋转不变性以理论保证的方式嵌入场景文本识别框架，避免了现有方法依赖方向估计的误差累积和计算开销。
+
+**创新点拆解**
+
+- 提出旋转等变的局部-全局特征提取网络，融合等变卷积与自注意力
+- 证明交叉注意力的旋转不变性，并用于构建旋转不变解码器
+- 构建端到端全旋转不变网络，无额外推理计算
+- 提供理论保证的旋转不变性，不依赖数据驱动校正
+
+**当前局限**
+
+> 实验主要针对多方向文本，未充分验证在极端变形或低质量图像上的表现；理论证明基于特定假设，可能不完全适用于复杂场景。
+
+**后续可改进方向**
+
+- 扩展到更复杂的文本形状（如弯曲文本）的旋转不变性建模
+- 探索与其他数据增强或自监督方法结合，进一步提升泛化能力
+- 降低模型复杂度，推动在移动端或实时场景部署
+
+**工程启发**
+
+> 为多方向文本识别提供高效且鲁棒的解决方案，可直接应用于文档数字化、自动驾驶标志识别、增强现实等场景，减少对方向校正流程的依赖。
+
+**为什么值得关注**
+
+> 针对场景文本识别（OCR子领域）的旋转鲁棒性问题，提出了新方法，与OCR技术发展直接相关。
+
+**原始摘要**
+
+Multi-oriented text is ubiquitous in real-world scenes and remains a major challenge for scene text
+recognition (STR). Existing rotation-aware methods explicitly estimate text orientation. However,
+due to the lack of theoretical guarantees, they are prone to error accumulation, increased
+computational cost, and strong reliance on data. In this work, we incorporate rotation invariance
+into the STR framework to address these limitations. Specifically, we adopt an encoder-decoder
+architecture, embedding rotation equivariance in the encoder and rotation invariance in the decoder
+to construct a fully rotation-invariant network. On the decoder side, we first identify and prove
+the rotation-invariant property of the cross-attention mechanism and use it to formulate a rotation-
+invariant text decoder that maps visual features to output text in a rotation-invariant manner. On
+the encoder side, we propose a rotation-equivariant local-global extraction network that integrates
+deep equivariant convolutions with self-attention, enabling rotation-equivariant feature extraction
+while modeling inter-character dependencies and preserving fine-grained visual details. By
+integrating the encoder and decoder, we obtain an end-to-end Rotation-Invariant Scene Text
+Recognition network (RISTER). RISTER provides rotation invariance with theoretical guarantees,
+enhancing robustness on multi-oriented samples without introducing additional inference computation
+or relying on data-driven orientation correction. Experiments show that RISTER achieves state-of-
+the-art performance on both standard and multi-oriented benchmarks, surpassing the second-best model
+by 4.0 percent in accuracy on the general multi-oriented dataset.
+
+---
+
+### 2. Multimodal Model Diffing for Feature Discovery and Control
 
 - arXiv: [2608.09928v1](https://arxiv.org/abs/2608.09928v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2608.09928v1)
@@ -74,41 +134,40 @@
 - 发布时间: 2026-08-10T17:59:30Z
 - 分类: cs.CV, cs.AI, cs.CL, cs.LG
 - 相关性评分: 12
-- 主题标签: 多模态、可解释性、稀疏自编码器、OCR
+- 主题标签: 多模态大模型、稀疏自编码器、特征发现、模型差异分析、OCR
 
 **中文摘要**
 
-> 多模态大语言模型（MLLMs）展现出强大的视觉理解能力，但其内部特征难以审计和控制。现有基于稀疏自编码器（SAE）的方法无法有效隔离多模态训练所改变的特征，也难以用于目标控制。为此，我们提出MMDiff，一个多模态模型差异分析框架，通过训练多模态SAE并将其转化为特征级接口，实现特征发现与控制。MMDiff支持三种用途：特征隔离（对比基础LM SAE与多模态适应后的SAE）、任务特定特征检测（基于逐token对比激活分析）和特征级控制（因果移除或操纵特征方向）。我们在LLaVA-MORE、PaliGemma 2和InternVL3.5三个MLLM家族上训练多模态SAE，并在视觉空间理解、多模态安全性和OCR任务上评估。实验表明，MMDiff发现的稀疏因果特征在移除后能选择性降低目标行为性能（空间任务平均12%，OCR平均17%），并将多模态安全攻击成功率降低24%，同时不影响VQA性能。特征操纵在空间和OCR任务上较标准单层基线平均提升+3.6%和+1.8%。
+> 提出MMDiff框架，通过多模态稀疏自编码器（SAE）识别和控制多模态大语言模型（MLLM）中的特征。通过对比基础语言模型和多模态模型的SAE，隔离多模态训练改变的特征；利用逐token对比激发分析检测任务特定特征；通过因果干预实现特征级控制。实验表明可有效降低多模态安全攻击成功率，提升空间理解和OCR性能。
 
 **核心创新概述**
 
-> 提出多模态模型差异分析框架，利用SAE对比发现和操纵MLLM内部特征，为特征级解释和控制提供了新方法。
+> 首次将模型差异分析（model diffing）应用于多模态特征发现与控制，提供了特征级别的接口。
 
 **创新点拆解**
 
-- 设计多模态SAE训练方法，支持跨模态特征差异分析。
-- 提出对比激活分析方法，用于识别任务特定因果特征。
-- 实现特征级控制，通过移除或操纵特征方向影响模型行为。
-- 在多个MLLM家族上验证框架有效性，覆盖多种任务。
+- 提出多模态SAE训练框架，支持特征隔离
+- 引入逐token对比激发分析，实现任务特定特征检测
+- 实现特征级控制，支持删除或导向特征方向
+- 在三个MLLM家族上训练SAE并验证有效性
 
 **当前局限**
 
-> 摘要未提及具体局限性，可能包括计算开销、SAE训练复杂度、特征解释性受限等。
+> 依赖预训练SAE质量；特征控制可能对其他任务产生未知影响；实验规模有限（三个模型家族）。
 
 **后续可改进方向**
 
-- 优化SAE训练效率，降低计算成本。
-- 探索更细粒度的特征控制方法，提升操纵精度。
-- 拓展到更多任务和模型类型，验证泛化性。
-- 结合自动评估机制，提升特征发现的自动化程度。
+- 扩展到更多MLLM架构和任务类型
+- 探索更优的特征分解方法，提高稀疏性和可解释性
+- 研究特征控制的副作用，实现更精确的干预
 
 **工程启发**
 
-> 提供可解释性工具，帮助审计和调试多模态模型，提升模型安全性和可靠性，对实际部署有指导意义。
+> 为MLLM的可解释性和安全性提供实用工具，可用于模型审计、错误分析和行为控制，有助于开发更可靠的多模态系统。
 
 **为什么值得关注**
 
-> 与OCR相关，因为其在OCR任务上评估了特征发现与控制的可行性，且多模态特征分析可潜在应用于文档理解。
+> 涉及OCR作为评估任务之一，且提出模型差异分析方法，可应用于OCR相关特征分析，与文档智能理解相关。
 
 **原始摘要**
 
@@ -134,72 +193,71 @@ behavior toward safer and more capable generations.
 
 ---
 
-### 2. Beyond Tables: Doc2DB-Bench for Relationally Faithful Document-to-Database Construction
+### 3. FormStruct-Bench:A Hierarchical and Diagnostic Benchmark for Table-Form Document Structure Recognition
 
-- arXiv: [2608.08459v1](https://arxiv.org/abs/2608.08459v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2608.08459v1)
-- 作者: Zhuowen Liang, Zhengxuan Zhang, Jiayang Wang, Jiazhuo Chen, Nan Tang
-- 发布时间: 2026-08-09T03:58:39Z
-- 分类: cs.CL, cs.AI, cs.DB
+- arXiv: [2608.10396v1](https://arxiv.org/abs/2608.10396v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.10396v1)
+- 作者: Lujie Ban, Jiangtao Zhu, Yuanheng Yu, Jiasheng Shi, Chenhao Ma
+- 发布时间: 2026-08-11T02:44:34Z
+- 分类: cs.CV
 - 相关性评分: 10
-- 主题标签: 文档理解、数据库构建、基准测试、关系抽取
+- 主题标签: 表格结构识别、基准测试、文档解析、层次结构、诊断评估
 
 **中文摘要**
 
-> 实际AI系统越来越需要将长文档转换为可查询的关系型数据库，而非孤立表格。现有文档到表格基准无法满足此需求，因为扁平化证据会导致实体重复、多对多关系模糊等问题。我们提出Doc2DB-Bench，一个文档到数据库构建基准，包含203个长文档实例，覆盖42个模式和七个领域组，含117个实体表、132个关系表、7,341行和41,935个单元格。通过可控的数据库到文档合成流水线和真实性验证，确保生成文档与真实世界参考难以区分。该基准为评估基于LLM的数据系统提供了测试平台，强调关系忠实性。
+> 提出FormStruct-Bench基准，用于评估表格表单文档结构识别。该基准提供文档级及更细粒度的组件级评估，通过可审计的地面真值构建流程和诊断指标，揭示现有系统在读取内容与恢复层次结构之间的显著差距。最佳文档级得分83.85%，但细粒度结构得分低于18%。
 
 **核心创新概述**
 
-> 首个聚焦文档到关系型数据库构建的基准，超越传统表格抽取，强调跨表关系和一致性。
+> 首次提供表格表单结构识别的分层诊断基准，将聚合性能追溯到具体结构失败模式。
 
 **创新点拆解**
 
-- 定义文档到数据库构建任务，区别于文档到表格。
-- 构建大规模基准，覆盖多领域多模式。
-- 设计可控合成流水线，确保文档真实性。
-- 提供分类体系，区分表内抽取和表间推理。
+- 构建包含70个模板和7000个实例的基准，测试集模板不重叠且有人工审查
+- 提出五主指标和三个结构特定诊断，覆盖页面、模式和组件层级
+- 提供难度、结构约束和视觉退化切片分析
+- 评估14个API和本地系统及两个SFT变体
 
 **当前局限**
 
-> 摘要未提及具体局限，可能包括合成文档与真实世界差异、评估指标不完善等。
+> 基准限于表格表单文档，未涵盖其他文档类型；最佳系统得分低，表明任务难度大，但可能受限于评估指标不完善。
 
 **后续可改进方向**
 
-- 扩展基准覆盖更多语言和文档类型。
-- 开发更细粒度的评估指标，评估数据库完整性。
-- 研究从文档中恢复复杂关系（如多对多）的方法。
-- 探索端到端模型，直接生成可查询数据库。
+- 扩展基准到更多文档类型和语言
+- 开发能捕捉层级结构的专用模型架构
+- 改进结构识别评估指标，细化到单元格和关系级别
 
 **工程启发**
 
-> 为文档理解系统提供评估标准，推动可靠数据系统开发，对金融、医疗等领域的数据管理有实际价值。
+> 为表格识别系统提供标准化测试平台，帮助识别结构性弱点，指导算法优化，对文档数字化和自动化处理有重要价值。
 
 **为什么值得关注**
 
-> 与OCR紧密相关，因为文档到数据库构建依赖OCR准确提取文本和布局信息。
+> 直接针对表格文档结构识别（OCR领域）提出基准评估，为衡量和提升OCR结构化输出能力提供工具。
 
 **原始摘要**
 
-Practical AI systems increasingly need to turn long, heterogeneous documents into queryable
-relational databases, not isolated spreadsheets. In domains such as finance, healthcare, education,
-transportation, and enterprise operations, downstream workflows rely on normalized schemas, entity
-identities, keys, cross-table relationships, and integrity constraints for analytics, compliance,
-auditing, and SQL-backed decision making. Existing Document-to-Table benchmarks are insufficient for
-this setting: flattening evidence into single tables can duplicate entities, obscure many-to-many
-relationships, create sparse records, and avoid testing whether extracted facts form a valid
-database instance. This creates an urgent need to evaluate document understanding as database
-construction rather than field extraction. We introduce Doc2DB-Bench, a benchmark for Document-to-
-Database construction, containing 203 long-document instances across 42 schemas and seven domain
-groups, with 117 entity tables, 132 relationship tables, 7,341 rows, and 41,935 cells. Built through
-a controllable DB-to-Doc synthesis pipeline and organized by a taxonomy of intra-table extraction
-and inter-table reasoning, the generated documents undergo authenticity verification, proving
-indistinguishable from real-world references. Doc2DB-Bench thus provides a testbed for reliable,
-auditable, and relationally faithful LLM-based data systems. The benchmark is publicly available at
-https://github.com/SetonLiang/Doc2DB-Bench.
+Transforming table-form documents into machine-processable records requires recovering not only
+their visible content but also the multilevel structure that organizes it. However, existing
+benchmarks evaluate either holistic document outputs or conventional table grids, and their
+aggregate scores provide little insight into where structural failures occur. We introduce
+FormStruct-Bench, a hierarchical and diagnostic benchmark that evaluates table-form document
+structure recognition at both the document level and progressively finer component levels, allowing
+aggregate performance to be traced back to specific structural failure modes. To construct auditable
+ground truth at scale, we annotate 70 reusable templates and expand them into 7,000 verified
+instances through a provenance-preserving Director--Artist--Verifier pipeline; all 1,100 instances
+in the template-disjoint test set additionally receive human review. Our evaluation protocol uses
+five primary metrics and three structure-specific diagnostics across page, schema, and component
+levels, together with slices over difficulty, structural constraints, and visual degradation. Across
+14 API-hosted and locally deployable systems plus two SFT variants, the best document-level score
+reaches 83.85%, whereas the best reported fine-grained structural score remains below 18%. These
+results reveal a pronounced gap between reading document content and recovering the hierarchy and
+regional organization required for reliable table-form understanding.
 
 ---
 
-### 3. PragMatch: Separating Pragmatic Incongruity from Cross-Modal Mismatch in Large Vision-Language Models
+### 4. PragMatch: Separating Pragmatic Incongruity from Cross-Modal Mismatch in Large Vision-Language Models
 
 - arXiv: [2608.09772v1](https://arxiv.org/abs/2608.09772v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2608.09772v1)
@@ -207,41 +265,40 @@ https://github.com/SetonLiang/Doc2DB-Bench.
 - 发布时间: 2026-08-10T16:00:04Z
 - 分类: cs.CL
 - 相关性评分: 9
-- 主题标签: 多模态、讽刺检测、捷径学习、OCR
+- 主题标签: 多模态理解、讽刺检测、快捷学习、基准测试、OCR线索
 
 **中文摘要**
 
-> 大型视觉语言模型（LVLMs）在多模态基准上表现强劲，但不清楚它们是否真正推理图像与文本关系，还是依赖表面相关性的捷径学习。多模态讽刺检测中，成功预测需要识别语用不一致，而非简单的图像文本不匹配。我们提出PragMatch，一个受控基准，包含3,000个图像文本对，源自MMSD2.0，涵盖原始讽刺样本和构造的字面及难负样本。通过系统性掩码识别关键捷径线索，并通过定向注入实验评估其影响。结果表明，LVLM预测对词汇、OCR派生和风格线索敏感，注入表面信号显著改变预测，而底层关系不变。这揭示当前LVLM的局限，并提供多模态语用推理测试平台。
+> 提出PragMatch基准，用于检验大视觉语言模型（LVLMs）是否真正理解多模态讽刺（图像-文本关系），而非依赖表面相关性捷径。包含3000个图像-文本对，通过系统性掩蔽识别捷径线索，并设计注入实验。结果发现LVLM预测对词汇、OCR和风格线索敏感，表面信号改变可显著影响预测，表明当前LVLMs在多模态语用推理方面存在局限。
 
 **核心创新概述**
 
-> 首次区分语用不一致与跨模态不匹配，构建受控基准评估LVLM的捷径学习现象。
+> 首次区分语用不一致与跨模态不匹配，并提供受控基准评估LVLMs的讽刺检测能力。
 
 **创新点拆解**
 
-- 设计包含硬负样本的受控基准，分离语用不一致与简单不匹配。
-- 通过系统性掩码识别捷径线索。
-- 采用定向注入实验量化表面线索影响。
-- 发现OCR线索在预测中的作用。
+- 构建包含原始讽刺样本和构造的字面及硬负样本的基准
+- 通过系统性掩蔽识别快捷线索
+- 通过注入实验评估表面线索对预测的影响
+- 提供多模态语用推理的测试平台
 
 **当前局限**
 
-> 基准仅基于单一数据集，可能缺乏多样性；评估主要针对讽刺检测，结论可能不适用于其他任务。
+> 基准基于特定数据集（MMSD2.0），可能不全面；评估限于讽刺检测，未覆盖其他语用现象。
 
 **后续可改进方向**
 
-- 扩展到更多语用现象（如隐喻、反讽）和任务。
-- 开发训练方法减少捷径学习，如对抗训练。
-- 引入更真实的文档图像，评估OCR影响。
-- 研究模型内部机制，理解语用推理能力。
+- 扩展基准到更多语用任务如隐喻、反讽等
+- 开发减少对表面线索依赖的训练方法
+- 探索模型内部机制，提升深层语义理解
 
 **工程启发**
 
-> 提供评估工具，帮助检测LVLM中的捷径学习，改进模型鲁棒性，对多模态内容理解有实际意义。
+> 为多模态模型的鲁棒性评估提供方法，有助于识别模型在真实场景中的漏洞，对改进视觉-语言模型设计有指导意义。
 
 **为什么值得关注**
 
-> 涉及OCR线索对模型预测的影响，与文档理解中文本提取的可靠性相关。
+> OCR线索被识别为快捷线索之一，与OCR技术在多模态理解中可能带来的负面影响相关，值得关注。
 
 **原始摘要**
 
@@ -261,134 +318,70 @@ surface-level image-text alignment.
 
 ---
 
-### 4. Reading is not Reasoning: Bridging the Agentic Policy Gap in Vision-Text Compression
+### 5. RLMOpt: Adaptive Prompt Optimization via Recursive Language Models
 
-- arXiv: [2608.08960v1](https://arxiv.org/abs/2608.08960v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2608.08960v1)
-- 作者: Cheng Fan, Junyi Zhou, Tingzhang Luo, RongJian Xu, Qiyanhui Lu, Mingjian Zhu, Hanting Chen, Jianyuan Guo
-- 发布时间: 2026-08-09T23:38:12Z
+- arXiv: [2608.10471v1](https://arxiv.org/abs/2608.10471v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.10471v1)
+- 作者: Subhash Bangalore Satheesha, Nirvik Pande, Deepthi Duddempudi, Bharath Dandala
+- 发布时间: 2026-08-11T04:35:05Z
 - 分类: cs.AI
-- 相关性评分: 9
-- 主题标签: 多模态LLM、自蒸馏、上下文压缩、OCR
+- 相关性评分: 6
+- 主题标签: 提示优化、递归语言模型、信息抽取、自动化、语言模型代理
 
 **中文摘要**
 
-> 多步语言模型代理不断处理增长的历史记录，导致大量上下文成本。视觉-文本压缩通过将历史渲染为图像来降低成本，但模态转换造成显著能力差距。受控评估显示，该差距不能仅由OCR质量解释，视觉历史代理在动作选择、查询制定等表现出系统性漂移，反映代理策略差距。我们引入CAPS，一个两阶段跨模态代理策略自蒸馏框架，使用同一模型的较强文本历史策略监督其视觉历史对应版本。离线轨迹自蒸馏成功迁移文本策略行为到视觉历史输入，在线策略自蒸馏在强化学习期间对视觉历史策略访问的状态提供密集监督。在SearchQA上，CAPS在3B和7B主干上分别提升AgentOCR 5.0%和3.4%；在完整历史ALFWorld上，对应增益为15.6%和14.5%。平均内存上下文成本降低高达63.3%，峰值成本降低83.4%。这表明显式跨模态策略自蒸馏能保留视觉-文本压缩下的代理能力。
+> 提出RLMOpt，一种使用递归语言模型驱动搜索策略的提示优化器。RLM代理在基于工具的环境中检查任务信息、分析失败、生成候选、分配评估预算并决定停止。在四个基准上评估，RLMOpt在配对比较中取得更好的保持分数，且更高效，提示尺寸更小。
 
 **核心创新概述**
 
-> 首次识别视觉历史代理中的“代理策略差距”，并提出跨模态策略自蒸馏框架加以缓解。
+> 首次将搜索策略本身由语言模型驱动，而非预定义优化流程，提高了优化器的适应性和效率。
 
 **创新点拆解**
 
-- 提出两阶段自蒸馏框架，离线结合在线，高效迁移策略。
-- 通过强化学习提供密集监督，利用文本历史策略指导视觉历史。
-- 在多种任务上显著提升性能，同时大幅压缩上下文成本。
+- 使用递归语言模型作为搜索策略代理
+- 构建工具化环境，支持迭代优化
+- 实现Pareto选择和回归约束
+- 在四个多样化基准上验证有效性
 
 **当前局限**
 
-> 摘要未提及具体局限，可能包括对特定任务依赖、自蒸馏计算开销等。
+> 实验种子数有限（单种子比较），可能影响统计可靠性；未深入分析代理的决策过程。
 
 **后续可改进方向**
 
-- 扩展到更多代理任务和模型架构。
-- 探索更高效的自蒸馏方法，减少训练开销。
-- 研究压缩方法对OCR准确性的影响。
-- 评估长期记忆和复杂推理场景下的效果。
+- 在更多任务和种子数上进行实验
+- 增强代理的可解释性和控制性
+- 探索多代理协作或人机协同优化
 
 **工程启发**
 
-> 为视觉历史压缩提供实用解决方案，降低大规模代理应用的成本，提高效率。
+> 提供自动化提示优化工具，可应用于文档信息抽取（如临床信息提取）等场景，提升文本处理效率。
 
 **为什么值得关注**
 
-> 直接涉及OCR质量与代理性能的关系，压缩历史图像中的OCR是关键环节。
+> 虽然不直接涉及OCR，但提示优化对依赖语言模型的文档理解任务有间接帮助，可作为通用工具。
 
 **原始摘要**
 
-Multi-step language-model agents repeatedly process growing interaction histories, leading to
-substantial context costs. Vision--text compression reduces these costs by rendering history as
-images, but the resulting modality shift creates a marked capability gap. Through controlled
-evaluations of history recovery, matched-state decisions, and complete trajectories, we show that
-this gap cannot be explained by OCR quality alone. Visual-history agents exhibit systematic drift in
-action selection, query formulation, stopping, and evidence use, revealing an agentic policy gap. We
-introduce \textbf{CAPS}, a two-stage \textbf{C}ross-modal \textbf{A}gentic \textbf{P}olicy
-\textbf{S}elf-distillation framework that uses the same model's stronger text-history policy to
-supervise its visual-history counterpart. Offline trajectory self-distillation transfers successful
-text-policy behavior to visual-history inputs, while online policy self-distillation provides dense
-supervision on states visited by the visual-history policy during reinforcement learning. On
-SearchQA, CAPS improves over AgentOCR by 5.0\% and 3.4\% with 3B and 7B backbones, respectively. On
-full-history ALFWorld, the corresponding gains are 15.6\% and 14.5\%. Across settings, CAPS reduces
-average memory-context cost by up to 63.3\% and peak cost by up to 83.4\% relative to matched text-
-history policies. These results show that explicit cross-modal policy self-distillation can preserve
-agent capability under vision--text compression. Our code will be made publicly available in a
-future release.
-
----
-
-### 5. Time Present and Time Past: Benchmarking Large Language Models on Temporally Evolving Document Understanding
-
-- arXiv: [2608.08512v1](https://arxiv.org/abs/2608.08512v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2608.08512v1)
-- 作者: Mahbub E Sobhani, Md. Faiyaz Abdullah Sayeedi, Fahmid Hasan Chowdhury, Md Adnan Arefeen, Farig Sadeque, Md. Faizul Bari, Swakkhar Shatabda
-- 发布时间: 2026-08-09T06:17:41Z
-- 分类: cs.AI
-- 相关性评分: 8
-- 主题标签: 时间推理、文档理解、版本解析、OCR
-
-**中文摘要**
-
-> 演进文档（如法律、税法和软件文档）会随时间修订、替换甚至恢复，因此不同日期的正确答案不同。与百科知识不同，修订本身是官方文本，说明其替换内容和生效日期，早期版本在其有效期内仍为正确。因此核心挑战是版本解析：识别查询日期有效的版本。现有时间QA数据集仅将时间视为注释，版本解析未受测试。我们提出TIDE，一个专家验证的基准，包含3050个QA对，涉及孟加拉国政府1969年至2025年发布的644个官方海关文书，覆盖八种任务类型，文档深度混合编码，布局异构，使用两种日历。我们还评估了九个最新LLM，在参数、黄金上下文和检索访问下统一协议，由三法官LLM委员会评分，并设硬日期门区分正确含义和正确时间。最佳宏平均准确率仅68.5%。从隐式日期解析版本准确率59.7%，检测提供版本不适用查询仅26.7%。模型更可能找到正确版本而非拒绝错误版本，且倾向于遵循自信的参数答案而非提供的权威文本。
-
-**核心创新概述**
-
-> 首个聚焦时间演进文档版本解析的基准，强调版本身份和有效日期，而非简单事实更新。
-
-**创新点拆解**
-
-- 构建大规模时间敏感基准，覆盖多种任务类型。
-- 提出硬日期门评估，区分答案内容和时间正确性。
-- 使用混合语言真实文档，增加挑战性。
-- 系统评估多个LLM在不同访问模式下的表现。
-
-**当前局限**
-
-> 摘要未提及具体局限，可能包括基准限于特定领域和语言，文档版式提取难度等。
-
-**后续可改进方向**
-
-- 扩展到更多法律和法规文档，以及多语言。
-- 改进模型对时间推理和版本解析的能力。
-- 开发训练方法，利用文档中的版本链接信息。
-- 探索检索模型与推理模型的结合。
-
-**工程启发**
-
-> 为法律、合规等领域的文档检索和问答提供评估框架，促进版本化文档处理系统开发。
-
-**为什么值得关注**
-
-> 时间敏感文档理解中，OCR提取的文本必须结合版本信息，OCR质量直接影响版本识别。
-
-**原始摘要**
-
-Evolving documents, such as laws, tax codes, and software documentation, are amended, replaced, and
-sometimes reverted over time, so a question has different correct answers at different dates. In
-contrast to encyclopedic knowledge, where an old fact is simply overwritten, an amendment is itself
-an official text that states what it replaces and when it takes effect, and the earlier version
-stays correct for its validity period. The central challenge is therefore version resolution, that
-is, identifying the version in force on the queried date. Existing temporal QA datasets treat time
-only as an annotation, so version resolution stays untested. We present TIDE, an expert-verified
-benchmark of 3,050 QA pairs over 644 official customs instruments issued between 1969 and 2025 by
-the Government of Bangladesh, covering eight task types over deeply code-mixed documents that are
-heterogeneous in layout and dated in two calendars. In addition, we evaluate nine recent LLMs under
-a single protocol across parametric, gold-context, and retrieval access, scored by a three-judge LLM
-council with a hard date gate separating correct meaning from correct time. The best macro-averaged
-accuracy is only 68.5%. Resolving a version from an implicit date reaches 59.7%, and detecting that
-the supplied version does not govern the query reaches only 26.7%. Models are more likely to find
-correct versions than to reject incorrect ones, and they tend to follow a confident parametric
-answer over the supplied authoritative text. All code and data are available at
-https://github.com/icsetepa44/TIDE
+Prompt optimizers automate the search for prompts that improve language-model performance, but
+existing methods rely on a predefined optimization procedure: the algorithm determines which
+candidates to explore and how the search progresses, while the language model generates or refines
+prompt proposals. We introduce RLMOpt, a prompt optimizer that makes the search policy itself
+language-model-driven through a recursive language model (RLM). The RLM agent operates over a tool-
+based environment, inspecting task information, analyzing failures, generating candidates,
+allocating evaluation budget, and deciding when to stop. A deterministic harness complements the
+agent by enforcing objective scoring, Pareto-based selection, and regression constraints. We
+evaluate RLMOpt across four benchmarks spanning structured clinical information extraction (Chia),
+multi-hop question answering (HotpotQA), verifiable instruction following (IFBench-2025), and multi-
+turn tool-calling agents (BFCL). In a matched comparison at a single seed, RLMOpt obtains the best
+held-out score on all four benchmarks and leads the four-task mean (0.610 against 0.589 for GEPA).
+Repeating each benchmark across seeds yields 11 matched benchmark-seed comparisons, in which RLMOpt
+outperforms GEPA in 9 cases. Across all 11 runs, it never produced a prompt that underperformed its
+seed, whereas GEPA fell below its starting point twice. It is also more efficient, achieving these
+results with fewer search rollouts while producing prompts that are 27-79% the size of those
+produced by GEPA. Our results further show that optimization gains are determined primarily by the
+headroom available in the seed prompt, rather than by the search budget. Efficient optimization
+therefore depends on reaching the available headroom reliably and with minimal search
 
 ---
 
@@ -400,41 +393,40 @@ https://github.com/icsetepa44/TIDE
 - 发布时间: 2026-08-10T08:37:14Z
 - 分类: cs.AI
 - 相关性评分: 6
-- 主题标签: 多模态推理、工程文档、基准测试、OCR
+- 主题标签: 多模态推理、建筑图纸理解、基准评估、工程文档、视觉-语言模型
 
 **中文摘要**
 
-> 多模态大语言模型（MLLMs）在工程图像上表现强劲，但现有基准主要测试图纸识别、信息提取或合规检查，未探究模型是否结合分布视觉证据与工程原理得出结论。我们提出MMArch，一个建筑和土木工程基准，覆盖十个子领域，完全基于同行评审论文中的图表。其1,212个简答题由解耦的规划-写作流水线生成，并通过自动筛选、盲目对抗审计和专家审查验证，确保回答需感知相关证据、识别主导原则并应用，而非利用文本或单图捷径。评估18个开源和专有MLLMs与领域专家小组对比，发现巨大差距：最强开源模型约30%，最佳专有系统52%，而人类专家达95%，高出40个百分点。错误分析显示，失败集中在应用原则和跨图组合证据，而非定位证据，表明未来研究空间大。
+> 提出MMArch基准，用于评估多模态大语言模型在建筑工程领域的推理能力。基准包含1212个短答案项，基于同行评审论文中的图表构建，通过解耦规划-写作流程和专家审查。评估18个开源和专有模型，最佳开源模型得分约30%，专有系统52%，人类专家95%，表明模型在应用原理和跨图组合证据方面存在显著差距。
 
 **核心创新概述**
 
-> 创建专为工程领域设计的多模态推理基准，强调跨图证据整合和原则应用，测试模型深层推理能力。
+> 首个专门用于建筑和土木工程多模态推理的基准，要求结合分布式视觉证据和工程原理进行推理。
 
 **创新点拆解**
 
-- 构建多子领域基准，全部基于论文图表。
-- 采用解耦流水线生成高质题目，并多重验证。
-- 评估多种MLLMs，与人类专家对比，量化差距。
-- 细致错误分析，定位失败环节。
+- 构建覆盖十个子领域、基于论文图表的基准
+- 采用解耦规划-写作流程生成问题和答案
+- 实施多重验证流程，包括自动化筛选和对抗审计
+- 详细错误分析，区分故障模式
 
 **当前局限**
 
-> 基准仅覆盖建筑和土木工程，可能缺乏通用性；题目依赖论文，可能受版权等限制。
+> 基准限于建筑工程领域，可能缺乏泛化性；问题生成依赖论文，可能存在文本线索泄漏。
 
 **后续可改进方向**
 
-- 扩展到其他工程领域或跨学科推理。
-- 改进生成流水线，减少对专家验证的依赖。
-- 开发训练方法，增强跨图证据整合能力。
-- 探索模型对工程图纸中OCR依赖的部分。
+- 扩展到其他专业领域，增强通用性
+- 设计更完善的去偏机制，避免文本捷径
+- 开发结合工程知识图谱的推理模型
 
 **工程启发**
 
-> 为工程领域MLLM应用提供性能评估标准，推动模型在专业文档理解中的应用。
+> 为建筑领域的AI应用提供评估工具，有助于开发能辅助工程设计、审查和质量控制的多模态系统。
 
 **为什么值得关注**
 
-> 基准涉及文档中的图表和文本，OCR对提取图表中的文本和数字至关重要，影响问题回答。
+> 涉及从工程图纸中提取和理解信息，与OCR和文档分析相关，可视为高级文档理解的评估场景。
 
 **原始摘要**
 
@@ -455,129 +447,61 @@ available at https://dcx-swjtu.github.io/MMArch/.
 
 ---
 
-### 7. Enhancing Scientific Named Entity Recognition via Large Language Models: A Type-driven Multi-task Learning Approach
+### 7. InSight-doc: Agentic Visual Perception for Long-Document Understanding
 
-- arXiv: [2608.08636v1](https://arxiv.org/abs/2608.08636v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2608.08636v1)
-- 作者: Tong Bao, Yi Zhao, Heng Zhang, Chengzhi Zhang
-- 发布时间: 2026-08-09T10:59:37Z
-- 分类: cs.CL, cs.AI, cs.DL, cs.IR
-- 相关性评分: 6
-- 主题标签: 科学命名实体识别、大语言模型、多任务学习、提示工程
-
-**中文摘要**
-
-> 针对科学命名实体识别（SciNER）中，当提示中候选实体类型过多时，大型语言模型（LLM）难以准确识别和标注实体的问题，提出了一种类型驱动的多任务学习方法TdSciNER。该方法首先设计实体类型过滤模型，识别句子中最可能出现的实体类型；然后引入辅助的多类实体类型任务，与SciNER进行多任务学习以获取更丰富的上下文表示；最后提出基于句子相似性和实体类型多样性的示例选择策略，以激活LLM的上下文学习能力。在三个数据集上的实验表明，该方法取得了与全监督模型相当的性能，并验证了每个类型驱动组件对性能提升的贡献。
-
-**核心创新概述**
-
-> 针对LLM在提示中实体类型过多时性能下降的问题，提出了类型驱动的解决方案，包括类型过滤、辅助多任务学习和基于类型多样性的示例选择，具有较高的新颖性。
-
-**创新点拆解**
-
-- 提出实体类型过滤模型，动态筛选最可能的实体类型，减少提示中的类型噪声。
-- 在多任务学习框架中引入辅助的实体类型分类任务，增强模型对上下文的理解。
-- 设计基于句子相似性和实体类型多样性的示例选择策略，优化上下文学习效果。
-
-**当前局限**
-
-> 方法在三个数据集上验证，但可能不适用于所有科学领域；依赖LLM的上下文学习能力，对LLM的规模和质量有一定要求。
-
-**后续可改进方向**
-
-- 探索类型过滤模型的自适应阈值或学习策略，以适应不同句子特性。
-- 研究如何将类型驱动方法扩展到更广泛的NER任务和低资源语言。
-- 进一步分析类型多样性对示例选择的影响，开发更高效的采样算法。
-
-**工程启发**
-
-> 为科学文献信息抽取提供了实用的技术方案，可提升LLM在专业领域NER的准确性，降低人工标注成本，具有较好的工程应用前景。
-
-**为什么值得关注**
-
-> 针对LLM在科学实体识别中类型过多时的性能问题，提出有效的优化方法，对文档解析中的实体抽取具有直接参考价值。
-
-**原始摘要**
-
-Scientific named entity recognition (SciNER) plays a crucial role in information extraction and
-knowledge discovery from scientific texts. Recently, large language models (LLMs) have demonstrated
-the capacity to achieve competitive SciNER performance with minimal human effort. Existing research
-highlights the importance of incorporating candidate entity type information for accurate entity
-recognition and classification by LLMs. However, when too many candidate entity types are provided
-in the prompt, LLMs struggle to accurately recognize and label entities in scientific texts, where
-entity types are more complex than in general domains. To address this challenge, we propose
-TdSciNER, a type-driven approach that effectively leverages entity type information to enhance
-SciNER performance. In TdSciNER, we first design an entity type filter model to identify the most
-likely entity types present in a given sentence. Subsequently, we introduce an auxiliary multi-class
-entity typing task within a multi-task learning framework alongside SciNER to obtain richer
-contextual representations. Then, we develop a novel demonstration selection strategy based on
-sentence similarity and entity type diversity to activate the in-context learning capabilities of
-LLMs, thereby improving entity recognition accuracy across diverse scientific domains. Experiments
-on three datasets demonstrate that our method achieves performance comparable to fully supervised
-models. Further analysis validates that each entity type-driven component in TdSciNER contributes to
-the improvement of SciNER performance. This work provides valuable insights for future advancements
-in SciNER and broader information extraction tasks in scientific text mining.
-
----
-
-### 8. AI Evaluation Should Measure Verification Cost, Not Correctness Alone
-
-- arXiv: [2608.08709v1](https://arxiv.org/abs/2608.08709v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2608.08709v1)
-- 作者: Viviana Crescitelli, Generoso Immediato, Fabio Persia, Stefania Costantini
-- 发布时间: 2026-08-09T13:44:26Z
-- 分类: cs.AI, cs.SE
+- arXiv: [2608.10628v1](https://arxiv.org/abs/2608.10628v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.10628v1)
+- 作者: Kaican Li, Weiyan Xie, Lewei Yao, Jiannan Wu, Lanqing Hong, Yongxiang Huang, Nevin L. Zhang
+- 发布时间: 2026-08-11T08:15:16Z
+- 分类: cs.CV, cs.CL, cs.LG
 - 相关性评分: 4
-- 主题标签: AI评估、验证成本、可靠性、生成模型
+- 主题标签: 长文档理解、智能体视觉感知、分辨率自适应、SFT+RL、文档VQA、推理效率
 
 **中文摘要**
 
-> 本文提出AI生成模型的可靠性不应仅以输出正确性来衡量，而应考虑验证成本。定义了验证成本错误（VCEs）：在给定部署预算内，一定比例的验证者无法识别的错误输入-输出对。该定义是操作性的，取决于验证者的识别失败和预算，而非输出本身的属性。文章通过代码生成和多模态文档理解的例子，证明高基准准确率可能掩盖实际中的大量验证工作量，主张评估应明确考虑验证成本，以反映在现实资源约束下错误是否可被检测。
+> 长文档理解通常需要对许多视觉丰富的页面进行推理，这导致推理成本高昂且容易出现上下文腐烂问题。为此，我们提出了InSight-doc，一种智能体视觉感知框架，将视觉分辨率视为一种自适应的推理时间资源。InSight-doc从低分辨率开始，选择性地放大到高分辨率区域以获取更精细的证据，无需依赖任何外部检索器。为了训练这样的智能体，我们构建了一个包含17.9K个高质量SFT示例（带区域级放大轨迹）和19.2K个困难RL示例的主动感知语料库。通过SFT+RL，InSight-doc-8B在文档VQA基准上将基线提升了4.3至16.4个准确率点。在长文档上，它减少了超过40%的幻觉，并将推理延迟降低了41%至68%，同时保持了准确率领先。我们的代码、数据集和模型已在 https://github.com/m-Just/InSight-doc 发布。
 
 **核心创新概述**
 
-> 引入验证成本作为评估AI系统可靠性的新维度，提出了验证成本错误（VCEs）的概念，强调验证成本而非仅仅正确性，具有概念创新性。
+> 提出了将视觉分辨率作为自适应推理时间资源的智能体感知框架，通过主动选择放大区域进行推理，无需外部检索器，在长文档理解中显著降低推理成本和幻觉。
 
 **创新点拆解**
 
-- 定义验证成本错误（VCEs），基于验证者识别失败和预算而非输出属性。
-- 提出将验证成本作为评估的常规维度，与部署预算相关联。
-- 通过代码生成和文档理解任务展示高准确率下可能存在的验证困难。
+- 提出智能体视觉感知框架，动态调节视觉分辨率以平衡推理成本和精度
+- 构建包含区域级放大轨迹的SFT语料库和困难RL示例，训练智能体进行选择性注意
+- 采用SFT+RL训练范式，强化决定放大区域的能力
+- 在推理时无需外部检索器，仅依赖模型自身的感知决策
 
 **当前局限**
 
-> 当前为概念性论证，尚未提供完整的度量标准和量化方法；验证者群体和预算的界定仍需细化。
+> ['当前框架在长文档上的推理延迟降低依赖于硬RL样本，但尚未验证在更广泛文档类型上的泛化性', '放大区域的选择可能受限于初始低分辨率下的全局信息，极端复杂版面可能难以准确判断关键区域', '实验主要基于文档VQA，未充分检验在真实场景中的长期记忆和上下文管理效果']
 
 **后续可改进方向**
 
-- 开发具体的验证成本度量指标，并实验验证其与部署可靠性的关联。
-- 研究如何自动估计验证成本，以便在模型评估中集成。
-- 探索不同验证者群体的代表性，以增强VCE定义的适用性。
+- 探索更精细的分辨率调整策略，如连续分辨率映射而非离散级别
+- 将主动感知与多模态大语言模型（MLLM）的内部注意力机制结合，以监督方式学习放大决策
+- 扩展到视频或交互式文档理解，动态调整感知区域以适应时间维度
+- 引入跨页上下文关联，减少长文档中的幻觉
 
 **工程启发**
 
-> 为AI系统部署提供更全面的评估视角，帮助实践者更准确地评估模型在真实场景中的可靠性，降低因未检测错误导致的风险。
+> 该框架可显著降低长文档理解系统的推理成本和延迟，同时维持高准确率，适合部署在资源受限的OCR和文档智能平台。
 
 **为什么值得关注**
 
-> 为AI评估提供新视角，强调验证成本的重要性，对文档解析等依赖模型输出的工程场景具有启示意义。
+> 该工作直接针对OCR和文档理解中的关键挑战：如何处理长文档的视觉信息冗余和推理效率问题，其主动感知机制为后续研究提供了新思路。
 
 **原始摘要**
 
-The reliability of AI generative models is typically measured by output correctness, yet in practice
-it depends on the effort required to verify those outputs. We argue that current evaluation metrics
-overlook a critical failure mode: Verification-Cost Errors (VCEs), defined as incorrect input-output
-pairs that a declared fraction of the verifier population fails to identify within the verification
-budget available in a given deployment context. Unlike standard notions of "hallucination", VCEs are
-defined operationally, by the failure of correct identification within budget rather than by any
-property of the output itself. Plausibility and authoritative presentation are hypothesised
-contributors to that failure, not defining conditions. To capture this asymmetry, we introduce the
-notion of verification cost relative to a deployment budget as an operational dimension that current
-evaluation does not routinely capture. The quantity is presented as a conceptual instrument rather
-than a finalized metric. Evidence from code generation and multi-modal document understanding shows
-that high benchmark accuracy can mask significant verification effort in practice. We therefore take
-the position that correctness alone is insufficient as a measure of reliability. AI evaluation
-should explicitly account for verification cost, reflecting whether errors can be detected under
-realistic resource constraints.
+Long-document understanding often requires reasoning over many visually rich pages, making inference
+costly and prone to context rot. In this work, we propose InSight-doc, an agentic visual perception
+framework that treats visual resolution as an adaptive reasoning-time resource. InSight-doc starts
+from low resolution and selectively zooms into high-resolution regions for finer evidence, without
+relying on any external retriever. To train such an agent, we construct an active-perception corpus
+of 17.9K high-quality SFT examples with region-level zoom-in trajectories, accompanied by 19.2K hard
+RL examples. Through SFT+RL, InSight-doc-8B improves the baseline by 4.3--16.4 accuracy points over
+document VQA benchmarks. On long documents, it reduces hallucination by more than 40% and inference
+latency by 41%--68% while maintaining an accuracy lead. Our code, datasets, and model are released
+at https://github.com/m-Just/InSight-doc .
 
 ---
