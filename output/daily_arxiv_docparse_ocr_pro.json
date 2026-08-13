@@ -1,54 +1,13 @@
 {
   "meta": {
-    "report_date": "2026-08-12",
-    "generated_at_utc": "2026-08-12 03:29:07",
+    "report_date": "2026-08-13",
+    "generated_at_utc": "2026-08-13 03:32:19",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
-    "llm_enabled": true,
-    "llm_note": null,
-    "count": 7
+    "llm_enabled": false,
+    "llm_note": "DeepSeek 处理失败：Expecting ',' delimiter: line 46 column 31 (char 2240)",
+    "count": 3
   },
-  "synthesis": {
-    "executive_summary": "今日OCR与文档解析研究聚焦于多方向文本识别、表格结构识别、长文档理解、多模态模型可解释性及提示优化等方向，并引入了新的基准（FormStruct-Bench、MMArch）以评估这些任务。工作进展包括提出具备理论保证旋转不变性的文本识别器（RISTER）、用于表格结构识别的层次化基准、以及长文档理解的智能体视觉感知框架（InSight-doc），后者通过动态分辨率控制显著降低推理成本并减少幻觉。关键词包括：旋转不变性、结构识别基准、智能体感知、模型差异分析、讽刺检测。",
-    "trend_summary": "当前趋势强调端到端与理论保证的性能提升（如旋转不变性），同时注重构建诊断性基准以揭示模型在结构化文档（表格、长文档）中的深层缺陷。多模态模型的研究聚焦于特征级控制（SAE）和鲁棒性评估（讽刺检测）。此外，利用智能体框架（如RLMOpt、InSight-doc）优化推理效率和提示工程成为新热点。",
-    "common_innovations": [
-      "多个研究提出基于智能体或自动搜索的框架（如RLMOpt、InSight-doc），用于动态优化推理过程以减少成本并改进性能。",
-      "新基准（如FormStruct-Bench、MMArch）强调诊断性评估，细分到组件级或特定领域，以揭示现有模型的系统性失败。",
-      "理论保证与可解释性技术（如旋转等变卷积、稀疏自编码器）被引入，以提升模型的可控性与鲁棒性。",
-      "跨模态和文档结构推理（如表格结构、工程图纸）成为共同关注点，推动多模态模型在专业领域的应用。"
-    ],
-    "future_directions": [
-      "开发能够处理弯曲文本或复杂版面且保持旋转不变性的模型，并通过无监督或自监督方式增强泛化。",
-      "将多模态稀疏自编码器与特征控制用于文档解析任务，以实现可控的版面理解与错误纠正。",
-      "构建更全面的表格结构识别基准，纳入更多语言和文档类型，并定义细化到单元格级关系评估。",
-      "研究减少视觉语言模型对表面线索（如OCR文本、风格）的依赖，提升深层语用和上下文推理。",
-      "探索在长文档理解中利用强化学习训练智能体，以自适应选择放大区域，同时融合跨页上下文。",
-      "将提示优化技术（如RLMOpt）应用于文档信息抽取，实现自动化的高精度抽取流程。",
-      "开发专用于建筑图纸等专业文档的多模态推理模型，结合领域知识图谱提升跨图证据组合能力。"
-    ],
-    "engineering_takeaways": [
-      "RISTER可应用于文档数字化和自动驾驶标志识别，减少对方向校正依赖。",
-      "MMDiff提供特征级工具，可用于错误分析、安全控制以及性能提升。",
-      "FormStruct-Bench作为标准化测试平台，帮助识别表格识别系统的结构性弱点。",
-      "PragMatch的评估方法可用于鲁棒性测试，防止模型过度拟合表面线索。",
-      "RLMOpt可显著提升提示优化效率，适用于临床信息抽取等任务。",
-      "MMArch为工程图纸理解提供评估基准，指导开发辅助设计审查系统。",
-      "InSight-doc框架可直接部署于资源受限的OCR平台，降低推理延迟且保持准确率。"
-    ],
-    "watchlist": [
-      {
-        "title": "MMArch: Benchmarking Multimodal Reasoning Grounded in Architectural Evidence",
-        "watch_reason": "基准显示模型在专业领域推理显著落后于人类专家，关注后续改进可能推动领域专用模型发展。"
-      },
-      {
-        "title": "FormStruct-Bench:A Hierarchical and Diagnostic Benchmark for Table-Form Document Structure Recognition",
-        "watch_reason": "强调结构识别底层缺陷，可能促使新架构出现，对文档解析技术影响深远。"
-      },
-      {
-        "title": "InSight-doc: Agentic Visual Perception for Long-Document Understanding",
-        "watch_reason": "主动感知框架显著降低推理成本，可能成为长文档处理的标准范式，值得跟踪其代码开源和后续优化。"
-      }
-    ]
-  },
+  "synthesis": null,
   "papers": [
     {
       "title": "Embedding Rotation Invariance for Provable Multi-Oriented Scene Text Recognition",
@@ -70,161 +29,14 @@
       ],
       "arxiv_id": "2608.10684v1",
       "score": 12,
-      "topic_tags": [
-        "场景文本识别",
-        "旋转不变性",
-        "等变卷积",
-        "交叉注意力",
-        "端到端网络"
-      ],
-      "zh_summary": "提出旋转不变场景文本识别网络（RISTER），通过理论保证的旋转不变性解决多方向文本识别问题。编码器采用旋转等变卷积与自注意力结合，解码器利用交叉注意力的旋转不变性，实现端到端训练，无需额外推理计算或数据驱动的方向校正，在标准和多方向基准上达到最先进性能。",
-      "novelty": "首次将旋转不变性以理论保证的方式嵌入场景文本识别框架，避免了现有方法依赖方向估计的误差累积和计算开销。",
-      "innovation_points": [
-        "提出旋转等变的局部-全局特征提取网络，融合等变卷积与自注意力",
-        "证明交叉注意力的旋转不变性，并用于构建旋转不变解码器",
-        "构建端到端全旋转不变网络，无额外推理计算",
-        "提供理论保证的旋转不变性，不依赖数据驱动校正"
-      ],
-      "limitations": "实验主要针对多方向文本，未充分验证在极端变形或低质量图像上的表现；理论证明基于特定假设，可能不完全适用于复杂场景。",
-      "improvement_directions": [
-        "扩展到更复杂的文本形状（如弯曲文本）的旋转不变性建模",
-        "探索与其他数据增强或自监督方法结合，进一步提升泛化能力",
-        "降低模型复杂度，推动在移动端或实时场景部署"
-      ],
-      "engineering_value": "为多方向文本识别提供高效且鲁棒的解决方案，可直接应用于文档数字化、自动驾驶标志识别、增强现实等场景，减少对方向校正流程的依赖。",
-      "why_relevant": "针对场景文本识别（OCR子领域）的旋转鲁棒性问题，提出了新方法，与OCR技术发展直接相关。"
-    },
-    {
-      "title": "Multimodal Model Diffing for Feature Discovery and Control",
-      "summary": "Multimodal Large Language Models (MLLMs) exhibit strong visual understanding, yet the internal features that cause these behaviors remain difficult to identify, audit, or control. While applicable to post-hoc inspection, hidden states that are decomposed into interpretable feature directions using sparse autoencoders (SAEs) neither readily isolate which features are changed by multimodal training, nor are they directly useful for targeted control. We introduce MMDiff, a multimodal model-diffing framework that trains multimodal SAEs and turns them into feature-level interfaces for discovering and controlling multimodal behavior. MMDiff supports three uses: (i) feature isolation, by diffing a base-LM SAE against its multimodal-adapted counterpart to identify features altered by multimodal training; (ii) task-specific feature detection, via per-token contrastive firing analysis that isolates causal features; and (iii) feature-level control, by causally removing or steering the discovered feature directions. We train multimodal SAEs for three MLLM families, LLaVA-MORE, PaliGemma 2, and InternVL3.5, and evaluate on visual-spatial understanding, multimodal safety, and OCR. MMDiff discovers sparse, causally specific features whose removal selectively degrades target behaviors by an average of 12% on spatial tasks and 17% on OCR, and reduces attack success rate by 24% on multimodal safety attacks, with no impact on VQA performance. Steering these features improves spatial and OCR accuracy by +3.6% and +1.8% on average over a standard single-layer steering baseline. These results show that multimodal SAEs can serve not only as interpretability tools, but as mechanisms for auditing, steering, and controlling MLLMs behavior toward safer and more capable generations.",
-      "link": "https://arxiv.org/abs/2608.09928v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.09928v1",
-      "authors": [
-        "Hunar Batra",
-        "Lachin Naghashyar",
-        "Ashkan Khakzar",
-        "Philip Torr",
-        "Christian Schroeder de Witt",
-        "Constantin Venhoff",
-        "Ronald Clark"
-      ],
-      "published": "2026-08-10T17:59:30Z",
-      "updated": "2026-08-10T17:59:30Z",
-      "categories": [
-        "cs.CV",
-        "cs.AI",
-        "cs.CL",
-        "cs.LG"
-      ],
-      "arxiv_id": "2608.09928v1",
-      "score": 12,
-      "topic_tags": [
-        "多模态大模型",
-        "稀疏自编码器",
-        "特征发现",
-        "模型差异分析",
-        "OCR"
-      ],
-      "zh_summary": "提出MMDiff框架，通过多模态稀疏自编码器（SAE）识别和控制多模态大语言模型（MLLM）中的特征。通过对比基础语言模型和多模态模型的SAE，隔离多模态训练改变的特征；利用逐token对比激发分析检测任务特定特征；通过因果干预实现特征级控制。实验表明可有效降低多模态安全攻击成功率，提升空间理解和OCR性能。",
-      "novelty": "首次将模型差异分析（model diffing）应用于多模态特征发现与控制，提供了特征级别的接口。",
-      "innovation_points": [
-        "提出多模态SAE训练框架，支持特征隔离",
-        "引入逐token对比激发分析，实现任务特定特征检测",
-        "实现特征级控制，支持删除或导向特征方向",
-        "在三个MLLM家族上训练SAE并验证有效性"
-      ],
-      "limitations": "依赖预训练SAE质量；特征控制可能对其他任务产生未知影响；实验规模有限（三个模型家族）。",
-      "improvement_directions": [
-        "扩展到更多MLLM架构和任务类型",
-        "探索更优的特征分解方法，提高稀疏性和可解释性",
-        "研究特征控制的副作用，实现更精确的干预"
-      ],
-      "engineering_value": "为MLLM的可解释性和安全性提供实用工具，可用于模型审计、错误分析和行为控制，有助于开发更可靠的多模态系统。",
-      "why_relevant": "涉及OCR作为评估任务之一，且提出模型差异分析方法，可应用于OCR相关特征分析，与文档智能理解相关。"
-    },
-    {
-      "title": "FormStruct-Bench:A Hierarchical and Diagnostic Benchmark for Table-Form Document Structure Recognition",
-      "summary": "Transforming table-form documents into machine-processable records requires recovering not only their visible content but also the multilevel structure that organizes it. However, existing benchmarks evaluate either holistic document outputs or conventional table grids, and their aggregate scores provide little insight into where structural failures occur. We introduce FormStruct-Bench, a hierarchical and diagnostic benchmark that evaluates table-form document structure recognition at both the document level and progressively finer component levels, allowing aggregate performance to be traced back to specific structural failure modes. To construct auditable ground truth at scale, we annotate 70 reusable templates and expand them into 7,000 verified instances through a provenance-preserving Director--Artist--Verifier pipeline; all 1,100 instances in the template-disjoint test set additionally receive human review. Our evaluation protocol uses five primary metrics and three structure-specific diagnostics across page, schema, and component levels, together with slices over difficulty, structural constraints, and visual degradation. Across 14 API-hosted and locally deployable systems plus two SFT variants, the best document-level score reaches 83.85%, whereas the best reported fine-grained structural score remains below 18%. These results reveal a pronounced gap between reading document content and recovering the hierarchy and regional organization required for reliable table-form understanding.",
-      "link": "https://arxiv.org/abs/2608.10396v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.10396v1",
-      "authors": [
-        "Lujie Ban",
-        "Jiangtao Zhu",
-        "Yuanheng Yu",
-        "Jiasheng Shi",
-        "Chenhao Ma"
-      ],
-      "published": "2026-08-11T02:44:34Z",
-      "updated": "2026-08-11T02:44:34Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2608.10396v1",
-      "score": 10,
-      "topic_tags": [
-        "表格结构识别",
-        "基准测试",
-        "文档解析",
-        "层次结构",
-        "诊断评估"
-      ],
-      "zh_summary": "提出FormStruct-Bench基准，用于评估表格表单文档结构识别。该基准提供文档级及更细粒度的组件级评估，通过可审计的地面真值构建流程和诊断指标，揭示现有系统在读取内容与恢复层次结构之间的显著差距。最佳文档级得分83.85%，但细粒度结构得分低于18%。",
-      "novelty": "首次提供表格表单结构识别的分层诊断基准，将聚合性能追溯到具体结构失败模式。",
-      "innovation_points": [
-        "构建包含70个模板和7000个实例的基准，测试集模板不重叠且有人工审查",
-        "提出五主指标和三个结构特定诊断，覆盖页面、模式和组件层级",
-        "提供难度、结构约束和视觉退化切片分析",
-        "评估14个API和本地系统及两个SFT变体"
-      ],
-      "limitations": "基准限于表格表单文档，未涵盖其他文档类型；最佳系统得分低，表明任务难度大，但可能受限于评估指标不完善。",
-      "improvement_directions": [
-        "扩展基准到更多文档类型和语言",
-        "开发能捕捉层级结构的专用模型架构",
-        "改进结构识别评估指标，细化到单元格和关系级别"
-      ],
-      "engineering_value": "为表格识别系统提供标准化测试平台，帮助识别结构性弱点，指导算法优化，对文档数字化和自动化处理有重要价值。",
-      "why_relevant": "直接针对表格文档结构识别（OCR领域）提出基准评估，为衡量和提升OCR结构化输出能力提供工具。"
-    },
-    {
-      "title": "PragMatch: Separating Pragmatic Incongruity from Cross-Modal Mismatch in Large Vision-Language Models",
-      "summary": "Large Vision-Language Models (LVLMs) have demonstrated strong performance on multimodal benchmarks, yet it remains unclear whether they genuinely reason about relationships between images and text or rely on superficial correlations, known as shortcut learning. This question is particularly important for multimodal sarcasm detection, where successful prediction depends on recognizing pragmatic incongruity rather than treating sarcasm as simple image-text mismatch. We introduce PragMatch, a controlled benchmark of 3,000 image-text pairs derived from MMSD2.0, including original sarcastic examples and constructed literal and hard-negative pairs. We identify influential shortcut cues through systematic masking and evaluate their impact through targeted injection experiments. Our results show that LVLM predictions are sensitive to lexical, OCR-derived and stylistic cues, with injected surface signals causing substantial changes in model predictions despite unchanged underlying image-text relationships. Our findings reveal limitations in current LVLMs while PragMatch provides a systematic testbed for evaluating multimodal pragmatic reasoning beyond surface-level image-text alignment.",
-      "link": "https://arxiv.org/abs/2608.09772v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.09772v1",
-      "authors": [
-        "Zhanna Mukhametsharip",
-        "Vera Demberg",
-        "Varsha Suresh"
-      ],
-      "published": "2026-08-10T16:00:04Z",
-      "updated": "2026-08-10T16:00:04Z",
-      "categories": [
-        "cs.CL"
-      ],
-      "arxiv_id": "2608.09772v1",
-      "score": 9,
-      "topic_tags": [
-        "多模态理解",
-        "讽刺检测",
-        "快捷学习",
-        "基准测试",
-        "OCR线索"
-      ],
-      "zh_summary": "提出PragMatch基准，用于检验大视觉语言模型（LVLMs）是否真正理解多模态讽刺（图像-文本关系），而非依赖表面相关性捷径。包含3000个图像-文本对，通过系统性掩蔽识别捷径线索，并设计注入实验。结果发现LVLM预测对词汇、OCR和风格线索敏感，表面信号改变可显著影响预测，表明当前LVLMs在多模态语用推理方面存在局限。",
-      "novelty": "首次区分语用不一致与跨模态不匹配，并提供受控基准评估LVLMs的讽刺检测能力。",
-      "innovation_points": [
-        "构建包含原始讽刺样本和构造的字面及硬负样本的基准",
-        "通过系统性掩蔽识别快捷线索",
-        "通过注入实验评估表面线索对预测的影响",
-        "提供多模态语用推理的测试平台"
-      ],
-      "limitations": "基准基于特定数据集（MMSD2.0），可能不全面；评估限于讽刺检测，未覆盖其他语用现象。",
-      "improvement_directions": [
-        "扩展基准到更多语用任务如隐喻、反讽等",
-        "开发减少对表面线索依赖的训练方法",
-        "探索模型内部机制，提升深层语义理解"
-      ],
-      "engineering_value": "为多模态模型的鲁棒性评估提供方法，有助于识别模型在真实场景中的漏洞，对改进视觉-语言模型设计有指导意义。",
-      "why_relevant": "OCR线索被识别为快捷线索之一，与OCR技术在多模态理解中可能带来的负面影响相关，值得关注。"
+      "topic_tags": null,
+      "zh_summary": null,
+      "novelty": null,
+      "innovation_points": null,
+      "limitations": null,
+      "improvement_directions": null,
+      "engineering_value": null,
+      "why_relevant": null
     },
     {
       "title": "RLMOpt: Adaptive Prompt Optimization via Recursive Language Models",
@@ -244,78 +56,14 @@
       ],
       "arxiv_id": "2608.10471v1",
       "score": 6,
-      "topic_tags": [
-        "提示优化",
-        "递归语言模型",
-        "信息抽取",
-        "自动化",
-        "语言模型代理"
-      ],
-      "zh_summary": "提出RLMOpt，一种使用递归语言模型驱动搜索策略的提示优化器。RLM代理在基于工具的环境中检查任务信息、分析失败、生成候选、分配评估预算并决定停止。在四个基准上评估，RLMOpt在配对比较中取得更好的保持分数，且更高效，提示尺寸更小。",
-      "novelty": "首次将搜索策略本身由语言模型驱动，而非预定义优化流程，提高了优化器的适应性和效率。",
-      "innovation_points": [
-        "使用递归语言模型作为搜索策略代理",
-        "构建工具化环境，支持迭代优化",
-        "实现Pareto选择和回归约束",
-        "在四个多样化基准上验证有效性"
-      ],
-      "limitations": "实验种子数有限（单种子比较），可能影响统计可靠性；未深入分析代理的决策过程。",
-      "improvement_directions": [
-        "在更多任务和种子数上进行实验",
-        "增强代理的可解释性和控制性",
-        "探索多代理协作或人机协同优化"
-      ],
-      "engineering_value": "提供自动化提示优化工具，可应用于文档信息抽取（如临床信息提取）等场景，提升文本处理效率。",
-      "why_relevant": "虽然不直接涉及OCR，但提示优化对依赖语言模型的文档理解任务有间接帮助，可作为通用工具。"
-    },
-    {
-      "title": "MMArch: Benchmarking Multimodal Reasoning Grounded in Architectural Evidence",
-      "summary": "Multimodal large language models (MLLMs) perform strongly on engineering imagery, yet existing benchmarks mostly test drawing recognition, information extraction, or compliance checking, leaving open whether models can combine distributed visual evidence with engineering principles to reach a conclusion. We introduce MMArch, a benchmark for architecture and civil engineering spanning ten subdomains and built entirely from figures in peer-reviewed papers. Its $1{,}212$ short-answer items are produced by a decoupled planner--writer pipeline and validated through automated screening, a blind adversarial audit, and expert review, so that answering requires perceiving the relevant evidence, identifying the governing principle, and applying it, not exploiting textual or single-figure shortcuts. Evaluating $18$ open-weight and proprietary MLLMs against a domain-expert panel, we find a wide gap: the strongest open-source model attains about $30\\%$ and the best proprietary system $52\\%$, while human experts reach $95\\%$, more than forty points ahead. Our error analysis shows that failures concentrate in applying principles and combining evidence across figures rather than in locating it, pointing to substantial headroom for future research. Code and data are available at https://dcx-swjtu.github.io/MMArch/.",
-      "link": "https://arxiv.org/abs/2608.09281v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.09281v1",
-      "authors": [
-        "Chenxu Du",
-        "Kang An",
-        "Tengyue Wang",
-        "Zhongyu Yang",
-        "Xinqi Yang",
-        "Yuanchi Zhu",
-        "Hebao Zhu",
-        "Ziliang Wang",
-        "Faqiang Qian",
-        "Yunli Yang",
-        "Qibing Ren"
-      ],
-      "published": "2026-08-10T08:37:14Z",
-      "updated": "2026-08-10T08:37:14Z",
-      "categories": [
-        "cs.AI"
-      ],
-      "arxiv_id": "2608.09281v1",
-      "score": 6,
-      "topic_tags": [
-        "多模态推理",
-        "建筑图纸理解",
-        "基准评估",
-        "工程文档",
-        "视觉-语言模型"
-      ],
-      "zh_summary": "提出MMArch基准，用于评估多模态大语言模型在建筑工程领域的推理能力。基准包含1212个短答案项，基于同行评审论文中的图表构建，通过解耦规划-写作流程和专家审查。评估18个开源和专有模型，最佳开源模型得分约30%，专有系统52%，人类专家95%，表明模型在应用原理和跨图组合证据方面存在显著差距。",
-      "novelty": "首个专门用于建筑和土木工程多模态推理的基准，要求结合分布式视觉证据和工程原理进行推理。",
-      "innovation_points": [
-        "构建覆盖十个子领域、基于论文图表的基准",
-        "采用解耦规划-写作流程生成问题和答案",
-        "实施多重验证流程，包括自动化筛选和对抗审计",
-        "详细错误分析，区分故障模式"
-      ],
-      "limitations": "基准限于建筑工程领域，可能缺乏泛化性；问题生成依赖论文，可能存在文本线索泄漏。",
-      "improvement_directions": [
-        "扩展到其他专业领域，增强通用性",
-        "设计更完善的去偏机制，避免文本捷径",
-        "开发结合工程知识图谱的推理模型"
-      ],
-      "engineering_value": "为建筑领域的AI应用提供评估工具，有助于开发能辅助工程设计、审查和质量控制的多模态系统。",
-      "why_relevant": "涉及从工程图纸中提取和理解信息，与OCR和文档分析相关，可视为高级文档理解的评估场景。"
+      "topic_tags": null,
+      "zh_summary": null,
+      "novelty": null,
+      "innovation_points": null,
+      "limitations": null,
+      "improvement_directions": null,
+      "engineering_value": null,
+      "why_relevant": null
     },
     {
       "title": "InSight-doc: Agentic Visual Perception for Long-Document Understanding",
@@ -340,31 +88,14 @@
       ],
       "arxiv_id": "2608.10628v1",
       "score": 4,
-      "topic_tags": [
-        "长文档理解",
-        "智能体视觉感知",
-        "分辨率自适应",
-        "SFT+RL",
-        "文档VQA",
-        "推理效率"
-      ],
-      "zh_summary": "长文档理解通常需要对许多视觉丰富的页面进行推理，这导致推理成本高昂且容易出现上下文腐烂问题。为此，我们提出了InSight-doc，一种智能体视觉感知框架，将视觉分辨率视为一种自适应的推理时间资源。InSight-doc从低分辨率开始，选择性地放大到高分辨率区域以获取更精细的证据，无需依赖任何外部检索器。为了训练这样的智能体，我们构建了一个包含17.9K个高质量SFT示例（带区域级放大轨迹）和19.2K个困难RL示例的主动感知语料库。通过SFT+RL，InSight-doc-8B在文档VQA基准上将基线提升了4.3至16.4个准确率点。在长文档上，它减少了超过40%的幻觉，并将推理延迟降低了41%至68%，同时保持了准确率领先。我们的代码、数据集和模型已在 https://github.com/m-Just/InSight-doc 发布。",
-      "novelty": "提出了将视觉分辨率作为自适应推理时间资源的智能体感知框架，通过主动选择放大区域进行推理，无需外部检索器，在长文档理解中显著降低推理成本和幻觉。",
-      "innovation_points": [
-        "提出智能体视觉感知框架，动态调节视觉分辨率以平衡推理成本和精度",
-        "构建包含区域级放大轨迹的SFT语料库和困难RL示例，训练智能体进行选择性注意",
-        "采用SFT+RL训练范式，强化决定放大区域的能力",
-        "在推理时无需外部检索器，仅依赖模型自身的感知决策"
-      ],
-      "limitations": "['当前框架在长文档上的推理延迟降低依赖于硬RL样本，但尚未验证在更广泛文档类型上的泛化性', '放大区域的选择可能受限于初始低分辨率下的全局信息，极端复杂版面可能难以准确判断关键区域', '实验主要基于文档VQA，未充分检验在真实场景中的长期记忆和上下文管理效果']",
-      "improvement_directions": [
-        "探索更精细的分辨率调整策略，如连续分辨率映射而非离散级别",
-        "将主动感知与多模态大语言模型（MLLM）的内部注意力机制结合，以监督方式学习放大决策",
-        "扩展到视频或交互式文档理解，动态调整感知区域以适应时间维度",
-        "引入跨页上下文关联，减少长文档中的幻觉"
-      ],
-      "engineering_value": "该框架可显著降低长文档理解系统的推理成本和延迟，同时维持高准确率，适合部署在资源受限的OCR和文档智能平台。",
-      "why_relevant": "该工作直接针对OCR和文档理解中的关键挑战：如何处理长文档的视觉信息冗余和推理效率问题，其主动感知机制为后续研究提供了新思路。"
+      "topic_tags": null,
+      "zh_summary": null,
+      "novelty": null,
+      "innovation_points": null,
+      "limitations": null,
+      "improvement_directions": null,
+      "engineering_value": null,
+      "why_relevant": null
     }
   ]
 }
