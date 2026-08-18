@@ -1,10 +1,371 @@
-# OCR / 文档解析研究日报（2026-08-17）
+# OCR / 文档解析研究日报（2026-08-18）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-08-17 02:33:16`
+- 生成时间（UTC）：`2026-08-18 02:20:42`
 - 大模型综合分析：`开启`
 
-今天没有筛到符合条件的新论文。
+## 一、今日执行摘要
+
+> 今日论文聚焦于文档解析与OCR的多个前沿方向，包括金融文档审计的验证框架、视觉文档检索的潜在概念学习、PDF语料统计偏差分析、长文档理解的双维度缩放代理，以及医疗EMR的疼痛检测。共同趋势是利用多模态大语言模型和代理式架构增强文档理解，同时强调可审计性、效率与鲁棒性。工程上，这些研究提供了提升文档处理系统准确性、可扩展性和可信度的具体方法。
+
+## 二、今日趋势判断
+
+当前研究趋势包括：1) 多模态大语言模型在文档理解中占据主导，但随之而来的幻觉控制和可审计性成为焦点，如LAVA框架；2) 代理式架构（Agentic）用于动态分配计算资源，如D2-ScaleAgent，以实现高效长文档理解；3) 检索增强生成（RAG）持续演进，视觉文档检索中引入潜在概念学习（ConceptFormer）；4) 数据层面，PDF语料统计的单位偏差受到关注，建议双单位报告；5) 垂直领域应用深化，如医疗疼痛检测与金融审计。
+
+## 三、今日论文概览
+
+1. **LAVA: Logic-Aware Validation and Augmentation Framework for Large-Scale Financial Document Auditing** | 标签：多模态大语言模型、文档信息提取、符号验证、金融审计、规则检索、可审计性
+2. **ConceptFormer: Learning Adaptive Latent Concepts for Query-Document Alignment in Visual Document Retrieval** | 标签：视觉文档检索、潜在概念学习、多模态表示、检索增强生成、视觉-语言模型
+3. **Counting Documents Is Not Counting Text: Unit Bias in Web-PDF Corpus Statistics** | 标签：PDF语料统计、单位偏差、Common Crawl、截断恢复、OCR路由、token统计
+4. **D2-ScaleAgent: Dual-Dimensional Scaling for Long Document Understanding** | 标签：多智能体系统、长文档理解、检索增强生成、动态路由、测试时计算
+5. **PLeDO: Pain Level Detection for Osteoarthritis from EMR Data** | 标签：医疗信息抽取、疼痛检测、电子病历、自然语言处理、机器学习、骨关节炎
+
+## 四、今天 OCR / 文档解析论文里的主要创新点
+
+- 利用多模态大语言模型和代理式架构提升文档理解的准确性和效率
+- 引入验证和动态路由机制增强系统鲁棒性，如LAVA的符号验证和D2-ScaleAgent的动态缩放
+- 改进检索增强生成，通过潜在概念学习或双维度缩放提升文档检索和长文档理解性能
+- 强调可审计性和可解释性，确保高风险场景下的可信度
+
+## 五、后续 OCR 领域值得推进的改进方向
+
+- 开发轻量级且可解释的潜在概念表示模型，以降低计算成本并增强视觉文档检索的透明度
+- 研究代理式框架中更高效的验证器和记忆机制，减少系统开销并优化大规模应用
+- 构建标准化PDF语料统计基准，推广双单位报告，并研发更可靠的截断恢复技术
+- 探索多模态文档理解中的幻觉消减方法，结合外部知识库和规则推理
+- 设计跨领域可迁移的验证规则生成方法，减少人工干预并提升泛化性
+
+## 六、工程落地启发
+
+- 采用模块化、骨干无关的流水线设计，便于适配不同模型，如LAVA
+- 在文档检索中引入潜在概念学习可显著提升效果，但需权衡计算成本
+- 动态计算分配机制（如D2-ScaleAgent）能有效提高长文档处理效率
+- 报告语料统计时需同时注明文档数和token数，避免误导性结论
+- 整合结构化与非结构化信息（如PLeDO）是提升领域专用系统准确性的关键
+
+## 七、优先关注论文
+
+- **LAVA: Logic-Aware Validation and Augmentation Framework for Large-Scale Financial Document Auditing**：其可审计性和幻觉控制机制对金融等高风险场景至关重要，后续可能发展为标准工具。
+- **ConceptFormer: Learning Adaptive Latent Concepts for Query-Document Alignment in Visual Document Retrieval**：潜在概念表示可能成为视觉检索的通用范式，影响RAG系统设计，值得跟踪其可解释性进展。
+- **D2-ScaleAgent: Dual-Dimensional Scaling for Long Document Understanding**：双维度缩放策略体现了测试时计算的智能分配，有望提升复杂文档处理系统的效率，需关注其泛化能力。
+- **Counting Documents Is Not Counting Text: Unit Bias in Web-PDF Corpus Statistics**：语料统计偏差影响科研和工程实验的严谨性，推动标准化有助于研究和开发。
+
+## 八、论文逐篇解析
+
+### 1. LAVA: Logic-Aware Validation and Augmentation Framework for Large-Scale Financial Document Auditing
+
+- arXiv: [2608.16763v1](https://arxiv.org/abs/2608.16763v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.16763v1)
+- 作者: Ruoqi Shu, Xuhui Wang, Isaac Wang, Yanming Mai, Bo Wan
+- 发布时间: 2026-08-17T16:10:05Z
+- 分类: cs.AI
+- 相关性评分: 17
+- 主题标签: 多模态大语言模型、文档信息提取、符号验证、金融审计、规则检索、可审计性
+
+**中文摘要**
+
+> 介绍LAVA框架，一个基于多模态大语言模型的模块化、骨干无关的流水线，用于大规模金融文档审计。该框架包含四个阶段：文档规则检索、保留布局的信息提取、辅助元数据丰富和可审计的符号/算术验证。在真实世界基准上优于基线，在幻觉控制和边缘情况处理方面表现更好，同时保持高效的token使用。
+
+**核心创新概述**
+
+> 提出了一个逻辑感知的验证和增强框架，将规则检索、布局保留提取、元数据丰富和符号验证集成到一个统一的流水线中，强调可审计性和可追溯性，适用于高风险的金融文档审计场景。
+
+**创新点拆解**
+
+- 四阶段模块化设计，支持规则接地和细粒度错误归因
+- 骨干无关，可适配不同多模态大语言模型
+- 引入符号/算术验证步骤，增强结果的可信度和可审计性
+- 在真实金融文档基准上验证，专注幻觉控制和边缘情况处理
+
+**当前局限**
+
+> ['依赖多模态大语言模型的性能，可能受限于模型能力', '验证规则需要专家制定，扩展性受限', '评估基于单一基准，泛化性有待进一步验证']
+
+**后续可改进方向**
+
+- 探索更高效的规则表示和检索方法，减少对专家人工的依赖
+- 研究如何将框架扩展到更多类型的文档和验证规则
+- 优化token使用效率，以支持超大规模和高吞吐场景
+
+**工程启发**
+
+> 为金融审计等高风险场景提供了一种可靠的大规模文档验证解决方案，具有实际部署价值，帮助企业提高准确性、一致性和可追溯性。
+
+**为什么值得关注**
+
+> 与OCR相关，因为金融文档审计涉及文档解析和信息提取，LAVA框架中保留布局的信息提取模块和多模态大语言模型的应用，为文档理解提供新思路。
+
+**原始摘要**
+
+Financial document validation in production, such as payroll auditing, tax compliance, and loan
+underwriting, demands exceptional accuracy, consistency, and reproducibility under strict enterprise
+constraints. In practice, documents arrive with heterogeneous layouts and formats, semantically rich
+and context-dependent content, and embedded business rules that current pipelines struggle to
+process reliably. We introduce LAVA (Logic-Aware Validation and Augmentation), a modular, backbone-
+agnostic pipeline built on multimodal large language models, that integrates a four-stage design:
+document-rule retrieval, layout-preserving information extraction, auxiliary metadata enrichment,
+and auditable symbolic/arithmetic verification. LAVA supports robust rule grounding, fine-grained
+error attribution, and consistent, traceable end-to-end execution, capabilities essential for high-
+stakes deployment. Evaluated on a large real-world benchmark with diverse financial documents and
+dozens of expert-curated validation rules, LAVA outperforms baselines in hallucination control and
+edge-case handling while maintaining efficient token usage, demonstrating practicality for high-
+volume, time-critical validation.
+
+---
+
+### 2. ConceptFormer: Learning Adaptive Latent Concepts for Query-Document Alignment in Visual Document Retrieval
+
+- arXiv: [2608.15698v1](https://arxiv.org/abs/2608.15698v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.15698v1)
+- 作者: Peng Chunyi, Xu Zhipeng, Yan Yukun, Liu Zhenghao, Yu Shi, Mei Sen, Sun Yubo, Zhang Yongheng, Zhou Jie, Gu Yu, Yu Ge, Sun Maosong
+- 发布时间: 2026-08-16T12:07:12Z
+- 分类: cs.CV, cs.IR
+- 相关性评分: 17
+- 主题标签: 视觉文档检索、潜在概念学习、多模态表示、检索增强生成、视觉-语言模型
+
+**中文摘要**
+
+> 提出ConceptFormer，一个潜在概念表示学习框架，用于视觉文档检索。通过将查询相关的证据建模为连续的、由查询条件化的潜在概念，显式桥接局部视觉证据和语义相关性，无需文本中间表示或直接依赖原始视觉注释。在多个基准上，与最强的视觉检索基线和OCR文本检索基线相比，平均NDCG@10分别相对提高16.7%和22.1%。
+
+**核心创新概述**
+
+> 提出一种新的潜在概念表示学习方法，通过动态确定概念数量，以潜在概念作为中间表示，弥补查询和文档之间的语义鸿沟，无需文本中间表示或原始视觉注释。
+
+**创新点拆解**
+
+- 引入潜在概念作为查询条件化的连续表示，桥接视觉证据和语义相关性
+- 训练中使用强大的视觉-语言模型动态确定潜在概念token的数量
+- 无需文本中间表示或直接视觉注释，简化监督信号
+- 在多个视觉文档检索基准上取得显著性能提升
+
+**当前局限**
+
+> ['依赖强大的视觉-语言模型，可能增加计算成本', '潜在概念的解释性有待加强', '实验主要基于特定基准，泛化性需进一步研究']
+
+**后续可改进方向**
+
+- 研究如何提高潜在概念的可解释性，以增强模型透明度
+- 探索更轻量级的模型，减少计算开销
+- 扩展至更广泛的下游任务，如文档分类和问答
+
+**工程启发**
+
+> 增强了视觉文档检索的性能，有助于改进多模态检索增强生成系统，具有较高的实际应用价值。
+
+**为什么值得关注**
+
+> 直接涉及视觉文档检索，与OCR紧密相关，其潜在概念学习方法可应用于文档理解任务。
+
+**原始摘要**
+
+Visual document retrieval is a critical component of multimodal retrieval-augmented generation,
+aiming to identify query-relevant pages from document collections where evidence is distributed
+across text, layout, charts, and visual structures. Recent efforts toward finer-grained supervision
+primarily rely on textual descriptions or localized visual regions as evidence proxies. However,
+such supervision signals may either overlook complex visual structures or provide incomplete and
+inaccurate representations of the underlying evidence. To address these limitations, we propose
+ConceptFormer, a latent concept representation learning framework for visual document retrieval.
+ConceptFormer models query-relevant evidence as continuous, query-conditioned latent concepts that
+explicitly bridge localized visual evidence and semantic relevance, without requiring either textual
+intermediate representations or direct reliance on raw visual annotations. During training,
+ConceptFormer employs a strong vision-language model to dynamically determine the number of latent
+concept tokens and uses these concepts as an intermediate representation to bridge the semantic gap
+between queries and documents, thereby guiding the learning of the embedding space. Experiments on
+diverse visual document retrieval benchmarks demonstrate that ConceptFormer achieves 16.7\% and
+22.1\% relative improvements in average NDCG@10 over the strongest visual retrieval baseline and the
+strongest OCR-based text retrieval baseline, respectively. Further analysis reveals that latent
+concepts effectively connect localized visual evidence with semantic relevance, enabling the
+retriever to capture both fine-grained textual cues and complex document-level visual structures
+while preserving strong retrieval alignment. Codes and data are available at
+https://github.com/Neuir/ConceptFormer.
+
+---
+
+### 3. Counting Documents Is Not Counting Text: Unit Bias in Web-PDF Corpus Statistics
+
+- arXiv: [2608.16390v1](https://arxiv.org/abs/2608.16390v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.16390v1)
+- 作者: Luca Foppiano
+- 发布时间: 2026-08-17T10:41:07Z
+- 分类: cs.CL, cs.AI
+- 相关性评分: 12
+- 主题标签: PDF语料统计、单位偏差、Common Crawl、截断恢复、OCR路由、token统计
+
+**中文摘要**
+
+> 本文揭示PDF语料库统计中常见的单位偏差问题：语料库规模以token数宣传，但覆盖率、OCR路由等指标按文档计算，且没有分解token总量。在CC-MAIN-2021-31-PDF-UNTRUNCATED上，3.02%的文档占据一半token，超过50页的文档占5.00%但贡献53.53%的文本。Common Crawl截断政策导致大量文本丢失，重建后恢复率极低。建议同时以文档和token两种单位报告语料统计。
+
+**核心创新概述**
+
+> 首次系统分析PDF语料库统计中文档和token两种单位之间的分歧，并量化了截断导致的文本损失，提出双单位报告的建议。
+
+**创新点拆解**
+
+- 指出PDF语料库统计中单位偏差问题，并量化其影响
+- 分析Common Crawl截断对不同规模文档的影响
+- 评估重建工具在恢复截断文本方面的效果
+- 提出同时以文档和token两种单位报告统计的建议
+
+**当前局限**
+
+> ['数据集限于web PDF，可能不全面', '重建工具的评估基于特定实现，可能存在偏差', '未深入探讨解决方案，主要提出报告建议']
+
+**后续可改进方向**
+
+- 开发更准确的PDF文本恢复方法
+- 研究不同截断策略对语料质量的影响
+- 推动语料统计标准化，引入双单位报告
+
+**工程启发**
+
+> 为OCR和文档处理领域提供了关于语料规模统计的重要洞见，有助于改进语料构建和评估方法。
+
+**为什么值得关注**
+
+> 直接涉及PDF文档语料统计和OCR路由，与OCR文档处理密切相关。
+
+**原始摘要**
+
+PDF corpora advertise their size in tokens but compute every rate they publish (coverage, OCR
+routing, re-fetch recovery, language mix) per document, and none decomposes its token total. The two
+units diverge sharply. On CC-MAIN-2021-31-PDF-UNTRUNCATED (7.9M web PDFs, 32.6B tokens), 3.02% of
+text-bearing documents hold half the tokens (Gini 0.807); documents over 50 pages are 5.00% of the
+corpus but 53.53% of its text. The PDFs produced by a TeX{} toolchain are 1.66% of documents and
+4.05% of the text. The clearest casualty is Common Crawl's truncation cap: it affected 23.06% of
+documents and 63.08% of the text. Reconstructing the truncated files and extracting both versions,
+two widely used libraries recover 11.4% and 1.4% of that text; between 72% and 97% of affected
+documents yield nothing; roughly 55--62% of the corpus's text is lost. Under the 5 MiB cap adopted
+in March 2025, 30.19% of tokens would still be truncated, and recovery on those documents rises only
+from 3.3% to 13.2%. We recommend that corpus statistics be reported in both units: documents and
+tokens.
+
+---
+
+### 4. D2-ScaleAgent: Dual-Dimensional Scaling for Long Document Understanding
+
+- arXiv: [2608.16417v1](https://arxiv.org/abs/2608.16417v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.16417v1)
+- 作者: Hao Zhang, Longrong Yang, Lunhao Duan, Ziyang Wang, Qing-Guo Chen, Shanshan Zhao
+- 发布时间: 2026-08-17T11:15:27Z
+- 分类: cs.CL
+- 相关性评分: 7
+- 主题标签: 多智能体系统、长文档理解、检索增强生成、动态路由、测试时计算
+
+**中文摘要**
+
+> 提出D2-ScaleAgent，一种双维度缩放代理框架，用于长文档理解。通过Verifier代理驱动的动态路由循环，基于查询内在难度进行检索和推理的缩放：检索扩展时向外路由，分解查询并并行检索页面；推理细化时向内路由，动态选择不同粒度和数量的子代理提取证据。在多个长文档基准上验证了有效性。
+
+**核心创新概述**
+
+> 引入双维度缩放范式，允许模型根据查询难度动态调整计算资源，在检索和推理两个维度上自适应扩展，克服了现有方法固定流程的局限。
+
+**创新点拆解**
+
+- 提出双维度缩放：检索缩放和推理缩放
+- Verifier代理基于查询难度驱动动态路由循环
+- 持续更新的证据库作为动态工作记忆
+- 自适应剪枝和子代理选择以优化资源使用
+
+**当前局限**
+
+> ['代理框架复杂度高，增加系统开销', '依赖Verifier的准确性，可能影响路由决策', '实验主要在特定基准上，泛化性待验证']
+
+**后续可改进方向**
+
+- 优化Verifier模型，减少误判
+- 探索更高效的证据库更新策略
+- 扩展至更广泛的长文档理解任务
+
+**工程启发**
+
+> 提供了一种自适应计算分配的代理框架，可提高长文档理解的效率和准确性，对于实际文档处理系统有重要参考价值。
+
+**为什么值得关注**
+
+> 与OCR相关，因为长文档理解涉及文档解析和内容提取，尤其关注多模态文档。
+
+**原始摘要**
+
+Multi-modal retrieval-augmented generation (RAG) is a key technique for visually rich long document
+understanding. Existing multi-modal RAG methods are progressively advancing toward multi-agent
+systems: they first retrieve relevant pages based on a query, and then iteratively understand
+information within those pages. However, these methods typically rely on fixed workflows and lack
+the ability to dynamically scale computation at test time, often leading to insufficient evidence.
+To address this, we propose D2-ScaleAgent, an agentic framework that introduces a dual-dimensional
+scaling paradigm for retrieval and reasoning. The core of D2-ScaleAgent is a Verifier agent-driven
+dynamic routing loop based on the intrinsic difficulty of the query, centered around a continuously
+updated evidence bank that serves as the agent's dynamic working memory: when retrieval needs to be
+expanded, the agent routes outward (retrieval scaling), decomposing the query into attributes and
+performing parallel page retrieval, followed by adaptive pruning to ensure comprehensive evidence
+coverage. When fine-grained reasoning is required, the agent routes inward (reasoning scaling),
+dynamically selecting sub-agents with varying granularity and count to extract evidence from pages.
+Finally, D2-ScaleAgent achieves logical closure over the evidence chain. Extensive experiments
+demonstrate that D2-ScaleAgent is effective on long and visually rich document benchmarks like
+MMLongBench-Doc, LongDocURL, etc.
+
+---
+
+### 5. PLeDO: Pain Level Detection for Osteoarthritis from EMR Data
+
+- arXiv: [2608.15719v1](https://arxiv.org/abs/2608.15719v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.15719v1)
+- 作者: Yuhao Chen, Jiahao Cai, Nafiz Sadman, Farhana Zulkernine, John Queenan, David Barber
+- 发布时间: 2026-08-16T12:41:29Z
+- 分类: cs.AI, cs.ET, cs.IR, cs.LG
+- 相关性评分: 6
+- 主题标签: 医疗信息抽取、疼痛检测、电子病历、自然语言处理、机器学习、骨关节炎
+
+**中文摘要**
+
+> 提出PLeDO，一个集成疼痛水平检测工具，用于骨关节炎患者。从电子病历中提取结构化数据和非结构化图表笔记信息，使用同义词库、NLP和机器学习技术，将患者分为轻度或中重度疼痛。PLeDO结合药物信息和疼痛量表信息，在人工标注的金标准数据上验证了有效性。
+
+**核心创新概述**
+
+> 将结构化EMR数据和不可结构化图表笔记中的疼痛表达结合，提出集成工具PLeDO，利用同义词库和机器学习分类疼痛严重程度。
+
+**创新点拆解**
+
+- 提出基于同义词的疼痛水平检测工具SPaDe
+- 集成结构化药物信息与非结构化笔记中的疼痛量表信息
+- 结合人类标注的金标准数据评估模型
+- 针对骨关节炎患者进行专门优化
+
+**当前局限**
+
+> ['基于单一疾病（骨关节炎）和特定EMR数据，泛化性有限', '依赖人工标注质量，样本量可能较小', '分类仅分为轻度/中重度，粒度较粗']
+
+**后续可改进方向**
+
+- 扩展到更多疾病和更细粒度的疼痛分级
+- 引入更多特征，如影像数据，提高准确性
+- 探索无监督学习减少对标注数据的依赖
+
+**工程启发**
+
+> 为医疗保健领域提供自动化疼痛水平评估工具，可辅助提高初级保健中的护理质量，具有实际部署价值。
+
+**为什么值得关注**
+
+> 涉及从非结构化医疗文本中提取信息，与OCR和自然语言处理在医疗文档解析方面相关。
+
+**原始摘要**
+
+Osteoarthritis (OA) is a progressive chronic joint disease resulting in a breakdown of articular
+cartilage and bone when damaged joint tissues are not able to normally repair themselves. The aim of
+this pilot research study is to understand the pain severity for OA from patients' primary care
+Electronic Medical Records (EMR), both from the structured medical data and the unstructured chart
+note data using information extraction, natural language processing and machine learning techniques.
+We propose SPaDe, a Synonym-based Pain level Detection tool to categorize patients into having mild
+or moderate-to-severe pain to understand diagnosis and treatment methods based on only the pain
+related expressions in the unstructured chart note. Expressions are subjective, objective, and
+influenced by cultural background and demography which poses a difficult challenge. Therefore, we
+improve the model by incorporating the medication information from the structured EMR data and pain
+scale related information from the chart note to propose an integrated pain level detection tool for
+OA called PLeDO. With the help of human labeled gold standard data, we demonstrate that both SPaDe
+and PLeDO can detect mild and moderate-to-severe pain from the EMR data to analyze and potentially
+improve the quality of care in primary care setting.
+
+---
