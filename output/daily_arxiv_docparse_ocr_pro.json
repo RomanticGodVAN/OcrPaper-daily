@@ -1,55 +1,120 @@
 {
   "meta": {
-    "report_date": "2026-08-18",
-    "generated_at_utc": "2026-08-18 02:20:42",
+    "report_date": "2026-08-19",
+    "generated_at_utc": "2026-08-19 02:31:04",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 5
+    "count": 6
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦于文档解析与OCR的多个前沿方向，包括金融文档审计的验证框架、视觉文档检索的潜在概念学习、PDF语料统计偏差分析、长文档理解的双维度缩放代理，以及医疗EMR的疼痛检测。共同趋势是利用多模态大语言模型和代理式架构增强文档理解，同时强调可审计性、效率与鲁棒性。工程上，这些研究提供了提升文档处理系统准确性、可扩展性和可信度的具体方法。",
-    "trend_summary": "当前研究趋势包括：1) 多模态大语言模型在文档理解中占据主导，但随之而来的幻觉控制和可审计性成为焦点，如LAVA框架；2) 代理式架构（Agentic）用于动态分配计算资源，如D2-ScaleAgent，以实现高效长文档理解；3) 检索增强生成（RAG）持续演进，视觉文档检索中引入潜在概念学习（ConceptFormer）；4) 数据层面，PDF语料统计的单位偏差受到关注，建议双单位报告；5) 垂直领域应用深化，如医疗疼痛检测与金融审计。",
+    "executive_summary": "今日OCR/文档解析研究聚焦于将文档解析为可执行代码、金融文档审计验证、语料库统计偏差、多模态推理基准、安全防护及长文档理解等方向。核心趋势是文档解析正从传统文本提取转向更深层的语义、逻辑和可执行结构重建，并强调可信、可验证和安全的AI系统。同时，多篇论文指出当前模型在专业文档推理、高保真重构方面仍存在明显不足，工程上亟需更高效、鲁棒和可扩展的解决方案。",
+    "trend_summary": "1. 文档解析范式从文本提取转向结构化、可执行的重建（如LaTeX+Python代码），强调保真度和可验证性。2. 多模态大模型（MLLM）在专业文档（学术、金融）中的应用成为热点，但模型能力不足，需要验证框架和专用基准。3. 语料库质量与统计偏差引起关注，影响模型训练效果。4. 文档理解任务强调推理能力，双语和多语言基准出现。5. 安全防护成为MLLM应用的重要考虑，尤其是引用相关风险。6. 长文档理解向智能体动态计算扩展，实现资源自适应分配。",
     "common_innovations": [
-      "利用多模态大语言模型和代理式架构提升文档理解的准确性和效率",
-      "引入验证和动态路由机制增强系统鲁棒性，如LAVA的符号验证和D2-ScaleAgent的动态缩放",
-      "改进检索增强生成，通过潜在概念学习或双维度缩放提升文档检索和长文档理解性能",
-      "强调可审计性和可解释性，确保高风险场景下的可信度"
+      "提出将文档解析为可执行代码（如LaTeX+Python）以保留结构、数据和逻辑的可验证范式。",
+      "构建面向金融文档的模块化验证框架，结合规则检索、布局保持提取和符号验证。",
+      "首次系统揭示Web-PDF语料库统计中文档数与token数的巨大偏差，建议双重单位报告。",
+      "推出首个英俄双语企业及学术文档推理基准，自包含设计不依赖外部知识。",
+      "设计引用感知的安全门机制，动态评估操作-目标对安全性以防御越狱攻击。",
+      "提出双维度扩展智能体框架，根据查询难度动态调整检索和推理资源。"
     ],
     "future_directions": [
-      "开发轻量级且可解释的潜在概念表示模型，以降低计算成本并增强视觉文档检索的透明度",
-      "研究代理式框架中更高效的验证器和记忆机制，减少系统开销并优化大规模应用",
-      "构建标准化PDF语料统计基准，推广双单位报告，并研发更可靠的截断恢复技术",
-      "探索多模态文档理解中的幻觉消减方法，结合外部知识库和规则推理",
-      "设计跨领域可迁移的验证规则生成方法，减少人工干预并提升泛化性"
+      "探索自监督预训练任务，结合代码执行反馈，提升模型对结构化文档元素（表格、公式）的重构能力。",
+      "开发更有效的PDF截断恢复方法，研究文档长度与内容质量关系以指导语料构建。",
+      "将金融文档验证框架扩展到其他高合规性领域（如法律），并开源基准促进社区发展。",
+      "针对长文档理解，优化智能体的路由和剪枝策略，降低计算延迟，并探索跨文档扩展。",
+      "扩展双语推理基准到更多语言和领域，设计更复杂的多步推理问题以更好评估模型能力。",
+      "研究安全门机制的对抗鲁棒性，防止攻击者通过视觉提示绕过防护，同时降低推理开销。"
     ],
     "engineering_takeaways": [
-      "采用模块化、骨干无关的流水线设计，便于适配不同模型，如LAVA",
-      "在文档检索中引入潜在概念学习可显著提升效果，但需权衡计算成本",
-      "动态计算分配机制（如D2-ScaleAgent）能有效提高长文档处理效率",
-      "报告语料统计时需同时注明文档数和token数，避免误导性结论",
-      "整合结构化与非结构化信息（如PLeDO）是提升领域专用系统准确性的关键"
+      "评估文档解析质量时，应同时考虑文档数和token数，避免语料统计误导。",
+      "构建文档审计系统时，采用模块化、骨干无关的设计，可灵活适配不同模型和规则。",
+      "使用验证器智能体动态分配计算资源，可有效提升长文档理解的效率。",
+      "在部署MLLM处理文档时，应加入引用感知的安全门，预防恶意操作。",
+      "专业文档推理基准应覆盖多种语言，以发现模型在非英语场景下的能力短板。"
     ],
     "watchlist": [
       {
+        "title": "Code as Representation: A Compilable Parsing Paradigm for Academic Documents",
+        "watch_reason": "提出文档解析为可执行代码的新范式，性能瓶颈明显，未来优化空间大，可能引领学术文档解析方向。"
+      },
+      {
         "title": "LAVA: Logic-Aware Validation and Augmentation Framework for Large-Scale Financial Document Auditing",
-        "watch_reason": "其可审计性和幻觉控制机制对金融等高风险场景至关重要，后续可能发展为标准工具。"
-      },
-      {
-        "title": "ConceptFormer: Learning Adaptive Latent Concepts for Query-Document Alignment in Visual Document Retrieval",
-        "watch_reason": "潜在概念表示可能成为视觉检索的通用范式，影响RAG系统设计，值得跟踪其可解释性进展。"
-      },
-      {
-        "title": "D2-ScaleAgent: Dual-Dimensional Scaling for Long Document Understanding",
-        "watch_reason": "双维度缩放策略体现了测试时计算的智能分配，有望提升复杂文档处理系统的效率，需关注其泛化能力。"
+        "watch_reason": "针对金融审计的验证框架，实用性强，后续可能扩展到其他领域，且开源可能性高。"
       },
       {
         "title": "Counting Documents Is Not Counting Text: Unit Bias in Web-PDF Corpus Statistics",
-        "watch_reason": "语料统计偏差影响科研和工程实验的严谨性，推动标准化有助于研究和开发。"
+        "watch_reason": "揭示语料库统计偏差，对预训练数据构建有重要指导意义，可能推动统计标准改变。"
+      },
+      {
+        "title": "BEAR-Bench: A Bilingual Enterprise and Academic Reasoning Benchmark for Multimodal Models",
+        "watch_reason": "新双语基准，对模型评估有重要价值，未来可能扩展影响多语言文档理解研究。"
+      },
+      {
+        "title": "COMIC: Reference-Aware Safety Gating for Multimodal Large Language Models",
+        "watch_reason": "针对MLLM安全风险的创新防御机制，对部署安全至关重要，值得跟踪其后续优化和商业应用。"
+      },
+      {
+        "title": "D2-ScaleAgent: Dual-Dimensional Scaling for Long Document Understanding",
+        "watch_reason": "智能体驱动的动态计算扩展，为长文档理解提供高效方案，可能成为未来RAG系统标配。"
       }
     ]
   },
   "papers": [
+    {
+      "title": "Code as Representation: A Compilable Parsing Paradigm for Academic Documents",
+      "summary": "Academic papers are a primary carrier of scientific knowledge, yet most of this knowledge remains locked in PDFs that are optimized for human reading rather than machine use. For Multimodal Large Language Models (MLLMs), the core challenge is not only perception, but representation: scientific pages interleave text with Structured Academic Elements (SAEs) such as tables, formulas, charts, and pseudocode, whose structure, data, and logic are poorly preserved by common surrogates like Markdown. We therefore propose Compilable Academic Document Parsing (CADP), a paradigm that reconstructs a full page as contextual \\LaTeX{} plus executable Python, so that structure-preserving elements and executable chart representations can be reconstructed, recompiled, and directly verified against the source page. To support this setting, we introduce CADP-Bench, an expert-verified benchmark of full academic pages containing tightly coupled text and multiple SAE types, evaluated through a re-injection compilation protocol. We further study current capabilities using SOTA MLLMs and an exploratory multi-agent baseline that incorporates common agentic techniques. Results show that even frontier models still struggle to produce high-fidelity executable reconstructions, highlighting substantial room for improvement in structure-aware scientific document parsing. CADP-Bench is released for future research.",
+      "link": "https://arxiv.org/abs/2608.17550v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17550v1",
+      "authors": [
+        "Rihui Jin",
+        "Jun Wang",
+        "chengyuan zhu",
+        "Liang Mingyu",
+        "Yue Gao",
+        "Li Yunxuan",
+        "Kuicai Dong",
+        "Guilin Qi",
+        "Lin Ren",
+        "Yongrui Chen",
+        "Xinbang Dai",
+        "Jiaqi Li",
+        "Tongtong Wu",
+        "Gholamreza Haffari"
+      ],
+      "published": "2026-08-18T09:10:43Z",
+      "updated": "2026-08-18T09:10:43Z",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "arxiv_id": "2608.17550v1",
+      "score": 17,
+      "topic_tags": [
+        "学术文档解析",
+        "MLLM",
+        "LaTeX",
+        "Python",
+        "基准测试"
+      ],
+      "zh_summary": "本文提出了一种新的学术文档解析范式——可编译学术文档解析（CADP），将整页文档重构建为上下文LaTeX加上可执行的Python代码，以保留表格、公式、图表和伪代码等结构化学术元素的结构、数据和逻辑。作者构建了专家验证的基准CADP-Bench，并采用重新注入编译协议进行评估，同时研究现有最先进的MLLMs和多智能体基线在生成可执行重构方面的能力。结果表明，即使是前沿模型也难以产生高保真的可执行重构，表明该领域仍有很大提升空间。",
+      "novelty": "提出了将文档解析为可执行代码（LaTeX+Python）的新范式，超越了传统的Markdown等表示，支持直接验证和重编译；提供了包含多种SAE类型且专家验证的基准，并设计了独特的评估协议。",
+      "innovation_points": [
+        "提出CADP范式，将文档重构为上下文LaTeX加可执行Python代码",
+        "构建包含紧密耦合文本与多种结构化元素的学术页面基准CADP-Bench",
+        "设计重新注入编译协议以评估可执行重构的保真度",
+        "研究多智能体基线，结合常见智能体技术探索解析能力的上限"
+      ],
+      "limitations": "['现有模型生成的高保真可执行重构准确率仍然较低', '基准覆盖的文档类型和语言范围有限', '评估协议可能未能完全反映真实应用场景的复杂性']",
+      "improvement_directions": [
+        "探索更有效的模型架构或训练策略，提升结构化元素重构的准确性",
+        "扩展基准覆盖更多文档类型和语言",
+        "优化编译协议以更贴近真实应用需求",
+        "开发专门针对代码生成与视觉理解结合的预训练任务"
+      ],
+      "engineering_value": "为学术文档自动解析和知识提取提供了新思路，有望提升科学知识在机器中的可用性，支持自动化文献分析、知识库构建等应用。",
+      "why_relevant": "直接关注学术文档的结构化解析，与OCR研究方向高度相关，提供新的表示范式和基准，推动文档解析技术的发展。"
+    },
     {
       "title": "LAVA: Logic-Aware Validation and Augmentation Framework for Large-Scale Financial Document Auditing",
       "summary": "Financial document validation in production, such as payroll auditing, tax compliance, and loan underwriting, demands exceptional accuracy, consistency, and reproducibility under strict enterprise constraints. In practice, documents arrive with heterogeneous layouts and formats, semantically rich and context-dependent content, and embedded business rules that current pipelines struggle to process reliably. We introduce LAVA (Logic-Aware Validation and Augmentation), a modular, backbone-agnostic pipeline built on multimodal large language models, that integrates a four-stage design: document-rule retrieval, layout-preserving information extraction, auxiliary metadata enrichment, and auditable symbolic/arithmetic verification. LAVA supports robust rule grounding, fine-grained error attribution, and consistent, traceable end-to-end execution, capabilities essential for high-stakes deployment. Evaluated on a large real-world benchmark with diverse financial documents and dozens of expert-curated validation rules, LAVA outperforms baselines in hallucination control and edge-case handling while maintaining efficient token usage, demonstrating practicality for high-volume, time-critical validation.",
@@ -70,80 +135,29 @@
       "arxiv_id": "2608.16763v1",
       "score": 17,
       "topic_tags": [
-        "多模态大语言模型",
-        "文档信息提取",
-        "符号验证",
-        "金融审计",
-        "规则检索",
-        "可审计性"
+        "金融文档审计",
+        "多模态LLM",
+        "验证框架",
+        "信息提取",
+        "合规性"
       ],
-      "zh_summary": "介绍LAVA框架，一个基于多模态大语言模型的模块化、骨干无关的流水线，用于大规模金融文档审计。该框架包含四个阶段：文档规则检索、保留布局的信息提取、辅助元数据丰富和可审计的符号/算术验证。在真实世界基准上优于基线，在幻觉控制和边缘情况处理方面表现更好，同时保持高效的token使用。",
-      "novelty": "提出了一个逻辑感知的验证和增强框架，将规则检索、布局保留提取、元数据丰富和符号验证集成到一个统一的流水线中，强调可审计性和可追溯性，适用于高风险的金融文档审计场景。",
+      "zh_summary": "本文提出了LAVA，一个基于多模态大语言模型的模块化、骨干无关的流程，用于大规模金融文档审计。LAVA包括四个阶段：文档-规则检索、布局保持的信息提取、辅助元数据丰富和可审计的符号/算术验证。它在实际金融文档基准上表现出色，优于基线在幻觉控制和边缘情况处理方面的性能，同时保持高效的令牌使用，展示了在高吞吐量、时间敏感的验证场景中的实用性。",
+      "novelty": "提出了一个逻辑感知的验证和增强框架，专门针对金融文档审计，结合规则检索、布局保持提取和符号验证，强调了可审计性和可追溯性。",
       "innovation_points": [
-        "四阶段模块化设计，支持规则接地和细粒度错误归因",
-        "骨干无关，可适配不同多模态大语言模型",
-        "引入符号/算术验证步骤，增强结果的可信度和可审计性",
-        "在真实金融文档基准上验证，专注幻觉控制和边缘情况处理"
+        "设计四阶段流程：文档-规则检索、布局保持信息提取、元数据丰富、符号/算术验证",
+        "支持规则接地和细粒度错误归因",
+        "骨干无关的模块化设计",
+        "在严格企业约束下实现一致、可追溯的端到端执行"
       ],
-      "limitations": "['依赖多模态大语言模型的性能，可能受限于模型能力', '验证规则需要专家制定，扩展性受限', '评估基于单一基准，泛化性有待进一步验证']",
+      "limitations": "['评估基于特定领域基准，通用性需进一步验证', '框架依赖多模态LLM的能力，可能受限于模型性能', '未与其他同类系统进行广泛对比']",
       "improvement_directions": [
-        "探索更高效的规则表示和检索方法，减少对专家人工的依赖",
-        "研究如何将框架扩展到更多类型的文档和验证规则",
-        "优化token使用效率，以支持超大规模和高吞吐场景"
+        "增强对不同文档布局和格式的适应性",
+        "探索更高效的令牌利用策略，降低部署成本",
+        "集成更多领域知识，提高规则理解和验证的准确性",
+        "开源框架和基准，促进社区发展"
       ],
-      "engineering_value": "为金融审计等高风险场景提供了一种可靠的大规模文档验证解决方案，具有实际部署价值，帮助企业提高准确性、一致性和可追溯性。",
-      "why_relevant": "与OCR相关，因为金融文档审计涉及文档解析和信息提取，LAVA框架中保留布局的信息提取模块和多模态大语言模型的应用，为文档理解提供新思路。"
-    },
-    {
-      "title": "ConceptFormer: Learning Adaptive Latent Concepts for Query-Document Alignment in Visual Document Retrieval",
-      "summary": "Visual document retrieval is a critical component of multimodal retrieval-augmented generation, aiming to identify query-relevant pages from document collections where evidence is distributed across text, layout, charts, and visual structures. Recent efforts toward finer-grained supervision primarily rely on textual descriptions or localized visual regions as evidence proxies. However, such supervision signals may either overlook complex visual structures or provide incomplete and inaccurate representations of the underlying evidence. To address these limitations, we propose ConceptFormer, a latent concept representation learning framework for visual document retrieval. ConceptFormer models query-relevant evidence as continuous, query-conditioned latent concepts that explicitly bridge localized visual evidence and semantic relevance, without requiring either textual intermediate representations or direct reliance on raw visual annotations. During training, ConceptFormer employs a strong vision-language model to dynamically determine the number of latent concept tokens and uses these concepts as an intermediate representation to bridge the semantic gap between queries and documents, thereby guiding the learning of the embedding space. Experiments on diverse visual document retrieval benchmarks demonstrate that ConceptFormer achieves 16.7\\% and 22.1\\% relative improvements in average NDCG@10 over the strongest visual retrieval baseline and the strongest OCR-based text retrieval baseline, respectively. Further analysis reveals that latent concepts effectively connect localized visual evidence with semantic relevance, enabling the retriever to capture both fine-grained textual cues and complex document-level visual structures while preserving strong retrieval alignment. Codes and data are available at https://github.com/Neuir/ConceptFormer.",
-      "link": "https://arxiv.org/abs/2608.15698v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.15698v1",
-      "authors": [
-        "Peng Chunyi",
-        "Xu Zhipeng",
-        "Yan Yukun",
-        "Liu Zhenghao",
-        "Yu Shi",
-        "Mei Sen",
-        "Sun Yubo",
-        "Zhang Yongheng",
-        "Zhou Jie",
-        "Gu Yu",
-        "Yu Ge",
-        "Sun Maosong"
-      ],
-      "published": "2026-08-16T12:07:12Z",
-      "updated": "2026-08-16T12:07:12Z",
-      "categories": [
-        "cs.CV",
-        "cs.IR"
-      ],
-      "arxiv_id": "2608.15698v1",
-      "score": 17,
-      "topic_tags": [
-        "视觉文档检索",
-        "潜在概念学习",
-        "多模态表示",
-        "检索增强生成",
-        "视觉-语言模型"
-      ],
-      "zh_summary": "提出ConceptFormer，一个潜在概念表示学习框架，用于视觉文档检索。通过将查询相关的证据建模为连续的、由查询条件化的潜在概念，显式桥接局部视觉证据和语义相关性，无需文本中间表示或直接依赖原始视觉注释。在多个基准上，与最强的视觉检索基线和OCR文本检索基线相比，平均NDCG@10分别相对提高16.7%和22.1%。",
-      "novelty": "提出一种新的潜在概念表示学习方法，通过动态确定概念数量，以潜在概念作为中间表示，弥补查询和文档之间的语义鸿沟，无需文本中间表示或原始视觉注释。",
-      "innovation_points": [
-        "引入潜在概念作为查询条件化的连续表示，桥接视觉证据和语义相关性",
-        "训练中使用强大的视觉-语言模型动态确定潜在概念token的数量",
-        "无需文本中间表示或直接视觉注释，简化监督信号",
-        "在多个视觉文档检索基准上取得显著性能提升"
-      ],
-      "limitations": "['依赖强大的视觉-语言模型，可能增加计算成本', '潜在概念的解释性有待加强', '实验主要基于特定基准，泛化性需进一步研究']",
-      "improvement_directions": [
-        "研究如何提高潜在概念的可解释性，以增强模型透明度",
-        "探索更轻量级的模型，减少计算开销",
-        "扩展至更广泛的下游任务，如文档分类和问答"
-      ],
-      "engineering_value": "增强了视觉文档检索的性能，有助于改进多模态检索增强生成系统，具有较高的实际应用价值。",
-      "why_relevant": "直接涉及视觉文档检索，与OCR紧密相关，其潜在概念学习方法可应用于文档理解任务。"
+      "engineering_value": "为金融文档验证提供了可靠的自动化解决方案，能够提高审计效率、减少错误，满足企业级应用的严格需求。",
+      "why_relevant": "关注金融文档中的信息提取和验证，是OCR技术在高价值应用场景中的重要延伸，具有实际部署价值。"
     },
     {
       "title": "Counting Documents Is Not Counting Text: Unit Bias in Web-PDF Corpus Statistics",
@@ -162,29 +176,120 @@
       "arxiv_id": "2608.16390v1",
       "score": 12,
       "topic_tags": [
-        "PDF语料统计",
-        "单位偏差",
+        "PDF语料库",
+        "统计偏差",
         "Common Crawl",
-        "截断恢复",
-        "OCR路由",
-        "token统计"
+        "文本恢复",
+        "数据质量"
       ],
-      "zh_summary": "本文揭示PDF语料库统计中常见的单位偏差问题：语料库规模以token数宣传，但覆盖率、OCR路由等指标按文档计算，且没有分解token总量。在CC-MAIN-2021-31-PDF-UNTRUNCATED上，3.02%的文档占据一半token，超过50页的文档占5.00%但贡献53.53%的文本。Common Crawl截断政策导致大量文本丢失，重建后恢复率极低。建议同时以文档和token两种单位报告语料统计。",
-      "novelty": "首次系统分析PDF语料库统计中文档和token两种单位之间的分歧，并量化了截断导致的文本损失，提出双单位报告的建议。",
+      "zh_summary": "本文研究了PDF语料库统计中的单位偏差问题，指出语料库虽然以token数宣传规模，但发布的各项指标却按文档数计算，导致严重偏差。通过对CC-MAIN-2021-31-PDF-UNTRUNCATED的分析，发现3.02%的文档包含一半的token，文档截断影响23.06%的文档但涉及63.08%的文本，多数截断文本无法恢复。建议语料库统计应同时报告文档数和token数两种单位。",
+      "novelty": "首次系统性地揭示了Web-PDF语料库统计中文档数与token数之间的巨大差异，量化分析了截断导致的内容丢失，并提出了双重单位报告的建议。",
       "innovation_points": [
-        "指出PDF语料库统计中单位偏差问题，并量化其影响",
-        "分析Common Crawl截断对不同规模文档的影响",
-        "评估重建工具在恢复截断文本方面的效果",
-        "提出同时以文档和token两种单位报告统计的建议"
+        "大规模分析真实Web-PDF语料库，揭示文档数与token数的分布不均",
+        "量化Common Crawl截断对文本损失的影响及恢复率",
+        "评估两种主流PDF库的文本恢复能力",
+        "提出统计报告应使用双重单位的建议"
       ],
-      "limitations": "['数据集限于web PDF，可能不全面', '重建工具的评估基于特定实现，可能存在偏差', '未深入探讨解决方案，主要提出报告建议']",
+      "limitations": "['分析基于特定语料库和特定时间戳，可能不具备普遍性', '未深入探讨不同类型PDF的特征差异', '未考虑多页文档内token分布的具体模式']",
       "improvement_directions": [
-        "开发更准确的PDF文本恢复方法",
-        "研究不同截断策略对语料质量的影响",
-        "推动语料统计标准化，引入双单位报告"
+        "扩展到更多语料库和时间点，验证发现的普遍性",
+        "开发更有效的PDF截断恢复方法",
+        "研究文档长度与内容质量的关系，辅助语料构建决策",
+        "推动语料库统计标准采用双重单位"
       ],
-      "engineering_value": "为OCR和文档处理领域提供了关于语料规模统计的重要洞见，有助于改进语料构建和评估方法。",
-      "why_relevant": "直接涉及PDF文档语料统计和OCR路由，与OCR文档处理密切相关。"
+      "engineering_value": "为大规模PDF语料构建和评估提供了重要警示，指导语料库设计者更准确地衡量数据规模和内容覆盖，优化爬取和存储策略。",
+      "why_relevant": "直接涉及PDF文档处理和语料统计，对OCR和文档理解研究的数据集构建具有参考价值。"
+    },
+    {
+      "title": "BEAR-Bench: A Bilingual Enterprise and Academic Reasoning Benchmark for Multimodal Models",
+      "summary": "While Multimodal Large Language Models (MLLMs) have made significant strides in visual comprehension, their ability to reason about text-dense, professional documents remains incompletely evaluated. Existing benchmarks emphasize information extraction, require external domain knowledge, or cover professional documents only as one of many settings. They are also largely English- or Chinese-centric, leaving other languages and Russian, in particular, substantially underrepresented. To address these limitations, we introduce BEAR-Bench (Bilingual Enterprise and Academic Reasoning), a self-contained, complex English-and-Russian benchmark comprising 1000 human-annotated questions based on text-rich business and scientific documents. We evaluate 16 proprietary and open-weight MLLMs, including Gemini 3.1 Pro and Qwen3.5-397B, on BEAR-Bench and observe clear headroom even for the strongest systems. Finally, we use the resulting model outputs to compare existing hallucination detection methods, evaluating not only how often models fail on BEAR-Bench but also how reliably those failures can be identified.",
+      "link": "https://arxiv.org/abs/2608.17895v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17895v1",
+      "authors": [
+        "Liubov Chubarova",
+        "Alexandra Kuleshova",
+        "Daniil Volkov",
+        "Kirill Sultanov",
+        "Alexey Zaytsev"
+      ],
+      "published": "2026-08-18T15:29:09Z",
+      "updated": "2026-08-18T15:29:09Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "arxiv_id": "2608.17895v1",
+      "score": 10,
+      "topic_tags": [
+        "多模态基准",
+        "推理",
+        "双语",
+        "文档理解",
+        "幻觉检测"
+      ],
+      "zh_summary": "本文提出了BEAR-Bench，一个面向多模态模型的英俄双语企业及学术推理基准，包含1000个人工标注的基于文本密集的商业和科学文档的问题。作者评估了16个专有和开源MLLM，包括Gemini 3.1 Pro和Qwen3.5-397B，在所有模型上都观察到明显的性能提升空间，并比较了现有的幻觉检测方法，评估模型失败的可检测性。",
+      "novelty": "引入了首个涵盖英语和俄语的专业文档推理基准，填补了现有基准的语言空白，并自包含设计，不依赖外部知识，专注于文本密集场景。",
+      "innovation_points": [
+        "构建双语（英语和俄语）企业及学术文档推理基准",
+        "包含1000个人工标注问题，覆盖多种专业文档类型",
+        "评估16个先进MLLM，提供全面性能基线",
+        "比较多种幻觉检测方法，为模型可靠性提供参考"
+      ],
+      "limitations": "['基准只覆盖英语和俄语，其他语言仍然缺失', '问题类型可能偏向于信息提取，推理深度有限', '模型性能受限于特定文档领域']",
+      "improvement_directions": [
+        "扩展基准到更多语言和领域",
+        "设计更复杂的推理问题，涉及多步逻辑",
+        "探索更有效的幻觉检测方法，提高失败识别能力",
+        "鼓励模型在专业文档上的微调与评估"
+      ],
+      "engineering_value": "为评估和比较多模态模型在专业文档上的推理能力提供了标准化工具，推动模型在实际应用中的可靠性和实用性。",
+      "why_relevant": "关注文本密集文档的推理，与OCR和文档理解密切相关，提供双语评估资源，促进多语言场景的研究。"
+    },
+    {
+      "title": "COMIC: Reference-Aware Safety Gating for Multimodal Large Language Models",
+      "summary": "Multimodal large language models (MLLMs) are increasingly used to interact with screenshots, scanned documents, diagrams, and other visually grounded inputs. This shift introduces a new safety risk: in many multimodal jailbreaks, neither the prompt nor the image is harmful in isolation. Unsafe behavior emerges only when the model binds an apparently benign operation, such as summarizing, translating, or following, to a localized visual target. This reveals a structural weakness in current multimodal defenses, which largely moderate the prompt-image pair as a whole even though the true security-relevant unit is the grounded operation-target pair produced during dereference. In this work, we identify and analyze this reference-dependent failure mode and show that existing defenses degrade when harmful semantics are localized, activated only after grounding, and dependent on visual reference resolution. To address this problem, we propose COMIC (Context-Operation-Modality-Image-Classifier), a reference-aware pre-generation safety gate for MLLMs. COMIC first infers the requested operation and reference type, constructs candidate targets from OCR and open-vocabulary proposals, grounds plausible referents, and evaluates safety over explicit operation-target pairs. To handle ambiguity conservatively, COMIC combines max-risk aggregation with quality-aware routing before deciding whether to forward or block a request. We evaluate COMIC across multiple open-source MLLMs, localized and broader multimodal jailbreak benchmarks, and benign reference-sensitive settings. The results show that COMIC consistently improves robustness while preserving benign utility and practical efficiency. More broadly, our findings suggest that multimodal safety cannot be enforced reliably without modeling the requested operation, the visual target to which it applies, and the confidence of that grounding.",
+      "link": "https://arxiv.org/abs/2608.17234v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17234v1",
+      "authors": [
+        "Md Abdullahil Oaphy",
+        "Anhao Xiang",
+        "Zongxing Xie",
+        "Huayue Gu",
+        "Chenyu Wang",
+        "Honghui Xu"
+      ],
+      "published": "2026-08-18T00:45:29Z",
+      "updated": "2026-08-18T00:45:29Z",
+      "categories": [
+        "cs.CR",
+        "cs.AI"
+      ],
+      "arxiv_id": "2608.17234v1",
+      "score": 10,
+      "topic_tags": [
+        "多模态安全",
+        "越狱防御",
+        "安全门",
+        "引用解析",
+        "MLLM"
+      ],
+      "zh_summary": "本文识别了MLLM在多模态场景中的一种新安全风险：当提示和图像单独无害，但模型将看似良性的操作（如总结、翻译）绑定到局部视觉目标时，会产生不安全行为。这种基于引用的失败模式暴露了当前防御机制的弱点。为此，作者提出了COMIC，一个引用感知的预生成安全门，通过推断操作和引用类型、构建候选目标、接地指代并评估操作-目标对的安全性，采用最大风险聚合和质量感知路由进行决策。实验表明COMIC在多种基准上有效。",
+      "novelty": "首次系统分析MLLM中引用依赖的安全失败模式，并提出针对性的安全门机制，动态评估操作-目标对，而非整体图像。",
+      "innovation_points": [
+        "识别引用依赖的失败模式，并形式化描述",
+        "设计COMIC安全门，推断操作和引用类型，构建候选目标并接地",
+        "采用保守策略处理歧义，结合最大风险聚合和质量感知路由",
+        "在多种MLLM和基准上评估，包括局部和多模态越狱"
+      ],
+      "limitations": "['评估基于开源MLLM，对商业模型效果未知', '方法可能增加推理计算开销', '对复杂指代消解和长尾目标可能不稳健']",
+      "improvement_directions": [
+        "优化指代消解算法，提高复杂场景下的准确性",
+        "降低安全门的计算开销，实现实时拦截",
+        "扩展到商业模型，验证普适性",
+        "探索对抗鲁棒性，防止攻击者绕过安全门"
+      ],
+      "engineering_value": "为多模态模型的部署提供了安全防护机制，尤其在处理文档、截图等视觉输入时，可防止恶意利用和越狱攻击，增强系统安全性。",
+      "why_relevant": "涉及OCR和文档图像的内容安全，为多模态模型在文档处理中的应用提供了安全保障。"
     },
     {
       "title": "D2-ScaleAgent: Dual-Dimensional Scaling for Long Document Understanding",
@@ -207,76 +312,29 @@
       "arxiv_id": "2608.16417v1",
       "score": 7,
       "topic_tags": [
-        "多智能体系统",
         "长文档理解",
-        "检索增强生成",
-        "动态路由",
-        "测试时计算"
+        "多模态RAG",
+        "智能体",
+        "动态扩展",
+        "证据链"
       ],
-      "zh_summary": "提出D2-ScaleAgent，一种双维度缩放代理框架，用于长文档理解。通过Verifier代理驱动的动态路由循环，基于查询内在难度进行检索和推理的缩放：检索扩展时向外路由，分解查询并并行检索页面；推理细化时向内路由，动态选择不同粒度和数量的子代理提取证据。在多个长文档基准上验证了有效性。",
-      "novelty": "引入双维度缩放范式，允许模型根据查询难度动态调整计算资源，在检索和推理两个维度上自适应扩展，克服了现有方法固定流程的局限。",
+      "zh_summary": "本文提出了D2-ScaleAgent，一个用于长文档理解的双维度扩展智能体框架。该框架基于验证器智能体驱动的动态路由循环，根据查询的内在难度进行扩展：外部扩展（检索扩展）分解查询为属性进行并行页面检索并自适应剪枝；内部扩展（推理扩展）动态选择不同粒度和数量的子智能体来提取证据。D2-ScaleAgent在MMLongBench-Doc和LongDocURL等长视觉丰富文档基准上表现有效。",
+      "novelty": "引入了双维度扩展范式，动态调整检索和推理的计算资源，不同于现有固定流程的RAG方法，以证据库为动态工作记忆，实现自适应计算。",
       "innovation_points": [
-        "提出双维度缩放：检索缩放和推理缩放",
-        "Verifier代理基于查询难度驱动动态路由循环",
-        "持续更新的证据库作为动态工作记忆",
-        "自适应剪枝和子代理选择以优化资源使用"
+        "提出双维度扩展：检索扩展和推理扩展",
+        "验证器智能体驱动的动态路由循环",
+        "以证据库为中心的工作记忆，持续更新",
+        "自适应剪枝和子智能体选择，确保证据覆盖和精细推理"
       ],
-      "limitations": "['代理框架复杂度高，增加系统开销', '依赖Verifier的准确性，可能影响路由决策', '实验主要在特定基准上，泛化性待验证']",
+      "limitations": "['框架复杂度高，可能增加延迟和计算成本', '依赖于验证器智能体的质量，可能成为瓶颈', '在超长文档上的扩展性未充分测试']",
       "improvement_directions": [
-        "优化Verifier模型，减少误判",
-        "探索更高效的证据库更新策略",
-        "扩展至更广泛的长文档理解任务"
+        "优化路由和剪枝策略，降低计算开销",
+        "提升验证器的准确性和鲁棒性",
+        "探索跨文档和跨模态的扩展能力",
+        "在更多长文档基准上验证，包括多模态融合场景"
       ],
-      "engineering_value": "提供了一种自适应计算分配的代理框架，可提高长文档理解的效率和准确性，对于实际文档处理系统有重要参考价值。",
-      "why_relevant": "与OCR相关，因为长文档理解涉及文档解析和内容提取，尤其关注多模态文档。"
-    },
-    {
-      "title": "PLeDO: Pain Level Detection for Osteoarthritis from EMR Data",
-      "summary": "Osteoarthritis (OA) is a progressive chronic joint disease resulting in a breakdown of articular cartilage and bone when damaged joint tissues are not able to normally repair themselves. The aim of this pilot research study is to understand the pain severity for OA from patients' primary care Electronic Medical Records (EMR), both from the structured medical data and the unstructured chart note data using information extraction, natural language processing and machine learning techniques. We propose SPaDe, a Synonym-based Pain level Detection tool to categorize patients into having mild or moderate-to-severe pain to understand diagnosis and treatment methods based on only the pain related expressions in the unstructured chart note. Expressions are subjective, objective, and influenced by cultural background and demography which poses a difficult challenge. Therefore, we improve the model by incorporating the medication information from the structured EMR data and pain scale related information from the chart note to propose an integrated pain level detection tool for OA called PLeDO. With the help of human labeled gold standard data, we demonstrate that both SPaDe and PLeDO can detect mild and moderate-to-severe pain from the EMR data to analyze and potentially improve the quality of care in primary care setting.",
-      "link": "https://arxiv.org/abs/2608.15719v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.15719v1",
-      "authors": [
-        "Yuhao Chen",
-        "Jiahao Cai",
-        "Nafiz Sadman",
-        "Farhana Zulkernine",
-        "John Queenan",
-        "David Barber"
-      ],
-      "published": "2026-08-16T12:41:29Z",
-      "updated": "2026-08-16T12:41:29Z",
-      "categories": [
-        "cs.AI",
-        "cs.ET",
-        "cs.IR",
-        "cs.LG"
-      ],
-      "arxiv_id": "2608.15719v1",
-      "score": 6,
-      "topic_tags": [
-        "医疗信息抽取",
-        "疼痛检测",
-        "电子病历",
-        "自然语言处理",
-        "机器学习",
-        "骨关节炎"
-      ],
-      "zh_summary": "提出PLeDO，一个集成疼痛水平检测工具，用于骨关节炎患者。从电子病历中提取结构化数据和非结构化图表笔记信息，使用同义词库、NLP和机器学习技术，将患者分为轻度或中重度疼痛。PLeDO结合药物信息和疼痛量表信息，在人工标注的金标准数据上验证了有效性。",
-      "novelty": "将结构化EMR数据和不可结构化图表笔记中的疼痛表达结合，提出集成工具PLeDO，利用同义词库和机器学习分类疼痛严重程度。",
-      "innovation_points": [
-        "提出基于同义词的疼痛水平检测工具SPaDe",
-        "集成结构化药物信息与非结构化笔记中的疼痛量表信息",
-        "结合人类标注的金标准数据评估模型",
-        "针对骨关节炎患者进行专门优化"
-      ],
-      "limitations": "['基于单一疾病（骨关节炎）和特定EMR数据，泛化性有限', '依赖人工标注质量，样本量可能较小', '分类仅分为轻度/中重度，粒度较粗']",
-      "improvement_directions": [
-        "扩展到更多疾病和更细粒度的疼痛分级",
-        "引入更多特征，如影像数据，提高准确性",
-        "探索无监督学习减少对标注数据的依赖"
-      ],
-      "engineering_value": "为医疗保健领域提供自动化疼痛水平评估工具，可辅助提高初级保健中的护理质量，具有实际部署价值。",
-      "why_relevant": "涉及从非结构化医疗文本中提取信息，与OCR和自然语言处理在医疗文档解析方面相关。"
+      "engineering_value": "为长文档问答和理解应用提供了可扩展的智能体解决方案，可根据查询难度动态分配资源，提升效率和准确性。",
+      "why_relevant": "直接针对长文档理解，涉及文档检索和推理，结合多模态RAG，与OCR后处理和信息提取紧密相关。"
     }
   ]
 }
