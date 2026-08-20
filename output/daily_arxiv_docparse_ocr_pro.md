@@ -1,67 +1,325 @@
-# OCR / 文档解析研究日报（2026-08-19）
+# OCR / 文档解析研究日报（2026-08-20）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-08-19 02:31:04`
+- 生成时间（UTC）：`2026-08-20 02:22:19`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日OCR/文档解析研究聚焦于将文档解析为可执行代码、金融文档审计验证、语料库统计偏差、多模态推理基准、安全防护及长文档理解等方向。核心趋势是文档解析正从传统文本提取转向更深层的语义、逻辑和可执行结构重建，并强调可信、可验证和安全的AI系统。同时，多篇论文指出当前模型在专业文档推理、高保真重构方面仍存在明显不足，工程上亟需更高效、鲁棒和可扩展的解决方案。
+> 今日研究聚焦于OCR与文档解析的全流程优化，从历史报纸、图书到学术文档，呈现从数据流水线、智能体框架到评测基准的多元进展。核心发现包括：开源流水线在大规模历史文档处理上展现高效性，智能体方法为多任务统一提供新思路，但开源模型在高风险场景及手写识别等复杂任务上可靠性仍显不足。
 
 ## 二、今日趋势判断
 
-1. 文档解析范式从文本提取转向结构化、可执行的重建（如LaTeX+Python代码），强调保真度和可验证性。2. 多模态大模型（MLLM）在专业文档（学术、金融）中的应用成为热点，但模型能力不足，需要验证框架和专用基准。3. 语料库质量与统计偏差引起关注，影响模型训练效果。4. 文档理解任务强调推理能力，双语和多语言基准出现。5. 安全防护成为MLLM应用的重要考虑，尤其是引用相关风险。6. 长文档理解向智能体动态计算扩展，实现资源自适应分配。
+1. 强调端到端流水线与模块化结合，在提升数据质量的同时兼顾可解释性与可定制性；2. 智能体（Agentic）范式引入文档处理，尝试统一OCR、文档问答和关键信息提取等任务；3. 评测基准日益精细化，从通用文档扩展到高风险公共部门应用、手写数学公式及英俄双语专业场景，并关注幻觉检测；4. 传统OCR与多模态大模型在历史文档（如梵文手稿）上的结合，通过迭代微调优化性能。
 
 ## 三、今日论文概览
 
-1. **Code as Representation: A Compilable Parsing Paradigm for Academic Documents** | 标签：学术文档解析、MLLM、LaTeX、Python、基准测试
-2. **LAVA: Logic-Aware Validation and Augmentation Framework for Large-Scale Financial Document Auditing** | 标签：金融文档审计、多模态LLM、验证框架、信息提取、合规性
-3. **Counting Documents Is Not Counting Text: Unit Bias in Web-PDF Corpus Statistics** | 标签：PDF语料库、统计偏差、Common Crawl、文本恢复、数据质量
-4. **BEAR-Bench: A Bilingual Enterprise and Academic Reasoning Benchmark for Multimodal Models** | 标签：多模态基准、推理、双语、文档理解、幻觉检测
-5. **COMIC: Reference-Aware Safety Gating for Multimodal Large Language Models** | 标签：多模态安全、越狱防御、安全门、引用解析、MLLM
-6. **D2-ScaleAgent: Dual-Dimensional Scaling for Long Document Understanding** | 标签：长文档理解、多模态RAG、智能体、动态扩展、证据链
+1. **Institutional Newspapers Pipeline: Deriving billions of high quality tokens from historical newspapers** | 标签：历史文档数字化、流水线、开源数据集
+2. **DocClaw: A Unified Agentic System for Intelligent Document Processing** | 标签：智能体、文档理解、多任务统一
+3. **Evaluating Structured Information Extraction with Open Models in a High Risk Public Sector Application** | 标签：评测、开源模型、高风险应用
+4. **OmniHandwritingOCR: A Diagnostic Benchmark for Evaluating Multimodal LLMs in Handwritten OCR Scenarios** | 标签：手写识别、基准测试、多模态LLM
+5. **Code as Representation: A Compilable Parsing Paradigm for Academic Documents** | 标签：文档解析、可编译代码、学术文档
+6. **Impact of Iterative Fine-Tuning on Transcription Accuracy in Complex Historical Sanskrit Manuscripts** | 标签：历史文档、迭代微调、梵文手稿
+7. **Institutional Books - Enriched Text: A customizable multilingual open-source pipeline for denoising, deduplicating, and annotating OCR text at scale** | 标签：OCR后处理、多语言处理、元数据注释、数据去重、数字图书馆
+8. **Institutional Books - Visual Elements: An open-source pipeline for extracting, classifying, deduplicating, and captioning visual elements from digital book collections** | 标签：视觉元素提取、图像分类、图像去重、图像说明、数字图书馆
+9. **BEAR-Bench: A Bilingual Enterprise and Academic Reasoning Benchmark for Multimodal Models** | 标签：多模态文档理解、基准测试、英俄双语、幻觉检测、专业文档推理
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 提出将文档解析为可执行代码（如LaTeX+Python）以保留结构、数据和逻辑的可验证范式。
-- 构建面向金融文档的模块化验证框架，结合规则检索、布局保持提取和符号验证。
-- 首次系统揭示Web-PDF语料库统计中文档数与token数的巨大偏差，建议双重单位报告。
-- 推出首个英俄双语企业及学术文档推理基准，自包含设计不依赖外部知识。
-- 设计引用感知的安全门机制，动态评估操作-目标对安全性以防御越狱攻击。
-- 提出双维度扩展智能体框架，根据查询难度动态调整检索和推理资源。
+- 构建从图像预处理到文本后处理的完整开源流水线，并发布大规模数据集（如163亿token、217B token、2260万视觉元素）。
+- 提出以可编译代码（如LaTeX+Python）作为文档表示的新范式，支持结构元素的验证与重建。
+- 在历史文档处理中引入迭代微调和多模态大模型基准测试，探索提升复杂手稿识别准确率的路径。
+- 针对文档密集型场景设计双语基准（英俄），并对比多种幻觉检测方法的可靠性。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 探索自监督预训练任务，结合代码执行反馈，提升模型对结构化文档元素（表格、公式）的重构能力。
-- 开发更有效的PDF截断恢复方法，研究文档长度与内容质量关系以指导语料构建。
-- 将金融文档验证框架扩展到其他高合规性领域（如法律），并开源基准促进社区发展。
-- 针对长文档理解，优化智能体的路由和剪枝策略，降低计算延迟，并探索跨文档扩展。
-- 扩展双语推理基准到更多语言和领域，设计更复杂的多步推理问题以更好评估模型能力。
-- 研究安全门机制的对抗鲁棒性，防止攻击者通过视觉提示绕过防护，同时降低推理开销。
+- 开发结合布局感知与结构语义的解码策略，以降低手写数学公式和多行公式的幻觉与错误。
+- 探索更细粒度的注释格式（如句子级、语义级）以增强OCR后处理数据的适用性，同时优化去重算法以降低计算成本。
+- 研究智能体工具调用的优化策略，降低推理开销，提升跨任务泛化能力。
+- 利用合成数据与领域自适应微调，提升开源VLM在高风险场景（如公共部门申请处理）中的零样本性能。
+- 构建多语言、多学科的可编译文档解析基准，推动可执行代码生成的保真度提升。
 
 ## 六、工程落地启发
 
-- 评估文档解析质量时，应同时考虑文档数和token数，避免语料统计误导。
-- 构建文档审计系统时，采用模块化、骨干无关的设计，可灵活适配不同模型和规则。
-- 使用验证器智能体动态分配计算资源，可有效提升长文档理解的效率。
-- 在部署MLLM处理文档时，应加入引用感知的安全门，预防恶意操作。
-- 专业文档推理基准应覆盖多种语言，以发现模型在非英语场景下的能力短板。
+- IBM开源流水线（IB-HL-ET等）提供了可复用的模块化组件，支持多语言、大规模去噪去重，并保留元数据。
+- DocClaw统一智能体架构可降低多任务系统的维护成本，但需注意推理成本控制。
+- VLM在复杂文档端到端处理上优于OCR+LLM流水线，但零样本可靠性不足，需谨慎用于高风险场景。
+- 传统OCR结合迭代微调可有效提升特定历史文档的准确率，但需人工标注干预。
+- BEAR-Bench等基准为文档AI评测提供了标准化测试集，可用于验证模型可靠性与幻觉倾向。
 
 ## 七、优先关注论文
 
-- **Code as Representation: A Compilable Parsing Paradigm for Academic Documents**：提出文档解析为可执行代码的新范式，性能瓶颈明显，未来优化空间大，可能引领学术文档解析方向。
-- **LAVA: Logic-Aware Validation and Augmentation Framework for Large-Scale Financial Document Auditing**：针对金融审计的验证框架，实用性强，后续可能扩展到其他领域，且开源可能性高。
-- **Counting Documents Is Not Counting Text: Unit Bias in Web-PDF Corpus Statistics**：揭示语料库统计偏差，对预训练数据构建有重要指导意义，可能推动统计标准改变。
-- **BEAR-Bench: A Bilingual Enterprise and Academic Reasoning Benchmark for Multimodal Models**：新双语基准，对模型评估有重要价值，未来可能扩展影响多语言文档理解研究。
-- **COMIC: Reference-Aware Safety Gating for Multimodal Large Language Models**：针对MLLM安全风险的创新防御机制，对部署安全至关重要，值得跟踪其后续优化和商业应用。
-- **D2-ScaleAgent: Dual-Dimensional Scaling for Long Document Understanding**：智能体驱动的动态计算扩展，为长文档理解提供高效方案，可能成为未来RAG系统标配。
+- **DocClaw: A Unified Agentic System for Intelligent Document Processing**：首个统一智能体系统，有望成为文档处理新范式，关注其后续推理成本优化与性能对比。
+- **Code as Representation: A Compilable Parsing Paradigm for Academic Documents**：创新性地以可执行代码表示文档，未来可能重塑学术文档解析与知识提取方式，关注其基准扩展与模型改进。
+- **Evaluating Structured Information Extraction with Open Models in a High Risk Public Sector Application**：揭示了开源模型在高风险应用中的可靠性短板，对合规性导向的工程选型有重要参考价值。
+- **OmniHandwritingOCR: A Diagnostic Benchmark for Evaluating Multimodal LLMs in Handwritten OCR Scenarios**：首个手写OCR诊断基准，涵盖多语言与公式，将推动手写识别模型的针对性改进。
 
 ## 八、论文逐篇解析
 
-### 1. Code as Representation: A Compilable Parsing Paradigm for Academic Documents
+### 1. Institutional Newspapers Pipeline: Deriving billions of high quality tokens from historical newspapers
+
+- arXiv: [2608.18972v1](https://arxiv.org/abs/2608.18972v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.18972v1)
+- 作者: Matteo Cargnelutti, Catherine Brobston, Eben English, Jake Sadow, Kacie Bailey, Greg Leppert, Amanda Watson, Jessica Chapel, Jonathan Zittrain
+- 发布时间: 2026-08-19T14:41:12Z
+- 分类: cs.CL, cs.DL
+- 相关性评分: 26
+- 主题标签: 历史文档数字化、流水线、开源数据集
+
+**中文摘要**
+
+> 本文介绍了一个与波士顿公共图书馆联合设计的模块化系统，用于从历史报纸扫描件中提取高质量结构化数据。该系统包括扫描分割、OCR、文本分析、类型分类、阅读顺序检测、命名实体识别、主题分类、语言检测和预计算嵌入等步骤，并可在工作站硬件上运行。在波士顿公共图书馆的147万份公共领域扫描件上运行，产生163亿个token的OCR输出，并发布了开源数据集、模型和代码。
+
+**核心创新概述**
+
+> 提出一个完整的、可解释且可定制的历史报纸处理流水线，并在大规模真实数据上验证，同时强调计算效率。
+
+**创新点拆解**
+
+- 采用模块化流水线架构，每个步骤可解释且可定制
+- 在OCR后集成多种文本分析任务（如实体识别、主题分类）
+- 使用类型无关的分割方法处理不规则布局
+- 发布大规模开放数据集（83.1百万裁剪、16.3B token）
+
+**当前局限**
+
+> ['报告未详细说明OCR错误率对下游任务的影响', '可能对极端噪声或非常规布局的报纸性能有限']
+
+**后续可改进方向**
+
+- 探索端到端可学习的分割与识别联合优化
+- 研究如何利用预计算嵌入进行检索增强
+- 引入更鲁棒的布局分析以应对更复杂的报纸版式
+
+**工程启发**
+
+> 提供了一个可复用的开源流水线和数据集，为数字人文研究及图书馆文档数字化提供了高效工具。
+
+**为什么值得关注**
+
+> 展示了大规模历史文档数字化处理的系统性解决方案，对OCR领域具有基准参考价值。
+
+**原始摘要**
+
+Historical newspapers are an abundant record of public life, but their dense, irregular and
+sometimes noisy layouts make computational access to these materials both challenging and limited.
+We present the Institutional Newspapers Pipeline, a modular system we jointly designed with Boston
+Public Library to extract high-quality, structured datasets from historical newspaper scans. It was
+architected so that each step remains interpretable and customizable, and so that the pipeline as a
+whole remains computationally frugal enough to run on workstation-level hardware. The pipeline runs
+each scan through a multi-step process: it segments scans into individual type-agnostic crops and
+performs OCR on each resulting segment before then performing text analysis, type classification,
+reading order detection, named entities recognition, subject classification, language detection, and
+pre-computed embeddings generation on every crop. We ran this pipeline against a portion of Boston
+Public Library's holdings and released the results as an open dataset. The optical character
+recognition (OCR) output represents 16.3 billion o200k_base tokens across 83.1 million individual
+crops, extracted from 1,473,635 public domain newspaper scans published between 1795 and 1930. This
+report describes our methods for each processing step, the small models we trained, as well as the
+evaluation results and dataset-scale measurements we collected in the process. It accompanies the
+release of the pipeline, models, and dataset. We position this work as a substantial step towards
+unlocking high-quality data from tens of millions of newspaper scans.
+
+---
+
+### 2. DocClaw: A Unified Agentic System for Intelligent Document Processing
+
+- arXiv: [2608.18685v1](https://arxiv.org/abs/2608.18685v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.18685v1)
+- 作者: Siqi Xiang, Zhipeng Xu, Yufei Liu, Junhao Ji, Qing Liu, Zulong Chen, Zhibo Yang, Chunyan Miao, Shijian Lu
+- 发布时间: 2026-08-19T08:34:48Z
+- 分类: cs.CV
+- 相关性评分: 23
+- 主题标签: 智能体、文档理解、多任务统一
+
+**中文摘要**
+
+> 本文提出DocClaw，一个统一的智能体系统，用于处理多种文档智能处理任务，包括OCR、文档问答和关键信息提取。该系统将任务建模为智能体与文档的交互过程，通过文档技能迭代获取信息并调用工具，共享底层交互循环、工具空间和文档状态。在多个基准上验证了其有效性，实现了在单一框架内处理多样任务。
+
+**核心创新概述**
+
+> 将不同文档处理任务统一为智能体交互过程，通过共享状态和工具实现多任务处理，是首个统一的智能体系统。
+
+**创新点拆解**
+
+- 提出统一的智能体交互范式，覆盖OCR、DocQA和KIE
+- 设计结构化文档状态组织可重用的知识
+- 任务特定需求经由技能定义，灵活适应不同任务
+- 在多个基准上验证跨任务泛化能力
+
+**当前局限**
+
+> ['实验未全面对比专用模型在各项任务上的顶尖性能', '智能体方法的推理成本可能较高']
+
+**后续可改进方向**
+
+- 优化工具调用策略以降低推理开销
+- 探索更高效的技能学习机制
+- 在更多语言和文档类型上验证泛化性
+
+**工程启发**
+
+> 为构建多功能文档处理系统提供了新架构，可降低任务专用模型的维护成本。
+
+**为什么值得关注**
+
+> 提出了一种新的文档处理范式，将OCR等任务融入统一智能体框架，对多模态文档理解研究有启发意义。
+
+**原始摘要**
+
+Intelligent document processing (IDP) encompasses a broad range of tasks, including optical
+character recognition (OCR), document question answering (DocQA), and key information extraction
+(KIE). Despite their distinct objectives, these tasks share a common need to perceive document
+content, acquire task-relevant information, and progressively refine intermediate results. However,
+they are typically formulated as separate prediction problems and addressed by task-specific models
+or processing pipelines. We introduce DocClaw, a unified agentic system that formulates diverse
+intelligent document processing tasks as a shared process of interaction between an agent and a
+document. Given a document and a task-specific query, DocClaw follows an appropriate document skill
+to iteratively identify the information required, invoke relevant tools, and integrate the resulting
+observations into the desired output. Throughout this process, a structured document state organizes
+reusable document knowledge and task-specific interaction context, allowing the agent to accumulate,
+revisit, and progressively refine information as the interaction proceeds. Under this formulation,
+task-specific requirements are captured by the agent's interpretation of the query objective and the
+corresponding document skill, while the underlying interaction loop, tool space, and document state
+are shared across tasks. Extensive experiments across multiple intelligent document processing
+benchmarks demonstrate that DocClaw effectively handles diverse tasks within a single agentic
+framework and achieves competitive performance compared with both general-purpose VLMs and task-
+specific methods.
+
+---
+
+### 3. Evaluating Structured Information Extraction with Open Models in a High Risk Public Sector Application
+
+- arXiv: [2608.18289v1](https://arxiv.org/abs/2608.18289v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.18289v1)
+- 作者: Elias Schubert, Felix Bießmann
+- 发布时间: 2026-08-18T20:14:47Z
+- 分类: cs.AI, cs.CR, cs.IR, cs.LG
+- 相关性评分: 23
+- 主题标签: 评测、开源模型、高风险应用
+
+**中文摘要**
+
+> 本文评估了开源OCR引擎、LLM和VLM在现实复杂任务（国际学习项目学生申请处理）端到端性能。实验发现，VLM通常优于OCR+LLM流水线，但开源零样本设置下可靠性不足：35个配置中仅4个F1超过0.5，约75%的配置低于0.25。模型规模影响性能但非线性，更大模型并不保证更好性能。
+
+**核心创新概述**
+
+> 首次在高风险公共部门应用场景中系统评估开源系统端到端性能，揭示了零样本设置的可靠性问题。
+
+**创新点拆解**
+
+- 构建了面向高风险应用的复杂文档处理基准
+- 系统比较了OCR+LLM与VLM的多种组合
+- 发现规模与性能的非线性关系
+
+**当前局限**
+
+> ['仅针对单一任务类型（学生申请）', '零样本设置可能未充分体现模型微调潜力']
+
+**后续可改进方向**
+
+- 探索领域自适应微调以提升零样本性能
+- 研究更鲁棒的OCR与LLM融合策略
+- 扩展到更多高风险应用场景进行验证
+
+**工程启发**
+
+> 为高风险公共部门选择开源模型提供了实证依据，有助于合规性评估。
+
+**为什么值得关注**
+
+> 直接关系到OCR在关键部门的应用可靠性，对模型选型有指导意义。
+
+**原始摘要**
+
+The extraction of structured information from unstructured documents represents a critical component
+of digital transformations in all sectors. While proprietary solutions dominate commercial
+applications, a rapidly growing ecosystem of open-source Optical Character Recognition (OCR)
+engines, Large Language Models (LLMs), and Vision-Language Models (VLMs) offers accessible
+alternatives. However, systematic evaluations on realistic, multi-step extraction pipelines remain
+scarce. Responsible usage of such extraction tools require comprehensive evaluations on realistic
+tasks, especially as these solutions will be key components of applications in the public sector
+that the EU AI act categorizes as high risk. To address this gap we present a comprehensive
+benchmark assessing the end-to-end performance of open-source systems on a complex real-world
+document processing task classified as high risk: Student applications for an international study
+program. We conduct a comprehensive empirical evaluation with state-of-the-art OCR engines, LLMs and
+VLMs. Our results reveal that while VLMs generally outperform OCR+LLM pipelines, even state-of-the-
+art open-source models struggle to handle such tasks reliably in zero-shot settings. Only 4 of 35
+configurations achieved F1 scores above 0.5, with the best OCR+LLM pipeline matching top VLM
+performance, though most OCR+LLM combinations performed substantially worse. Roughly 75\% of all
+configurations scored below 0.25. Model scale influences performance, yet the relationship is non-
+linear: substantially larger models do not guarantee proportionally better results. Input quality,
+particularly the structural preservation of OCR output, emerges as a critical factor independent of
+downstream model capability.
+
+---
+
+### 4. OmniHandwritingOCR: A Diagnostic Benchmark for Evaluating Multimodal LLMs in Handwritten OCR Scenarios
+
+- arXiv: [2608.18586v1](https://arxiv.org/abs/2608.18586v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.18586v1)
+- 作者: Zinuo Guo, Min Zhang, Bo Jiang
+- 发布时间: 2026-08-19T06:27:05Z
+- 分类: cs.CV, cs.AI
+- 相关性评分: 20
+- 主题标签: 手写识别、基准测试、多模态LLM
+
+**中文摘要**
+
+> 本文介绍OmniHandwritingOCR，一个用于评估多模态大模型在手写OCR场景中性能的诊断基准。覆盖手写文本识别和手写数学表达式识别，包含六个子任务和十二个子集，共77.57K标注图像。研究发现现有系统在手写识别上距离可靠转录仍有差距，尤其在复杂多行公式上性能显著下降，且不同模型在语言和公式设置上排名不一致，存在幻觉问题。
+
+**核心创新概述**
+
+> 首个专门用于诊断MLLM在手写OCR中失败模式的基准，包含难度分层多行公式语料。
+
+**创新点拆解**
+
+- 构建了含77.57K图像的多语言手写基准
+- 设计难度分层多行公式语料，测试结构复杂性鲁棒性
+- 采用五个互补指标统一评估协议
+
+**当前局限**
+
+> ['基准仅覆盖有限的手写风格和语言', '未深入探索缓解幻觉的机制']
+
+**后续可改进方向**
+
+- 研究结构感知的解码策略以减少幻觉
+- 扩展基准覆盖更多语种和手写风格
+- 结合视觉与语言先验提升复杂公式识别
+
+**工程启发**
+
+> 为评估和改进手写OCR系统提供了标准测试平台，尤其是医疗、教育等场景。
+
+**为什么值得关注**
+
+> 揭示了多模态模型在手写OCR中的短板，为OCR研究指明改进方向。
+
+**原始摘要**
+
+Multimodal large language models (MLLMs) are increasingly used as OCR systems in document and
+knowledge-processing pipelines, but their ability to faithfully read real handwriting remains
+underexplored. Existing OCR benchmarks focus largely on printed text or clean single-line inputs,
+leaving limited coverage of realistic handwritten OCR scenarios such as multilingual handwriting,
+writer errors, and structurally complex mathematical expressions. We introduce OmniHandwritingOCR, a
+diagnostic benchmark for evaluating MLLMs and OCR systems on handwritten OCR. It covers handwritten
+text recognition and handwritten mathematical expression recognition across six subtasks and twelve
+subsets, totaling 77.57K labeled images from public datasets and newly collected student writings. A
+key component is a difficulty-stratified multi-line formula corpus designed to test robustness under
+increasing structural complexity. We evaluate thirteen open- and closed-source systems with five
+complementary metrics under a unified protocol. Results show that current systems remain far from
+faithful transcription: performance drops sharply on complex multi-line formulas, model rankings
+vary across language and formula settings, and several generative models hallucinate plausible but
+visually unsupported corrections. OmniHandwritingOCR provides a challenging testbed for diagnosing
+language, content, structural, and visual-grounding failure modes of multimodal models in
+handwritten OCR scenarios.
+
+---
+
+### 5. Code as Representation: A Compilable Parsing Paradigm for Academic Documents
 
 - arXiv: [2608.17550v1](https://arxiv.org/abs/2608.17550v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2608.17550v1)
@@ -69,41 +327,39 @@
 - 发布时间: 2026-08-18T09:10:43Z
 - 分类: cs.CV, cs.CL
 - 相关性评分: 17
-- 主题标签: 学术文档解析、MLLM、LaTeX、Python、基准测试
+- 主题标签: 文档解析、可编译代码、学术文档
 
 **中文摘要**
 
-> 本文提出了一种新的学术文档解析范式——可编译学术文档解析（CADP），将整页文档重构建为上下文LaTeX加上可执行的Python代码，以保留表格、公式、图表和伪代码等结构化学术元素的结构、数据和逻辑。作者构建了专家验证的基准CADP-Bench，并采用重新注入编译协议进行评估，同时研究现有最先进的MLLMs和多智能体基线在生成可执行重构方面的能力。结果表明，即使是前沿模型也难以产生高保真的可执行重构，表明该领域仍有很大提升空间。
+> 本文提出可编译学术文档解析（CADP）范式，将完整页面重建为上下文LaTeX加可执行Python，以保留表格、公式、图表等结构元素的紧凑表示。引入CADP-Bench基准，包含专家验证的完整学术页面，通过重注入编译协议评估。使用前沿MLLM和探索性多智能体基线测试，结果显示现有模型生成可执行重建的保真度仍不足，有待提升。
 
 **核心创新概述**
 
-> 提出了将文档解析为可执行代码（LaTeX+Python）的新范式，超越了传统的Markdown等表示，支持直接验证和重编译；提供了包含多种SAE类型且专家验证的基准，并设计了独特的评估协议。
+> 提出以可编译代码作为文档表示的新范式，支持结构元素的重新编译和验证，超越常见Markdown表示。
 
 **创新点拆解**
 
-- 提出CADP范式，将文档重构为上下文LaTeX加可执行Python代码
-- 构建包含紧密耦合文本与多种结构化元素的学术页面基准CADP-Bench
-- 设计重新注入编译协议以评估可执行重构的保真度
-- 研究多智能体基线，结合常见智能体技术探索解析能力的上限
+- 提出CADP范式，结合LaTeX和Python表示文档
+- 构建专家验证的CADP-Bench基准
+- 设计重注入编译评估协议
 
 **当前局限**
 
-> ['现有模型生成的高保真可执行重构准确率仍然较低', '基准覆盖的文档类型和语言范围有限', '评估协议可能未能完全反映真实应用场景的复杂性']
+> ['当前模型生成的可执行代码保真度低', '基准规模有限，可能不完全代表多样学术文档']
 
 **后续可改进方向**
 
-- 探索更有效的模型架构或训练策略，提升结构化元素重构的准确性
-- 扩展基准覆盖更多文档类型和语言
-- 优化编译协议以更贴近真实应用需求
-- 开发专门针对代码生成与视觉理解结合的预训练任务
+- 探索结构化解码方法提高代码生成准确性
+- 加强布局与代码生成的协同
+- 扩展基准覆盖更多学科和文档类型
 
 **工程启发**
 
-> 为学术文档自动解析和知识提取提供了新思路，有望提升科学知识在机器中的可用性，支持自动化文献分析、知识库构建等应用。
+> 为学术文档的机器可读解析提供了新思路，可支持文档重建、验证和知识提取。
 
 **为什么值得关注**
 
-> 直接关注学术文档的结构化解析，与OCR研究方向高度相关，提供新的表示范式和基准，推动文档解析技术的发展。
+> 重新定义文档解析的表示形式，对OCR和VLM后端处理有重要影响。
 
 **原始摘要**
 
@@ -125,130 +381,192 @@ document parsing. CADP-Bench is released for future research.
 
 ---
 
-### 2. LAVA: Logic-Aware Validation and Augmentation Framework for Large-Scale Financial Document Auditing
+### 6. Impact of Iterative Fine-Tuning on Transcription Accuracy in Complex Historical Sanskrit Manuscripts
 
-- arXiv: [2608.16763v1](https://arxiv.org/abs/2608.16763v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2608.16763v1)
-- 作者: Ruoqi Shu, Xuhui Wang, Isaac Wang, Yanming Mai, Bo Wan
-- 发布时间: 2026-08-17T16:10:05Z
-- 分类: cs.AI
-- 相关性评分: 17
-- 主题标签: 金融文档审计、多模态LLM、验证框架、信息提取、合规性
-
-**中文摘要**
-
-> 本文提出了LAVA，一个基于多模态大语言模型的模块化、骨干无关的流程，用于大规模金融文档审计。LAVA包括四个阶段：文档-规则检索、布局保持的信息提取、辅助元数据丰富和可审计的符号/算术验证。它在实际金融文档基准上表现出色，优于基线在幻觉控制和边缘情况处理方面的性能，同时保持高效的令牌使用，展示了在高吞吐量、时间敏感的验证场景中的实用性。
-
-**核心创新概述**
-
-> 提出了一个逻辑感知的验证和增强框架，专门针对金融文档审计，结合规则检索、布局保持提取和符号验证，强调了可审计性和可追溯性。
-
-**创新点拆解**
-
-- 设计四阶段流程：文档-规则检索、布局保持信息提取、元数据丰富、符号/算术验证
-- 支持规则接地和细粒度错误归因
-- 骨干无关的模块化设计
-- 在严格企业约束下实现一致、可追溯的端到端执行
-
-**当前局限**
-
-> ['评估基于特定领域基准，通用性需进一步验证', '框架依赖多模态LLM的能力，可能受限于模型性能', '未与其他同类系统进行广泛对比']
-
-**后续可改进方向**
-
-- 增强对不同文档布局和格式的适应性
-- 探索更高效的令牌利用策略，降低部署成本
-- 集成更多领域知识，提高规则理解和验证的准确性
-- 开源框架和基准，促进社区发展
-
-**工程启发**
-
-> 为金融文档验证提供了可靠的自动化解决方案，能够提高审计效率、减少错误，满足企业级应用的严格需求。
-
-**为什么值得关注**
-
-> 关注金融文档中的信息提取和验证，是OCR技术在高价值应用场景中的重要延伸，具有实际部署价值。
-
-**原始摘要**
-
-Financial document validation in production, such as payroll auditing, tax compliance, and loan
-underwriting, demands exceptional accuracy, consistency, and reproducibility under strict enterprise
-constraints. In practice, documents arrive with heterogeneous layouts and formats, semantically rich
-and context-dependent content, and embedded business rules that current pipelines struggle to
-process reliably. We introduce LAVA (Logic-Aware Validation and Augmentation), a modular, backbone-
-agnostic pipeline built on multimodal large language models, that integrates a four-stage design:
-document-rule retrieval, layout-preserving information extraction, auxiliary metadata enrichment,
-and auditable symbolic/arithmetic verification. LAVA supports robust rule grounding, fine-grained
-error attribution, and consistent, traceable end-to-end execution, capabilities essential for high-
-stakes deployment. Evaluated on a large real-world benchmark with diverse financial documents and
-dozens of expert-curated validation rules, LAVA outperforms baselines in hallucination control and
-edge-case handling while maintaining efficient token usage, demonstrating practicality for high-
-volume, time-critical validation.
-
----
-
-### 3. Counting Documents Is Not Counting Text: Unit Bias in Web-PDF Corpus Statistics
-
-- arXiv: [2608.16390v1](https://arxiv.org/abs/2608.16390v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2608.16390v1)
-- 作者: Luca Foppiano
-- 发布时间: 2026-08-17T10:41:07Z
-- 分类: cs.CL, cs.AI
-- 相关性评分: 12
-- 主题标签: PDF语料库、统计偏差、Common Crawl、文本恢复、数据质量
+- arXiv: [2608.18696v1](https://arxiv.org/abs/2608.18696v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.18696v1)
+- 作者: Kartik Chincholikar, Kaushik Gopalan, Mihir Hasabnis
+- 发布时间: 2026-08-19T08:50:45Z
+- 分类: cs.CV, cs.AI
+- 相关性评分: 15
+- 主题标签: 历史文档、迭代微调、梵文手稿
 
 **中文摘要**
 
-> 本文研究了PDF语料库统计中的单位偏差问题，指出语料库虽然以token数宣传规模，但发布的各项指标却按文档数计算，导致严重偏差。通过对CC-MAIN-2021-31-PDF-UNTRUNCATED的分析，发现3.02%的文档包含一半的token，文档截断影响23.06%的文档但涉及63.08%的文本，多数截断文本无法恢复。建议语料库统计应同时报告文档数和token数两种单位。
+> 本文提出一种可用于迭代微调的本地传统OCR流水线，用于复杂历史梵文手稿的数字化。通过布局级和外观级适应目标手稿分布，提高后续页面预测并减少人工标注迭代。在三个复杂手稿上验证，并引入带布局级标注和Unicode标注的数据集。同时基准测试了多模态大模型在该数据集上的性能。
 
 **核心创新概述**
 
-> 首次系统性地揭示了Web-PDF语料库统计中文档数与token数之间的巨大差异，量化分析了截断导致的内容丢失，并提出了双重单位报告的建议。
+> 强调迭代微调对传统OCR流水线的提升，并发布带有精细布局标注的历史梵文手稿数据集。
 
 **创新点拆解**
 
-- 大规模分析真实Web-PDF语料库，揭示文档数与token数的分布不均
-- 量化Common Crawl截断对文本损失的影响及恢复率
-- 评估两种主流PDF库的文本恢复能力
-- 提出统计报告应使用双重单位的建议
+- 提出布局级和外观级迭代微调策略
+- 构建带有PAGE-XML格式的Unicode标注数据集
+- 系统评估了迭代微调带来的性能提升
 
 **当前局限**
 
-> ['分析基于特定语料库和特定时间戳，可能不具备普遍性', '未深入探讨不同类型PDF的特征差异', '未考虑多页文档内token分布的具体模式']
+> ['仅针对特定语言（梵文）和手稿类型', '微调过程仍需要人工干预']
 
 **后续可改进方向**
 
-- 扩展到更多语料库和时间点，验证发现的普遍性
-- 开发更有效的PDF截断恢复方法
-- 研究文档长度与内容质量的关系，辅助语料构建决策
-- 推动语料库统计标准采用双重单位
+- 探索无监督或弱监督微调以减少人工标注
+- 将方法扩展到更多古代语言和文档
+- 结合大模型提升复杂布局理解能力
 
 **工程启发**
 
-> 为大规模PDF语料构建和评估提供了重要警示，指导语料库设计者更准确地衡量数据规模和内容覆盖，优化爬取和存储策略。
+> 提供了传统OCR在高复杂度历史文档上的实用优化路径，可降低数字化成本。
 
 **为什么值得关注**
 
-> 直接涉及PDF文档处理和语料统计，对OCR和文档理解研究的数据集构建具有参考价值。
+> 展示了领域适应和迭代微调在OCR中的重要性，为古籍数字化提供案例。
 
 **原始摘要**
 
-PDF corpora advertise their size in tokens but compute every rate they publish (coverage, OCR
-routing, re-fetch recovery, language mix) per document, and none decomposes its token total. The two
-units diverge sharply. On CC-MAIN-2021-31-PDF-UNTRUNCATED (7.9M web PDFs, 32.6B tokens), 3.02% of
-text-bearing documents hold half the tokens (Gini 0.807); documents over 50 pages are 5.00% of the
-corpus but 53.53% of its text. The PDFs produced by a TeX{} toolchain are 1.66% of documents and
-4.05% of the text. The clearest casualty is Common Crawl's truncation cap: it affected 23.06% of
-documents and 63.08% of the text. Reconstructing the truncated files and extracting both versions,
-two widely used libraries recover 11.4% and 1.4% of that text; between 72% and 97% of affected
-documents yield nothing; roughly 55--62% of the corpus's text is lost. Under the 5 MiB cap adopted
-in March 2025, 30.19% of tokens would still be truncated, and recovery on those documents rises only
-from 3.3% to 13.2%. We recommend that corpus statistics be reported in both units: documents and
-tokens.
+Digitizing the text from handwritten historical manuscripts is required to make them easily
+accessible, preservable, and to enable historical scholars to study them in new ways. Historical
+manuscripts, however, often exhibit complex heterogeneous layouts and non-standard appearance due to
+period-specific writing styles, page textures, camera noise, and other nuisance factors, making them
+difficult to perform OCR on. To tackle this challenge, we introduce a local traditional OCR
+pipeline, which can be iteratively fine-tuned on the target manuscript at the layout-level and the
+appearance-level. By adapting to the target manuscript distribution, the proposed Traditional OCR
+pipeline makes better predictions on subsequent pages, causing iterative reduction in human
+annotation effort, which is expensive and time-consuming as it requires historical domain expertise.
+Using this pipeline, we digitize text from three complex historical Sanskrit manuscripts and
+introduce a dataset with granular layout-level annotations, along with Unicode annotations in the
+standard PAGE-XML format. We demonstrate quantitative gains due to iterative fine-tuning of the
+proposed traditional OCR pipeline, and also benchmark the performance of leading Multi-Modal Large
+Language Models on the introduced Dataset. Code and dataset are available at:
+https://github.com/flame-cai/gnn-synthetic-layout-historical/.
 
 ---
 
-### 4. BEAR-Bench: A Bilingual Enterprise and Academic Reasoning Benchmark for Multimodal Models
+### 7. Institutional Books - Enriched Text: A customizable multilingual open-source pipeline for denoising, deduplicating, and annotating OCR text at scale
+
+- arXiv: [2608.19026v1](https://arxiv.org/abs/2608.19026v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.19026v1)
+- 作者: David Lowry-Duda, Matteo Cargnelutti, Catherine Brobston, Salwa Ismail, Greg Leppert, Amanda Watson, Jonathan Zittrain
+- 发布时间: 2026-08-19T15:20:54Z
+- 分类: cs.CL, cs.DL
+- 相关性评分: 14
+- 主题标签: OCR后处理、多语言处理、元数据注释、数据去重、数字图书馆
+
+**中文摘要**
+
+> 本文介绍了“Institutional Books - Enriched Text”（IB-HL-ET）数据集及其处理流程。该数据集源自哈佛图书馆参与Google Books项目扫描的983,004卷图书（约242B个token），经过去噪、去重、注释等处理，产出包含217B token、按主题段落注释的增强文本版本。该流程不生成单一“完整”的token流，而是保留元数据并通过HTML式注释提供段落级语言检测、重复段落聚类及每段落bits-per-byte分数等信息，支持用户按需定制输出，适用于约250种语言。文章阐述了项目的目标、实现和设计原理。
+
+**核心创新概述**
+
+> 不同于常见的面向Web文本的激进过滤和去重策略，该工作提出“Enriched Text”方法，通过保留元数据并添加多层次注释，避免全局裁剪，赋予用户定制化处理能力。
+
+**创新点拆解**
+
+- 设计“Enriched Text”格式，以注释形式保留元数据，而非生成单一token流。
+- 开发了可扩展的多语言流水线，集成去噪、去重（段落级重复聚类）、语言检测、按段落计算bits-per-byte等模块。
+- 发布包含1.39B注释段落的IB-HL-ET数据集，覆盖约250种语言。
+
+**当前局限**
+
+> ['该流程仍需要处理大规模数据，可能仍有计算资源需求。', '段落级注释可能无法完全捕捉跨段落的上下文信息。']
+
+**后续可改进方向**
+
+- 进一步优化注释粒度，例如句子级或语义级注释，以增强下游任务适用性。
+- 探索更高效的去重算法，降低计算成本。
+- 为注释格式设计标准化规范，便于社区统一使用。
+
+**工程启发**
+
+> 提供了一个可复用的开源流程，可处理海量多语言OCR文本，并保留结构化元数据，便于图书馆数字馆藏的分析、检索及AI模型训练。
+
+**为什么值得关注**
+
+> 该工作直接针对OCR文本的后处理与标注，给出了保留信息完整性的创新方案，对OCR下游应用（如文档分析、语料库构建）有重要参考价值。
+
+**原始摘要**
+
+Released in 2025, Institutional Books: Harvard Library (IB-HL) is a collection of 983,004 volumes
+(242B o200k_base tokens), originally digitized through Harvard Library's participation in the Google
+Books Library project. As researchers and developers have begun to use IB-HL, a tension has emerged
+between standard large-scale preprocessing practices and the goals of careful information
+stewardship. Many existing pipelines optimize for web text: as a result, they tend to aggressively
+filter, deduplicate, restrict by language, and sometimes discard meaningful metadata. Meanwhile,
+researchers seeking to use IB-HL duplicate effort while performing similar processing and analysis.
+We describe an approach that we call Enriched Text. Instead of producing a single 'complete' stream
+of tokens, we normalize the text while preserving metadata through annotations. We separate
+endmatter, detect per-paragraph language, identify clusters of duplicate paragraphs, and compute
+per-paragraph bits-per-byte scores. We provide this information through HTML-like annotations
+layered on top of the text. By parsing these annotations, users can tailor the output to their own
+needs instead of accepting a global editorial decision on content. The pipeline applies to all
+$\approx$250 languages in the collection. This report describes this project's goals,
+implementation, and design rationale. The release includes IB-HL-ET (an enriched-text version of IB-
+HL containing 217B o200k_base tokens across 983,003 volumes, organized into 1.39B annotated subtopic
+paragraphs) and the pipeline that produced it. These serve to make the collection easier for
+machines to parse and for humans to study.
+
+---
+
+### 8. Institutional Books - Visual Elements: An open-source pipeline for extracting, classifying, deduplicating, and captioning visual elements from digital book collections
+
+- arXiv: [2608.18957v1](https://arxiv.org/abs/2608.18957v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2608.18957v1)
+- 作者: Jimmy Mendez, Matteo Cargnelutti, David Lowry-Duda, Catherine Brobston, Salwa Ismail, Greg Leppert, Amanda Watson, Jonathan Zittrain
+- 发布时间: 2026-08-19T14:21:56Z
+- 分类: cs.CV, cs.DL
+- 相关性评分: 13
+- 主题标签: 视觉元素提取、图像分类、图像去重、图像说明、数字图书馆
+
+**中文摘要**
+
+> 本文介绍了“Institutional Books - Visual Elements”项目，这是一个开源端到端流水线，用于从历史书籍扫描中检测、分类、去重和生成说明文字。除流水线外，作者还发布了从IB-HL数据集（983,004卷）中提取的2260万个视觉元素（如图画、照片、版画和装饰艺术）的初始数据集。该工作旨在通过计算访问数字馆藏，支持AI模型训练和数字人文研究。
+
+**核心创新概述**
+
+> 首次从大规模数字图书集合中系统性地提取并分类视觉元素，并公开数据集和流水线。
+
+**创新点拆解**
+
+- 构建了完整的视觉元素处理流水线，包括检测、分类、去重和说明文字生成。
+- 发布了包含2260万个视觉元素的大规模数据集，覆盖多种类型的插图。
+- 流水线设计为可扩展，适用于海量数字馆藏的自动化处理。
+
+**当前局限**
+
+> ['视觉元素的分类可能受限于预定义类别，难以覆盖所有新颖类型。', '说明文字的质量依赖于现有图像字幕模型的性能。']
+
+**后续可改进方向**
+
+- 采用更细粒度的分类体系或开放集识别，提高元素类型的覆盖率。
+- 利用更先进的多模态模型提升说明文字的准确性和丰富性。
+- 探索视觉元素与文本OCR的跨模态关联，支持更深入的分析。
+
+**工程启发**
+
+> 为数字图书馆的视觉内容挖掘提供了实用工具和数据集，可直接应用于历史文献研究、文化传承数字化和AI训练数据构建。
+
+**为什么值得关注**
+
+> 该工作补充了OCR文本提取之外的视觉维度，是文档解析中多模态信息获取的重要进展，对全面理解历史文献具有重要价值。
+
+**原始摘要**
+
+Historical book collections contain rich visual elements - such as illustrations, photographs,
+engravings, and decorative art - that are frequently under-explored in large-scale digitization
+projects. While Optical Character Recognition (OCR) has standardized the extraction of textual
+content, these visual components offer a layer of nuance and context that remains largely untapped
+by automated text extraction workflows. This technical report introduces Institutional Books -
+Visual Elements, an open-source end-to-end pipeline for detecting, classifying, deduplicating, and
+captioning visual elements from historical book collections. Alongside this pipeline, we release an
+initial dataset of 22.6 million visual elements extracted from the 983,004 scanned volumes that
+comprise the Institutional Books: Harvard Library dataset. This work contributes to ongoing,
+community-wide efforts to enable new use cases for digitized library collections through
+computational access, from artificial intelligence model training to digital humanities research.
+
+---
+
+### 9. BEAR-Bench: A Bilingual Enterprise and Academic Reasoning Benchmark for Multimodal Models
 
 - arXiv: [2608.17895v1](https://arxiv.org/abs/2608.17895v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2608.17895v1)
@@ -256,41 +574,39 @@ tokens.
 - 发布时间: 2026-08-18T15:29:09Z
 - 分类: cs.CL, cs.AI
 - 相关性评分: 10
-- 主题标签: 多模态基准、推理、双语、文档理解、幻觉检测
+- 主题标签: 多模态文档理解、基准测试、英俄双语、幻觉检测、专业文档推理
 
 **中文摘要**
 
-> 本文提出了BEAR-Bench，一个面向多模态模型的英俄双语企业及学术推理基准，包含1000个人工标注的基于文本密集的商业和科学文档的问题。作者评估了16个专有和开源MLLM，包括Gemini 3.1 Pro和Qwen3.5-397B，在所有模型上都观察到明显的性能提升空间，并比较了现有的幻觉检测方法，评估模型失败的可检测性。
+> 本文介绍了BEAR-Bench，一个用于评估多模态大语言模型（MLLMs）在商业和学术文档（文本密集、专业性强）上推理能力的双语基准（英语和俄语），包含1000个基于人工注释的问题。作者评估了16个专有和开源MLLM（如Gemini 3.1 Pro、Qwen3.5-397B），发现即使最强系统仍有明显提升空间。此外，还利用模型输出比较了现有的幻觉检测方法，评估模型在基准上的失败率及失败的可识别性。
 
 **核心创新概述**
 
-> 引入了首个涵盖英语和俄语的专业文档推理基准，填补了现有基准的语言空白，并自包含设计，不依赖外部知识，专注于文本密集场景。
+> 提出了专门针对文档密集型专业场景的双语（英俄）基准，填补了非英语文档评估的空白，并整合了幻觉检测评估。
 
 **创新点拆解**
 
-- 构建双语（英语和俄语）企业及学术文档推理基准
-- 包含1000个人工标注问题，覆盖多种专业文档类型
-- 评估16个先进MLLM，提供全面性能基线
-- 比较多种幻觉检测方法，为模型可靠性提供参考
+- 构建了BEAR-Bench基准，涵盖1000个人工注释的复杂问题，基于文本丰富的商业和科学文档。
+- 基准为自包含设计，无需外部领域知识，便于直接评估。
+- 不仅评估模型性能，还对比了多种幻觉检测方法在基准上的可靠性。
 
 **当前局限**
 
-> ['基准只覆盖英语和俄语，其他语言仍然缺失', '问题类型可能偏向于信息提取，推理深度有限', '模型性能受限于特定文档领域']
+> ['问题数量相对有限（1000个），可能不足以全面代表所有文档类型。', '主要聚焦于英语和俄语，其他语言仍未覆盖。']
 
 **后续可改进方向**
 
-- 扩展基准到更多语言和领域
-- 设计更复杂的推理问题，涉及多步逻辑
-- 探索更有效的幻觉检测方法，提高失败识别能力
-- 鼓励模型在专业文档上的微调与评估
+- 扩展更多语言和领域的基准，提高覆盖度。
+- 增加问题多样性，覆盖更多推理类型（如数学、逻辑）。
+- 开发更有效的幻觉检测指标，用于评估MLLM可靠性。
 
 **工程启发**
 
-> 为评估和比较多模态模型在专业文档上的推理能力提供了标准化工具，推动模型在实际应用中的可靠性和实用性。
+> 提供了评估文档解析和多模态理解模型的标准化基准，有助于推动更强大、更可靠的文档AI系统开发。
 
 **为什么值得关注**
 
-> 关注文本密集文档的推理，与OCR和文档理解密切相关，提供双语评估资源，促进多语言场景的研究。
+> 该工作为OCR文档理解提供了专门的评测基准，对衡量文档解析模型的推理能力和幻觉程度具有直接参考价值。
 
 **原始摘要**
 
@@ -306,139 +622,5 @@ MLLMs, including Gemini 3.1 Pro and Qwen3.5-397B, on BEAR-Bench and observe clea
 the strongest systems. Finally, we use the resulting model outputs to compare existing hallucination
 detection methods, evaluating not only how often models fail on BEAR-Bench but also how reliably
 those failures can be identified.
-
----
-
-### 5. COMIC: Reference-Aware Safety Gating for Multimodal Large Language Models
-
-- arXiv: [2608.17234v1](https://arxiv.org/abs/2608.17234v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2608.17234v1)
-- 作者: Md Abdullahil Oaphy, Anhao Xiang, Zongxing Xie, Huayue Gu, Chenyu Wang, Honghui Xu
-- 发布时间: 2026-08-18T00:45:29Z
-- 分类: cs.CR, cs.AI
-- 相关性评分: 10
-- 主题标签: 多模态安全、越狱防御、安全门、引用解析、MLLM
-
-**中文摘要**
-
-> 本文识别了MLLM在多模态场景中的一种新安全风险：当提示和图像单独无害，但模型将看似良性的操作（如总结、翻译）绑定到局部视觉目标时，会产生不安全行为。这种基于引用的失败模式暴露了当前防御机制的弱点。为此，作者提出了COMIC，一个引用感知的预生成安全门，通过推断操作和引用类型、构建候选目标、接地指代并评估操作-目标对的安全性，采用最大风险聚合和质量感知路由进行决策。实验表明COMIC在多种基准上有效。
-
-**核心创新概述**
-
-> 首次系统分析MLLM中引用依赖的安全失败模式，并提出针对性的安全门机制，动态评估操作-目标对，而非整体图像。
-
-**创新点拆解**
-
-- 识别引用依赖的失败模式，并形式化描述
-- 设计COMIC安全门，推断操作和引用类型，构建候选目标并接地
-- 采用保守策略处理歧义，结合最大风险聚合和质量感知路由
-- 在多种MLLM和基准上评估，包括局部和多模态越狱
-
-**当前局限**
-
-> ['评估基于开源MLLM，对商业模型效果未知', '方法可能增加推理计算开销', '对复杂指代消解和长尾目标可能不稳健']
-
-**后续可改进方向**
-
-- 优化指代消解算法，提高复杂场景下的准确性
-- 降低安全门的计算开销，实现实时拦截
-- 扩展到商业模型，验证普适性
-- 探索对抗鲁棒性，防止攻击者绕过安全门
-
-**工程启发**
-
-> 为多模态模型的部署提供了安全防护机制，尤其在处理文档、截图等视觉输入时，可防止恶意利用和越狱攻击，增强系统安全性。
-
-**为什么值得关注**
-
-> 涉及OCR和文档图像的内容安全，为多模态模型在文档处理中的应用提供了安全保障。
-
-**原始摘要**
-
-Multimodal large language models (MLLMs) are increasingly used to interact with screenshots, scanned
-documents, diagrams, and other visually grounded inputs. This shift introduces a new safety risk: in
-many multimodal jailbreaks, neither the prompt nor the image is harmful in isolation. Unsafe
-behavior emerges only when the model binds an apparently benign operation, such as summarizing,
-translating, or following, to a localized visual target. This reveals a structural weakness in
-current multimodal defenses, which largely moderate the prompt-image pair as a whole even though the
-true security-relevant unit is the grounded operation-target pair produced during dereference. In
-this work, we identify and analyze this reference-dependent failure mode and show that existing
-defenses degrade when harmful semantics are localized, activated only after grounding, and dependent
-on visual reference resolution. To address this problem, we propose COMIC (Context-Operation-
-Modality-Image-Classifier), a reference-aware pre-generation safety gate for MLLMs. COMIC first
-infers the requested operation and reference type, constructs candidate targets from OCR and open-
-vocabulary proposals, grounds plausible referents, and evaluates safety over explicit operation-
-target pairs. To handle ambiguity conservatively, COMIC combines max-risk aggregation with quality-
-aware routing before deciding whether to forward or block a request. We evaluate COMIC across
-multiple open-source MLLMs, localized and broader multimodal jailbreak benchmarks, and benign
-reference-sensitive settings. The results show that COMIC consistently improves robustness while
-preserving benign utility and practical efficiency. More broadly, our findings suggest that
-multimodal safety cannot be enforced reliably without modeling the requested operation, the visual
-target to which it applies, and the confidence of that grounding.
-
----
-
-### 6. D2-ScaleAgent: Dual-Dimensional Scaling for Long Document Understanding
-
-- arXiv: [2608.16417v1](https://arxiv.org/abs/2608.16417v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2608.16417v1)
-- 作者: Hao Zhang, Longrong Yang, Lunhao Duan, Ziyang Wang, Qing-Guo Chen, Shanshan Zhao
-- 发布时间: 2026-08-17T11:15:27Z
-- 分类: cs.CL
-- 相关性评分: 7
-- 主题标签: 长文档理解、多模态RAG、智能体、动态扩展、证据链
-
-**中文摘要**
-
-> 本文提出了D2-ScaleAgent，一个用于长文档理解的双维度扩展智能体框架。该框架基于验证器智能体驱动的动态路由循环，根据查询的内在难度进行扩展：外部扩展（检索扩展）分解查询为属性进行并行页面检索并自适应剪枝；内部扩展（推理扩展）动态选择不同粒度和数量的子智能体来提取证据。D2-ScaleAgent在MMLongBench-Doc和LongDocURL等长视觉丰富文档基准上表现有效。
-
-**核心创新概述**
-
-> 引入了双维度扩展范式，动态调整检索和推理的计算资源，不同于现有固定流程的RAG方法，以证据库为动态工作记忆，实现自适应计算。
-
-**创新点拆解**
-
-- 提出双维度扩展：检索扩展和推理扩展
-- 验证器智能体驱动的动态路由循环
-- 以证据库为中心的工作记忆，持续更新
-- 自适应剪枝和子智能体选择，确保证据覆盖和精细推理
-
-**当前局限**
-
-> ['框架复杂度高，可能增加延迟和计算成本', '依赖于验证器智能体的质量，可能成为瓶颈', '在超长文档上的扩展性未充分测试']
-
-**后续可改进方向**
-
-- 优化路由和剪枝策略，降低计算开销
-- 提升验证器的准确性和鲁棒性
-- 探索跨文档和跨模态的扩展能力
-- 在更多长文档基准上验证，包括多模态融合场景
-
-**工程启发**
-
-> 为长文档问答和理解应用提供了可扩展的智能体解决方案，可根据查询难度动态分配资源，提升效率和准确性。
-
-**为什么值得关注**
-
-> 直接针对长文档理解，涉及文档检索和推理，结合多模态RAG，与OCR后处理和信息提取紧密相关。
-
-**原始摘要**
-
-Multi-modal retrieval-augmented generation (RAG) is a key technique for visually rich long document
-understanding. Existing multi-modal RAG methods are progressively advancing toward multi-agent
-systems: they first retrieve relevant pages based on a query, and then iteratively understand
-information within those pages. However, these methods typically rely on fixed workflows and lack
-the ability to dynamically scale computation at test time, often leading to insufficient evidence.
-To address this, we propose D2-ScaleAgent, an agentic framework that introduces a dual-dimensional
-scaling paradigm for retrieval and reasoning. The core of D2-ScaleAgent is a Verifier agent-driven
-dynamic routing loop based on the intrinsic difficulty of the query, centered around a continuously
-updated evidence bank that serves as the agent's dynamic working memory: when retrieval needs to be
-expanded, the agent routes outward (retrieval scaling), decomposing the query into attributes and
-performing parallel page retrieval, followed by adaptive pruning to ensure comprehensive evidence
-coverage. When fine-grained reasoning is required, the agent routes inward (reasoning scaling),
-dynamically selecting sub-agents with varying granularity and count to extract evidence from pages.
-Finally, D2-ScaleAgent achieves logical closure over the evidence chain. Extensive experiments
-demonstrate that D2-ScaleAgent is effective on long and visually rich document benchmarks like
-MMLongBench-Doc, LongDocURL, etc.
 
 ---
