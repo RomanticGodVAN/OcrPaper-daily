@@ -1,51 +1,74 @@
 {
   "meta": {
-    "report_date": "2026-08-20",
-    "generated_at_utc": "2026-08-20 02:22:19",
+    "report_date": "2026-08-21",
+    "generated_at_utc": "2026-08-21 02:36:44",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 9
+    "count": 8
   },
   "synthesis": {
-    "executive_summary": "今日研究聚焦于OCR与文档解析的全流程优化，从历史报纸、图书到学术文档，呈现从数据流水线、智能体框架到评测基准的多元进展。核心发现包括：开源流水线在大规模历史文档处理上展现高效性，智能体方法为多任务统一提供新思路，但开源模型在高风险场景及手写识别等复杂任务上可靠性仍显不足。",
-    "trend_summary": "1. 强调端到端流水线与模块化结合，在提升数据质量的同时兼顾可解释性与可定制性；2. 智能体（Agentic）范式引入文档处理，尝试统一OCR、文档问答和关键信息提取等任务；3. 评测基准日益精细化，从通用文档扩展到高风险公共部门应用、手写数学公式及英俄双语专业场景，并关注幻觉检测；4. 传统OCR与多模态大模型在历史文档（如梵文手稿）上的结合，通过迭代微调优化性能。",
+    "executive_summary": "今日OCR与文档解析研究聚焦于构建大规模、可复用的处理流水线，提升对历史文档、手写文本和对抗性场景的鲁棒性，并探索统一智能体框架。关键进展包括：波士顿公共图书馆和哈佛图书馆分别推出了处理历史报纸和书籍的模块化流水线及大规模数据集；DocClaw提出了统一智能体文档处理范式；OmniHandwritingOCR提供了手写场景的评估基准；ArmorOCR关注对抗性感知；ThermoDPO则从偏好优化角度改善了生成模型的OCR性能。整体趋势是向系统化、标准化和鲁棒化方向发展。",
+    "trend_summary": "今日论文呈现三大趋势：一是构建端到端、可扩展的文档处理流水线，强调结构化输出和元数据保留；二是使用统一智能体框架整合多种文档任务，减少系统复杂性；三是关注特殊场景（手写、历史文稿、对抗性攻击）下的性能评估与提升，推动系统鲁棒性。同时，大语言模型和偏好优化技术被引入OCR领域，用于提升生成质量和对齐性。",
     "common_innovations": [
-      "构建从图像预处理到文本后处理的完整开源流水线，并发布大规模数据集（如163亿token、217B token、2260万视觉元素）。",
-      "提出以可编译代码（如LaTeX+Python）作为文档表示的新范式，支持结构元素的验证与重建。",
-      "在历史文档处理中引入迭代微调和多模态大模型基准测试，探索提升复杂手稿识别准确率的路径。",
-      "针对文档密集型场景设计双语基准（英俄），并对比多种幻觉检测方法的可靠性。"
+      "采用模块化流水线设计，各步骤独立可定制，便于针对特定任务优化。",
+      "发布大规模公开数据集和开源工具，促进研究和复现。",
+      "利用小模型和轻量级方法在有限硬件上处理历史文档。",
+      "强调元数据保留和注释，而非简单过滤，以支持下游分析。",
+      "引入智能体和强化学习等新技术，提升文档处理的交互性和鲁棒性。"
     ],
     "future_directions": [
-      "开发结合布局感知与结构语义的解码策略，以降低手写数学公式和多行公式的幻觉与错误。",
-      "探索更细粒度的注释格式（如句子级、语义级）以增强OCR后处理数据的适用性，同时优化去重算法以降低计算成本。",
-      "研究智能体工具调用的优化策略，降低推理开销，提升跨任务泛化能力。",
-      "利用合成数据与领域自适应微调，提升开源VLM在高风险场景（如公共部门申请处理）中的零样本性能。",
-      "构建多语言、多学科的可编译文档解析基准，推动可执行代码生成的保真度提升。"
+      "开发自适应OCR流水线，能针对不同语料库（如不同语言、时代、扫描质量）自动调整预处理和识别参数。",
+      "探索无监督或半监督方法，利用大规模未标注文档数据提升模型泛化能力，减少人工标注。",
+      "建立更全面的基准，涵盖手写、对抗性、多种布局和噪声类型，以系统评估系统鲁棒性。",
+      "结合视觉语言模型，实现从文本提取到视觉元素理解的一体化文档解析。",
+      "优化智能体框架的推理效率，实现低延迟的文档问答和关键信息提取。",
+      "研究如何利用流形学习和对抗训练，使OCR系统在对抗性攻击下保持可靠。",
+      "推动跨机构合作，整合多来源数字馆藏，构建多样化的大规模数据集。",
+      "开发统一文档表示和交互标准，使不同工具和模型可互相操作。",
+      "探索从生成模型中利用偏好优化和流形约束，提高合成数据的质量，用于训练更鲁棒的OCR模型。",
+      "开发低资源语言的历史文档识别技术，结合语言模型和领域知识提高准确率。"
     ],
     "engineering_takeaways": [
-      "IBM开源流水线（IB-HL-ET等）提供了可复用的模块化组件，支持多语言、大规模去噪去重，并保留元数据。",
-      "DocClaw统一智能体架构可降低多任务系统的维护成本，但需注意推理成本控制。",
-      "VLM在复杂文档端到端处理上优于OCR+LLM流水线，但零样本可靠性不足，需谨慎用于高风险场景。",
-      "传统OCR结合迭代微调可有效提升特定历史文档的准确率，但需人工标注干预。",
-      "BEAR-Bench等基准为文档AI评测提供了标准化测试集，可用于验证模型可靠性与幻觉倾向。"
+      "设计流水线时应考虑计算效率和硬件限制，如使用小模型和模块化处理。",
+      "利用注释而非过滤来保留元数据，为用户提供定制化灵活性。",
+      "历史文档处理需要迭代微调策略，以适应目标分布，降低标注成本。",
+      "统一框架可简化多任务系统的部署和维护，但需平衡性能与推理开销。",
+      "对抗性攻击是安全的隐患，建议在开发流程中嵌入鲁棒性评估。",
+      "流匹配偏好优化可改善生成模型的OCR性能，可作为训练工具。"
     ],
     "watchlist": [
       {
+        "title": "Institutional Newspapers Pipeline: Deriving billions of high quality tokens from historical newspapers",
+        "watch_reason": "提供了大型历史报纸数据集，可测试其他系统的泛化性；流水线设计具有可复用性。"
+      },
+      {
         "title": "DocClaw: A Unified Agentic System for Intelligent Document Processing",
-        "watch_reason": "首个统一智能体系统，有望成为文档处理新范式，关注其后续推理成本优化与性能对比。"
-      },
-      {
-        "title": "Code as Representation: A Compilable Parsing Paradigm for Academic Documents",
-        "watch_reason": "创新性地以可执行代码表示文档，未来可能重塑学术文档解析与知识提取方式，关注其基准扩展与模型改进。"
-      },
-      {
-        "title": "Evaluating Structured Information Extraction with Open Models in a High Risk Public Sector Application",
-        "watch_reason": "揭示了开源模型在高风险应用中的可靠性短板，对合规性导向的工程选型有重要参考价值。"
+        "watch_reason": "统一的智能体框架可能成为文档处理的新范式，其性能与效率的权衡值得持续关注。"
       },
       {
         "title": "OmniHandwritingOCR: A Diagnostic Benchmark for Evaluating Multimodal LLMs in Handwritten OCR Scenarios",
-        "watch_reason": "首个手写OCR诊断基准，涵盖多语言与公式，将推动手写识别模型的针对性改进。"
+        "watch_reason": "为手写OCR提供诊断基准，其挑战性场景可驱动模型改进，未来可能扩展至更多语言。"
+      },
+      {
+        "title": "Impact of Iterative Fine-Tuning on Transcription Accuracy in Complex Historical Sanskrit Manuscripts",
+        "watch_reason": "迭代微调方法在特定领域取得效果，后续可能推广至其他历史文档，相关数据集有价值。"
+      },
+      {
+        "title": "Institutional Books - Enriched Text: A customizable multilingual open-source pipeline for denoising, deduplicating, and annotating OCR text at scale",
+        "watch_reason": "大规模多语言处理流水线，其注释方法可能成为数字图书馆标准。"
+      },
+      {
+        "title": "ArmorOCR: Grounded Adversarial Visual Perception via Observation-Transferred Self-Distillation",
+        "watch_reason": "首次提出对抗性OCR基准和训练方法，可能推动鲁棒性研究，尤其对安全敏感应用重要。"
+      },
+      {
+        "title": "Institutional Books - Visual Elements: An open-source pipeline for extracting, classifying, deduplicating, and captioning visual elements from digital book collections",
+        "watch_reason": "大型视觉元素数据集，可支持多模态模型训练，流水线贡献社区。"
+      },
+      {
+        "title": "Manifold Drift in Flow Preference Optimization: A Root Cause of Reward Hacking",
+        "watch_reason": "从优化理论角度提升OCR性能，其方法可能应用于生成模型的数据增强，值得跟踪。"
       }
     ]
   },
@@ -75,26 +98,29 @@
       "arxiv_id": "2608.18972v1",
       "score": 26,
       "topic_tags": [
-        "历史文档数字化",
-        "流水线",
-        "开源数据集"
+        "historical documents",
+        "OCR pipeline",
+        "dataset",
+        "layout analysis",
+        "digital humanities"
       ],
-      "zh_summary": "本文介绍了一个与波士顿公共图书馆联合设计的模块化系统，用于从历史报纸扫描件中提取高质量结构化数据。该系统包括扫描分割、OCR、文本分析、类型分类、阅读顺序检测、命名实体识别、主题分类、语言检测和预计算嵌入等步骤，并可在工作站硬件上运行。在波士顿公共图书馆的147万份公共领域扫描件上运行，产生163亿个token的OCR输出，并发布了开源数据集、模型和代码。",
-      "novelty": "提出一个完整的、可解释且可定制的历史报纸处理流水线，并在大规模真实数据上验证，同时强调计算效率。",
+      "zh_summary": "本文介绍了一个名为机构报纸流水线的模块化系统，由波士顿公共图书馆联合设计，用于从历史报纸扫描件中提取高质量、结构化的数据集。系统架构强调每一步的可解释性和可定制性，并优化了计算效率以适应工作站级硬件。流水线执行多步骤处理：首先将扫描件分割成独立的类型无关块，然后对每个块进行OCR，再进行文本分析、类型分类、阅读顺序检测、命名实体识别、主题分类、语言检测和预计算嵌入生成。作者对波士顿公共图书馆的馆藏部分运行了该流水线，并发布了开放数据集，包含147万份1795年至1930年的公共领域报纸扫描件，OCR输出为163亿个o200k_base词元，来自8310万个独立块。报告详细描述了各步骤的方法、训练的小模型、评估结果和数据集规模测量，并将此工作定位为解锁高质量历史报纸数据的重要一步。",
+      "novelty": "提出了一个端到端的模块化流水线，专门针对历史报纸的复杂布局和噪声进行优化，且设计强调在小型硬件上运行，同时产出了大规模公开数据集。",
       "innovation_points": [
-        "采用模块化流水线架构，每个步骤可解释且可定制",
-        "在OCR后集成多种文本分析任务（如实体识别、主题分类）",
-        "使用类型无关的分割方法处理不规则布局",
-        "发布大规模开放数据集（83.1百万裁剪、16.3B token）"
+        "模块化流水线设计，每个步骤独立可解释和可定制",
+        "类型无关的扫描件分割方法，适应历史报纸的密集和不规则布局",
+        "训练了多个小模型用于文本分析、类型分类、语言检测等任务",
+        "发布了大规模开放数据集，包含163亿词元和8310万个块",
+        "数据集覆盖1795年至1930年的历史报纸，时间跨度大"
       ],
-      "limitations": "['报告未详细说明OCR错误率对下游任务的影响', '可能对极端噪声或非常规布局的报纸性能有限']",
+      "limitations": "['评估可能未覆盖所有类型的布局和噪声情况', '数据集仅来自波士顿公共图书馆，可能代表性和通用性有限', '流水线在特定历史报纸上的性能可能与其他类型文档存在差异']",
       "improvement_directions": [
-        "探索端到端可学习的分割与识别联合优化",
-        "研究如何利用预计算嵌入进行检索增强",
-        "引入更鲁棒的布局分析以应对更复杂的报纸版式"
+        "扩展到更多图书馆和历史档案，增强数据集的多样性",
+        "研究更高效的OCR模型，提高处理速度和准确性",
+        "探索自适应方法来处理更广泛的布局变化和噪声类型"
       ],
-      "engineering_value": "提供了一个可复用的开源流水线和数据集，为数字人文研究及图书馆文档数字化提供了高效工具。",
-      "why_relevant": "展示了大规模历史文档数字化处理的系统性解决方案，对OCR领域具有基准参考价值。"
+      "engineering_value": "提供了一个完整、可复用的流水线，能够在常规硬件上处理大规模历史文档，并公开了数据和模型，可直接用于相关研究和应用。",
+      "why_relevant": "该研究为历史文档数字化提供了实用的解决方案，并开源了数据和工具，对OCR领域和数字人文研究有直接价值。"
     },
     {
       "title": "DocClaw: A Unified Agentic System for Intelligent Document Processing",
@@ -120,66 +146,28 @@
       "arxiv_id": "2608.18685v1",
       "score": 23,
       "topic_tags": [
-        "智能体",
-        "文档理解",
-        "多任务统一"
+        "agentic system",
+        "document processing",
+        "OCR",
+        "docQA",
+        "KIE"
       ],
-      "zh_summary": "本文提出DocClaw，一个统一的智能体系统，用于处理多种文档智能处理任务，包括OCR、文档问答和关键信息提取。该系统将任务建模为智能体与文档的交互过程，通过文档技能迭代获取信息并调用工具，共享底层交互循环、工具空间和文档状态。在多个基准上验证了其有效性，实现了在单一框架内处理多样任务。",
-      "novelty": "将不同文档处理任务统一为智能体交互过程，通过共享状态和工具实现多任务处理，是首个统一的智能体系统。",
+      "zh_summary": "本文提出了DocClaw，这是一个统一的智能体系统，将多种智能文档处理任务（如OCR、文档问答DocQA和关键信息提取KIE）统一为智能体与文档之间的交互过程。给定文档和任务特定查询，DocClaw遵循适当的文档技能，迭代地识别所需信息、调用相关工具，并将观察结果整合到预期输出中。系统通过结构化文档状态组织可复用的文档知识和任务特定的交互上下文，使智能体能够积累、回顾和逐步细化信息。该公式下，任务特定要求由智能体对查询目标和相应文档技能的解释捕获，而底层交互循环、工具空间和文档状态在任务间共享。在多个智能文档处理基准上的实验表明，DocClaw能够在单一智能体框架内有效处理多种任务，并达到有竞争力的性能。",
+      "novelty": "将多样的IDP任务统一到一个智能体交互框架中，共享底层机制，而非为每个任务设计独立模型。",
       "innovation_points": [
-        "提出统一的智能体交互范式，覆盖OCR、DocQA和KIE",
-        "设计结构化文档状态组织可重用的知识",
-        "任务特定需求经由技能定义，灵活适应不同任务",
-        "在多个基准上验证跨任务泛化能力"
+        "统一任务公式：将OCR、DocQA和KIE视为智能体与文档的交互过程",
+        "结构化文档状态管理知识和上下文，支持信息积累和细化",
+        "共享交互循环和工具空间，适应不同任务",
+        "在多个基准上验证了多任务处理的有效性"
       ],
-      "limitations": "['实验未全面对比专用模型在各项任务上的顶尖性能', '智能体方法的推理成本可能较高']",
+      "limitations": "['性能可能未超越专门化系统，尤其是在OCR等基础任务上', '智能体框架的推理开销可能较大，影响效率', '对多种任务的处理依赖文档技能，可能在不同文档类型上表现不稳定']",
       "improvement_directions": [
-        "优化工具调用策略以降低推理开销",
-        "探索更高效的技能学习机制",
-        "在更多语言和文档类型上验证泛化性"
+        "优化智能体的工具调用和交互策略，降低计算开销",
+        "增强文档技能库的覆盖，支持更多场景",
+        "探索在多任务学习中平衡性能与效率的方法"
       ],
-      "engineering_value": "为构建多功能文档处理系统提供了新架构，可降低任务专用模型的维护成本。",
-      "why_relevant": "提出了一种新的文档处理范式，将OCR等任务融入统一智能体框架，对多模态文档理解研究有启发意义。"
-    },
-    {
-      "title": "Evaluating Structured Information Extraction with Open Models in a High Risk Public Sector Application",
-      "summary": "The extraction of structured information from unstructured documents represents a critical component of digital transformations in all sectors. While proprietary solutions dominate commercial applications, a rapidly growing ecosystem of open-source Optical Character Recognition (OCR) engines, Large Language Models (LLMs), and Vision-Language Models (VLMs) offers accessible alternatives. However, systematic evaluations on realistic, multi-step extraction pipelines remain scarce. Responsible usage of such extraction tools require comprehensive evaluations on realistic tasks, especially as these solutions will be key components of applications in the public sector that the EU AI act categorizes as high risk. To address this gap we present a comprehensive benchmark assessing the end-to-end performance of open-source systems on a complex real-world document processing task classified as high risk: Student applications for an international study program. We conduct a comprehensive empirical evaluation with state-of-the-art OCR engines, LLMs and VLMs. Our results reveal that while VLMs generally outperform OCR+LLM pipelines, even state-of-the-art open-source models struggle to handle such tasks reliably in zero-shot settings. Only 4 of 35 configurations achieved F1 scores above 0.5, with the best OCR+LLM pipeline matching top VLM performance, though most OCR+LLM combinations performed substantially worse. Roughly 75\\% of all configurations scored below 0.25. Model scale influences performance, yet the relationship is non-linear: substantially larger models do not guarantee proportionally better results. Input quality, particularly the structural preservation of OCR output, emerges as a critical factor independent of downstream model capability.",
-      "link": "https://arxiv.org/abs/2608.18289v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.18289v1",
-      "authors": [
-        "Elias Schubert",
-        "Felix Bießmann"
-      ],
-      "published": "2026-08-18T20:14:47Z",
-      "updated": "2026-08-18T20:14:47Z",
-      "categories": [
-        "cs.AI",
-        "cs.CR",
-        "cs.IR",
-        "cs.LG"
-      ],
-      "arxiv_id": "2608.18289v1",
-      "score": 23,
-      "topic_tags": [
-        "评测",
-        "开源模型",
-        "高风险应用"
-      ],
-      "zh_summary": "本文评估了开源OCR引擎、LLM和VLM在现实复杂任务（国际学习项目学生申请处理）端到端性能。实验发现，VLM通常优于OCR+LLM流水线，但开源零样本设置下可靠性不足：35个配置中仅4个F1超过0.5，约75%的配置低于0.25。模型规模影响性能但非线性，更大模型并不保证更好性能。",
-      "novelty": "首次在高风险公共部门应用场景中系统评估开源系统端到端性能，揭示了零样本设置的可靠性问题。",
-      "innovation_points": [
-        "构建了面向高风险应用的复杂文档处理基准",
-        "系统比较了OCR+LLM与VLM的多种组合",
-        "发现规模与性能的非线性关系"
-      ],
-      "limitations": "['仅针对单一任务类型（学生申请）', '零样本设置可能未充分体现模型微调潜力']",
-      "improvement_directions": [
-        "探索领域自适应微调以提升零样本性能",
-        "研究更鲁棒的OCR与LLM融合策略",
-        "扩展到更多高风险应用场景进行验证"
-      ],
-      "engineering_value": "为高风险公共部门选择开源模型提供了实证依据，有助于合规性评估。",
-      "why_relevant": "直接关系到OCR在关键部门的应用可靠性，对模型选型有指导意义。"
+      "engineering_value": "提供了一个统一的文档处理框架，可简化系统部署和维护，并提升多任务处理的一致性。",
+      "why_relevant": "提出了一种新颖的智能体范式，对构建通用的文档处理系统有启发，且实验证实了其可行性。"
     },
     {
       "title": "OmniHandwritingOCR: A Diagnostic Benchmark for Evaluating Multimodal LLMs in Handwritten OCR Scenarios",
@@ -200,75 +188,28 @@
       "arxiv_id": "2608.18586v1",
       "score": 20,
       "topic_tags": [
-        "手写识别",
-        "基准测试",
-        "多模态LLM"
+        "handwritten OCR",
+        "benchmark",
+        "multimodal LLM",
+        "mathematical expressions",
+        "evaluation"
       ],
-      "zh_summary": "本文介绍OmniHandwritingOCR，一个用于评估多模态大模型在手写OCR场景中性能的诊断基准。覆盖手写文本识别和手写数学表达式识别，包含六个子任务和十二个子集，共77.57K标注图像。研究发现现有系统在手写识别上距离可靠转录仍有差距，尤其在复杂多行公式上性能显著下降，且不同模型在语言和公式设置上排名不一致，存在幻觉问题。",
-      "novelty": "首个专门用于诊断MLLM在手写OCR中失败模式的基准，包含难度分层多行公式语料。",
+      "zh_summary": "本文介绍了OmniHandwritingOCR，这是一个用于评估多模态大语言模型（MLLMs）在手写OCR场景中能力的诊断性基准。现有基准多聚焦于印刷文本或简单单行输入，而现实手写场景如多语言手写、作者错误和结构复杂的数学表达式覆盖不足。该基准涵盖手写文本识别和手写数学表达式识别，包含六个子任务和十二个子集，共77,570张带标签图像，来自公开数据集和新收集的学生手写内容。关键组件是难度分层多行公式语料，用于测试在结构复杂性增加下的鲁棒性。作者在统一协议下使用五个互补指标评估了十三个开源和闭源系统。结果显示，当前系统在忠实转录方面仍有较大差距：复杂多行公式上性能急剧下降，不同语言和公式设置下模型排名变化，一些生成模型产生看似合理但视觉上无依据的纠正。该基准为诊断多模态模型在手写OCR场景中的语言、内容、结构和视觉基础失败模式提供了具有挑战性的测试平台。",
+      "novelty": "提出了一个专门针对手写OCR的全面诊断基准，包含多语言、多行公式等复杂场景，并采用多指标评估。",
       "innovation_points": [
-        "构建了含77.57K图像的多语言手写基准",
-        "设计难度分层多行公式语料，测试结构复杂性鲁棒性",
-        "采用五个互补指标统一评估协议"
+        "设计了包含六子任务和十二子集的基准，覆盖广泛的手写场景",
+        "引入难度分层多行公式语料，测试结构复杂性",
+        "使用五个互补指标全面评估性能",
+        "包含新收集的学生手写数据，增加现实性"
       ],
-      "limitations": "['基准仅覆盖有限的手写风格和语言', '未深入探索缓解幻觉的机制']",
+      "limitations": "['基准主要针对手写，对印刷文本场景覆盖有限', '评估的系统数量有限，可能不代表所有最新模型', '多行公式的标注和评估可能受主观因素影响']",
       "improvement_directions": [
-        "研究结构感知的解码策略以减少幻觉",
-        "扩展基准覆盖更多语种和手写风格",
-        "结合视觉与语言先验提升复杂公式识别"
+        "扩展基准以涵盖更多语言的书写风格",
+        "引入更精细的失败模式分析，如词级错误类型",
+        "将基准与模型训练结合，推动针对性改进"
       ],
-      "engineering_value": "为评估和改进手写OCR系统提供了标准测试平台，尤其是医疗、教育等场景。",
-      "why_relevant": "揭示了多模态模型在手写OCR中的短板，为OCR研究指明改进方向。"
-    },
-    {
-      "title": "Code as Representation: A Compilable Parsing Paradigm for Academic Documents",
-      "summary": "Academic papers are a primary carrier of scientific knowledge, yet most of this knowledge remains locked in PDFs that are optimized for human reading rather than machine use. For Multimodal Large Language Models (MLLMs), the core challenge is not only perception, but representation: scientific pages interleave text with Structured Academic Elements (SAEs) such as tables, formulas, charts, and pseudocode, whose structure, data, and logic are poorly preserved by common surrogates like Markdown. We therefore propose Compilable Academic Document Parsing (CADP), a paradigm that reconstructs a full page as contextual \\LaTeX{} plus executable Python, so that structure-preserving elements and executable chart representations can be reconstructed, recompiled, and directly verified against the source page. To support this setting, we introduce CADP-Bench, an expert-verified benchmark of full academic pages containing tightly coupled text and multiple SAE types, evaluated through a re-injection compilation protocol. We further study current capabilities using SOTA MLLMs and an exploratory multi-agent baseline that incorporates common agentic techniques. Results show that even frontier models still struggle to produce high-fidelity executable reconstructions, highlighting substantial room for improvement in structure-aware scientific document parsing. CADP-Bench is released for future research.",
-      "link": "https://arxiv.org/abs/2608.17550v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.17550v1",
-      "authors": [
-        "Rihui Jin",
-        "Jun Wang",
-        "chengyuan zhu",
-        "Liang Mingyu",
-        "Yue Gao",
-        "Li Yunxuan",
-        "Kuicai Dong",
-        "Guilin Qi",
-        "Lin Ren",
-        "Yongrui Chen",
-        "Xinbang Dai",
-        "Jiaqi Li",
-        "Tongtong Wu",
-        "Gholamreza Haffari"
-      ],
-      "published": "2026-08-18T09:10:43Z",
-      "updated": "2026-08-18T09:10:43Z",
-      "categories": [
-        "cs.CV",
-        "cs.CL"
-      ],
-      "arxiv_id": "2608.17550v1",
-      "score": 17,
-      "topic_tags": [
-        "文档解析",
-        "可编译代码",
-        "学术文档"
-      ],
-      "zh_summary": "本文提出可编译学术文档解析（CADP）范式，将完整页面重建为上下文LaTeX加可执行Python，以保留表格、公式、图表等结构元素的紧凑表示。引入CADP-Bench基准，包含专家验证的完整学术页面，通过重注入编译协议评估。使用前沿MLLM和探索性多智能体基线测试，结果显示现有模型生成可执行重建的保真度仍不足，有待提升。",
-      "novelty": "提出以可编译代码作为文档表示的新范式，支持结构元素的重新编译和验证，超越常见Markdown表示。",
-      "innovation_points": [
-        "提出CADP范式，结合LaTeX和Python表示文档",
-        "构建专家验证的CADP-Bench基准",
-        "设计重注入编译评估协议"
-      ],
-      "limitations": "['当前模型生成的可执行代码保真度低', '基准规模有限，可能不完全代表多样学术文档']",
-      "improvement_directions": [
-        "探索结构化解码方法提高代码生成准确性",
-        "加强布局与代码生成的协同",
-        "扩展基准覆盖更多学科和文档类型"
-      ],
-      "engineering_value": "为学术文档的机器可读解析提供了新思路，可支持文档重建、验证和知识提取。",
-      "why_relevant": "重新定义文档解析的表示形式，对OCR和VLM后端处理有重要影响。"
+      "engineering_value": "提供了一个标准化的评估工具，可用于衡量和比较不同手写OCR系统的性能，促进技术进步。",
+      "why_relevant": "填补了现有OCR基准在手写场景上的空白，为多模态模型的研究和部署提供了诊断工具。"
     },
     {
       "title": "Impact of Iterative Fine-Tuning on Transcription Accuracy in Complex Historical Sanskrit Manuscripts",
@@ -289,25 +230,28 @@
       "arxiv_id": "2608.18696v1",
       "score": 15,
       "topic_tags": [
-        "历史文档",
-        "迭代微调",
-        "梵文手稿"
+        "historical manuscripts",
+        "Sanskrit",
+        "OCR",
+        "iterative fine-tuning",
+        "layout analysis"
       ],
-      "zh_summary": "本文提出一种可用于迭代微调的本地传统OCR流水线，用于复杂历史梵文手稿的数字化。通过布局级和外观级适应目标手稿分布，提高后续页面预测并减少人工标注迭代。在三个复杂手稿上验证，并引入带布局级标注和Unicode标注的数据集。同时基准测试了多模态大模型在该数据集上的性能。",
-      "novelty": "强调迭代微调对传统OCR流水线的提升，并发布带有精细布局标注的历史梵文手稿数据集。",
+      "zh_summary": "本文针对历史手写梵文手稿的数字化挑战，提出了一种局部传统OCR流水线，可在布局层面和外观层面进行迭代微调。该方法通过适应目标手稿的分布，在后续页面预测中表现更好，从而减少了人工标注的迭代成本。作者使用该流水线数字化了三份复杂的历史梵文手稿，并发布了带精细布局标注和Unicode标注的数据集（PAGE-XML格式）。实验展示了迭代微调的定量收益，并与领先的多模态大语言模型进行了基准比较。",
+      "novelty": "提出了一种针对特定手稿分布的迭代微调OCR流水线，同时处理布局和外观变化，并创建了带精细标注的梵文手稿数据集。",
       "innovation_points": [
-        "提出布局级和外观级迭代微调策略",
-        "构建带有PAGE-XML格式的Unicode标注数据集",
-        "系统评估了迭代微调带来的性能提升"
+        "迭代微调策略，逐步适应目标手稿的风格和噪声",
+        "结合布局级和外观级的适应，提高OCR准确性",
+        "发布了带有精细布局和Unicode标注的数据集",
+        "提供了开源代码和数据集，便于复现和扩展"
       ],
-      "limitations": "['仅针对特定语言（梵文）和手稿类型', '微调过程仍需要人工干预']",
+      "limitations": "['主要针对手稿类文档，适用性可能有限', '人工标注成本仍然较高，尽管通过迭代微调有所减少', '传统OCR方法可能不如深度学习方法灵活']",
       "improvement_directions": [
-        "探索无监督或弱监督微调以减少人工标注",
-        "将方法扩展到更多古代语言和文档",
-        "结合大模型提升复杂布局理解能力"
+        "探索无监督或半监督学习方法，减少标注依赖",
+        "扩展到更多历史和语言文档，提升泛化能力",
+        "结合深度学习模型增强特征提取"
       ],
-      "engineering_value": "提供了传统OCR在高复杂度历史文档上的实用优化路径，可降低数字化成本。",
-      "why_relevant": "展示了领域适应和迭代微调在OCR中的重要性，为古籍数字化提供案例。"
+      "engineering_value": "提供了一个实用的流水线，可减少历史手稿数字化中的人工努力，并开源了数据，对文化遗产保护有应用价值。",
+      "why_relevant": "针对历史手稿OCR的挑战，提出了有效的迭代微调方法，并开源了资源和数据，对相关研究有直接帮助。"
     },
     {
       "title": "Institutional Books - Enriched Text: A customizable multilingual open-source pipeline for denoising, deduplicating, and annotating OCR text at scale",
@@ -332,27 +276,77 @@
       "arxiv_id": "2608.19026v1",
       "score": 14,
       "topic_tags": [
-        "OCR后处理",
-        "多语言处理",
-        "元数据注释",
-        "数据去重",
-        "数字图书馆"
+        "large-scale OCR",
+        "text enrichment",
+        "multilingual",
+        "metadata",
+        "digital libraries"
       ],
-      "zh_summary": "本文介绍了“Institutional Books - Enriched Text”（IB-HL-ET）数据集及其处理流程。该数据集源自哈佛图书馆参与Google Books项目扫描的983,004卷图书（约242B个token），经过去噪、去重、注释等处理，产出包含217B token、按主题段落注释的增强文本版本。该流程不生成单一“完整”的token流，而是保留元数据并通过HTML式注释提供段落级语言检测、重复段落聚类及每段落bits-per-byte分数等信息，支持用户按需定制输出，适用于约250种语言。文章阐述了项目的目标、实现和设计原理。",
-      "novelty": "不同于常见的面向Web文本的激进过滤和去重策略，该工作提出“Enriched Text”方法，通过保留元数据并添加多层次注释，避免全局裁剪，赋予用户定制化处理能力。",
+      "zh_summary": "本文介绍了机构书籍：哈佛图书馆（IB-HL）的丰富文本版本（IB-HL-ET），这是一个包含983,004卷、242B o200k_base词元的大型语料库。作者提出了一种名为“丰富文本”的方法，不产生单一“完整”的token流，而是通过注释保留元数据，对文本进行标准化。他们分离了补编、检测每段落语言、识别重复段落簇，并计算每段落的每字节位数得分。这些信息通过HTML样式的注释叠加在文本上，用户可以根据需要解析。该流水线适用于该馆藏中的约250种语言。版本中IB-HL-ET包含983,003卷、217B o200k_base词元，组织为13.9亿个带注释的子主题段落。此报告描述了项目的目标、实现和设计原理，并发布了IB-HL-ET和生成该版本的流水线。",
+      "novelty": "提出了一种“丰富文本”方法，通过注释保留元数据，而非过滤和丢弃，以满足信息管理需求，适用于大规模多语言OCR文本。",
       "innovation_points": [
-        "设计“Enriched Text”格式，以注释形式保留元数据，而非生成单一token流。",
-        "开发了可扩展的多语言流水线，集成去噪、去重（段落级重复聚类）、语言检测、按段落计算bits-per-byte等模块。",
-        "发布包含1.39B注释段落的IB-HL-ET数据集，覆盖约250种语言。"
+        "采用注释而非过滤的方法，保留灵活性和完整性",
+        "提供多语言检测、重复段落识别和复杂度评分",
+        "设计了HTML样式注释，便于用户定制输出",
+        "适用于约250种语言的大规模处理"
       ],
-      "limitations": "['该流程仍需要处理大规模数据，可能仍有计算资源需求。', '段落级注释可能无法完全捕捉跨段落的上下文信息。']",
+      "limitations": "['注释可能增加数据大小和处理复杂度', '依赖OCR质量，可能受限于原始扫描件', '面向IB-HL特定语料，对其他语料可能需调整']",
       "improvement_directions": [
-        "进一步优化注释粒度，例如句子级或语义级注释，以增强下游任务适用性。",
-        "探索更高效的去重算法，降低计算成本。",
-        "为注释格式设计标准化规范，便于社区统一使用。"
+        "优化注释表示，减少冗余和存储开销",
+        "探索自动化的段落聚类和去重方法，提高效率",
+        "扩展到其他图书馆和书籍来源，验证通用性"
       ],
-      "engineering_value": "提供了一个可复用的开源流程，可处理海量多语言OCR文本，并保留结构化元数据，便于图书馆数字馆藏的分析、检索及AI模型训练。",
-      "why_relevant": "该工作直接针对OCR文本的后处理与标注，给出了保留信息完整性的创新方案，对OCR下游应用（如文档分析、语料库构建）有重要参考价值。"
+      "engineering_value": "提供了一个可扩展的多语言文本处理流水线，能保留重要元数据，适用于大规模数字图书馆建设。",
+      "why_relevant": "研究了大规模OCR语料处理中的信息管理问题，提出的方法有助于平衡数据清理和完整性，对数字人文有用。"
+    },
+    {
+      "title": "ArmorOCR: Grounded Adversarial Visual Perception via Observation-Transferred Self-Distillation",
+      "summary": "Large multimodal models (LMMs) have demonstrated strong OCR recognition capabilities, yet remain vulnerable to adversarial visual text that is readable to humans but challenging for models to localize and recognize. Existing OCR benchmarks mainly focus on natural or document-style text, while adversarial OCR evaluations remain limited in scale, task coverage, or region-aware evaluation. In this paper, we formulate adversarial OCR as a \\textbf{grounded OCR perception} task and introduce \\textbf{AdvSpot}, the first benchmark for grounded adversarial OCR evaluation. AdvSpot comprises 390 images with region-level annotations, spanning 5 primary categories and 13 fine-grained adversarial OCR types. To address this challenge, we propose \\textbf{ArmorOCR}, a two-stage training framework for robust adversarial OCR perception. ArmorOCR first acquires missing adversarial OCR perception from privileged transformed observations through On-Policy Self-Distillation (OPSD), and then refines grounded OCR perception through Group Relative Policy Optimization (GRPO) with task-conditioned rewards for localization, recognition, full spotting, and visual question answering (VQA). Experiments on our AdvSpot, other adversarial OCR benchmarks, and general OCR benchmarks demonstrate that ArmorOCR consistently improves adversarial OCR perception while preserving competitive general OCR capability.",
+      "link": "https://arxiv.org/abs/2608.20122v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20122v1",
+      "authors": [
+        "Linhan Cao",
+        "Siyuan Li",
+        "Jun Lan",
+        "Liangbo He",
+        "Guannan Li",
+        "Xiaolei Huang",
+        "Jun Jia",
+        "Shuheng Zhou",
+        "Huijia Zhu",
+        "Weiqiang Wang",
+        "Wei Sun"
+      ],
+      "published": "2026-08-20T14:52:06Z",
+      "updated": "2026-08-20T14:52:06Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2608.20122v1",
+      "score": 13,
+      "topic_tags": [
+        "adversarial OCR",
+        "grounded perception",
+        "reinforcement learning",
+        "self-distillation",
+        "robustness"
+      ],
+      "zh_summary": "本文针对大型多模态模型（LMMs）在对抗性视觉文本上的脆弱性，将对抗性OCR形式化为一个接地OCR感知任务，并引入了AdvSpot，这是一个用于接地对抗性OCR评估的首个基准。AdvSpot包含390张图像，带有区域级标注，涵盖5个主要类别和13种细粒度对抗性OCR类型。为解决这些挑战，作者提出了ArmorOCR，一个两阶段训练框架：首先通过策略内自蒸馏（OPSD）从特权变换观察中获取缺失的对抗性OCR感知，然后使用带任务条件奖励的组相对策略优化（GRPO）细化接地OCR感知，包括定位、识别、完整spotting和视觉问答。在AdvSpot和其他对抗性及一般OCR基准上的实验表明，ArmorOCR在保持竞争性的一般OCR能力的同时，持续提高了对抗性OCR的感知能力。",
+      "novelty": "首次提出了对抗性OCR的接地感知任务，并构建了专门的基准AdvSpot，以及提出了结合自蒸馏和强化学习的训练框架ArmorOCR。",
+      "innovation_points": [
+        "定义了接地对抗性OCR感知任务，包括定位、识别和VQA",
+        "构建了首个对抗性OCR基准AdvSpot，包含区域级标注和多类别",
+        "提出了两阶段训练框架，结合OPSD和GRPO",
+        "在多个基准上验证了改进效果和泛化性"
+      ],
+      "limitations": "['对抗性OCR的类型可能未完全覆盖所有现实攻击模式', '训练框架计算开销可能较大', '性能提升可能牺牲部分一般OCR能力，尽管实验显示保持']",
+      "improvement_directions": [
+        "扩大对抗性OCR任务的种类和规模，增强基准的全面性",
+        "优化自蒸馏和强化学习过程，提高训练效率",
+        "探索对抗性训练与其他鲁棒性方法的结合"
+      ],
+      "engineering_value": "提供了对抗性OCR的基准和训练方法，有助于开发更鲁棒的文档处理系统，抵御恶意操纵。",
+      "why_relevant": "关注OCR模型的安全性和鲁棒性，提出了新的评估基准和解决方案，对实际应用有重要价值。"
     },
     {
       "title": "Institutional Books - Visual Elements: An open-source pipeline for extracting, classifying, deduplicating, and captioning visual elements from digital book collections",
@@ -379,69 +373,74 @@
       "score": 13,
       "topic_tags": [
         "视觉元素提取",
-        "图像分类",
-        "图像去重",
-        "图像说明",
-        "数字图书馆"
+        "历史书籍",
+        "数字人文",
+        "开源流水线",
+        "数据集"
       ],
-      "zh_summary": "本文介绍了“Institutional Books - Visual Elements”项目，这是一个开源端到端流水线，用于从历史书籍扫描中检测、分类、去重和生成说明文字。除流水线外，作者还发布了从IB-HL数据集（983,004卷）中提取的2260万个视觉元素（如图画、照片、版画和装饰艺术）的初始数据集。该工作旨在通过计算访问数字馆藏，支持AI模型训练和数字人文研究。",
-      "novelty": "首次从大规模数字图书集合中系统性地提取并分类视觉元素，并公开数据集和流水线。",
+      "zh_summary": "历史书籍收藏中蕴含丰富的视觉元素（如图示、照片、版画、装饰艺术），但在大规模数字化项目中常被忽视。尽管OCR已标准化了文本内容提取，这些视觉组件所承载的细微语境仍未得到充分利用。本文介绍了一个开源端到端流水线，用于从历史书籍收藏中检测、分类、去重和描述视觉元素，并发布了从983,004卷扫描书籍（即Institutional Books: Harvard Library数据集）中提取的2260万视觉元素的初始数据集。这项工作贡献于社区范围内通过计算访问（从AI模型训练到数字人文学研究）为数字化图书馆收藏提供新用例的持续努力。",
+      "novelty": "提出了一个完整的、开源的、端到端的视觉元素提取流水线，涵盖检测、分类、去重和描述，并应用于大规模历史书籍数字化数据集，填补了OCR仅处理文本的空白。",
       "innovation_points": [
-        "构建了完整的视觉元素处理流水线，包括检测、分类、去重和说明文字生成。",
-        "发布了包含2260万个视觉元素的大规模数据集，覆盖多种类型的插图。",
-        "流水线设计为可扩展，适用于海量数字馆藏的自动化处理。"
+        "构建了一个针对历史书籍视觉元素的专用检测、分类、去重和描述流水线",
+        "发布了包含2260万视觉元素的大规模数据集，来源于983,004卷扫描书籍",
+        "实现了视觉元素提取的全流程自动化，支持数字人文学研究和AI模型训练",
+        "提供了开源工具，便于社区扩展和复现"
       ],
-      "limitations": "['视觉元素的分类可能受限于预定义类别，难以覆盖所有新颖类型。', '说明文字的质量依赖于现有图像字幕模型的性能。']",
+      "limitations": "['数据集可能仅覆盖哈佛图书馆收藏，存在库内偏差', '视觉元素的分类和描述质量依赖自动化模型的性能，可能不及人工标注精准', '未提及对低质量扫描或特殊版式的鲁棒性', '工程验证可能缺乏与现有方法的定量对比']",
       "improvement_directions": [
-        "采用更细粒度的分类体系或开放集识别，提高元素类型的覆盖率。",
-        "利用更先进的多模态模型提升说明文字的准确性和丰富性。",
-        "探索视觉元素与文本OCR的跨模态关联，支持更深入的分析。"
+        "融合视觉语言模型提升描述质量和更细粒度的分类",
+        "扩展数据集至其他图书馆，增强多样性",
+        "优化检测模型以处理变形、老化扫描件",
+        "开发针对版式和装饰性元素的专用特征提取方法"
       ],
-      "engineering_value": "为数字图书馆的视觉内容挖掘提供了实用工具和数据集，可直接应用于历史文献研究、文化传承数字化和AI训练数据构建。",
-      "why_relevant": "该工作补充了OCR文本提取之外的视觉维度，是文档解析中多模态信息获取的重要进展，对全面理解历史文献具有重要价值。"
+      "engineering_value": "提供了一个可直接部署的视觉元素提取工具链，有助于图书馆数字化项目自动化处理视觉内容，并可作为下游任务（如多模态模型训练）的数据源。",
+      "why_relevant": "OCR领域主要关注文本，但书籍中的视觉元素常被忽略。该流水线补充了文档解析的视觉维度，对全面理解历史文献具有重要价值。"
     },
     {
-      "title": "BEAR-Bench: A Bilingual Enterprise and Academic Reasoning Benchmark for Multimodal Models",
-      "summary": "While Multimodal Large Language Models (MLLMs) have made significant strides in visual comprehension, their ability to reason about text-dense, professional documents remains incompletely evaluated. Existing benchmarks emphasize information extraction, require external domain knowledge, or cover professional documents only as one of many settings. They are also largely English- or Chinese-centric, leaving other languages and Russian, in particular, substantially underrepresented. To address these limitations, we introduce BEAR-Bench (Bilingual Enterprise and Academic Reasoning), a self-contained, complex English-and-Russian benchmark comprising 1000 human-annotated questions based on text-rich business and scientific documents. We evaluate 16 proprietary and open-weight MLLMs, including Gemini 3.1 Pro and Qwen3.5-397B, on BEAR-Bench and observe clear headroom even for the strongest systems. Finally, we use the resulting model outputs to compare existing hallucination detection methods, evaluating not only how often models fail on BEAR-Bench but also how reliably those failures can be identified.",
-      "link": "https://arxiv.org/abs/2608.17895v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.17895v1",
+      "title": "Manifold Drift in Flow Preference Optimization: A Root Cause of Reward Hacking",
+      "summary": "Preference optimization is a standard alignment method for generative models, yet extending it to continuous-time dynamics remains non-trivial. In flow matching, reward-driven updates modify transport trajectories without an inherent constraint to the pretrained data manifold and can move terminal samples off the pretrained support. We formalize this failure mode as manifold drift. Theoretically, we show that optimal flow matching recovers the terminal data distribution, whereas a preference update leaves the pretrained manifold whenever its induced terminal displacement has a nonzero normal component. As a remedy, we propose ThermoDPO, a temperature-controlled objective that anchors pairwise preference optimization on preferred samples. Across temperature regimes, this objective connects rejection sampling fine-tuning and FlowDPO and controls a pointwise reconstruction-based surrogate for manifold distance. To counteract diminished signals at low temperatures, we further introduce a weighted variant, ThermoDPO-weighted. On the main toy benchmark, ThermoDPO-weighted attains a StrictScore of 0.899, compared with 0.629 for FlowDPO and 0.857 for FlowDPO+RFT. On SD3.5-M at CFG = 4.5, it improves OCR by 47.5% and the average of four metrics by 16.0%.",
+      "link": "https://arxiv.org/abs/2608.20011v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20011v1",
       "authors": [
-        "Liubov Chubarova",
-        "Alexandra Kuleshova",
-        "Daniil Volkov",
-        "Kirill Sultanov",
-        "Alexey Zaytsev"
+        "Yansen Han",
+        "Shengyi Liao",
+        "Yuanxing Zhang",
+        "Pengfei Wan",
+        "Tao Lin"
       ],
-      "published": "2026-08-18T15:29:09Z",
-      "updated": "2026-08-18T15:29:09Z",
+      "published": "2026-08-20T13:25:24Z",
+      "updated": "2026-08-20T13:25:24Z",
       "categories": [
-        "cs.CL",
-        "cs.AI"
+        "cs.AI",
+        "cs.CV"
       ],
-      "arxiv_id": "2608.17895v1",
-      "score": 10,
+      "arxiv_id": "2608.20011v1",
+      "score": 9,
       "topic_tags": [
-        "多模态文档理解",
-        "基准测试",
-        "英俄双语",
-        "幻觉检测",
-        "专业文档推理"
+        "偏好优化",
+        "流匹配",
+        "奖励黑客",
+        "流形漂移",
+        "ThermoDPO"
       ],
-      "zh_summary": "本文介绍了BEAR-Bench，一个用于评估多模态大语言模型（MLLMs）在商业和学术文档（文本密集、专业性强）上推理能力的双语基准（英语和俄语），包含1000个基于人工注释的问题。作者评估了16个专有和开源MLLM（如Gemini 3.1 Pro、Qwen3.5-397B），发现即使最强系统仍有明显提升空间。此外，还利用模型输出比较了现有的幻觉检测方法，评估模型在基准上的失败率及失败的可识别性。",
-      "novelty": "提出了专门针对文档密集型专业场景的双语（英俄）基准，填补了非英语文档评估的空白，并整合了幻觉检测评估。",
+      "zh_summary": "偏好优化是生成模型的标准对齐方法，但扩展到连续时间动力学仍有挑战。在流匹配中，奖励驱动的更新修改传输轨迹，没有对预训练数据流形的固有约束，可能使终端样本偏离预训练支持集。我们将这种失败模式形式化为流形漂移。理论上，我们证明了最优流匹配能恢复终端数据分布，而偏好更新只要其诱导的终端位移具有非零法向分量就会离开预训练流形。为此，我们提出了ThermoDPO，一个温度控制的损失函数，将成对偏好优化锚定在偏好样本上。在不同温度制度下，该目标连接了拒绝采样微调和FlowDPO，并控制了点态重建代理以度量流形距离。为了抵消低温下信号减弱，我们进一步引入了加权变体ThermoDPO-weighted。在主要玩具基准上，ThermoDPO-weighted的StrictScore为0.899，对比FlowDPO的0.629和FlowDPO+RFT的0.857。在SD3.5-M上，CFG=4.5时，OCR改进47.5%，四项指标平均改进16.0%。",
+      "novelty": "首次将偏好优化中的奖励黑客问题归因于流形漂移，并提出了温度控制的ThermoDPO目标，从理论上证明其能保持预训练流形，为流匹配对齐提供了新见解。",
       "innovation_points": [
-        "构建了BEAR-Bench基准，涵盖1000个人工注释的复杂问题，基于文本丰富的商业和科学文档。",
-        "基准为自包含设计，无需外部领域知识，便于直接评估。",
-        "不仅评估模型性能，还对比了多种幻觉检测方法在基准上的可靠性。"
+        "形式化了流形漂移概念，揭示偏好优化导致生成样本偏离预训练数据分布的内在机制",
+        "提出了ThermoDPO，通过温度控制将偏好优化锚定在偏好样本上，避免流形漂移",
+        "理论证明了最优流匹配恢复终端分布，而偏好更新在非零法向位移时导致漂移",
+        "引入了加权变体ThermoDPO-weighted，缓解低温下信号减弱问题",
+        "在流匹配模型上实现了显著的OCR性能提升（47.5%）和平均四项指标改进16.0%"
       ],
-      "limitations": "['问题数量相对有限（1000个），可能不足以全面代表所有文档类型。', '主要聚焦于英语和俄语，其他语言仍未覆盖。']",
+      "limitations": "['主要在玩具基准上评估，可能缺乏复杂真实场景的验证', '温度参数的调节需要启发式方法，可能影响稳定性', '理论分析可能假设简单流形结构，现实数据流形更复杂', '计算开销可能因加权机制增加']",
       "improvement_directions": [
-        "扩展更多语言和领域的基准，提高覆盖度。",
-        "增加问题多样性，覆盖更多推理类型（如数学、逻辑）。",
-        "开发更有效的幻觉检测指标，用于评估MLLM可靠性。"
+        "在更复杂的真实数据集上验证流形漂移现象及ThermoDPO效果",
+        "探索自适应温度调节策略以简化超参数选择",
+        "将ThermoDPO推广到其他生成模型（如扩散模型）",
+        "结合其他正则化方法进一步约束流形偏移"
       ],
-      "engineering_value": "提供了评估文档解析和多模态理解模型的标准化基准，有助于推动更强大、更可靠的文档AI系统开发。",
-      "why_relevant": "该工作为OCR文档理解提供了专门的评测基准，对衡量文档解析模型的推理能力和幻觉程度具有直接参考价值。"
+      "engineering_value": "提供了一个有效的偏好优化方法，可改善生成模型的对齐质量，尤其在OCR等需要高一致性任务的合成数据生成中，减少奖励黑客导致的输出退化。",
+      "why_relevant": "生成模型广泛用于合成训练数据，奖励黑客会降低合成数据质量，进而影响OCR等下游任务。ThermoDPO通过控制流形漂移提升了合成数据的生成可靠性，对OCR数据增强有直接价值。"
     }
   ]
 }
