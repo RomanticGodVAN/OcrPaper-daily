@@ -1,55 +1,50 @@
 {
   "meta": {
-    "report_date": "2026-08-25",
-    "generated_at_utc": "2026-08-25 02:31:01",
+    "report_date": "2026-08-26",
+    "generated_at_utc": "2026-08-26 02:38:34",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 7
+    "count": 6
   },
   "synthesis": {
-    "executive_summary": "今日论文聚焦于多模态大语言模型在复杂文档理解中的性能评估与优化，覆盖手写识别、金融文档解析、多模态抽取等场景，强调了现有模型对语言先验的依赖、跨领域泛化难题及数据与评测的标准化需求。",
-    "trend_summary": "研究趋势包括：构建针对特定领域的高质量基准（如手写、金融）；探索视觉-语言模型的适用边界，提出先验驱动误差、可恢复性等原则；采用智能体、多阶段强化学习等方案提升长文档和多模态解析性能；重视可复现性和训练策略的敏感度分析。",
+    "executive_summary": "今日OCR/文档解析研究聚焦于真实场景与领域适应性，手写文档基准、金融文档解析、古籍智能理解等各有突破，同时事件抽取和云模拟器合成也展示了生成式框架与文档理解的交叉潜力。主流趋势是从通用解析向领域与任务定制化发展，并强调证据推理和可验证性。工程上重视数据工厂、多智能体协作与评估基准的构建。",
+    "trend_summary": "研究显著转向真实场景和领域特定挑战，如手写退化、金融表格、古籍背景。评估基准从单纯准确率转向细粒度指标（如PDE）和域内工作流适配。训练策略引入同形字对比学习、多阶段强化学习，强调数据质量控制。",
     "common_innovations": [
-      "多个研究提出了面向特定领域（手写、阿拉伯语、金融）的专用基准和评估指标，如 WildHandBench、FinixDocBench 和 OCR 先验可恢复性。",
-      "提出了将 OCR 输出作为条件输入与 VLM 结合的方法，并分析了其适用条件，如阿拉伯语识别中的自适应工作流。",
-      "采用多智能体或多阶段强化学习等技术，在长文档和复杂布局的解析中提升性能，如 Q2IT 和 FinixDoc。",
-      "强调了数据和评估的标准化，如发布可复现的评估包和引入人机协同的数据工厂。"
+      "设计针对特定领域（手写、金融、古籍）的基准，引入细粒度错误度量（如PDE）",
+      "采用多智能体架构或强化学习来增强推理和适应性",
+      "构建数据工厂或人机协同流程，提升高质量训练数据的生产",
+      "利用生成式框架统一多任务并跨域泛化"
     ],
     "future_directions": [
-      "开发更严格的评估协议，通过多次运行和计算量匹配来控制实现细节的干扰，确保结论的稳定性。",
-      "设计反事实训练或对比学习，抑制模型对语言先验的过度依赖，增强视觉证据的使用。",
-      "构建自适应路由机制，根据文档类型或 OCR 输出质量动态选择纯 OCR、VLM 或混合工作流。",
-      "扩展统一的生成式框架，将事件抽取等任务与视觉信息融合，支持多模态文档的端到端解析。",
-      "利用诊断指标（如 PDE）设计针对性的数据增强或损失函数，减少先验驱动错误。",
-      "探索更大的模型规模与高效训练策略（如 LoRA、蒸馏），以提升复杂金融文档的解析性能。"
+      "扩大手写基准规模，深入分析模型架构对语言先验依赖的影响，并探索针对性训练策略",
+      "扩展金融文档解析至更多文档类型与语言，引入跨域泛化评测",
+      "研发自动状态恢复机制以减轻LLM工作流中的约束弱化，并验证于复杂真实场景",
+      "拓展古籍理解至跨文档推理，并增强对低质量扫描图像的处理能力",
+      "探索领域自适应的符号抽象，提升云模拟器对复杂API交互的模拟精度"
     ],
     "engineering_takeaways": [
-      "在部署 OCR 系统前，应利用领域特定基准（如 FinixDocBench）评估并针对视觉质量、文档规模等轴优化。",
-      "对于阿拉伯语等特定语言，需注意变音符号和预处理的影响，可结合 OCR 先验可恢复性设计混合流程。",
-      "采用多智能体框架可将长文档解析拆分为证据收集、页面选择、目标定位，提升多模态抽取的准确率。",
-      "在训练历史文档识别模型时，需谨慎使用现代手写预热，并通过计算量匹配实验验证其真实收益，避免实现细节导致的误判。"
+      "采用多阶段强化学习和对比学习可提升领域文档解析精度",
+      "人机协同数据工厂能高效生产高质量训练数据",
+      "基于证据的多智能体系统显著提升古籍理解可靠性",
+      "LLM代码生成结合符号抽象能有效自动化云模拟器开发"
     ],
     "watchlist": [
       {
         "title": "WildHandBench: A Benchmark for Handwritten Text Understanding that Challenges MLLMs and Humans",
-        "watch_reason": "提出了衡量先验驱动错误的指标，可能成为评估手写识别模型的新标准，后续有望扩展规模并衍生改进方法。"
+        "watch_reason": "首个手写表格和真实退化场景基准，揭示了语言先验依赖问题，值得持续关注其扩展版本和后续改进"
       },
       {
         "title": "FinixDoc: Rethinking Financial Document Parsing Beyond Saturated Benchmarks",
-        "watch_reason": "为金融文档解析提供了高价值基准和训练方法，其强化学习训练策略和同形字感知对比学习或可迁移至其他垂直领域。"
+        "watch_reason": "针对金融文档的端到端系统，其能力矩阵和数据工厂设计具有实用价值，可能成为金融文档解析标杆"
       },
       {
-        "title": "When Do VLMs Help Arabic Manuscript OCR? A Cross-Dataset Study",
-        "watch_reason": "揭示了 VLM 与 OCR 结合的条件，提出的自适应工作流原则对多语言文档识别有重要指导意义，后续可扩展至更多语言和主流 VLM。"
+        "title": "SAGE: From Direct Answering to Evidence-Grounded Inference for Chinese Ancient Document Understanding",
+        "watch_reason": "多智能体证据推理方案为古籍领域提供新思路，其弃权机制值得关注，可能推广至其他低可信度场景"
       },
       {
-        "title": "Query-Driven Multimodal Information Extraction from Long Documents",
-        "watch_reason": "定义了新任务并提供了基准，多智能体方法有改进空间，潜在推动长文档多模态抽取技术发展，值得跟踪后续进展。"
-      },
-      {
-        "title": "Does a Modern-Handwriting Warm-Up Help Historical Arabic OCR? A Reproducible, Compute-Matched Evaluation on Muharaf and KHATT",
-        "watch_reason": "对训练策略的敏感性分析提示了可复现研究的重要性，未来可能影响历史文档识别训练的标准实践。"
+        "title": "When \"Must\" Becomes \"Maybe\": Constraint Weakening in LLM Agent Workflows",
+        "watch_reason": "首次系统研究状态传递可靠性，对智能体工作流设计有巨大影响，其后续真实场景验证结果将至关重要"
       }
     ]
   },
@@ -79,112 +74,25 @@
       "arxiv_id": "2608.22959v1",
       "score": 17,
       "topic_tags": [
-        "手写文档理解",
+        "手写文档",
         "基准测试",
-        "多模态大语言模型",
-        "错误分析"
+        "多模态模型"
       ],
-      "zh_summary": "本文提出 WildHandBench 基准，用于评估多模态大语言模型在手写文档理解上的能力。该基准包含 500 个手写文档，涵盖自由文本、表格、公式四种语言和九种真实场景，并引入先验驱动误差（PDE）指标来量化错误源于语言先验而非视觉证据的程度。对 18 个先进模型和校准的人类基线的评估显示，最佳模型整体准确率为 71.85%，人类为 77.09%，且模型错误中 63-91% 为先验驱动，而人类仅 49%。",
-      "novelty": "首个专门针对手写文档理解的多模态基准，引入先验驱动误差指标来揭示模型对语言先验的依赖，并对比人类表现。",
+      "zh_summary": "介绍了WildHandBench基准，用于评估手写文档理解，包含500份文档，涵盖多种结构和场景。引入PDE指标量化模型错误中语言先验的依赖，评估18个模型和人类基线，发现最佳模型准确率仅71.85%，且模型错误与人类错误有本质差异。",
+      "novelty": "首个关注手写表格和真实退化场景的基准，并提出Prior-Driven Error指标，揭示模型对语言先验的系统性依赖。",
       "innovation_points": [
-        "构建涵盖多结构、多语言、多场景的手写文档基准 WildHandBench",
-        "提出 Prior-Driven Error (PDE) 指标，量化错误来源是否为语言先验",
-        "系统评估多种模型并与校准的人类基线对比，暴露模型与人类错误的定性差异"
+        "构建包含多语言、多结构和多场景的手写文档基准",
+        "提出Prior-Driven Error指标区分语言先验导致的错误",
+        "系统评估多个SOTA模型和人类基线"
       ],
-      "limitations": "基准规模有限（500 文档），可能无法完全代表真实世界手写文档的多样性；指标主要针对识别错误，未深入分析定位或布局错误。",
+      "limitations": "基准规模有限，且未提供错误细粒度分析；人类基线可能存在偏差。",
       "improvement_directions": [
-        "扩展基准规模，覆盖更多语言、场景和手写风格",
-        "优化模型以减少对语言先验的过度依赖，增强视觉证据利用",
-        "设计训练策略显式抑制先验驱动错误，如对比学习或反事实训练"
+        "扩大基准规模并增加更多真实场景",
+        "进一步分析模型架构对先验依赖的影响",
+        "探索减轻先验依赖的训练策略"
       ],
-      "engineering_value": "提供标准化的评估工具，帮助开发者量化手写文档理解系统的性能短板，指导模型迭代优化，推动实际应用。",
-      "why_relevant": "直接面向手写文档 OCR 这一难题，为评估和改进模型提供重要资源和方法。"
-    },
-    {
-      "title": "Multimodal examination answer data with expert-designed Outcome-Based Education rubrics for criterion-level assessment",
-      "summary": "This data article describes a multimodal collection of scanned examination answers paired with expert-designed Outcome-Based Education (OBE) grading metadata. The collection contains 485 answer submissions from 415 consenting students at four academic institutions. Eight faculty contributors supplied examination materials covering nine subjects and 12 distinct question templates. Each answer-level item links a scanned PDF to a randomized identifier, subject label, question, model answer, criterion definitions, performance-level descriptions, criterion marks, and a total mark. The 12 rubrics contain 47 criteria in total. The scans retain realistic academic content, including handwriting, printed text, equations, tables, code, figures, sketches, and diagrams. CamScanner, Adobe Scan, and conventional scanners contributed variation in illumination, contrast, orientation, compression, and resolution. Diverse handwriting, crossed-out work, revised calculations, and inserted corrections add further visual variability for robustness and generalization studies. Preparation involved heterogeneous-source consolidation, label and text standardization, score validation, identifier randomization, filename randomization, and JSON-to-PDF integrity checks. An answer-level audit confirmed 485 unique identifiers, 485 unique PDF filenames, agreement between each total mark and its criterion-mark sum, and scores within the applicable rubric maximum. The data can support rubric-aware automated evaluation, multimodal document understanding, criterion-level feedback, score prediction, and privacy-aware OBE assessment research. Access is restricted to research use and is available from the corresponding author upon reasonable request.",
-      "link": "https://arxiv.org/abs/2608.22346v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.22346v1",
-      "authors": [
-        "Jahangir Alam SM",
-        "Md Khalid Syfullah",
-        "Saad Ahmed",
-        "Munira Akter Mou",
-        "A K Z Rasel Rahman",
-        "A. K. M. Masudur Rahman",
-        "Mohammed Sowket Ali"
-      ],
-      "published": "2026-08-23T10:25:59Z",
-      "updated": "2026-08-23T10:25:59Z",
-      "categories": [
-        "cs.CV",
-        "cs.AI"
-      ],
-      "arxiv_id": "2608.22346v1",
-      "score": 17,
-      "topic_tags": [
-        "多模态数据集",
-        "考试评分",
-        "OBE",
-        "文档理解"
-      ],
-      "zh_summary": "本文介绍了一个多模态考试答案数据集，包含来自 4 所院校 415 名学生的 485 份扫描答卷，并配有专家设计的基于成果导向教育（OBE）的评分标准。数据涵盖 9 个科目、12 个问题模板和 47 个评分标准，每个答案项关联扫描 PDF、随机标识符、标准答案、标准定义和评分等。扫描件包含手写、印刷文本、公式、表格、代码、图表等多种内容，并具有光照、对比度、方向等多样性。该数据集可用于支持标准感知的自动评估、多模态文档理解、标准级反馈和分数预测等研究。",
-      "novelty": "提供带精细 OBE 评分标准的多模态考试答案数据集，支持细粒度评估，且包含真实学术内容。",
-      "innovation_points": [
-        "构建多模态考试答案数据集，包含多种内容类型和视觉变化",
-        "设计基于 OBE 的评分标准，提供 47 个标准级标注",
-        "数据集可用于标准级评估和反馈生成，支持自动化评分研究"
-      ],
-      "limitations": "数据集规模有限（485 份），主要来自学术机构，可能缺乏工业场景多样性；评分标准基于特定教育框架，通用性受限。",
-      "improvement_directions": [
-        "扩大数据规模和机构范围，增加学科和问题类型",
-        "探索跨数据集的标准迁移和通用评分模型",
-        "结合视觉和语言信息改进标准级反馈生成"
-      ],
-      "engineering_value": "为自动化考试评分系统提供高质量训练和评估数据，有助于提升教育领域的文档理解与评估效率。",
-      "why_relevant": "提供了带细粒度评分的手写文档数据，对多模态理解、标准级评估和反馈生成研究有重要价值。"
-    },
-    {
-      "title": "When Do VLMs Help Arabic Manuscript OCR? A Cross-Dataset Study",
-      "summary": "Vision-language models (VLMs) are increasingly being used for document understanding, yet their role in Arabic and Islamic manuscript recognition remains underexplored. To address such a gap in this paper, we evaluate traditional OCR, general-purpose VLMs, Arabic-specialized VLMs, and OCR-conditioned VLM correction across eight Arabic text datasets spanning historical manuscripts, aged printed books, clean print, multi-domain documents, and handwriting. The results show that no single approach dominates across setups. On line-level historical manuscripts, VLMs are close to Tesseract; on page-level manuscript images, they perform better; and in several settings, an OCR-conditioned corrector improves over both standalone OCR and standalone VLMs. The central finding is an OCR-prior recoverability principle: OCR conditioning helps when the OCR output remains visually and textually recoverable, providing anchors that the VLM can refine against the image. It improves recognition on aged print, clean print, mixed-domain Arabic, and some Naskh manuscripts, but degrades performance when the prior is script-mismatched or systematically misleading, as in Maghribi manuscripts and realistic student handwriting. Additional diagnostics show that Arabic VLM-OCR is sensitive to diacritics, preprocessing, generation budget, and repetition loops. These findings support an adaptive OCR-VLM workflow that routes pages according to script, OCR-prior recoverability, length diagnostics, and failure-mode indicators.",
-      "link": "https://arxiv.org/abs/2608.22366v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.22366v1",
-      "authors": [
-        "Moshiur Farazi",
-        "Firoj Alam",
-        "Abderrahmane Maaradji",
-        "Zakaria Maamar",
-        "Hamdy Mubarak",
-        "Wajdi Zaghouani"
-      ],
-      "published": "2026-08-23T11:12:06Z",
-      "updated": "2026-08-23T11:12:06Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2608.22366v1",
-      "score": 13,
-      "topic_tags": [
-        "阿拉伯语OCR",
-        "视觉语言模型",
-        "手写识别",
-        "自适应工作流"
-      ],
-      "zh_summary": "本文评估了传统 OCR、通用 VLM、阿拉伯语专用 VLM 以及 OCR 条件 VLM 校正方法在八个阿拉伯语文本数据集上的表现，范围涵盖历史手稿、旧印刷书、清洁印刷品等多领域。结果显示没有单一方法在所有场景占优。关键发现是“OCR 先验可恢复性”原则：当 OCR 输出仍具有视觉和文本可恢复性时，OCR 条件化能提升识别效果，但在脚本不匹配或系统性误导时则性能下降。此外，阿拉伯语 VLM-OCR 对变音符号、预处理、生成预算和重复循环敏感。",
-      "novelty": "首次系统研究 VLM 在阿拉伯语手稿识别中的适用性，提出 OCR 先验可恢复性原则，并给出自适应工作流建议。",
-      "innovation_points": [
-        "跨八个数据集全面评估多种 OCR 和 VLM 方法",
-        "提出 OCR 先验可恢复性原则，解释何时 OCR 条件化有效",
-        "揭示阿拉伯语 VLM-OCR 对变音符号等细节的敏感性问题"
-      ],
-      "limitations": "主要针对阿拉伯语，可能无法直接扩展到其他语言；评估未涵盖最先进的大型 VLM，可能低估其潜力。",
-      "improvement_directions": [
-        "针对特定脚本优化 VLM 的预处理和生成策略",
-        "设计自适应路由机制，根据文档特性选择 OCR 或 VLM",
-        "增强模型对变音符号和脚本变体的鲁棒性"
-      ],
-      "engineering_value": "为阿拉伯语文档识别系统提供选型和调优指导，支持构建混合 OCR-VLM 工作流以适应不同文档类型。",
-      "why_relevant": "探讨了 VLM 与传统 OCR 的互补性，对多语言手写和古代文档识别有直接启示。"
+      "engineering_value": "为手写文档解析提供可靠评估工具，帮助改进模型设计。",
+      "why_relevant": "直接针对手写文档理解这一OCR难点，提供评估方法和错误分析。"
     },
     {
       "title": "FinixDoc: Rethinking Financial Document Parsing Beyond Saturated Benchmarks",
@@ -217,26 +125,25 @@
       "arxiv_id": "2608.22842v1",
       "score": 12,
       "topic_tags": [
-        "金融文档解析",
-        "视觉语言模型",
-        "智能体系统",
+        "金融文档",
+        "文档解析",
         "强化学习"
       ],
-      "zh_summary": "本文提出 FinixDoc，一个用于真实金融文档解析的端到端智能体系统，核心解析器为基于 Qwen3-VL-4B 的 FinixDoc-VL 模型。为表征基准测试与部署性能的差距，引入文档解析能力矩阵，按视觉质量和文档规模两个轴组织。训练采用领域自适应策略，包括同形字感知对比学习和多阶段强化学习。构建人机协同的数据工厂和评估套件 FinixDocBench，涵盖数字原生、相机拍摄、超大页和内部工作流场景。实验显示 FinixDoc-VL 在主要子集上取得最佳整体得分 81.43，比最佳开源模型高 5.13 分。",
-      "novelty": "聚焦金融文档解析，提出基于能力矩阵的评测和针对性训练方法，并构建合规审查的金融文档基准。",
+      "zh_summary": "提出FinixDoc系统，用于真实金融文档解析，核心是4B规模的ViT-LM模型FinixDoc-VL。通过文档解析能力矩阵指导训练，结合同形字对比学习和多阶段强化学习，并构建人机协同数据工厂。在FinixDocBench上取得最高分，尤其在内部工作流场景表现突出。",
+      "novelty": "针对金融文档的端到端智能体解析系统，专门设计训练策略和数据生产流程。",
       "innovation_points": [
-        "提出文档解析能力矩阵，用于分析基准与部署差异",
-        "采用同形字感知对比学习和多阶段强化学习训练模型",
+        "提出文档解析能力矩阵，从视觉质量和文档规模两个维度指导训练",
+        "设计同形字感知对比学习和多阶段强化学习方法",
         "构建人机协同的数据工厂，支持大规模高质量数据生产"
       ],
-      "limitations": "模型规模小（4B），可能受限于复杂场景；基准主要覆盖金融领域，通用性有待验证。",
+      "limitations": "基准覆盖场景有限，未充分探讨跨域泛化。",
       "improvement_directions": [
-        "扩展基准到更多金融文档类型和退化情况",
-        "探索更大规模模型和更高效训练策略",
-        "改进对表格和复杂布局的解析精度"
+        "扩展更多金融文档类型和语言",
+        "改进数据工厂的效率",
+        "探索更轻量级的模型架构"
       ],
-      "engineering_value": "为金融文档解析提供高性能解决方案，支持自动化和数据生产，具有直接应用价值。",
-      "why_relevant": "专注于真实金融文档解析，针对低质量图像和复杂布局，对 OCR 落地有重要意义。"
+      "engineering_value": "提供金融领域文档解析的实用解决方案，具有部署价值。",
+      "why_relevant": "推动文档解析在特定金融领域的落地，解决低质量文档难题。"
     },
     {
       "title": "A Scalable Cross-Domain Event Extraction System via a Unified Generative Training Framework",
@@ -258,110 +165,151 @@
       "score": 10,
       "topic_tags": [
         "事件抽取",
-        "生成式框架",
-        "跨领域泛化",
-        "Web应用"
+        "生成式模型",
+        "跨域泛化"
       ],
-      "zh_summary": "本文提出一种可扩展的跨领域事件抽取系统，采用统一的生成式序列到序列框架，联合执行事件抽取子任务，并支持流水线和端到端配置。通过在多个事件数据集上微调预训练语言模型，单一模型可保留领域特定语义并泛化到大规模标签空间。系统提供基于 Web 的应用，支持文档上传、模式感知的事件抽取、触发器与参数的可视化，以及领域配置对比。",
-      "novelty": "提出统一生成框架，将事件检测和参数抽取联合建模，支持跨领域泛化，并部署为实用工具。",
+      "zh_summary": "提出统一生成式序列到序列框架，用于跨域事件抽取，支持联合执行检测和参数抽取，并兼容pipeline和端到端配置。在多个领域数据集上微调预训练模型，使单一模型保留领域语义同时泛化。并开发了web应用供研究者使用。",
+      "novelty": "将事件抽取各子任务统一为生成式框架，实现跨域泛化，并提供实用工具。",
       "innovation_points": [
-        "统一生成框架联合执行子任务，支持多种配置",
-        "多数据集微调实现跨领域泛化",
-        "提供可视化界面，便于研究者使用"
+        "统一生成式框架联合执行事件抽取子任务",
+        "支持pipeline和端到端两种配置",
+        "基于预训练模型微调，适应多样领域"
       ],
-      "limitations": "主要针对文本事件抽取，未涉及图像或多模态内容；框架性能可能受限于预训练模型容量。",
+      "limitations": "评估仅限于现有数据集，未覆盖未见过的标签空间。",
       "improvement_directions": [
-        "扩展至多模态文档，融合视觉信息",
-        "引入更高效的微调方法以处理更大标签空间",
-        "增强系统对长文档和复杂事件的处理能力"
+        "扩展更多领域数据集",
+        "处理标签空间的动态扩展",
+        "增强小样本场景下的能力"
       ],
-      "engineering_value": "提供实用的开源工具，降低事件抽取应用门槛，支持文档级信息提取。",
-      "why_relevant": "展示生成式框架在信息抽取中的泛化能力，对文档解析中的结构化信息提取有借鉴意义。"
+      "engineering_value": "提供了web平台，便于研究者实践和比较。",
+      "why_relevant": "虽然非OCR，但事件抽取与文档理解相关，可借鉴其生成式框架思想。"
     },
     {
-      "title": "Query-Driven Multimodal Information Extraction from Long Documents",
-      "summary": "In domain-specific multimodal long documents, images and text jointly convey complex knowledge that cannot be fully captured by plain text alone. However, existing paradigms like DocVQA primarily focus on generating textual answers or localizing evidence regions, rather than outputting query-specific textual attribute values and corresponding images. To address this gap, we propose query-driven image-text joint extraction from long documents, requiring models to output query-requested textual attribute values and corresponding image bounding boxes. Based on challenges related to both user intent and document content, we designed a two-level taxonomy that operates at the query and instance levels. Further, we construct ITJoint, the first high-quality, manually annotated benchmark for this new task, comprising 2,455 pages of domain-specific documents with numerous non-decorative images, 316 queries, and 910 answer instances. Finally, we evaluate representative standalone Vision-Language Models from different providers and further design Q2IT, a multi-agent collaborative framework consisting of three progressively collaborating agents for evidence collection, page selection, and target-image localization. Using a joint evaluation approach that assesses both text extraction and image localization, our experiments show that standalone VLMs struggle with this task, while Q2IT significantly improves performance on ITJoint, although a substantial gap remains toward perfect results.",
-      "link": "https://arxiv.org/abs/2608.22214v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.22214v1",
+      "title": "SAGE: From Direct Answering to Evidence-Grounded Inference for Chinese Ancient Document Understanding",
+      "summary": "Chinese ancient document understanding demands complex visual, linguistic, and historical reasoning. Current Large Vision-Language Models (LVLMs) typically rely on an opaque, single-pass generation paradigm, often producing overconfident and weakly grounded responses. To address this, we propose SAGE, an evidence-grounded multi-agent framework that reformulates Chinese ancient document understanding as evidence-grounded inference rather than direct answer generation. SAGE coordinates specialized agents for task-aware planning, tool-mediated evidence acquisition, claim-level verification, and bounded replanning under a constrained shared-state runtime. This design supports bounded evidence seeking, answer revision, and abstention when grounding is insufficient. Experiments on the AncientDoc benchmark show that SAGE consistently outperforms matched direct-answering baselines across three LVLM backbones. Remarkably, SAGE with Qwen3.5-9B surpasses much larger monolithic LVLMs on most evaluated metrics, highlighting the importance of structured, evidence-grounded inference beyond model scaling.",
+      "link": "https://arxiv.org/abs/2608.24011v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24011v1",
       "authors": [
-        "Yikai Gao",
-        "Ding Xia",
-        "Xi Yang"
+        "Yuchuan Wu",
+        "Xuan Luo",
+        "Yinglian Zhu",
+        "Meng Fang",
+        "Xiangyang Xue",
+        "Bin Li"
       ],
-      "published": "2026-08-23T04:37:34Z",
-      "updated": "2026-08-23T04:37:34Z",
+      "published": "2026-08-25T03:01:51Z",
+      "updated": "2026-08-25T03:01:51Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "arxiv_id": "2608.24011v1",
+      "score": 7,
+      "topic_tags": [
+        "古代文档",
+        "多智能体",
+        "证据推理"
+      ],
+      "zh_summary": "提出SAGE框架，将中国古代文档理解重定义为基于证据的推理，而非直接回答。通过多智能体协作进行证据获取和验证，支持回答修订和弃权。在AncientDoc基准上，SAGE显著优于直接回答基线，且小模型SAGE超过更大的单模型。",
+      "novelty": "以证据为基础的多智能体框架用于古代文档理解，强调可验证的推理过程。",
+      "innovation_points": [
+        "设计证据获取和验证的多智能体架构",
+        "引入任务规划、工具调用和claim级验证",
+        "支持不可靠情况下的弃权机制"
+      ],
+      "limitations": "依赖于工具调用，可能受限于古代文献的数字化水平。",
+      "improvement_directions": [
+        "优化证据获取策略",
+        "扩展跨文档推理能力",
+        "增强对低质量扫描文档的处理"
+      ],
+      "engineering_value": "为古籍理解提供了结构化方案，可应用于历史研究辅助。",
+      "why_relevant": "针对OCR下游理解环节，结合视觉语言模型和多智能体，提升推理可信度。"
+    },
+    {
+      "title": "Automated Synthesis of Cloud Emulators",
+      "summary": "DevOps programming (e.g., using CLI/API scripts or IaC frameworks) is key to cloud infrastructure management. Unlike traditional programming tasks, DevOps program testing needs provisioning and execution against actual cloud resources, which is often time-consuming, unsafe, and costly. Cloud emulators have gained popularity for easing DevOps program testing; they are generally API-level mocks that can execute DevOps programs in a local environment. Still, building these emulators remains challenging: developers must manually interpret extensive cloud documentation and handcraft logic for each service, API, and their interaction. This does not scale to the complexity of the cloud, which is further a moving target as the services and APIs evolve. CloudEmu is an automated approach that constructs emulators based on cloud documentation via neurosymbolic code synthesis. The key idea is to combine LLMs' general strengths in documentation understanding and code generation with cloud-specific symbolic abstractions that suppress hallucinations and enforce precision at scale, while using the real cloud as an oracle for automated testing, repair, and alignment. Our evaluation shows the effectiveness of CloudEmu on major cloud provider (AWS and GCP) services in both coverage and accuracy. CloudEmu outperforms the existing leading tool LocalStack, which was manually developed by a large team of engineers over a decade.",
+      "link": "https://arxiv.org/abs/2608.23842v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.23842v1",
+      "authors": [
+        "Archit Bhatnagar",
+        "Zhenning Yang",
+        "Sarah McClure",
+        "Yiming Qiu",
+        "Sylvia Ratnasamy",
+        "Ang Chen"
+      ],
+      "published": "2026-08-24T21:29:52Z",
+      "updated": "2026-08-24T21:29:52Z",
+      "categories": [
+        "cs.SE",
+        "cs.AI",
+        "cs.DC"
+      ],
+      "arxiv_id": "2608.23842v1",
+      "score": 7,
+      "topic_tags": [
+        "云模拟器",
+        "神经符号",
+        "文档理解"
+      ],
+      "zh_summary": "提出CloudEmu，基于云文档自动合成云模拟器，结合LLM的代码生成能力和云特定的符号抽象，以真实云为oracle进行测试和修复。在AWS和GCP上的评估显示，CloudEmu优于手动开发的LocalStack。",
+      "novelty": "将文档解析和代码合成应用于云模拟器构建，自动化程度高。",
+      "innovation_points": [
+        "利用LLM理解云API文档并生成代码",
+        "结合符号抽象减少幻觉",
+        "使用真实云验证和修复模拟器"
+      ],
+      "limitations": "评估限于AWS和GCP，未涉及其他云提供商或特定API深度。",
+      "improvement_directions": [
+        "扩展更多云服务支持",
+        "改进符号抽象的表达能力",
+        "提升对复杂交互的模拟准确性"
+      ],
+      "engineering_value": "降低云模拟器开发成本，提高测试效率。",
+      "why_relevant": "涉及从文档到代码的自动化，与OCR文档理解有相似之处。"
+    },
+    {
+      "title": "When \"Must\" Becomes \"Maybe\": Constraint Weakening in LLM Agent Workflows",
+      "summary": "Large language model (LLM) agents coordinate complex tasks through multi-role and multi-stage workflows. Upstream state is repeatedly transformed into intermediate language artifacts, such as summaries, plans, tickets, memories, and handoff notes, from which downstream components act. For action-constraining state, topical retention is insufficient: an artifact may mention an unresolved condition while changing it from a requirement that must be resolved before execution into information that may merely inform the next action. We study this action-binding role as operational state preservation. Safety blockers provide a controlled instance because each source state has an explicit prerequisite, authority, fallback, and execution consequence. We condition on correct upstream identification, vary the handoff transformation, and evaluate an executor restricted to the resulting artifact. Across 1,296 controlled synthetic episodes, direct-handoff controls preserve every blocker, whereas compression, plan assimilation, convergence, ownership deferral, and precedent substitution repeatedly turn binding state into caveats or non-binding considerations. Normal handoff compression produces 100.0% deactivation and 54.2% forbidden action. Restoring all four state fields raises preservation to 100.0% and reduces forbidden action to 0.0%. Fixed-artifact interventions further separate preservation from containment: downstream verification eliminates forbidden action while artifact deactivation remains 95.3%. These results identify a state-transmission failure between information extraction and action. Handoff transformations can retain state content while weakening its constraints on downstream action. Semantic availability does not guarantee operational preservation.",
+      "link": "https://arxiv.org/abs/2608.24569v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24569v1",
+      "authors": [
+        "Yiheng Sun",
+        "Huifei Wang",
+        "Yancheng Zhu",
+        "Zhenyu Li",
+        "Zebin Zhao",
+        "Yifan Yuan"
+      ],
+      "published": "2026-08-25T13:51:52Z",
+      "updated": "2026-08-25T13:51:52Z",
       "categories": [
         "cs.AI",
-        "cs.MM"
+        "cs.MA"
       ],
-      "arxiv_id": "2608.22214v1",
-      "score": 10,
-      "topic_tags": [
-        "多模态抽取",
-        "长文档",
-        "查询驱动",
-        "多智能体"
-      ],
-      "zh_summary": "本文提出查询驱动的图像-文本联合抽取任务，要求模型输出查询对应的文本属性值和图像边界框。构建了首个高质量手动标注基准 ITJoint，包含 2455 页领域文档、316 个查询和 910 个答案实例。设计了多智能体协作框架 Q2IT，包含证据收集、页面选择和目标图像定位三个智能体。实验表明，独立 VLM 在此任务上表现不佳，而 Q2IT 显著提升性能，但仍有较大改进空间。",
-      "novelty": "定义新任务：查询驱动的图像-文本联合抽取，并构建首个基准，提出多智能体协作方法。",
-      "innovation_points": [
-        "提出图像-文本联合抽取任务及两级分类法",
-        "构建首个高质量人工标注基准 ITJoint",
-        "设计多智能体协作框架 Q2IT，分阶段处理证据收集、页面选择和图像定位"
-      ],
-      "limitations": "任务难度大，现有方法性能不足；基准规模有限，且主要面向领域文档。",
-      "improvement_directions": [
-        "优化智能体协作策略，提高定位精度",
-        "增强模型对长文档的上下文理解",
-        "扩展基准规模，探索半自动标注方法"
-      ],
-      "engineering_value": "为多模态文档理解提供新任务和数据集，推动查询驱动的信息提取技术发展。",
-      "why_relevant": "关注长文档中图像与文本联合抽取，对文档解析中多模态信息融合有重要价值。"
-    },
-    {
-      "title": "Does a Modern-Handwriting Warm-Up Help Historical Arabic OCR? A Reproducible, Compute-Matched Evaluation on Muharaf and KHATT",
-      "summary": "Whether an intermediate stage of modern Arabic handwriting helps or hurts historical Arabic HTR is usually decided from one implementation and one comparison, too thin a basis for a claim either way. We test stability by running the same nominal ablation four times, letting the base checkpoint, encoder-freezing strategy, epoch budget, precision, and learning-rate schedule vary as they naturally did during development, while holding the normalization, scorer, and interval estimation fixed. Each run compares intermediate training on modern handwriting (KHATT) then fine-tuning on historical manuscripts (Muharaf) against fine-tuning on Muharaf directly. Across the four runs the estimated effect swings from -17.64 to +14.52 CER points and reverses sign. The two extremes are exactly the two runs with an identifiable confound (a fivefold lower learning rate in one; a checkpoint of undisclosed provenance in the other); the two clean runs land at -0.25 and +0.94, i.e. no effect. A tight interval from one implementation says nothing about the next. We then run a compute-matched experiment with identical budgets over three seeds: KHATT warm-up is +2.42 CER points worse than a matched same-domain control (95% interval [+0.60, +4.25]); the part of that gap specific to the handwriting domain is only about 0.6 points a small negative effect under this configuration, not a universal result. We release a SaudiHeritage-OCR package with the normalizer, interval scorer, a verified KHATT decoder, experimental manifests, VLM baselines, and an edition-alignment protocol, so the result can be checked independently. The Al-Mahd inscription line is held strictly out and is not offered as a benchmark.",
-      "link": "https://arxiv.org/abs/2608.22316v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.22316v1",
-      "authors": [
-        "Sumaih Almarshad",
-        "Maram Alamri",
-        "Dona Aloraini",
-        "Fares Altuwaim",
-        "AlJawharh AlOtaibi",
-        "Reem Alyabis",
-        "Rayah Aldawsari"
-      ],
-      "published": "2026-08-23T09:29:27Z",
-      "updated": "2026-08-23T09:29:27Z",
-      "categories": [
-        "cs.LG",
-        "cs.CV"
-      ],
-      "arxiv_id": "2608.22316v1",
+      "arxiv_id": "2608.24569v1",
       "score": 6,
       "topic_tags": [
-        "历史手写识别",
-        "迁移学习",
-        "可复现性评估",
-        "阿拉伯语OCR",
-        "训练策略"
+        "智能体",
+        "状态管理",
+        "约束传递"
       ],
-      "zh_summary": "本文针对历史阿拉伯语手写文本识别（HTR）中，是否使用现代阿拉伯语手写作为中间训练阶段（预热）这一问题，进行了可复现的、计算量匹配的评估。作者发现，在改变基础检查点、编码器冻结策略、训练轮数预算、精度和学习率调度等实现细节时，预热的效果在不同运行之间波动剧烈（从-17.64到+14.52 CER百分点），甚至出现符号反转。在两次干净的运行中，预热效果几乎为零（-0.25和+0.94）。计算量匹配的实验表明，预热比同域控制差2.42 CER百分点，其中与手写域相关的部分仅约0.6个百分点。作者发布了SaudiHeritage-OCR包以支持复现。",
-      "novelty": "该研究首次系统性地评估了现代手写预热对历史阿拉伯语HTR的影响，并强调了结果对实现细节的敏感性，挑战了以往基于单一实现的结论。",
+      "zh_summary": "研究LLM智能体工作流中约束状态在信息传递中的弱化问题。通过安全阻断器场景，发现压缩、计划同化等转换会导致状态字段丢失，使约束从必须变为可能，导致禁止动作发生。恢复所有字段可保持约束，但下游验证仅能防止动作，无法恢复状态。",
+      "novelty": "首次系统研究LLM工作流中状态传递的可靠性，识别出约束弱化现象。",
       "innovation_points": [
-        "采用多次运行（四次）同一名义消融实验，并自然变化开发过程中的实现细节，以测试结果稳定性。",
-        "设计计算量匹配实验，在相同预算下比较预热与同域控制，隔离手写域的影响。",
-        "发布包含归一化器、区间评分器、验证过的KHATT解码器、实验清单、VLM基线和版本对齐协议的完整包，促进可复现研究。"
+        "定义行动绑定状态保持问题",
+        "设计受控合成实验量化约束弱化",
+        "提出干预措施（恢复字段）并评估效果"
       ],
-      "limitations": "['实验仅针对阿拉伯语手写，可能不适用于其他语言或文字。', '预热效果的估计在配置变化下高度不稳定，表明结论的普适性有限。', '计算量匹配实验仅使用三个随机种子，可能不足以捕捉全部变异性。']",
+      "limitations": "实验基于合成数据，未在真实复杂工作流中验证。",
       "improvement_directions": [
-        "进一步探索预热效果对更多实现细节（如优化器、数据增强、模型架构）的敏感性，建立更稳健的评估框架。",
-        "扩展研究到其他语言和手写风格，验证预热方法的通用性。",
-        "开发更精细的域适应技术，以更有效地利用现代手写数据。"
+        "在更真实场景中验证状态保持",
+        "开发自动恢复状态字段的机制",
+        "研究其他类型约束的状态保持"
       ],
-      "engineering_value": "该研究为历史手写识别模型训练提供了一个可复现的评估工具和资源，帮助研究人员避免基于单一实现得出错误结论，并节省计算资源。",
-      "why_relevant": "该研究直接相关于OCR/HTR领域中的迁移学习和训练策略选择，对于优化历史文档识别系统的性能具有重要参考价值。"
+      "engineering_value": "为智能体工作流设计提供原则，避免危险的约束弱化。",
+      "why_relevant": "与文档理解中信息提取的可靠性相关，特别是关键信息保持。"
     }
   ]
 }
