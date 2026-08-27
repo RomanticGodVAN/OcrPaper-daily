@@ -1,273 +1,185 @@
 {
   "meta": {
-    "report_date": "2026-08-26",
-    "generated_at_utc": "2026-08-26 02:38:34",
+    "report_date": "2026-08-27",
+    "generated_at_utc": "2026-08-27 11:11:00",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 6
+    "count": 4
   },
   "synthesis": {
-    "executive_summary": "今日OCR/文档解析研究聚焦于真实场景与领域适应性，手写文档基准、金融文档解析、古籍智能理解等各有突破，同时事件抽取和云模拟器合成也展示了生成式框架与文档理解的交叉潜力。主流趋势是从通用解析向领域与任务定制化发展，并强调证据推理和可验证性。工程上重视数据工厂、多智能体协作与评估基准的构建。",
-    "trend_summary": "研究显著转向真实场景和领域特定挑战，如手写退化、金融表格、古籍背景。评估基准从单纯准确率转向细粒度指标（如PDE）和域内工作流适配。训练策略引入同形字对比学习、多阶段强化学习，强调数据质量控制。",
+    "executive_summary": "今日论文情报聚焦于OCR/文档解析的多个前沿方向：一是历史手稿的高效标注自动化，二是多模态RAG在图纸理解和合规检查中的应用，三是多模态知识图谱中的上下文增强，四是LLM智能体工作流中的约束弱化问题。这些工作共同表明，文档解析正从纯文本抽取向视觉优先、多模态融合和智能体工作流发展，同时强调效率、可解释性和安全约束的重要性。",
+    "trend_summary": "OCR和文档解析领域正经历从传统文本提取向多模态智能体化、知识图谱化和可解释性方向的转变。关键技术包括多模态大模型、视觉优先的RAG、上下文增强的知识图谱，以及对工作流安全性的关注。",
     "common_innovations": [
-      "设计针对特定领域（手写、金融、古籍）的基准，引入细粒度错误度量（如PDE）",
-      "采用多智能体架构或强化学习来增强推理和适应性",
-      "构建数据工厂或人机协同流程，提升高质量训练数据的生产",
-      "利用生成式框架统一多任务并跨域泛化"
+      "多模态大模型被广泛应用于文档内容的理解和结构化，如RefLAM和PlanSightRAG。",
+      "RAG框架从纯文本向视觉优先和多模态知识图谱融合方向发展。",
+      "强调可解释性，通过置信度得分和热力图等机制提供证据跟踪。",
+      "面向特定领域（如历史手稿、土木图纸）的定制化OCR管线开发。",
+      "对LLM智能体工作流的安全性和约束保持提出新要求。"
     ],
     "future_directions": [
-      "扩大手写基准规模，深入分析模型架构对语言先验依赖的影响，并探索针对性训练策略",
-      "扩展金融文档解析至更多文档类型与语言，引入跨域泛化评测",
-      "研发自动状态恢复机制以减轻LLM工作流中的约束弱化，并验证于复杂真实场景",
-      "拓展古籍理解至跨文档推理，并增强对低质量扫描图像的处理能力",
-      "探索领域自适应的符号抽象，提升云模拟器对复杂API交互的模拟精度"
+      "开发跨语言和脚本的历史手稿标注管线，减少对干净参考文本的依赖，并探索弱监督或无参考场景下的对齐方法。",
+      "在真实世界图纸和文档上验证视觉优先RAG的鲁棒性，结合OCR与视觉信息以处理密集文本区域。",
+      "将上下文增强的多模态知识图谱扩展至更多模态（如音频、视频），并优化上下文选择机制，减小图谱构建成本。",
+      "研究动态工作流中操作状态自动保存的方法，结合形式化验证提供更强约束保证。",
+      "整合文档解析与领域特定智能体，实现从解析到合规检查或问答的端到端自动化。"
     ],
     "engineering_takeaways": [
-      "采用多阶段强化学习和对比学习可提升领域文档解析精度",
-      "人机协同数据工厂能高效生产高质量训练数据",
-      "基于证据的多智能体系统显著提升古籍理解可靠性",
-      "LLM代码生成结合符号抽象能有效自动化云模拟器开发"
+      "RefLAM的级联流程和置信度规则可大幅提升标注效率，适合大规模历史文档语料构建。",
+      "PlanSightRAG的视觉优先索引可避免OCR噪声，但需注意真实场景中阈值设定的局限性。",
+      "在多模态知识图谱构建阶段注入上下文可显著改善下游RAG性能，但需权衡存储成本。",
+      "约束弱化问题警示：在LLM工作流中必须显式保存操作状态，以确保安全机制有效。"
     ],
     "watchlist": [
       {
-        "title": "WildHandBench: A Benchmark for Handwritten Text Understanding that Challenges MLLMs and Humans",
-        "watch_reason": "首个手写表格和真实退化场景基准，揭示了语言先验依赖问题，值得持续关注其扩展版本和后续改进"
+        "title": "RefLAM: A Reference-Grounded Line Annotation Pipeline for Historical Arabic Manuscripts",
+        "watch_reason": "提出高效的手稿标注方案，对数字人文和OCR训练数据构建有重要价值，但语言限制需关注其扩展性。"
       },
       {
-        "title": "FinixDoc: Rethinking Financial Document Parsing Beyond Saturated Benchmarks",
-        "watch_reason": "针对金融文档的端到端系统，其能力矩阵和数据工厂设计具有实用价值，可能成为金融文档解析标杆"
+        "title": "PlanSightRAG: A Visual-First Multimodal RAG for Automating Question Answering and Compliance Checking for Civil Standard Plans",
+        "watch_reason": "视觉优先RAG可能改变图纸等视觉文档的解析方式，后续真实场景测试值得跟踪。"
       },
       {
-        "title": "SAGE: From Direct Answering to Evidence-Grounded Inference for Chinese Ancient Document Understanding",
-        "watch_reason": "多智能体证据推理方案为古籍领域提供新思路，其弃权机制值得关注，可能推广至其他低可信度场景"
+        "title": "Multi-Granularity Context-Enhanced RAG over Multimodal Knowledge Graphs",
+        "watch_reason": "知识图谱构建阶段的上下文注入是新颖思路，可能推动多模态RAG发展，但领域泛化有待验证。"
       },
       {
         "title": "When \"Must\" Becomes \"Maybe\": Constraint Weakening in LLM Agent Workflows",
-        "watch_reason": "首次系统研究状态传递可靠性，对智能体工作流设计有巨大影响，其后续真实场景验证结果将至关重要"
+        "watch_reason": "揭示LLM工作流中约束保持的关键问题，对构建可靠文档解析工作流有直接指导意义。"
       }
     ]
   },
   "papers": [
     {
-      "title": "WildHandBench: A Benchmark for Handwritten Text Understanding that Challenges MLLMs and Humans",
-      "summary": "While the top model on OmniDocBench now reaches 96.34% overall on printed-document parsing, the ability of current models to handle challenging handwritten documents remains largely uncharacterized. Existing benchmarks focus on isolated text or formulas, overlook handwritten tables and real-world degradation, and report aggregate accuracy without explaining why models fail. We present WildHandBench, a benchmark containing 500 handwritten documents across three structures (free text, tables, formulas), four languages, and nine real-world scenarios. We introduce a Prior-Driven Error (PDE) metric that quantifies whether errors originate from language priors rather than visual evidence. Evaluating 18 state-of-the-art models together with calibrated human baselines, we find: (1) the best model achieves only 71.85% overall; (2) humans outperform all models yet the gap is narrow (77.09% vs. 71.85%); and (3) model errors are qualitatively different from human errors -- 63-91% of model errors are prior-driven versus only 49% for humans, exposing systematic reliance on language priors that conventional accuracy metrics cannot capture.",
-      "link": "https://arxiv.org/abs/2608.22959v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.22959v1",
+      "title": "RefLAM: A Reference-Grounded Line Annotation Pipeline for Historical Arabic Manuscripts",
+      "summary": "Existing approaches to building line-level Arabic handwritten-text-recognition (HTR) training data either rely on fully manual annotation, which does not scale, or on automatic OCR-to-reference alignment methods not yet extended to multi-script, two-zone (main-plus-margin) manuscript layouts with a provable correctness guarantee. We present RefLAM (Reference-grounded Line Annotation for Manuscripts), a pipeline converting manuscript page images and clean transcriptions into validated, line-level ground truth without sacrificing human oversight. RefLAM couples a deep-learning page-segmentation model with a multimodal large language model (MLLM) for structured OCR and a diacritic-agnostic fuzzy alignment engine that grounds each OCR line in a contiguous span of the reference text, with a character-level confidence score in $[0,100]$. A perfect score is provably equivalent to character-for-character identity of the normalised strings (the Confidence-100 rule), verified with no counterexample across the released corpus. A reviewer can thus trust a perfect score, confirming most lines at a glance rather than retyping them, so annotation becomes triaged, with attention concentrated on uncertain alignments. Across 7 fully page-validated books we measured a 75$\\times$ throughput gain over manual annotation (3,000 vs. 40 lines/hr); applying the same guarantee to 7 further books, we retained 16,533 confidence-100 main-text lines within one week, excluding sub-100 lines rather than manually correcting them. Using RefLAM, we release AraMS-28k: 14 historical Arabic manuscript books, 3,043 pages, and 27,971 main-text and 629 margin-line annotations with bounding boxes, layout labels, and insertion anchors for 191 margin entries (30.4%). We also finetune Muharaf-pretrained baselines (including HATFormer) on AraMS-28k and report CER results confirming its practical utility for downstream HTR training.",
+      "link": "https://arxiv.org/abs/2608.25140v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.25140v1",
       "authors": [
-        "Jun Zhang",
-        "Qiao Zhao",
-        "Cheng Cui",
-        "Jianying Qu",
-        "Zhongkai Sun",
-        "Jianwen Yang",
-        "Changda Zhou",
-        "ZhuoXin Liu",
-        "Shubin Han"
+        "Mohamed Guechaoui",
+        "Mohamed Diaa Zellagui",
+        "Souleyman Chaib",
+        "Sahraoui Dhelim"
       ],
-      "published": "2026-08-24T08:25:12Z",
-      "updated": "2026-08-24T08:25:12Z",
+      "published": "2026-08-25T20:46:11Z",
+      "updated": "2026-08-25T20:46:11Z",
       "categories": [
         "cs.CV",
-        "cs.AI"
-      ],
-      "arxiv_id": "2608.22959v1",
-      "score": 17,
-      "topic_tags": [
-        "手写文档",
-        "基准测试",
-        "多模态模型"
-      ],
-      "zh_summary": "介绍了WildHandBench基准，用于评估手写文档理解，包含500份文档，涵盖多种结构和场景。引入PDE指标量化模型错误中语言先验的依赖，评估18个模型和人类基线，发现最佳模型准确率仅71.85%，且模型错误与人类错误有本质差异。",
-      "novelty": "首个关注手写表格和真实退化场景的基准，并提出Prior-Driven Error指标，揭示模型对语言先验的系统性依赖。",
-      "innovation_points": [
-        "构建包含多语言、多结构和多场景的手写文档基准",
-        "提出Prior-Driven Error指标区分语言先验导致的错误",
-        "系统评估多个SOTA模型和人类基线"
-      ],
-      "limitations": "基准规模有限，且未提供错误细粒度分析；人类基线可能存在偏差。",
-      "improvement_directions": [
-        "扩大基准规模并增加更多真实场景",
-        "进一步分析模型架构对先验依赖的影响",
-        "探索减轻先验依赖的训练策略"
-      ],
-      "engineering_value": "为手写文档解析提供可靠评估工具，帮助改进模型设计。",
-      "why_relevant": "直接针对手写文档理解这一OCR难点，提供评估方法和错误分析。"
-    },
-    {
-      "title": "FinixDoc: Rethinking Financial Document Parsing Beyond Saturated Benchmarks",
-      "summary": "Financial document parsing requires accuracy, structural consistency, and verifiability that current benchmarks often fail to reflect. We present FinixDoc, an end-to-end agentic parsing system for real-world financial documents, with FinixDoc-VL, a 4B-scale vision-language model built on Qwen3-VL-4B, as its core parser. To characterize the gap between benchmark and deployment performance, we introduce a Document Parsing Capability Matrix organized along two practical axes: visual quality and document scale. Guided by this matrix, FinixDoc-VL is trained with a domain-adapted recipe combining homoglyph-aware contrastive learning and multi-stage reinforcement learning with composite domain-specific rewards. To better leverage our accumulated advantage in low-quality financial-document data and support large-scale, high-quality data production, we further build a human-in-the-loop Data Factory pipeline with confidence-aware expert review. For evaluation, we construct FinixDocBench, a financial-domain evaluation suite covering digital-native, camera-captured, ultra-large-page, and internal-workflow scenarios, with a compliance-reviewed subset released alongside this technical report. On its main subsets, FinixDoc-VL achieves the highest overall score (81.43) among evaluated baselines, outperforming the next-best open-source model by 5.13 points, with the largest gains on internal financial workflows (FinixInner: 84.08 vs. 78.73).",
-      "link": "https://arxiv.org/abs/2608.22842v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.22842v1",
-      "authors": [
-        "Hang Wang",
-        "Jin Zhang",
-        "Guoliang Xu",
-        "Pengyue Lu",
-        "Yao Li",
-        "Zijiao Zhang",
-        "Tianyu Huang",
-        "Weiqi Xiong",
-        "Yulong Wang",
-        "Chuqiao Lu",
-        "Wenkang Huang",
-        "Kai Yang",
-        "Yadong Li",
-        "Hui Li",
-        "Xingzhong Xu",
-        "Xiao Xu"
-      ],
-      "published": "2026-08-24T06:20:18Z",
-      "updated": "2026-08-24T06:20:18Z",
-      "categories": [
-        "cs.AI"
-      ],
-      "arxiv_id": "2608.22842v1",
-      "score": 12,
-      "topic_tags": [
-        "金融文档",
-        "文档解析",
-        "强化学习"
-      ],
-      "zh_summary": "提出FinixDoc系统，用于真实金融文档解析，核心是4B规模的ViT-LM模型FinixDoc-VL。通过文档解析能力矩阵指导训练，结合同形字对比学习和多阶段强化学习，并构建人机协同数据工厂。在FinixDocBench上取得最高分，尤其在内部工作流场景表现突出。",
-      "novelty": "针对金融文档的端到端智能体解析系统，专门设计训练策略和数据生产流程。",
-      "innovation_points": [
-        "提出文档解析能力矩阵，从视觉质量和文档规模两个维度指导训练",
-        "设计同形字感知对比学习和多阶段强化学习方法",
-        "构建人机协同的数据工厂，支持大规模高质量数据生产"
-      ],
-      "limitations": "基准覆盖场景有限，未充分探讨跨域泛化。",
-      "improvement_directions": [
-        "扩展更多金融文档类型和语言",
-        "改进数据工厂的效率",
-        "探索更轻量级的模型架构"
-      ],
-      "engineering_value": "提供金融领域文档解析的实用解决方案，具有部署价值。",
-      "why_relevant": "推动文档解析在特定金融领域的落地，解决低质量文档难题。"
-    },
-    {
-      "title": "A Scalable Cross-Domain Event Extraction System via a Unified Generative Training Framework",
-      "summary": "Event extraction is fundamental to information extraction. Prior approaches often separate event detection and argument extraction or depend on dataset-specific designs, limiting scalability and cross-domain generalization. We propose a unified generative sequence-to-sequence framework that performs event extraction subtasks jointly and supports both pipeline and end-to-end configurations. We fine-tune pretrained language models on multiple event datasets across diverse domains, enabling a single model to retain domain-specific semantics while generalizing over large and evolving label spaces. We demonstrate these capabilities through a web-based application tailored for researchers and practitioners. The platform supports document upload, schema-aware event extraction, visualization of triggers and arguments, and comparison of different extraction configurations across domains.",
-      "link": "https://arxiv.org/abs/2608.23261v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.23261v1",
-      "authors": [
-        "Siting Liang",
-        "Omar Adjali",
-        "Omair Shahzad Bhatti",
-        "Daniel Sonntag"
-      ],
-      "published": "2026-08-24T13:51:03Z",
-      "updated": "2026-08-24T13:51:03Z",
-      "categories": [
         "cs.CL"
       ],
-      "arxiv_id": "2608.23261v1",
+      "arxiv_id": "2608.25140v1",
+      "score": 15,
+      "topic_tags": [
+        "手写文本识别",
+        "文档标注",
+        "多模态大模型",
+        "历史手稿",
+        "OCR训练数据"
+      ],
+      "zh_summary": "提出RefLAM管线，用于历史阿拉伯语手稿的线级标注，结合深度学习页面分割、多模态大模型和模糊对齐引擎，提供可证明的置信度得分，实现人工审核下的高效标注，吞吐量提升75倍，并发布AraMS-28k数据集。",
+      "novelty": "首次将参考文本对齐的可证明正确性保证应用于多脚本、双区域手稿布局的线级标注，通过置信度100规则实现人工审核的高效分流。",
+      "innovation_points": [
+        "提出置信度100规则，证明完美得分与归一化字符串逐字符一致等价，并经语料验证无反例。",
+        "结合页面分割模型、多模态大语言模型和模糊对齐引擎的级联流程，实现结构化OCR与参考文本的精确对齐。",
+        "开发三分类审核流程，将人工注意力集中在低置信度行上，大幅提升标注效率。"
+      ],
+      "limitations": "['仅针对阿拉伯语手稿，可能不适用于其他语言或现代文档。', '依赖干净转录稿作为参考，对于无参考文本的场景不适用。', '处理双区域布局（主文本加边注）可能限制其通用性。']",
+      "improvement_directions": [
+        "扩展至更多语言和脚本，评估对齐算法的跨语言泛化能力。",
+        "探索无参考或弱参考场景下的标注方法，减少对清洁转录的依赖。",
+        "优化低置信度行的半自动校正策略，进一步减少人工干预。"
+      ],
+      "engineering_value": "为手稿数字化提供高效准确的标注工具，显著降低人力成本，适用于大规模历史文档的语料构建。",
+      "why_relevant": "针对手写文本识别训练数据的生产瓶颈，提供可扩展的自动化标注方案，对OCR领域的数据建设有直接借鉴意义。"
+    },
+    {
+      "title": "PlanSightRAG: A Visual-First Multimodal RAG for Automating Question Answering and Compliance Checking for Civil Standard Plans",
+      "summary": "Civil infrastructure compliance checking has long relied on engineers manually reading legacy 2D plans; however, OCR-based automation strips away the geometry and layout essential for interpreting these plans. We present a Visual-First Multimodal Retrieval-Augmented Generation (RAG) framework called PlanSightRAG. It indexes and reasons directly over plan imagery, integrates a ColNomic-3B multi-vector retrieval, an agentic Planner-Retriever-Auditor-Synthesizer, and MaxSim heatmaps as an evidence trail. We introduce a 4,056-pair benchmark from five state Departments of Transportation (DOT) standard plans (1,898 pages). PlanSightRAG achieves 91.47% Recall@5 on zero-shot retrieval, while on a held-out Michigan DOT corpus, it achieves 91.40%. On synthetic, parametrically-generated compliance drawings, our Qwen2.5-VL-72B pipeline reaches 100% verdict accuracy only when supplied a pre-resolved rule threshold, a controlled ceiling that a non-VLM OCR baseline already reaches at 76.4%. Finally, we demonstrate autonomous visual rule-grounding by extracting numeric limits directly from a specification corpus without any human-supplied rules.",
+      "link": "https://arxiv.org/abs/2608.26091v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26091v1",
+      "authors": [
+        "Nabaraj Subedi",
+        "Shuvo Dip Datta",
+        "Ahmed Abdelaty",
+        "Shivanand Venkanna Sheshappanavar"
+      ],
+      "published": "2026-08-26T17:54:24Z",
+      "updated": "2026-08-26T17:54:24Z",
+      "categories": [
+        "cs.IR",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "arxiv_id": "2608.26091v1",
       "score": 10,
       "topic_tags": [
-        "事件抽取",
-        "生成式模型",
-        "跨域泛化"
+        "多模态RAG",
+        "视觉文档理解",
+        "合规检查",
+        "土木图纸",
+        "智能体"
       ],
-      "zh_summary": "提出统一生成式序列到序列框架，用于跨域事件抽取，支持联合执行检测和参数抽取，并兼容pipeline和端到端配置。在多个领域数据集上微调预训练模型，使单一模型保留领域语义同时泛化。并开发了web应用供研究者使用。",
-      "novelty": "将事件抽取各子任务统一为生成式框架，实现跨域泛化，并提供实用工具。",
+      "zh_summary": "提出视觉优先的多模态RAG框架PlanSightRAG，直接对图纸图像进行索引和推理，整合多向量检索、智能体流程和热力图证据追踪，用于土木标准图纸的问答和合规检查，在基准上达到91.47%的召回率。",
+      "novelty": "放弃传统的OCR文本提取，直接利用视觉信息进行图纸理解，并通过无人类规则的自主视觉规则提取实现合规检查。",
       "innovation_points": [
-        "统一生成式框架联合执行事件抽取子任务",
-        "支持pipeline和端到端两种配置",
-        "基于预训练模型微调，适应多样领域"
+        "视觉优先的RAG架构，直接索引和推理图像，保留几何与布局信息。",
+        "集成ColNomic-3B多向量检索与Planner-Retriever-Auditor-Synthesizer智能体流程。",
+        "引入MaxSim热力图作为证据轨迹，增强可解释性。",
+        "构建4,056对基准测试集，来自五个州交通部标准图纸。"
       ],
-      "limitations": "评估仅限于现有数据集，未覆盖未见过的标签空间。",
+      "limitations": "['依赖合成图纸进行合规验证，真实图纸场景尚需测试。', '在规则阈值预先解析时才能达到100%准确率，实际应用受限。', '未与基于OCR的完整基线进行全面对比。']",
       "improvement_directions": [
-        "扩展更多领域数据集",
-        "处理标签空间的动态扩展",
-        "增强小样本场景下的能力"
+        "在更多真实世界图纸上评估，增强泛化性。",
+        "探索自动规则解析的鲁棒性，减少人工设定阈值的依赖。",
+        "融合OCR与视觉信息，提升对文本密集区域的解释能力。"
       ],
-      "engineering_value": "提供了web平台，便于研究者实践和比较。",
-      "why_relevant": "虽然非OCR，但事件抽取与文档理解相关，可借鉴其生成式框架思想。"
+      "engineering_value": "可用于土木工程图纸的自动审查和问答，减少人工阅读工作量，提高合规检查效率。",
+      "why_relevant": "展示非OCR方案在处理复杂文档时的优势，为OCR在工程图纸领域的应用提供新思路。"
     },
     {
-      "title": "SAGE: From Direct Answering to Evidence-Grounded Inference for Chinese Ancient Document Understanding",
-      "summary": "Chinese ancient document understanding demands complex visual, linguistic, and historical reasoning. Current Large Vision-Language Models (LVLMs) typically rely on an opaque, single-pass generation paradigm, often producing overconfident and weakly grounded responses. To address this, we propose SAGE, an evidence-grounded multi-agent framework that reformulates Chinese ancient document understanding as evidence-grounded inference rather than direct answer generation. SAGE coordinates specialized agents for task-aware planning, tool-mediated evidence acquisition, claim-level verification, and bounded replanning under a constrained shared-state runtime. This design supports bounded evidence seeking, answer revision, and abstention when grounding is insufficient. Experiments on the AncientDoc benchmark show that SAGE consistently outperforms matched direct-answering baselines across three LVLM backbones. Remarkably, SAGE with Qwen3.5-9B surpasses much larger monolithic LVLMs on most evaluated metrics, highlighting the importance of structured, evidence-grounded inference beyond model scaling.",
-      "link": "https://arxiv.org/abs/2608.24011v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.24011v1",
+      "title": "Multi-Granularity Context-Enhanced RAG over Multimodal Knowledge Graphs",
+      "summary": "Retrieval-augmented generation (RAG) is widely used to mitigate hallucination issues in large language models (LLMs) and multimodal large language models (MLLMs). In particular, knowledge graph (KG)-based RAG leverages structured knowledge to provide (M)LLMs with high-quality external information. Building on these works, recent studies have explored multimodal knowledge graphs (MMKGs) as knowledge bases for GraphRAG. This enables Graph RAG to integrate knowledge across multiple modalities, thereby further enhancing its performance. However, existing MMKG-based RAG methods generally follow a common pipeline in which different modalities are largely processed independently before being fusion. As a result, textual context is only used to a limited extent during visual information extraction and subsequent multimodal knowledge fusion. This brings a semantic gap between images and text which limits the multimodal GraphRAG performance. To address this issue, we propose a novel framework for constructing a Context-Enhanced MMKG (CEMMKG) to better support multimodal GraphRAG. The proposed CEMMKG enriches each image with complementary textual context at both local and global scopes. Local context goes beyond the surrounding text by incorporating sentences that are semantically related to the image, while global context provides a summary of the entire passage. We further introduce a multi-granularity design for the local context, allowing it to capture semantically relevant information at different levels of detail. Extensive experiments on the selected vision-centric dataset validate that CEMMKG is effective in leveraging contextual information to improve MMKG-based RAG performance. Moreover, its effectiveness across different MMKG-based RAG methods demonstrates its broad applicability.",
+      "link": "https://arxiv.org/abs/2608.25986v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.25986v1",
       "authors": [
-        "Yuchuan Wu",
-        "Xuan Luo",
-        "Yinglian Zhu",
-        "Meng Fang",
-        "Xiangyang Xue",
-        "Bin Li"
+        "Zongyu Wu",
+        "Yilong Wang",
+        "Xiaochen Wang",
+        "Minhua Lin",
+        "Zhichao Xu",
+        "Fenglong Ma",
+        "Xiang Zhang",
+        "Suhang Wang"
       ],
-      "published": "2026-08-25T03:01:51Z",
-      "updated": "2026-08-25T03:01:51Z",
+      "published": "2026-08-26T16:38:02Z",
+      "updated": "2026-08-26T16:38:02Z",
       "categories": [
-        "cs.CL",
         "cs.AI"
       ],
-      "arxiv_id": "2608.24011v1",
-      "score": 7,
+      "arxiv_id": "2608.25986v1",
+      "score": 6,
       "topic_tags": [
-        "古代文档",
-        "多智能体",
-        "证据推理"
+        "多模态知识图谱",
+        "RAG",
+        "上下文增强",
+        "知识融合",
+        "视觉问答"
       ],
-      "zh_summary": "提出SAGE框架，将中国古代文档理解重定义为基于证据的推理，而非直接回答。通过多智能体协作进行证据获取和验证，支持回答修订和弃权。在AncientDoc基准上，SAGE显著优于直接回答基线，且小模型SAGE超过更大的单模型。",
-      "novelty": "以证据为基础的多智能体框架用于古代文档理解，强调可验证的推理过程。",
+      "zh_summary": "提出CEMMKG框架，通过为多模态知识图谱中的图像补充局部和全局文本上下文，增强多粒度信息，以改进基于知识图谱的RAG性能，在视觉中心数据集上进行实验验证。",
+      "novelty": "针对现有MMKG-RAG方法中多模态融合不足、文本上下文利用有限的问题，提出在构建知识图谱时即注入上下文信息。",
       "innovation_points": [
-        "设计证据获取和验证的多智能体架构",
-        "引入任务规划、工具调用和claim级验证",
-        "支持不可靠情况下的弃权机制"
+        "构建上下文增强的MMKG，为每个图像补充语义相关的句子和篇章摘要。",
+        "引入多粒度局部上下文设计，捕捉不同细节级别的语义信息。",
+        "采用双阶段上下文注入（图谱构建阶段）而非融合阶段，从源头减小语义鸿沟。"
       ],
-      "limitations": "依赖于工具调用，可能受限于古代文献的数字化水平。",
+      "limitations": "['实验仅基于视觉中心数据集，可能未覆盖其他领域。', '上下文增强可能增加知识图谱的大小和构建成本。', '对文本与图像间复杂语义关系的建模尚浅。']",
       "improvement_directions": [
-        "优化证据获取策略",
-        "扩展跨文档推理能力",
-        "增强对低质量扫描文档的处理"
+        "扩展到更多模态（如音频、视频），探索多模态协同增强。",
+        "设计更高效的上下文选择机制，降低噪声影响。",
+        "与最新的MLLM结合，动态调整上下文表示。"
       ],
-      "engineering_value": "为古籍理解提供了结构化方案，可应用于历史研究辅助。",
-      "why_relevant": "针对OCR下游理解环节，结合视觉语言模型和多智能体，提升推理可信度。"
-    },
-    {
-      "title": "Automated Synthesis of Cloud Emulators",
-      "summary": "DevOps programming (e.g., using CLI/API scripts or IaC frameworks) is key to cloud infrastructure management. Unlike traditional programming tasks, DevOps program testing needs provisioning and execution against actual cloud resources, which is often time-consuming, unsafe, and costly. Cloud emulators have gained popularity for easing DevOps program testing; they are generally API-level mocks that can execute DevOps programs in a local environment. Still, building these emulators remains challenging: developers must manually interpret extensive cloud documentation and handcraft logic for each service, API, and their interaction. This does not scale to the complexity of the cloud, which is further a moving target as the services and APIs evolve. CloudEmu is an automated approach that constructs emulators based on cloud documentation via neurosymbolic code synthesis. The key idea is to combine LLMs' general strengths in documentation understanding and code generation with cloud-specific symbolic abstractions that suppress hallucinations and enforce precision at scale, while using the real cloud as an oracle for automated testing, repair, and alignment. Our evaluation shows the effectiveness of CloudEmu on major cloud provider (AWS and GCP) services in both coverage and accuracy. CloudEmu outperforms the existing leading tool LocalStack, which was manually developed by a large team of engineers over a decade.",
-      "link": "https://arxiv.org/abs/2608.23842v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.23842v1",
-      "authors": [
-        "Archit Bhatnagar",
-        "Zhenning Yang",
-        "Sarah McClure",
-        "Yiming Qiu",
-        "Sylvia Ratnasamy",
-        "Ang Chen"
-      ],
-      "published": "2026-08-24T21:29:52Z",
-      "updated": "2026-08-24T21:29:52Z",
-      "categories": [
-        "cs.SE",
-        "cs.AI",
-        "cs.DC"
-      ],
-      "arxiv_id": "2608.23842v1",
-      "score": 7,
-      "topic_tags": [
-        "云模拟器",
-        "神经符号",
-        "文档理解"
-      ],
-      "zh_summary": "提出CloudEmu，基于云文档自动合成云模拟器，结合LLM的代码生成能力和云特定的符号抽象，以真实云为oracle进行测试和修复。在AWS和GCP上的评估显示，CloudEmu优于手动开发的LocalStack。",
-      "novelty": "将文档解析和代码合成应用于云模拟器构建，自动化程度高。",
-      "innovation_points": [
-        "利用LLM理解云API文档并生成代码",
-        "结合符号抽象减少幻觉",
-        "使用真实云验证和修复模拟器"
-      ],
-      "limitations": "评估限于AWS和GCP，未涉及其他云提供商或特定API深度。",
-      "improvement_directions": [
-        "扩展更多云服务支持",
-        "改进符号抽象的表达能力",
-        "提升对复杂交互的模拟准确性"
-      ],
-      "engineering_value": "降低云模拟器开发成本，提高测试效率。",
-      "why_relevant": "涉及从文档到代码的自动化，与OCR文档理解有相似之处。"
+      "engineering_value": "为多模态知识图谱的构建和RAG系统提供改进方法，可提升问答等任务的准确性。",
+      "why_relevant": "多模态知识图谱是文档理解的重要方向，其改进直接关系到OCR后端的语义推理能力。"
     },
     {
       "title": "When \"Must\" Becomes \"Maybe\": Constraint Weakening in LLM Agent Workflows",
@@ -291,25 +203,27 @@
       "arxiv_id": "2608.24569v1",
       "score": 6,
       "topic_tags": [
-        "智能体",
-        "状态管理",
-        "约束传递"
+        "LLM智能体",
+        "工作流",
+        "约束传递",
+        "状态保存",
+        "安全机制"
       ],
-      "zh_summary": "研究LLM智能体工作流中约束状态在信息传递中的弱化问题。通过安全阻断器场景，发现压缩、计划同化等转换会导致状态字段丢失，使约束从必须变为可能，导致禁止动作发生。恢复所有字段可保持约束，但下游验证仅能防止动作，无法恢复状态。",
-      "novelty": "首次系统研究LLM工作流中状态传递的可靠性，识别出约束弱化现象。",
+      "zh_summary": "研究LLM智能体工作流中约束弱化问题，通过1,296个受控合成情节，发现压缩、计划合并等转换会丢失操作状态，导致安全阻断器失效，而恢复状态字段可保持100%的保全率。",
+      "novelty": "引入“操作状态保存”概念，系统性地分析中间语言工件中的约束传递问题，并量化不同干预措施的影响。",
       "innovation_points": [
-        "定义行动绑定状态保持问题",
-        "设计受控合成实验量化约束弱化",
-        "提出干预措施（恢复字段）并评估效果"
+        "提出操作状态保存作为约束作用角色的新视角。",
+        "设计基准测试，包含安全阻断器实例，精确控制上游识别和下游执行。",
+        "识别出多个导致约束弱化的转换类型（压缩、计划合并等），并验证恢复四个状态字段的效果。"
       ],
-      "limitations": "实验基于合成数据，未在真实复杂工作流中验证。",
+      "limitations": "['仅使用合成情节，未在真实任务中验证。', '关注状态传递，未深入探讨约束内容本身的语义变化。', '固定工件干预可能不适用于动态生成的场景。']",
       "improvement_directions": [
-        "在更真实场景中验证状态保持",
-        "开发自动恢复状态字段的机制",
-        "研究其他类型约束的状态保持"
+        "在真实多角色工作流中验证，分析影响因素。",
+        "研究如何动态确保状态完整保存，避免固定模板依赖。",
+        "结合形式化验证方法，提供更强的保证。"
       ],
-      "engineering_value": "为智能体工作流设计提供原则，避免危险的约束弱化。",
-      "why_relevant": "与文档理解中信息提取的可靠性相关，特别是关键信息保持。"
+      "engineering_value": "为LLM智能体工作流的设计提供关键指导，确保约束条件在下游执行中得到遵守，提升系统安全性。",
+      "why_relevant": "LLM智能体涉及信息提取和处理，其约束传递问题对OCR输出在后续任务中的可靠使用具有借鉴意义。"
     }
   ]
 }
