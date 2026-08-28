@@ -1,96 +1,239 @@
 {
   "meta": {
-    "report_date": "2026-08-27",
-    "generated_at_utc": "2026-08-27 11:11:00",
+    "report_date": "2026-08-28",
+    "generated_at_utc": "2026-08-28 12:45:35",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 4
+    "count": 8
   },
   "synthesis": {
-    "executive_summary": "今日论文情报聚焦于OCR/文档解析的多个前沿方向：一是历史手稿的高效标注自动化，二是多模态RAG在图纸理解和合规检查中的应用，三是多模态知识图谱中的上下文增强，四是LLM智能体工作流中的约束弱化问题。这些工作共同表明，文档解析正从纯文本抽取向视觉优先、多模态融合和智能体工作流发展，同时强调效率、可解释性和安全约束的重要性。",
-    "trend_summary": "OCR和文档解析领域正经历从传统文本提取向多模态智能体化、知识图谱化和可解释性方向的转变。关键技术包括多模态大模型、视觉优先的RAG、上下文增强的知识图谱，以及对工作流安全性的关注。",
+    "executive_summary": "今日研究显示OCR领域正向多模态、低资源语言和复杂文档处理演进，但现有模型在基准测试中仍面临挑战，提示工程化需结合具体场景优化。",
+    "trend_summary": "OCR研究趋势从通用模型转向特定领域（如古文、手稿），并注重数据集构建和基准测试；多模态RAG和视觉优先方法成为主流，强调视觉理解与文本解析的融合。",
     "common_innovations": [
-      "多模态大模型被广泛应用于文档内容的理解和结构化，如RefLAM和PlanSightRAG。",
-      "RAG框架从纯文本向视觉优先和多模态知识图谱融合方向发展。",
-      "强调可解释性，通过置信度得分和热力图等机制提供证据跟踪。",
-      "面向特定领域（如历史手稿、土木图纸）的定制化OCR管线开发。",
-      "对LLM智能体工作流的安全性和约束保持提出新要求。"
+      "多模态RAG和视觉优先框架，减少对OCR的依赖，直接处理图像信息。",
+      "大规模、多介质、多语言数据集的构建，推动模型泛化能力。",
+      "利用LLM和视觉语言模型进行标注和解析，提高效率。",
+      "关注噪声鲁棒性，从tokenization层面解释和提升模型抗噪能力。"
     ],
     "future_directions": [
-      "开发跨语言和脚本的历史手稿标注管线，减少对干净参考文本的依赖，并探索弱监督或无参考场景下的对齐方法。",
-      "在真实世界图纸和文档上验证视觉优先RAG的鲁棒性，结合OCR与视觉信息以处理密集文本区域。",
-      "将上下文增强的多模态知识图谱扩展至更多模态（如音频、视频），并优化上下文选择机制，减小图谱构建成本。",
-      "研究动态工作流中操作状态自动保存的方法，结合形式化验证提供更强约束保证。",
-      "整合文档解析与领域特定智能体，实现从解析到合规检查或问答的端到端自动化。"
+      "开发低资源语言和手写体的自适应识别模型，利用自监督学习增强泛化。",
+      "构建多模态知识图谱融合文本、图像和上下文，提升复杂文档解析精度。",
+      "设计视觉-语言联合模型，实现端到端文档理解，避免中间OCR误差。",
+      "探索无监督或弱监督学习，减少对大规模标注数据的依赖。",
+      "研究动态上下文增强机制，结合用户意图和任务需求，提升RAG检索质量。"
     ],
     "engineering_takeaways": [
-      "RefLAM的级联流程和置信度规则可大幅提升标注效率，适合大规模历史文档语料构建。",
-      "PlanSightRAG的视觉优先索引可避免OCR噪声，但需注意真实场景中阈值设定的局限性。",
-      "在多模态知识图谱构建阶段注入上下文可显著改善下游RAG性能，但需权衡存储成本。",
-      "约束弱化问题警示：在LLM工作流中必须显式保存操作状态，以确保安全机制有效。"
+      "采用视觉优先的RAG框架，可减少OCR信息丢失，提高合规检查等场景的准确率。",
+      "构建专用基准（如Ancient-Bench）时，需定义多级注释标准，确保可评估性。",
+      "噪声增强训练和鲁棒tokenization能显著提升OCR系统在真实场景下的稳定性。",
+      "利用多模态LLM进行数据标注（如RefLAM管道）可提高效率，但需人工审核保证质量。",
+      "评估模型时，应模拟真实输入规模（如企业文档），以避免性能高估。"
     ],
     "watchlist": [
       {
-        "title": "RefLAM: A Reference-Grounded Line Annotation Pipeline for Historical Arabic Manuscripts",
-        "watch_reason": "提出高效的手稿标注方案，对数字人文和OCR训练数据构建有重要价值，但语言限制需关注其扩展性。"
+        "title": "Ancient-Bench: A Comprehensive Multi-millennial, Multi-medium, and Multi-script Benchmark for Ancient Chinese Artifact Text Recognition",
+        "watch_reason": "首个古文多介质基准，可能成为文化遗产数字化的标准评估工具，值得跟踪其扩展和应用。"
       },
       {
         "title": "PlanSightRAG: A Visual-First Multimodal RAG for Automating Question Answering and Compliance Checking for Civil Standard Plans",
-        "watch_reason": "视觉优先RAG可能改变图纸等视觉文档的解析方式，后续真实场景测试值得跟踪。"
+        "watch_reason": "视觉优先RAG在专业文档（土木图纸）中表现优异，有望推广至其他工程领域。"
       },
       {
-        "title": "Multi-Granularity Context-Enhanced RAG over Multimodal Knowledge Graphs",
-        "watch_reason": "知识图谱构建阶段的上下文注入是新颖思路，可能推动多模态RAG发展，但领域泛化有待验证。"
+        "title": "AraMS-28k: The Largest Publicly Released Line-Level Dataset of Historical Arabic Manuscripts with Margin and Insertion-Anchor Annotations",
+        "watch_reason": "创新性的锚点注释支持非线性阅读顺序恢复，可能影响历史手稿数字化标准。"
       },
       {
-        "title": "When \"Must\" Becomes \"Maybe\": Constraint Weakening in LLM Agent Workflows",
-        "watch_reason": "揭示LLM工作流中约束保持的关键问题，对构建可靠文档解析工作流有直接指导意义。"
+        "title": "When Is Noise Response Universal? Tokenization as the Hidden Variable in Language Models",
+        "watch_reason": "揭示了tokenization对噪声鲁棒性的关键作用，为OCR后处理提供理论指导，可转化为工程实践。"
       }
     ]
   },
   "papers": [
     {
-      "title": "RefLAM: A Reference-Grounded Line Annotation Pipeline for Historical Arabic Manuscripts",
-      "summary": "Existing approaches to building line-level Arabic handwritten-text-recognition (HTR) training data either rely on fully manual annotation, which does not scale, or on automatic OCR-to-reference alignment methods not yet extended to multi-script, two-zone (main-plus-margin) manuscript layouts with a provable correctness guarantee. We present RefLAM (Reference-grounded Line Annotation for Manuscripts), a pipeline converting manuscript page images and clean transcriptions into validated, line-level ground truth without sacrificing human oversight. RefLAM couples a deep-learning page-segmentation model with a multimodal large language model (MLLM) for structured OCR and a diacritic-agnostic fuzzy alignment engine that grounds each OCR line in a contiguous span of the reference text, with a character-level confidence score in $[0,100]$. A perfect score is provably equivalent to character-for-character identity of the normalised strings (the Confidence-100 rule), verified with no counterexample across the released corpus. A reviewer can thus trust a perfect score, confirming most lines at a glance rather than retyping them, so annotation becomes triaged, with attention concentrated on uncertain alignments. Across 7 fully page-validated books we measured a 75$\\times$ throughput gain over manual annotation (3,000 vs. 40 lines/hr); applying the same guarantee to 7 further books, we retained 16,533 confidence-100 main-text lines within one week, excluding sub-100 lines rather than manually correcting them. Using RefLAM, we release AraMS-28k: 14 historical Arabic manuscript books, 3,043 pages, and 27,971 main-text and 629 margin-line annotations with bounding boxes, layout labels, and insertion anchors for 191 margin entries (30.4%). We also finetune Muharaf-pretrained baselines (including HATFormer) on AraMS-28k and report CER results confirming its practical utility for downstream HTR training.",
-      "link": "https://arxiv.org/abs/2608.25140v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.25140v1",
+      "title": "Systematic Literature Review of Machine Learning Models and Applications for Text Recognition",
+      "summary": "Optical Character Recognition (OCR) for text recognition using machine vision has significantly improved, particularly when handling heterogeneous textual data. Traditional OCR models struggle with script variations, writing styles, and degraded documents. Advancements in technology are leading to new AI models with improved architecture for handling multiple languages and complex data formats. Despite this progress, a comprehensive evaluation of OCR advancements remains limited. Based on the established preferred reporting items for systematic reviews and meta-analysis (PRISMA) guidelines, this literature review presents an extensive assessment of OCR research to trace the evolution of AI models over the past decade. It explores the transition in AI models, application domains, data types, linguistic coverage, and challenges. Through a detailed analysis of 97 selected studies published during January 2015 - January 2025, key OCR models are identified, and their performance, strengths, and limitations are analyzed. The findings highlight how OCR technologies have evolved to address structured and unstructured text, scene text recognition, and multilingual processing. Unresolved challenges include limited resources for underrepresented languages, high variability in handwritten text, visual similarity among characters, and constraints in real-time OCR applications. To address these issues, several promising approaches are proposed. Key suggestions include self-supervised learning, multimodal AI, automated machine learning (AutoML), AI-assisted postprocessing, tiny machine learning (TinyML), and the creation of joint corpora for script matching. The future recommendations aim to enhance OCR accuracy and tackle the challenges identified for real-time industrial applications. This study will guide future research and establish a foundation for OCR field.",
+      "link": "https://arxiv.org/abs/2608.26500v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26500v1",
+      "authors": [
+        "Nuzhat Khan",
+        "Ab Al-Hadi Ab Rahman",
+        "Shahriyar Masud Rizvi",
+        "Ibrahim Yousef Alshareef",
+        "Muhammad Nadzir Marsono",
+        "Muhammad Paend Bakht",
+        "Mohd Shahrizal Rusli",
+        "Shahidatul Sadiah"
+      ],
+      "published": "2026-08-27T00:48:11Z",
+      "updated": "2026-08-27T00:48:11Z",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "arxiv_id": "2608.26500v1",
+      "score": 31,
+      "topic_tags": [
+        "OCR",
+        "文献综述",
+        "机器学习",
+        "文本识别",
+        "挑战与方向"
+      ],
+      "zh_summary": "本综述基于PRISMA指南，对2015年1月至2025年1月间发表的97项OCR研究进行了系统评估，追踪了AI模型在文本识别领域的演变，涵盖了模型架构、应用领域、数据类型、语言覆盖范围及挑战。研究发现，OCR技术在处理结构化与非结构化文本、场景文本识别和多语言处理方面取得了显著进展，但仍面临资源稀缺语言支持不足、手写文本高变异性、字符视觉相似性以及实时OCR应用限制等挑战。为此，提出了自监督学习、多模态AI、自动化机器学习（AutoML）、AI辅助后处理等潜在解决方案。",
+      "novelty": "采用PRISMA标准进行系统文献综述，提供近十年OCR模型发展的全面评估，涵盖多维度分析。",
+      "innovation_points": [
+        "应用PRISMA指南进行系统性文献综述",
+        "综合分析97项研究，覆盖模型、应用、数据、语言等多个维度",
+        "识别关键OCR模型并分析其性能、优势和局限"
+      ],
+      "limitations": "仅基于选定研究的定性分析，缺乏定量对比实验；可能遗漏某些最新进展；依赖文献发表质量。",
+      "improvement_directions": [
+        "开展更多针对低资源语言的OCR研究，探索自监督学习等方法",
+        "发展多模态AI融合文本结构与语义信息",
+        "利用AutoML自动化模型选择与调优",
+        "开发AI辅助后处理机制提升识别准确性"
+      ],
+      "engineering_value": "为OCR领域研究者提供清晰的进展图谱和未来方向建议，有助于制定研究路线。",
+      "why_relevant": "系统总结OCR技术演进，为后续研究提供基础参考和挑战梳理。"
+    },
+    {
+      "title": "Ancient-Bench: A Comprehensive Multi-millennial, Multi-medium, and Multi-script Benchmark for Ancient Chinese Artifact Text Recognition",
+      "summary": "Ancient Chinese artifact text recognition is fundamental to heritage digitization, and benchmarks for ancient texts are essential for evaluating current model capabilities. However, existing benchmarks suffer from ''fragmentation'', manifested in limited temporal coverage, limited medium diversity, and incomplete script types. Therefore, we present Ancient-Bench, a comprehensive benchmark of 2,700 images for ancient Chinese artifact text recognition, featuring three dimensions: Multi-millennial (spanning 3,000 years of character evolution), Multi-medium (covering nine artifact categories), and Multi-script (encompassing seven historical script forms). To enable consistent and fair evaluation across heterogeneous media, we further define three annotation standards tailored to the medium-specific characteristics of ancient texts: symbol standardization, character standardization, and parsing standardization. Extensive experiments on Ancient-Bench covering general Vision-Language Models (VLMs) and OCR-specialist models reveal that ancient Chinese artifact text recognition remains fundamentally unsolved, with persistent challenges in variant characters, specialized symbols, and hallucination. The dataset is available at https://github.com/SCUT-DLVCLab/Ancient_Bench.",
+      "link": "https://arxiv.org/abs/2608.27169v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.27169v1",
+      "authors": [
+        "Hiuyi Cheng",
+        "Nuo Xu",
+        "Yuyi Zhang",
+        "Xuhan Zheng",
+        "Wei Pan",
+        "Jing Zhang",
+        "Dezhi Peng",
+        "Minghui Liao",
+        "Yihua Teng",
+        "Jihao Wu",
+        "Haoyu Ren",
+        "Lianwen Jin"
+      ],
+      "published": "2026-08-27T14:22:12Z",
+      "updated": "2026-08-27T14:22:12Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2608.27169v1",
+      "score": 19,
+      "topic_tags": [
+        "古代文本",
+        "基准测试",
+        "OCR",
+        "视觉语言模型",
+        "文化遗产"
+      ],
+      "zh_summary": "针对古代中文文物文本识别，现有基准存在时间覆盖有限、介质多样性不足、字体类型不完整等问题。为此，提出Ancient-Bench基准，包含2700张图像，覆盖三千年字符演变、九类文物介质、七种历史字体形式。并定义了三种注释标准（符号、字符、解析标准化）以应对异构介质。实验表明，通用视觉语言模型和OCR专用模型在此基准上表现不佳，古代文本识别仍面临变体字、特殊符号、幻觉等挑战。数据集已公开。",
+      "novelty": "首个多千年、多介质、多字体的古代中文文物文本识别基准，并定义了标准化注释方案。",
+      "innovation_points": [
+        "构建大规模多介质古代文本基准Ancient-Bench",
+        "定义三类注释标准以适配不同材质",
+        "跨学科整合考古与OCR技术"
+      ],
+      "limitations": "基准规模相对有限（2700张），可能未覆盖所有古代文本变体；实验表明现有模型性能有限。",
+      "improvement_directions": [
+        "扩展基准覆盖更多历史时期和介质",
+        "开发针对古代变体字和符号的专用识别模型",
+        "利用多模态信息辅助识别以减少幻觉"
+      ],
+      "engineering_value": "为古代文物数字化提供标准化评估工具，推动文化遗产保护技术发展。",
+      "why_relevant": "填补古代中文文本识别基准的空白，对OCR研究人员和数字人文领域具有重要参考价值。"
+    },
+    {
+      "title": "AraMS-28k: The Largest Publicly Released Line-Level Dataset of Historical Arabic Manuscripts with Margin and Insertion-Anchor Annotations",
+      "summary": "We introduce AraMS-28k, the largest publicly released line-level dataset of genuine historical Arabic manuscripts, comprising 14 books, 3,043 pages, and 28,600 annotated text lines (27,971 main-text, 629 margin). Thirteen books are hand-copied manuscripts spanning three script traditions -- Naskh, Ruq'ah, and Maghrebi -- and one is a lithographed printed edition included to broaden format diversity. Each line is labelled as main-text or margin, and margin lines that have an unambiguous attachment point in the main text are further annotated with an insertion anchor, recovering the manuscript's true non-linear reading order at line-level granularity -- to our knowledge the first such annotation released for a historical Arabic manuscript corpus. Because reference transcriptions are fully vocalised while manuscript hands are typically undiacritised, we release both the raw diacritised transcription and a diacritic-normalised counterpart for every line. The dataset was constructed with RefLAM, a reference-grounded annotation pipeline that aligns multimodal-LLM OCR against independently sourced clean transcriptions and routes every line through human review, combining automatic verification with expert oversight. We describe the construction and quality-control process, present the annotation schema, report dataset statistics at both the corpus and per-book level, and provide baseline HTR results using Kraken and HATFormer, including a cross-script generalisation gradient from in-distribution pages to fully unseen books. AraMS-28k is released with page images, line-level annotations, and fixed train/val/test splits under CC BY-NC-SA 4.0 to support reproducible research on Arabic manuscript recognition, layout analysis, and reading-order recovery.",
+      "link": "https://arxiv.org/abs/2608.26921v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26921v1",
       "authors": [
         "Mohamed Guechaoui",
         "Mohamed Diaa Zellagui",
         "Souleyman Chaib",
         "Sahraoui Dhelim"
       ],
-      "published": "2026-08-25T20:46:11Z",
-      "updated": "2026-08-25T20:46:11Z",
+      "published": "2026-08-27T10:16:41Z",
+      "updated": "2026-08-27T10:16:41Z",
       "categories": [
         "cs.CV",
         "cs.CL"
       ],
-      "arxiv_id": "2608.25140v1",
-      "score": 15,
+      "arxiv_id": "2608.26921v1",
+      "score": 16,
       "topic_tags": [
-        "手写文本识别",
-        "文档标注",
-        "多模态大模型",
-        "历史手稿",
-        "OCR训练数据"
+        "手写识别",
+        "历史文档",
+        "数据集",
+        "阿拉伯语",
+        "注释"
       ],
-      "zh_summary": "提出RefLAM管线，用于历史阿拉伯语手稿的线级标注，结合深度学习页面分割、多模态大模型和模糊对齐引擎，提供可证明的置信度得分，实现人工审核下的高效标注，吞吐量提升75倍，并发布AraMS-28k数据集。",
-      "novelty": "首次将参考文本对齐的可证明正确性保证应用于多脚本、双区域手稿布局的线级标注，通过置信度100规则实现人工审核的高效分流。",
+      "zh_summary": "介绍AraMS-28k，至今最大的公开行级历史阿拉伯语手稿数据集，包含14本书、3043页、28600个标注文本行（主文本27971行，边缘629行）。覆盖三种手写传统（Naskh、Ruq'ah、Maghrebi）及一种石印印刷版。每个行标注主文本或边缘类别，边缘行如与主文本有明确连接点则标注插入锚点，以恢复手稿的真实非线性阅读顺序，这是首次为历史阿拉伯语手稿语料库发布此类标注。数据集提供原始带音符转录和去除音符的版本，构建采用RefLAM管道，结合多模态LLM OCR与人工审核。提供了使用Kraken和HATFormer的基线HTR结果，包括跨脚本泛化实验。",
+      "novelty": "首个带有插入锚点注释的历史阿拉伯语手稿数据集，提供行级非线性阅读顺序信息。",
       "innovation_points": [
-        "提出置信度100规则，证明完美得分与归一化字符串逐字符一致等价，并经语料验证无反例。",
-        "结合页面分割模型、多模态大语言模型和模糊对齐引擎的级联流程，实现结构化OCR与参考文本的精确对齐。",
-        "开发三分类审核流程，将人工注意力集中在低置信度行上，大幅提升标注效率。"
+        "发布大规模行级手稿数据集AraMS-28k",
+        "创新注释方案包括边缘行插入锚点标注",
+        "利用RefLAM管道结合多模态LLM与人工审核提高标注质量"
       ],
-      "limitations": "['仅针对阿拉伯语手稿，可能不适用于其他语言或现代文档。', '依赖干净转录稿作为参考，对于无参考文本的场景不适用。', '处理双区域布局（主文本加边注）可能限制其通用性。']",
+      "limitations": "数据仅覆盖阿拉伯语手稿，跨语言泛化性未知；基线HTR模型性能有限。",
       "improvement_directions": [
-        "扩展至更多语言和脚本，评估对齐算法的跨语言泛化能力。",
-        "探索无参考或弱参考场景下的标注方法，减少对清洁转录的依赖。",
-        "优化低置信度行的半自动校正策略，进一步减少人工干预。"
+        "扩展数据集至其他语言和书写风格",
+        "探索更强大的HTR模型以处理复杂手写体",
+        "利用锚点信息辅助文档解析和阅读顺序恢复"
       ],
-      "engineering_value": "为手稿数字化提供高效准确的标注工具，显著降低人力成本，适用于大规模历史文档的语料构建。",
-      "why_relevant": "针对手写文本识别训练数据的生产瓶颈，提供可扩展的自动化标注方案，对OCR领域的数据建设有直接借鉴意义。"
+      "engineering_value": "为阿拉伯语手稿数字化和文档解析研究提供宝贵资源，促进历史文档分析技术发展。",
+      "why_relevant": "提供新颖的数据集和注释范式，对OCR和手写识别领域有直接贡献。"
+    },
+    {
+      "title": "CorporateBench: Large-Scale Q&A Benchmarking with Temporal Knowledge Bases",
+      "summary": "LLMs are increasingly able to answer complex questions about enterprise-scale document collections. But evaluation is hard: companies don't want to share internal communications, and synthetic datasets have been overly simple. We present CorporateBench (CB), a human-validated multi-task Q&A benchmark whose scale approaches the conditions LLMs encounter in corporate communication networks, with evaluation corpora surpassing 230,000 documents. CB evaluates LLMs across two dimensions (information extraction and knowledge base querying) through four synthetically generated firms ranging from 12 to 10,000 employees. Each corpus is sampled from a temporally evolving knowledge base describing a consistent world, guaranteeing cross-document logical consistency even across hundreds of thousands of documents. We evaluate five LLMs on CB, revealing increasingly poor performance as input size approaches realistic scales. CB provides LLM developers a metric for corporate communication reasoning, filling a crucial gap in the benchmarking ecosystem.",
+      "link": "https://arxiv.org/abs/2608.27391v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.27391v1",
+      "authors": [
+        "Sil Hamilton",
+        "Albert Yu Sun",
+        "Oscar J. Romero",
+        "Carl-Leander Henneking",
+        "David Mimno",
+        "Bishan Yang",
+        "Igor Labutov"
+      ],
+      "published": "2026-08-27T17:23:04Z",
+      "updated": "2026-08-27T17:23:04Z",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.IR",
+        "cs.LG"
+      ],
+      "arxiv_id": "2608.27391v1",
+      "score": 10,
+      "topic_tags": [
+        "问答系统",
+        "大语言模型",
+        "基准测试",
+        "知识库",
+        "企业应用"
+      ],
+      "zh_summary": "针对企业级文档集问答评估困难的问题，提出CorporateBench基准，包含超过23万文档，模拟4家合成企业（员工数12-10000），基于时间演化的知识库生成，保证跨文档逻辑一致性。该基准评估LLM在信息抽取和知识库查询两个维度上的能力。实验显示，随着输入规模接近实际水平，LLM性能显著下降，揭示了其在企业通信推理上的不足。该基准填补了评估生态中的空白。",
+      "novelty": "首个接近企业真实规模的多任务Q&A基准，能保证跨文档逻辑一致性。",
+      "innovation_points": [
+        "构建大规模合成企业文档语料库",
+        "基于时间演化知识库生成数据，保证一致性",
+        "提出跨两个维度的评估任务"
+      ],
+      "limitations": "合成数据可能不完全代表真实企业文本的复杂性；评估侧重于LLM，可能忽略专门模型。",
+      "improvement_directions": [
+        "引入更多真实企业数据以提高生态效度",
+        "扩展到多模态文档场景",
+        "探索模型压缩以处理大规模输入"
+      ],
+      "engineering_value": "为企业级LLM应用提供可靠评估工具，帮助开发者了解模型在真实场景下的表现。",
+      "why_relevant": "强调了大规模真实场景评估的重要性，与OCR后文本理解相关。"
     },
     {
       "title": "PlanSightRAG: A Visual-First Multimodal RAG for Automating Question Answering and Compliance Checking for Civil Standard Plans",
@@ -114,27 +257,117 @@
       "score": 10,
       "topic_tags": [
         "多模态RAG",
-        "视觉文档理解",
+        "土木工程",
         "合规检查",
-        "土木图纸",
-        "智能体"
+        "视觉理解",
+        "文档分析"
       ],
-      "zh_summary": "提出视觉优先的多模态RAG框架PlanSightRAG，直接对图纸图像进行索引和推理，整合多向量检索、智能体流程和热力图证据追踪，用于土木标准图纸的问答和合规检查，在基准上达到91.47%的召回率。",
-      "novelty": "放弃传统的OCR文本提取，直接利用视觉信息进行图纸理解，并通过无人类规则的自主视觉规则提取实现合规检查。",
+      "zh_summary": "针对土木工程合规检查依赖人工读取图纸的问题，提出PlanSightRAG框架，采用视觉优先的多模态RAG方法，直接对图纸图像进行索引和推理。集成ColNomic-3B多向量检索、代理式Planner-Retriever-Auditor-Synthesizer流程，并利用MaxSim热图作为证据踪迹。构建了包含5个州交通部标准图纸共4056对问题的基准。零样本检索Recall@5达91.47%，在密歇根州交通部数据集上为91.40%。对于合成合规图纸，Qwen2.5-VL-72B流水线在预置规则阈值时达到100%判定准确率，但非视觉OCR基线已达76.4%。此外，实现了自主视觉规则定位，从规范中提取数值限制。",
+      "novelty": "提出视觉优先的多模态RAG，直接基于图纸图像进行推理，避免了OCR丢失几何信息的问题。",
       "innovation_points": [
-        "视觉优先的RAG架构，直接索引和推理图像，保留几何与布局信息。",
-        "集成ColNomic-3B多向量检索与Planner-Retriever-Auditor-Synthesizer智能体流程。",
-        "引入MaxSim热力图作为证据轨迹，增强可解释性。",
-        "构建4,056对基准测试集，来自五个州交通部标准图纸。"
+        "基于多模态RAG的视觉优先框架",
+        "多向量检索与代理式流程结合",
+        "生成MaxSim热图作为证据追踪"
       ],
-      "limitations": "['依赖合成图纸进行合规验证，真实图纸场景尚需测试。', '在规则阈值预先解析时才能达到100%准确率，实际应用受限。', '未与基于OCR的完整基线进行全面对比。']",
+      "limitations": "依赖预置规则阈值时表现最优；测试数据为合成生成，可能无法完全反映真实图纸复杂度。",
       "improvement_directions": [
-        "在更多真实世界图纸上评估，增强泛化性。",
-        "探索自动规则解析的鲁棒性，减少人工设定阈值的依赖。",
-        "融合OCR与视觉信息，提升对文本密集区域的解释能力。"
+        "扩展到更多真实图纸场景",
+        "进一步自动化规则提取以减少人工干预",
+        "增强模型对复杂几何布局的理解"
       ],
-      "engineering_value": "可用于土木工程图纸的自动审查和问答，减少人工阅读工作量，提高合规检查效率。",
-      "why_relevant": "展示非OCR方案在处理复杂文档时的优势，为OCR在工程图纸领域的应用提供新思路。"
+      "engineering_value": "为土木工程文档自动化检查提供新思路，减少人工阅读成本，提高合规检查效率。",
+      "why_relevant": "展示了OCR在多模态文档理解中的局限，及视觉优先方法作为替代方案的价值。"
+    },
+    {
+      "title": "PailitaoGR: Latent Think-with-Images for Generative Image Retrieval",
+      "summary": "Generative retrieval has demonstrated strong performance by directly generating product semantic identifiers (SIDs). Extending this paradigm to image search, however, is nontrivial because real-world query images contain diverse information, including the search target, useful auxiliary evidence, and irrelevant visual content. This requires the model to identify and focus on the search target while selectively utilizing auxiliary evidence. In this paper, we propose \\textbf{PailitaoGR}, a \\emph{Latent Think-with-Images} method for generative image retrieval, which internalizes target-focused perception and selective auxiliary-evidence utilization into a the generative retrieval model, enabling \\textit{Zooming without Cropping} and \\textit{Reading without OCR}. Specifically, we design a target-focused perception mechanism that identifies and enhances visual tokens of the search target, consisting of a target Enhancer and a learning strategy based on on-policy distillation and attention guidance loss, enabling the model to focus on search-target regions. We also design a selective auxiliary-evidence utilization mechanism that identifies and enhances visual tokens of auxiliary evidence, including an auxiliary enhancer and an in-capacity incremental contrastive distillation strategy, enabling the model to exploit auxiliary evidence. We construct training and validation sets sampled from real-world online image-search logs. Experiments show that our method outperforms existing baselines by an average of 13.8\\%, validating its effectiveness.",
+      "link": "https://arxiv.org/abs/2608.26658v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26658v1",
+      "authors": [
+        "Xiaomeng Fan",
+        "Yueran Liu",
+        "Shengyu Zhou",
+        "Chenghan Fu",
+        "Wanxian Guan",
+        "Feng Li",
+        "Chuan Yu",
+        "Jian Xu",
+        "Bo Zheng"
+      ],
+      "published": "2026-08-27T06:12:32Z",
+      "updated": "2026-08-27T06:12:32Z",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.IR"
+      ],
+      "arxiv_id": "2608.26658v1",
+      "score": 9,
+      "topic_tags": [
+        "生成式检索",
+        "图像检索",
+        "多模态",
+        "目标感知",
+        "电商"
+      ],
+      "zh_summary": "提出了PailitaoGR方法，用于生成式图像检索，通过“潜在图像思维”机制，使生成式检索模型能够内部化目标聚焦感知和选择性辅助证据利用，实现“无裁剪缩放”和“无OCR阅读”。具体包含目标感知机制（目标增强器和基于策略蒸馏与注意力引导损失的学习策略）和选择性辅助证据利用机制（辅助增强器和容量内增量对比蒸馏策略）。构建了来自真实在线图像搜索日志的训练和验证集。实验表明，该方法在平均性能上超过现有基线13.8%。",
+      "novelty": "首次将“潜在思维”概念引入生成式图像检索，使模型能够隐式处理目标聚焦和辅助证据选择。",
+      "innovation_points": [
+        "目标聚焦感知机制，增强目标区域视觉token",
+        "选择性辅助证据利用机制，动态利用辅助信息",
+        "结合策略蒸馏和对比蒸馏的学习方法"
+      ],
+      "limitations": "依赖真实用户搜索日志构建数据，可能引入噪声；仅关注图像检索，未涉及文本信息。",
+      "improvement_directions": [
+        "融合OCR信息以提升对图像中文本的理解",
+        "扩展到视频检索领域",
+        "增强对辅助证据的细粒度利用"
+      ],
+      "engineering_value": "为电商图像检索提供高效方案，提升搜索体验，降低对精确裁剪和OCR的依赖。",
+      "why_relevant": "展示了无需OCR即可实现图像中的文本理解，对OCR与检索交叉领域有启示。"
+    },
+    {
+      "title": "When Is Noise Response Universal? Tokenization as the Hidden Variable in Language Models",
+      "summary": "The performance of textual neural models often degrades when their inputs are corrupted by noise such as typos, OCR errors, or dropped words. We study the degradation rate across neural models, both sentence embeddings and decoder-only LLMs, and find that how consistent it is depends on the scale of the noise: under word-level noise, models with very different architectures decline along nearly the same curve, while under character-level noise they separate. We further identify the determining factor to be the training objective, not the architecture: eight encoders spanning six pretraining paradigms are scattered initially, and collapse onto a common curve after a short contrastive training recipe. We trace the word/character split to tokenization: a single character edit forces the tokenizer to re-segment the surrounding word, disturbing the token sequence far more than dropping a whole word does. This finding and its underlying mechanism provide a practical means to predict a model's robustness to noise without any noisy evaluation, and to install robustness at a chosen noise scale through noise-augmented training.",
+      "link": "https://arxiv.org/abs/2608.26319v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26319v1",
+      "authors": [
+        "Yefan Tao",
+        "Gerald Friedland",
+        "Luyang Kong"
+      ],
+      "published": "2026-08-26T18:51:51Z",
+      "updated": "2026-08-26T18:51:51Z",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "arxiv_id": "2608.26319v1",
+      "score": 9,
+      "topic_tags": [
+        "噪声鲁棒性",
+        "tokenization",
+        "语言模型",
+        "OCR噪声",
+        "对比训练"
+      ],
+      "zh_summary": "该研究探讨了文本神经模型在输入噪声（如拼写错误、OCR错误或单词遗漏）下的性能退化规律。研究发现，在词级噪声下，不同架构的模型表现出大致相同的退化曲线；而在字符级噪声下，模型表现分化。作者将这一差异归因于训练目标而非架构，并通过对比训练实验验证了tokenization的作用：单个字符编辑会导致分词器重新切分词，从而对token序列造成更大干扰。该发现可用于无需噪声评估即可预测模型鲁棒性，并通过噪声增强训练来提升特定噪声尺度下的鲁棒性。",
+      "novelty": "揭示了模型对噪声鲁棒性的通用性与噪声尺度的关系，并确定tokenization为关键因素，而非通常认为的模型架构或训练目标。",
+      "innovation_points": [
+        "通过大规模实验比较了多种神经模型在词级和字符级噪声下的鲁棒性，发现词级噪声下退化曲线具有跨架构一致性。",
+        "识别出训练目标（预训练范式）而非架构是决定噪声鲁棒性的主要因素，通过对比训练可统一性能表现。",
+        "提出tokenization机制作为解释词级和字符级噪声差异的根本原因，并验证了单字符编辑对token序列的更大干扰。",
+        "提供一种无需噪声评估即可预测模型鲁棒性的方法，以及通过噪声增强训练来在特定噪声尺度上安装鲁棒性的手段。"
+      ],
+      "limitations": "研究主要基于文本模型，对多模态或视觉模型未涉及；噪声类型限于拼写、OCR等，未涵盖更复杂的结构化噪声；预测鲁棒性的方法可能受限于训练数据分布。",
+      "improvement_directions": [
+        "探索更鲁棒的分词方法或字符级编码策略，以减轻字符级噪声对token序列的扰动。",
+        "研究噪声增强训练在不同噪声尺度下的最优比例，以及如何动态调整训练噪声。",
+        "将发现扩展到多模态语音或视觉模型，验证其普适性。",
+        "开发基于该机制的鲁棒性评估基准，实现无需噪声数据的模型鲁棒性预测。"
+      ],
+      "engineering_value": "为OCR系统提供理论指导：在字符级干扰下，可通过鲁棒分词或噪声增强训练提升系统健壮性；同时，提供了一种快速评估模型对噪声敏感性的方法，节省测试成本。",
+      "why_relevant": "OCR中常见字符级噪声（如识别错误），该研究直接分析了字符级噪声对模型的影响机制，并提出了提升鲁棒性的方法，对OCR后处理及模型优化具有直接指导意义。"
     },
     {
       "title": "Multi-Granularity Context-Enhanced RAG over Multimodal Knowledge Graphs",
@@ -160,70 +393,28 @@
       "score": 6,
       "topic_tags": [
         "多模态知识图谱",
-        "RAG",
+        "GraphRAG",
         "上下文增强",
-        "知识融合",
-        "视觉问答"
+        "视觉语言模型",
+        "信息检索"
       ],
-      "zh_summary": "提出CEMMKG框架，通过为多模态知识图谱中的图像补充局部和全局文本上下文，增强多粒度信息，以改进基于知识图谱的RAG性能，在视觉中心数据集上进行实验验证。",
-      "novelty": "针对现有MMKG-RAG方法中多模态融合不足、文本上下文利用有限的问题，提出在构建知识图谱时即注入上下文信息。",
+      "zh_summary": "该研究提出了一种上下文增强的多模态知识图谱（CEMMKG）框架，以改进多模态GraphRAG的性能。现有方法在视觉信息提取和多模态融合时对文本上下文利用不足，导致图像与文本之间存在语义差距。CEMMKG通过为每张图像补充局部和全局文本上下文，并在局部上下文中采用多粒度设计，来丰富图像信息。实验证明该方法在视觉中心数据集上有效。",
+      "novelty": "提出在构建多模态知识图谱时，不仅利用相邻文本，还引入语义相关句子和全局摘要作为图像上下文，并采用多粒度设计，以缩小图像-文本语义鸿沟。",
       "innovation_points": [
-        "构建上下文增强的MMKG，为每个图像补充语义相关的句子和篇章摘要。",
-        "引入多粒度局部上下文设计，捕捉不同细节级别的语义信息。",
-        "采用双阶段上下文注入（图谱构建阶段）而非融合阶段，从源头减小语义鸿沟。"
+        "提出CEMMKG框架，为图像补充局部和全局文本上下文，超越传统的周围文本。",
+        "局部上下文引入语义相关句子（通过语义相似度检索），全局上下文提供段落摘要。",
+        "设计多粒度局部上下文，捕获不同细节层次的相关信息。",
+        "将CEMMKG应用于多模态GraphRAG，提升视觉问答等任务的性能。"
       ],
-      "limitations": "['实验仅基于视觉中心数据集，可能未覆盖其他领域。', '上下文增强可能增加知识图谱的大小和构建成本。', '对文本与图像间复杂语义关系的建模尚浅。']",
+      "limitations": "实验仅在特定视觉中心数据集上评估，未在更多任务或更大规模数据上验证；上下文增强可能引入冗余信息，增加计算开销；未详细分析不同粒度选择的影响。",
       "improvement_directions": [
-        "扩展到更多模态（如音频、视频），探索多模态协同增强。",
-        "设计更高效的上下文选择机制，降低噪声影响。",
-        "与最新的MLLM结合，动态调整上下文表示。"
+        "探索自适应上下文粒度选择，如基于图像复杂度或任务类型动态调整局部上下文粒度。",
+        "研究更有效的文本上下文过滤机制，减少噪声和冗余，提高检索效率。",
+        "将CEMMKG与其他多模态融合技术结合，如跨模态注意力，进一步提升语义对齐。",
+        "在更多任务（如视觉推理、图文生成）和多种数据集上验证泛化性。"
       ],
-      "engineering_value": "为多模态知识图谱的构建和RAG系统提供改进方法，可提升问答等任务的准确性。",
-      "why_relevant": "多模态知识图谱是文档理解的重要方向，其改进直接关系到OCR后端的语义推理能力。"
-    },
-    {
-      "title": "When \"Must\" Becomes \"Maybe\": Constraint Weakening in LLM Agent Workflows",
-      "summary": "Large language model (LLM) agents coordinate complex tasks through multi-role and multi-stage workflows. Upstream state is repeatedly transformed into intermediate language artifacts, such as summaries, plans, tickets, memories, and handoff notes, from which downstream components act. For action-constraining state, topical retention is insufficient: an artifact may mention an unresolved condition while changing it from a requirement that must be resolved before execution into information that may merely inform the next action. We study this action-binding role as operational state preservation. Safety blockers provide a controlled instance because each source state has an explicit prerequisite, authority, fallback, and execution consequence. We condition on correct upstream identification, vary the handoff transformation, and evaluate an executor restricted to the resulting artifact. Across 1,296 controlled synthetic episodes, direct-handoff controls preserve every blocker, whereas compression, plan assimilation, convergence, ownership deferral, and precedent substitution repeatedly turn binding state into caveats or non-binding considerations. Normal handoff compression produces 100.0% deactivation and 54.2% forbidden action. Restoring all four state fields raises preservation to 100.0% and reduces forbidden action to 0.0%. Fixed-artifact interventions further separate preservation from containment: downstream verification eliminates forbidden action while artifact deactivation remains 95.3%. These results identify a state-transmission failure between information extraction and action. Handoff transformations can retain state content while weakening its constraints on downstream action. Semantic availability does not guarantee operational preservation.",
-      "link": "https://arxiv.org/abs/2608.24569v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.24569v1",
-      "authors": [
-        "Yiheng Sun",
-        "Huifei Wang",
-        "Yancheng Zhu",
-        "Zhenyu Li",
-        "Zebin Zhao",
-        "Yifan Yuan"
-      ],
-      "published": "2026-08-25T13:51:52Z",
-      "updated": "2026-08-25T13:51:52Z",
-      "categories": [
-        "cs.AI",
-        "cs.MA"
-      ],
-      "arxiv_id": "2608.24569v1",
-      "score": 6,
-      "topic_tags": [
-        "LLM智能体",
-        "工作流",
-        "约束传递",
-        "状态保存",
-        "安全机制"
-      ],
-      "zh_summary": "研究LLM智能体工作流中约束弱化问题，通过1,296个受控合成情节，发现压缩、计划合并等转换会丢失操作状态，导致安全阻断器失效，而恢复状态字段可保持100%的保全率。",
-      "novelty": "引入“操作状态保存”概念，系统性地分析中间语言工件中的约束传递问题，并量化不同干预措施的影响。",
-      "innovation_points": [
-        "提出操作状态保存作为约束作用角色的新视角。",
-        "设计基准测试，包含安全阻断器实例，精确控制上游识别和下游执行。",
-        "识别出多个导致约束弱化的转换类型（压缩、计划合并等），并验证恢复四个状态字段的效果。"
-      ],
-      "limitations": "['仅使用合成情节，未在真实任务中验证。', '关注状态传递，未深入探讨约束内容本身的语义变化。', '固定工件干预可能不适用于动态生成的场景。']",
-      "improvement_directions": [
-        "在真实多角色工作流中验证，分析影响因素。",
-        "研究如何动态确保状态完整保存，避免固定模板依赖。",
-        "结合形式化验证方法，提供更强的保证。"
-      ],
-      "engineering_value": "为LLM智能体工作流的设计提供关键指导，确保约束条件在下游执行中得到遵守，提升系统安全性。",
-      "why_relevant": "LLM智能体涉及信息提取和处理，其约束传递问题对OCR输出在后续任务中的可靠使用具有借鉴意义。"
+      "engineering_value": "为多模态知识图谱构建和GraphRAG系统提供了可实施的增强方案，能提升视觉问答等应用的准确性，对工业界部署多模态RAG系统有参考价值。",
+      "why_relevant": "OCR是构建多模态知识图谱的重要环节，本文关于多模态知识图谱的上下文增强方法有助于OCR与其他模态信息的融合，为OCR在知识图谱中的应用提供思路。"
     }
   ]
 }
