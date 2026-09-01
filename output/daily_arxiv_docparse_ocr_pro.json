@@ -1,30 +1,437 @@
 {
   "meta": {
-    "report_date": "2026-08-31",
-    "generated_at_utc": "2026-08-31 07:00:56",
+    "report_date": "2026-09-01",
+    "generated_at_utc": "2026-09-01 06:14:24",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 0
+    "count": 9
   },
   "synthesis": {
-    "executive_summary": "今日暂无新增 OCR 或文档解析相关论文，因此没有可总结的学术动态。建议关注近期主流会议的论文更新，并梳理已有的技术积累，为下一轮研究做准备。",
-    "trend_summary": "由于无论文输入，无法判断当前趋势。从历史研究看，OCR 和文档解析领域正朝着多模态大模型、端到端文档理解、复杂版面分析、低资源语言OCR 以及文档级信息抽取等方向发展。",
-    "common_innovations": [],
+    "executive_summary": "今日OCR与文档解析研究聚焦于提升模型在复杂场景下的推理与提取能力，包括基准测试、低资源微调、联合模型、查询优化、语义分块、集成学习及领域特定语料库构建，共同推动了从文本识别到信息抽取的端到端性能与效率的提升。",
+    "trend_summary": "研究趋势显示，从单纯追求OCR准确率转向对推理过程、查询设计和语义结构的优化，同时关注低资源语言和领域的适应性与模型轻量化，并通过基准测试和错误分析推动数据质量改进与模型可解释性。",
+    "common_innovations": [
+      "构建专用基准和数据集以评估和提升模型特定能力，如OCR元推理、考古手写字段提取。",
+      "通过联合建模或端到端框架消除流水线中的错误累积，如高棉语识别与分词协同。",
+      "利用反馈驱动或迭代优化机制改进提取流程中的非模型组件，如查询优化。",
+      "采用可配置或自适应策略替代固定模式，如语义分块配置。",
+      "通过集成和精化策略提升特定场景（如艺术文本）的鲁棒性。"
+    ],
     "future_directions": [
-      "探索基于多模态大模型的统一文档理解框架，整合版面分析、OCR、信息抽取和问答，实现端到端训练与推理。",
-      "针对多样化的文档类型（如表格、图表、扫描件、手写体）研究更鲁棒的预训练和目标检测方法，提升复杂版面解析的准确性。",
-      "开发低资源或零样本场景下的 OCR 技术，利用合成数据、对抗生成或跨语言迁移提升泛化能力。",
-      "将文档解析与知识图谱、自然语言推理结合，实现从文字到结构化知识的自动转化，服务于知识密集型应用。",
-      "研究高效推理的轻量化模型，降低大模型在文档解析任务中的部署成本，满足实时处理需求。"
+      "将OCR元推理基准扩展至多页文档和跨图像场景，以覆盖真实世界应用。",
+      "开发更细粒度的推理过程评估方法，验证步骤间的逻辑连贯性。",
+      "探索基于元学习的低资源微调策略，进一步减少标注样本需求。",
+      "研究适用于无分隔符语言的联合分词与识别模型，扩展至泰语、老挝语等。",
+      "设计自动配置选择机制，降低语义分块框架的人工调优成本。",
+      "发展更轻量级的模型集成技术，如知识蒸馏，以降低计算开销。",
+      "构建跨语言平行NER语料库的自动化扩展流程，提高越南语等低资源语言性能。"
     ],
     "engineering_takeaways": [
-      "投资建设高质量、多样化的文档数据集，特别是标注复杂版面、手写体和印刷体混合数据。",
-      "搭建模块化且可扩展的文档解析流水线，便于快速集成新算法和适配不同业务场景。",
-      "关注模型蒸馏和量化技术，以优化推理性能，保障端侧或大规模部署的可行性。",
-      "定期跟踪 arXiv 和主流会议论文，建立技术预警机制，及时捕捉领域突破点。"
+      "使用标准基准和开源工具可系统评估模型能力，指导性能改进。",
+      "LoRA等低资源微调方法可大幅提升领域特定OCR任务的效能。",
+      "联合模型能简化流水线并减少延迟，适用于实时处理。",
+      "查询优化可成为比模型扩展更经济有效的性能提升途径。",
+      "可配置的语义分块框架为RAG系统提供灵活验证的适应性方案。",
+      "置信度感知集成和精化阶段可在特定任务上带来显著增益。",
+      "解决数据标签噪声问题比优化模型更具潜在收益，需提升数据质量。"
     ],
-    "watchlist": []
+    "watchlist": [
+      {
+        "title": "OCR-MetaReasoning Benchmark: Evaluating the Meta-Reasoning Ability of MLLMs in Text-Rich Image Understanding",
+        "watch_reason": "首个针对文本丰富图像元推理的基准，可能成为未来评估复杂文档理解的标准工具。"
+      },
+      {
+        "title": "Towards a Joint Khmer Text Recognition and Word Segmentation",
+        "watch_reason": "联合识别与分词框架可扩展至多种无分隔符语言，对多语言OCR系统有重要影响。"
+      },
+      {
+        "title": "Improving Information Extraction with Learned Queries",
+        "watch_reason": "查询优化方法可能改变信息提取的范式，尤其对资源受限场景极具价值。"
+      },
+      {
+        "title": "Configurable Semantic Chunking for Biomedical Information Extraction in Retrieval-Augmented Generation",
+        "watch_reason": "可配置分块策略可提升RAG系统在关系提取任务中的表现，且易于集成。"
+      },
+      {
+        "title": "Confidence-Aware Ensemble and Long-Word Refinement for Artistic Text Recognition",
+        "watch_reason": "精细化集成与错误分析方法对处理艺术文本等复杂OCR场景具有参考价值。"
+      }
+    ]
   },
-  "papers": []
+  "papers": [
+    {
+      "title": "OCR-MetaReasoning Benchmark: Evaluating the Meta-Reasoning Ability of MLLMs in Text-Rich Image Understanding",
+      "summary": "Text-rich image understanding requires multimodal large language models (MLLMs) to organize OCR (Optical Character Recognition)-grounded evidence across words, layout, fields, charts, and visual correspondences. Existing evaluations often conflate extraction with reasoning and rarely test whether models follow the required reasoning direction: applying visible rules, abstracting hidden regularities, or recovering missing premises. We introduce OCR-MetaReasoning, a controlled single-image benchmark that treats deduction, induction, and abduction as distinct directions and separates final-answer correctness from reasoning-process compliance. The benchmark contains 1,500 verified samples in a balanced \\(3\\times5\\) taxonomy crossing three reasoning types with five OCR-object categories, along with reference reasoning steps, automatic answer scoring, the Meta-Reasoning Macro Score (MRMS), and the Reasoning Process Compliance Score (RPCS). Experiments with representative closed-source and open-source MLLMs show that OCR-grounded meta-reasoning remains far from saturated: models struggle with visible-rule application and layout-sensitive inference, while process-compliant rationales can accompany incorrect final answers under exact-match evaluation. The code is available at https://github.com/gengxuli/OCR-MetaReasoning.",
+      "link": "https://arxiv.org/abs/2608.30678v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.30678v1",
+      "authors": [
+        "Gengxu Li",
+        "Yuan Wu",
+        "Yi Chang"
+      ],
+      "published": "2026-08-31T12:20:05Z",
+      "updated": "2026-08-31T12:20:05Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2608.30678v1",
+      "score": 17,
+      "topic_tags": [
+        "OCR",
+        "多模态大语言模型",
+        "元推理",
+        "基准测试",
+        "文本丰富图像"
+      ],
+      "zh_summary": "文本丰富的图像理解要求多模态大型语言模型（MLLMs）跨词、布局、字段、图表和视觉对应关系组织基于OCR的证据。现有评估常混淆提取与推理，且很少测试模型是否遵循所需的推理方向：应用可见规则、抽象隐藏规律或恢复缺失前提。我们引入了OCR-MetaReasoning，一个受控的单图像基准，将演绎、归纳和溯因视为不同方向，并区分最终答案正确性与推理过程合规性。该基准包含1500个经过验证的样本，采用平衡的3×5分类法，跨越三种推理类型和五个OCR对象类别，并附有参考推理步骤、自动答案评分、元推理宏分数（MRMS）和推理过程合规分数（RPCS）。对代表性闭源和开源MLLMs的实验表明，基于OCR的元推理远未饱和：模型在可见规则应用和布局敏感推理上存在困难，而在精确匹配评估下，过程合规的推理可能伴随错误的最终答案。代码可在 https://github.com/gengxuli/OCR-MetaReasoning 获取。",
+      "novelty": "提出了首个专门评估MLLMs在文本丰富图像理解中元推理能力的基准，将推理方向（演绎、归纳、溯因）与对象类别相结合，并分离了答案正确性与过程合规性。",
+      "innovation_points": [
+        "设计了三类推理方向（演绎、归纳、溯因）与五个OCR对象类别交叉的3×5分类法，构建了1,500个验证样本的基准。",
+        "引入了两个新指标：元推理宏分数（MRMS）和推理过程合规分数（RPCS），分别量化整体性能和推理过程质量。",
+        "提供了参考推理步骤和自动答案评分机制，支持可复现的评估。"
+      ],
+      "limitations": "基准仅限于单图像场景，未考虑多图像或视频输入；MRMS和RPCS可能无法完全反映推理步骤的逻辑有效性；实验模型数量有限。",
+      "improvement_directions": [
+        "扩展基准至多页文档或跨图像推理场景，以更贴近实际应用。",
+        "开发更细粒度的推理过程评估方法，超越合规性评分，如验证推理步骤之间的逻辑连贯性。",
+        "探索训练策略，增强模型在可见规则应用和布局敏感推理上的能力。"
+      ],
+      "engineering_value": "提供了用于评估和提升MLLMs文档理解能力的标准化工具，有助于开发更可靠的OCR系统，特别是在需要复杂推理的文档理解场景中。",
+      "why_relevant": "直接关系OCR领域的高级推理能力评估，为文档智能处理提供参考标准和方法。"
+    },
+    {
+      "title": "OCR-Based Field Extraction for Archaeological Pottery Metadata: The CENTURIA Dataset",
+      "summary": "Pottery is a primary source for reconstructing the chronological and economic dimensions of past societies. Archaeologists often document ceramic finds through technical drawings and handwritten metadata. This metadata is critical for dating, provenance attribution, and cross-site comparison, but remains inaccessible to computational analysis, requiring manual transcription of every record. We investigate whether state-of-the-art document analysis models can address this task, and introduce CENTURIA, a dataset of 507 pottery records from the Roman site of Carnuntum, providing transcriptions, bounding boxes, and structured field-level labels across seven metadata categories. Benchmarking five OCR models reveals a substantial domain gap: zero-shot transcription error reaches 15-32% SpACER-M, far exceeding rates on printed archival documents, with domain-specific fields recovered in fewer than 3% of cases. LoRA fine-tuning on just 57 samples, reflecting a realistic archival annotation budget, closes this gap, reducing transcription error to below 1.5% and recovering overall field-level accuracy above 87%. Our results show that a small expert-validated fine-tuning set suffices to convert handwritten pottery documentation into structured, searchable metadata ready for archaeological databases.",
+      "link": "https://arxiv.org/abs/2608.30616v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.30616v1",
+      "authors": [
+        "Gissu Valentina Naghavi",
+        "Dominik Hagmann",
+        "Martin Kampel",
+        "Irene Ballester"
+      ],
+      "published": "2026-08-31T11:26:31Z",
+      "updated": "2026-08-31T11:26:31Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2608.30616v1",
+      "score": 12,
+      "topic_tags": [
+        "OCR",
+        "手写识别",
+        "字段提取",
+        "考古学",
+        "低资源微调"
+      ],
+      "zh_summary": "陶器是重建过去社会年代和经济维度的主要来源。考古学家通常通过技术图纸和手写元数据记录陶瓷发现。这些元数据对于年代测定、来源归属和跨遗址比较至关重要，但无法进行计算分析，需要手动转录每条记录。我们研究最先进的文档分析模型是否能解决此任务，并引入CENTURIA数据集，包含来自罗马Carnuntum遗址的507条陶器记录，提供转录、边界框和七个元数据类别的结构化字段级标签。对五个OCR模型的基准测试揭示了显著的领域差距：零样本转录错误率达到15-32% SpACER-M，远超印刷档案文档的错误率，领域特定字段在不到3%的情况下被恢复。仅基于57个样本的LoRA微调（反映了现实的档案注释预算）缩小了这一差距，将转录错误降至1.5%以下，并将总体字段级准确率恢复到87%以上。我们的结果表明，一个小的专家验证微调集足以将手写陶器文档转换为结构化、可搜索的元数据，可直接用于考古数据库。",
+      "novelty": "首次系统评估了现代OCR模型在手写陶器档案元数据提取上的表现，并发布了包含字段级标注的专用数据集，展示了低资源微调的有效性。",
+      "innovation_points": [
+        "构建了新数据集CENTURIA，包含507条手写陶器记录的多模态标注（转录、边界框、字段标签）。",
+        "评估了多个OCR模型在该领域的零样本性能，揭示了显著的领域差距。",
+        "证明了仅用57个样本进行LoRA微调即可大幅提升性能，为低资源文档分析提供了实用方法。"
+      ],
+      "limitations": "数据集规模较小且来自单一遗址，可能限制泛化性；字段类别固定为七个，未涵盖所有可能的元数据变体。",
+      "improvement_directions": [
+        "扩展数据集至更多遗址和手写风格，以提高模型鲁棒性。",
+        "研究半监督或主动学习策略以进一步减少注释需求。",
+        "探索结合语言模型的端到端字段提取方法，减少对后处理规则的依赖。"
+      ],
+      "engineering_value": "为考古文档的数字化提供高效解决方案，显著降低人工转录成本，促进大规模考古数据挖掘。",
+      "why_relevant": "展示了OCR在特定领域（考古学）的应用潜力，具有跨学科价值，且方法可推广至其他手写文档类型。"
+    },
+    {
+      "title": "Towards a Joint Khmer Text Recognition and Word Segmentation",
+      "summary": "Text recognition, or extracting electronic text from document images, has been indispensable for knowledge retrieval tasks, such as retrieval-augmented generation (RAG). For Khmer, extracted text is subject to an extra word segmentation step, as Khmer does not use any visible word delimiters to denote word boundaries. Thus, a recognition-then-segmentation pipeline for Khmer requires two separate sequential models; this is not only error-prone but also adds significant latency for large-scale document processing. This paper proposes a novel joint Khmer text recognition and word segmentation framework in a unified model. The proposed model, using a connectionist-temporal-classification (CTC) decoder for fast, parallel decoding, can be instructed to recognize Khmer text with ($b=1$) and without ($b=0$) word segmentation. Experimental results on different benchmark datasets of different document modalities (document, scene, and handwritten images) show that the proposed model can not only recognize characters in document images but also locate word boundaries, removing the need for an extra word segmentation step in a conventional sequential pipeline.",
+      "link": "https://arxiv.org/abs/2608.30213v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.30213v1",
+      "authors": [
+        "Marry Kong",
+        "Rina Buoy",
+        "Sovisal Chenda",
+        "Nguonly Taing",
+        "Masakazu Iwamura",
+        "Koichi Kise"
+      ],
+      "published": "2026-08-31T03:53:25Z",
+      "updated": "2026-08-31T03:53:25Z",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "arxiv_id": "2608.30213v1",
+      "score": 11,
+      "topic_tags": [
+        "OCR",
+        "高棉语",
+        "词语分割",
+        "文本识别",
+        "联合模型"
+      ],
+      "zh_summary": "文本识别（从文档图像中提取电子文本）对于知识检索任务（如检索增强生成）至关重要。对于高棉语，提取的文本需要额外的分词步骤，因为高棉语不使用可见的单词分隔符。因此，用于高棉语的“识别后分词”流水线需要两个独立的顺序模型；这不仅容易出错，而且增加了大规模文档处理的延迟。本文提出了一种新颖的联合高棉语文本识别和分词框架，在统一模型中进行。所提模型使用连接主义时间分类（CTC）解码器进行快速并行解码，可被指示识别带词分割（b=1）和不带词分割（b=0）的高棉语文本。在不同文档模态（文档、场景和手写图像）的多个基准数据集上的实验表明，所提模型不仅能识别文档图像中的字符，还能定位词边界，消除了传统顺序流水线中额外分词步骤的需要。",
+      "novelty": "首次提出在单一模型中联合执行高棉语文本识别和词语分割，避免了顺序流水线的错误累积和延迟问题。",
+      "innovation_points": [
+        "提出联合识别与分割框架，利用CTC解码器支持并行解码，统一了任务。",
+        "通过可切换的模式（是否进行分词）实现灵活输出，适应不同下游任务需求。",
+        "在多种文本模态（文档、场景、手写）上验证了方法的有效性。"
+      ],
+      "limitations": "实验可能未覆盖高棉语的所有复杂方言或文体；CTC解码器可能对长序列预测存在限制。",
+      "improvement_directions": [
+        "探索基于Transformer的解码器或注意力机制以提升长文本处理能力。",
+        "将框架扩展至其他无分隔符语言，如泰语、老挝语等。",
+        "研究在分词和识别之间显式建模依赖关系以进一步提高准确性。"
+      ],
+      "engineering_value": "简化高棉语文档处理流程，降低系统复杂性和延迟，适用于大规模检索增强生成等应用。",
+      "why_relevant": "针对特定语言的OCR挑战提供了高效解决方案，对多语言OCR系统开发有启示作用。"
+    },
+    {
+      "title": "Improving Information Extraction with Learned Queries",
+      "summary": "When information extraction fails, a natural instinct is to improve the model doing it: for example, by scaling it up or refining its reasoning. In this paper, we show that another part of the pipeline matters at least as much: the queries used to elicit this information. Across four clinical benchmarks and five LLMs, improving the question design alone raises performance by 18.6 F1-score points, i.e. more than using larger extraction models. To make such question design learnable, we introduce List of Questions (LoQ), which generates document-specific question sets, and FeedQ, a feedback-driven optimization method that iteratively refines questions against extraction outcomes. The resulting optimized questions can be used to train lightweight generators: with fine-tuning, 4B-parameter models match or outperform expert-derived baselines and substantially exceed the performance of much larger untuned models. We release a dataset of 12,820 optimized questions to support a broader shift in information extraction research toward treating question design as a first-class problem.",
+      "link": "https://arxiv.org/abs/2608.31058v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.31058v1",
+      "authors": [
+        "Omar Sharif",
+        "Soroush Vosoughi",
+        "Nikhil Singh"
+      ],
+      "published": "2026-08-31T16:35:31Z",
+      "updated": "2026-08-31T16:35:31Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2608.31058v1",
+      "score": 10,
+      "topic_tags": [
+        "信息提取",
+        "查询优化",
+        "大语言模型",
+        "临床文本",
+        "反馈驱动"
+      ],
+      "zh_summary": "当信息提取失败时，自然的直觉是改进执行提取的模型：例如扩大规模或细化推理。在本文中，我们表明流水线的另一部分至少同样重要：用于获取信息的查询。在四个临床基准和五个LLM上，仅改进问题设计就将性能提高了18.6 F1分，即比使用更大的提取模型还要多。为了使这种问题设计可学习，我们引入了问题列表（LoQ），生成文档特定的问题集，以及FeedQ，一种反馈驱动的优化方法，根据提取结果迭代细化问题。由此产生的优化问题可用于训练轻量级生成器：通过微调，4B参数模型可以匹配或超过专家派生的基线，并大大超过更大的未调优模型的性能。我们发布了包含12,820个优化问题的数据集，以支持信息提取研究向将问题设计视为一等问题的方向转变。",
+      "novelty": "将信息提取性能提升的关键从模型规模转向查询设计，并提出了可学习的问题优化方法，为信息提取研究提供了新视角。",
+      "innovation_points": [
+        "提出LoQ方法，生成文档特定的问题集，促进信息提取。",
+        "引入FeedQ优化框架，通过反馈迭代改进问题。",
+        "验证了轻量级模型在优化问题下的高性能，挑战了大规模模型的必要性。",
+        "发布了12,820个优化问题数据集，供社区使用。"
+      ],
+      "limitations": "研究限于临床领域，可能不直接适用于其他领域的提取；查询优化可能依赖于基础LLM的能力。",
+      "improvement_directions": [
+        "将查询优化方法推广至更多领域，如法律、金融文档。",
+        "研究自动评估问题质量的方法，减少人工反馈依赖。",
+        "探索将问题设计与提取模型联合优化的端到端方法。"
+      ],
+      "engineering_value": "提供了一种成本效益高的性能提升方案，通过优化查询而非扩大模型，帮助资源有限的组织改善信息提取。",
+      "why_relevant": "揭示了查询设计在信息提取中的核心作用，对OCR后处理和信息抽取系统设计有重要影响。"
+    },
+    {
+      "title": "Configurable Semantic Chunking for Biomedical Information Extraction in Retrieval-Augmented Generation",
+      "summary": "BioMedRAG introduced retrieval-augmented generation with a learned chunk scorer for biomedical information extraction. However, it relies on fixed-size chunking which can fragment semantic evidence. We propose a configurable semantic chunking framework that addresses this limitation by combining entity-preserving windows, trigger-centered chunking, proposition-first extraction, tiered trigger prioritization, and hierarchical relation resolution. The framework integrates with BioMedRAG by replacing only the chunk construction stage while preserving the embedding model, learned chunk scorer, generator, and evaluation protocol. We evaluate the framework on biomedical relation extraction benchmarks (GM-CIHT, DDI, ChemProt) and adverse event classification (ADE). On GM-CIHT, the full hybrid configuration achieves 82.6% F1, improving over the fixed-size baseline (74.2% F1) by 8.4 points under our experimental setup. Cross-dataset analysis shows that semantic chunking improves extraction datasets with explicit relation cues, such as GM-CIHT and DDI, while fixed chunking remains competitive or stronger for dense biochemical extraction and binary classification settings such as ChemProt and ADE. By externalizing chunking logic into configuration files, the framework provides an interpretable and adaptable alternative to rigid fixed-size chunking for biomedical RAG pipelines.",
+      "link": "https://arxiv.org/abs/2608.31139v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.31139v1",
+      "authors": [
+        "Riya Ahuja",
+        "Tim Kacprowski",
+        "Roya Shiasi Sardoabi"
+      ],
+      "published": "2026-08-31T17:44:54Z",
+      "updated": "2026-08-31T17:44:54Z",
+      "categories": [
+        "cs.CL",
+        "cs.IR"
+      ],
+      "arxiv_id": "2608.31139v1",
+      "score": 9,
+      "topic_tags": [
+        "OCR",
+        "语义分块",
+        "检索增强生成",
+        "生物医学",
+        "信息提取"
+      ],
+      "zh_summary": "BioMedRAG引入了具有学习分块器的检索增强生成，用于生物医学信息提取。然而，它依赖固定大小的分块，可能分裂语义证据。我们提出了一种可配置的语义分块框架，通过结合实体保持窗口、触发器中心分块、命题优先提取、分层触发器优先级和分层关系解析来解决此限制。该框架通过仅替换分块构建阶段而与BioMedRAG集成，同时保留嵌入模型、学习分块器、生成器和评估协议。我们在生物医学关系提取基准（GM-CIHT、DDI、ChemProt）和不良事件分类（ADE）上评估该框架。在GM-CIHT上，完整混合配置达到82.6% F1，在我们的实验设置下比固定大小基线（74.2% F1）提高8.4个百分点。跨数据集分析表明，语义分块改善了具有显式关系线索的提取数据集，如GM-CIHT和DDI，而固定分块在密集生物化学提取和二元分类设置（如ChemProt和ADE）中保持竞争力或更强。通过将分块逻辑外部化到配置文件中，该框架为生物医学RAG流水线提供了一种可解释且适应性强的替代方案，替代刚性固定大小分块。",
+      "novelty": "提出了针对生物医学RAG的可配置语义分块框架，解决了固定大小分块导致的语义碎片问题，并在多个数据集上验证了其有效性。",
+      "innovation_points": [
+        "设计了多种语义分块策略（实体保持窗口、触发器中心、命题提取、分层优先级、关系解析）。",
+        "采用可配置方式，允许根据数据集调整分块策略，增加灵活性。",
+        "与现有BioMedRAG系统无缝集成，仅替换分块阶段，便于采用。"
+      ],
+      "limitations": "语义分块并非在所有数据集上一致优于固定分块，在密集生化提取任务中可能不如固定分块；框架的配置调优需要专业知识。",
+      "improvement_directions": [
+        "开发自动选择最优分块配置的策略，减少人工调优成本。",
+        "研究更细粒度的语义表示，以应对复杂关系提取。",
+        "探索将分块策略与下游任务损失联合优化的方法。"
+      ],
+      "engineering_value": "为生物医学RAG系统提供了可扩展的分块方案，有望提升信息提取准确性，尤其在具有明确关系线索的数据集上。",
+      "why_relevant": "直接关注OCR后处理中的分块策略，对文档理解流水线的性能和可解释性有实际价值。"
+    },
+    {
+      "title": "Confidence-Aware Ensemble and Long-Word Refinement for Artistic Text Recognition",
+      "summary": "Artistic Text Recognition (ATR) remains challenging because word images often combine decorative fonts, curved layouts, object-like characters, clutter, and severe distortions. This paper studies WordArt-V1.5 as a standardized benchmark for this setting and evaluates recent scene and artistic text recognizers under a common protocol. We propose a confidence-aware ensemble that combines SVTRv2, PARSeq, and MAERec after fine-tuning on the official training split. The ensemble selects predictions using the minimum confidence over disagreement positions, emphasizing characters that separate competing hypotheses. For long words, where a single character error can invalidate the whole prediction, we add a targeted refinement stage based on Needleman-Wunsch alignment and lexicon-guided correction. On the WordArt-V1.5 Test B split, the proposed system reaches 89.90% Word Recognition Accuracy, improving the best individual fine-tuned model by 1.77 percentage points. The long-word refinement produces a modest global gain, but improves the targeted long-word subset by 2.72 percentage points. Finally, an error analysis of all remaining mistakes shows that 48.8% are associated with labeling issues, visual ambiguity, or illegible samples, highlighting the value of diagnostic reporting for future ATR benchmarks and models. Our source code is available at https://github.com/lucas-azdias/Artistic-Text-Recognition/.",
+      "link": "https://arxiv.org/abs/2608.29970v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.29970v1",
+      "authors": [
+        "Lucas A. Dias",
+        "Henrique A. Schulz",
+        "Rafaela de Miranda",
+        "Guilherme L. Peres",
+        "Pedro L. Bittencourt",
+        "Rayson Laroca"
+      ],
+      "published": "2026-08-30T18:56:04Z",
+      "updated": "2026-08-30T18:56:04Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2608.29970v1",
+      "score": 9,
+      "topic_tags": [
+        "OCR",
+        "艺术文本识别",
+        "集成学习",
+        "长单词精化",
+        "错误分析"
+      ],
+      "zh_summary": "艺术文本识别（ATR）仍然具有挑战性，因为单词图像通常结合装饰字体、曲线布局、类似对象的字符、杂乱和严重变形。本文研究WordArt-V1.5作为该设置的标准化基准，并在统一协议下评估近期场景和艺术文本识别器。我们提出了一种置信度感知的集成方法，结合了SVTRv2、PARSeq和MAERec，在官方训练集上微调后。该集成使用不一致位置上的最小置信度选择预测，强调区分竞争假设的字符。对于长单词，单个字符错误可能使整个预测无效，我们增加了基于Needleman-Wunsch比对和词典引导修正的针对性精化阶段。在WordArt-V1.5 Test B分割上，所提系统达到89.90%的单词识别准确率，比最佳单个微调模型提高1.77个百分点。长单词精化产生适度的全局增益，但在目标长单词子集上提高了2.72个百分点。最后，对所有剩余错误的错误分析显示，48.8%与标签问题、视觉歧义或难以辨认的样本相关，突显了诊断报告对未来ATR基准和模型的价值。源代码可在 https://github.com/lucas-azdias/Artistic-Text-Recognition/ 获取。",
+      "novelty": "提出了针对艺术文本识别的置信度感知集成和长单词精化方法，在标准基准上取得了改进，并提供了详细的错误分析。",
+      "innovation_points": [
+        "设计了基于不一致位置最小置信度的集成策略，有效综合多个模型的预测。",
+        "引入了针对长单词的Needleman-Wunsch比对和词典修正精化阶段。",
+        "进行了系统的错误分析，将近半数错误归因于数据问题，为未来基准改进提供依据。"
+      ],
+      "limitations": "集成方法计算成本较高；长单词精化仅带来适度全局增益；错误分析表明数据标签质量限制了性能上限。",
+      "improvement_directions": [
+        "开发更轻量级的集成方法或知识蒸馏技术以降低推理成本。",
+        "研究更精细的长单词处理策略，如字符级置信度校准。",
+        "推动创建更高质量、减少歧义的基准数据集，同时发展对标签噪声鲁棒的训练方法。"
+      ],
+      "engineering_value": "为艺术文本识别提供了一套有效且可复现的改进方案，并提供了开源代码，便于实际应用和进一步研究。",
+      "why_relevant": "直接针对OCR领域中的艺术文本识别难题，提出集成和精化方法，具有应用价值。"
+    },
+    {
+      "title": "VeriCam: A Verification Baseline for the Classification of Unknown Data",
+      "summary": "The advent of foundation models have enabled a new era in zero-shot classification. Yet, key challenges persist. Despite their impressive generalization power that leverages the immense pre-training knowledge, both foundation models for image and text as well as vision-text hybrids lack the representational power needed for fine-grained, minutiae-based class separation that some real-world tasks require. To address the current gaps in the literature, we propose VeriCam, a pipeline designed to learn highly specialized features that enable classification of unknown classes in unseen data. VeriCam works by leveraging the representation power of image models trained for the verification task, where the model develops an intricate feature space that incorporates fine-grained details. By training a model to discriminate between pairs of images from the same and different classes, a relational graph is constructed, representing the class relationships between data points. We then present two approaches for graph clustering: a naive algorithm and a specific setup for the Leiden graph clustering algorithm. The pipeline is validated on the LPLCv2 dataset, which comprises real-world traffic surveillance images. We show that the dataset carries an inherent capture device bias that is posed as a generalization challenge for downstream License Plate recognition tasks such as OCR. As such, we dynamically identify capture devices with a label-agnostic approach, enabling the construction of a fair and unbiased benchmark. In the cross-device scenario, our pipeline reaches an F1-Score of 93.45 in the verification baseline and a V-Measure score of 80.13 in the clustering step. All code is publicly available at https://github.com/lmlwojcik/VeriCam",
+      "link": "https://arxiv.org/abs/2608.31107v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.31107v1",
+      "authors": [
+        "Lucas Wojcik",
+        "Gabriel E. Lima",
+        "Sergio M. Silva",
+        "Eduil Nascimento",
+        "David Menotti"
+      ],
+      "published": "2026-08-31T17:12:59Z",
+      "updated": "2026-08-31T17:12:59Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "arxiv_id": "2608.31107v1",
+      "score": 6,
+      "topic_tags": [
+        "零样本分类",
+        "图聚类",
+        "设备偏差",
+        "车牌识别"
+      ],
+      "zh_summary": "基础模型在零样本分类中表现强大，但在需要细粒度、基于细节的类别区分时存在不足。本文提出VeriCam流水线，利用对比学习训练的图像验证模型来学习精细特征，构建数据点间的关系图，并通过图聚类实现未知类别的分类。在LPLCv2真实交通监控数据集上验证，该数据集存在固有的拍摄设备偏差，影响下游OCR任务。VeriCam以无标签方式识别设备，构建公平基准，跨设备场景F1分数达9...",
+      "novelty": "提出利用验证任务训练的图像模型进行未知类别分类的新方法，结合图聚类，并解决数据集中设备偏差问题。",
+      "innovation_points": [
+        "利用验证模型学习细粒度特征，构建关系图进行聚类，实现未知类别分类。",
+        "提出两种图聚类方法：朴素算法和针对Leiden算法的特定设置。",
+        "无标签方式动态识别拍摄设备，构建公平基准。"
+      ],
+      "limitations": "['依赖验证模型的特征质量，可能不适用于所有数据分布。', '图聚类计算复杂度高，难以扩展到大规模数据。']",
+      "improvement_directions": [
+        "探索更高效的近似聚类算法以降低计算开销。",
+        "将方法扩展到其他领域如生物医学图像，验证泛化性。"
+      ],
+      "engineering_value": "提供了一种处理具有设备偏差的真实世界图像分类的鲁棒方法，为OCR车牌识别等任务的基准构建提供参考。",
+      "why_relevant": "涉及OCR相关任务（车牌识别）的基准构建和偏差处理，与文档解析中图像预处理和鲁棒性提升相关。"
+    },
+    {
+      "title": "Type-Balanced Contextual Learning for Incremental Named Entity Recognition",
+      "summary": "Incremental Named Entity Recognition (INER) stands as a pivotal task in information extraction, emphasizing the successive identification of new entity types within unstructured text. Faced with the continuous influx of entity types, INER grapples with two significant challenges: the widespread issue of catastrophic forgetting and the unique shift issue of the non-entity type semantics. While pseudo-labeling-based INER methods have proven effective in addressing these challenges, a previously overlooked issue arises: the biased context problem. Our analysis shows that, in new sentences, the contextual associations of tokens representing old entity types exhibit a significantly stronger bias towards new entity types compared to their contexts in old sentences. This tendency intensifies the degradation of old knowledge while promoting the overfitting of new knowledge. To solve this biased context, we propose a Type-Balanced Contextual Learning (TBCL) method, featuring a sentence-duplet learning scheme and a contextual consistency loss. This approach offers a fresh perspective for INER through context analysis. Extensive experiments across ten INER settings on three highly recognized datasets showcase the efficacy of our TBCL method, highlighting its proficiency in resolving the biased context issue inherent in pseudo-labeling based INER approaches.",
+      "link": "https://arxiv.org/abs/2608.31038v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.31038v1",
+      "authors": [
+        "Duzhen Zhang",
+        "Yahan Yu",
+        "Xiuyi Chen",
+        "Chenxing Li",
+        "Dong Yu"
+      ],
+      "published": "2026-08-31T16:15:41Z",
+      "updated": "2026-08-31T16:15:41Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2608.31038v1",
+      "score": 6,
+      "topic_tags": [
+        "增量学习",
+        "命名实体识别",
+        "上下文偏差",
+        "伪标签"
+      ],
+      "zh_summary": "增量命名实体识别（INER）面临灾难性遗忘和非实体语义漂移，基于伪标签的方法还存在上下文偏差问题：新句子中旧实体类型与上下文关联对新实体类型有更强的偏差，加剧旧知识遗忘和新知识过拟合。本文提出类型平衡的上下文学习（TBCL），包括双句学习和上下文一致性损失，在多个数据集上验证有效性。",
+      "novelty": "从上下文分析角度出发，首次提出偏置上下文问题，并设计双句学习和一致性损失来平衡类型概率。",
+      "innovation_points": [
+        "提出双句学习方案，使用新句和旧句对进行训练。",
+        "设计上下文一致性损失，对齐新旧句的类型概率。",
+        "通过最大化熵来平衡类型预测。"
+      ],
+      "limitations": "['依赖伪标签质量，可能受噪声影响。', '双句学习可能增加训练复杂度。']",
+      "improvement_directions": [
+        "探索更稳健的伪标签生成方法。",
+        "将上下文平衡扩展到其他增量任务。"
+      ],
+      "engineering_value": "提升了增量NER系统的稳定性，对持续学习的信息抽取系统有实际应用价值。",
+      "why_relevant": "与OCR后处理中的命名实体识别相关，增量学习范式可用于不断更新的文档解析模型。"
+    },
+    {
+      "title": "En-ViMedNER: An English-Vietnamese Parallel Biomedical Corpus with UMLS Semantic Type Annotations",
+      "summary": "Biomedical Named Entity Recognition (NER) is fundamental to healthcare AI applications, including clinical decision support and medical information extraction. While corpora with Unified Medical Language System (UMLS) annotations, such as MedMentions, have driven progress in English biomedical NER, no comparable resource exists for Vietnamese. This paper presents En-ViMedNER, the first English-Vietnamese parallel biomedical NER corpus annotated with UMLS semantic types, which are language-neutral codes providing a shared cross-lingual label space and ensuring direct comparability with existing UMLS-based resources. The corpus contains 4,392 PubMed abstract pairs, 44,892 English-Vietnamese sentence pairs, and 202,949 aligned entity-mention pairs across 21 semantic types adapted from the MedMentions ST21pv dataset. To balance quality and scalability, we have constructed the corpus through automatic translation, expert post-editing, LLM-assisted label projection, and human verification and adjudication. We characterize En-ViMedNER as a large-scale silver-standard corpus with a human-audited and consensus-corrected mini-test subset. We evaluate En-ViMedNER in two settings: (i) Vietnamese-input/Vietnamese-output biomedical NER and (ii) English-input/Vietnamese-output cross-lingual NER. For Vietnamese NER, we benchmark Vietnamese-supervised encoder models, English-supervised multilingual encoder models, and prompt-based LLMs. The best model achieves an F1 score of 52.70 on the test set and 53.78 on the mini-test set. For cross-lingual NER, we benchmark encoder-decoder models and prompt-based LLMs. The best model achieves an F1 score of 45.44 on the mini-test set. We publicly release our corpus, corpus construction pipeline, and baseline models to facilitate future Vietnamese biomedical NLP research.",
+      "link": "https://arxiv.org/abs/2608.29890v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.29890v1",
+      "authors": [
+        "Nhu Vo",
+        "Phuong Nguyen",
+        "Nu Uyen Phuong Le",
+        "Inigo Jauregi Unanue",
+        "Dung D. Le",
+        "Massimo Piccardi",
+        "Wray Buntine"
+      ],
+      "published": "2026-08-30T16:40:18Z",
+      "updated": "2026-08-30T16:40:18Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2608.29890v1",
+      "score": 6,
+      "topic_tags": [
+        "生物医学NER",
+        "语料库构建",
+        "越南语",
+        "跨语言",
+        "UMLS"
+      ],
+      "zh_summary": "本文介绍了En-ViMedNER，第一个英语-越南语并行生物医学NER语料库，标注UMLS语义类型，包含4,392篇摘要对，44,892句子对，202,949实体提及对，覆盖21种语义类型。构建采用自动翻译、专家后编辑、LLM辅助标签投影和人工验证。该语料支持越南语NLP和跨语言NER，可作为银标准资源。",
+      "novelty": "首次构建英语-越南语平行生物医学NER语料库，使用UMLS语义类型作为跨语言标签空间，并提供银标准资源。",
+      "innovation_points": [
+        "创建并发布第一个英-越平行生物医学NER语料库。",
+        "采用LLM辅助标签投影和人工验证的混合方法保证质量。",
+        "提供多语言和跨语言评估基准。"
+      ],
+      "limitations": "['语料库为银标准，可能包含噪声。', '覆盖范围有限，仅21种语义类型。', '越南语模型性能仍较低，F1约52-53。']",
+      "improvement_directions": [
+        "扩大语料规模，增加更多实体类型。",
+        "改进跨语言对齐方法，利用预训练语言模型提升性能。",
+        "探索结合主动学习以降低人工成本。"
+      ],
+      "engineering_value": "为低资源语言（越南语）的生物医学信息抽取提供了基础资源，对构建多语言文档解析系统有重要价值。",
+      "why_relevant": "涉及生物医学NER语料构建和跨语言标签投影，对多语言OCR文档中的实体识别有参考意义。"
+    }
+  ]
 }
