@@ -1,192 +1,56 @@
-# OCR / 文档解析研究日报（2026-09-04）
+# OCR / 文档解析研究日报（2026-09-05）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-09-04 05:52:15`
+- 生成时间（UTC）：`2026-09-05 05:44:09`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日论文聚焦OCR与文档解析的效率提升、隐私保护、合成数据应用及鲁棒性改进。核心进展包括Jina-OCR-v1在低预算GPU上的高效解码、LeakageBench对文档级PII泄漏的评估、OCR-EDR的渲染感知修复框架，以及泰文合成数据训练的竞争力验证。这些研究显示出对实际应用场景的深入关注，并在性能、安全和数据效率方面提出了创新解决方案。
+> 今日三篇论文分别从OCR错误诊断修复、多模态LLM在特殊文档上的能力评估以及合成数据在低资源语言OCR中的应用三个维度推进了文档解析技术。OCR-EDR提出渲染感知的闭环修复，显著提升公式与复杂文档识别；KhatianDoc基准揭示现有模型在孟加拉法律记录等特殊任务上的能力缺失；泰文OCR研究证明纯合成数据可达到竞争性性能。这些进展指向更精细的诊断工具、能力缺口识别及低成本数据策略。
 
 ## 二、今日趋势判断
 
-文档解析模型持续向低算力、高效推理发展，结合投机解码和MoE架构。隐私与安全成为文档理解的重要考量，出现专门针对PII脱敏的基准。合成数据的可控生成与迁移学习成为低成本扩展OCR能力的关键路径。诊断与修复闭环受到关注，强调从单一评估到可迭代改进的转变。
+当前研究趋势包括：1) 从整体指标转向细粒度错误诊断与可执行修复；2) 构建针对特殊数字系统和复杂手写的多模态基准，暴露模型真正瓶颈；3) 利用合成数据解决低资源语言和私有数据问题，强调可控生成和训练粒度的重要性。
 
 ## 三、今日论文概览
 
-1. **Jina-OCR-v1: Efficient Document Parsing with Speculative Decoding and Dense Verifiable Rewards** | 标签：文档解析、投机解码、混合专家、强化学习
-2. **LeakageBench: Document-Level Leakage Risk for Redacting Personally Identifiable Information in Document Images** | 标签：PII脱敏、文档图像、基准测试、隐私保护
-3. **OCR-EDR: Rendering-Aware Diagnosis and Repair for Closed-Loop OCR Improvement** | 标签：OCR错误诊断、渲染一致性、公式识别、迭代修复
-4. **CA-OPD: Confidence-Aware On-Policy Distillation for Structured Visual Prediction** | 标签：知识蒸馏、自回归模型、置信度、结构化预测
-5. **KhatianDoc: A Human-Verified Benchmark Diagnosing Multimodal LLM Failure on Bengali Legal Land Records** | 标签：多模态LLM、孟加拉语、土地记录、能力评估
-6. **How Far Can Synthetic Data Take Thai OCR?** | 标签：合成数据、泰文OCR、迁移学习、模型适配
-7. **T2LSC-Bench: Benchmarking Localized Semantic Control in Text-to-Image Generation** | 标签：图像生成、语义泄漏评估、OCR基准、文本渲染
-8. **Structured-Prior-Guided Diffusion Inpainting with Physical Consistency for Traffic Sign Augmentation** | 标签：数据增强、扩散模型、交通标志检测、OCR文本渲染
-9. **DiffIE: Diffusion-based Open Information Extraction** | 标签：开放信息抽取、扩散模型、结构化预测
-10. **VeriPhy: Agentic Physical Reasoning for World Model Evaluation and Refinement** | 标签：世界模型评估、人工智能安全、物理验证、代理推理
-11. **ViSAR: Training-Free Adaptive-$k$ Retrieval for Visual Document Question Answering** | 标签：文档视觉问答、自适应检索、检索增强生成、多模态文档理解
+1. **OCR-EDR: Rendering-Aware Diagnosis and Repair for Closed-Loop OCR Improvement** | 标签：OCR错误修复、渲染感知、诊断框架、基准数据集
+2. **KhatianDoc: A Human-Verified Benchmark Diagnosing Multimodal LLM Failure on Bengali Legal Land Records** | 标签：多模态LLM、法律文档、基准、手写识别
+3. **How Far Can Synthetic Data Take Thai OCR?** | 标签：合成数据、泰文OCR、迁移学习、模型微调
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 投机解码与混合专家架构结合，在低预算GPU上实现高效文档解析
-- 引入可验证奖励（如公式、表格结构）进行强化学习提升模型准确性
-- 建立文档级泄漏指标，关注页面整体安全性而非仅实体级
-- 渲染一致性检查用于OCR诊断与修复，处理等效编码问题
-- 合成数据受控重建，解耦字体、结构、上下文等因素以指导数据生成
-- 置信度感知的蒸馏策略，动态选择干预位置以优化结构化预测
+- 在OCR和文档解析中引入渲染一致性或感知比较来区分真实错误与等效输出。
+- 构建人工验证或真实数据的细粒度基准，以诊断模型在特定文档类型上的失败模式。
+- 利用合成数据页面级微调，有效提升低资源语言或复杂文档的识别精度。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 研究自适应投机解码步长策略，动态平衡加速与验证开销，进一步优化低算力部署
-- 探索结合语义相似度与结构验证的更细粒度密集奖励信号，提升文档解析模型的泛化能力
-- 构建包含更多语言、文档类型与复杂结构（如表格、图表）的诊断基准，覆盖真实世界多样性
-- 开发无OCR的高效视觉语言模型，直接学习文档语义，绕过传统OCR误差传播
-- 研究利用可控扩散模型生成复杂文档版面与版面扰动，增强合成训练数据的多样性与物理合理性
-- 设计高召回率、低误报的PII检测方法，并结合上下文推理实现页面级安全脱敏
-- 将渲染感知的修复框架扩展到表格、手写体等更复杂文档结构，提升自动化修复能力
-- 探索置信度校准技术，使蒸馏干预与监督信号更精确地适配学生模型学习状态
+- 开发渲染感知的OCR后处理框架，集成为可直接调用的开源库，支持错误诊断与自动化修复循环。
+- 扩展多模态基准至更多语系和特殊数字系统，并将算术推理任务融入文档解析评测标准。
+- 研究合成数据在更多低资源语言上的迁移规律，建立页面级与裁剪级训练差异的理论解释。
+- 设计联合优化损失函数，将渲染一致性与诊断修复信号整合到端到端OCR模型训练中。
+- 探索主动学习策略，利用少量真实样本来选择最有益于泛化的合成数据生成参数。
+- 针对手写体合成，引入风格迁移或生成对抗网络提升字形真实感，从而缩小合成与真实手写识别鸿沟。
 
 ## 六、工程落地启发
 
-- Jina-OCR-v1的FastMTP投机解码技术在NVIDIA L4等低端GPU上可显著提升文档解析吞吐量，适合资源受限场景
-- LeakageBench提供的文档级泄漏指标可以用于评估真实PII脱敏系统，指导合规性设计
-- OCR-EDR框架的自动化诊断修复循环可提升OCR输出质量，尤其适用于公式识别等难点
-- 泰文OCR研究证明纯合成数据训练可行，大大降低低资源语言的数据标注成本
-- ViSAR的无训练自适应检索方法减少RAG延迟，可直接用于大规模文档问答系统优化
+- OCR-EDR方法可直接作为后处理模块，嵌入现有文档处理流水线，预计能显著减少公式等特定错误的人工校对。
+- KhatianDoc基准提醒工程团队在部署多模态模型前，需针对特定领域做能力验证，谨防算术或符号解析的隐性失败。
+- 采用可控合成数据流程并做页面级训练，能大幅降低真实标注成本，尤其适合低资源或私有文档OCR项目。
 
 ## 七、优先关注论文
 
-- **Jina-OCR-v1: Efficient Document Parsing with Speculative Decoding and Dense Verifiable Rewards**：展示低预算GPU上高效文档解析的进展，可能成为端侧部署的实用方案
-- **LeakageBench: Document-Level Leakage Risk for Redacting PII in Document Images**：提供文档级脱敏评估基准，对隐私合规应用有重要参考价值
-- **OCR-EDR: Rendering-Aware Diagnosis and Repair for Closed-Loop OCR Improvement**：提出可迭代修复框架，可能用于提升现有OCR系统的鲁棒性
-- **How Far Can Synthetic Data Take Thai OCR?**：揭示合成数据训练的关键因素，对其他低资源语言可能具有借鉴意义
+- **OCR-EDR: Rendering-Aware Diagnosis and Repair for Closed-Loop OCR Improvement**：其开源基准和诊断模型可能成为事实标准，后续对长尾格式的扩展值得关注。
+- **KhatianDoc: A Human-Verified Benchmark Diagnosing Multimodal LLM Failure on Bengali Legal Land Records**：揭示了多模态模型在特定数字系统与手写上的知识缺失，可能促进领域自适应或多模态增强研究发展。
+- **How Far Can Synthetic Data Take Thai OCR?**：纯合成数据在低资源OCR的成功案例可能被推广到其他语言，页面级合成训练趋势值得跟踪。
 
 ## 八、论文逐篇解析
 
-### 1. Jina-OCR-v1: Efficient Document Parsing with Speculative Decoding and Dense Verifiable Rewards
-
-- arXiv: [2609.03181v1](https://arxiv.org/abs/2609.03181v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.03181v1)
-- 作者: Alejandro Barón García, Feng Wang, Emilia Garcia Casademont, Han Xiao
-- 发布时间: 2026-09-02T21:49:21Z
-- 分类: cs.CL, cs.CV
-- 相关性评分: 21
-- 主题标签: 文档解析、投机解码、混合专家、强化学习
-
-**中文摘要**
-
-> Jina-OCR-v1是一个端到端文档解析模型，专为低预算GPU设计。它结合了DeepSeek-OCR的压缩视觉编码器和3B混合专家解码器（每token激活约570M参数），并采用FastMTP投机解码头，通过单个草稿块在K=3个预测步骤中递归共享，贪心验证保证无损。后训练结合指令对齐、针对困难文档的鲁棒性微调，以及基于密集可验证奖励（确定性公式、表格和结构检查，给予部分分数）的GRPO。训练数据混合清洗后的公共语料和针对性合成页面。在默认动态分辨率设置下，Jina-OCR-v1在OmniDocBench v1.6上得分为91.14，在olmOCR-Bench上得分为83.4，吞吐量达到2.57页/秒。在NVIDIA L4等低预算GPU上，FastMTP相比贪心自回归解码将解码速度提升了一倍。
-
-**核心创新概述**
-
-> 提出将投机解码与混合专家架构结合，并在低预算GPU上实现高效文档解析；使用可验证奖励进行强化学习。
-
-**创新点拆解**
-
-- 采用FastMTP投机解码头，K=3步递归共享单个草稿块，实现无损加速
-- 将GRPO与确定性公式、表格和结构验证奖励结合，提供部分学分
-- 针对困难文档进行鲁棒性微调，混合合成数据与真实数据
-- 在3B MoE模型中仅激活570M参数，实现高效推理
-
-**当前局限**
-
-> ['依赖合成数据，可能不完全覆盖真实文档的多样性', '在超低预算或边缘设备上的性能未详细评估', '对多语言支持未明确说明']
-
-**后续可改进方向**
-
-- 探索自适应投机解码步数，以平衡加速比和验证开销
-- 研究更细粒度的密集奖励信号，如结合语义相似度
-- 扩展到更多语言和文档类型，提升泛化能力
-
-**工程启发**
-
-> 为资源受限环境下的文档解析提供了高效解决方案，具有较高的工程实用价值。
-
-**为什么值得关注**
-
-> 直接提出低预算GPU上的文档解析模型，结合投机解码和MoE，关注推理效率，对OCR/文档智能化落地有直接参考价值。
-
-**原始摘要**
-
-We present Jina-OCR-v1, an end-to-end document parsing model built to serve on low-budget GPUs. It
-combines the compressed-vision encoder and the 3B mixture-of-experts decoder of DeepSeek-OCR, which
-activates about 570M parameters per token, with a FastMTP speculative decoding head that shares a
-single draft block recursively across K=3 prediction steps. Greedy verification makes decoding
-lossless. Post-training combines instruction alignment, robustness fine-tuning on difficult
-documents, and GRPO under dense verifiable rewards: deterministic formula, table, and structural
-checks that award partial credit. The training data mixes cleaned public corpora with targeted
-synthetic pages. At the default dynamic-resolution setting, Jina-OCR-v1 scores 91.14 on OmniDocBench
-v1.6 and 83.4 on olmOCR-Bench, and reaches the highest page throughput in our comparison at 2.57
-pages per second. On a low-budget GPU such as the NVIDIA L4, FastMTP doubles decoding speed over
-greedy autoregressive decoding. The model is publicly available at
-https://huggingface.co/jinaai/jina-ocr-v1.
-
----
-
-### 2. LeakageBench: Document-Level Leakage Risk for Redacting Personally Identifiable Information in Document Images
-
-- arXiv: [2609.02207v1](https://arxiv.org/abs/2609.02207v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.02207v1)
-- 作者: Vishnu Prasad Vijaya Kumar, Santhosh Venkatesh, Ivan P. Yamshchikov
-- 发布时间: 2026-09-02T07:21:24Z
-- 分类: cs.CV, cs.CL
-- 相关性评分: 19
-- 主题标签: PII脱敏、文档图像、基准测试、隐私保护
-
-**中文摘要**
-
-> 真实世界的个人身份信息（PII）脱敏通常处理文档图像，其中OCR错误、布局结构和视觉噪声决定敏感信息是否真正移除。现有基准主要是文本中心，未衡量文档级别的脱敏风险。我们引入LeakageBench，一个包含500张文档图像和11,954个GDPR对齐的PII标注的挑战集，涵盖直接标识符、链接键和上下文重识别表面。我们评估通用OCR流程、商业和任务自适应OCR依赖的检测器以及无OCR视觉语言模型，使用实体级F1、组别泄漏和文档级泄漏指标。代码解释器将GPT-5.5定位F1从0.090提升到0.249，但关键页面级泄漏仍高达0.968。结果表明，更强的检测和工具辅助改善了定位，但并未使大多数页面安全可发布。LeakageBench为文档图像中高召回率、空间定位的PII脱敏提供了诊断基准。
-
-**核心创新概述**
-
-> 首次提出文档级PII脱敏风险评估基准，强调页面级泄漏而非仅实体级，并包含布局和视觉噪声因素。
-
-**创新点拆解**
-
-- 创建包含真实文档图像和GDPR对齐PII标注的基准数据集
-- 提出文档级泄漏指标，衡量页面是否完全安全
-- 评估多种OCR和检测流程，揭示工具辅助的局限
-
-**当前局限**
-
-> ['数据集规模相对有限（500张）', '主要聚焦英文，未覆盖其他语言', 'PII标注可能未全面覆盖所有隐私法规']
-
-**后续可改进方向**
-
-- 扩充数据集规模和多样性，包括不同语言和文档类型
-- 探索高召回率、低误报的PII检测新方法
-- 结合布局分析和上下文推理以提升页面级安全性
-
-**工程启发**
-
-> 为实际PII脱敏系统提供评估基准，对合规和隐私保护应用有重要价值。
-
-**为什么值得关注**
-
-> 关注OCR在文档图像中的应用，并针对PII泄漏风险提出评估框架，对OCR后处理和隐私保护场景具有直接参考意义。
-
-**原始摘要**
-
-Real-world personally identifiable information (PII) redaction often operates on document images---
-scans, screenshots, and PDF renderings---where OCR errors, layout structure, and visual noise
-determine whether sensitive information is actually removed. Existing PII benchmarks are mostly
-text-centric and do not measure document-level redaction risk: a page remains unsafe if even one
-identifier is missed. We introduce LeakageBench, a challenge set of 500 document images with 11,954
-GDPR-aligned PII annotations spanning direct identifiers, linkage keys, and contextual re-
-identification surfaces. We evaluate generic OCR pipelines, commercial and task-adapted OCR-
-dependent detectors, and OCR-free vision-language models using entity-level F1, group-wise leakage,
-and document-level leakage metrics. Code Interpreter raises GPT-5.5 localization F1 from 0.090 to
-0.249, but critical page-level leakage remains 0.968. These results show that stronger detection and
-tool assistance improve localization without making most pages safe for release. LeakageBench
-provides a diagnostic benchmark for high-recall, spatially grounded PII redaction in document
-images.
-
----
-
-### 3. OCR-EDR: Rendering-Aware Diagnosis and Repair for Closed-Loop OCR Improvement
+### 1. OCR-EDR: Rendering-Aware Diagnosis and Repair for Closed-Loop OCR Improvement
 
 - arXiv: [2609.03445v1](https://arxiv.org/abs/2609.03445v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2609.03445v1)
@@ -194,40 +58,39 @@ images.
 - 发布时间: 2026-09-03T07:02:17Z
 - 分类: cs.CV
 - 相关性评分: 16
-- 主题标签: OCR错误诊断、渲染一致性、公式识别、迭代修复
+- 主题标签: OCR错误修复、渲染感知、诊断框架、基准数据集
 
 **中文摘要**
 
-> 尽管文档OCR系统在常规文档上表现越来越好，但在复杂公式、结构化文本和长尾格式上仍容易出错。OCR预测可能遗漏细粒度内容或幻觉出不支持的输出，同时必须接受相同可见内容的等效编码。现有OCR评估方法大多报告聚合指标，对分析案例级错误和改进OCR性能的支持有限。我们提出OCR-EDR（OCR错误诊断与修复），一个渲染感知框架，从细粒度诊断推进到迭代修复。给定源图像、可编辑的OCR预测及其渲染图像，OCR-EDR首先联合评估预测及其渲染是否与源一致，保留有效的预测（包括渲染等效预测），同时诊断和定位真实错误。然后应用可执行编辑，并可能请求更新渲染以进行迭代重新评估。我们构建了OCRErrBench，包含来自各种真实OCR预测的文本和公式、精确和渲染等效正样本以及真实错误，并开发DocEDR模型执行诊断-修复循环。在OCRErrBench上，DocEDR达到94.78%的诊断准确率。它在DOCRcaseBench上修复了86.23%的错误输入到视觉一致性，将公式Case-F1比DOCR-Inspector-7B提高30.99个百分点，并在UniMER-Test上对四种OCR系统识别出的Bad子集将公式CDM最多提高4.62个百分点。这些结果表明，OCR-EDR将细粒度诊断与迭代修复相结合，可显著提升OCR输出质量。
+> 本文提出OCR-EDR框架，用于OCR错误的诊断与迭代修复。该框架通过渲染感知比较源图像、OCR预测及渲染图，区分真实错误和等效编码，支持可执行编辑和循环评估。作者构建了包含真实OCR预测的OCRErrBench基准，并开发了DocEDR模型执行诊断-修复循环。在基准上，诊断准确率达94.78%，能修复86.23%的错误输入，公式Case-F1提升30.99个百分点，CDM最高提升4.62个百分点。
 
 **核心创新概述**
 
-> 提出渲染感知的诊断与修复框架，处理“等效编码”问题，实现可迭代的OCR改进，而非仅提供聚合指标。
+> 现有OCR评估多采用聚合指标，缺乏细粒度错误分析与改进支持。OCR-EDR首次将渲染一致性检查用于错误诊断和修复循环，并区分渲染等效的正确预测与真实错误。
 
 **创新点拆解**
 
-- 提出渲染一致性检查以保留渲染等效的预测
-- 构建包含精确和渲染等效样本的OCRErrBench基准
-- 开发DocEDR模型执行诊断-修复循环
-- 通过可执行编辑和更新渲染实现迭代修复
+- 提出渲染感知的OCR错误诊断框架，同时评估预测与源图像、渲染与源图像的一致性。
+- 构建包含文本和公式、真实错误与渲染等效正例的OCRErrBench基准。
+- 开发DocEDR模型实现诊断-修复迭代循环，支持可执行编辑和重新渲染。
 
 **当前局限**
 
-> ['仅针对文本和公式，未覆盖表格等复杂结构', '依赖渲染图像，对渲染质量敏感', '修复步骤可能引入新的错误']
+> 可能依赖渲染质量；对复杂排版或低质量图像鲁棒性未知；基准规模有限，未涵盖所有长尾格式。
 
 **后续可改进方向**
 
-- 扩展到更多OCR输出类型，如图表、手写体
-- 优化诊断模型以区分视觉等效与真实错误
-- 探索自动生成修复操作，减少人工干预
+- 扩展到更多语言和复杂排版文档，增强泛化能力。
+- 引入主动学习或在线反馈以优化修复策略。
+- 结合端到端训练实现诊断与修复的联合优化。
 
 **工程启发**
 
-> 提供了一种改善OCR输出的自动诊断修复工具，对提升下游文档处理质量有实用价值。
+> 提供实用的OCR后处理工具，可集成到现有OCR流程中，提升公式和复杂文档的识别准确性，降低人工校对成本。
 
 **为什么值得关注**
 
-> 直接针对OCR错误诊断和修复，提出渲染感知方法，对提升OCR鲁棒性和后处理能力有直接贡献。
+> 针对OCR技术中的关键难题（错误诊断与修复）提出新框架和模型，具有实际应用价值，与OCR研究方向高度相关。
 
 **原始摘要**
 
@@ -252,73 +115,7 @@ gains.
 
 ---
 
-### 4. CA-OPD: Confidence-Aware On-Policy Distillation for Structured Visual Prediction
-
-- arXiv: [2609.02401v1](https://arxiv.org/abs/2609.02401v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.02401v1)
-- 作者: Menghao Li, Linjie Mu, Yin Wang, Haotian Hu, Yannian Gu, Lujiayi Xue, Fanyi Wang
-- 发布时间: 2026-09-02T10:11:59Z
-- 分类: cs.CV
-- 相关性评分: 16
-- 主题标签: 知识蒸馏、自回归模型、置信度、结构化预测
-
-**中文摘要**
-
-> 自回归视觉语言模型统一了异构感知任务，但极易受到复合误差影响。同策略蒸馏通过让学生在自己的轨迹上训练，弥合了训练与推理之间的不匹配。然而，不可靠的学生预测，尤其是在训练早期，可能偏离轨迹并降低教师监督的质量。虽然最近的交错蒸馏方法允许教师验证和替换学生token，但它们主要依赖刚性排名指标而非精确的教师置信度，并且忽略了干预决策如何影响token级监督。为了解决这个问题，我们提出了置信度感知的同策略蒸馏框架，将可靠的轨迹构建与自适应监督耦合。该方法利用教师置信度选择性纠正不可靠的学生转换，通过从严格到宽松的时间表逐步将轨迹控制转移给学生。关键的是，该方法将知识转移与这些干预决策对齐：被纠正的位置接收来自教师预测的直接交叉熵监督，而保留的位置受益于教师的完整预测分布。在GUI接地和OCR的多教师设置中评估，该方法显著改善了Qwen3.5-0.8B基线在所有六个目标基准上的性能，包括ScreenSpot-Pro提高9.50分，OCRBench-v2英文提高6.72分。对照研究表明，收益依赖于干预位置，这表明置信度感知的干预策略是有效的。
-
-**核心创新概述**
-
-> 提出了置信度感知的同策略蒸馏（CA-OPD），使用教师置信度进行选择性干预和自适应监督，以训练自回归视觉语言模型，与现有方法相比更精确且考虑干预对监督的影响。
-
-**创新点拆解**
-
-- 利用教师置信度动态选择干预位置
-- 采用从严格到宽松的干预调度策略
-- 对于纠正位置和保留位置分别使用交叉熵和完整分布监督
-- 在GUI接地和OCR多任务上验证有效性
-
-**当前局限**
-
-> ['对多步干预带来的计算开销有待优化', '置信度信号的质量依赖教师模型']
-
-**后续可改进方向**
-
-- 探索更精确的置信度估计方法
-- 将CA-OPD应用到更多结构化视觉预测任务
-- 结合因果关系分析以优化干预时机
-
-**工程启发**
-
-> 提供了一种提升自回归视觉语言模型在结构化预测任务上性能的蒸馏技术，具有较高的应用价值。
-
-**为什么值得关注**
-
-> 直接针对OCR等结构化视觉预测任务中的复合误差问题，提出基于置信度的蒸馏方法，对训练高性能、高鲁棒性的OCR模型有直接参考。
-
-**原始摘要**
-
-Autoregressive vision language models unify heterogeneous perception tasks but are highly
-susceptible to compounding errors. On-policy distillation (OPD) bridges the training-inference
-mismatch by training students on their own rollouts. However, unreliable student predictions,
-especially early in training, can derail the trajectory and degrade the quality of teacher
-supervision. While recent interleaved distillation methods allow the teacher to verify and replace
-student tokens, they primarily rely on rigid ranking metrics rather than exact teacher confidence,
-and they overlook how intervention decisions can inform token-level supervision. To address this, we
-introduce Confidence-Aware On-Policy Distillation (CA-OPD), a framework that couples reliable
-rollout construction with adaptive supervision. CA-OPD utilizes teacher confidence to selectively
-correct unreliable student transitions, gradually transferring rollout control to the student via a
-strict-to-relaxed schedule. Crucially, CA-OPD aligns knowledge transfer with these intervention
-decisions: corrected positions receive direct cross-entropy supervision from the teacher's
-prediction, while retained positions benefit from the teacher's full predictive distribution.
-Evaluated in a multi-teacher setting for GUI grounding and optical character recognition, CA-OPD
-substantially improves the Qwen3.5-0.8B baseline across all six target benchmarks, including gains
-of $9.50$ points on ScreenSpot-Pro and $6.72$ points on OCRBench-v2 English. Controlled studies
-further show that the gains depend on intervention placement, progressive rollout control, and
-intervention-aligned supervision, rather than intervention frequency alone.
-
----
-
-### 5. KhatianDoc: A Human-Verified Benchmark Diagnosing Multimodal LLM Failure on Bengali Legal Land Records
+### 2. KhatianDoc: A Human-Verified Benchmark Diagnosing Multimodal LLM Failure on Bengali Legal Land Records
 
 - arXiv: [2609.03597v1](https://arxiv.org/abs/2609.03597v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2609.03597v1)
@@ -326,39 +123,39 @@ intervention-aligned supervision, rather than intervention frequency alone.
 - 发布时间: 2026-09-03T09:46:41Z
 - 分类: cs.CL
 - 相关性评分: 15
-- 主题标签: 多模态LLM、孟加拉语、土地记录、能力评估
+- 主题标签: 多模态LLM、法律文档、基准、手写识别
 
 **中文摘要**
 
-> 孟加拉国的土地所有权记录在Ana-Ganda-Kora-Kranti-Til中，这是一种基于16进制的位置分数系统，有专门的Unicode字形，没有主流字体，也没有任何OCR管道或分词器覆盖。包含这些分数的手写记录RS Khatian是数百万地块的权威所有权记录，并且是民事诉讼的常见主题，但还没有基准测试询问机器是否能读取一份。我们引入KhatianDoc，一个包含107份来自孟加拉国Munshiganj Vumi（土地）办公室的真实RS Khatian记录的四任务基准：符号识别、16进制到十进制转换、结构化字段提取，以及包含1,634个问答对的法律文档问答。真实值由手工转录，由土地法律从业者充分协商验证，并通过位置令牌匿名化，这些令牌保持了多跳问题所依赖的指称区分。我们在固定零样本协议下评估六个多模态LLM（8B到72B+，开源和闭源）。五个QA类别占我们分层集的39.3%，每个模型都零正确答案；在算术任务上，每个输出数字的模型都比常数均值基线差，具有精确和近匹配分数同时出现：去相关而非近似。审计我们自己的指标发现了两个相反方向的伪影：我们纠正了一个拒绝评分错误，并在原始分数旁边报告固定分数，并标记一个膨胀的元数据指标作为上限。KhatianDoc记录的并非性能差距，而是能力的缺失，并提供了经过验证的真实值。
+> 本文介绍KhatianDoc基准，用于评估多模态大语言模型在孟加拉法律土地记录识别上的能力。这些问题涉及基于16进制的分数系统，无主流字体支持，现有OCR和分词器无法处理。基准包含4个任务、107份真实记录和1634个问答对，并经过人工验证。评测6个多模态模型，结果发现39.3%的类别无一正确，算术任务表现不如常数均值基线，表明现有模型缺乏相关能力，而不仅是性能差距。
 
 **核心创新概述**
 
-> 首次提出针对孟加拉语法律土地记录的基准，测试先进多模态LLM在特定文化/语言和领域（如16进制系统）上的真正能力，并揭示当前模型在此任务上完全缺乏能力。
+> 首次提出针对孟加拉法律记录的多模态基准，挑战特殊数字系统和手写文档，揭示模型的能力缺失。
 
 **创新点拆解**
 
-- 构建包含真实RS Khatian记录的基准，覆盖符号识别、转换、提取和QA
-- 采用人工验证和匿名化处理，确保数据质量
-- 发现现有模型在关键任务上完全失败，凸显能力空白
+- 构建包含符号识别、进制转换、字段提取和法律问答的多任务基准。
+- 使用真实手写记录，并由法律从业者验证，保证标签准确性。
+- 通过位置令牌化保持引用关系，支持多跳问题。
 
 **当前局限**
 
-> ['数据量较小，涉及特定语言和地区', '基准任务难度较高，可能超出通用模型能力', '人工验证成本高，扩展性有限']
+> 基准规模有限（107份），仅覆盖特定区域和记录类型；评估模型可能未针对该任务微调。
 
 **后续可改进方向**
 
-- 扩展基准到其他地区的类似地契系统
-- 开发专门针对罕见脚本和符号的OCR或多模态模型
-- 结合领域知识（如法律）以提升模型对专业文档的理解
+- 扩大基准规模并涵盖更多地区和法律文档类型。
+- 引入针对特殊数字系统的模型预训练或自适应方法。
+- 设计更合理的评估指标，避免忽略近似正确输出。
 
 **工程启发**
 
-> 为高价值文档（如土地记录）的数字化和分析提供评估与诊断依据，对法律和行政领域智能化有参考价值。
+> 为法律文档智能化处理提供测试平台，有助于开发针对稀有数字系统和复杂手写体的专用OCR。
 
 **为什么值得关注**
 
-> 专注真实世界低资源、高价值文档的OCR和文档理解，揭示现有模型能力缺失，为研究盲点提供指导，对开发面向特定领域的OCR系统有启发。
+> 突出OCR在特殊领域（法律、低资源语言）的挑战，推动模型能力边界研究。
 
 **原始摘要**
 
@@ -383,7 +180,7 @@ release, are publicly available.
 
 ---
 
-### 6. How Far Can Synthetic Data Take Thai OCR?
+### 3. How Far Can Synthetic Data Take Thai OCR?
 
 - arXiv: [2609.03595v1](https://arxiv.org/abs/2609.03595v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2609.03595v1)
@@ -391,40 +188,39 @@ release, are publicly available.
 - 发布时间: 2026-09-03T09:46:19Z
 - 分类: cs.CL, cs.AI, cs.CV
 - 相关性评分: 15
-- 主题标签: 合成数据、泰文OCR、迁移学习、模型适配
+- 主题标签: 合成数据、泰文OCR、迁移学习、模型微调
 
 **中文摘要**
 
-> 我们研究了什么使合成OCR监督转移到真实泰文文档，并利用这些见解构建了Wayu-Paxa-OCR-Zero，一个无需真实泰文文档页面的OCR标签即可适配的泰文OCR模型。合成数据以规模提供精确标签，但“真实性”混淆了源域、页面上下文、排版、空间结构和字形变化。我们用受控的文档重建流程解开这些因素，并在页面和裁剪级训练下对印刷和手写泰文文档评估每个变体。非文本上下文影响不大，而字体多样性、二维结构和真实手写字形改善转移；此外，源域匹配取决于训练粒度，域内重建在页面级训练下接近真实印刷监督（中位字符错误率1.82%对1.31%），但在裁剪级训练下表现不如域外重建（15.59%对5.52%）。在这些发现的指导下，我们使用45,723个合成页面将0.9B参数的PaddleOCR-VL-1.6适配为Wayu-Paxa-OCR-Zero：相对于其基础检查点，它将印刷页面的中位字符错误率从6.64%降至1.24%，手写体的从74.87%降至20.55%，并在所有五个评估集上优于Typhoon OCR v1 7B，表明纯合成训练可以具有竞争力。
+> 本文研究合成数据如何有效迁移到真实泰文OCR。通过可控重建流程分离字体、上下文等因子，发现非文本上下文影响小，而字体多样性、二维结构和真实手写字形有益。在页面级训练下，领域内重建接近真实监督效果（1.82% vs 1.31% CER），但裁剪级训练时差距大（15.59% vs 5.52%）。基于此，作者用45,723个合成页面微调0.9B模型，得到Wayu-Paxa-OCR-Zero，将印刷体CER从6.64%降至1.24%，手写体从74.87%降至20.55%，并在所有测试集上优于Typhoon OCR v1 7B。
 
 **核心创新概述**
 
-> 系统研究了影响合成OCR数据迁移性能的因素，并提出了在零真实标签条件下训练竞争性泰文OCR模型的方法，揭示了训练粒度对领域匹配的重要性。
+> 系统分析了影响合成数据迁移效果的因素，并证明纯合成训练可以达到竞争性性能，为低资源语言OCR提供新思路。
 
 **创新点拆解**
 
-- 通过受控重建流程解耦合成数据中的因素
-- 发现字体多样性、二维结构和真实手写体对迁移有显著改善
-- 展示了在页面级训练下，域内重建可接近真实数据性能
-- 仅用合成数据训练出竞争性泰文OCR模型
+- 提出文档重建管线来独立控制内容、字体、布局等因子。
+- 比较页面级和裁剪级训练对迁移的影响，发现训练粒度的重要性。
+- 利用合成数据微调0.9B模型，实现泰文印刷和手写识别的大幅改进。
 
 **当前局限**
 
-> ['主要针对泰文，其他语言需验证', '手写字符错误率仍较高，需要进一步改进', '模型规模较小，可能影响复杂版面处理能力']
+> 研究主要聚焦泰文，结论可能不适用于其他语言；数据规模和模型大小有限，未探索更大模型。
 
 **后续可改进方向**
 
-- 探索合成数据生成的自动化优化方法
-- 将方法扩展到更多语言和文档类型
-- 结合少量真实数据以进一步提升性能
+- 在更多语言和书写风格上验证合成数据迁移规律。
+- 开发更真实的手写字形合成方法，提升手写识别效果。
+- 结合半监督学习，利用未标注真实数据进一步优化。
 
 **工程启发**
 
-> 为低资源语言OCR提供了一种无标注数据的可行训练方案，显著降低数据成本，对多语言OCR落地有工程价值。
+> 展示了无需真实标注数据即可训练高质量OCR模型的路径，节省大量人力成本，对低资源语言应用价值高。
 
 **为什么值得关注**
 
-> 直接讨论合成数据在OCR训练中的迁移问题，提供消融实验和实用指导，对OCR研究者如何使用合成数据有参考价值。
+> 针对低资源OCR数据稀缺问题，提供基于合成数据的解决方案，对实际工程具有指导意义。
 
 **原始摘要**
 
@@ -443,319 +239,5 @@ VL-1.6 into Wayu-Paxa-OCR-Zero using 45,723 synthetic pages: relative to its bas
 reduces median character error rate from 6.64% to 1.24% on printed pages and from 74.87% to 20.55%
 on handwriting and outperforms Typhoon OCR v1 7B on all five evaluation sets, showing that
 synthetic-only training can be competitive.
-
----
-
-### 7. T2LSC-Bench: Benchmarking Localized Semantic Control in Text-to-Image Generation
-
-- arXiv: [2609.02255v1](https://arxiv.org/abs/2609.02255v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.02255v1)
-- 作者: Yan Wang, Xinyi Hou, Weiguo Lin, Junjun Si, Siwei Ma
-- 发布时间: 2026-09-02T08:02:40Z
-- 分类: cs.CV
-- 相关性评分: 13
-- 主题标签: 图像生成、语义泄漏评估、OCR基准、文本渲染
-
-**中文摘要**
-
-> 针对文生图模型中的局部文本控制问题，提出了一个名为T2LSC-Bench的诊断基准，用于评估目标文本语义是否泄漏到非文本区域。该基准通过分解设计（语义关系、场景开放性、提示模式、语言）和双分支协议（OCR-VLM与VLM语义判断），在六个生成模型上测量了Text-at-Anchor Accuracy (TAA)、Semantic Subject Preservation (SSP)、Semantic Leakage Rate (SLR)与Conditional Semantic Leakage Rate (cSLR)。实验表明，在压力测试下，语义泄漏率显著增加（SLR从1.2%升至18.1%），而文本渲染准确性几乎不变（TAA仅从91.4%降至90.9%），提出抗泄漏提示可将SLR降低一半且不影响渲染精度。
-
-**核心创新概述**
-
-> 首次系统定义并量化了目标文本相关的语义泄漏现象，提出了新的评估协议和指标（SLR、cSLR），强调除文本准确性之外的语义保持。
-
-**创新点拆解**
-
-- 提出新的诊断基准T2LSC-Bench，采用因子化设计控制语义关系、场景开放性、提示模式和语言。
-- 设计双分支协议：OCR-VLM验证文本+结构化VLM语义判断，同时衡量多个指标。
-- 发现并量化了语义泄漏问题，展示现有模型在压力测试下的脆弱性。
-
-**当前局限**
-
-> 基准规模有限（50个种子主题，1200个提示案例），主要针对特定模型和场景，可能无法覆盖所有生成模型和复杂现实情况。
-
-**后续可改进方向**
-
-- 扩展基准到更多生成模型和语言，增强跨语言和跨模型的诊断能力。
-- 涉及更细粒度的语义泄漏类型，改进评估协议的自动化与一致性。
-
-**工程启发**
-
-> 提供自动化评估框架，可用于生产环境中监控模型生成结果，防止不合规内容，提高文本到图像生成的可靠性。
-
-**为什么值得关注**
-
-> 为OCR和文档解析中的图像生成与文本渲染评估提供新思路，特别是关注文本与图像语义一致性，对文档类图像合成有参考价值。
-
-**原始摘要**
-
-Recent text-to-image models have become increasingly capable of rendering explicit text, but
-reliable localized text control requires more than generating the correct string. In applications
-such as product labeling, signage, and interface design, target text should be rendered within a
-designated text-bearing region without altering the predefined subject identity or surrounding scene
-semantics. We refer to violations of this requirement as target-text-associated semantic leakage, in
-which target-text semantics are expressed through non-textual visual content beyond the designated
-anchor. Existing visual-text benchmarks primarily evaluate readability, spelling accuracy, and
-layout, leaving this form of semantic leakage largely unexamined. We introduce T2LSC-Bench, a
-controlled diagnostic benchmark comprising 50 seed subjects and 1,200 prompt cases per model,
-yielding 7,160 evaluated images across six models. Its factorized design varies semantic relation,
-scene openness, prompt mode, and language. A dual-branch protocol combines OCR-VLM text verification
-with structured VLM semantic judgments to measure Text-at-Anchor Accuracy (TAA), Semantic Subject
-Preservation (SSP), Semantic Leakage Rate (SLR), and Conditional Semantic Leakage Rate (cSLR). Under
-stress-test conditions, SLR increases from 1.2% to 18.1% and cSLR from 1.3% to 18.2%, whereas TAA
-decreases only from 91.4% to 90.9%. Anti-leakage prompting reduces SLR from 16.6% to 8.4% without
-degrading rendering accuracy. Human validation on 420 images shows strong agreement between
-automatic and adjudicated annotations. These results show that accurate text rendering does not
-guarantee local containment of target-text semantics.
-
----
-
-### 8. Structured-Prior-Guided Diffusion Inpainting with Physical Consistency for Traffic Sign Augmentation
-
-- arXiv: [2609.02348v1](https://arxiv.org/abs/2609.02348v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.02348v1)
-- 作者: Luo Li, Chongchong Huang, Jun Jia, Qiang Gao, Xinlong Liu, Gui Yang, Liang Cao
-- 发布时间: 2026-09-02T09:22:23Z
-- 分类: cs.CV
-- 相关性评分: 12
-- 主题标签: 数据增强、扩散模型、交通标志检测、OCR文本渲染
-
-**中文摘要**
-
-> 针对交通标志检测中罕见类别样本不足的问题，提出了一种结构化先验引导的扩散修复框架，用于生成多样化的交通标志增强样本。该框架通过三条正交路径注入语义、外观和几何先验：JSON文本提示、带有主色渲染的正视图向量模板（经IP-Adapter）以及仿射对齐的向量模板（经ControlNet）。同时设计两种物理一致性损失（CEILAB色度L1损失和Sobel梯度损失）确保生成样本的物理合理性。模型在自建房数据集上自监督重建训练，在公共TT100K-2021数据集上零样本评估，在重建保真度、物理一致性和语义可控性指标上优于七个对比方法，OCR精确匹配率达91.1%，且推理时间仅为FLUX.1 Fill的1/14。
-
-**核心创新概述**
-
-> 将结构化先验（文本、图像、模板）多条路径注入到扩散生成过程中，并引入物理一致性损失，专门针对交通标志的几何和颜色保持，实现了低成本高质量的数据增强。
-
-**创新点拆解**
-
-- 提出三路先验注入方式，包括IP-Adapter和ControlNet的使用。
-- 设计两个物理损失项（颜色和边缘）以增强生成样本的物理合理性。
-- 采用自监督重建训练，在跨域数据上展现了很好的泛化性。
-
-**当前局限**
-
-> 主要针对交通标志，通用性受限；依赖模板生成，对复杂场景和未见过类型可能泛化不足。
-
-**后续可改进方向**
-
-- 将框架扩展到其他受控对象，并探索无模板的自适应生成。
-- 研究如何进一步提高生成样本的多样性同时保持物理一致性。
-
-**工程启发**
-
-> 实现高效、低延迟的数据增强方案，显著改善稀缺类别的检测性能，有望减少人工标注成本并提升自动驾驶安全性。
-
-**为什么值得关注**
-
-> 涉及OCR技术在图像生成中的关键作用，其文本渲染精度与效率对文档场景（如路标图像）的合成尤其重要。
-
-**原始摘要**
-
-Traffic sign detection faces a long-tailed data distribution. Many rare signs matter as much as
-common ones from a regulatory standpoint, yet they have very few samples. Generative data
-augmentation is one way out. General-purpose inpainting models, however, distort digits, deform
-geometry and perspective, and shift colours when applied directly to sign regions. We trace this to
-a single gap: the conditioning signal is too abstract for the physical composition of a sign. We
-propose a structured-prior-guided diffusion inpainting framework with physical consistency. It
-injects the semantic, appearance and geometric priors of a sign through three orthogonal pathways: a
-JSON-formatted text prompt, a front-view vector template rendered with measured dominant colours
-(via IP-Adapter), and an affine-aligned vector template (via ControlNet). Two physical consistency
-losses constrain colour with a CIELAB chromaticity $L_1$ term and edge structure with a Sobel
-gradient term. We train by self-supervised reconstruction on a large set of images collected in-
-house at AMAP, then evaluate zero-shot on the public TT100K-2021 dataset, a different source. Our
-method uses a Stable Diffusion 1.5 backbone of about 1.4B parameters. It beats seven representative
-competitors on every metric of reconstruction fidelity, physical consistency and semantic
-controllability. Its OCR exact-match rate reaches 91.1\%, against 44.2\% for the 12B industrial
-model FLUX.1 Fill [dev], and it needs only $1/14$ of that model's inference time. Leave-one-out
-ablations confirm that each of the three prior pathways and both loss terms contribute on their own.
-In downstream detection, the synthetic data raises the group-pooled AP50 of rare classes by
-$1.23\times$ to $7.40\times$ over a real-data-only baseline. Code and pre-trained models are
-available at https://github.com/52hz-whale/TrafficSignInpaint.
-
----
-
-### 9. DiffIE: Diffusion-based Open Information Extraction
-
-- arXiv: [2609.02315v1](https://arxiv.org/abs/2609.02315v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.02315v1)
-- 作者: Konstantin Fedorov, Valentin Malykh
-- 发布时间: 2026-09-02T09:01:42Z
-- 分类: cs.CL, cs.AI
-- 相关性评分: 6
-- 主题标签: 开放信息抽取、扩散模型、结构化预测
-
-**中文摘要**
-
-> 提出了DIFFIE，一种基于条件离散扩散模型的新型开放信息抽取方法。不同于传统自回归生成或固定槽预测，DIFFIE利用分离的逆扩散过程在每个token上生成角色标签，产生候选三元组，并通过宽松匹配聚类和排序选择最终输出。该方法池大小和输出数量可在推理时调整，从而实现测试时计算的可控扩展。实验表明，DIFFIE在CaRB和BenchIE基准上达到了新最优性能，在多样化输出方面展现出扩散随机性的优势。
-
-**核心创新概述**
-
-> 将概率扩散模型直接应用于多标签结构化预测任务，将抽取机制与扩散随机性巧妙结合，实现了多输出灵活性与高效推理的平衡。
-
-**创新点拆解**
-
-- 使用条件离散扩散生成角色标签，通过聚类和排序输出多个三元组。
-- 推理时可调整池大小和输出数，解耦训练和抽取预算。
-- 实验证明均匀扩散优于吸收态扩散，并揭示扩散随机性带来的增益。
-
-**当前局限**
-
-> 依赖超参数设置（聚类阈值等），计算开销可能较大；在长尾模式上表现未深入探讨。
-
-**后续可改进方向**
-
-- 优化扩散加速与蒸馏技术以降低推理延迟。
-- 探索自适应聚类或基于语义的方法提升多样性控制。
-
-**工程启发**
-
-> 为信息抽取系统提供了可调节抽取数量和效率的方案，实用性强，尤其适合需要处理多关系句子的生产环境。
-
-**为什么值得关注**
-
-> 文档结构化抽取涉及关系三元组，DIFFIE的扩散思想可迁移到其他多输出预测任务，为OCR后处理的结构化信息解析提供参考。
-
-**原始摘要**
-
-A single sentence often expresses multiple valid relational triplets, which makes Open Information
-Extraction (OpenIE) fundamentally a multi-output task. Existing neural systems handle this by
-autoregressive generation, which is flexible but slow and prone to redundancy, or by fixed-slot
-prediction, which is efficient but couples the extraction budget to training. We introduce DIFFIE
-which instead treats the stochasticity of conditional discrete diffusion as the extraction mechanism
-itself: independent reverse-diffusion trajectories over per-token role tags produce a pool of
-candidate triplets, which are clustered under lenient matching and ranked to form the output. Both
-the pool size and the number of returned extractions are inference-time choices, decoupling the
-extraction budget from training and exposing test-time compute as a tunable axis. DIFFIE achieves
-the new state of the art in CaRB (1-1) both F1 and AUC, and outperforms the strongest rule-based
-system (ClausIE) in BenchIE; it also remains competitive in standard CaRB and WiRe57 evaluations,
-giving the best average score among systems that report all four benchmarks. Ablations show that
-uniform discrete diffusion outperforms absorbing state diffusion in our setting, and that a matched
-non-diffusion stochastic tagger does not reproduce its gains. Our results indicate that diffusion
-stochasticity is an effective mechanism for structured prediction tasks with multiple valid outputs.
-
----
-
-### 10. VeriPhy: Agentic Physical Reasoning for World Model Evaluation and Refinement
-
-- arXiv: [2609.03153v1](https://arxiv.org/abs/2609.03153v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.03153v1)
-- 作者: Wenzhuo Xu, Yuchen Zhu, Chongjian Ge, Xuan Shen, Jing Shi, Jason Kuen, Yongxin Chen, Molei Tao, Christopher McComb, Noelia Grande Gutiérrez, Jiuxiang Gu
-- 发布时间: 2026-09-02T20:36:45Z
-- 分类: cs.CV
-- 相关性评分: 5
-- 主题标签: 世界模型评估、人工智能安全、物理验证、代理推理
-
-**中文摘要**
-
-> 提出了VeriPhy，一个用于世界模型物理验证的系统，它采用可审核的计划器将提示编译为类型化物理义务和静态验证计划。执行时观察能够控制和限定对冻结底层专家的调用，每个动作返回带来源的证据记录，通过类型化解析器和组合将可用记录映射为三态判定（支持、矛盾或未知），并保存完整来源。在包含1500个片段的人工注释语料上进行评估，VeriPhy在149个核心片段上解释了228个缺陷记录，明显优于基准方法（164），且提供可追踪的证据。尽管单独记忆召回与单块主干相当，但VeriPhy的可审核追踪使其在生成失败定位上更有优势。
-
-**核心创新概述**
-
-> 将物理验证设计为可审计的代理系统，结合符号计划与低层视觉专家工具，提供带来源的验证结果，推动了世界模型评估的发展。
-
-**创新点拆解**
-
-- 规划器在观察前编译物理义务并生成计划。
-- 使用类型化证据与三态逻辑进行判定。
-- 集成多种专家工具并利用追踪提升诊断能力。
-
-**当前局限**
-
-> 依赖低层专家工具的准确性；对未预见的物理场景可能无法处理。
-
-**后续可改进方向**
-
-- 扩展专家工具箱和知识库以覆盖更广泛物理规律。
-- 引入自适应规划优化验证效率。
-
-**工程启发**
-
-> 对生成视频的物理可靠性评估提出自动化方案，有助构建安全可靠的生成系统。
-
-**为什么值得关注**
-
-> VeriPhy利用了OCR和跟踪等手段验证物理性质，其验证范式可启发文档解析中直观检查与合规手段的结合。
-
-**原始摘要**
-
-Visual fluency in generated video does not imply physical reliability, and a scalar quality score
-alone is incapable of indicating the obligation a clip violates or the moment it fails. We present
-VeriPhy, an auditable physical-verification system in which a text-only planner compiles the prompt
-into typed physical obligations and a statically validated execution plan before any frame is
-observed. During execution, observations gate and scope only declared calls to frozen low-level
-experts (e.g., segmentation and tracking, counting, eleven typed physical measurements over the
-resulting tracks, depth, OCR, and audio-event detection). Each action returns a provenance-carrying
-evidence record whose payload, when usable, is either a typed measurement or an explicitly tagged
-learned state. Typed resolvers and fixed composition map usable records to a three-valued state
-(supported, contradicted, or unknown, surfaced as plausible, implausible, or abstain) with full
-provenance, so that every verdict is traceable to the evidence that produced it. We anchor
-evaluation in a 1,500-clip corpus of human-annotated flaw records that localize real generation
-failures in prompt reference, space, and time. On a 149-clip core carrying 304 such records, VeriPhy
-accounts for 228, against 164 for a published question-decomposition evaluator given the same clips
-and the same claims. Recall alone does not separate it from prompting the same backbone
-monolithically, which reaches 222; what separates them is that each decision retains its evidence
-record and provenance, making the traces auditable one verdict at a time and usable as the interface
-through which a critic verdict could be written back into generation.
-
----
-
-### 11. ViSAR: Training-Free Adaptive-$k$ Retrieval for Visual Document Question Answering
-
-- arXiv: [2609.02486v2](https://arxiv.org/abs/2609.02486v2)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.02486v2)
-- 作者: Adrien Mialland, Marc Plantevit, Julien Gallois, Céline Robardet
-- 发布时间: 2026-09-02T11:54:58Z
-- 分类: cs.IR, cs.AI, cs.CL, cs.CV
-- 相关性评分: 4
-- 主题标签: 文档视觉问答、自适应检索、检索增强生成、多模态文档理解
-
-**中文摘要**
-
-> 提出了ViSAR，一种用于视觉文档问答的无训练自适应k值检索方法。ViSAR直接在嵌入空间构建查询条件下的页面级相似度矩阵，突出查询相关内容并动态决定检索页面数量。在多个编码器和LVLM上评估，ViSAR相较于固定top-k检索，可减少RAG延迟最多58.7%，同时维持或改进回答精度。此外，相似性矩阵的结构与答案准确度相关，这可能促进未来面向检索质量感知的文档理解研究。
-
-**核心创新概述**
-
-> 提出根据查询复杂度动态确定检索数量的方案，且无需额外训练，即插即用。
-
-**创新点拆解**
-
-- 设计查询特定相似度矩阵及自适应- k算法。
-- 在多个模型组合上实现高精度低延迟检索。
-- 分析矩阵结构与精度相关性，给出质量可控思路。
-
-**当前局限**
-
-> 方法依赖块级检索性能；未充分考虑图片页面与文本页面的差异。
-
-**后续可改进方向**
-
-- 融和视觉布局信息以提升页面检索质量。
-- 探索基于置信度的可学习自适应k机制。
-
-**工程启发**
-
-> 可用于大规模文档检索场景，降低成本、增强用户体验，对构建高效文档问答系统有显著工程价值。
-
-**为什么值得关注**
-
-> 直接优化视觉文档QA的RAG流程，提高检索效率，其思想可适配到OCR大模型输出解析与知识获取领域。
-
-**原始摘要**
-
-Document Visual Question Answering (DocVQA) often leverages Retrieval-Augmented Generation (RAG),
-where late-interaction encoders are commonly used to identify document pages relevant to a user
-query, before answer generation by a Large Vision-Language Model (LVLM). Existing approaches
-typically retrieve a fixed top-$k$ number of pages regardless of query complexity, which increases
-LVLM latency and may degrade answer accuracy. We introduce ViSAR (Visual Semantic Activation
-Retrieval), a training-free adaptive-$k$ retrieval method for late-interaction visual document
-retrieval. ViSAR operates directly in the embedding space to construct a query-conditioned page-
-level similarity matrix that highlights query-relevant semantics and dynamically determines the
-number of pages to retrieve. Across multiple encoders and LVLMs, ViSAR retrieves compact, query-
-adapted page sets that reduce RAG latency by up to 58.7\%, while maintaining or improving answer
-accuracy compared with fixed top-$k$ and adaptive retrieval heuristics. Furthermore, we show that
-the similarity matrix structure correlates with answer accuracy, suggesting future directions for
-retrieval quality-aware document understanding.
 
 ---
