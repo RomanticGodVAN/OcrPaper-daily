@@ -1,294 +1,589 @@
-# OCR / 文档解析研究日报（2026-09-16）
+# OCR / 文档解析研究日报（2026-09-29）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-09-16 05:59:27`
+- 生成时间（UTC）：`2026-09-29 06:53:14`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日论文覆盖表格理解、文档抽取评估、OCR应用工作流和手写识别标注效率。表格方向提出结构化文本表示DELTA与TARQA，避免视觉语言模型依赖；文档抽取方向系统评估鲁棒性、成本与治理权衡，显示微调开源VLM可超越零样本商业系统；OCR应用工作流揭示自动化筛查与VLM结果存在较大分歧，需谨慎部署；手写梵文研究量化预训练可节省约4.4倍标注成本，但优势随精度要求提高而减小。
+> 今日论文集中体现了OCR与文档解析领域从“识别文本”向“理解结构、定位证据、校准可靠性”的转变。三篇工作分别从结构感知检索（临床指南）、源保留对齐（科学PDF）和组合失败分析（VLM问答）出发，强调输出必须指向文档中的具体元素而非整页或整串文本。同时，两篇论文（场景文本识别与文档推理）揭示了上下文误导和OCR质量对系统性能的支配性影响，工程上需优先保障解析鲁棒性。此外，视觉令牌剪枝（MiCo）和图像到视频蒸馏（MILD）展示了将OCR/文档能力高效迁移到多模态大模型与视频生成的路径。
 
 ## 二、今日趋势判断
 
-当前研究呈现三条主线：一是用结构化文本表示替代表格图像输入，提升多语言适用性并降低对视觉编码器的依赖；二是从单一准确率转向鲁棒性、成本与治理的综合评估，强调微调开源模型的经济性；三是OCR在垂直领域落地时，保守工作流与VLM的决策一致性成为关键风险点。
+研究焦点正从纯文本识别精度转向结构感知的文档理解与证据定位。具体表现为：检索单元从固定文本块变为符合文档布局的结构元素（章节、表格行、流程图路径）；对齐方法强调保留源字符溯源以支持精确高亮；对VLM的评估开始区分视觉抽取与语言推理，并量化上下文偏差和组合失败。同时，自监督预训练（手写文本识别）和令牌剪枝（MiCo）继续提升效率与标签利用率，而文档推理审计（When Harness Beats Scale）则警示OCR鲁棒性可能比模型规模更关键。
 
 ## 三、今日论文概览
 
-1. **Tables Decoded: DELTA for Structure, TARQA for Understanding** | 标签：表格结构识别、表格问答、OCR、结构化文本表示、多语言、LLM微调
-2. **Beyond Accuracy: Robustness, Cost, and Governance Trade-offs for Vision-Language Models in Templated Document Extraction** | 标签：视觉语言模型、文档抽取、鲁棒性评估、成本分析、治理、微调
-3. **A Conservative OCR-Enabled Workflow for R214 Sodium Screening of South African Packaged Foods** | 标签：OCR应用、食品包装、钠筛查、视觉语言模型、合规监测、工作流
-4. **Measuring Annotation Efficiency for Handwritten Devanagari Recognition: Sample-Complexity Curves for Four Pretraining Regimes** | 标签：手写文本识别、OCR、预训练、标注效率、低资源、梵文
+1. **From PDF to Evidence: Structure-Aware Retrieval for Clinical Practice Guidelines** | 标签：文档图像分析、结构感知检索、临床指南、PDF解析、视觉RAG
+2. **When VLMs Trust Context: Evaluating Scene Text Recognition under Misleading Context** | 标签：场景文本识别、视觉语言模型、上下文偏差、基准测试、鲁棒性
+3. **When Harness Beats Scale, and When Reading Beats Both** | 标签：文档推理、OCR鲁棒性、Program-of-Thoughts、评估审计、模型规模
+4. **MiCo: Mutual Information Coverage Optimization through Semantic Erasure Modeling for Efficient MLLM Inference** | 标签：多模态大模型、视觉令牌剪枝、互信息覆盖、高效推理、OCR定位
+5. **Handwritten Text Recognition Lives in the High-Pixel Variance Subspace** | 标签：手写文本识别、自监督预训练、像素重建、高方差子空间、标签效率
+6. **From Static to Dynamic: On-Policy Distillation from Image to Video Diffusion Models** | 标签：图像到视频蒸馏、扩散模型、OCR迁移、运动保持、在线策略蒸馏
+7. **Seeing and Solving Are Not Enough for Vision-Language Models** | 标签：视觉语言模型、多模态问答、组合失败、LoRA微调、OCR增强理解
+8. **Native Association: Confidence-Aware Human Perception in the Wild with a Foundation VLM** | 标签：视觉语言模型、原生关联、语法约束生成、OCR、置信度校准、体育分析
+9. **Source-preserving alignment for robust evidence localization in scientific PDFS** | 标签：科学PDF解析、证据定位、文本对齐、源保留、OCR后处理、可验证性
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 采用结构化文本表示（如OTSL）统一编码表格布局与内容，便于与LLM集成。
-- 将文档抽取评估从准确率扩展至鲁棒性、成本和治理的多维权衡分析。
-- 在真实或合成数据集上系统比较多种系统（商业VLM、开源VLM、OCR+规则）的表现。
-- 量化预训练对标注效率的提升，并将性能增益转化为标注等价成本。
-- 构建非英语基准（如印地语TORQUE）以验证多语言鲁棒性。
+- 将检索或回答单元定义为文档结构元素（如表格行、流程图路径、分级推荐），而非固定大小文本块或整页。
+- 在匹配与定位之间引入解耦：归一化用于稳健匹配，同时保留源字符跨度以实现精确几何高亮。
+- 利用语法约束或块级生成让VLM输出天然符合文档结构，消除事后绑定步骤，减少身份错配。
+- 通过单次自回归输出显式任务状态，再给出最终答案，以诊断和修复组合失败。
+- 从任务对数损失推导互信息覆盖目标，将视觉令牌剪枝转化为无需训练的单调子模优化问题。
+- 提出高像素方差子空间假设，解释手写文本识别中像素重建自监督优于对比学习的原因。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 扩展OTSL格式至更多语言和复杂表格类型，验证其通用性并标准化为社区格式。
-- 研究表格结构识别与OCR联合优化，降低对OCR质量的敏感度并提升低质量扫描鲁棒性。
-- 在更多真实文档类型（非合成支票）上评估VLM抽取的鲁棒性、成本与治理权衡。
-- 开发自适应选择框架，根据任务画像（质量、延迟、治理、数据量）动态推荐抽取方案。
-- 探索OCR与VLM混合工作流中，如何量化并缩小自动化决策与VLM决策的一致性差距。
-- 研究手写识别中负迁移现象的边界条件，为预训练策略选择提供更精确的指导。
-- 将标注效率曲线方法推广至其他低资源文字，建立标注成本估算的通用工具。
-- 针对垂直领域（如食品合规）开发保守筛查工作流，明确数据不足案例的处理规范。
+- 将结构感知证据单元扩展到多语言、多版式（双栏、公式密集、扫描件）的临床与科学PDF，并端到端评估下游决策支持任务。
+- 研究OCR输出中上下文改写（Canonicalization）的检测与抑制方法，构建真实场景下的细粒度可靠性基准。
+- 开发文档推理系统的OCR鲁棒性增强模块，针对栅格化、水印、低分辨率等常见PDF缺陷进行训练与测试。
+- 探索将视觉令牌剪枝（如MiCo）与结构感知检索结合，在低计算预算下实现元素级文档证据定位。
+- 将源保留对齐框架从化学论文推广到通用科学文献，覆盖非拉丁字符、表格和公式，并自动评估高亮正确性。
+- 利用图像到视频蒸馏（MILD）思路，将静态文档OCR专家能力迁移到视频中的文本识别与跟踪任务。
+- 针对手写文本识别的高方差子空间假设，设计新的自监督目标以进一步统一印刷体与手写体预训练。
+- 建立文档解析的因果审计流程，区分世界知识与语言知识的扩展性，指导紧凑模型与大规模模型的选型。
 
 ## 六、工程落地启发
 
-- 表格处理可采用OTSL结构化文本表示，减少对视觉编码器的依赖，便于与现有LLM集成。
-- 在模板化文档抽取中，3K样本微调开源VLM可使F1超过0.98，成本效益优于零样本商业系统。
-- 选择文档抽取方案时需综合任务画像（质量、延迟、治理、数据量），而非仅看准确率。
-- OCR应用工作流应与VLM进行一致性验证，人工复核环节对保守筛查至关重要。
-- 低资源手写识别中，监督合成预训练可节省约4.4倍标注成本，但高精度目标下优势减弱。
-- 掩码图像建模在有限标注预算下可能产生负迁移，需谨慎选择预训练策略。
-- 食品合规筛查中，数据不足案例应被排除在通过和失败之外，避免误判。
-- 开源评估代码和数据集有助于可复现研究，建议工程团队优先采用并贡献。
+- 在临床指南、科学文献等场景中，优先实现结构感知的检索单元（表格行、章节、流程图路径），可显著减少上下文体积并提升元素级命中率。
+- 部署OCR增强的问答系统时，应加入上下文偏差检测与改写抑制模块，避免模型在视觉不确定时依赖语言先验输出错误但流畅的结果。
+- 文档AI系统的输入解析鲁棒性可能比模型规模更关键：在真实PDF上应优先保障OCR质量，再考虑推理架构和参数扩展。
+- 采用源保留对齐（归一化匹配+源跨度映射）可大幅提升证据高亮定位率，适合构建可溯源的文档问答与审阅工具。
+- 利用训练无关的视觉令牌剪枝（如MiCo）可在保留95%以上性能的同时降低MLLM推理成本，适合资源受限的文档理解部署。
+- 对于手写文档数字化，选择像素接地自监督预训练编码器，并配合轻量LLM解码器，可在标签有限时达到接近全监督的性能。
+- 在人物属性关联等结构化输出任务中，用语法约束让VLM按块生成属性，可消除后处理绑定错误，并支持字段级置信度拒绝。
 
 ## 七、优先关注论文
 
-- **Tables Decoded: DELTA for Structure, TARQA for Understanding**：提出OTSL统一表格表示并微调LLM，在表格问答上提升显著，且构建多语言基准，可能影响表格理解的技术路线。
-- **Beyond Accuracy: Robustness, Cost, and Governance Trade-offs for Vision-Language Models in Templated Document Extraction**：首次系统评估VLM在文档抽取中的鲁棒性、成本与治理权衡，并提供选择框架，对工程选型有直接指导意义。
-- **A Conservative OCR-Enabled Workflow for R214 Sodium Screening of South African Packaged Foods**：揭示OCR工作流与VLM在真实合规筛查中一致性较低（最终一致率69.5%），提醒自动化决策的风险与人工复核的必要性。
-- **Measuring Annotation Efficiency for Handwritten Devanagari Recognition: Sample-Complexity Curves for Four Pretraining Regimes**：量化预训练节省标注成本（4.4倍标签乘数）并发现掩码图像建模负迁移，为低资源手写识别项目提供标注预算依据。
+- **From PDF to Evidence: Structure-Aware Retrieval for Clinical Practice Guidelines**：首次将临床指南证据获取定义为结构感知的文档图像分析任务，元素级Hit@1达0.382，上下文减少3.8倍，可能改变医疗RAG的检索范式。
+- **When Harness Beats Scale, and When Reading Beats Both**：揭示文档推理系统在真实PDF上因OCR崩溃导致排名暴跌（163中第149），强调评估输入物理性质优先于架构选择，对工程部署有直接警示。
+- **MiCo: Mutual Information Coverage Optimization through Semantic Erasure Modeling for Efficient MLLM Inference**：无需训练即可在5.6%视觉令牌下保留97.5%性能，3.8倍加速，且覆盖细粒度OCR任务，适合高效文档理解部署。
+- **Source-preserving alignment for robust evidence localization in scientific PDFS**：在1020篇化学论文上达到92.6%引文级自动定位率，远超文本搜索（43.6%），源保留对齐设计可直接集成到证据高亮系统。
+- **When VLMs Trust Context: Evaluating Scene Text Recognition under Misleading Context**：首次系统量化VLM在场景文本识别中的上下文改写行为（8.45%-58.51%），并发布SceneFaith基准，对OCR可靠性评估有重要参考价值。
 
 ## 八、论文逐篇解析
 
-### 1. Tables Decoded: DELTA for Structure, TARQA for Understanding
+### 1. From PDF to Evidence: Structure-Aware Retrieval for Clinical Practice Guidelines
 
-- arXiv: [2609.17458v1](https://arxiv.org/abs/2609.17458v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.17458v1)
-- 作者: Jahanvi Rajput, Dhruv Kudale, Saikiran Kasturi, Utkarsh Verma, Ganesh Ramakrishnan
-- 发布时间: 2026-09-15T16:59:42Z
-- 分类: cs.CV, cs.LG
-- 相关性评分: 25
-- 主题标签: 表格结构识别、表格问答、OCR、结构化文本表示、多语言、LLM微调
-
-**中文摘要**
-
-> 本文针对表格理解中的表格重建与表格视觉问答两个子任务，提出基于结构化文本表示的替代方案，避免依赖视觉语言模型处理表格图像。作者提出DELTA框架，将物理结构识别、逻辑结构识别与OCR分离，输出统一的优化表格结构语言（OTSL）格式。在表格结构识别任务上，DELTA在FinTabNet、PubTabNet和PubTables-1M上达到与SOTA相近的TEDS-Structure分数，并在自建的印地语基准TORQUE上验证鲁棒性。进一步，作者提出基于OTSL序列微调的LLM模型TARQA，在WTQ上提升9.3个百分点，在FinTabNetQA上提升9.2个百分点。
-
-**核心创新概述**
-
-> 提出用结构化文本表示（OTSL）统一编码表格布局与内容，并基于此微调LLM完成表格问答，避免语言特定的视觉编码器，提升多语言适用性。
-
-**创新点拆解**
-
-- 提出OTSL（Optimised Table Structure Language）作为紧凑统一的表格表示格式，同时编码单元格排列与文本内容。
-- DELTA框架将物理结构识别、逻辑结构识别和OCR解耦，支持准确提取布局与内容。
-- 基于OTSL序列微调LLM得到TARQA，在表格问答和表格视觉问答任务上均取得显著提升。
-- 构建印地语表格基准TORQUE，用于评估非英语表格的鲁棒性。
-
-**当前局限**
-
-> 依赖OCR质量，对低质量扫描或复杂版式表格可能敏感；OTSL格式的通用性未在更多语言和表格类型上验证；与端到端VLM相比，流程可能更复杂。
-
-**工程启发**
-
-> 为文档智能中的表格处理提供了一种可扩展、多语言友好的方案，OTSL格式便于与现有LLM集成，降低对视觉编码器的依赖，适合工程化部署。
-
-**为什么值得关注**
-
-> 该工作直接涉及OCR、表格结构识别和表格理解，与文档解析和OCR研究高度相关，提出的OTSL表示和TARQA模型对后续表格信息抽取有参考价值。
-
-**原始摘要**
-
-Table understanding is a core task in document intelligence, encompassing two key subtasks: table
-reconstruction and table visual question answering (TabVQA). While recent approaches predominantly
-rely on vision- language models (VLMs) operating on table images, we propose a more scalable and
-effective alternative based on structured textual representations. These representations are easier
-to process, align more naturally with LLMs, and eliminate the need for language-specific visual
-encoders, making them particularly suitable for multilingual documents. We present DELTA, which
-separates physical structure recognition, logical structure recognition, and OCR to extract both
-layout and content accurately. DELTA outputs tables in Optimised Table Structure Language (OTSL), a
-compact and unified format that encodes cell arrangements and textual content. On table structure
-recognition (TSR), DELTA achieves TEDS- Structure scores comparable with state-of-the-art methods
-across FinTabNet, PubTabNet, and PubTables-1M. We further establish its robustness on non-English
-tables through our curated Hindi benchmark, TORQUE. Building on this, we introduce TARQA, an LLM
-fine-tuned on OTSL sequences. Our approach yields gains of 9.3 p.p. on WTQ (TabQA) and 9.2 p.p. on
-FinTabNetQA (TabVQA), respectively. On TORQUE, our method ranks second among all VLMs and DELTA +
-LLM variants. We release our code, models, and benchmark at: https://github.com/Tihiitborg/Tables-
-Decoded
-
----
-
-### 2. Beyond Accuracy: Robustness, Cost, and Governance Trade-offs for Vision-Language Models in Templated Document Extraction
-
-- arXiv: [2609.15706v1](https://arxiv.org/abs/2609.15706v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.15706v1)
-- 作者: Kushal Patel, Pushkal Shrivastava, Mackenzie Lees, Qirui Lu, Bhargobjyoti Saikia, Liying Li, Junlin Jiang
-- 发布时间: 2026-09-14T15:10:33Z
-- 分类: cs.AI
-- 相关性评分: 13
-- 主题标签: 视觉语言模型、文档抽取、鲁棒性评估、成本分析、治理、微调
+- arXiv: [2609.33447v1](https://arxiv.org/abs/2609.33447v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2609.33447v1)
+- 作者: Xingyu Lin, Dehui Du
+- 发布时间: 2026-09-27T10:55:19Z
+- 分类: cs.IR, cs.CV
+- 相关性评分: 22
+- 主题标签: 文档图像分析、结构感知检索、临床指南、PDF解析、视觉RAG
 
 **中文摘要**
 
-> 本文针对视觉语言模型在模板化文档抽取中的评估问题，指出现有研究多关注干净基准上的准确率，缺乏对鲁棒性、成本和治理的权衡分析。作者在750份合成支票文档上评估了11个系统（包括商业、推理、开源VLM及非LLM OCR+正则基线）。结果显示，在3K样本上微调可使最佳开源VLM的F1超过0.98，优于所有零样本商业系统；GPT-5在商业系统中F1领先，而Claude Sonnet 4.5在日期字段上表现崩溃。作者提出了一个面向实践者的选择框架，将任务画像（质量、延迟、治理、数据量）映射到推荐方案，并通过过滤和总成本最小化进行说明。
+> 论文面向临床实践指南PDF，将证据获取定义为文档图像分析问题。方法先将页面图像解析为有类型的结构元素，再检索遵循文档布局的结构感知证据单元（章节、表格行、流程图路径、分级推荐），每个单元保留结构上下文，使结果指向具体元素而非整页。在26份指南（3619页，中英文）和199个证据查询上，结构感知单元在BM25、稠密和混合检索下均将金标元素排在第一，混合检索的Element Hit@1为0.382，相比逐元素OCR文本，在元素级排序上有显著提升（MRR_e +0.107, p=0.002），同时匹配页面级召回（Page Hit@5 0.879 vs 0.889, p=0.75），上下文体积减少3.8倍，并显著优于ColPali视觉RAG基线（PH@5 0.497）。
 
 **核心创新概述**
 
-> 首次系统性地在模板化文档抽取任务中综合评估鲁棒性、成本和治理权衡，并提出了面向实践者的方案选择框架。
+> 将指南证据检索从固定大小文本块范式转为结构感知的文档图像分析任务，并提出按文档自身布局定义的可检索结构单元，保留结构上下文。
 
 **创新点拆解**
 
-- 构建了包含11个系统的全面评估基准，覆盖商业、推理、开源VLM及非LLM基线。
-- 通过微调3K样本使开源VLM在特定任务上超越零样本商业系统。
-- 提出基于任务画像（质量、延迟、治理、数据量）的方案选择框架，结合过滤和总成本最小化。
-- 开源了评估代码和数据集，促进可复现研究。
+- 任务定义：将证据获取建模为文档图像分析问题，要求检索结果指向具体结构元素（如表格行、流程图路径、分级推荐）而非页面。
+- 方法设计：从页面图像解析出带类型的结构元素，并构建结构感知证据单元，每个单元保持其结构上下文。
+- 评估设置：构建中英文双语临床指南数据集，包含26份指南、3619页和199个证据查询，并采用元素级与页面级双重评价指标。
+- 对比实验：与逐元素OCR文本和ColPali视觉RAG基线对比，在元素级排序和上下文效率上展示优势。
 
 **当前局限**
 
-> 评估仅基于合成支票文档，可能无法完全反映真实世界文档的多样性和噪声；选择框架的普适性需进一步验证；未深入探讨不同治理要求的具体影响。
+> 论文主要验证了检索和排序效果，未涉及下游临床决策支持任务的端到端评估；结构解析的泛化能力、对复杂或不常见版式的鲁棒性未充分讨论；Hit@5的提升仅具方向性（p=0.17），统计显著性有限；中文和英文之外的语言覆盖未知。
 
 **工程启发**
 
-> 为工程实践中选择文档抽取方案提供了数据驱动的决策框架，强调了微调开源模型在成本效益上的优势，有助于企业平衡质量、延迟和治理要求。
+> 在医疗指南检索场景中，能以更少上下文实现元素级精确检索，降低检索增强生成的计算开销，并提升引用可溯源性，适合构建临床决策支持系统或指南问答系统。
 
 **为什么值得关注**
 
-> 该研究涉及OCR、视觉语言模型在文档抽取中的应用，评估了鲁棒性和成本，与OCR工程实践和文档解析系统选型密切相关。
+> 论文聚焦OCR后处理与文档结构解析，并将结构信息用于检索，属于OCR在专业文档中的典型应用，与文档解析、结构感知检索和视觉RAG密切相关。
 
 **原始摘要**
 
-Vision-language models (VLMs) are increasingly used to extract structured fields from business
-documents, yet most evaluations report accuracy on clean benchmarks and offer little guidance to
-practitioners choosing an approach for a given task complexity. We address this gap with a
-measurement-grounded study and an open-source release. Across eleven systems (three commercial, two
-reasoning, five open-source VLMs in pretrained and fine-tuned form, and a non-LLM OCR->regex floor)
-scored on a 750-document held-out pool of synthetic checks, fine-tuning on 3K samples lifts the best
-open-source VLMs above F1 0.98-above every zero-shot commercial system on this task-while GPT-5
-leads the commercial pool on F1 and Claude Sonnet 4.5 collapses on Date. To turn these measurements
-into actionable choices, we introduce a practitioner-oriented selection framework that maps a task
-profile (quality, latency, governance, volume) to a recommended approach via filtering and total-
-cost minimization, illustrated on a hypothetical mid-volume document-extraction scenario.
+Guideline documents are published as unstructured PDFs whose evidence is locked in visual structures
+---tables, flowcharts, and graded recommendations---that standard retrieval pipelines flatten into
+fixed-size text chunks. We cast evidence access as a document image analysis problem: parse each
+page image into typed structural elements, then retrieve structure-aware evidence units that follow
+the document's own layout (sections, table rows, flowchart paths, graded recommendations), each
+keeping its structural context so a result points to a specific element rather than a page. On 26
+clinical practice guidelines from 9 sources (3,619 pages, Chinese and English) with 199 evidence
+queries, structure-aware units rank the gold element first under BM25, dense, and hybrid retrieval
+(hybrid Element Hit@1 of 0.382), with a significant element-level ranking gain over per-element OCR
+text (MRR_e +0.107, p=0.002; the Hit@5 gain is directional, p=0.17), while matching page-level
+recall (Page Hit@5 0.879 vs. 0.889, p=0.75) at 3.8x less context and clearly outperforming a ColPali
+visual-RAG baseline (PH@5 0.497).
 
 ---
 
-### 3. A Conservative OCR-Enabled Workflow for R214 Sodium Screening of South African Packaged Foods
+### 2. When VLMs Trust Context: Evaluating Scene Text Recognition under Misleading Context
 
-- arXiv: [2609.15427v2](https://arxiv.org/abs/2609.15427v2)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.15427v2)
-- 作者: Mayimunah Nagayi, Alice Scaria Khan, Tamryn Frank, Rina Swart, Clement Nyirenda
-- 发布时间: 2026-09-14T11:55:32Z
+- arXiv: [2609.34781v1](https://arxiv.org/abs/2609.34781v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2609.34781v1)
+- 作者: Yuxing Cheng, Yuan Wu, Yi Chang
+- 发布时间: 2026-09-28T09:55:28Z
 - 分类: cs.CV, cs.AI
-- 相关性评分: 13
-- 主题标签: OCR应用、食品包装、钠筛查、视觉语言模型、合规监测、工作流
+- 相关性评分: 12
+- 主题标签: 场景文本识别、视觉语言模型、上下文偏差、基准测试、鲁棒性
 
 **中文摘要**
 
-> 本文针对南非包装食品的钠含量筛查，提出一个基于图像的保守工作流，结合区域检测、OCR、产品身份和钠证据提取、R214类别分配、确定性阈值比较，并与独立的视觉语言模型工作流进行对比。使用442个产品和3929张包装图像，YOLO26s检测器生成4195个区域裁剪，经过严格后处理得到每个产品一行钠证据。集成工作流产生290个超出R214范围、139个需复核、7个筛查通过和6个筛查失败；Qwen2.5-VL 7B工作流产生387个超出范围、31个需复核、20个通过和4个失败。两个工作流在类别分配上一致率为93.9%，在是否属于R214范围上一致率为94.1%，最终筛查结果一致率为69.5%。人工验证60个产品显示严格结果一致性低于监管状态一致性，且所有数据不足案例均被两个工作流排除在通过和失败之外。
+> 论文研究视觉语言模型（VLM）在自然场景文本识别中受上下文误导的现象。作者构建了SceneFaith基准，包含781张生成场景图像，将模型输出分类为Literal（忠实转录）、Canonical（上下文一致的改写）或Other（普通识别错误）。在7个系列15个模型上，所有模型在清晰图像上均出现改写，比例从8.45%到58.51%。控制实验表明：移除周围场景信息可减少改写并提升字面准确率；改变同一文本块周围的场景可改变模型输出；模糊目标文本会增加改写。结论是可靠的场景文本识别需要VLM在视觉字符证据与上下文信息之间取得平衡，在视觉不确定时主要依赖上下文。
 
 **核心创新概述**
 
-> 将OCR与视觉语言模型结合应用于食品包装钠含量合规筛查，提出保守的自动化工作流并量化与VLM工作流的一致性。
+> 首次系统性地定义并量化VLM在场景文本识别中的“上下文改写”行为，并发布专门基准SceneFaith。
 
 **创新点拆解**
 
-- 设计了一个多阶段的保守图像工作流，结合区域检测、OCR、证据提取和确定性阈值比较。
-- 在真实世界南非食品包装数据集上评估，并与独立的VLM工作流进行对比分析。
-- 引入人工验证，揭示自动化筛查在严格结果与监管状态一致性上的差异。
-- 强调保守策略，确保数据不足案例不被误判为通过或失败。
+- 任务定义：提出区分Literal、Canonical和Other的输出分类框架，将忠实转录与上下文一致改写和识别错误分开。
+- 数据：构建781张受控生成的场景图像基准，用于诱发和评估上下文误导。
+- 实验设计：通过移除场景信息、改变场景和模糊目标文本等控制实验，分离上下文与视觉证据的影响。
+- 发现：揭示所有被测模型均存在改写现象，并定量刻画了上下文对输出的因果影响。
 
 **当前局限**
 
-> 最终筛查结果一致率较低（69.5%），表明自动化决策与VLM存在较大分歧；依赖OCR准确性，对包装图像质量敏感；类别分配和阈值比较可能受限于R214规则的复杂性。
+> 基准基于生成图像，可能无法完全覆盖真实场景的复杂性；仅评估15个模型，模型家族和版本有限；未提出缓解上下文改写的具体方法；分类标准可能对边界案例存在主观性。
 
 **工程启发**
 
-> 为食品合规监测提供了一种可自动化的保守筛查方案，可辅助人工审核，降低大规模筛查成本，但需进一步优化一致性。
+> 为OCR系统在真实场景下的可靠性评估提供了新维度，提醒工程部署中需考虑上下文偏差，可指导设计更可信的场景文本识别模块。
 
 **为什么值得关注**
 
-> 该研究应用OCR和视觉语言模型解决实际文档理解问题，涉及OCR在食品包装图像上的应用和与VLM的对比，与OCR技术落地相关。
+> 论文直接研究OCR在视觉语言模型中的行为，尤其场景文本识别中的上下文偏差，属于OCR鲁棒性和可信度评估范畴。
 
 **原始摘要**
 
-Using food package images to monitor sodium and salt content against South Africa's R214 sodium
-limits is challenging when screening decisions require product identity, nutrition facts panel
-evidence, reporting basis, and category-specific thresholds. This study presents a conservative
-image-based workflow that combines region detection, optical character recognition (OCR), product
-identity and sodium evidence extraction, R214 category assignment, deterministic threshold
-comparison, and independent vision language model comparison. The evaluation used 442 packaged food
-products and 3 929 full package images from a real-world South African food packaging dataset. A
-YOLO26s small detector generated 4 195 region crops, and strict post-processing produced one sodium
-evidence row per product. The integrated workflow produced 290 OUTSIDE R214 SCOPE, 139 REVIEW, seven
-SCREEN-PASS, and six SCREEN-FAIL outcomes. The independent Qwen2.5-VL 7B vision language model
-workflow produced 387 OUTSIDE R214 SCOPE, 31 REVIEW, twenty SCREEN-PASS, and four SCREEN-FAIL
-outcomes. The workflows agreed on exact R214 category assignment for 415 of 442 products (93.9%) and
-on whether the assigned category was within R214 scope for 416 of 442 products (94.1%). Final
-screening outcome agreement was 307 out of 442 products, or 69.5%. Manual verification on 60
-products showed lower strict outcome agreement than regulated status agreement, while all manual
-INSUFFICIENT DATA cases were kept out of SCREEN-PASS and SCREEN-FAIL by both automated workflows.
-The findings show that conservative image-based screening can organise package evidence, identify
-clear cases, and assign uncertain cases to REVIEW rather than forcing SCREEN-PASS or SCREEN-FAIL
-decisions.
+Vision-language models (VLMs) can read text in natural scenes, but their predictions may be
+influenced by the surrounding context. When the printed text conflicts with what the scene suggests,
+a model may return a more plausible word instead of the shown text. We introduce SceneFaith, a
+benchmark of 781 generated scene images for studying this behavior. Each output is classified as
+Literal, Canonical, or Other, separating faithful transcription from context-consistent rewriting
+and ordinary recognition errors. Across 15 models from seven families, all models show rewriting on
+clear images, with rates ranging from 8.45\% to 58.51\%. Controlled experiments further show that
+surrounding context matters: removing surrounding scene information reduces rewriting and improves
+literal accuracy, while changing the scene around the same text patch can also change model outputs.
+Moreover, weakening the target text with blur increases rewriting. These results show that reliable
+scene-text recognition requires VLMs to balance visual character evidence with contextual
+information, preserving clear text while using context mainly when the visual evidence is uncertain.
 
 ---
 
-### 4. Measuring Annotation Efficiency for Handwritten Devanagari Recognition: Sample-Complexity Curves for Four Pretraining Regimes
+### 3. When Harness Beats Scale, and When Reading Beats Both
 
-- arXiv: [2609.16859v1](https://arxiv.org/abs/2609.16859v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.16859v1)
-- 作者: Manglesh Kumar Pandey, Sumit Kumar Banshal
-- 发布时间: 2026-09-15T08:50:51Z
-- 分类: cs.CV, cs.LG
-- 相关性评分: 7
-- 主题标签: 手写文本识别、OCR、预训练、标注效率、低资源、梵文
+- arXiv: [2609.34366v1](https://arxiv.org/abs/2609.34366v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2609.34366v1)
+- 作者: Ivan Bondarenko, Nikolay O. Nikitin
+- 发布时间: 2026-09-28T05:42:51Z
+- 分类: cs.CL, cs.AI, cs.IR
+- 相关性评分: 12
+- 主题标签: 文档推理、OCR鲁棒性、Program-of-Thoughts、评估审计、模型规模
 
 **中文摘要**
 
-> 本文研究手写梵文识别中标注效率问题，探讨需要多少转录样本才能训练出有用的识别器，以及预训练能减少多少标注成本。在保持识别器、优化器和评估协议不变的情况下，仅改变微调用的真实转录单词数量（9个预算从10到4000）和四种初始化方案，每个点6个随机种子。结果转化为标注等价术语：监督合成预训练仅用81个转录词即可达到CER 0.50，而随机初始化需要355个，标签乘数为4.40。零样本参考点：无真实转录词时，预训练价值约相当于136个词。随着目标精度提高，这种优势减小，在最苛刻目标下无法区分。第四个实验组仅迁移编码器，分离预训练方法和迁移范围的影响，观察到掩码图像建模在有限预算范围内产生负迁移。
+> 论文描述DocSem文档 grounded 定量推理任务的系统，并分析其在标注数据上成功而在测试集上失败的原因。系统结合混合块检索、在沙箱解释器中执行的Program-of-Thoughts（PoT）生成、自一致性采样和来自块级知识图谱的实体增强。在留出集上，架构对指标的提升远大于模型规模：PoT为7B模型增加0.282联合准确率，而对72B模型至多增加0.005；27B模型配合完整系统与72B模型相当（0.884 vs 0.873），参数少约2.7倍，CO2排放为四分之一。作者区分了随参数陡峭扩展的世界知识和缓慢扩展的语言知识，并表明结构化输出训练使紧凑模型适配系统。在栅格化、带水印的测试PDF上，同一系统联合准确率跌至13.58%（163个中排名149）；对验证集重新渲染的受控实验复现了OCR部分的崩溃。结论是审计评估输入的物理性质先于架构选择，排行榜的双峰性与阅读质量而非推理能力有关。
 
 **核心创新概述**
 
-> 首次为手写梵文识别量化标注效率曲线，并比较四种预训练初始化方案，将性能增益转化为标注等价成本。
+> 通过DocSem任务，揭示在文档 grounded 推理中，系统架构和训练范式对紧凑模型的提升可能超过模型规模，并首次系统分析OCR质量对排行榜结果的支配作用。
 
 **创新点拆解**
 
-- 系统测量了手写梵文识别中标注样本数量与识别性能的关系，生成样本复杂度曲线。
-- 比较四种初始化方案（随机、监督合成预训练、仅编码器迁移等）对标注效率的影响。
-- 将性能提升转化为标注等价术语，量化预训练节省的标注成本。
-- 发现掩码图像建模在有限预算下可能产生负迁移，并分离了预训练方法与迁移范围的影响。
+- 系统设计：将混合块检索、PoT生成、自一致性采样和知识图谱实体增强结合，形成完整的文档推理流水线。
+- 训练范式：证明结构化输出训练能使紧凑模型适配复杂系统，从而以小得多的参数规模匹配大模型。
+- 分析视角：区分世界知识与语言知识的扩展性，解释为何架构对紧凑模型收益更大。
+- 评估洞察：通过控制实验复现OCR崩溃，强调评估输入物理形式（栅格化、水印）对结果的决定性影响。
 
 **当前局限**
 
-> 研究仅针对手写梵文，结论可能不直接适用于其他文字；预训练优势随目标精度提高而减小，在高精度要求下节省有限；负迁移现象的边界条件未充分探索。
+> 系统在测试集上严重崩溃，表明对真实PDF的OCR鲁棒性不足；分析基于单一任务和数据集，泛化性未知；未提出具体的OCR鲁棒性改进方法；实体增强和知识图谱构建的细节及消融不够充分。
 
 **工程启发**
 
-> 为低资源手写文字识别项目提供了标注成本估算依据，指导预训练策略选择，有助于优化标注资源分配。
+> 为文档AI系统部署提供关键警示：在实际PDF上，OCR和文档阅读质量可能比模型规模和推理架构更关键，应优先确保输入解析鲁棒性。
 
 **为什么值得关注**
 
-> 该工作涉及OCR中的手写文本识别、预训练和标注效率，对OCR模型训练和资源受限场景有直接参考价值。
+> 论文核心涉及OCR质量对文档推理系统的影响，并分析真实PDF中的阅读质量问题，与OCR在文档理解中的角色直接相关。
 
 **原始摘要**
 
-To train handwritten text recognition systems we need word images and their corresponding
-transcriptions, and these transcriptions are produced manually. For a script that can be read by
-only a small number of specialists, this manual transcription is a limitation, because the trained
-models are supposed to save the time of those same specialists. A relevant question therefore
-arises: how many transcriptions are needed before a recogniser becomes useful, and how much of that
-cost can pretraining remove? In this study the answer is measured directly for handwritten
-Devanagari. We keep the recogniser, optimiser and evaluation protocol the same and change only the
-number of real transcribed words used for fine-tuning across nine budgets from 10 to 4,000 and four
-initialisation regimes, with six seeds at every point. The resulting curves are then converted into
-annotation-equivalent terms. A CER of 0.50 is reached by supervised synthetic pretraining using only
-81 transcribed words, whereas random initialisation requires 355, which gives a label multiplier of
-4.40 [3.56, 4.99]. There is a zero-shot reference point as well: with no real transcribed words at
-all, this pretraining is worth about 136 of them. This advantage gets smaller as the target accuracy
-improves, and at the most demanding target we measure, it cannot be distinguished from no saving at
-all. A fourth arm in which only the encoder is transferred separates the effect of the pretraining
-method from that of transfer scope, and masked image modelling is observed to transfer negatively
-over a bounded range of budgets. We emphasise that the scarcity in this study is constructed by
-subsampling a large corpus.
+We describe our system for DocSem, the document-grounded quantitative reasoning shared task at
+DocInsights 2026, and analyze why it succeeded on labeled data and failed on the test set. The
+pipeline pairs hybrid block retrieval with Program-of-Thoughts (PoT) generation executed in a
+sandboxed interpreter, self-consistency sampling, and entity enrichment from chunk-level knowledge
+graphs. On our held-out split, application architecture moved the metrics far more than model scale
+did: PoT added 0.282 joint accuracy to a compact 7B model but at most 0.005 to a 72B model, and a
+27B model with the full harness matched the 72B (0.884 vs.\ 0.873) at roughly 2.7$\times$ fewer
+parameters and a quarter of the CO$_2$. We read this through a distinction between world knowledge,
+which scales steeply with parameters, and language knowledge, which scales gently, and show that
+structured-output training makes a compact model harness-ready rather than merely small. On the
+raster, watermarked test PDFs the same system collapsed to 13.58\% joint (rank 149 of 163); a
+controlled re-rendering of the validation set reproduces the OCR half of the collapse while bounding
+what the simulation misses. Auditing the physical nature of evaluation inputs precedes architecture,
+and the leaderboard's bimodality is consistent with reading quality, not reasoning, having separated
+the field.
+
+---
+
+### 4. MiCo: Mutual Information Coverage Optimization through Semantic Erasure Modeling for Efficient MLLM Inference
+
+- arXiv: [2609.34330v1](https://arxiv.org/abs/2609.34330v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2609.34330v1)
+- 作者: Tinghao Wang, Yichen Guo, Qizhe Zhang, Yuan Zhang, Weimin Ouyang, Rui Huang, Jiajun Cao, Sixiang Chen, Hao Jiang, Jixian Wu, Zheng Lu, Bofan Zhu, Renyuan Li, Shanghang Zhang
+- 发布时间: 2026-09-28T05:09:20Z
+- 分类: cs.CV
+- 相关性评分: 12
+- 主题标签: 多模态大模型、视觉令牌剪枝、互信息覆盖、高效推理、OCR定位
+
+**中文摘要**
+
+> 论文针对多模态大语言模型（MLLM）中视觉令牌过多导致计算成本高的问题，提出MiCo，一种无需训练的两阶段剪枝方法。通过语义擦除模型从任务对数损失推导出互信息覆盖目标，MiCo首先在视觉令牌进入语言模型前用视觉信号选择代表性候选池，然后在候选池内进行任务感知的子集选择。每个阶段使用合适的可观测代理将目标实例化为单调子模覆盖函数，并在令牌预算下贪婪优化。在7B到13B的多种MLLM和广泛图像/视频基准（包括细粒度OCR和定位）上，MiCo在所有剪枝比例下几乎均取得最佳性能。在LLaVA-NEXT-13B上，仅用5.6%视觉令牌保留97.5%基线性能，实现3.8倍推理加速。
+
+**核心创新概述**
+
+> 从任务对数损失推导出互信息覆盖目标，并将其转化为无需训练的两阶段令牌剪枝方法，为视觉令牌压缩提供理论依据。
+
+**创新点拆解**
+
+- 理论推导：基于语义擦除模型从任务对数损失导出互信息覆盖目标，统一了剪枝目标。
+- 方法设计：两阶段剪枝，先视觉候选池选择，再任务感知子集选择，每阶段用可观测代理实例化为子模函数并贪婪优化。
+- 训练范式：无需训练，可直接应用于现有MLLM。
+- 实验覆盖：在多种模型规模、图像和视频基准上验证，包括细粒度OCR任务。
+
+**当前局限**
+
+> 方法依赖子模覆盖的近似和代理函数，可能不是全局最优；未在极低剪枝比例下详细分析性能边界；对训练时未见任务的泛化性未充分讨论；OCR能力虽被评估，但未专门针对文本密集场景优化。
+
+**工程启发**
+
+> 可显著降低MLLM视觉推理的计算成本，尤其适合部署资源受限但需OCR能力的场景，如移动端文档理解或实时视频分析。
+
+**为什么值得关注**
+
+> 论文在评估中包含细粒度OCR任务，且方法旨在高效保留视觉信息，对OCR在MLLM中的高效推理有直接工程意义。
+
+**原始摘要**
+
+Multimodal large language models (MLLMs) have demonstrated impressive performance in multimodal
+understanding, but processing large numbers of visual tokens results in high computational costs.
+While many methods have been proposed to reduce the number of visual tokens, most of them rely on
+heuristics and are prone to discarding substantial visual information during pruning, leading to
+degradation in model performance. In this work, by using a semantic erasure model, we derive a
+general mutual information coverage objective from task log-loss and propose MiCo, a training-free
+two-stage pruning method. MiCo first uses visual signals to select a representative candidate pool
+before visual tokens enter the language model, then performs task-aware subset selection within it.
+At each stage, suitable observable proxies instantiate the derived objective as a monotone
+submodular coverage function, which MiCo greedily optimizes under the token budget. MiCo is
+evaluated on diverse MLLMs ranging from 7B to 13B parameters across a broad range of image and video
+benchmarks spanning general visual reasoning, fine-grained OCR and grounding, hallucination
+detection, and long-video understanding. MiCo consistently achieves the best performance across
+nearly all evaluated models under all pruning ratios. On LLaVA-NEXT-13B, MiCo uses only 5.6% visual
+tokens, retains 97.5% of baseline performance, and achieves a 3.8-fold inference speedup. Our
+experiments demonstrate the effectiveness of MiCo and our mutual information coverage objective for
+visual token pruning.
+
+---
+
+### 5. Handwritten Text Recognition Lives in the High-Pixel Variance Subspace
+
+- arXiv: [2609.35473v1](https://arxiv.org/abs/2609.35473v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2609.35473v1)
+- 作者: Carlos Garrido-Munoz, Jorge Calvo-Zaragoza
+- 发布时间: 2026-09-28T15:54:35Z
+- 分类: cs.CV, cs.LG
+- 相关性评分: 10
+- 主题标签: 手写文本识别、自监督预训练、像素重建、高方差子空间、标签效率
+
+**中文摘要**
+
+> 论文探讨手写文本识别（HTR）自监督预训练中像素重建方法优于对比方法的原因。作者认为，HTR的判别信号集中在像素空间的高方差方向，而低方差方向几乎不含判别信息。据此预测保留高方差像素内容的目标迁移效果最好。在匹配编码器、数据和评估协议下，测试了三类六种SSL方法（像素接地的MIM、JEPA和对比）在五种语言的六个手写基准上。全标签下，像素接地SSL在每个基准和两个冻结探针上取得最低CER，并暴露逐位置字符信息，且是唯一受益于真实手写数据预训练的方法。像素接地表示也更标签高效。编码器与高方差像素子空间的对齐程度可预测每种方法的CER。使用预训练LLM解码器时，冻结的像素接地编码器与全监督微调基线相当；全微调取得最低平均CER。
+
+**核心创新概述**
+
+> 从像素方差角度解释HTR中像素重建自监督优于对比学习的原因，并证明编码器与高方差子空间的对齐可预测识别性能。
+
+**创新点拆解**
+
+- 理论解释：提出HTR判别信号位于高像素方差子空间，为自监督目标选择提供依据。
+- 实验设计：在匹配的编码器、数据和评估协议下系统比较六种SSL方法，覆盖多语言手写基准。
+- 发现：像素接地SSL在多基准上最优，且唯一受益于真实手写预训练，表示更标签高效。
+- 分析：高方差像素子空间对齐度与CER相关，并揭示像素接地表示包含逐位置字符信息。
+
+**当前局限**
+
+> 研究局限于手写文本识别，结论是否适用于印刷体或其他OCR任务未知；未提出新的SSL方法，仅比较现有方法；高方差子空间对齐的因果性需进一步验证；LLM解码器实验规模有限。
+
+**工程启发**
+
+> 为手写OCR系统选择自监督预训练目标提供指导，像素接地方法可提升识别准确率和标签效率，降低标注成本，适合历史文档数字化等场景。
+
+**为什么值得关注**
+
+> 论文直接研究手写文本识别的自监督预训练，属于OCR核心方法范畴，对提升HTR性能有理论和实践价值。
+
+**原始摘要**
+
+In self-supervised pretraining for Handwritten Text Recognition (HTR), pixel reconstruction methods
+outperform contrastive methods, unlike in natural-image classification. We argue that this
+difference follows from where discriminative signal lies in pixel space: for HTR, it is concentrated
+in high-variance directions and largely absent from low-variance ones. This predicts that objectives
+preserving high-variance pixel content will transfer best. We test six SSL methods from three
+families (pixel-grounded MIM, JEPA, and contrastive) under matched encoder, data, and evaluation
+protocols on six handwriting benchmarks across five languages. With full labels, pixel-groundrounded
+SSL achieves the lowest CER on every benchmark and both frozen probes, exposes per-position
+character information that other families recover only through the readout, and is the only family
+to benefit from pretraining on real handwriting. Pixel-grounded representations are also more label
+efficient. Across datasets, encoder alignment with the high-variance pixel subspace predicts CER
+within every method. With a pretrained LLM decoder, a frozen pixel-grounded encoder is competitive
+with fully fine-tuned supervised baselines; full fine-tuning achieves the lowest mean CER and ranks
+first or second on every benchmark. These results show that the value of pixel reconstruction
+depends on where discriminative signal lies in the input.
+
+---
+
+### 6. From Static to Dynamic: On-Policy Distillation from Image to Video Diffusion Models
+
+- arXiv: [2609.34371v1](https://arxiv.org/abs/2609.34371v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2609.34371v1)
+- 作者: Bingqing Jiang, Li Luo, Zichao Yu, Yujin Han, Zhaolong Su, Difan Zou
+- 发布时间: 2026-09-28T05:46:11Z
+- 分类: cs.CV, cs.AI
+- 相关性评分: 9
+- 主题标签: 图像到视频蒸馏、扩散模型、OCR迁移、运动保持、在线策略蒸馏
+
+**中文摘要**
+
+> 论文提出MILD，一种运动保持的图像到视频潜在蒸馏框架，用于将专业图像扩散模型的专家能力（如美学和OCR）迁移到视频扩散模型，同时保留预训练视频的动态。由于图像和视频潜在空间异构，MILD使用可学习线性连接器对齐学生潜在状态和预测更新与图像专家，实现跨潜在空间的监督迁移；并约束图像引导的修正围绕预训练学生的预测，以保留视频动态；引入光流运动奖励提升运动质量和时间一致性。在多种专用图像专家和视频学生骨干上，方法持续优于视频教师在线策略蒸馏基线。
+
+**核心创新概述**
+
+> 提出从图像扩散模型到视频扩散模型的在线策略蒸馏框架，通过潜在空间对齐和运动保持机制，实现跨模态专家能力迁移。
+
+**创新点拆解**
+
+- 方法设计：使用可学习线性连接器对齐图像与视频潜在空间，实现跨异构潜在空间的监督迁移。
+- 训练范式：在线策略蒸馏中约束图像引导修正围绕预训练学生预测，并引入光流运动奖励。
+- 应用场景：针对时间无关能力（如OCR、美学）实现从图像专家到视频模型的高效迁移。
+- 实验验证：在多个图像专家和视频骨干上超越视频教师在线策略蒸馏基线。
+
+**当前局限**
+
+> 线性连接器可能不足以处理复杂潜在空间差异；方法依赖光流奖励，可能引入额外计算和误差；未在OCR等具体下游任务上定量评估；视频生成的时序一致性提升幅度未充分量化。
+
+**工程启发**
+
+> 为视频生成模型低成本集成OCR等图像专家能力提供路径，可降低对大规模视频数据和训练的依赖，加速专用视频模型开发。
+
+**为什么值得关注**
+
+> 论文涉及OCR能力从图像模型到视频模型的迁移，属于OCR技术在新模态中的扩展应用，对OCR在生成式视频中的集成有参考价值。
+
+**原始摘要**
+
+On-policy distillation (OPD) specializes pretrained video diffusion models through teacher
+supervision along the student's own generation trajectory. Although large video models are natural
+teachers, developing specialized video experts can require costly video data and training, while
+querying them incurs substantially higher latency than querying image experts. More readily
+available and cheaper to query, image experts offer a cost-effective alternative, particularly for
+largely temporal-agnostic capabilities such as aesthetics and OCR that admit frame-level
+supervision. However, heterogeneous image and video latent spaces prevent direct supervision of
+intermediate student states, while image experts lack cross-frame motion supervision, making
+temporal consistency vulnerable to frame-level improvements. In this paper, we propose MILD, a
+Motion-Preserving Image-to-Video Latent Distillation framework that transfers specialized image
+expertise while preserving pretrained video dynamics. MILD uses a learnable linear connector that
+aligns student latent states and predicted updates with those of image experts, enabling supervision
+transfer across heterogeneous latent spaces. We further constrain image-guided corrections around
+the pretrained student's predictions to preserve video dynamics and incorporate an optical-flow-
+based motion reward to improve motion quality and temporal consistency. Across specialized image
+experts and multiple video-student backbones, our method consistently outperforms video-teacher OPD
+baselines, with further studies demonstrating effective transfer across connector designs and
+heterogeneous architectures. These results establish image-to-video distillation as an effective
+route to improving video generation by drawing on the diverse and evolving capabilities of the
+image-generation ecosystem.
+
+---
+
+### 7. Seeing and Solving Are Not Enough for Vision-Language Models
+
+- arXiv: [2609.33694v1](https://arxiv.org/abs/2609.33694v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2609.33694v1)
+- 作者: Ziheng Wang, Mingxuan Xie, Yilin Liu, Dayan Wu, Yang Li, Pengwen Dai
+- 发布时间: 2026-09-27T15:57:04Z
+- 分类: cs.CV
+- 相关性评分: 6
+- 主题标签: 视觉语言模型、多模态问答、组合失败、LoRA微调、OCR增强理解
+
+**中文摘要**
+
+> 该研究系统分析了视觉语言模型（VLM）在视觉问答中一种被整体准确率掩盖的失败模式：模型分别通过视觉信息抽取和问题求解测试，却仍在原始多模态问题上失败。作者定义可精确评分的任务状态，对多个VLM和视觉域进行问题级分析，发现组合失败占直接回答错误的17.7%至75.6%。为此提出状态实现微调（SRT），在冻结VLM权重下微调语言模型层上的LoRA适配器，训练模型在单次自回归响应中先输出真实任务状态再给出最终答案，较标准监督微调提升1.7至14.1个百分点，修复92.5%至98.1%的组合失败。
+
+**核心创新概述**
+
+> 将视觉抽取与下游求解区分开，提出‘组合失败’这一被忽略的失败模式，并给出任务状态的概念与诊断方法；SRT以单次自回归输出显式状态作为语言层LoRA微调目标，而非改动视觉前端。
+
+**创新点拆解**
+
+- 定义可精确评分的任务状态，用于分离检测视觉抽取、问题求解与直接多模态回答三个环节
+- 通过多模型多数据集问题级实证，量化组合失败在错误中的占比
+- 提出State Realization Tuning（SRT），在冻结VLM参数下仅微调语言层LoRA
+- 训练模型在最终答案前输出真实任务状态，保持单次自回归生成与推理效率
+- 在显著不同任务上验证单个SRT LoRA适配器的迁移效果
+
+**当前局限**
+
+> 摘要未说明诊断流程是否可完全自动化，以及任务状态的构建是否需要人工或外部标注；未涉及OCR/文档场景中的状态定义；改进幅度和适配器迁移性依赖所测试的模型与数据集范围。
+
+**工程启发**
+
+> 提供了一种不改变视觉前端、仅以语言层LoRA恢复组合失败的低成本后训练方案；可用于提升OCR增强型VLM在生产问答中的鲁棒性，并保留单次自回归推理。
+
+**为什么值得关注**
+
+> OCR与文档解析常需要VLM从图文混合内容中抽取信息并推理；该文揭示的抽取正确但组合回答失败的问题，与OCR后接问答、字段抽取等系统直接相关。
+
+**原始摘要**
+
+Vision-language models (VLMs) answer visual questions by combining visual information extraction
+with downstream problem solving. We investigate a fundamental question: Does an incorrect answer
+necessarily reflect a failure in visual extraction or problem solving? A model may succeed at both
+abilities when tested separately yet still fail on the original multimodal question, a distinction
+that overall answer accuracy cannot reveal. To study this, we perform a question-level empirical
+analysis across multiple VLMs and visual domains. We define an exactly scorable task state (i.e.,
+the visual information sufficient to solve a question) and use it to test whether the same model can
+extract the required state, solve the question from the ground-truth state, and answer the original
+multimodal question. We find that composition failures, where extraction and solving both succeed
+but direct answering fails, account for 17.7% to 75.6% of direct-answering errors across multiple
+VLMs and datasets. To address this failure mode, we introduce a simple yet effective method, termed
+State Realization Tuning (SRT). SRT fine-tunes LoRA adapters attached to the language-model layers
+while keeping the pretrained VLM weights frozen. It trains the model to output the ground-truth task
+state before the final answer in a single autoregressive response. SRT improves over standard
+supervised fine-tuning by 1.7 to 14.1 percentage points and repairs 92.5% to 98.1% of diagnosed
+composition failures. A single LoRA adapter trained with SRT also improves performance across
+substantially different task-state structures. Our work shows that having both visual extraction and
+problem-solving capabilities does not guarantee correct multimodal answering. Requiring the model to
+first output the visual information needed to solve the question can help bridge this gap.
+
+---
+
+### 8. Native Association: Confidence-Aware Human Perception in the Wild with a Foundation VLM
+
+- arXiv: [2609.33450v1](https://arxiv.org/abs/2609.33450v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2609.33450v1)
+- 作者: Igal Dmitriev, Ofir Liba
+- 发布时间: 2026-09-27T11:00:02Z
+- 分类: cs.CV
+- 相关性评分: 6
+- 主题标签: 视觉语言模型、原生关联、语法约束生成、OCR、置信度校准、体育分析
+
+**中文摘要**
+
+> 针对广播画面中人物归属、队伍和号码的提取，传统方案需拼接检测器、OCR与分类器并在遮挡下易发生身份错配。该工作将关联内化为0.77B Florence-2视觉语言模型的原生能力，通过语法约束的序列输出，使每个人物属性在其所属代码块内生成，输出天然符合schema，消除事后绑定步骤。在冻结的多运动测试集上达到0.95检测F1，误关联约仅为零样本前沿API的1/4；一次额外前向可得到字段级置信度以支持拒绝选项和免训练放大重读，WIDER-Attribute上给定框mAP为93.1，并给出首个检测耦合端到端84.5 mAP结果。
+
+**核心创新概述**
+
+> 将人物属性关联作为VLM的序列生成结构问题而非后处理绑定问题，用语法约束保证每个属性归属到其人物块；揭示在该范式下结构增益大于继续参数微调。
+
+**创新点拆解**
+
+- 以0.77B轻量VLM通过语法约束序列统一输出人物检测、队伍与号码等属性
+- 输出按人物块组织，从生成结构上消除跨人物身份错配
+- 利用单次额外前向获得字段级置信度，支持拒绝选项与置信度路由处理
+- 免训练放大重读机制改善小目标球员的识别
+- 在多个体育数据集和WIDER-Attribute上复现同一结论，提供检测耦合端到端评测结果
+
+**当前局限**
+
+> 实验局限于广播体育画面与WIDER-Attribute，未验证通用OCR场景；依赖明确的语法与块结构定义；字段级置信度校准与宏平均表现未充分展开；在更密集遮挡和跨镜头场景下的关联鲁棒性仍需检验。
+
+**工程启发**
+
+> 给出可工程化的轻量原生关联方案，减少检测-OCR-分类后处理管线及其错配风险；置信度拒绝与自动重读可直接用于生产级筛选与人工复核。
+
+**为什么值得关注**
+
+> OCR文档解析中同样存在文本与结构、身份、字段的错误绑定问题，该文的结构化生成与置信度路由思路可用于版面元素归属与字段抽取。
+
+**原始摘要**
+
+Extracting who is where, on which team, wearing which number from a broadcast frame is typically
+done by stitching a detector, an OCR engine, and classifiers together -- and the stitching step
+swaps identities under occlusion. We make association native instead: a 0.77B vision-language model
+(Florence-2) is fine-tuned to emit all per-person attributes as one grammar-constrained sequence,
+with each attribute generated inside its owner's block. Output is therefore schema-valid on every
+frame by construction, and no post-hoc binding step exists to attach a correctly read number to the
+wrong player: residual misassociation is pure perception error, $\approx4\times$ rarer than zero-
+shot-prompted frontier APIs' (0.057 vs. 0.21-0.24). On a frozen multi-sport test set, this single
+pass reaches 0.95 detection F1 (APIs: 0.65-0.75). A single extra forward pass yields a per-field
+confidence that supports a reject option (jersey precision $0.71\rightarrow0.96$ at half coverage)
+and routes a training-free zoom-and-re-read for small players. Surprisingly, once the grammar is
+learned, further parameter-efficient tuning yields no measurable gain under the adaptation
+configurations we test; the identical recipe on WIDER-Attribute reaches 93.1 mAP given-box, yields
+the first detection-coupled end-to-end results under its standard test protocol (84.5 mAP), and
+reproduces the same tuning result. In this regime, the gains live in the structure, not in added
+weights.
+
+---
+
+### 9. Source-preserving alignment for robust evidence localization in scientific PDFS
+
+- arXiv: [2609.35588v1](https://arxiv.org/abs/2609.35588v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2609.35588v1)
+- 作者: Zihao Liu, Wei Yang, Zixiao Dong, Chenshu Li, Longzhang Liu, Tao Tan, Hong Xie
+- 发布时间: 2026-09-28T16:40:33Z
+- 分类: cs.AI
+- 相关性评分: 5
+- 主题标签: 科学PDF解析、证据定位、文本对齐、源保留、OCR后处理、可验证性
+
+**中文摘要**
+
+> 科学信息抽取系统通常返回证据字符串，但证据与PDF文本层是不同表示，受换行、Unicode变体、上标、引用标记和碎片化条目影响，难以在原文中定位。该文提出源保留对齐框架：先对文本归一化以稳健匹配，再保留溯源信息以精确定位；将证据与归一化页面文本对齐，映射回源字符跨度并仅渲染其几何区域；精确对齐失败时采用换行感知的token对齐恢复支持跨度并排除噪声。在1020篇化学论文上达到92.6%的引文级自动定位率，而文本搜索和预计算边界框基线分别仅为43.6%和19.1%。
+
+**核心创新概述**
+
+> 强调匹配与定位的分离与统一，在归一化用于匹配的同时保留源字符溯源，从而兼顾鲁棒匹配与精确高亮；引入换行感知近似token对齐作为回退。
+
+**创新点拆解**
+
+- 提出源保留对齐框架，将归一化匹配与源字符跨度映射统一
+- 仅渲染匹配源跨度几何区域，避免整块边界框定位误差
+- 设计换行感知token对齐，在精确匹配失败时恢复支持跨度并过滤未匹配噪声
+- 在1020篇化学论文上给出引文级自动定位率与人工视觉正确性评估
+- 组件消融验证归一化与近似token对齐的独立贡献
+
+**当前局限**
+
+> 实验集中于化学论文，其他学科与扫描件、双栏、公式密集版式未覆盖；近似token对齐对语义改写可能只能定位支持片段而非精确连续证据；高亮视觉正确性依赖人工评估，未报告在非拉丁字符和表格内的表现。
+
+**工程启发**
+
+> 可直接用于科学文献问答与证据高亮系统，显著提升基于PDF文本层的证据定位率；源保留与近似对齐设计便于集成到现有抽取管线。
+
+**为什么值得关注**
+
+> 该文核心是PDF文本层与抽取证据之间的对齐、定位和溯源，属于OCR/文档解析中证据可验证性的关键技术。
+
+**原始摘要**
+
+Scientific information-extraction systems often return a claim with an evidence string, which users
+must locate in the original PDF. This is challenging because the extracted evidence and PDF text
+layer are different representations: line wrapping, Unicode variants, superscripts, citation
+markers, and fragmented items alter text sequences and geometry. We present a source-preserving
+alignment framework: normalize text for robust matching while preserving provenance for accurate
+localization. It aligns evidence with normalized page text, maps matches back to source-character
+spans, and renders only their geometry. When exact alignment fails, line-break-aware token alignment
+recovers supported spans while excluding unmatched noise. Experiments on 1,020 chemistry papers show
+that the framework achieves a 92.6\% quote-level automatic localization rate, compared with 43.6\%
+for text search and 19.1\% for a precomputed bounding-box baseline. Component ablation confirms
+distinct contributions from normalization and approximate token alignment, while human verification
+assesses the visual correctness of returned highlights. Overall, these results demonstrate that
+reliable evidence verification requires robust matching and precise localization within a shared
+source-preserving alignment representation.
 
 ---
