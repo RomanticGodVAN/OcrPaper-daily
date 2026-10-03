@@ -1,761 +1,165 @@
-# OCR / 文档解析研究日报（2026-09-30）
+# OCR / 文档解析研究日报（2026-10-03）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-09-30 06:41:10`
+- 生成时间（UTC）：`2026-10-03 06:29:40`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日论文集中体现出OCR与文档解析正朝着统一基础模型、细粒度监督、以及面向真实下游任务的鲁棒性评估方向发展。PolyOCR-Venus和Xiaomi-OCR-0展示了统一框架与紧凑模型在数据引擎和强化学习驱动下的潜力；手写文本识别领域出现上下文学习与自监督预训练两个互补方向；同时，多个基准工作（SceneFaith、VidScribe、EnterpriseBench、纸草HTR容忍度）为可靠评测提供了新工具。整体上，社区正从单一识别精度转向兼顾上下文忠实度、记忆效率与任务容忍度的系统级优化。
+> 今日两篇论文分别针对孟加拉语手写OCR的单词分割和LLM推测解码的修复，前者在特定语言OCR前处理上取得进展，后者在通用推理加速上创新。两者均关注实际工程中的鲁棒性和效率优化。
 
 ## 二、今日趋势判断
 
-OCR基础模型趋向统一指令遵循与多任务联合训练，并通过数据引擎与强化学习提升监督质量；手写文本识别在无需微调的上下文学习与像素级自监督预训练两条路径上取得进展；文本生成与编辑的评测开始关注细粒度结构（如IDS部首分解）与时序一致性；同时，长上下文代理与记忆优化开始借用OCR作为视觉感知入口，推动文档解析与决策任务的结合。
+OCR研究继续向低资源语言和现实场景（如手机拍摄、颜色变化）深入；LLM推理加速则聚焦并行解码的精细修复，以提升端到端性能。
 
 ## 三、今日论文概览
 
-1. **PolyOCR-Venus: Unified OCR Foundation Models for Text-Centric Visual Intelligence** | 标签：OCR基础模型、统一框架、强化学习、在线蒸馏、基准评测
-2. **Exploring In-Context Learning for Handwritten Text Recognition** | 标签：手写文本识别、上下文学习、视觉语言模型、跨域适应
-3. **Xiaomi-OCR-0 Technical Report** | 标签：文档解析、OCR理解、紧凑模型、强化学习、数据引擎
-4. **ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents** | 标签：OCR感知、推荐代理、长上下文、动态记忆、强化学习
-5. **When VLMs Trust Context: Evaluating Scene Text Recognition under Misleading Context** | 标签：场景文本识别、上下文误导、基准评测、视觉语言模型、鲁棒性
-6. **Which papyrus HTR is good enough? Character-error-rate tolerance of four papyrological tasks on Greek texts** | 标签：手写文本识别、字符错误率、纸草学、下游任务、基准
-7. **Learning What to Remember: Long-horizon Counterfactual Memory Optimization** | 标签：长程记忆、信用分配、策略优化、文档级信息抽取、记忆压缩
-8. **Handwritten Text Recognition Lives in the High-Pixel Variance Subspace** | 标签：手写文本识别、自监督预训练、像素重建、高方差子空间、表征学习
-9. **EnterpriseBench: Benchmarking LLM Agents on Enterprise-Level Strategic Reasoning and Decision-Making** | 标签：智能体基准、企业决策、长程交互、信息抽取、供应链模拟
-10. **MSTypography: Multi-character Semantic Typography via Balancing Word Legibility and Object Recognizability** | 标签：语义排版、多字符、OCR约束、扩散先验、字形可读性
-11. **Beyond Legibility: Benchmarking Visual Text Rendering and In-Place Editing in Unified Video Generation** | 标签：视频文本生成、视觉文本编辑、OCR指标、时序一致性、基准评测
-12. **Decompose Radicals, Then Reward: Fine-Grained Inspection for Accurate Chinese Text Rendering** | 标签：中文文本渲染、IDS、OCR奖励、强化学习、细粒度识别
+1. **Color Independent Word Segmentation From Transcribed Bangla Passages** | 标签：OCR、单词分割、孟加拉语、手写文本、图像处理
+2. **DRelay: Global Draft Context for Prefix-Aware Parallel Speculative Decoding Repair** | 标签：推测解码、大语言模型、并行解码、推理加速、自然语言处理
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 统一指令遵循框架联合处理识别、定位与推理任务，减少多模型拼接开销。
-- 大规模自动化数据引擎结合专家共识、渲染验证与定向合成，提升监督数据质量与规模。
-- 验证器驱动的强化学习与在线蒸馏路由结合，实现能力引导的策略优化。
-- 上下文学习（ICL）被用于手写文本识别，无需参数更新即可适配新集合。
-- 像素级自监督预训练在高方差子空间对齐下优于对比学习与JEPA，提升标签效率。
-- 细粒度结构奖励（如IDS部首分解）替代原子字符级奖励，为中文文本渲染提供部件级信用。
-- OCR感知被引入长上下文推荐代理，替代HTML解析实现平台无关的物品理解。
+- 针对特定问题设计定制化方法，而非通用方案（如颜色无关分割、前缀感知修复）。
+- 强调对真实场景中干扰因素的鲁棒性（如阴影、候选选择错误）。
+- 通过构建专用数据集或训练框架来验证方法有效性。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 开发统一OCR基础模型的参数高效适配方法，在共享框架下支持新语言、新任务与域偏移的低成本扩展。
-- 研究上下文示例的自动选择与压缩策略，在有限上下文长度下最大化手写文本识别的跨域性能。
-- 构建结合真实HTR错误模式的鲁棒评测基准，替代纯模拟CER降解，覆盖版面变化与低质量图像。
-- 探索像素级自监督预训练在印刷体、场景文本与复杂版面中的迁移性，验证高方差子空间对齐指标的通用性。
-- 将细粒度IDS奖励与可微分渲染结合，用于中文、日文等表意文字生成中的结构一致性优化。
-- 设计面向长文档流处理的记忆压缩与信用分配方法，在降低存储开销的同时保持下游抽取与推理性能。
-- 建立视频文本生成与编辑的时序一致性训练目标，缓解V2V局部编辑中的文本崩溃问题。
-- 推动OCR模型在上下文误导下的鲁棒性训练，平衡视觉字符证据与语言先验的权重。
-- 构建跨文档类型与语言的HTR任务容忍度映射，为不同下游任务自动设定可接受的字符错误率目标。
-- 研究紧凑OCR模型（<1B）在端侧设备上的持续学习方案，利用混合任务强化学习适应新数据流。
+- 将颜色无关分割方法扩展到其他手写文字（如天城文、阿拉伯文）并测试跨语言泛化能力。
+- 研究嵌套单词边界框的检测与后处理策略，以提升复杂版面OCR的准确性。
+- 探索自适应阈值和形态学滤波器的自动参数优化，减少人工调参成本。
+- 将DRelay的全局草稿上下文思想应用于其他并行生成任务（如机器翻译、语音识别）。
+- 研究推测解码中草稿模型与选择器的轻量化联合训练，降低训练开销。
+- 在移动端或边缘设备上评估OCR分割与LLM加速方法的实时性能与功耗。
+- 构建包含阴影、多颜色墨水、弯曲文本的OCR基准数据集，推动鲁棒性研究。
+- 将前缀感知修复机制与树状注意力或动态草稿长度结合，进一步延长接受前缀。
 
 ## 六、工程落地启发
 
-- PolyOCR-Venus与Xiaomi-OCR-0表明，统一数据引擎与强化学习后训练可在不显著增加推理成本下提升多任务性能，适合作为基础模型选型参考。
-- 对于历史文档数字化，ICL手写识别可零训练部署，但需注意上下文规模增大后最优采样性能下降，工程上应平衡示例数量与延迟。
-- 手写文本识别在标签稀缺时应优先采用像素级自监督预训练，并利用高方差子空间对齐指标筛选预训练目标。
-- 紧凑0.8B OCR模型（Xiaomi-OCR-0）为端侧或资源受限场景提供了可部署方案，其Q-Mask与Mix-RL配方可复用于其他小模型。
-- SceneFaith基准提醒工程团队在场景文本识别中需评估上下文误导风险，避免模型过度依赖语言先验而改写视觉证据。
-- 纸草HTR容忍度研究为不同文档分析任务设定了明确的CER目标（如分类约20%，搜索约5%），有助于合理分配标注与模型优化资源。
-- MGPO方法可将长程记忆长度压缩近80%且保持抽取效果，适合文档流处理与多轮信息抽取系统的记忆管理。
-- 对于中文文本生成，IDSpect奖励模块可直接嵌入GRPO后训练，无需修改生成器或增加推理成本，提升结构质量。
-- VidScribe基准显示视频文本编辑是当前瓶颈，视频生成产品需重点关注V2V局部编辑的时序一致性与笔画级正确性。
+- 对于孟加拉语等低资源语言OCR，可优先集成颜色无关分割模块，提升移动端预处理鲁棒性。
+- 在LLM服务中，可考虑采用DRelay等推测解码修复技术，以8-16%的加速比提升吞吐。
+- 针对OCR分割中的嵌套框问题，需设计后处理规则或损失函数以避免单词合并。
+- 联合训练草稿模型和选择器时，需平衡训练成本与推理收益，建议在资源充足场景下尝试。
+- 自定义数据集的构建应覆盖真实拍摄障碍（如阴影、褶皱），以评估模型实际部署效果。
 
 ## 七、优先关注论文
 
-- **PolyOCR-Venus: Unified OCR Foundation Models for Text-Centric Visual Intelligence**：提出统一OCR基础模型与能力引导策略优化，并发布OCRBench v2.1修正版，可能成为后续OCR基础模型训练与评测的重要参考。
-- **Xiaomi-OCR-0 Technical Report**：0.8B紧凑模型在多个基准取得高分，其数据引擎与Q-Mask、Mix-RL训练配方对端侧文档解析有直接工程价值。
-- **Handwritten Text Recognition Lives in the High-Pixel Variance Subspace**：从像素方差子空间解释自监督预训练在HTR中的有效性，并提供可预测迁移性能的对齐指标，可能影响未来HTR预训练目标选择。
-- **ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents**：将OCR感知与动态记忆结合用于长上下文代理，展示了OCR作为视觉感知入口在非传统文档任务中的新用法，值得关注其跨平台泛化性。
-- **Decompose Radicals, Then Reward: Fine-Grained Inspection for Accurate Chinese Text Rendering**：IDSpect奖励利用IDS分解提供部件级信用，为中文文本渲染的强化学习后训练提供了新思路，且不增加推理成本，易于集成。
-- **MSTypography: Multi-character Semantic Typography via Balancing Word Legibility and Object Recognizability**：首次面向多字符语义排版平衡可读性与物体可识别性，其OCR约束与结构损失可迁移至生成式设计系统。
+- **Color Independent Word Segmentation From Transcribed Bangla Passages**：为孟加拉语手写OCR提供了颜色无关的分割方案，在手机拍摄场景下F1达91.2%，但嵌套框处理不足，可能影响后续识别。
+- **DRelay: Global Draft Context for Prefix-Aware Parallel Speculative Decoding Repair**：通过全局草稿上下文修复并行解码候选，端到端加速8.1%-16.8%，但联合训练增加复杂度，需评估实际部署开销。
 
 ## 八、论文逐篇解析
 
-### 1. PolyOCR-Venus: Unified OCR Foundation Models for Text-Centric Visual Intelligence
+### 1. Color Independent Word Segmentation From Transcribed Bangla Passages
 
-- arXiv: [2609.37712v1](https://arxiv.org/abs/2609.37712v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.37712v1)
-- 作者: GuangJian Team, Kaili Huang, Yongshuo Zhang, Bingtao Fu, Changjiang Jiang, Chenfan Qu, Chenfeng Zhang, Fangming Cui, Gaoyang Zhang, Jiangwei Xie, Jianshu Li, Jing Huang, Jingwen Bai, Mingqi Fang, Tao Fang, Weihong Zhang, Wenbo Du, Xiongfei Bai, Xuekang Zhu, Yinan Xia, Zhenming Wang, Jian Liu, Jingjing Liu, Xiang Qi, Weiqiang Wang
-- 发布时间: 2026-09-29T14:43:48Z
-- 分类: cs.CV, cs.AI
-- 相关性评分: 21
-- 主题标签: OCR基础模型、统一框架、强化学习、在线蒸馏、基准评测
-
-**中文摘要**
-
-> 该报告提出 PolyOCR 系列统一 OCR 基础模型，采用共享指令遵循框架与大规模数据引擎构建质量验证的 OCR 监督数据，并引入能力引导策略优化（结合基于验证器的 GRPO 与基于教师可靠性和能力差距的在线蒸馏）。同时发布 OCRBench v2.1 修正版。在多个 OCR 基准上取得领先或极具竞争力的结果。
-
-**核心创新概述**
-
-> 提出能力引导策略优化，将验证器驱动的 GRPO 与基于教师可靠性和师生能力差距的样本级路由在线蒸馏相结合，用于统一 OCR 基础模型训练。
-
-**创新点拆解**
-
-- 统一指令遵循框架联合处理识别、定位与推理任务
-- 大规模数据引擎将异构视觉资源转化为质量验证的 OCR 监督数据
-- 能力引导策略优化：验证器 GRPO 与样本级在线蒸馏路由
-- 发布 OCRBench v2.1，人工校正标注并对齐任务评分指标
-
-**当前局限**
-
-> 依赖大规模数据引擎的构建成本与质量；未充分讨论不同规模模型在极端场景下的泛化边界；教师可靠性路由可能引入教师偏差。
-
-**工程启发**
-
-> 为 OCR 基础模型提供统一训练范式与数据构建流程，OCRBench v2.1 可作为评测基准，能力引导策略优化可迁移至其他多任务视觉语言模型训练。
-
-**为什么值得关注**
-
-> 直接面向 OCR 基础模型、文档解析与文本中心视觉智能，涵盖识别、定位与推理的统一建模。
-
-**原始摘要**
-
-Optical Character Recognition (OCR) is evolving from plain-text transcription toward general visual
-intelligence, requiring models to recognize, localize, and reason over textual information in
-complex visual environments. However, existing OCR systems often excel at only some tasks and
-struggle to balance recognition, parsing, and reasoning across scenarios. In this report, we present
-PolyOCR, a family of unified OCR foundation models of varying scales. PolyOCR combines a shared
-instruction-following framework with a large-scale data engine that converts heterogeneous visual
-resources into quality-verified OCR supervision. We introduce Competence-Guided Policy Optimization,
-which combines verifier-based Group Relative Policy Optimization with on-policy distillation through
-sample-wise routing based on teacher reliability and the teacher--student competence gap. We also
-introduce OCRBench v2.1, our revision of OCRBench v2 with manually verified annotation corrections
-and task-aligned scoring metrics. Extensive experiments across OCRBench v2.1, CC-OCR, in-house KIE
-Benchmark, OmniDocBench v1.6 and MDPBench demonstrate that PolyOCR achieves state-of-the-art or
-highly competitive performance.
-
----
-
-### 2. Exploring In-Context Learning for Handwritten Text Recognition
-
-- arXiv: [2609.37195v1](https://arxiv.org/abs/2609.37195v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.37195v1)
-- 作者: Eric Ayllon, Abel Gandia, Jorge Calvo-Zaragoza
-- 发布时间: 2026-09-29T10:15:38Z
-- 分类: cs.CV
-- 相关性评分: 20
-- 主题标签: 手写文本识别、上下文学习、视觉语言模型、跨域适应
-
-**中文摘要**
-
-> 该研究探索使用预训练视觉语言模型的上下文学习（ICL）进行手写文本识别，无需更新模型参数。在多个数据集和模型上评估，并设置跨域场景。结果表明通用 VLM 可通过上下文示例有效转录手写文本，在域偏移下具有与传统 HTR 竞争的潜力；上下文规模增大会降低最优采样性能但缩小误差范围。
-
-**核心创新概述**
-
-> 将上下文学习范式引入手写文本识别，无需参数更新即可实现转录，并系统评估域内与跨域场景下上下文规模与采样策略的影响。
-
-**创新点拆解**
-
-- 无需微调的 ICL 手写文本识别流程
-- 跨域场景下上下文示例来自不同集合的评估设置
-- 分析上下文规模与采样策略对误差范围的影响
-
-**当前局限**
-
-> 上下文规模增大牺牲最优采样性能；跨域性能仍受示例选择影响；未与传统 HTR 在全部指标上详细对比；依赖 VLM 的上下文长度限制。
-
-**工程启发**
-
-> 为历史文档数字化提供无需训练即可部署的转录方案，降低标注依赖，适合快速适配新集合。
-
-**为什么值得关注**
-
-> 涉及 OCR 中的手写文本识别，并探索视觉语言模型的上下文学习在 OCR 任务中的应用。
-
-**原始摘要**
-
-Handwritten Text Recognition (HTR) systems have become an indispensable tool for the digitization of
-historical documents. Not only do they cut down time and cost, but they also allow democratizing
-access and processing of their contents by generating their transcripts. However, literature in HTR
-currently focuses mostly on specialized models that require large amounts of annotated samples to
-achieve satisfactory performance. We explore the use of In-Context Learning with pre-trained Vision-
-Language Models (VLMs) to create a transcription pipeline without updating the model's parameters.
-We then evaluate this pipeline across multiple collections and models, and demonstrate that general-
-purpose VLMs can be effectively taught how to transcribe handwritten text from images. To assess how
-our observations may translate to practical applications, we evaluate the performance in a Cross-
-Domain (CD) scenario, where context examples are drawn from a different collection than the query
-image. Results in both the controlled In-Domain (ID) scenario and the realistic CD scenario follow
-the same patterns. First, as context size grows, the error range is expected to narrow towards the
-average performance. Thus, larger context sizes sacrifice the performance of the oracle-best
-sampling for lower expected error rates. The results obtained show that, without any parameter
-updates, this methodology has strong potential to compete with traditional HTR in the presence of
-domain shift. Moreover, we show and argue that some context samplings work better than others and
-suggest more effort should be put into finding an ideal sampling method in future work.
-
----
-
-### 3. Xiaomi-OCR-0 Technical Report
-
-- arXiv: [2609.36136v1](https://arxiv.org/abs/2609.36136v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.36136v1)
-- 作者: Xin Chen, Anan Du, Feng Feng, Pei Fu, Jian Luan, Longwei Xu, Shaojie Zhang, Hang Li, Heng Qu, Cheng Tan
-- 发布时间: 2026-09-28T19:10:10Z
+- arXiv: [2610.01191v1](https://arxiv.org/abs/2610.01191v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2610.01191v1)
+- 作者: Faias Satter, Noor Masrur, Sk. Md. Masudul Ahsan
+- 发布时间: 2026-10-01T07:04:59Z
 - 分类: cs.CV
 - 相关性评分: 18
-- 主题标签: 文档解析、OCR理解、紧凑模型、强化学习、数据引擎
+- 主题标签: OCR、单词分割、孟加拉语、手写文本、图像处理
 
 **中文摘要**
 
-> 小米提出 Xiaomi-OCR-0，一个 0.8B 统一文档解析与 OCR 中心理解模型。构建约 1.7 亿样本 OCR 中心语料，采用自动化数据引擎结合专家共识、渲染验证和定向合成。训练流程包括 Q-Mask 文本锚定、持续预训练和混合任务强化学习。在多个 OmniDocBench 和 OCR VQA 基准上取得高分，消融表明解析训练充分时 OCR 中心理解监督可进一步提升解析性能。
+> 针对孟加拉语手写文本的单词分割问题，提出一种颜色无关的分割方法。该方法可处理智能手机拍摄的图像，不受纸张和墨水颜色影响，并构建了包含阴影干扰等障碍的自定义数据集。在7374个单词上生成7278个边界框，召回率90.60%，精确率91.80%，F1分数91.20%。
 
 **核心创新概述**
 
-> 在紧凑 0.8B 模型上统一文档解析与 OCR 中心理解，提出 Q-Mask 文本锚定与混合任务强化学习（Mix-RL）的渐进训练配方。
+> 面向孟加拉语手写文本的单词分割，强调颜色无关性及对智能手机拍摄图像中阴影干扰的鲁棒性，并构建了包含多种障碍的自定义数据集。
 
 **创新点拆解**
 
-- 约 1.7 亿样本 OCR 中心语料与自动化数据引擎（专家共识、渲染验证、定向合成）
-- Q-Mask 文本锚定机制
-- 持续预训练与混合任务强化学习（Mix-RL）渐进训练
-- 验证 OCR 中心理解监督对文档解析的额外增益
+- 提出颜色无关的单词分割方法，适用于不同纸张和墨水颜色。
+- 构建了包含阴影干扰等实际拍摄障碍的自定义数据集，涵盖多种复杂场景。
+- 针对手写孟加拉语文本，填补了该语言OCR中单词分割环节的空白。
 
 **当前局限**
 
-> 模型规模较小可能限制复杂推理能力；数据引擎依赖专家共识与合成，可能存在分布偏差；未详细讨论多语言和低资源场景。
+> 对于包含多个单词的边界框，未进行嵌套处理，可能导致分割错误；自适应阈值和膨胀滤波器尺寸的调整不够精细，可能影响分割精度。
 
 **工程启发**
 
-> 提供可部署的紧凑 OCR 模型与数据构建、训练配方，适合端侧或资源受限场景的文档解析。
+> 为孟加拉语手写文本OCR系统提供了可靠的前处理步骤，可集成到移动端OCR应用中，推动孟加拉语OCR的实用化。
 
 **为什么值得关注**
 
-> 直接针对 OCR 与文档解析的统一模型，涉及数据引擎、训练范式和强化学习。
+> 论文主题为OCR中的单词分割，是OCR流程的关键环节，直接相关于OCR研究。
 
 **原始摘要**
 
-Compact OCR-specific vision-language models achieve strong document parsing performance, but often
-rely on costly supervision and focus primarily on visual-text reconstruction. We introduce Xiaomi-
-OCR-0, a unified 0.8B model for document parsing and OCR-centric understanding. We build an
-approximately 170M-sample OCR-centric corpus using an automated data engine that combines expert
-consensus, render-based verification, and targeted synthesis. Starting from Qwen3.5-0.8B, our
-progressive training recipe combines Q-Mask-based text anchoring, continued pretraining, and mixed-
-task reinforcement learning (Mix-RL). Xiaomi-OCR-0 achieves 95.24 on Real5-OmniDocBench, 96.83 on
-OmniDocBench v1.6, and 87.94 on Wild-OmniDocBench, while reaching an average score of 83.2 across
-five OCR-oriented VQA benchmarks. Ablations further show that, with sufficient parsing training,
-OCR-centric understanding supervision provides additional gains for document parsing. Homepage:
-https://huggingface.co/spaces/SeerRay-Lab/Xiaomi-OCR-0.
+An optical character recognition(OCR) system can scan paper and extract text, making people's jobs
+easier. While numerous OCR systems are accessible in the software sector, finding a dependable
+equivalent solution for Bangla is tough. When it comes to handwritten texts, the case is even more
+rare. The first fundamental step to any OCR is to segment words from text images. If this stage
+fails, the total OCR's performance will be poor no matter how promising the later stages perform.
+This research aims to segment words in a handwritten Bangla text image. This research can be
+implemented on any smartphone-captured image, irrespective of the color and type of paper and ink.
+Furthermore, as smartphone-captured images can create shadow interferences, the custom dataset built
+for this research is created in such a way that every possible obstacle that can be faced is
+included. For 7374 words, a total of 7278 bounding boxes are generated, which have recall of 90.60
+%, precision of 91.80 %, and F1-score of 91.20 %. The system can be further improved with nested
+operations on bounding boxes containing several words or by adjusting the adaptive thresholding and
+dilation filter sizes to a more precise level.
 
 ---
 
-### 4. ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents
-
-- arXiv: [2609.37311v1](https://arxiv.org/abs/2609.37311v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.37311v1)
-- 作者: Haohao Qu, Yongcheng Jing, Chun Hin Chan, Shanru Lin, Wenqi Fan, Dacheng Tao
-- 发布时间: 2026-09-29T11:46:23Z
-- 分类: cs.AI, cs.IR
-- 相关性评分: 14
-- 主题标签: OCR感知、推荐代理、长上下文、动态记忆、强化学习
-
-**中文摘要**
-
-> 针对长上下文推荐代理的脆弱物品感知和低效长上下文推理问题，提出 ReMem 框架，结合基于 OCR 的多模态感知与时间演化动态记忆。通过截图和 OCR 工具提取结构化多模态信息，替代原始 HTML 解析；引入分块顺序记忆更新策略，以线性推理复杂度和有界上下文长度维护固定大小记忆；开发多记忆 GRPO 变体传播最终答案优势至中间对话。
-
-**核心创新概述**
-
-> 将 OCR 多模态感知与时间演化动态记忆结合用于长上下文推荐代理，提出分块顺序记忆更新与多记忆 GRPO 训练变体。
-
-**创新点拆解**
-
-- 基于 OCR 的截图感知替代 HTML 解析，实现平台无关的物品理解
-- 分块顺序记忆更新策略，固定大小记忆与线性推理复杂度
-- 多记忆 GRPO 变体，将最终答案优势传播至中间对话
-
-**当前局限**
-
-> OCR 感知在复杂版面或低质量截图下可能出错；记忆更新策略可能丢失细粒度历史信息；未充分评估跨平台泛化性。
-
-**工程启发**
-
-> 为推荐代理提供平台无关的视觉感知与长上下文记忆方案，可降低对 HTML 结构的依赖，提升代理在真实平台上的可部署性。
-
-**为什么值得关注**
-
-> 核心使用 OCR 作为多模态感知工具，涉及 OCR 在代理系统中的下游应用。
-
-**原始摘要**
-
-Recent Recommendation Agents (RecAgents) offer a promising alternative by shifting recommendation to
-an active, user-side paradigm, where generative agents autonomously perceive external platforms,
-reason over user preferences, and execute decisions. However, existing RecAgents still suffer from
-two critical limitations: brittle item perception based on noisy and heterogeneous item pages, and
-inefficient long-context reasoning over extended user histories and multi-step interaction traces.
-To address these challenges, we propose a novel recommendation agent framework, termed as ReMem,
-that combines OCR-based multimodal perception with time-evolving dynamic memory. Instead of parsing
-raw HTML, ReMem observes item pages through screenshots and extracts structured multimodal
-information via an OCR tool, enabling a more humanoid and platform-agnostic perception mechanism. To
-support long-horizon preference modeling, ReMem further introduces a chunk-wise sequential memory
-update strategy, where the agent selectively maintains a fixed-size memory of informative historical
-interactions while processing arbitrarily long contexts with linear inference complexity and bounded
-context length. This design allows the agent to preserve evolving user preferences without relying
-on external memory modules or disrupting the standard autoregressive generation process. To enhance
-the dynamic memory instruction, we further develop a multi-memory GRPO variant, which propagates the
-final-answer advantage to all intermediate conversations that contribute to the final response.
-Extensive experiments on three datasets demonstrate that ReMem consistently outperforms state-of-
-the-art baselines, achieving an average improvement of 5.16\% across three recommendation agent
-tasks, namely searching, ranking, and judging.
-
----
-
-### 5. When VLMs Trust Context: Evaluating Scene Text Recognition under Misleading Context
-
-- arXiv: [2609.34781v1](https://arxiv.org/abs/2609.34781v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.34781v1)
-- 作者: Yuxing Cheng, Yuan Wu, Yi Chang
-- 发布时间: 2026-09-28T09:55:28Z
-- 分类: cs.CV, cs.AI
-- 相关性评分: 12
-- 主题标签: 场景文本识别、上下文误导、基准评测、视觉语言模型、鲁棒性
-
-**中文摘要**
-
-> 该文引入 SceneFaith 基准（781 张生成场景图像），研究视觉语言模型在场景文本识别中受周围上下文误导而进行“改写”的行为，将输出分为 Literal、Canonical 和 Other。15 个模型均出现改写，比率 8.45%–58.51%。控制实验表明移除场景信息减少改写，改变场景可改变输出，模糊目标文本增加改写。强调可靠场景文本识别需平衡视觉字符证据与上下文信息。
-
-**核心创新概述**
-
-> 构建专门评估场景文本识别中上下文误导的基准 SceneFaith，并提出 Literal/Canonical/Other 分类以区分忠实转录与上下文一致性改写。
-
-**创新点拆解**
-
-- SceneFaith 基准：781 张生成场景图像评估上下文误导
-- 输出分类体系区分忠实识别与改写
-- 控制实验分析场景信息、文本模糊对改写的影响
-
-**当前局限**
-
-> 基准基于生成图像，可能与真实场景分布存在差距；改写率受提示和模型特定因素影响；未提出具体缓解方法。
-
-**工程启发**
-
-> 为场景文本识别模型提供上下文鲁棒性评测工具，指导模型在视觉证据与上下文之间取得平衡。
-
-**为什么值得关注**
-
-> 直接评估 OCR/场景文本识别中的上下文偏差问题，属于 OCR 鲁棒性研究。
-
-**原始摘要**
-
-Vision-language models (VLMs) can read text in natural scenes, but their predictions may be
-influenced by the surrounding context. When the printed text conflicts with what the scene suggests,
-a model may return a more plausible word instead of the shown text. We introduce SceneFaith, a
-benchmark of 781 generated scene images for studying this behavior. Each output is classified as
-Literal, Canonical, or Other, separating faithful transcription from context-consistent rewriting
-and ordinary recognition errors. Across 15 models from seven families, all models show rewriting on
-clear images, with rates ranging from 8.45\% to 58.51\%. Controlled experiments further show that
-surrounding context matters: removing surrounding scene information reduces rewriting and improves
-literal accuracy, while changing the scene around the same text patch can also change model outputs.
-Moreover, weakening the target text with blur increases rewriting. These results show that reliable
-scene-text recognition requires VLMs to balance visual character evidence with contextual
-information, preserving clear text while using context mainly when the visual evidence is uncertain.
-
----
-
-### 6. Which papyrus HTR is good enough? Character-error-rate tolerance of four papyrological tasks on Greek texts
-
-- arXiv: [2609.37755v1](https://arxiv.org/abs/2609.37755v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.37755v1)
-- 作者: Anton Repushko, Elena Chepel
-- 发布时间: 2026-09-29T15:03:30Z
-- 分类: cs.CL
-- 相关性评分: 11
-- 主题标签: 手写文本识别、字符错误率、纸草学、下游任务、基准
-
-**中文摘要**
-
-> 该研究评估希腊纸草手写文本识别（HTR）在不同纸草学任务中可容忍的字符错误率（CER）。利用 papyri.info 的 63,846 个版本，模拟完美 HTR 输出并降解至 1–50% CER，训练小模型进行文档类型、年代和文献/文学分类，并应用关键词搜索。结果：文献/文学分类可容忍约 20% CER，文档类型约 7.5%，子类型和搜索约 5%，年代约 3%。在含错误文本上重训练可缓解 15% CER 以上的急剧退化。
-
-**核心创新概述**
-
-> 首次系统量化希腊纸草 HTR 的字符错误率容忍度，针对四类纸草学任务设定基准，并分析错误形状和重训练的影响。
-
-**创新点拆解**
-
-- 基于 63,846 个版本的完美 HTR 模拟与可控 CER 降解
-- 针对文档类型、年代、文献/文学分类和关键词搜索的容忍度评估
-- 分析错误形状、丢失行和重训练对任务性能的影响
-
-**当前局限**
-
-> 基于模拟数据而非真实 HTR 输出；仅针对希腊纸草文本；未考虑版面和图像质量变化；模型规模较小。
-
-**工程启发**
-
-> 为希腊纸草 HTR 系统设定可接受精度目标，指导资源分配和任务适配，降低对完美识别的依赖。
-
-**为什么值得关注**
-
-> 直接研究 OCR/HTR 在历史文献中的错误容忍度与下游任务影响。
-
-**原始摘要**
-
-Purpose: Most Greek papyri remain unpublished and undigitised; a handwritten text recognition (HTR)
-pipeline that transcribes them automatically would let scholars discover documents and literary
-works that have so far gone unread. Recognition systems for Ancient Greek papyri are in statu
-nascendi, and how accurate they must be for a given papyrological task has not been examined. To
-answer this and set a benchmark for Greek papyrus HTR, we test a range of character error rates
-(CER) against four papyrological tasks, using published editions as ground truth. Methods: From
-63,846 current editions of Greek texts in papyri.info, we imitate a letters-only "perfect HTR"
-output by removing the editorial layer, then degrade it with a seeded algorithm to exact CERs of 1 -
-50%, with lost lines and four error-shape variants. On these data we train small models (TF-IDF,
-fastText, a character CNN, ByT5-small) for document type, dating and documentary-versus-literary
-classification, and apply eight keyword search methods. We compare models trained on clean text with
-models retrained at a specific CER level, and evaluate across CERs. Results: Tolerance differs by
-task. With clean-trained models, documentary-versus-literary classification retains 90% of its
-metric up to 20% CER; document type up to 7.5%; subtypes and search up to 5%; dating only up to 3%.
-Retraining on text containing character errors largely eliminates the sharp degradation that
-otherwise sets in above 15% CER. Models generally tolerate concentrated damage in a long document
-better than small errors spread across a short text. Conclusion: The study provides a CER target for
-each of the four tasks and shows that models trained on noisy text make current, imperfect text
-recognition useful for them.
-
----
-
-### 7. Learning What to Remember: Long-horizon Counterfactual Memory Optimization
-
-- arXiv: [2609.37930v1](https://arxiv.org/abs/2609.37930v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.37930v1)
-- 作者: Jiaming Tang, Mingyan Liu, Armin Sarabi
-- 发布时间: 2026-09-29T16:17:32Z
-- 分类: cs.CL, cs.LG
-- 相关性评分: 10
-- 主题标签: 长程记忆、信用分配、策略优化、文档级信息抽取、记忆压缩
-
-**中文摘要**
-
-> 针对持久文本记忆中「该记什么」这一信用分配问题，提出 Memory Gain Policy Optimization（MGPO），将每次记忆重写的价值归因于其对当前与未来下游效用的边际贡献，从而把延迟记忆效用转化为直接学习信号。在文档级信息抽取任务上验证，MGPO 在提升抽取效果的同时将平均记忆长度较初始策略减少近 80%，且学到的记忆策略可跨域复用和迁移至未再训练的下游模型。
-
-**核心创新概述**
-
-> 将记忆重写视为增量价值分配问题，提出 MGPO 以边际贡献而非绝对效用作为奖励信号，用于优化长程记忆的保留内容与长度。
-
-**创新点拆解**
-
-- 把「记忆该记什么」建模为信用分配问题，显式区分继承的旧信息价值与新重写带来的增量价值。
-- 提出 Memory Gain Policy Optimization，用记忆重写对当前及未来下游效用的边际贡献作为学习信号。
-- 在文档级信息抽取这一结构化监督场景中，使单次记忆更新的效果可直接测量并用于策略优化。
-- 实现记忆压缩与效果提升的兼顾，平均记忆长度减少约 80%，并支持跨域复用与免训练迁移。
-
-**当前局限**
-
-> 实验主要局限于文档级信息抽取任务，尚未在更开放、监督信号更弱的长程对话或通用推理场景中验证；对记忆重写边际贡献的估计依赖当前任务的下游效用反馈，跨任务泛化时的信用分配稳定性仍需检验。
-
-**工程启发**
-
-> 为长程 LLM 应用中的文本记忆管理提供可训练的策略优化方法，显著降低记忆存储开销与上下文长度，适合需要持续交互、文档流处理或多轮信息抽取的工程系统。
-
-**为什么值得关注**
-
-> 论文关注结构化文本信息的持久记忆与抽取，核心方法围绕记忆重写与信息保留，与 OCR/文档解析中长文档信息抽取与记忆管理问题相关。
-
-**原始摘要**
-
-Persistent textual memory allows language models to carry information across long interactions, but
-learning what to remember is fundamentally a credit-assignment problem. A memory rewrite may only
-become useful many steps later, while much of the observed utility may be inherited from information
-already stored before the rewrite. We introduce Memory Gain Policy Optimization (MGPO), which
-isolates the incremental value of each memory rewrite by crediting it for its marginal contribution
-to current and future downstream utility. This turns delayed memory utility into a direct learning
-signal for optimizing what information should persist. We study MGPO on document-level information
-extraction, where structured supervision makes the effects of individual memory updates directly
-measurable. MGPO improves extraction while reducing average memory length by nearly 80% relative to
-the initial memory policy before optimization. The learned memory policy also supports reuse and
-transfer across domains, downstream models without further training. These results show that
-effective memory learning depends not only on preserving useful information, but on identifying
-which memory updates create lasting incremental value.
-
----
-
-### 8. Handwritten Text Recognition Lives in the High-Pixel Variance Subspace
-
-- arXiv: [2609.35473v1](https://arxiv.org/abs/2609.35473v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.35473v1)
-- 作者: Carlos Garrido-Munoz, Jorge Calvo-Zaragoza
-- 发布时间: 2026-09-28T15:54:35Z
-- 分类: cs.CV, cs.LG
-- 相关性评分: 10
-- 主题标签: 手写文本识别、自监督预训练、像素重建、高方差子空间、表征学习
-
-**中文摘要**
-
-> 论文提出手写文本识别（HTR）的自监督预训练中，判别信号主要集中于像素空间的高方差方向，而非低方差方向，因此保留高方差像素内容的目标迁移性最好。在匹配编码器、数据与评测协议下比较六种 SSL 方法（像素级 MIM、JEPA、对比学习）于六种手写基准、五种语言，结果显示像素级 SSL 在全标签下 CER 最低，且是唯一从真实手写数据预训练中获益的方法族，标签效率更高；与高方差像素子空间的对齐程度可预测各方法的 CER。
-
-**核心创新概述**
-
-> 从像素方差子空间角度解释 HTR 中像素重建优于对比学习的现象，并给出可预测迁移性能的表征对齐指标。
-
-**创新点拆解**
-
-- 提出 HTR 判别信号集中于高方差像素子空间、低方差方向信号缺失的假设，并据此预测自监督目标的迁移性。
-- 在匹配编码器、数据与评测协议下系统比较像素级 MIM、JEPA 与对比学习三类共六种 SSL 方法。
-- 发现像素级 SSL 在六个手写基准上 CER 最低，能暴露逐字符位置信息，且是唯一从真实手写预训练中获益的方法族。
-- 证明编码器与高方差像素子空间的对齐程度可在各方法内预测 CER，并展示冻结像素级编码器配合预训练 LLM 解码器可媲美全监督微调基线。
-
-**当前局限**
-
-> 结论主要基于手写文本识别基准与特定 SSL 方法族，是否推广到印刷体、场景文本或更复杂版面尚不明确；高方差子空间对齐作为预测指标在不同编码器架构与数据规模下的稳定性仍需验证。
-
-**工程启发**
-
-> 为手写文本识别及更广泛的 OCR 预训练提供方法选择依据：在标签稀缺场景优先采用像素重建式 SSL，并可利用高方差子空间对齐指标筛选预训练目标与编码器。
-
-**为什么值得关注**
-
-> 论文直接研究手写文本识别（HTR）的自监督预训练与表征学习，属于 OCR 核心方法范畴。
-
-**原始摘要**
-
-In self-supervised pretraining for Handwritten Text Recognition (HTR), pixel reconstruction methods
-outperform contrastive methods, unlike in natural-image classification. We argue that this
-difference follows from where discriminative signal lies in pixel space: for HTR, it is concentrated
-in high-variance directions and largely absent from low-variance ones. This predicts that objectives
-preserving high-variance pixel content will transfer best. We test six SSL methods from three
-families (pixel-grounded MIM, JEPA, and contrastive) under matched encoder, data, and evaluation
-protocols on six handwriting benchmarks across five languages. With full labels, pixel-groundrounded
-SSL achieves the lowest CER on every benchmark and both frozen probes, exposes per-position
-character information that other families recover only through the readout, and is the only family
-to benefit from pretraining on real handwriting. Pixel-grounded representations are also more label
-efficient. Across datasets, encoder alignment with the high-variance pixel subspace predicts CER
-within every method. With a pretrained LLM decoder, a frozen pixel-grounded encoder is competitive
-with fully fine-tuned supervised baselines; full fine-tuning achieves the lowest mean CER and ranks
-first or second on every benchmark. These results show that the value of pixel reconstruction
-depends on where discriminative signal lies in the input.
-
----
-
-### 9. EnterpriseBench: Benchmarking LLM Agents on Enterprise-Level Strategic Reasoning and Decision-Making
-
-- arXiv: [2609.37658v1](https://arxiv.org/abs/2609.37658v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.37658v1)
-- 作者: Min Yang, Yichen Pan, Jinghua Piao, Dandan Song, Yongshun Gong, Yong Li
-- 发布时间: 2026-09-29T14:20:18Z
+### 2. DRelay: Global Draft Context for Prefix-Aware Parallel Speculative Decoding Repair
+
+- arXiv: [2610.01439v1](https://arxiv.org/abs/2610.01439v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2610.01439v1)
+- 作者: Zhuoyu Wang, Junnan Huang, Xinyu Chen
+- 发布时间: 2026-10-01T10:37:32Z
 - 分类: cs.AI
-- 相关性评分: 9
-- 主题标签: 智能体基准、企业决策、长程交互、信息抽取、供应链模拟
+- 相关性评分: 3
+- 主题标签: 推测解码、大语言模型、并行解码、推理加速、自然语言处理
 
 **中文摘要**
 
-> 针对现有企业与金融基准多测静态能力、缺乏交互与长程决策评测的问题，提出 EnterpriseBench，将既有企业/金融 QA 数据重组为按能力与难度标注的基础套件，并新增三个专业交互场景：咨询式多轮信息寻求、延迟反馈下的供应链啤酒游戏、以及面向项目/风险/人力规划的企业数字孪生模拟器。对九种智能体方法与四种基座模型的实验表明，当前智能体在企业场景中尚未达到稳定、全面、跨任务可靠的决策水平。
+> 针对大语言模型推测解码中并行草稿因早期选择错误导致接受前缀短的问题，提出DRelay方法。该方法利用整个草稿块的全局信息，在目标模型验证前对候选选择进行前缀感知的选择性修复。通过全局读取器提取每个候选的跨位置预测信息，因果选择器结合候选级信息和已选前缀决定是否保留或替换当前token。联合训练草稿骨干和选择器，并结合候选支持学习与修复目标。在八个基准测试上，平均接受长度和端到端解码性能均优于DFlash、Domino和DSpark，在SGLang服务下端到端加速比提升8.1%-16.8%。
 
 **核心创新概述**
 
-> 构建覆盖静态 QA 到动态长程决策的企业级智能体基准，并引入咨询、供应链模拟与数字孪生三类交互环境。
+> 提出DRelay，利用全局草稿上下文对并行推测解码中的候选选择进行前缀感知修复，通过联合训练草稿模型和选择器，减少早期选择错误，延长接受前缀。
 
 **创新点拆解**
 
-- 将现有企业与金融 QA 数据集统一重组为按能力与难度标注的基础套件，形成从静态到动态的统一评测谱系。
-- 设计 Consulting、Beer Game 与 Enterprise Digital Twin 三个专业交互场景，覆盖多轮信息寻求、延迟反馈库存控制与项目规划。
-- 在九种智能体方法与四种基座模型上进行系统评测，揭示企业场景中稳定性和跨任务可靠性的不足。
+- 设计全局读取器提取草稿块中每个候选的跨位置预测信息，结合因果选择器进行前缀感知的候选修复。
+- 提出联合训练框架，将候选支持学习与修复目标结合，并根据位置对连续接受前缀的潜在贡献加权修复损失。
+- 在多个基准和实际服务框架下验证了方法有效性，显著提升端到端加速比。
 
 **当前局限**
 
-> 基准主要基于已有 QA 数据集与模拟环境，与企业真实工作流的复杂度和数据分布仍有差距；交互场景数量有限，未覆盖企业决策中的全部角色协作与合规约束；评测结果可能受基座模型与提示策略影响。
+> 方法依赖于草稿模型和选择器的联合训练，可能增加训练复杂度和计算开销；未探讨在极长序列或资源受限场景下的性能。
 
 **工程启发**
 
-> 为面向企业流程的 LLM 智能体提供可复用的评测框架与交互环境，便于在咨询、供应链与项目规划等场景中诊断智能体的长程决策与信息寻求能力。
+> 能够提升大语言模型推测解码的端到端推理速度，适用于需要低延迟的LLM服务场景，具有较高的工程应用价值。
 
 **为什么值得关注**
 
-> 虽非直接 OCR 论文，但其基础套件包含信息抽取等静态能力评测，且文档解析常作为企业智能体前端，与 OCR 下游应用评测相关。
+> 虽非直接OCR研究，但涉及大语言模型推理加速，与OCR中文本生成或后处理环节的模型优化相关。
 
 **原始摘要**
 
-LLM agents are increasingly expected to support enterprise workflows, where tasks often involve
-missing information, uncertainty, feedback, and long-term trade-offs. However, existing enterprise
-and financial benchmarks mainly test static capabilities such as information extraction, numerical
-calculation, domain knowledge, and financial QA, leaving interactive and long-horizon decision-
-making underexplored. To bridge this gap, we introduce EnterpriseBench, a benchmark that evaluates
-LLM agents across this spectrum, from static question answering to dynamic decision-making.
-Specifically, EnterpriseBench reorganizes existing enterprise and financial QA datasets into a
-unified foundational suite annotated by capability and difficulty, and introduces three professional
-interactive settings: Consulting, based on management-consulting-style business cases for client
-problem diagnosis through multi-turn information seeking; the Beer Game, adapted from a classic
-supply-chain management simulation for inventory control under delayed feedback; and Enterprise
-Digital Twin, a project-based business simulator for workforce, risk, and project planning.
-Experiments with nine agent methods under four backbone models show that current agents have not yet
-achieved stable, comprehensive, and cross-task reliability in enterprise scenarios. These results
-show that EnterpriseBench provides a practical benchmark for evaluating LLM agents in realistic
-enterprise strategic reasoning and decision-making.
-
----
-
-### 10. MSTypography: Multi-character Semantic Typography via Balancing Word Legibility and Object Recognizability
-
-- arXiv: [2609.37141v1](https://arxiv.org/abs/2609.37141v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.37141v1)
-- 作者: Xinye Yang, Xinding Zhu, Kai Fang, Xinyi Ren, Mengjian Li, Bin Cao, Jiazhou Chen
-- 发布时间: 2026-09-29T09:41:00Z
-- 分类: cs.CV, cs.GR
-- 相关性评分: 9
-- 主题标签: 语义排版、多字符、OCR约束、扩散先验、字形可读性
-
-**中文摘要**
-
-> 针对现有多字符语义排版方法可读性约束不足、局部形变不够的问题，提出全局到局部的排版框架：全局进行掩码驱动的轮廓逼近，局部进行语义引导细化，中间加入剔除步骤提升效率。为保持词可读性设计结构损失（显式碰撞约束与隐式 Jacobian 奇异值约束）及 OCR 可读性约束；为增强物体可识别性利用扩散先验的语义引导。在英、中、日、韩、阿五种语言上优于现有方法。
-
-**核心创新概述**
-
-> 首次面向多字符语义排版，在全局到局部框架中同时平衡词级可读性与物体可识别性，并引入结构损失与 OCR 约束。
-
-**创新点拆解**
-
-- 提出面向多字符词的全局到局部语义排版框架，结合掩码驱动轮廓逼近与语义引导局部细化，并插入剔除步骤提升效率。
-- 设计显式碰撞约束与隐式 Jacobian 奇异值约束等结构损失，以及字符级 OCR 可读性约束，以保持词可读性。
-- 利用扩散先验进行语义引导，在朝目标概念变形的同时保持字符结构完整性。
-- 在五种代表性语言上验证多字符场景下可读性与物体可识别性的平衡优于 SOTA。
-
-**当前局限**
-
-> 方法依赖扩散先验与多种约束的联合优化，计算成本可能较高；对极端复杂字形或长词的可读性保持仍可能受限；评估主要基于视觉与 OCR 指标，缺乏大规模用户感知研究。
-
-**工程启发**
-
-> 为多字符语义排版、品牌字体设计与跨语言视觉文本生成提供可工程化的框架，OCR 约束与结构损失可直接用于需要字形可读性的生成式设计系统。
-
-**为什么值得关注**
-
-> 论文在语义排版中显式引入 OCR 可读性约束与字符结构保持，与 OCR 中的字形可读性和文本渲染质量评估直接相关。
-
-**原始摘要**
-
-Semantic typography is a design technique where the visual representation of a word conveys its
-semantic meaning, while maintaining its legibility. Existing digital typography methods mainly focus
-on single-character scenarios. They suffer from a lack of legibility constraints and insufficient
-local deformation when extended to multi-character words, as the intricate structures among multiple
-characters are hardly preserved during the typography process. In this paper, we propose a global-
-to-local typography framework for multi-character scenarios. It performs mask-driven silhouette
-approximation at the global level, while semantic-guided refinement at the local level, with a
-culling step in between to improve efficiency. To preserve word legibility, we designed structural
-losses (including explicit collision constraints and implicit Jacobian singular value constraints)
-and an OCR constraint for character-level readability. To enhance the object recognizability, we
-leverage semantic guidance with diffusion priors, which drives the character glyph toward the target
-concept while preserving its structural integrity. To the best of our knowledge, this is the first
-multi-character semantic typography method that effectively balances word legibility and object
-recognizability. Evaluations on five representative languages (English, Chinese, Japanese, Korean,
-Arabic) demonstrate superiority over SOTA methods. Codes will be open-sourced.
-
----
-
-### 11. Beyond Legibility: Benchmarking Visual Text Rendering and In-Place Editing in Unified Video Generation
-
-- arXiv: [2609.36598v1](https://arxiv.org/abs/2609.36598v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.36598v1)
-- 作者: Ziying Zhang, Litao Li, Junchao Liao, Tianyi Zeng, Siyu Zhu, Long Qin, Zhenghao Zhang
-- 发布时间: 2026-09-29T03:17:09Z
-- 分类: cs.CV
-- 相关性评分: 9
-- 主题标签: 视频文本生成、视觉文本编辑、OCR指标、时序一致性、基准评测
-
-**中文摘要**
-
-> 针对视频生成中视觉文本易崩溃、现有基准忽视时序动态的问题，提出 VidScribe 统一诊断基准，覆盖 T2V 语言生成文字、R2V 参考文本身份迁移、I2V 动态下文字保持、V2V 局部文本编辑四种生成范式。基准包含 803 个人工验证样本，覆盖内在文本属性、物理成像条件与时序行为共 12 轴正交因子空间，并建立跟踪门控的评测套件（11 个共享指标与 2 个任务专用探针）。对 11 个商业与开源系统的评测显示视频文本能力非单一，内容识别与笔画级字形正确性解耦，任务间性能高度不对称，V2V 编辑是主要瓶颈。
-
-**核心创新概述**
-
-> 构建首个统一覆盖视频文本生成、迁移、保持与局部编辑的诊断基准，并引入跟踪门控与因子正交设计以评测时序动态下的文本质量。
-
-**创新点拆解**
-
-- 提出 VidScribe 基准，统一覆盖 T2V、R2V、I2V、V2V 四种视频文本生成与编辑范式。
-- 构建 803 个人工验证样本与覆盖内在文本属性、物理成像条件、时序行为的 12 轴条件正交因子空间。
-- 建立跟踪门控的评测套件，包含 11 个共享指标与 2 个任务专用探针，强调可测量性条件。
-- 发现视频文本能力非单一，内容识别与笔画级字形正确性解耦，且退化集中在少数文本结构与时序因素而非不利成像条件。
-
-**当前局限**
-
-> 基准规模为 803 个样本，覆盖语言与场景仍有限；评测依赖跟踪与 OCR 指标，对复杂遮挡、快速运动或艺术字体的鲁棒性可能不足；未涵盖音频与文本交互等更复杂多模态场景。
-
-**工程启发**
-
-> 为视频生成系统的视觉文本质量提供可诊断的评测工具，有助于定位 T2V/I2V/V2V 中的文本崩溃瓶颈，指导视频生成与视频编辑产品的文本渲染优化。
-
-**为什么值得关注**
-
-> 论文以视觉文本渲染与编辑为核心，评测指标依赖 OCR 与字形正确性，与 OCR 在视频场景中的鲁棒性和文本质量评估相关。
-
-**原始摘要**
-
-A video can exhibit convincing motion and photorealism yet fail immediately when visual text
-collapses. Unlike generic scene content, visual text is unforgiving in video generation: minor
-stroke corruption, temporal instability, or editing errors instantly break legibility and realism.
-Existing benchmarks overlook this challenge by treating text as incidental or using static OCR
-metrics that ignore temporal dynamics. We introduce VidScribe, a unified diagnostic benchmark
-spanning four generation regimes: writing from language (T2V), transferring text identity from a
-reference (R2V), sustaining text under dynamics (I2V), and localized text editing (V2V). VidScribe
-contains 803 human-verified samples across a 12-axis conditionally orthogonal factor space covering
-Intrinsic Text Properties, Physical Imaging Conditions, and Temporal Behavior. For reliable
-evaluation, we build a track-grounded, gated suite with 11 shared metrics and 2 task-specific probes
-under strict measurability conditions. Benchmarking 11 commercial and open-source systems shows that
-video text capability is non-monolithic, with content recognition decoupled from stroke-level glyph
-correctness. Performance is highly task-asymmetric: I2V sustains text most reliably, whereas V2V
-editing is the primary bottleneck. Counter-intuitively, degradation concentrates on a small subset
-of text-centric structural and temporal factors rather than adverse imaging conditions. Further
-probes show that visual references improve glyph and typographic fidelity rather than content
-accuracy, while localized editing fails to isolate target text without corrupting undeclared source
-text. Beyond evaluation, VidScribe also provides an actionable training signal, where benchmark-
-aligned preference optimization measurably improves visual text generation.
-https://huggingface.co/datasets/Vicky0720/VidScribe.
-
----
-
-### 12. Decompose Radicals, Then Reward: Fine-Grained Inspection for Accurate Chinese Text Rendering
-
-- arXiv: [2609.37569v1](https://arxiv.org/abs/2609.37569v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2609.37569v1)
-- 作者: Yazhen Xie, Xingsong Ye, Zhineng Chen
-- 发布时间: 2026-09-29T13:37:32Z
-- 分类: cs.CV
-- 相关性评分: 6
-- 主题标签: 中文文本渲染、IDS、OCR奖励、强化学习、细粒度识别
-
-**中文摘要**
-
-> 针对文本到图像模型中中文渲染的结构性错误，指出基于 OCR 的强化学习奖励将汉字视为原子字符，忽视部首组合与空间关系，反馈过于粗糙。论文采用表意文字描述序列（IDS）表示部件与空间算子，训练专家 IDS 识别器将渲染中文转写为 IDS，进而提出 IDSpect：在 GRPO 后训练中将目标文本确定性分解为 IDS 令牌，并对齐裁剪级视觉 IDS 预测，配合全局字符语义奖励，在不改变生成器、不增加推理成本的情况下提供部件级与空间关系级的细粒度信用。在 Qwen-Image 上于 LongText 与 GenTextEval 取得领先的结构质量与语义对齐。
-
-**核心创新概述**
-
-> 利用 IDS 将汉字渲染质量分解为部件与空间关系，并设计 IDSpect 奖励在强化学习中提供细粒度结构信用，替代原子字符级 OCR 奖励。
-
-**创新点拆解**
-
-- 引入表意文字描述序列（IDS）作为汉字结构与空间关系的表示，并训练专家 IDS 识别器用于渲染文本转写。
-- 提出 IDSpect 奖励，将目标文本确定性分解为 IDS 令牌，对齐裁剪级视觉 IDS 预测与目标序列，利用全局唯一令牌信用使其对检测区域顺序鲁棒。
-- 结合整体字符语义奖励，在 GRPO 后训练中提供部件级与空间关系级细粒度反馈，不改变图像生成器、不增加推理成本。
-- 在 Qwen-Image 上验证，于 LongText 与 GenTextEval 取得领先的结构质量与语义对齐。
-
-**当前局限**
-
-> 方法依赖专家 IDS 识别器的准确性，识别错误可能传导至奖励信号；目前主要在 Qwen-Image 上验证，跨模型与跨语言（如日文汉字）的泛化性待检验；对极度复杂或生僻汉字的 IDS 分解与识别覆盖可能不足。
-
-**工程启发**
-
-> 为中文文本到图像生成提供可直接嵌入强化学习后训练的细粒度奖励模块，无需修改生成器或增加推理成本，适合需要高质量中文文字渲染的生成式设计、广告与出版系统。
-
-**为什么值得关注**
-
-> 论文以 OCR 奖励为切入点，提出基于 IDS 的汉字结构识别与细粒度奖励，直接涉及 OCR 在生成式文本渲染质量评估中的应用。
-
-**原始摘要**
-
-Rendering accurate Chinese text remains challenging for text-to-image models. Existing OCR-based
-reinforcement-learning rewards compare decoded transcripts with target strings. Such rewards
-overlook the compositional nature of Chinese writing: an ideograph consists of reusable components
-arranged through explicit spatial relations, yet OCR evaluates it as an atomic character.
-Consequently, visually different radical-level errors may receive equally coarse feedback,
-encouraging glyphs that merely resemble the target instead of faithfully reproducing its internal
-structure. We employ Ideographic Description Sequences (IDS), which comprise spatial operators and
-character components, and train an expert IDS recognizer to transcribe rendered Chinese text into
-this representation. Building on this recognizer, we introduce IDSpect, which deterministically
-decomposes the target text into IDS tokens and aligns crop-level visual IDS predictions with the
-target sequence. Globally unique token credit makes this comparison robust to the order of detected
-text regions. Combined with a whole-character semantic reward, IDSpect supplies fine-grained credit
-with component and spatial-relation without changing the image generator or adding inference-time
-cost. Experiments with GRPO post-training of Qwen-Image demonstrate that IDSpect achieves leading
-structural quality and semantic alignment on LongText and GenTextEval.
+Parallel drafting reduces the drafting overhead of speculative decoding for large language models
+(LLMs), but its gains remain limited by the accepted prefix length. Even when the correct token is
+present in the candidate pool, a single early selection error prevents subsequent predictions from
+being used. We propose DRelay, which uses global information from the entire draft block to perform
+prefix-aware selective repair of candidate selections before target-model verification. DRelay bases
+its decisions on candidate correlations and the selected path: a global reader extracts predictive
+information across positions for each candidate. While a causal selector combines candidate-level
+information extracted by the global read with the tokens selected at preceding positions to
+determine whether the native choice at the current position is consistent with the global evidence
+and the selected prefix. It then decides whether to retain or replace the token, thereby repairing
+early errors and extending the accepted prefix. We further jointly train the draft backbone and the
+selector, combining candidate-support learning with a repair objective, while weighting the repair
+loss according to each block position's potential contribution to the consecutive accepted prefix.
+Across eight diverse benchmarks on an H800 GPU, DRelay consistently improves both average acceptance
+length and end-to-end decoding performance over DFlash, Domino, and DSpark. Under SGLang serving,
+DRelay improves average end-to-end speedup over DFlash, Domino, and DSpark by 14.7%-16.8%,
+8.7%-9.3%, and 8.1%-9.3%, respectively.
 
 ---
