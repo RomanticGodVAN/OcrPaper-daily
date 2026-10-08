@@ -1,94 +1,126 @@
 {
   "meta": {
-    "report_date": "2026-10-07",
-    "generated_at_utc": "2026-10-07 07:11:57",
+    "report_date": "2026-10-08",
+    "generated_at_utc": "2026-10-08 07:20:57",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 2
+    "count": 3
   },
   "synthesis": {
-    "executive_summary": "今日的OCR/文档解析研究日报聚焦于内容提取生产系统与多模态记忆评估基准。一篇论文提出面向生成式AI的生产级内容提取系统，包含选择性OCR路由、提取评分、结构感知分块和检索评估，在180文档上最佳提取器得分97.4/100。另一篇提出DSV-Mem基准，评估MLLM智能体在专业工作流中的多模态记忆能力，最强基线低于45%，揭示状态演化是主要难度因素。",
-    "trend_summary": "趋势显示，文档解析正从孤立任务转向面向下游生成式AI工作负载的端到端系统，强调提取、分块和检索的联合评估与优化；同时，针对复杂状态跟踪和多模态记忆的评估基准开始涌现，推动智能体在专业工作流中的可靠性。",
+    "executive_summary": "本期三篇论文分别聚焦古代碑铭文字的低资源OCR与翻译、科学文献到知识图谱的自动化构建、专业工作流中多模态代理的密集状态视觉记忆评测。共同信号是：文档理解正从纯识别向“识别+领域知识结构化+状态追踪”的端到端系统演进，且验证与评测的严格性在持续提升。",
+    "trend_summary": "OCR/文档解析的研究重心正在从通用场景向垂直领域和复杂状态理解迁移。具体表现为：1）低资源、退化图像场景下的全流水线（增强-识别-转写-翻译）整合；2）将抽取结果约束到领域本体（如SHACL验证），强调知识表示一致性；3）多模态代理的记忆评测开始覆盖多版本、高密度专业文档，关注状态演化而非静态问答。",
     "common_innovations": [
-      "将内容提取作为独立可测量的生命周期阶段，强调其错误无法被下游修复。",
-      "引入选择性OCR路由和基于参考的提取评分器，实现细粒度准确率评估。",
-      "设计确定性结构感知的父子分块器，保留文档结构以提升检索质量。",
-      "构建只读检索评估器，自动生成有依据的问题并报告Hit@k、MRR和延迟。",
-      "提出密集状态视觉记忆基准，覆盖多类状态查询并引入Hartley准则筛选挑战性问题。"
+      "将OCR/文档解析与下游领域任务（机器翻译、知识图谱构建、代理状态追踪）深度绑定，形成端到端系统而非孤立识别模块。",
+      "采用自动化或半自动化的数据/知识构建流程，如利用LLM抽取加约束验证、解耦状态转移合成与对话填充来降低人工标注成本。",
+      "针对特定退化或高复杂度场景（古代石刻、密集状态专业文档）设计基准或数据集，填补现有评测空白。"
     ],
     "future_directions": [
-      "扩展评估语料到更多语言、文档类型和复杂布局，验证选择性OCR和提取系统的泛化性。",
-      "研究自适应和可解释的选择性OCR路由策略，基于内容置信度或布局复杂度动态决策。",
-      "探索端到端联合优化提取、分块和检索的框架，替代当前独立阶段的流水线。",
-      "开发针对状态跟踪的专门记忆机制，如外部记忆库或状态压缩表示，提升多模态证据融合推理。",
-      "建立细粒度评估指标，区分状态识别、更新跟踪和冲突解决等子能力，并支持动态基准生成。"
+      "将InscriptionOCR的图像增强-OCR-转写-NMT流水线迁移到其他低资源古代文字（如楔形文字、古埃及圣书体），并建立跨文字的联合训练与适配方法。",
+      "在知识图谱自动构建流程中引入多模态文档解析（图表、公式、表格），使抽取不止于文本，提升材料科学等领域的信息覆盖率。",
+      "为DSV-Mem这类密集状态视觉记忆评测开发专门的记忆管理与检索架构，例如分层状态缓存、变更感知的注意力机制，以降低状态演化带来的错误率。",
+      "研究OCR识别置信度与下游任务（翻译、知识抽取、状态追踪）错误传播的联合建模，在流水线中引入不确定性传递与回退机制。",
+      "构建可迭代更新的文档解析评测基准，使新出现的退化类型、专业文档版式或领域术语能够持续加入，避免基准快速过时。"
     ],
     "engineering_takeaways": [
-      "在生产RAG系统中集成选择性OCR路由和结构感知分块，可提升数据准备质量并降低计算成本。",
-      "采用基于参考的提取评分和只读检索评估，便于监控和优化内容提取流程。",
-      "对于需要精确状态跟踪的专业工作流，考虑引入外部记忆或状态压缩机制，避免MLLM内部记忆的不足。",
-      "在部署MLLM智能体前，使用DSV-Mem类基准评估其多模态记忆能力，识别状态演化和信息密度带来的失败模式。"
+      "对于低资源或退化文档的OCR项目，应优先建设图像增强与识别联合优化的流水线，并同步积累平行语料或领域标签，使下游翻译/抽取可复用。",
+      "在从文档抽取领域知识时，引入形式化约束（如SHACL）与验证循环，可显著降低LLM抽取的幻觉与不一致性，适合需要长期维护的知识库场景。",
+      "面向专业工作流的多模态代理，不能只评测单轮文档理解，必须覆盖当前状态、历史变更和冲突消解；系统设计需显式维护版本化状态表示。",
+      "数据集和基准的构建成本很高，工程上应优先采用“解耦合成+人工审核”混合方式，便于扩展和迭代，同时保留专家验证以保证质量。"
     ],
     "watchlist": [
       {
-        "title": "Smart Content Ingestion for Generative AI Workloads",
-        "watch_reason": "提供生产级内容提取系统，涵盖选择性OCR、提取评分、分块和检索评估，可直接集成到企业RAG系统，其选择性OCR路由和结构感知分块策略值得关注。"
+        "title": "InscriptionOCR: A Dataset and Method for Understanding Inscriptions",
+        "watch_reason": "首次公开大规模阿育王婆罗米文OCR数据集与普拉克里特语-英语平行语料，且提供端到端流水线，对低资源古代文字数字化有直接复用价值。"
+      },
+      {
+        "title": "Automatically Building and Updating a Knowledge Graph of MLIP Models",
+        "watch_reason": "将LLM抽取与SHACL验证循环结合，展示了一条可迭代、可验证的领域知识图谱构建路径，其约束验证思路可迁移到其他科学文献解析任务。"
       },
       {
         "title": "DSV-Mem: Evaluating Multimodal Memory in Professional Workflows for MLLM Agents",
-        "watch_reason": "首个针对专业工作流中密集状态视觉记忆的基准，揭示状态演化是主要难度因素，为开发可靠MLLM智能体提供评估工具和方向。"
+        "watch_reason": "定义了密集状态视觉记忆评测，最强基线低于45%，揭示状态演化是当前MLLM代理在专业文档工作流中的主要瓶颈，对文档版本管理与多模态记忆系统设计有重要参考。"
       }
     ]
   },
   "papers": [
     {
-      "title": "Smart Content Ingestion for Generative AI Workloads",
-      "summary": "The evolution of machine learning has progressively changed where intelligence resides in an AI system. In conventional machine learning the task, data representation, labels and model architecture were tightly coupled, so data preparation was narrow, schema-bound and visible. Generative AI decouples the model from any single task: one foundation model serves open-ended downstream tasks, and the generality gained on the model side is matched by heterogeneity on the data side, because enterprise knowledge is authored in the formats people use (PDF, presentations, spreadsheets, scanned documents, forms, tables, diagrams and mixed-layout files) that carry textual, visual, geometric and structural information at once. A language model or retriever cannot reason reliably over information misrepresented at this interface, so content extraction becomes a lifecycle stage in its own right whose errors no downstream retriever or re-ranker can repair. This paper presents a production-ready content-extraction system that makes this stage explicit, configurable, and measurable. The system incorporates selective OCR routing, a scarcity-first curation engine with a reference-based extraction scorer that measures character, word, and table-structure accuracy, a deterministic structure-aware parent-child chunker, and a read-only retrieval evaluator that generates grounded questions from every page and reports Hit@k, mean reciprocal rank, and latency. On a 180-document corpus the best extractor scores 97.4 of 100 (character error rate 0.13%, table similarity 0.995) and the chunker reaches hit@1 of 68.6%, hit@10 of 92.8% and MRR 0.77 over 25,050 generated questions. We distil three design principles (structure before semantics, never mutate what you measure, budget your labels) and position measured content extraction as the perception layer of enterprise agentic systems.",
-      "link": "https://arxiv.org/abs/2610.07091v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.07091v1",
+      "title": "InscriptionOCR: A Dataset and Method for Understanding Inscriptions",
+      "summary": "Ancient script image restoration is a fundamental problem in computer vision, as it directly affects the reliable analysis and interpretation of historical documents and inscriptions. Ashokan Brahmi is an ancient script extensively used during the reign of Emperor Ashoka in the 3rd century BC, primarily for inscriptions in Prakrit. These inscriptions, including major and minor rock and pillar edicts, constitute a valuable yet largely unexplored source of data for computational analysis. The degraded nature of inscription imagery and the lack of standardized digital resources pose significant challenges for automated processing. We present an end-to-end AI-based framework for understanding ancient inscriptions that encompasses image enhancement, optical character recognition (OCR), transliteration, and neural machine translation (NMT). The proposed pipeline processes low-quality images captured directly from stone inscriptions, performs image restoration and Brahmi script character recognition, maps the recognized characters to the Roman script, and finally translates the resulting Prakrit text into English. We also introduce two new datasets: (i) InscriptionOCR Dataset: the largest publicly usable digital OCR dataset for Brahmi script to date, consisting of over 200,000 character images across about 600 classes, and (ii) a bilingual Prakrit-English parallel corpus comprising over 2,000 sentence pairs for NMT. We believe that the proposed framework and datasets will facilitate future research in ancient script analysis, low-resource OCR, and digital epigraphy.",
+      "link": "https://arxiv.org/abs/2610.09439v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.09439v1",
       "authors": [
-        "Abbas Raza Ali",
-        "Muhammad Ajmal Siddiqui",
-        "Moona Zahid"
+        "Jaidev Sanjay Khalane",
+        "Akbar Ali",
+        "V. N. Prabhakar",
+        "Shanmuganathan Raman"
       ],
-      "published": "2026-10-05T13:22:01Z",
-      "updated": "2026-10-05T13:22:01Z",
+      "published": "2026-10-07T04:50:41Z",
+      "updated": "2026-10-07T04:50:41Z",
       "categories": [
-        "cs.AI",
-        "cs.CL",
-        "cs.CV",
-        "cs.IR"
+        "cs.CV"
       ],
-      "arxiv_id": "2610.07091v1",
-      "score": 22,
+      "arxiv_id": "2610.09439v1",
+      "score": 20,
       "topic_tags": [
-        "文档解析",
-        "选择性OCR",
-        "内容提取",
-        "检索评估",
-        "表格结构识别",
-        "生成式AI"
+        "OCR",
+        "古代文字识别",
+        "低资源OCR",
+        "数据集构建",
+        "图像增强",
+        "机器翻译",
+        "数字碑铭学"
       ],
-      "zh_summary": "本文提出一个面向生成式AI工作负载的生产级内容提取系统，将内容提取视为独立生命周期阶段。系统包含选择性OCR路由、基于参考的提取评分器（测量字符、单词和表格结构准确率）、确定性结构感知的父子分块器，以及只读检索评估器（从每页生成有依据的问题并报告Hit@k、MRR和延迟）。在180文档语料上，最佳提取器得分97.4/100（字符错误率0.13%，表格相似度0.995），分块器也达到一定性能。",
-      "novelty": "将内容提取作为生成式AI工作负载中独立且可配置、可测量的生命周期阶段，并整合选择性OCR路由、基于参考的提取评分、结构感知分块和检索评估于一体的生产就绪系统。",
+      "zh_summary": "针对阿育王时期婆罗米文石刻图像退化严重、缺乏标准化数字资源的问题，提出端到端AI框架，涵盖图像增强、OCR、转写与神经机器翻译。流水线处理直接从石刻拍摄的低质量图像，进行图像恢复与婆罗米字符识别，映射为罗马字母，并将普拉克里特语翻译成英语。同时发布两个新数据集：InscriptionOCR数据集（超20万字符图像，约600类）和普拉克里特语-英语平行语料（超2000句对）。",
+      "novelty": "首次为阿育王婆罗米文石刻构建端到端理解流水线，并公开大规模OCR数据集与平行语料，填补古代石刻计算分析的数据空白。",
       "innovation_points": [
-        "提出选择性OCR路由机制，根据文档类型和内容动态决定是否使用OCR，平衡效率与准确性",
-        "设计基于参考的提取评分器，综合测量字符、单词和表格结构准确率，提供细粒度评估",
-        "实现确定性结构感知的父子分块器，保留文档结构信息，提升检索质量",
-        "开发只读检索评估器，从每页自动生成有依据的问题，并报告Hit@k、MRR和延迟，实现端到端评估",
-        "将内容提取明确为独立阶段，强调其错误无法被下游检索或重排序修复"
+        "提出涵盖图像增强、OCR、转写与NMT的端到端古代石刻理解框架",
+        "发布目前最大的公开婆罗米文OCR数据集，含超20万字符图像、约600个类别",
+        "构建普拉克里特语-英语双语平行语料，用于低资源神经机器翻译",
+        "针对直接从石刻拍摄的低质量图像进行图像恢复与识别"
       ],
-      "limitations": "['摘要未提及系统对多语言或非拉丁语系文档的处理能力', '评估仅基于180文档语料，规模有限，泛化性有待验证', '选择性OCR路由的具体策略和阈值未详细说明，可能影响可复现性', '只读检索评估器生成的问题可能无法覆盖所有复杂查询场景']",
-      "improvement_directions": [
-        "扩展评估语料到更大规模、更多样化的文档类型和语言，验证系统泛化性",
-        "研究更自适应和可解释的选择性OCR路由策略，例如基于内容置信度或布局复杂度",
-        "探索端到端联合优化提取、分块和检索的框架，而非独立阶段",
-        "增强对复杂表格、图表和混合布局的提取精度，特别是跨页表格和嵌套结构",
-        "开发动态分块策略，根据查询或下游任务自适应调整分块粒度"
+      "limitations": "依赖特定古代文字（阿育王婆罗米文）和普拉克里特语，泛化到其他古代文字需重新适配；数据集规模虽大但类别间可能不均衡；未详细说明图像增强和OCR在真实退化条件下的鲁棒性边界。",
+      "improvement_directions": null,
+      "engineering_value": "为数字碑铭学、低资源OCR和古代文献数字化提供可复用的数据集与流水线基线，可支持博物馆、考古机构的自动化整理与翻译工具开发。",
+      "why_relevant": "该工作直接涉及OCR数据集构建、图像增强与端到端文字识别，属于OCR核心应用领域，并为古代文字识别提供新基准。"
+    },
+    {
+      "title": "Automatically Building and Updating a Knowledge Graph of MLIP Models",
+      "summary": "Complementing the many efforts in providing semantic representations of concepts, notions, and entities in materials science, we report and illustrate a process by which we can automatically build a knowledge graph of the fast evolving field of machine learning applied to the prediction of material properties, focusing on MLIP (Machine Learning Interatomic Potential). This LLM-based process relies on multiple steps, from information extraction in documents and articles to a validation loop using SHACL constraints to detect and correct errors. It is carried out on a model-by-model basis, focusing on the consistency of representation, therefore enabling an iterative construction where the addition of new models is facilitated. We illustrate the process by showing a few interesting aspects that can be queried from a knowledge graph built from the models listed in the Matbench Discovery leaderboard.",
+      "link": "https://arxiv.org/abs/2610.09644v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.09644v1",
+      "authors": [
+        "Alexis Beer",
+        "Liudmyla Klochko",
+        "Mathieu d'Aquin"
       ],
-      "engineering_value": "该系统为生成式AI应用提供了从文档提取到检索评估的完整生产级解决方案，可直接集成到企业知识管理、RAG系统等场景，提升数据准备质量和下游任务可靠性。其可配置和可测量的特性有助于工程团队监控和优化内容提取流程。",
-      "why_relevant": "内容提取是OCR技术的核心应用领域，本文提出的选择性OCR路由、提取评分和结构感知分块直接关联OCR研究，特别是文档解析和表格识别，对提升OCR在复杂文档中的实用性和评估方法有重要参考价值。"
+      "published": "2026-10-07T08:19:49Z",
+      "updated": "2026-10-07T08:19:49Z",
+      "categories": [
+        "cs.AI"
+      ],
+      "arxiv_id": "2610.09644v1",
+      "score": 10,
+      "topic_tags": [
+        "知识图谱",
+        "LLM信息抽取",
+        "材料科学",
+        "SHACL验证",
+        "自动化构建",
+        "文献挖掘"
+      ],
+      "zh_summary": "针对机器学习原子间势（MLIP）领域快速演进、知识分散的问题，提出基于LLM的自动化流程，从文献中抽取信息并构建知识图谱。流程以模型为单元，利用SHACL约束进行验证循环以检测和纠正错误，支持迭代式构建，便于新增模型。以Matbench Discovery排行榜中的模型为例，展示可查询的知识图谱构建过程。",
+      "novelty": "将LLM信息抽取与SHACL验证循环结合，实现MLIP领域知识图谱的自动化构建与更新，强调表示一致性和可迭代扩展。",
+      "innovation_points": [
+        "提出基于LLM的多步骤知识图谱自动构建流程，涵盖文档信息抽取与验证循环",
+        "使用SHACL约束自动检测和纠正抽取错误，提升图谱一致性",
+        "以模型为单元进行增量式构建，便于新模型持续加入",
+        "在Matbench Discovery排行榜模型上验证流程可行性"
+      ],
+      "limitations": "依赖LLM抽取质量，可能存在幻觉或遗漏；SHACL验证只能覆盖预定义约束，无法保证语义完整性；当前仅针对MLIP领域，跨领域迁移需重新设计本体与约束。",
+      "improvement_directions": null,
+      "engineering_value": "为材料科学领域快速构建和更新专业知识图谱提供可操作流程，可辅助研究人员追踪MLIP模型进展，并支持自动化文献综述与模型推荐系统。",
+      "why_relevant": "虽然不直接处理OCR，但涉及从科学文献中自动抽取信息，与文档解析、信息抽取技术相关，可借鉴于OCR后处理与知识结构化。"
     },
     {
       "title": "DSV-Mem: Evaluating Multimodal Memory in Professional Workflows for MLLM Agents",
@@ -112,32 +144,26 @@
       "arxiv_id": "2610.08102v1",
       "score": 9,
       "topic_tags": [
-        "多模态基准",
-        "视觉记忆",
-        "MLLM智能体",
+        "多模态记忆",
+        "MLLM代理",
+        "基准评测",
         "专业工作流",
-        "状态跟踪",
+        "状态追踪",
         "文档理解"
       ],
-      "zh_summary": "本文提出DSV-Mem基准，用于评估MLLM智能体在专业工作流中的多模态记忆能力。基准包含专家评审的场景和1000个问题，覆盖五个用户导向类别（当前状态、过去状态、衍生状态、变更历史和冲突/拒绝），并引入基于Hartley的准则筛选需要更广泛视觉证据检查的问题。评估27种配置显示最强基线低于45%，分析发现状态演化（尤其是治理更新数量）是主要难度因素，多模态和信息密度也有贡献。",
-      "novelty": "首个针对专业工作流中密集状态视觉记忆（Dense Stateful Visual Memory）的MLLM智能体评估基准，强调结构化、频繁修订的文档和需要精确状态跟踪的组合查询。",
+      "zh_summary": "针对现有MLLM代理基准多聚焦日常场景、缺乏专业工作流中密集状态视觉记忆评估的问题，提出DSV-Mem基准，包含专家审核场景和1000个问题，覆盖当前状态、过去状态、派生状态、变更历史和冲突/拒绝五类。采用Hartley启发式准则筛选需广泛视觉证据检查的问题，并引入解耦状态转移合成与对话填充的生成工具。评估27种配置，最强基线低于45%，发现状态演化（尤其管理更新次数）是主要困难因素。",
+      "novelty": "首次定义并系统评估专业工作流中的密集状态视觉记忆（Dense Stateful Visual Memory），提出解耦状态转移与对话生成的评测套件构建方法。",
       "innovation_points": [
-        "定义并构建了密集状态视觉记忆（DSV-Mem）基准，填补专业工作流中MLLM记忆评估的空白",
-        "设计了五个用户导向的问题类别，覆盖状态查询的多个维度，包括冲突/拒绝",
-        "引入Hartley-inspired准则，优先选择需要更广泛视觉证据检查的问题，提升评估挑战性",
-        "提出生成框架，将状态转移合成与对话填充解耦，可扩展生成评估套件",
-        "评估了27种配置，揭示状态演化是主要难度因素，为未来研究提供方向"
+        "提出DSV-Mem基准，针对专业工作流中多版本、高信息密度视觉工件的状态追踪",
+        "定义五类用户导向问题：当前状态、过去状态、派生状态、变更历史、冲突/拒绝",
+        "引入Hartley启发式准则筛选需广泛视觉证据检查的问题",
+        "设计解耦状态转移合成与对话填充的生成工具，支持可扩展评测套件构建",
+        "系统评估27种配置，揭示状态演化是主要难度因素"
       ],
-      "limitations": "['基准目前仅基于文本描述，未提供实际数据集或开源代码的明确信息', '评估的模型配置可能未涵盖所有最新MLLM，时效性有限', '专业工作流场景可能仍局限于特定领域，通用性需进一步验证', '未详细说明基准中多模态信息的类型和比例，如文本、图像、表格等']",
-      "improvement_directions": [
-        "扩展基准到更多专业领域和文档类型，如法律、医疗、金融等，增加多样性",
-        "开发动态基准生成方法，支持持续更新和对抗性测试",
-        "研究针对状态跟踪的专门记忆机制，如外部记忆库或状态压缩表示",
-        "探索多模态证据融合方法，提升对复杂修订历史的推理能力",
-        "建立更细粒度的评估指标，区分状态识别、更新跟踪和冲突解决等子能力"
-      ],
-      "engineering_value": "DSV-Mem为开发专业场景的MLLM智能体提供了评估工具，有助于识别记忆和状态跟踪的弱点，指导工程优化，如改进RAG系统或智能体记忆架构，提升在动态文档环境中的可靠性。",
-      "why_relevant": "该基准涉及多模态文档理解，包括结构化文档和视觉信息，与OCR技术紧密相关，因为OCR是提取文档内容的基础，而基准评估的视觉记忆能力依赖于准确的OCR结果，对推动OCR在复杂文档处理中的应用有启示。"
+      "limitations": "基准构建依赖专家审核，扩展成本较高；问题类型和场景覆盖可能受限于特定专业领域；未充分探索多模态记忆管理方法的改进空间；评估模型限于当前MLLM，可能快速过时。",
+      "improvement_directions": null,
+      "engineering_value": "为专业工作流中的MLLM代理记忆能力提供评估标准，可指导文档版本管理、多模态检索与状态追踪系统的设计，提升AI助手在工程与业务场景中的可靠性。",
+      "why_relevant": "涉及多模态文档理解与状态追踪，与OCR后的文档解析、版本化文档管理相关，可启发OCR系统对结构化文档演化的处理。"
     }
   ]
 }
