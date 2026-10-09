@@ -1,88 +1,178 @@
 {
   "meta": {
-    "report_date": "2026-10-08",
-    "generated_at_utc": "2026-10-08 07:20:57",
+    "report_date": "2026-10-09",
+    "generated_at_utc": "2026-10-09 07:21:47",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 3
+    "count": 4
   },
   "synthesis": {
-    "executive_summary": "本期三篇论文分别聚焦古代碑铭文字的低资源OCR与翻译、科学文献到知识图谱的自动化构建、专业工作流中多模态代理的密集状态视觉记忆评测。共同信号是：文档理解正从纯识别向“识别+领域知识结构化+状态追踪”的端到端系统演进，且验证与评测的严格性在持续提升。",
-    "trend_summary": "OCR/文档解析的研究重心正在从通用场景向垂直领域和复杂状态理解迁移。具体表现为：1）低资源、退化图像场景下的全流水线（增强-识别-转写-翻译）整合；2）将抽取结果约束到领域本体（如SHACL验证），强调知识表示一致性；3）多模态代理的记忆评测开始覆盖多版本、高密度专业文档，关注状态演化而非静态问答。",
+    "executive_summary": "本批次论文聚焦OCR与文档解析的三个关键方向：轻量级VLM在文化遗产档案中的结构化抽取、嘈杂手写混合文档的解析与噪声抑制、以及基于自对弈的精细OCR优化。同时，一篇知识图谱构建工作展示了LLM在科学信息抽取中的自动化流程。整体来看，研究正从通用场景向垂直领域深化，强调数据自主、噪声鲁棒性与低成本部署，但各方向均缺乏跨领域泛化验证和标准化评估。",
+    "trend_summary": "OCR与文档解析研究正从通用印刷文档转向文化遗产、教育答题卷等复杂真实场景，轻量级视觉语言模型（≤7B）因数据自主和成本优势成为部署热点。噪声抑制与残差误差优化成为提升精度的核心手段，同时自对弈、参数高效微调等技术降低了训练门槛。领域知识图谱的自动化构建开始与文档抽取流程融合，形成从抽取到结构化知识的闭环。",
     "common_innovations": [
-      "将OCR/文档解析与下游领域任务（机器翻译、知识图谱构建、代理状态追踪）深度绑定，形成端到端系统而非孤立识别模块。",
-      "采用自动化或半自动化的数据/知识构建流程，如利用LLM抽取加约束验证、解耦状态转移合成与对话填充来降低人工标注成本。",
-      "针对特定退化或高复杂度场景（古代石刻、密集状态专业文档）设计基准或数据集，填补现有评测空白。"
+      "针对特定垂直领域（文化遗产、教育、材料科学）定义任务与评估协议，推动OCR从通用向领域适配发展。",
+      "采用轻量级视觉语言模型（≤7B）在约束条件下实现文档OCR与结构化输出，兼顾数据自主与成本。",
+      "引入噪声感知或差异感知机制，通过掩码、注意力或损失设计精细优化模型对噪声和残差误差的处理能力。",
+      "结合经典图像预处理（如CLAHE、去噪）与多阶段训练、自对弈等策略，提升模型在低质量文档上的鲁棒性。",
+      "利用LLM进行自动化信息抽取并借助SHACL等约束验证，构建可迭代更新的领域知识图谱。"
     ],
     "future_directions": [
-      "将InscriptionOCR的图像增强-OCR-转写-NMT流水线迁移到其他低资源古代文字（如楔形文字、古埃及圣书体），并建立跨文字的联合训练与适配方法。",
-      "在知识图谱自动构建流程中引入多模态文档解析（图表、公式、表格），使抽取不止于文本，提升材料科学等领域的信息覆盖率。",
-      "为DSV-Mem这类密集状态视觉记忆评测开发专门的记忆管理与检索架构，例如分层状态缓存、变更感知的注意力机制，以降低状态演化带来的错误率。",
-      "研究OCR识别置信度与下游任务（翻译、知识抽取、状态追踪）错误传播的联合建模，在流水线中引入不确定性传递与回退机制。",
-      "构建可迭代更新的文档解析评测基准，使新出现的退化类型、专业文档版式或领域术语能够持续加入，避免基准快速过时。"
+      "在HANS数据集基础上扩展多语言、跨学科（如物理、化学）的学生答题卷，并评估NA-GOT等噪声抑制框架的跨领域泛化能力。",
+      "将SP-DocReader的自对弈残差误差优化方法应用于更多文档类型（如表格、公式混合）和更大规模主干模型，验证其可扩展性。",
+      "研究轻量级VLM在文化遗产档案中的少样本跨收藏迁移学习，降低每个新收藏的微调成本，并量化推理效率与碳排放。",
+      "开发针对文档OCR的标准化噪声鲁棒性基准，统一定义噪声类型（如划线、污损、手写覆盖）和评估指标（如噪声感知CER）。",
+      "探索将知识图谱构建流程中的SHACL验证循环与OCR结构化抽取输出直接对接，实现从图像到知识图谱的端到端自动化。",
+      "设计动态自对弈策略，使模型在训练过程中自动识别并聚焦于当前残差误差最大的样本区域，替代静态的差异掩码。",
+      "研究多数据集联合训练中领域冲突的量化方法，提出自动权重分配或梯度协调机制，以平衡数据集特定微调与联合检查点。"
     ],
     "engineering_takeaways": [
-      "对于低资源或退化文档的OCR项目，应优先建设图像增强与识别联合优化的流水线，并同步积累平行语料或领域标签，使下游翻译/抽取可复用。",
-      "在从文档抽取领域知识时，引入形式化约束（如SHACL）与验证循环，可显著降低LLM抽取的幻觉与不一致性，适合需要长期维护的知识库场景。",
-      "面向专业工作流的多模态代理，不能只评测单轮文档理解，必须覆盖当前状态、历史变更和冲突消解；系统设计需显式维护版本化状态表示。",
-      "数据集和基准的构建成本很高，工程上应优先采用“解耦合成+人工审核”混合方式，便于扩展和迭代，同时保留专家验证以保证质量。"
+      "在文化遗产等数据敏感场景，可优先评估≤7B开源VLM（如Qwen3-VL-4B）结合少样本微调，以平衡数据自主与OCR结构化精度。",
+      "对于学生答题卷等含手写噪声的文档，可集成特征级噪声抑制与解码阶段噪声感知注意力，但需补充真实场景的标注数据以覆盖噪声多样性。",
+      "在已有VLM基础上，采用SP-DocReader式仅训练OCR模块的自对弈微调，可在冻结主干下以较低成本显著降低字符错误率。",
+      "图像预处理（光照平坦化、CLAHE、去噪）应作为轻量级VLM流程的标准前置步骤，以提升对历史档案和低质量扫描件的鲁棒性。",
+      "构建领域知识图谱时，可复用LLM抽取+SHACL验证循环，但需设计人工审核节点以纠正系统性抽取错误。",
+      "部署轻量级VLM时需同步记录推理延迟、显存占用和能耗，为机构决策提供成本-精度权衡的量化依据。"
     ],
     "watchlist": [
       {
-        "title": "InscriptionOCR: A Dataset and Method for Understanding Inscriptions",
-        "watch_reason": "首次公开大规模阿育王婆罗米文OCR数据集与普拉克里特语-英语平行语料，且提供端到端流水线，对低资源古代文字数字化有直接复用价值。"
+        "title": "From Pixels to Structure: Lightweight Vision-Language Models for Document OCR and Structured JSON Extraction",
+        "watch_reason": "首次系统评估八种≤7B开源VLM在文化遗产档案的OCR到JSON任务，其实验结论和预处理/微调策略对机构落地有直接参考价值，但需关注其最终性能数据披露。"
+      },
+      {
+        "title": "SP-DocReader: Difference-Aware Self-Play for Precise Document OCR",
+        "watch_reason": "自对弈残差误差优化在Qwen3-VL-4B上实现54% CER降低，方法新颖且仅训练OCR模块，适合低成本集成，需验证在其他主干和文档类型上的泛化性。"
+      },
+      {
+        "title": "HANS: A Handwritten Answer Sheet Dataset for Noisy Hybrid Document Parsing",
+        "watch_reason": "首个面向真实教育答题卷的噪声混合文档数据集，填补了手写多行推导、公式文本混合及划线噪声的基准空白，后续可能成为教育OCR的标准测试集。"
       },
       {
         "title": "Automatically Building and Updating a Knowledge Graph of MLIP Models",
-        "watch_reason": "将LLM抽取与SHACL验证循环结合，展示了一条可迭代、可验证的领域知识图谱构建路径，其约束验证思路可迁移到其他科学文献解析任务。"
-      },
-      {
-        "title": "DSV-Mem: Evaluating Multimodal Memory in Professional Workflows for MLLM Agents",
-        "watch_reason": "定义了密集状态视觉记忆评测，最强基线低于45%，揭示状态演化是当前MLLM代理在专业文档工作流中的主要瓶颈，对文档版本管理与多模态记忆系统设计有重要参考。"
+        "watch_reason": "展示了LLM抽取+SHACL验证的自动化知识图谱构建流程，虽非OCR核心，但其文档信息抽取到结构化知识的闭环对文档解析下游应用有借鉴意义。"
       }
     ]
   },
   "papers": [
     {
-      "title": "InscriptionOCR: A Dataset and Method for Understanding Inscriptions",
-      "summary": "Ancient script image restoration is a fundamental problem in computer vision, as it directly affects the reliable analysis and interpretation of historical documents and inscriptions. Ashokan Brahmi is an ancient script extensively used during the reign of Emperor Ashoka in the 3rd century BC, primarily for inscriptions in Prakrit. These inscriptions, including major and minor rock and pillar edicts, constitute a valuable yet largely unexplored source of data for computational analysis. The degraded nature of inscription imagery and the lack of standardized digital resources pose significant challenges for automated processing. We present an end-to-end AI-based framework for understanding ancient inscriptions that encompasses image enhancement, optical character recognition (OCR), transliteration, and neural machine translation (NMT). The proposed pipeline processes low-quality images captured directly from stone inscriptions, performs image restoration and Brahmi script character recognition, maps the recognized characters to the Roman script, and finally translates the resulting Prakrit text into English. We also introduce two new datasets: (i) InscriptionOCR Dataset: the largest publicly usable digital OCR dataset for Brahmi script to date, consisting of over 200,000 character images across about 600 classes, and (ii) a bilingual Prakrit-English parallel corpus comprising over 2,000 sentence pairs for NMT. We believe that the proposed framework and datasets will facilitate future research in ancient script analysis, low-resource OCR, and digital epigraphy.",
-      "link": "https://arxiv.org/abs/2610.09439v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.09439v1",
+      "title": "From Pixels to Structure: Lightweight Vision-Language Models for Document OCR and Structured JSON Extraction",
+      "summary": "While massive, closed-source Vision-Language Models (VLMs) set strong benchmarks for document understanding, their dependence on commercial APIs limits adoption in institutional archives due to data autonomy concerns, recurring costs, and the environmental footprint of hyperscale computing. This is especially acute in heritage digitization, where documents include historical handwriting, domain-specific terminology (e.g., jewelry, prehistory, architecture), and non-standard layouts requiring high-dimensional structured extraction. We present a comparative study of eight open-source lightweight VLMs (up to 7B parameters) for Optical Character Recognition (OCR)-to-structure across three university heritage collections. Given a document image, models must extract text and generate schema-compliant JSON, enabling automatic validation and downstream use. We evaluate models under a constraint-aware protocol across zero-shot, few-shot, and fine-tuning settings, measuring extraction fidelity and structured-output quality using Character Error Rate (CER), Approximate Normalized Levenshtein Similarity (ANLS*), and mean Average Precision F1 (mAP-F1). Against a fine-tuning baseline, we further test the independent impact of (i) hyperparameter optimization, (ii) classical image preprocessing (illumination flattening, denoising, and CLAHE), and (iii) multi-stage training. Finally, we analyze the trade-off between dataset-specific fine-tuning and a single multi-dataset checkpoint, where joint training enables one model to operate across collections but can shift performance between datasets. Overall, we show that carefully adapted VLMs with up to 7B parameters can provide a sustainable, private, high-performing alternative to manual transcription or commercial black-box systems, and we offer actionable guidance for heritage institutions seeking institution-controlled OCR-to-JSON extraction.",
+      "link": "https://arxiv.org/abs/2610.11818v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.11818v1",
       "authors": [
-        "Jaidev Sanjay Khalane",
-        "Akbar Ali",
-        "V. N. Prabhakar",
-        "Shanmuganathan Raman"
+        "Uddipan Basu Bir",
+        "Vincent Christlein",
+        "Andreas Maier",
+        "Mathias Zinnen"
       ],
-      "published": "2026-10-07T04:50:41Z",
-      "updated": "2026-10-07T04:50:41Z",
+      "published": "2026-10-08T12:21:52Z",
+      "updated": "2026-10-08T12:21:52Z",
       "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "arxiv_id": "2610.11818v1",
+      "score": 24,
+      "topic_tags": [
+        "轻量级VLM",
+        "文档OCR",
+        "结构化抽取",
+        "文化遗产数字化",
+        "模型评估"
+      ],
+      "zh_summary": "针对机构档案和文化遗产数字化场景中，大规模闭源VLM因数据自主性、成本和环境足迹问题难以应用的问题，本文系统比较了八种开源轻量级VLM（参数量≤7B）在三个大学遗产收藏上的OCR到结构化JSON抽取表现。给定文档图像，模型需抽取文本并生成符合schema的JSON，以便自动验证和下游使用。在约束感知协议下评估了零样本、少样本和微调设置，使用CER、ANLS*和mAP-F1指标。进一步测试了超参优化、经典图像预处理（光照平坦化、去噪、CLAHE）和多阶段训练的影响，并分析了数据集特定微调与单一多数据集检查点之间的权衡。",
+      "novelty": "首次面向文化遗产档案场景，系统比较多种开源轻量级VLM在OCR到结构化JSON抽取任务上的表现，并深入分析预处理、微调策略及多数据集联合训练的影响。",
+      "innovation_points": [
+        "针对文化遗产档案（历史手写、领域术语、非标准版式）的OCR到结构化JSON任务定义与评估协议。",
+        "在约束感知协议下对八种≤7B开源VLM进行零样本、少样本和微调的系统性比较。",
+        "解耦分析超参数优化、经典图像预处理（光照平坦化、去噪、CLAHE）和多阶段训练各自的影响。",
+        "研究数据集特定微调与单一多数据集联合检查点之间的性能权衡。"
+      ],
+      "limitations": "摘要未提供具体实验数据结论，难以判断所提方法的绝对性能；仅涵盖三个大学遗产收藏，领域泛化性存疑；模型规模限于7B，未探索更大模型或更小模型；未讨论推理效率与成本的具体量化。",
+      "improvement_directions": null,
+      "engineering_value": "为文化遗产机构在数据自主、成本可控前提下部署轻量级VLM进行文档结构化提供了实证参考和最佳实践，有助于推动开源方案在机构档案数字化中的落地。",
+      "why_relevant": "直接研究轻量级VLM在文档OCR和结构化JSON抽取中的应用，涵盖评估协议、预处理和训练策略，与OCR及文档解析领域高度相关。"
+    },
+    {
+      "title": "HANS: A Handwritten Answer Sheet Dataset for Noisy Hybrid Document Parsing",
+      "summary": "Intelligent grading and automated scoring technologies constitute critical infrastructure for smart education. However, existing document parsing and handwriting recognition benchmarks are predominantly designed for well-structured printed documents or isolated mathematical expressions, lacking datasets that capture the complex characteristics inherent to student answer sheets, including multi-line derivation processes, heterogeneous mixtures of text and mathematical formulae, and noise artifacts such as strikethroughs. To address this gap, we introduce HANS, the first dataset explicitly constructed for real-world educational scenarios, encompassing mathematical expressions, natural language text, hand-drawn tables, and diverse noise patterns including corrections and deletions, accompanied by fine-grained annotations that establish a reliable foundation for robust recognition research. Building upon HANS, we propose NA-GOT, an end-to-end framework that achieves two-stage noise suppression through a lightweight noise suppression module operating at the feature level, complemented by a noiseaware attention mechanism incorporated into the decoding stage. Experimental results demonstrate that HANS poses substantial challenges to existing methods, while NA-GOT achieves significant improvements in both accuracy and stability for answer process recognition. The dataset will be made publicly available upon publication.",
+      "link": "https://arxiv.org/abs/2610.12363v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12363v1",
+      "authors": [
+        "Xiazhen Wu",
+        "Wansong Qin",
+        "Yangbin Zheng",
+        "Liangda Fang",
+        "Zhan Li",
+        "Xiujie Huang",
+        "Liushen Zhou",
+        "Quanlong Guan"
+      ],
+      "published": "2026-10-08T17:27:12Z",
+      "updated": "2026-10-08T17:27:12Z",
+      "categories": [
+        "cs.AI",
         "cs.CV"
       ],
-      "arxiv_id": "2610.09439v1",
-      "score": 20,
+      "arxiv_id": "2610.12363v1",
+      "score": 17,
       "topic_tags": [
-        "OCR",
-        "古代文字识别",
-        "低资源OCR",
-        "数据集构建",
-        "图像增强",
-        "机器翻译",
-        "数字碑铭学"
+        "手写识别",
+        "噪声文档解析",
+        "教育数据集",
+        "注意力机制",
+        "端到端框架"
       ],
-      "zh_summary": "针对阿育王时期婆罗米文石刻图像退化严重、缺乏标准化数字资源的问题，提出端到端AI框架，涵盖图像增强、OCR、转写与神经机器翻译。流水线处理直接从石刻拍摄的低质量图像，进行图像恢复与婆罗米字符识别，映射为罗马字母，并将普拉克里特语翻译成英语。同时发布两个新数据集：InscriptionOCR数据集（超20万字符图像，约600类）和普拉克里特语-英语平行语料（超2000句对）。",
-      "novelty": "首次为阿育王婆罗米文石刻构建端到端理解流水线，并公开大规模OCR数据集与平行语料，填补古代石刻计算分析的数据空白。",
+      "zh_summary": "针对智能教育中试卷自动批改需求，现有文档解析和手写识别基准多面向结构良好的印刷文档或孤立数学表达式，缺乏反映学生答题卷复杂特性的数据集（多行推导、文本与公式混合、划线等噪声）。本文提出HANS，首个针对真实教育场景构建的数据集，涵盖数学表达式、自然语言文本、手绘表格及包括更正和删除在内的多样噪声模式，并提供细粒度标注。基于HANS，提出NA-GOT端到端框架，通过特征级轻量噪声抑制模块和解码阶段的噪声感知注意力机制实现两阶段噪声抑制。实验表明HANS对现有方法构成显著挑战，而NA-GOT在答题过程识别的准确性和稳定性上均有显著提升。",
+      "novelty": "构建首个面向真实教育场景的嘈杂混合文档解析数据集HANS，涵盖数学表达式、自然语言、手绘表格及多种噪声，并提出两阶段噪声抑制框架NA-GOT。",
       "innovation_points": [
-        "提出涵盖图像增强、OCR、转写与NMT的端到端古代石刻理解框架",
-        "发布目前最大的公开婆罗米文OCR数据集，含超20万字符图像、约600个类别",
-        "构建普拉克里特语-英语双语平行语料，用于低资源神经机器翻译",
-        "针对直接从石刻拍摄的低质量图像进行图像恢复与识别"
+        "HANS数据集：包含多行推导、文本与公式混合、划线等噪声的真实学生答题卷，提供细粒度标注。",
+        "NA-GOT框架：特征级轻量噪声抑制模块与解码阶段噪声感知注意力机制的两阶段噪声抑制设计。",
+        "面向答题过程识别的端到端解析任务定义与评估。"
       ],
-      "limitations": "依赖特定古代文字（阿育王婆罗米文）和普拉克里特语，泛化到其他古代文字需重新适配；数据集规模虽大但类别间可能不均衡；未详细说明图像增强和OCR在真实退化条件下的鲁棒性边界。",
+      "limitations": "摘要未提供与具体基线方法的量化对比；数据集规模、标注一致性及噪声类型覆盖范围未说明；NA-GOT的轻量噪声抑制模块可能对复杂噪声模式泛化能力有限；未讨论模型在跨学科或跨语言场景的适用性。",
       "improvement_directions": null,
-      "engineering_value": "为数字碑铭学、低资源OCR和古代文献数字化提供可复用的数据集与流水线基线，可支持博物馆、考古机构的自动化整理与翻译工具开发。",
-      "why_relevant": "该工作直接涉及OCR数据集构建、图像增强与端到端文字识别，属于OCR核心应用领域，并为古代文字识别提供新基准。"
+      "engineering_value": "为智能教育中的自动批改系统提供了高质量数据和端到端解决方案，有望直接应用于学生答题卷的自动识别与评分，提升教育信息化水平。",
+      "why_relevant": "涉及文档解析、手写识别和噪声抑制，直接关联OCR领域，尤其是复杂真实场景下的文本与公式混合识别。"
+    },
+    {
+      "title": "SP-DocReader: Difference-Aware Self-Play for Precise Document OCR",
+      "summary": "Accurate page transcription remains difficult for vision language models under limited input and training budgets. We present SP-DocReader, a self-play framework for optical character recognition (OCR) that targets residual errors after supervised fine-tuning. Reading Discrepancy Masking aligns reference and generated model tokens through a longest common subsequence, then scores unmatched positions with their full conditioning prefixes. Focused Fidelity Loss adds direct negative log-likelihood supervision at unmatched ground-truth positions. Only the OCR module is trained, while the backbone remains frozen. We derive the combined gradient to distinguish relative score optimization from direct supervision. Compared with SFT-2, SP-DR-3 reduces Vary-600K character error rate on both backbones. On Qwen3-VL-4B, it reduces character error rate by approximately 54 percent and improves DocVQA Average Normalized Levenshtein Similarity (ANLS) by 3.7 points. These results show the value of focusing self-play training on the discrepancies that remain after supervised fine-tuning.",
+      "link": "https://arxiv.org/abs/2610.11148v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.11148v1",
+      "authors": [
+        "Wenjie Liao",
+        "Xiaohui Song",
+        "Liangjie Zhao",
+        "Haonan Lu"
+      ],
+      "published": "2026-10-08T03:12:12Z",
+      "updated": "2026-10-08T03:12:12Z",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "arxiv_id": "2610.11148v1",
+      "score": 17,
+      "topic_tags": [
+        "文档OCR",
+        "自对弈学习",
+        "残差误差",
+        "参数高效微调",
+        "视觉语言模型"
+      ],
+      "zh_summary": "针对视觉语言模型在有限输入和训练预算下难以精确转录页面的问题，本文提出SP-DocReader，一种针对监督微调后残差误差的自对弈OCR框架。阅读差异掩码通过最长公共子序列对齐参考与生成token，并对未匹配位置用完整条件前缀评分。聚焦保真损失在未匹配的真实位置增加直接负对数似然监督。仅训练OCR模块，主干冻结。推导了组合梯度以区分相对分数优化和直接监督。与SFT-2相比，SP-DR-3在两种主干上均降低Vary-600K字符错误率。在Qwen3-VL-4B上，字符错误率降低约54%，DocVQA的ANLS提升3.7个点。",
+      "novelty": "提出自对弈框架SP-DocReader，通过阅读差异掩码和聚焦保真损失，针对监督微调后的残差误差进行精细优化，且仅训练OCR模块而冻结主干。",
+      "innovation_points": [
+        "阅读差异掩码：利用LCS对齐参考与生成token，并对未匹配位置用完整前缀评分。",
+        "聚焦保真损失：在未匹配的真实位置添加直接负对数似然监督，与相对分数优化结合。",
+        "推导组合梯度，明确区分相对优化与直接监督的贡献。",
+        "仅训练OCR模块而保持主干冻结的参数高效训练范式。"
+      ],
+      "limitations": "方法依赖于监督微调后的初始模型，对预训练质量敏感；仅在有限数据集（Vary-600K、DocVQA）上验证，泛化性有待考察；未与其他自对弈或强化学习方法进行广泛对比；计算开销未详细分析。",
+      "improvement_directions": null,
+      "engineering_value": "为在固定主干下提升OCR精度提供了有效的训练策略，可低成本集成到现有VLM中，适用于文档数字化场景中对高精度转录的需求。",
+      "why_relevant": "直接针对文档OCR的精度提升，提出自对弈训练框架，与OCR研究的前沿方向（自监督、残差误差优化）紧密相关。"
     },
     {
       "title": "Automatically Building and Updating a Knowledge Graph of MLIP Models",
@@ -103,67 +193,22 @@
       "score": 10,
       "topic_tags": [
         "知识图谱",
-        "LLM信息抽取",
+        "信息抽取",
+        "LLM",
         "材料科学",
-        "SHACL验证",
-        "自动化构建",
-        "文献挖掘"
+        "SHACL验证"
       ],
-      "zh_summary": "针对机器学习原子间势（MLIP）领域快速演进、知识分散的问题，提出基于LLM的自动化流程，从文献中抽取信息并构建知识图谱。流程以模型为单元，利用SHACL约束进行验证循环以检测和纠正错误，支持迭代式构建，便于新增模型。以Matbench Discovery排行榜中的模型为例，展示可查询的知识图谱构建过程。",
-      "novelty": "将LLM信息抽取与SHACL验证循环结合，实现MLIP领域知识图谱的自动化构建与更新，强调表示一致性和可迭代扩展。",
+      "zh_summary": "针对材料科学中机器学习原子间势（MLIP）领域快速演进，语义表示需求增加的问题，本文报道并展示了一个自动构建和更新MLIP模型知识图谱的流程。该基于LLM的流程包括从文档和文章中抽取信息，以及使用SHACL约束进行验证以检测和纠正错误的循环。流程以模型为单位进行，注重表示一致性，从而支持迭代构建，便于添加新模型。通过从Matbench Discovery排行榜所列模型构建的知识图谱中查询若干有趣方面进行了说明。",
+      "novelty": "提出基于LLM的自动化流程，从文献中抽取MLIP模型信息并构建可迭代更新的知识图谱，结合SHACL约束验证确保一致性。",
       "innovation_points": [
-        "提出基于LLM的多步骤知识图谱自动构建流程，涵盖文档信息抽取与验证循环",
-        "使用SHACL约束自动检测和纠正抽取错误，提升图谱一致性",
-        "以模型为单元进行增量式构建，便于新模型持续加入",
-        "在Matbench Discovery排行榜模型上验证流程可行性"
+        "基于LLM的多步信息抽取流程，从文档和文章中抽取MLIP模型相关信息。",
+        "使用SHACL约束的验证循环，自动检测和纠正抽取错误。",
+        "以模型为单位的迭代构建方法，便于新模型的持续集成与知识图谱更新。"
       ],
-      "limitations": "依赖LLM抽取质量，可能存在幻觉或遗漏；SHACL验证只能覆盖预定义约束，无法保证语义完整性；当前仅针对MLIP领域，跨领域迁移需重新设计本体与约束。",
+      "limitations": "流程依赖LLM抽取的准确性，可能存在遗漏或错误；仅针对MLIP领域，通用性有限；知识图谱的覆盖范围和更新频率未量化；未与其他知识图谱构建方法进行性能对比。",
       "improvement_directions": null,
-      "engineering_value": "为材料科学领域快速构建和更新专业知识图谱提供可操作流程，可辅助研究人员追踪MLIP模型进展，并支持自动化文献综述与模型推荐系统。",
-      "why_relevant": "虽然不直接处理OCR，但涉及从科学文献中自动抽取信息，与文档解析、信息抽取技术相关，可借鉴于OCR后处理与知识结构化。"
-    },
-    {
-      "title": "DSV-Mem: Evaluating Multimodal Memory in Professional Workflows for MLLM Agents",
-      "summary": "Conversational MLLM agents are increasingly expected to assist in professional workflows, from AI research and engineering design to product management and business operations. Yet this capability remains underexplored: existing benchmarks largely focus on informal, everyday interactions and personal-life scenarios featuring photographic natural images, isolated static artifacts, and recall-oriented questions. In contrast, professional scenarios often involve structured, information-heavy artifacts that undergo frequent revisions and authority updates, and compositional queries requiring reconciliation of many artifact versions while tracking state precisely. To address these challenges, we introduce DSV-Mem, a benchmark for evaluating Dense Stateful Visual Memory. DSV-Mem comprises expert-reviewed scenarios and 1,000 questions across five user-oriented categories (Current State, Past State, Derived State, Change History, and Conflict/Refusal). A Hartley-inspired criterion favors questions with broader visual-evidence inspection demands. We also introduce a generation harness that produces evaluation suites by decoupling state-transition synthesis from conversation filling. Evaluation over 27 configurations spanning frontier and open-weight models and memory management methods reveals that the strongest baseline scores below 45% on DSV-Mem. Analysis surfaces findings: 1) multimodality and information density both contribute to difficulty, but state evolution, particularly the number of governing updates, is the dominant tested factor. Raw conversation/haystack length, OCR, and arithmetic are not the primary bottlenecks; 2) models often fail to verify user premises against prior state updates before answering; 3) increased reasoning effort and memory management methods yield limited gains, whereas state-aware designs prove more effective. The benchmark and code will be publicly released.",
-      "link": "https://arxiv.org/abs/2610.08102v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.08102v1",
-      "authors": [
-        "Jike Zhong",
-        "Ritwick Chaudhry",
-        "Xuanbai Chen",
-        "Tianchen Zhao",
-        "Linghan Xu",
-        "Yifan Xing",
-        "Nishant Sankaran"
-      ],
-      "published": "2026-10-06T10:30:14Z",
-      "updated": "2026-10-06T10:30:14Z",
-      "categories": [
-        "cs.AI"
-      ],
-      "arxiv_id": "2610.08102v1",
-      "score": 9,
-      "topic_tags": [
-        "多模态记忆",
-        "MLLM代理",
-        "基准评测",
-        "专业工作流",
-        "状态追踪",
-        "文档理解"
-      ],
-      "zh_summary": "针对现有MLLM代理基准多聚焦日常场景、缺乏专业工作流中密集状态视觉记忆评估的问题，提出DSV-Mem基准，包含专家审核场景和1000个问题，覆盖当前状态、过去状态、派生状态、变更历史和冲突/拒绝五类。采用Hartley启发式准则筛选需广泛视觉证据检查的问题，并引入解耦状态转移合成与对话填充的生成工具。评估27种配置，最强基线低于45%，发现状态演化（尤其管理更新次数）是主要困难因素。",
-      "novelty": "首次定义并系统评估专业工作流中的密集状态视觉记忆（Dense Stateful Visual Memory），提出解耦状态转移与对话生成的评测套件构建方法。",
-      "innovation_points": [
-        "提出DSV-Mem基准，针对专业工作流中多版本、高信息密度视觉工件的状态追踪",
-        "定义五类用户导向问题：当前状态、过去状态、派生状态、变更历史、冲突/拒绝",
-        "引入Hartley启发式准则筛选需广泛视觉证据检查的问题",
-        "设计解耦状态转移合成与对话填充的生成工具，支持可扩展评测套件构建",
-        "系统评估27种配置，揭示状态演化是主要难度因素"
-      ],
-      "limitations": "基准构建依赖专家审核，扩展成本较高；问题类型和场景覆盖可能受限于特定专业领域；未充分探索多模态记忆管理方法的改进空间；评估模型限于当前MLLM，可能快速过时。",
-      "improvement_directions": null,
-      "engineering_value": "为专业工作流中的MLLM代理记忆能力提供评估标准，可指导文档版本管理、多模态检索与状态追踪系统的设计，提升AI助手在工程与业务场景中的可靠性。",
-      "why_relevant": "涉及多模态文档理解与状态追踪，与OCR后的文档解析、版本化文档管理相关，可启发OCR系统对结构化文档演化的处理。"
+      "engineering_value": "为快速发展的科研领域提供了一种自动构建和更新知识图谱的工程化方案，可辅助研究人员追踪模型进展，促进知识管理和发现。",
+      "why_relevant": "虽然主题为材料科学知识图谱，但涉及文档信息抽取、LLM应用和结构化表示，与OCR和文档解析中的信息抽取任务有方法上的关联。"
     }
   ]
 }
