@@ -1,114 +1,65 @@
 {
   "meta": {
-    "report_date": "2026-10-15",
-    "generated_at_utc": "2026-10-15 05:53:19",
+    "report_date": "2026-10-16",
+    "generated_at_utc": "2026-10-16 05:49:42",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 10
+    "count": 11
   },
   "synthesis": {
-    "executive_summary": "今日论文围绕OCR与文档解析的评估细化、长文档结构重建、多模态统一解析和推理效率展开。核心进展包括：提出严重性加权CER和字符级渲染验证器以弥补传统指标对关键错误不敏感的问题；利用逐级多模态记忆和统一数据集提升长文档标题层级与视觉元素描述的结构化输出能力；通过训练无关的视觉token剪枝在保持OCR等细粒度任务性能的同时大幅降低推理成本。工业界关注电商主图生成和GUI定位的端到端方案，但长文档结构一致性与记忆遗忘等开放问题仍未解决。",
-    "trend_summary": "文档解析正从孤立任务（布局、识别、描述）走向统一建模与结构一致性输出；评估指标开始引入人类感知和字符级验证，而非仅依赖CER或整体相似度；多模态大模型推理加速与视觉token剪枝成为提升OCR细粒度任务可行性的关键路径；工业级应用（电商主图、GUI自动化）推动数据合成、强化学习与多条件生成技术的落地，但长文档级结构重建和记忆管理仍缺乏系统性解决方案。",
+    "executive_summary": "今日论文显示，文档解析研究正从单一OCR向结构理解、视觉语义描述和端到端可审计系统演进。RPD基准和P2TPO分别推动统一解析评测与强化学习优化，LoC和ZoomCap则证明高分辨率视觉证据与自适应缩放对RAG和细粒度描述的价值。同时，医疗文档的确定性流水线和semCER评估指标凸显了在受监管场景中可复现性与人类感知对齐的重要性。DocPilot和ReviewPilot展示了智能体在长文档与系统综述中的落地潜力。",
+    "trend_summary": "整体趋势包括：1）文档解析任务定义趋向统一，要求模型同时输出布局、阅读顺序、文本和视觉元素描述；2）视觉令牌预算、自适应缩放和证据路由成为提升多模态文档理解的关键手段；3）强化学习被用于解决全页解析中的局部错误与信用分配问题；4）评估指标从单纯字符错误率转向严重性加权和事实级可恢复性；5）受监管领域对全流程确定性和可追溯性提出工程要求；6）智能体编排与课程学习开始应用于长文档和系统综述。",
     "common_innovations": [
-      "将文档级结构重建（如标题层级）形式化为增量式多模态记忆问题，突破VLM上下文长度限制",
-      "构建统一的多模态文档解析基准，同时评估布局、阅读顺序、文本识别和视觉元素描述生成",
-      "采用强化学习或LLM评判为OCR/渲染错误赋予严重性权重，使评估更贴近人类感知",
-      "设计训练无关的混合粒度视觉token剪枝方法，在细粒度OCR任务上保持高保留率的同时减少计算量",
-      "利用字符结构先验（如表意文字描述序列）提升生成文本的渲染验证准确率",
-      "在工业生成框架中引入多阶段强化学习和渐进训练，联合优化主体、商标和字符级文本保真度"
+      "统一文档解析任务定义，将视觉元素描述生成与布局、阅读顺序、文本内容整合为有序列表输出。",
+      "利用自适应视觉缩放和高分辨率证据增强来提升细粒度描述与多模态RAG的生成质量。",
+      "采用强化学习或策略优化进行结构对齐的信用分配，以定位全页解析中的局部错误。",
+      "构建端到端确定性流水线，覆盖OCR、嵌入、检索和推理，实现字节级可复现。",
+      "提出严重性加权的OCR评估指标，使字符错误率更贴近人类对关键信息错误的感知。",
+      "设计智能体框架与课程式训练，使小模型能够处理长文档中的稀疏证据和跨模态推理。"
     ],
     "future_directions": [
-      "研发面向长文档的全局结构一致性评估指标，将标题层级、阅读顺序和跨页引用关系纳入统一评测",
-      "探索将严重性加权CER与字符渲染验证器结合，构建端到端的OCR质量优化闭环，并将验证信号反馈给生成模型训练",
-      "扩展Bifocal等训练无关剪枝方法到多图、视频和动态文档场景，验证其在OCR密集任务上的泛化性和延迟收益",
-      "设计支持多模态记忆遗忘的文档管理系统架构，在保证长文档结构记忆的同时满足用户删除请求和隐私合规",
-      "构建涵盖更多领域（法律、医疗、工程图纸）的统一文档解析基准，并测试现有模型在跨领域联合任务上的泛化能力",
-      "研究将视觉元素描述生成与多模态知识图谱构建联动，使文档解析输出可直接用于RAG和结构化知识抽取"
+      "扩展RPD基准至多语言和跨领域文档，并验证空间感知增强器在非英文场景下的泛化能力。",
+      "将P2TPO的信用分配机制与轻量级专用解析模型结合，探索在低资源语言和复杂表格上的优化效果。",
+      "研究LoC方法中查询相关区域选择的端到端训练，减少对检索结果的依赖并支持多语言文档。",
+      "开发ZoomCap的自适应缩放策略在多样化文档类型（如表格、图表、手写体）上的验证与改进。",
+      "将semCER的严重性评分机制集成到OCR训练损失中，直接优化关键信息（如名称、数字）的准确性。",
+      "探索确定性流水线在更广泛受监管领域（金融、法律）的适用性，并消除OCR和嵌入服务中的非确定性来源。",
+      "设计DocPilot的增量学习机制，降低对教师模型轨迹的依赖，并验证在数百页超长文档上的扩展性。",
+      "构建OCR后结构化信息抽取的智能体系统，结合ReviewPilot的可追溯性设计，提升文档证据链的完整性。"
     ],
     "engineering_takeaways": [
-      "严重性加权CER可作为OCR和VLM评估的补充指标，在医疗、法律等文本质量敏感场景中优先关注关键字符错误",
-      "逐级多模态记忆框架可直接集成到长文档解析流水线，通过锚点选择策略控制内存和计算开销，适合RAG前处理",
-      "Bifocal等训练无关视觉token剪枝方法能在资源受限设备上保持超过90%的OCR性能，建议在部署多模态大模型时评估",
-      "字符级渲染验证器（如TextVerifier）可作为生成式文本图像的质量门控，集成到广告设计、电商主图生成流水线中",
-      "统一文档解析数据集和空间感知增强器为端到端文档理解模型提供标准化训练和评估基础，建议在内部文档处理系统中参考其任务定义",
-      "电商主图生成框架的三阶段流水线（信息提取、语义重写、多条件生成）和渐进训练策略对工业级多条件生成任务有直接参考价值"
+      "在文档RAG系统中优先扩大生成器的视觉令牌预算并叠加查询相关OCR文本，可无需训练获得显著提升。",
+      "受监管领域应记录GPU型号和推理引擎调度设置，并固定OCR、嵌入和检索服务以实现字节级可复现输出。",
+      "使用严重性加权CER（semCER）替代传统CER评估OCR质量，可更准确反映下游任务中的关键信息错误。",
+      "全页文档解析模型可采用P2TPO的信用分配框架，通过细粒度强化学习提升局部准确性和结构完整性。",
+      "智能体框架如DocPilot支持小模型达到接近大模型的性能，有助于降低长文档理解系统的部署成本。",
+      "参考ReviewPilot的多智能体设计，为OCR后的信息提取系统加入对话式配置和来源追溯，提升可审计性。"
     ],
     "watchlist": [
       {
-        "title": "Heading Hierarchy Reconstruction for Complex and Long Documents with Level-Wise Multimodal Memory",
-        "watch_reason": "首次将文档级标题层级重建形式化为增量式多模态记忆问题，并发布大规模专家标注基准，对长文档结构解析和RAG应用有直接推动作用，但锚点策略简单，需关注后续优化。"
-      },
-      {
         "title": "Read, Parse, Describe: Unified Document Parsing with Visual Element Description Generation",
-        "watch_reason": "提出统一文档解析任务和大规模多模态基准，并要求模型同时输出布局、阅读顺序和视觉元素描述，可能改变文档理解系统的评估范式，但领域覆盖有限，需观察扩展性。"
+        "watch_reason": "首个统一文档解析基准和即插即用空间感知增强器，可能成为后续评测和模型设计的参考标准。"
       },
       {
-        "title": "Efficient Scene-Text Refinement via Pixel-Space Grouped Image Generation",
-        "watch_reason": "将局部文本精修定义为像素空间分组生成，以极低生成成本实现高字符准确率，对生成图像文本质量提升有直接工程价值，但需验证在大范围编辑和自然场景中的适用性。"
+        "title": "Loud and Clear: Making Visual Evidence Count in Multimodal Document RAG",
+        "watch_reason": "无需训练即可大幅提升多模态文档RAG性能，方法简单且易于集成，适合工程落地。"
+      },
+      {
+        "title": "P2TPO: Structure-Aligned Page-to-Token Credit Assignment for Full-Page Document Parsing",
+        "watch_reason": "提出页面到令牌的信用分配框架，为全页解析的强化学习优化提供了新思路。"
       },
       {
         "title": "Equal CER, Unequal Damage: Severity-Weighted Character Error Rate for OCR",
-        "watch_reason": "提出基于LLM评判的严重性加权CER，并提供多语言人工评分数据，可能成为OCR评估的新标准，但依赖LLM评判的一致性和跨语言泛化性仍需验证。"
+        "watch_reason": "semCER指标更贴近人类感知，可能推动OCR评估标准变革，影响模型优化方向。"
       },
       {
-        "title": "TextVerifier: Seeing Beyond Recognition to Verify Chinese Text Rendering",
-        "watch_reason": "首次形式化文本渲染验证任务，利用IDS和字符级标注基准显著超越OCR置信度和通用VLM，对生成式文本图像的质量控制有直接应用潜力，但仅限中文，需观察多语言扩展。"
-      },
-      {
-        "title": "Bifocal: Training-Free Mixed Granularity Visual Token Pruning for Multimodal LLMs",
-        "watch_reason": "训练无关的混合粒度剪枝在OCR和视觉定位任务上保持高保留率，为多模态大模型推理加速提供可直接部署方案，但需关注实际延迟和注意力质量敏感性。"
-      },
-      {
-        "title": "CommerceGen-Studio: An End-to-End Framework for Commercial-Grade Main-Image Generation",
-        "watch_reason": "端到端电商主图生成框架已实现每天数百万张的工业部署，其多阶段流水线和渐进训练策略对商业级生成任务有高参考价值，但依赖专有数据，复现难度大。"
-      },
-      {
-        "title": "Can Agents Forget When Asked? A Benchmark for Memory Unlearning in LLM Agents",
-        "watch_reason": "首次基准测试LLM智能体记忆遗忘，揭示所有系统端到端通过率不超过1.5%，对文档管理系统中用户删除请求和隐私合规设计有重要警示意义。"
+        "title": "Making every stage of medical device document assessment with large language models deterministic",
+        "watch_reason": "为受监管领域的文档自动化提供了可审计、可复现的工程范式，合规价值高。"
       }
     ]
   },
   "papers": [
-    {
-      "title": "Heading Hierarchy Reconstruction for Complex and Long Documents with Level-Wise Multimodal Memory",
-      "summary": "Vision-language models (VLMs) have been widely adopted for document parsing and optical character recognition (OCR), as they can accurately extract page-level elements. However, downstream applications such as retrieval-augmented generation (RAG) also require coherent document-level structure. Although these models indicate heading levels using different numbers of preceding ``\\#'' symbols, page-by-page prediction often lacks document-level consistency. In practice, input-resolution and context-length constraints make it infeasible for a VLM to jointly process all page images in documents containing tens or hundreds of pages. To address this limitation, we propose a VLM-based framework that incrementally reconstructs heading hierarchies with a \\emph{level-wise multimodal memory}. The memory retains a compact subset of all previously processed pages, selected by anchors. Our framework supports flexible anchor selection, and in this work we select the most recent node at each level, allowing the VLM to observe the visual, textual, and layout patterns of headings at every level. For comprehensive evaluation, we also introduce the Complex and Long Document Heading Hierarchy Reconstruction Benchmark (CLDoc-HHRBench), comprising 250 documents and 11,212 pages with expert-verified annotations. Experiments on CLDoc-HHRBench and three existing benchmarks demonstrate the effectiveness of our method.",
-      "link": "https://arxiv.org/abs/2610.18238v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.18238v1",
-      "authors": [
-        "Qian Chen",
-        "Xianyin Zhang",
-        "Lifan Guo",
-        "Chi Zhang"
-      ],
-      "published": "2026-10-13T12:06:28Z",
-      "updated": "2026-10-13T12:06:28Z",
-      "categories": [
-        "cs.CV",
-        "cs.AI"
-      ],
-      "arxiv_id": "2610.18238v1",
-      "score": 26,
-      "topic_tags": [
-        "文档解析",
-        "标题层级重建",
-        "多模态记忆",
-        "视觉语言模型",
-        "长文档",
-        "基准测试"
-      ],
-      "zh_summary": "针对视觉语言模型在文档解析中逐页预测导致标题层级缺乏文档级一致性的问题，提出基于VLM的框架，通过逐级多模态记忆增量重建标题层级。记忆由锚点选出的紧凑历史页面子集构成，支持灵活锚点选择，本文选取每级最新节点，使VLM能观察各级标题的视觉、文本和布局模式。同时发布CLDoc-HHRBench，包含250个文档、11212页专家验证标注。在CLDoc-HHRBench和三个现有基准上验证了方法有效性。",
-      "novelty": "首次将文档级标题层级重建形式化为增量式多模态记忆问题，并设计了基于锚点的逐级记忆机制，突破了VLM输入分辨率和上下文长度限制。",
-      "innovation_points": [
-        "提出逐级多模态记忆机制，增量式重建标题层级，避免全文档联合处理",
-        "设计灵活的锚点选择策略，本文选取每级最新节点以保留各级标题模式",
-        "构建CLDoc-HHRBench，涵盖250个文档、11212页的专家验证标注，支持长文档标题层级评估"
-      ],
-      "limitations": "锚点选择策略较为简单（仅取每级最新节点），可能无法充分覆盖复杂层级变化；未与其他记忆压缩方法进行对比；评估主要限于标题层级重建，未验证对下游RAG任务的实际增益。",
-      "improvement_directions": null,
-      "engineering_value": "为长文档解析和结构化输出提供了可落地的VLM框架，直接支持RAG等下游应用对文档级结构的需求，具有较高的工程实用价值。",
-      "why_relevant": "该工作直接针对OCR/文档解析中的文档级结构重建问题，利用多模态记忆提升长文档标题层级一致性，属于文档解析的前沿方向。"
-    },
     {
       "title": "Read, Parse, Describe: Unified Document Parsing with Visual Element Description Generation",
       "summary": "Document understanding systems are typically evaluated as separate components via layout analysis, optical text recognition, reading-order prediction, and image captioning. This separation leaves scientific figures, captions, and visual semantics weakly connected, and fails to measure whether a model can produce a single page-level parse that is both structurally faithful and semantically accessible. We introduce Read-Parse-Describe, a unified dataset for document parsing with visual element description generation. Given a page image, models are required to output an ordered list of layout elements containing bounding boxes, semantic labels, reading-order indices, recognized textual content, and alternative text descriptions for visual elements. The benchmark is built from 2,402 documents, comprising 18,163 continuous pages, 125,218 layout elements, and 11,338 visual instances. Besides, we further propose a plug-and-play space-awareness enhancer that reuses multi-layer visual features and injects grid-aware spatial guidance into vision-language tokens for layout-aware generation. Experiments across end-to-end VLMs and pipeline parsers show that existing systems still struggle to jointly recover reading order and visual semantics, while our enhanced model achieves strong joint performance. These results highlight the need to move beyond isolated document parsing modules toward unified models that jointly read, parse, and describe complex documents. The new dataset and code will be made publicly available at https://github.com/yufanchen96/RPD",
@@ -138,63 +89,255 @@
       "topic_tags": [
         "文档解析",
         "视觉元素描述",
-        "统一数据集",
+        "基准数据集",
         "空间感知增强",
-        "阅读顺序",
-        "视觉语言模型"
+        "多模态文档理解"
       ],
-      "zh_summary": "针对文档理解系统通常分离评估布局分析、文本识别、阅读顺序预测和图像描述，导致科学图表、标题与视觉语义连接薄弱的问题，提出Read-Parse-Describe统一数据集，要求模型对页面图像输出有序布局元素列表，包含边界框、语义标签、阅读顺序索引、识别文本内容以及视觉元素的替代文本描述。基准包含2402个文档、18163页、125218个布局元素和11338个视觉实例。同时提出即插即用的空间感知增强器，重用多层视觉特征并向视觉语言令牌注入网格感知空间引导。实验表明现有系统难以联合恢复阅读顺序和视觉语义，而增强模型实现了强联合性能。",
-      "novelty": "首次将文档解析与视觉元素描述生成统一为单一任务，并构建了大规模多模态文档解析基准，同时提出空间感知增强器提升布局感知生成。",
+      "zh_summary": "针对文档理解系统评估割裂、视觉语义连接弱的问题，构建了统一文档解析基准 RPD，要求模型对页面图像输出包含布局、阅读顺序、文本内容和视觉元素替代文本的有序列表。基准包含 2402 篇文档、18163 页、125218 个布局元素和 11338 个视觉实例，并提出即插即用空间感知增强模块，利用多层视觉特征和网格感知空间引导提升布局感知生成。实验表明现有系统难以同时恢复阅读顺序和视觉语义，增强模型取得强联合性能。",
+      "novelty": "首次将文档解析中的视觉元素描述生成任务统一到页面级有序列表输出中，并发布大规模细粒度标注基准。",
       "innovation_points": [
-        "定义统一文档解析任务，输出有序布局元素列表并生成视觉元素替代文本描述",
-        "构建Read-Parse-Describe数据集，涵盖2402个文档、18163页、125218个布局元素和11338个视觉实例",
-        "提出即插即用的空间感知增强器，重用多层视觉特征并注入网格感知空间引导"
+        "提出统一文档解析任务定义：输出有序布局元素列表，同时包含边界框、语义标签、阅读顺序索引、文本内容和视觉元素替代文本描述",
+        "构建 RPD 基准数据集，涵盖 2402 篇文档、18163 连续页面、125218 个布局元素和 11338 个视觉实例",
+        "设计即插即用的空间感知增强器，通过重用多层视觉特征并向视觉语言令牌注入网格感知空间引导，增强布局感知生成"
       ],
-      "limitations": "数据集主要针对科学文档，领域覆盖有限；增强器为通用插件，未深入探索不同架构的适配性；评估指标可能未充分衡量描述生成的质量。",
+      "limitations": "未明确说明数据集的语言覆盖范围和领域分布；空间感知增强器未在非英文文档上验证；评估仅限端到端 VLM 和流水线解析器，未涉及轻量级专用模型。",
       "improvement_directions": null,
-      "engineering_value": "为文档理解系统提供了统一的评估基准和增强模块，有助于推动端到端文档解析模型的研发，在自动化文档处理、无障碍阅读等场景具有应用潜力。",
-      "why_relevant": "该工作直接涉及OCR和文档解析，通过统一任务定义和数据集推动文档理解从孤立模块向联合模型发展，与OCR研究密切相关。"
+      "engineering_value": "为文档智能系统提供可复用的统一解析评测基准和增强模块，有助于推动端到端文档解析产品在结构还原和视觉语义理解上的集成。",
+      "why_relevant": "直接关乎 OCR 和文档解析任务，涉及阅读顺序、布局分析、文本识别与视觉元素描述的统一建模，与 OCR 研究核心方向高度相关。"
     },
     {
-      "title": "Efficient Scene-Text Refinement via Pixel-Space Grouped Image Generation",
-      "summary": "Generated images often have coherent layouts and visual content, yet local errors in small text and complex characters still limit their readability and practical use. Scene-text refinement requires accuracy, preservation, and efficiency. Existing methods based on variational autoencoders (VAEs) can lose fine strokes during reconstruction, while full-image editing can shift background colors. In this work, we introduce PixText, a model that formulates local text refinement as grouped image generation in pixel space. Conditioned on the original image, PixText generates only the target regions, preserves unedited content, and uses MeanFlow for four-step generation. We further introduce Text Refinement Bench to evaluate text correction and image preservation in generated images. On this benchmark, PixText achieves 83.06% glyph pass and 94.66% exact target-character OCR accuracy, versus 36.77% and 52.31% for the strongest baseline. Its four-step MeanFlow variant retains an 81.84% pass rate with less than one GPU-second of amortized generation cost per image.",
-      "link": "https://arxiv.org/abs/2610.18284v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.18284v1",
+      "title": "Making every stage of medical device document assessment with large language models deterministic",
+      "summary": "To show that a medical device complies with regulation, experts judge whether documents and records meet each requirement and record the judgment for others to verify. For each assessment item that experts define, large language models could prepare a preliminary assessment: a label such as Satisfied or Not satisfied, a reason and quoted evidence. We sent fourteen commercial deployments of such models (seven models from three providers, through six routes) the same request repeatedly, with the deterministic sampling settings each accepted; every deployment returned differing assessments for at least one request, and in twelve the label changed. Reducing reasoning where the interface allows it did not reduce the variation, and prompts of retrieved passages removed it only for the smallest models. The same open-weight model was reproducible or not depending only on how it was served. A pipeline we built to be deterministic at every stage -- text extraction and optical character recognition (OCR), chunking, embedding, indexing, retrieval and inference -- returned byte-identical output at each stage across reruns, interruptions, edits, machines of one graphics processing unit (GPU) model and days, for blood glucose meter and infusion pump documents. OCR, embedding and approximate retrieval varied when their own serving was not made invariant, and outputs changed with the GPU model and with the inference engine's scheduling settings, which therefore belong in the recorded configuration. End-to-end determinism is achievable and gives a testable basis for audit and change control.",
+      "link": "https://arxiv.org/abs/2610.21300v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.21300v1",
       "authors": [
-        "Yaoli Liu",
-        "Guo-Hua Wang",
-        "Yiyang Chen",
-        "Qing-Guo Chen",
-        "Zhao Xu",
-        "Weihua Luo",
-        "Yao-Xiang Ding"
+        "Ryosuke Suzuki"
       ],
-      "published": "2026-10-13T12:34:42Z",
-      "updated": "2026-10-13T12:34:42Z",
+      "published": "2026-10-15T05:45:20Z",
+      "updated": "2026-10-15T05:45:20Z",
       "categories": [
-        "cs.CV"
+        "cs.CL",
+        "cs.IR"
       ],
-      "arxiv_id": "2610.18284v1",
+      "arxiv_id": "2610.21300v1",
+      "score": 20,
+      "topic_tags": [
+        "确定性推理",
+        "OCR 可复现性",
+        "医疗文档评估",
+        "大语言模型",
+        "审计与变更控制"
+      ],
+      "zh_summary": "探讨大语言模型在医疗器械文档评估中的确定性，发现十四个商业部署在确定性采样设置下仍对相同请求返回不同评估结果，其中十二个标签发生变化。构建的端到端确定性流水线（文本提取与 OCR、分块、嵌入、索引、检索、推理）在多次运行、中断、编辑、不同 GPU 和日期下对血糖仪和输液泵文档输出字节级一致结果，但 OCR、嵌入和近似检索在服务未固定时存在变化，GPU 型号和推理引擎调度设置也影响输出。",
+      "novelty": "系统评估了商业 LLM 在医疗器械评估中的非确定性，并证明端到端确定性流水线可实现字节级可复现性。",
+      "innovation_points": [
+        "首次对多种商业 LLM 在合规评估场景下的确定性进行量化测试，揭示即使固定采样设置也广泛存在输出变化",
+        "构建覆盖文本提取与 OCR、分块、嵌入、索引、检索和推理的全阶段确定性流水线，实现跨运行、中断、编辑、机器和日期的字节级一致输出",
+        "将 GPU 型号和推理引擎调度设置纳入需记录的配置因素，为审计和变更控制提供可测试基础"
+      ],
+      "limitations": "确定性流水线仅在两种医疗设备文档上验证，未扩展到更广泛领域；OCR 和嵌入服务的非确定性来源未完全消除，仅通过固定服务配置规避；未评估确定性对 LLM 评估准确性的影响。",
+      "improvement_directions": null,
+      "engineering_value": "为医疗等受监管领域的文档自动化评估提供可审计、可复现的工程实现范式，强调配置记录和全链路固定，具有高合规价值。",
+      "why_relevant": "涉及 OCR 作为文本提取环节的确定性要求，并讨论推理引擎调度对输出的影响，与 OCR 系统在关键业务中的可复现性直接相关。"
+    },
+    {
+      "title": "Loud and Clear: Making Visual Evidence Count in Multimodal Document RAG",
+      "summary": "Multimodal document retrieval-augmented generation (RAG) has focused largely on retrieval, yet its answers depend on how well a vision-language model reads the retrieved pages. We find that evidence in retrieved pages remains underused even when the correct pages are retrieved. On SciEGQA oracle pages, five prior methods give the generator 0.7K to 2.7K visual tokens per query on average under a common image processor, yet raising the page-only budget from 1K to 32K improves accuracy by 15.22 points. At a fixed 16K budget, adding ground-truth crops improves accuracy by 3.75 points over page-only input. We study what the generator needs from retrieved pages through two requirements: Loud, making full use of visual token capacity, and Clear, refining the page so that its evidence becomes prominent. For Loud, increasing either the visual token budget or visual fidelity, the image resolution those tokens preserve, improves accuracy with the other held fixed, and full-page scaling outperforms repetition and tiling at matched budgets. For Clear, suppressing surrounding content improves accuracy without enlarging selected regions, and adding OCR of these regions to page images outperforms either input alone. We implement both as Loud and Clear (LoC), which combines higher-resolution pages with OCR from query-relevant regions without ground-truth annotations or additional training. LoC outperforms eight prior methods on SciEGQA, ViDoRe-v3, and MMLongBench-Doc, improving over the strongest, ColQwen3, by 8.88, 3.09, and 4.22 points with the same retriever and generator. It also outperforms its page-only variant under the same visual token budget. These results locate a bottleneck beyond retrieval: how the retrieved pages are given to the generator.",
+      "link": "https://arxiv.org/abs/2610.21318v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.21318v1",
+      "authors": [
+        "Eunchan Jo",
+        "Seounghyun Jang",
+        "Sangwoo Mo"
+      ],
+      "published": "2026-10-15T06:08:04Z",
+      "updated": "2026-10-15T06:08:04Z",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "arxiv_id": "2610.21318v1",
+      "score": 18,
+      "topic_tags": [
+        "多模态文档 RAG",
+        "视觉令牌预算",
+        "OCR 融合",
+        "证据增强",
+        "免训练方法"
+      ],
+      "zh_summary": "发现多模态文档 RAG 中检索到的页面证据未被充分利用，生成器视觉令牌预算从 1K 增至 32K 可提升 15.22 个点，加入真值裁剪可提升 3.75 个点。提出 Loud and Clear（LoC）方法，通过提高页面分辨率并叠加查询相关区域的 OCR 文本，无需额外训练或标注，在 SciEGQA、ViDoRe-v3 和 MMLongBench-Doc 上优于八种先前方法，相比最强基线 ColQwen3 分别提升 8.88、3.09 和 4.22 个点。",
+      "novelty": "揭示多模态文档 RAG 中生成器对检索页面证据利用不足，并提出无需训练的 LoC 方法同时提升视觉令牌容量和证据清晰度。",
+      "innovation_points": [
+        "量化分析多模态文档 RAG 中视觉令牌预算和视觉保真度对答案准确率的影响，提出 Loud 和 Clear 两个需求框架",
+        "提出 LoC 方法，结合高分辨率页面与查询相关区域的 OCR 文本，无需真值标注或额外训练",
+        "在多个文档问答基准上取得一致提升，验证了同时扩大视觉令牌容量和突出证据区域的有效性"
+      ],
+      "limitations": "LoC 依赖查询相关区域的选择，可能引入检索错误；未探索端到端训练以优化区域选择和 OCR 融合；仅在英文文档基准上评估。",
+      "improvement_directions": null,
+      "engineering_value": "为文档 RAG 系统提供无需训练即可显著提升生成质量的工程方案，尤其适用于高分辨率页面和 OCR 文本融合的部署场景。",
+      "why_relevant": "核心涉及 OCR 文本与视觉页面在 RAG 中的融合利用，直接关联 OCR 输出如何增强多模态文档理解。"
+    },
+    {
+      "title": "ZoomCap: Evidence-Routed Visual Zooming for Recoverable Visual Information Transfer",
+      "summary": "Detailed captions transfer visual information into vision-language model supervision, but quality is easily conflated with length: long single-pass outputs still miss small objects, text, and spatial relations or promote uncertain observations into confident claims. We formulate fine-grained captioning as recoverable visual information transfer, in which a teacher acquires missing evidence under a finite observation budget and converts it into reusable supervision. ZoomCap uses a draft caption to route conditional knowledge retrieval, OCR-sensitive reading, coverage-gap recovery, and adaptive visual zooming, allocating deeper crops only to the most complex eligible region, deriving spatial relations from grounded geometry, and fusing non-duplicate evidence. We also introduce FactCycle, which scores caption-derived atomic claims on two blind anchors--source image (truthfulness) and reconstruction (realizability)--separating fabrication from generator loss claim by claim; human and multi-judge comparisons complement this fact-level view. Against Qwen3.5-397B-A17B captions, ZoomCap achieves an 81.9% human tie-adjusted preference score with a teacher over 10x smaller, and FactCycle counts 52.4 transferred claims per image vs. 31.5 for ScaleCap. The evidence also transfers: in continual pre-training, ZoomCap-450K improves the 11-benchmark average by 1.31-2.38 points over the strongest competing corpus and Ling-Tiny-VL-v3 gains 1.4 points on a production document/OCR monitor suite (1.5 on perception) at 60B tokens; in medical pre-training, 2.64M ZoomCap-captioned images improve five VQA benchmarks by 3.04 points (vs. 1.76 for same-image Gemini-3.1-Pro captions).",
+      "link": "https://arxiv.org/abs/2610.21320v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.21320v1",
+      "authors": [
+        "Hao Shi",
+        "Jiafeng Wang",
+        "Yuzhuo Fu",
+        "Tao Zhang",
+        "Jian Bai",
+        "Juelu Zhang",
+        "Qing Cui",
+        "Chao Huang"
+      ],
+      "published": "2026-10-15T06:10:24Z",
+      "updated": "2026-10-15T06:10:24Z",
+      "categories": [
+        "cs.CV",
+        "cs.CL",
+        "cs.MM"
+      ],
+      "arxiv_id": "2610.21320v1",
       "score": 13,
       "topic_tags": [
-        "场景文本精修",
-        "像素空间生成",
-        "MeanFlow",
-        "生成图像",
-        "OCR准确率",
-        "基准测试"
+        "细粒度图像描述",
+        "自适应视觉缩放",
+        "OCR 敏感阅读",
+        "事实性评估",
+        "持续预训练"
       ],
-      "zh_summary": "针对生成图像中小文本和复杂字符局部错误影响可读性的问题，提出PixText，将局部文本精修形式化为像素空间的分组图像生成。基于原始图像条件，仅生成目标区域，保留未编辑内容，并使用MeanFlow进行四步生成。同时提出Text Refinement Bench评估文本纠正和图像保持。在基准上，PixText达到83.06%字形通过率和94.66%精确目标字符OCR准确率，远超最强基线的36.77%和52.31%。四步MeanFlow变体保持81.84%通过率，每张图像摊销生成成本低于1 GPU秒。",
-      "novelty": "首次将局部文本精修定义为像素空间的分组图像生成，采用MeanFlow实现高效四步生成，并构建了专门的文本精修基准。",
+      "zh_summary": "将细粒度图像描述建模为可恢复的视觉信息传递，提出 ZoomCap 方法，利用草稿描述路由条件知识检索、OCR 敏感阅读、覆盖缺口恢复和自适应视觉缩放，将更深裁剪仅分配给最复杂的合格区域。提出 FactCycle 从真值性和可实现性两个盲锚点评估原子声明。ZoomCap 以小于教师模型 10 倍的规模获得 81.9% 的人类偏好得分，FactCycle 统计每图传递 52.4 个声明（ScaleCap 为 31.5）。在持续预训练中，ZoomCap-450K 在 11 个基准上平均提升 1.31-2.38 个点。",
+      "novelty": "提出可恢复视觉信息传递框架和自适应视觉缩放机制，以及 FactCycle 事实级评估方法，用于细粒度图像描述。",
       "innovation_points": [
-        "提出像素空间分组图像生成范式，仅生成目标区域，避免全图编辑导致的背景偏移",
-        "利用MeanFlow实现四步生成，平衡质量与效率",
-        "构建Text Refinement Bench，评估文本纠正和图像保持"
+        "将细粒度描述形式化为可恢复视觉信息传递，教师模型在有限观察预算下获取缺失证据并转化为监督信号",
+        "提出 ZoomCap，利用草稿描述路由条件知识检索、OCR 敏感阅读、覆盖缺口恢复和自适应视觉缩放，仅对最复杂区域进行深度裁剪",
+        "提出 FactCycle 评估方法，基于源图像和重构两个盲锚点分离虚构与生成器损失，实现事实级评分"
       ],
-      "limitations": "方法专注于局部文本精修，可能不适用于大范围文本编辑或复杂版面重构；MeanFlow的步骤数较少可能限制生成多样性；评估基准仅针对生成图像中的文本，未涵盖自然场景文本。",
+      "limitations": "依赖教师模型生成草稿描述，可能继承教师偏差；自适应缩放策略未在多样化文档类型上广泛验证；FactCycle 的自动化评估与人类判断的一致性需进一步验证。",
       "improvement_directions": null,
-      "engineering_value": "为生成图像中的文本质量提升提供了高效解决方案，在广告设计、电商主图、社交媒体内容生成等场景具有直接应用价值。",
-      "why_relevant": "该工作涉及OCR准确率评估和文本生成质量，与OCR技术中的文本识别和生成紧密相关，属于OCR在生成内容中的应用延伸。"
+      "engineering_value": "为视觉语言模型提供高质量细粒度描述数据生成方法，可用于文档/OCR 监控套件的持续预训练，提升感知能力。",
+      "why_relevant": "涉及 OCR 敏感阅读和文档/OCR 监控套件，与 OCR 数据生成和增强直接相关。"
+    },
+    {
+      "title": "P2TPO: Structure-Aligned Page-to-Token Credit Assignment for Full-Page Document Parsing",
+      "summary": "End-to-end full-page document parsing must preserve the content and structure of heterogeneous elements, yet otherwise accurate outputs can contain local errors and omissions. A single page-level advantage does not explicitly identify which elements differ in quality across sampled outputs or where their errors occur. We introduce Page-to-Token Policy Optimization (P2TPO), a structure-aligned credit-assignment framework that operates on full-page policy trajectories. Reference-element alignment first associates block-level quality contrasts with generated spans. Unified Anchor Pricing (UAP) incorporates matched and missing element outcomes and provides feedback relative to a fixed quality ceiling when sampled outputs receive identical but imperfect scores for a reference element. Within matched blocks, Span Credit Redistribution (SCR) redistributes existing block credit according to aligned correct and erroneous spans, using boundary proxies for within-block omissions while preserving the total block-derived advantage across its tokens. Under a fixed-weight additive page utility, we show that element-indexed contrasts retain local quality differences that page-level aggregation can cancel out. In the main experimental comparison, P2TPO outperforms all evaluated policy optimization baselines in seed-averaged scores on each of the six document parsing benchmarks. Additional experiments demonstrate gains across model scales and initializations.",
+      "link": "https://arxiv.org/abs/2610.21979v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.21979v1",
+      "authors": [
+        "Yong Zu",
+        "Ninghua Yang",
+        "Zezhong Tan",
+        "Xinhong Ma",
+        "Ziqiang Dong",
+        "Yang Yang"
+      ],
+      "published": "2026-10-15T14:32:00Z",
+      "updated": "2026-10-15T14:32:00Z",
+      "categories": [
+        "cs.LG",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "arxiv_id": "2610.21979v1",
+      "score": 12,
+      "topic_tags": [
+        "文档解析",
+        "策略优化",
+        "信用分配",
+        "结构对齐",
+        "强化学习"
+      ],
+      "zh_summary": "针对全页文档解析中局部错误和遗漏问题，提出 Page-to-Token Policy Optimization（P2TPO）结构对齐信用分配框架，在整页策略轨迹上操作。通过参考元素对齐将块级质量对比与生成跨度关联，统一锚点定价处理匹配和缺失元素，跨度信用重分配按对齐的正确和错误跨度重新分配块信用。在六个文档解析基准上，P2TPO 优于所有评估的策略优化基线。",
+      "novelty": "提出结构对齐的页面到令牌信用分配方法，解决全页文档解析中页面级优势无法定位局部元素错误的问题。",
+      "innovation_points": [
+        "引入 P2TPO 框架，在整页策略轨迹上进行结构对齐的信用分配，将块级质量对比与生成文本跨度关联",
+        "提出统一锚点定价（UAP），在采样输出获得相同但不完美分数时，结合匹配和缺失元素结果，提供相对于固定质量上限的反馈",
+        "设计跨度信用重分配（SCR），根据对齐的正确和错误跨度重新分配块信用，使用边界代理处理块内遗漏，同时保持总块优势不变"
+      ],
+      "limitations": "未明确说明 P2TPO 对初始模型质量的依赖；仅在固定权重加性页面效用下进行理论分析；未探讨在低资源语言或复杂表格上的表现。",
+      "improvement_directions": null,
+      "engineering_value": "为全页文档解析模型提供细粒度强化学习优化方案，可提升端到端解析系统的局部准确性和结构完整性，适用于高精度文档数字化。",
+      "why_relevant": "直接针对文档解析任务，涉及布局元素和阅读顺序的优化，与 OCR 后处理及端到端解析紧密相关。"
+    },
+    {
+      "title": "ESG-Kor: A Korean Dataset for ESG-related Information Extraction and Practical Use Cases",
+      "summary": "With the expansion of pre-trained language model usage in recent years, the importance of datasets for performing tasks in specialized domains has significantly increased. Therefore, we have built a Korean dataset called ESG-Kor to automatically extract Environmental, Social, and Governance (ESG) information, which has recently gained importance. ESG-Kor is a dataset consisting of a total of 118,946 sentences that extracted information on each ESG component from Korean companies' sustainability reports and manually labeled it according to objective rules provided by ESG evaluation agencies. To verify the effectiveness and applicability of the ESG-Kor dataset, classification performance was confirmed using several Korean pre-trained language models, and significant performance was obtained. Additionally, by extending the ESG classification model to documents of small and medium enterprises and extracting information based on ESG key issues and in-depth analysis, we demonstrated potential and practical use cases in the ESG field.",
+      "link": "https://arxiv.org/abs/2610.21368v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.21368v1",
+      "authors": [
+        "Jaeyoung Lee",
+        "Geonyeong Son",
+        "Misuk Kim"
+      ],
+      "published": "2026-10-15T06:48:21Z",
+      "updated": "2026-10-15T06:48:21Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "arxiv_id": "2610.21368v1",
+      "score": 10,
+      "topic_tags": [
+        "ESG 信息提取",
+        "韩语数据集",
+        "预训练语言模型",
+        "文档分类",
+        "可持续报告"
+      ],
+      "zh_summary": "构建了韩语 ESG 信息提取数据集 ESG-Kor，包含 118,946 个句子，从韩国公司可持续发展报告中提取 ESG 各组成部分信息，并依据 ESG 评估机构提供的客观规则进行人工标注。使用多个韩语预训练语言模型验证分类性能，并在中小企业文档上扩展 ESG 分类模型，展示基于 ESG 关键议题的信息提取和深入分析的实用案例。",
+      "novelty": "发布首个韩语 ESG 信息提取大规模人工标注数据集，并提供面向中小企业的应用案例。",
+      "innovation_points": [
+        "构建 ESG-Kor 数据集，包含 118,946 个从韩国公司可持续发展报告中提取并人工标注的句子，覆盖环境、社会和治理维度",
+        "基于 ESG 评估机构的客观规则进行标注，确保数据一致性和可验证性",
+        "验证多个韩语预训练语言模型的分类性能，并将模型扩展到中小企业文档，展示 ESG 关键议题提取的实用用例"
+      ],
+      "limitations": "数据集仅覆盖韩语和韩国公司，跨语言和跨地区泛化性未知；标注规则依赖特定评估机构，可能不适用于其他 ESG 框架；未涉及视觉元素或多模态文档解析。",
+      "improvement_directions": null,
+      "engineering_value": "为金融和合规领域的 ESG 自动化分析提供韩语数据和基线模型，可应用于中小企业报告的信息提取和风险评估。",
+      "why_relevant": "涉及从可持续发展报告中提取信息，与文档解析和 OCR 在金融文档处理中的应用场景相关。"
+    },
+    {
+      "title": "DocPilot: Interactive Agent Orchestration and Training for Long Visual Document Understanding",
+      "summary": "Multimodal long-document question answering requires models to seek sparse evidence across pages and modalities, understand heterogeneous document content, and reason over the collected evidence. Even advanced vision-language models (VLMs) can overlook sparse evidence and struggle with cross-modal reasoning in a single pass. Existing document agents further introduce multi-step interaction, but some still rely on predefined workflows or coarse-grained actions, limiting the flexibility and granularity of document reasoning. We introduce DocPilot, an agentic document framework that supports expressive orchestration and makes complex document solving learnable by small language models (SLMs). DocPilot orchestrates evidence seeking through page-level navigation and fine-grained evidence localization, and integrates local visual inspection, code-based numerical reasoning, and cross-modal reasoning for multimodal understanding. To transfer these capabilities to small models, we propose curriculum-based agentic training that progresses from single-ability learning to adaptive orchestration through supervision from data-grounded reasoning traces and executable interaction trajectories. Across MMLongBench-Doc, DocBench, FinRAGBench-V, and MADQA, DocPilot achieves strong gains with frontier VLM backbones, while DocPilot-4B delivers competitive performance against substantially larger models, demonstrating strong effectiveness and generalization across diverse long-document reasoning settings. The code is available at https://github.com/HKUSTDial/DocPilot.",
+      "link": "https://arxiv.org/abs/2610.21327v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.21327v1",
+      "authors": [
+        "Zhuowen Liang",
+        "Xiaotian Lin",
+        "Yuyu Luo",
+        "Haixun Wang",
+        "Nan Tang"
+      ],
+      "published": "2026-10-15T06:16:43Z",
+      "updated": "2026-10-15T06:16:43Z",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "arxiv_id": "2610.21327v1",
+      "score": 10,
+      "topic_tags": [
+        "长文档理解",
+        "多模态问答",
+        "智能体编排",
+        "小语言模型",
+        "课程学习"
+      ],
+      "zh_summary": "多模态长文档问答需要在跨页和跨模态中定位稀疏证据，并整合异构内容进行推理。现有视觉语言模型（VLM）易忽略稀疏证据，单次推理难以完成跨模态推理；已有文档智能体存在预定义流程或粗粒度动作的限制。本文提出DocPilot，一种智能体文档框架，支持表达性编排，并通过课程式智能体训练使小语言模型（SLM）学习复杂文档求解。DocPilot通过页面级导航和细粒度证据定位来编排证据搜索，并整合局部视觉检查、基于代码的数值推理和跨模态推理。在MMLongBench-Doc、DocBench、FinRAGBench-V和MADQA上，DocPilot与前沿VLM骨干结合取得显著提升，DocPilot-4B与更大模型相比具有竞争力。",
+      "novelty": "提出DocPilot智能体框架，通过页面级导航和细粒度证据定位实现表达性编排，并设计课程式智能体训练将复杂文档推理能力迁移至小模型。",
+      "innovation_points": [
+        "支持页面级导航与细粒度证据定位的智能体编排机制",
+        "整合局部视觉检查、代码数值推理与跨模态推理的多模态理解流程",
+        "课程式智能体训练：从单能力学习到自适应编排的渐进训练范式",
+        "基于数据接地推理轨迹和可执行交互轨迹的监督信号设计"
+      ],
+      "limitations": "未明确说明在开放域或低资源语言文档上的泛化能力；依赖教师模型生成轨迹，训练成本可能较高；未讨论对超长文档（如数百页）的扩展性。",
+      "improvement_directions": null,
+      "engineering_value": "为长文档问答系统提供可训练的智能体框架，使小模型也能达到接近大模型的性能，降低部署成本，适用于金融、法律等领域的文档理解场景。",
+      "why_relevant": "论文关注长视觉文档理解，涉及OCR后的文档问答与推理，与OCR技术在实际文档分析中的应用密切相关。"
     },
     {
       "title": "CommerceGen-Studio: An End-to-End Framework for Commercial-Grade Main-Image Generation",
@@ -222,24 +365,24 @@
       "arxiv_id": "2610.20603v1",
       "score": 10,
       "topic_tags": [
-        "电商主图生成",
-        "端到端框架",
+        "图像生成",
+        "电商主图",
         "多条件生成",
-        "强化学习",
-        "文本准确性",
-        "工业部署"
+        "渐进训练",
+        "基准测试"
       ],
-      "zh_summary": "提出CommerceGen-Studio，一个端到端生成商业级电商主图的框架，包含信息提取、语义重写和多条件生成三阶段。PERL-Agent通过VLM和LLM迭代闭环将异构SKU元数据提炼为简洁卖点文本列表；LTO通过交替领域特定策略优化对齐重写器与标题和渲染图像质量；SKU-DiT在RDR渐进训练下联合以白底产品图、商标裁剪和结构化布局为条件，保持主体保真度、商标完整性和字符级文本准确性。框架每天处理数百万张主图，延迟几秒。发布CommerceGen-Bench，在编辑任务上总体得分最高，可匹配更大闭源模型。",
-      "novelty": "首次提出端到端商业级主图生成框架，整合信息提取、语义重写与多条件生成，并通过强化学习策略优化和渐进训练实现工业级部署。",
+      "zh_summary": "本文提出CommerceGen-Studio，一个端到端框架，用于为电商SKU生成商业级主图。框架分为信息提取、语义重写和多条件生成三阶段：Prompt-Eval-Refine-Loop Agent（PERL-Agent）通过VLM和LLM角色的迭代闭环，从异构SKU元数据中提炼卖点文本列表；Layout Thinker Optimization（LTO）通过交替领域策略优化对齐重写器与标题及渲染图像质量；SKU-DiT在Reinforce-Distill-Reinforce（RDR）渐进训练下，联合以白底产品图、商标裁剪和结构化布局为条件，保持主体保真度、商标完整性和字符级文本准确性。系统每日可生成数百万张主图，每张延迟仅几秒，并发布CommerceGen-Bench基准。",
+      "novelty": "提出面向电商主图生成的端到端框架，通过多阶段智能体优化和渐进训练实现商业规模部署。",
       "innovation_points": [
-        "设计三阶段流水线：PERL-Agent信息提取、LTO语义重写、SKU-DiT多条件生成",
-        "提出Reinforce-Distill-Reinforce渐进训练策略，联合优化主体、商标和文本保真度",
-        "发布CommerceGen-Bench，涵盖全品类真实流量难例"
+        "PERL-Agent：基于VLM/LLM迭代闭环的卖点提炼与评估机制",
+        "LTO：交替领域策略优化对齐重写器与图像质量",
+        "SKU-DiT：基于RDR渐进训练的多条件生成模型，联合优化主体、商标和文本保真度",
+        "发布CommerceGen-Bench硬案例基准，覆盖全品类实时流量"
       ],
-      "limitations": "框架依赖大量专有数据和计算资源，复现难度高；评估主要针对电商主图，通用性有限；未详细讨论生成图像中文本准确性的具体错误类型。",
+      "limitations": "未详细说明模型对复杂背景或低质量输入图像的鲁棒性；未讨论生成图像的知识产权与合规风险；基准仅针对电商场景，泛化性有限。",
       "improvement_directions": null,
-      "engineering_value": "为电商行业提供了可规模化部署的主图生成方案，显著降低人工设计成本，提升商品展示效果，具有极高的商业应用价值。",
-      "why_relevant": "该工作涉及字符级文本准确性生成，与OCR技术中的文本识别和生成质量评估相关，属于OCR在生成式AI中的工程应用。"
+      "engineering_value": "提供可落地的电商主图生成方案，支持大规模生产，显著降低人工设计成本，对电商平台有直接应用价值。",
+      "why_relevant": "论文涉及图像生成中的文本准确性和布局控制，与OCR中的文本识别与生成技术有交叉，尤其在字符级文本准确性方面。"
     },
     {
       "title": "Equal CER, Unequal Damage: Severity-Weighted Character Error Rate for OCR",
@@ -263,229 +406,116 @@
         "OCR评估",
         "字符错误率",
         "严重性加权",
-        "LLM评判",
         "多语言",
-        "基准测试"
+        "LLM评判"
       ],
-      "zh_summary": "针对字符错误率（CER）将拼写错误与错误名称同等计价的问题，提出semCER，保留CER的对齐和分母，由LLM评判为每个字素编辑赋予严重性，无需分词。归一化CER保持整体转录得分，semCER将其分解为具名编辑。在英语、越南语和中文中，评分与读者评分逐编辑跟踪，且将读者认为最严重的编辑排在排序列表顶部。在CER与semCER不一致的样本对上，读者更支持semCER。跨16种语言，评判对错误变音符号或声调的严重性赋值差异大。释放6100万评判编辑、聚合读者评分和蒸馏评分器。",
-      "novelty": "首次提出基于LLM评判的严重性加权字符错误率，突破传统CER对错误一视同仁的局限，并构建了多语言人工评分数据集。",
+      "zh_summary": "字符错误率（CER）是OCR和视觉语言模型的标准指标，但将拼写错误与错误名称同等计分。本文提出semCER，保留CER的对齐和分母，为每个字素编辑赋予由LLM评判的严重性分数，无需分词。归一化CER保持整个转录的分数，semCER将其分解为命名编辑。在英语、越南语和中文中，收费与读者评分逐编辑一致，并将读者认为最严重的编辑排在排序列表顶部。在CER与semCER不一致的样本上，读者更常支持semCER。在16种语言中，评判者对错误变音符号或声调符号的收费因语言而异。释放6100万个评判编辑、聚合读者评分和蒸馏评分器。",
+      "novelty": "提出严重性加权的字符错误率（semCER），通过LLM评判为每个编辑赋予严重性分数，更贴近人类感知。",
       "innovation_points": [
-        "定义semCER，通过LLM为每个字素编辑赋予严重性权重，保留CER对齐和分母",
-        "构建多语言（16种）人工评分数据集，涵盖6100万编辑",
-        "提供可分解的具名编辑评分，支持错误严重性排序"
+        "保留CER对齐和分母，引入LLM评判的编辑严重性权重",
+        "无需分词，适用于多语言",
+        "将整体分数分解为命名编辑，提供可解释性",
+        "发布大规模评判编辑数据集和蒸馏评分器"
       ],
-      "limitations": "严重性评分依赖LLM评判，可能存在偏见或不一致；未在所有语言上验证与读者评分的一致性；计算复杂度高于传统CER。",
+      "limitations": "依赖LLM评判，可能引入评判偏差或成本；未讨论实时应用中的效率问题；严重性评分的主观性可能影响一致性。",
       "improvement_directions": null,
-      "engineering_value": "为OCR和VLM评估提供了更贴近人类感知的指标，有助于优化模型在关键错误上的表现，在文本质量敏感的应用（如医疗、法律）中具有实用价值。",
-      "why_relevant": "该工作直接改进OCR核心评估指标，提出严重性加权的字符错误率，对OCR研究和应用具有重要影响。"
+      "engineering_value": "为OCR系统提供更贴近人类感知的评估指标，有助于优化模型在关键信息（如名称、数字）上的准确性，提升下游应用可靠性。",
+      "why_relevant": "直接针对OCR评估指标提出改进，与OCR技术核心评估方法密切相关。"
     },
     {
-      "title": "TextVerifier: Seeing Beyond Recognition to Verify Chinese Text Rendering",
-      "summary": "Text-to-image models increasingly generate readable Chinese text that still contains local rendering defects, such as a character with an extra or missing stroke or a malformed component. Such errors are invisible to OCR and vision-language models, which are trained for recognition and are therefore invariant to the very structural deviations that define a rendering error. We formalize text rendering verification as a target-conditioned problem: given a target character and an image crop, decide whether the crop is a correct rendering of that character. Our verifier TEXTVERIFIER feeds the text tower a character's Ideographic Description Sequence (IDS) rather than a single-character symbol, and is trained on 12.7M crop-IDS pairs plus label-free \"same-character, different-quality\" hard pairs sampled from the training trajectory of a text-region inpainting model. To evaluate this ability we build TEXTRENDERBENCH-ZH, the first per-character benchmark for generated Chinese text, annotating position, identity, and correctness for 7,358 characters. TEXTVERIFIER reaches an F1 of 0.844, far above OCR confidence (0.526), a general VLM (0.329), and TextPecker (0.590). Used as a per-character reward for Flow-GRPO post-training, it further reduces rendering errors, showing that its score can both detect and correct errors.",
-      "link": "https://arxiv.org/abs/2610.19551v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.19551v1",
+      "title": "Learning from Interaction Experience via Localized Context Distillation",
+      "summary": "Learning from interaction experience is essential for enabling large language models to continually improve during deployment. Context distillation offers a promising path: privileged information extracted from experience is provided to a teacher, whose behavior is then distilled into a student model that has no access to it. However, both existing forms of context distillation have limitations. Off-policy context distillation trains the student on teacher-generated trajectories and thus suffers from exposure bias; whereas on-policy context distillation trains on the student's own rollouts, whose states are often uninformative and fail to convey behaviors the student cannot yet produce. To resolve this dilemma, we introduce Localized Context Distillation (LoCD). LoCD first localizes the critical spans of a student trajectory that require revision. The teacher then regenerates only these spans from the student's own prefix, and the student is trained on the regenerated segments. LoCD thereby concentrates learning on the most informative states while keeping exposure bias low. Extensive experiments across math reasoning, code generation, and agent tasks demonstrate that LoCD consistently outperforms strong baselines and achieves more stable training with smaller and sparser parameter updates.",
+      "link": "https://arxiv.org/abs/2610.21427v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.21427v1",
       "authors": [
-        "Yiyang Chen",
-        "Guo-Hua Wang",
-        "Yaoli Liu",
-        "Qing-Guo Chen",
-        "Zhao Xu",
-        "Weihua Luo",
-        "Xiujun Ma"
+        "Zhezheng Hao",
+        "Yongkang Yang",
+        "Xilin Xia",
+        "Jiarui Yu",
+        "Yi Liu",
+        "Fanjunduo Wei",
+        "Peijie Dong",
+        "Tianfu Wang",
+        "Qiang Lin",
+        "Can Wang",
+        "Hande Dong",
+        "Jiawei Chen"
       ],
-      "published": "2026-10-14T04:07:15Z",
-      "updated": "2026-10-14T04:07:15Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2610.19551v1",
-      "score": 9,
-      "topic_tags": [
-        "文本渲染验证",
-        "汉字生成",
-        "表意文字描述序列",
-        "基准测试",
-        "强化学习后训练",
-        "OCR"
-      ],
-      "zh_summary": "针对文本到图像模型生成的汉字存在局部渲染缺陷（如多笔少笔、部件畸形），而OCR和VLM对此不敏感的问题，将文本渲染验证形式化为目标条件问题：给定目标字符和图像裁剪，判断裁剪是否正确渲染该字符。TEXTVERIFIER向文本塔输入表意文字描述序列（IDS）而非单字符符号，在1270万裁剪-IDS对及无标签“同字不同质”难例上训练。构建TEXTRENDERBENCH-ZH，首个生成汉字逐字符基准，标注7358个字符的位置、身份和正确性。TEXTVERIFIER达到F1 0.844，远超OCR置信度（0.526）、通用VLM（0.329）和TextPecker（0.590）。作为Flow-GRPO后训练的逐字符奖励，进一步减少渲染错误。",
-      "novelty": "首次将文本渲染验证形式化为目标条件问题，并利用表意文字描述序列（IDS）增强字符结构感知，构建了首个生成汉字逐字符评估基准。",
-      "innovation_points": [
-        "提出目标条件文本渲染验证任务，区分识别与渲染验证",
-        "使用IDS替代单字符符号，增强对汉字结构的敏感度",
-        "构建TEXTRENDERBENCH-ZH，标注7358个生成汉字的位置、身份和正确性",
-        "将验证器作为Flow-GRPO的逐字符奖励，实现检测与纠正一体化"
-      ],
-      "limitations": "目前仅针对中文汉字，未扩展至其他表意文字；依赖IDS输入，对未知字符或变体字可能受限；训练数据中的难例采样策略可能影响泛化性。",
-      "improvement_directions": null,
-      "engineering_value": "为文本到图像生成中的文本质量验证提供了有效工具，可集成到生成流水线中提升输出可读性，在广告、设计、出版等领域有应用前景。",
-      "why_relevant": "该工作涉及OCR与VLM在文本渲染验证中的局限性，提出专门验证方法，与OCR技术密切相关，属于OCR在生成内容质量保障中的新应用。"
-    },
-    {
-      "title": "Bifocal: Training-Free Mixed Granularity Visual Token Pruning for Multimodal LLMs",
-      "summary": "Visual token pruning for multimodal large language models (MLLMs) appears highly effective, with existing methods retaining over 95% of unpruned performance on common VQA benchmarks using a quarter of the visual tokens or fewer. However, our extensive evaluation of ten methods across three MLLM families and five ability groups reveals a critical gap: strong general performance often comes at the cost of severe degradation on fine-grained tasks such as OCR and visual grounding. We trace these failures to two limitations of the prevailing paradigm of retaining the highest-ranked native patches. A single importance ranking overlooks the complementary evidence required by different tasks, while sparse patch selection disrupts both image content and spatial integrity. To address these limitations, we propose Bifocal, a training-free, two-stage pruning method built on a mixed-granularity framework. It allocates separate budgets to query-focused and image-intrinsic evidence, complemented by a pooled coarse representation of the entire image. Before the LLM, Bifocal matches question words to visual regions through a soft conjunction balanced against norm-debiased image saliency, while selecting image-intrinsic evidence to maximize representational coverage. Inside the LLM, it further prunes tokens using density-adjusted text-to-image attention. With roughly a quarter of the original visual tokens, Bifocal is the only evaluated method to retain over 90% of unpruned performance in every ability group across all three models, and ranks first on average in all nine model-budget settings. The code is available at: https://github.com/EIT-NLP/Bifocal",
-      "link": "https://arxiv.org/abs/2610.18399v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.18399v1",
-      "authors": [
-        "Peiran Yin",
-        "Hao Wu",
-        "Zihao Yang",
-        "Fengyu Zhou",
-        "Yijuan Liang",
-        "Haozhe Hu",
-        "Xudong Wang",
-        "Wei Zhang",
-        "Xiaoyu Shen"
-      ],
-      "published": "2026-10-13T13:46:32Z",
-      "updated": "2026-10-13T13:46:32Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2610.18399v1",
-      "score": 9,
-      "topic_tags": [
-        "多模态大模型",
-        "视觉token剪枝",
-        "OCR",
-        "视觉定位",
-        "推理加速"
-      ],
-      "zh_summary": "针对多模态大模型视觉 token 剪枝中细粒度任务性能下降的问题，提出无需训练的混合粒度两阶段剪枝方法 Bifocal。方法在 LLM 前将问题词与视觉区域匹配，结合去偏图像显著性与软连接，并选择最大化表征覆盖的图像内在证据；在 LLM 内利用密度调整的文本到图像注意力进一步剪枝。仅保留约四分之一视觉 token 时，在三个模型家族和五类能力组上均保持超过 90% 的未剪枝性能，在九个模型预算设置中平均排名第一。",
-      "novelty": "首次系统揭示现有视觉 token 剪枝在 OCR 和视觉定位等细粒度任务上的严重退化，并提出训练无关的混合粒度剪枝框架，分别分配查询聚焦与图像内在证据预算，并加入全局粗粒度表示。",
-      "innovation_points": [
-        "提出两阶段训练无关剪枝方法，结合 LLM 前软连接匹配与 LLM 内密度调整注意力剪枝",
-        "设计混合粒度预算分配机制，为查询聚焦证据和图像内在证据分别设置 token 预算，并补充全局池化粗表示",
-        "通过去偏图像显著性与最大化表征覆盖选择图像内在证据，缓解稀疏 patch 选择对图像内容和空间完整性的破坏"
-      ],
-      "limitations": "论文摘要未给出具体计算开销或推理延迟数据；方法依赖文本到图像注意力，可能对注意力质量敏感；未报告在视频或多图场景下的适用性。",
-      "improvement_directions": null,
-      "engineering_value": "为多模态大模型推理加速提供可直接部署的训练无关剪枝方案，显著降低视觉 token 数量同时保持 OCR 等细粒度任务可用性，适合在资源受限场景中落地。",
-      "why_relevant": "论文直接针对 OCR 相关细粒度任务在视觉 token 剪枝下的性能退化问题，并验证了在保留少量 token 时 OCR 能力不显著下降，对 OCR 系统与多模态模型结合具有直接参考价值。"
-    },
-    {
-      "title": "GroundGUI: GUI Grounding by High-Quality Data and Distillation-to-Reinforcement Learning",
-      "summary": "Constructing robust GUI agents relies on multimodal visual grounding: the ability to precisely map natural language intents to actionable on-screen components. Despite abundant desktop, web, and mobile benchmarks, high-fidelity resources tailored for diverse environments are surprisingly scarce. To bridge this gap, we introduce the Screen Referring Grounding Dataset (ScreenRef), a comprehensive GUI grounding dataset consisting of GUI screenshots paired with natural language referring expressions and box or point annotations. Spanning desktop, web, and mobile domains, ScreenRef comprises 586K screenshots and over 633K referring expression instances, covering tasks such as text recognition, visual matching, spatial understanding, and refusal scenarios. To boost the model's grounding performance, we propose the Distillation-to-Reinforcement Learning (D2RL) method to address the limited generalization of supervised fine-tuning and the sparse reward problem in reinforcement learning. Utilizing ScreenRef, we train Qwen3-VL-8B-Instruct via sequential SFT and D2RL training, yielding GroundGUI-8B. GroundGUI-8B achieves 95.2% on ScreenSpot-V2, 63.9% on ScreenSpot-Pro, 65.4% on OSWorld-G, 86.8% on MMBench-GUI L2, and 38.3% on UI-Vision. Among 8B-scale models, it produces substantial gains over models trained on open-source datasets, with performance comparable or even superior to models trained on closed-source data. Code, models, and datasets are available at https://github.com/PrentisAI/GroundGUI.",
-      "link": "https://arxiv.org/abs/2610.19100v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.19100v1",
-      "authors": [
-        "Qingsong Xie",
-        "Jiahao Tian",
-        "Jiacheng Tang",
-        "Zhifeng Li",
-        "Madalina Ciobanu",
-        "Navan Preet Singh",
-        "Qingqing Mao",
-        "Ritankar Das"
-      ],
-      "published": "2026-10-13T19:37:49Z",
-      "updated": "2026-10-13T19:37:49Z",
-      "categories": [
-        "cs.AI",
-        "cs.CL",
-        "cs.CV"
-      ],
-      "arxiv_id": "2610.19100v1",
-      "score": 8,
-      "topic_tags": [
-        "GUI定位",
-        "多模态大模型",
-        "数据集构建",
-        "强化学习",
-        "蒸馏"
-      ],
-      "zh_summary": "针对 GUI 视觉定位高质量数据稀缺问题，构建 ScreenRef 数据集，包含 58.6 万张截图和超过 63.3 万条指代表达实例，覆盖桌面、网页和移动端，涉及文字识别、视觉匹配、空间理解和拒绝场景。提出 Distillation-to-Reinforcement Learning 方法，结合 SFT 与强化学习，训练 Qwen3-VL-8B-Instruct 得到 GroundGUI-8B，在 ScreenSpot-V2、ScreenSpot-Pro、OSWorld-G、MMBench-GUI L2 和 UI-Vision 上取得有竞争力的结果。",
-      "novelty": "构建大规模跨平台 GUI 定位数据集 ScreenRef，并提出 D2RL 训练范式，将蒸馏与强化学习顺序结合，缓解监督微调泛化不足和强化学习稀疏奖励问题。",
-      "innovation_points": [
-        "发布 ScreenRef 数据集，涵盖桌面、网页、移动端，包含框和点标注以及拒绝场景，规模达 58.6 万截图和 63.3 万指代实例",
-        "提出 D2RL 方法，先通过 SFT 蒸馏再使用强化学习，解决强化学习稀疏奖励和 SFT 泛化受限的问题",
-        "在 8B 规模模型上使用开源数据训练，性能可比或超过闭源数据训练的模型"
-      ],
-      "limitations": "摘要未说明 D2RL 中强化学习的具体奖励设计和训练稳定性；未讨论数据集中文字识别任务的标注质量与噪声；未报告推理效率或实际 GUI 交互部署延迟。",
-      "improvement_directions": null,
-      "engineering_value": "为 GUI 智能体提供高质量开源定位数据和可复现训练方案，有助于降低对闭源数据的依赖，推动桌面、网页和移动端自动化操作系统的落地。",
-      "why_relevant": "论文覆盖文字识别、视觉匹配等 OCR 相关任务，且 GUI 定位是 OCR 与多模态交互结合的重要应用场景，数据集与训练方法对 OCR 驱动的界面理解有直接帮助。"
-    },
-    {
-      "title": "Can Agents Forget When Asked? A Benchmark for Memory Unlearning in LLM Agents",
-      "summary": "Long-term memory has become a core component of large language model (LLM) agents. As agents accumulate personal information over long-term use, users increasingly ask them to delete sensitive or outdated facts. A memory system should honor such requests. It should remove exactly what was requested and keep the rest of its memory intact. However, existing memory benchmarks evaluate only memory writing, retrieval, and organization, so whether agents can forget at the user's explicit request remains under-evaluated. To address this gap, we propose Bemula, the first benchmark dedicated to memory unlearning. It comprises 50 multi-session dialogue instances, 135 forget requests of six types, and 1,742 test questions. Each dialogue has a control version without the requests, so that only systems that have stored the target can earn credit for forgetting. Across the paired versions, five test suites measure storage, removal of the requested information, preservation of unrelated memories, relearning of similar facts, and resistance to extraction attacks. On Bemula, we evaluate six mainstream memory systems under three backbone LLMs, together with the Full Context LLM on two of them. The results are negative. Across all evaluated systems and backbones, no system passes more than 1.5% of forget requests end to end, and most pass none at all. These systems either leave the requested information extractable under simple attacks or delete far more than requested. Memory unlearning therefore remains an open challenge for agent memory design. We release our data and code at https://github.com/Nboxff/bemula-benchmark.",
-      "link": "https://arxiv.org/abs/2610.18052v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.18052v1",
-      "authors": [
-        "Bofan Xie",
-        "Chaokun Wang",
-        "Guanchen Ge",
-        "Songyao Wang",
-        "Fang Niu",
-        "Hang Zhang",
-        "Wei Wang"
-      ],
-      "published": "2026-10-13T09:41:12Z",
-      "updated": "2026-10-13T09:41:12Z",
+      "published": "2026-10-15T07:39:09Z",
+      "updated": "2026-10-15T07:39:09Z",
       "categories": [
         "cs.AI"
       ],
-      "arxiv_id": "2610.18052v1",
+      "arxiv_id": "2610.21427v1",
       "score": 6,
       "topic_tags": [
-        "LLM智能体",
-        "记忆遗忘",
-        "基准测试",
-        "隐私",
-        "长期记忆"
+        "上下文蒸馏",
+        "交互学习",
+        "持续学习",
+        "暴露偏差",
+        "参数高效训练"
       ],
-      "zh_summary": "针对 LLM 智能体长期记忆中的用户删除请求，提出首个记忆遗忘基准 Bemula。包含 50 个多会话对话实例、135 个六类遗忘请求和 1742 个测试问题，每个对话配有对照版本。通过五个测试套件评估存储、删除、保留无关记忆、相似事实重学习和抗提取攻击。评估六种主流记忆系统和三种骨干 LLM，结果显示所有系统端到端通过遗忘请求的比例不超过 1.5%，多数完全失败。",
-      "novelty": "首次形式化并基准测试 LLM 智能体记忆遗忘问题，提出配对对话设计以控制存储前提，并系统评估遗忘的精确性、完整性与安全性。",
+      "zh_summary": "从交互经验中学习对于大语言模型在部署中持续改进至关重要。上下文蒸馏提供了一条路径：将特权信息提供给教师，然后蒸馏到无访问权限的学生。然而，离策略上下文蒸馏存在暴露偏差，而在策略上下文蒸馏使用学生自身轨迹，状态信息量低。本文提出局部上下文蒸馏（LoCD），首先定位学生轨迹中需要修订的关键片段，教师仅根据学生前缀重新生成这些片段，学生基于重新生成的片段训练。LoCD将学习集中在信息量最大的状态，同时保持低暴露偏差。在数学推理、代码生成和智能体任务上，LoCD优于强基线，训练更稳定，参数更新更小更稀疏。",
+      "novelty": "提出局部上下文蒸馏（LoCD），通过定位关键片段并由教师重新生成，平衡暴露偏差与信息量。",
       "innovation_points": [
-        "构建首个面向 LLM 智能体记忆遗忘的基准 Bemula，包含多会话对话、六类遗忘请求和配对控制版本",
-        "设计五套测试套件，分别衡量存储、请求信息删除、无关记忆保留、相似事实重学习和抗提取攻击",
-        "揭示现有记忆系统在遗忘请求上几乎全部失败，指出记忆遗忘是开放挑战"
+        "局部化学生轨迹中需要修订的关键片段",
+        "教师基于学生前缀重新生成关键片段，学生训练于重新生成的片段",
+        "在数学推理、代码生成和智能体任务上验证有效性",
+        "实现更稳定训练和更小更稀疏的参数更新"
       ],
-      "limitations": "摘要未说明基准是否覆盖多模态记忆或非文本记忆；未分析失败原因与具体记忆系统架构的关系；样本规模相对有限，仅 50 个对话实例。",
+      "limitations": "未详细说明关键片段定位的准确性和鲁棒性；未讨论在长文本或多轮交互中的扩展性；实验主要集中在特定任务，泛化性需进一步验证。",
       "improvement_directions": null,
-      "engineering_value": "为智能体记忆系统提供可量化的遗忘评估标准，有助于推动隐私合规的长期记忆设计，对需要处理用户删除请求的对话系统与 OCR 文档管理系统具有工程指导意义。",
-      "why_relevant": "OCR 和文档解析系统常用于长期记忆与知识管理，用户可能要求删除扫描文档中的敏感文本，该基准提示了记忆遗忘在 OCR 相关智能体中的重要性。"
+      "engineering_value": "为模型持续学习提供高效训练范式，可应用于需要交互式改进的OCR系统，如文档问答智能体的在线优化。",
+      "why_relevant": "虽不直接涉及OCR，但为交互式文档理解系统的持续学习提供方法，可间接提升OCR下游任务性能。"
     },
     {
-      "title": "MMKG-R1: Constructing Multimodal Knowledge Graphs via Reinforcement Learning",
-      "summary": "Multimodal knowledge graphs (MMKGs) organize information across different modalities to support multimodal Graph Retrieval-Augmented Generation (RAG), which aims to improve the performance of multimodal large language models (MLLMs). The effectiveness of these multimodal Graph RAG methods largely depends on the quality of the constructed MMKGs. However, most existing methods construct MMKGs without explicit guidance on graph quality, while reinforcement learning (RL)-based methods that rely on final-answer correctness may provide only indirect feedback on MMKG quality. To address these limitations, we propose MMKG-R1, a novel MMKG-quality-driven RL framework for training an MLLM as a multimodal knowledge constructor. To be specific, MMKG-R1 introduces multiple quality-aware rewards to directly evaluate both the quality of information extracted from individual knowledge sources and the quality of the assembled MMKG. These rewards are then used to guide the RL training. Experiments across multiple datasets show that MMKG-R1 constructs MMKGs that improve downstream question-answering accuracy.",
-      "link": "https://arxiv.org/abs/2610.19341v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.19341v1",
+      "title": "ReviewPilot: A Multi-Agent System for Screening and Data Extraction in Systematic Reviews",
+      "summary": "Systematic literature reviews follow the PRISMA process of screening scholarly works and extracting evidence from included studies. Deep research tools based on large language models (LLMs) can search and summarize the literature but do not record which studies are excluded or where extracted values come from. We develop a conversational multi-agent system called ReviewPilot that automates the PRISMA workflow from paper screening to information extraction. Researchers can tailor criteria and schemas through dialogue, and a project memory keeps their configurations and revisions. Each screening decision comes with its reason and each extracted value with its source. On epidemiological expert reviews, ReviewPilot outperforms a single-prompt LLM and AgentSLR across three LLMs, with screening macro F1 up to 0.776 and extraction F1 up to 0.788. Case studies in biomedicine and human-computer interaction show close agreement with human annotators, suggesting that ReviewPilot can transfer beyond epidemiology. Code is available at https://github.com/ZhaoqianXue/ReviewPilot.",
+      "link": "https://arxiv.org/abs/2610.21042v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.21042v1",
       "authors": [
-        "Zongyu Wu",
-        "Yilong Wang",
-        "Xiaochen Wang",
-        "Minhua Lin",
-        "Yuan Zhong",
-        "Fenglong Ma",
-        "Xiang Zhang",
-        "Suhang Wang"
+        "Zhaoqian Xue",
+        "Shaoze Zhou",
+        "Xuexin Li",
+        "Junting Mu",
+        "Haozheng Liu",
+        "Zhongyin Wang",
+        "Yichun He",
+        "Renkai Ma",
+        "Hao Zhou",
+        "Sarah Bratt",
+        "Siyuan Ma",
+        "Chen Chen",
+        "Lingyao Li"
       ],
-      "published": "2026-10-14T00:35:59Z",
-      "updated": "2026-10-14T00:35:59Z",
+      "published": "2026-10-15T00:34:38Z",
+      "updated": "2026-10-15T00:34:38Z",
       "categories": [
-        "cs.CV"
+        "cs.CL",
+        "cs.AI",
+        "cs.IR"
       ],
-      "arxiv_id": "2610.19341v1",
-      "score": 3,
+      "arxiv_id": "2610.21042v1",
+      "score": 6,
       "topic_tags": [
-        "多模态知识图谱",
-        "强化学习",
-        "RAG",
-        "多模态大模型",
-        "知识抽取"
+        "系统综述",
+        "多智能体",
+        "信息提取",
+        "PRISMA",
+        "可追溯性"
       ],
-      "zh_summary": "针对多模态知识图谱构建中缺乏显式质量引导的问题，提出 MMKG-R1，一种以 MMKG 质量驱动的强化学习框架，用于训练多模态大模型作为多模态知识构建器。引入多个质量感知奖励，直接评估从单个知识源抽取的信息质量和组装后的 MMKG 质量，并用于指导强化学习训练。实验表明构建的 MMKG 提升下游问答准确率。",
-      "novelty": "将强化学习与 MMKG 质量直接对齐，设计多维度质量感知奖励，而非依赖最终答案正确性的间接反馈来训练知识构建器。",
+      "zh_summary": "系统文献综述遵循PRISMA流程，包括筛选学术作品和提取证据。基于LLM的深度研究工具可以搜索和总结文献，但不记录排除的研究或提取值的来源。本文开发了会话式多智能体系统ReviewPilot，自动化从论文筛选到信息提取的PRISMA工作流。研究人员可以通过对话定制标准和模式，项目记忆保存配置和修订。每个筛选决策附带理由，每个提取值附带来源。在流行病学专家综述上，ReviewPilot在三个LLM上优于单提示LLM和AgentSLR，筛选宏F1达0.776，提取F1达0.788。生物医学和HCI案例研究显示与人类标注者高度一致。",
+      "novelty": "提出会话式多智能体系统ReviewPilot，自动化PRISMA工作流，提供可追溯的筛选和提取。",
       "innovation_points": [
-        "提出质量驱动的强化学习框架 MMKG-R1，直接优化多模态知识图谱的构建质量",
-        "设计多个质量感知奖励，分别评估单源信息抽取质量和整体 MMKG 组装质量",
-        "将 MLLM 训练为多模态知识构建器，并通过下游问答验证构建质量提升"
+        "多智能体会话式系统，支持通过对话定制标准和模式",
+        "项目记忆保存配置和修订",
+        "每个筛选决策附带理由，每个提取值附带来源",
+        "在流行病学综述上超越单提示LLM和AgentSLR"
       ],
-      "limitations": "摘要未说明质量感知奖励的具体定义和可扩展性；未报告构建 MMKG 的计算成本与训练稳定性；缺乏与多种基线在大规模数据集上的详细对比。",
+      "limitations": "未讨论对非英语文献的处理能力；未评估在跨学科领域的泛化性；依赖LLM可能引入偏见；未涉及大规模文献的处理效率。",
       "improvement_directions": null,
-      "engineering_value": "为多模态知识图谱构建提供质量驱动的训练范式，可提升 RAG 系统的事实准确性和多模态检索能力，对需要结构化多模态知识的应用具有落地潜力。",
-      "why_relevant": "OCR 常作为多模态知识图谱构建中的文本来源，论文关注从多模态源抽取高质量知识并组装图谱，与 OCR 信息抽取和结构化任务相关。"
+      "engineering_value": "为系统文献综述提供自动化工具，提高筛选和提取效率，可应用于需要文档信息提取的领域，如OCR后的结构化信息抽取。",
+      "why_relevant": "涉及文档筛选和信息提取，与OCR后的文档理解任务相关，可借鉴其多智能体架构。"
     }
   ]
 }
