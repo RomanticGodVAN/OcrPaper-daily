@@ -1,62 +1,55 @@
-# OCR / 文档解析研究日报（2026-10-23）
+# OCR / 文档解析研究日报（2026-10-24）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-10-23 06:01:13`
+- 生成时间（UTC）：`2026-10-24 05:48:16`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日三篇论文分别覆盖长文档视觉问答的任务级综述、统一视觉感知VLM以及生物医学全文表型识别共享任务。核心信号是：文档理解的研究重心正从单纯的内容识别转向证据获取、证据管理与细粒度结构化输出；同时，单一VLM统一多粒度视觉任务（含OCR）成为减少多模型串联的可行工程路径；面向长文档的实体识别与主体归属仍是高难度、可量化的评测瓶颈。
+> 今日两篇论文分别从系统综述与统一模型两个角度推进OCR与文档解析研究。综述篇将长文档视觉问答拆解为文档解析、证据组织与检索、生成器组织与学习、评估四个组件，指出研究重心正从多模态内容理解转向高保真证据获取与持续证据管理；模型篇WeVisOne-VL通过<OBJ>令牌将轻量像素解码器接入VLM，在统一框架内覆盖检测、指代定位、计数、OCR、分割与抠图，并支持任意粒度定位。两篇均强调OCR不再是孤立识别任务，而应作为可检索、可验证证据链的一环。
 
 ## 二、今日趋势判断
 
-长文档理解正沿着两条主线演进：一是任务分解与证据中心化，长文档VQA综述明确将文档解析、证据组织与检索、生成器学习、评估拆为四组件，并指出研究重心从多模态内容理解转向高保真证据获取与持续证据管理；二是感知接口统一化，WeVisOne-VL用结构化下一词预测把对象级与像素级输出收进同一VLM，OCR、分割、抠图共享一套定位接口。评测侧，CHIP 2026任务显示长全文场景下的实体识别必须与主体归属联合建模，单纯识别已不足以支撑应用。
+长文档理解的研究重心正从单纯的多模态内容理解转向证据的充分获取、组织与持续管理；同时，视觉语言模型趋向统一对象级与像素级感知，OCR被纳入统一视觉任务体系并与掩码级输出对齐。评估层面开始关注证据充分性、可验证与可纠正理解以及预算感知协调。
 
 ## 三、今日论文概览
 
-1. **A Task-Centric Survey of Long-Document Visual Question Answering: Taxonomy, Evolution, and Future Directions** | 标签：长文档视觉问答、文档解析、证据检索、视觉文档理解、综述、评估体系
-2. **WeVisOne-VL: Unified Visual Perception from Objects to Pixels** | 标签：视觉语言模型、OCR、统一视觉感知、像素级分割、强化学习、多任务学习
-3. **Overview of CHIP 2026 Shared Task 1: Patient-Specific Phenotype Concept Recognition in Full-Text Biomedical Literature** | 标签：生物医学文献、表型概念识别、患者归属、信息抽取、共享任务评测、大语言模型
+1. **A Task-Centric Survey of Long-Document Visual Question Answering: Taxonomy, Evolution, and Future Directions** | 标签：长文档视觉问答、文档解析、证据检索、综述、评估体系
+2. **WeVisOne-VL: Unified Visual Perception from Objects to Pixels** | 标签：视觉语言模型、统一感知、OCR、像素级分割、多任务学习
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 以任务瓶颈而非架构路线组织研究框架，将文档解析、证据检索、生成与评估放在统一分解下关联分析。
-- 采用统一输出接口（结构化下一词预测、<OBJ>令牌、点/框/掩码多粒度定位）覆盖OCR、检测与分割等多类视觉任务。
-- 将长文档中的实体识别与主体归属合并为可评测的联合任务，推动抽取从提及级走向实例级。
-- 在训练中引入课程式SFT与混合任务强化学习，以多任务协同提升跨任务泛化与拒识能力。
-- 强调证据充分性与可验证性，把证据缺失与证据冗余作为可区分的失败模式纳入评测设计。
+- 两篇工作都将文档解析视为长文档理解流程中的基础组件，而非孤立识别步骤。
+- 两篇工作都强调细粒度定位能力，综述将高保真证据获取列为核心瓶颈，WeVisOne-VL则以点、框、掩码、alpha遮罩支持任意粒度输出。
+- 两篇工作都关注OCR与下游检索/生成之间的衔接，综述建立跨组件依赖分析，WeVisOne-VL将OCR纳入统一视觉感知任务体系。
+- 两篇工作都涉及评估维度扩展，综述提出证据充分性与可验证理解，WeVisOne-VL报告了30多个基准并考察对象缺失拒绝能力。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 建立长文档VQA证据充分性的量化基准，分别统计证据缺失与证据冗余两类失败率，并给出可复现的判定协议。
-- 设计检索证据可验证性与可纠正性评测：要求系统输出证据链及每步引用，支持对错误证据节点的自动定位与替换。
-- 构建预算感知的协调模型，把解析粒度（OCR分辨率/版面层级）、检索深度与生成成本纳入同一目标函数并报告帕累托前沿。
-- 在同等计算与token预算下系统对比直接阅读范式与显式检索范式，给出分文档长度、分任务类型的交叉结论。
-- 研究持续文档理解场景下的证据管理机制，包括证据的新增、失效、冲突消解与版本更新，并配套时序评测集。
-- 将统一VLM的像素级输出扩展到文档版面元素（表格、公式、印章）的实例级分割与抠图，报告字符级与版面级双重精度。
-- 针对多患者、多主体的长全文文档，设计跨段落共指与患者归属的显式建模方法，并将本体归一化纳入端到端训练目标。
-- 量化混合任务强化学习中任务采样比例对OCR细粒度识别与分割性能的权衡，给出稳定训练的任务配比建议。
-- 将拒识机制扩展为可校准的置信度估计，联合判定目标缺失、低质量输入与低置信OCR结果。
-- 扩展CHIP类任务的数据规模与语言/文体覆盖，构建跨语言、跨临床文书的迁移评测协议。
+- 构建面向长文档VQA的证据充分性度量，量化检索到的证据是否足以支撑生成答案，而非仅评估最终答案准确率。
+- 研究可验证与可纠正的文档理解流程，使生成器能回溯到具体解析片段与OCR token，并在证据不足时请求补充检索。
+- 在统一视觉模型中提升高分辨率文档细粒度分割与OCR精度，重点评估复杂版式、小字号与低质量扫描场景。
+- 设计OCR输出与像素级掩码、版面结构对齐的统一表示，使识别结果可直接用于证据定位与检索索引。
+- 开发预算感知的检索-生成协调策略，在页码、token与延迟预算约束下动态决定解析粒度与证据管理深度。
+- 建立跨组件消融评估协议，定量比较不同解析质量、检索组织方式与生成器配置对长文档VQA端到端性能的影响。
+- 探索持续文档理解场景下的证据更新与管理机制，支持多轮查询中证据的增量维护与过期纠正。
+- 研究混合任务强化学习在OCR与分割等多任务联合训练中的稳定性，降低超参数敏感性与任务间负迁移。
 
 ## 六、工程落地启发
 
-- 长文档系统应按解析、证据组织与检索、生成、评估四层做模块化拆分，便于按瓶颈单独替换与压测。
-- 在需要多粒度视觉输出的文档处理链路中，优先评估统一VLM替代OCR+检测+分割多模型串联，可降低误差累积与部署复杂度。
-- 对长全文抽取任务，实体识别与主体归属必须联合建模，单独优化识别指标会掩盖归属错误这一主要失败来源。
-- 评测中应把证据缺失与证据冗余分开统计，否则检索模块的改进信号会被生成端的容错掩盖。
-- 为检索增强的文档问答保留证据链可追溯输出，工程上便于错误归因与人工纠正。
-- 像素解码器接入VLM时需先验证高分辨率文档与大实例数下的内存与延迟开销，再决定是否上线。
-- 混合任务强化学习上线前应固定任务采样比例并做消融，避免OCR细粒度性能被其他任务稀释。
+- 可将长文档VQA系统按解析、证据组织与检索、生成器、评估四组件拆分，便于定位性能瓶颈与独立迭代。
+- 统一视觉模型方案可降低检测、分割、OCR多任务部署复杂度，适合需要任意粒度定位的实际场景。
+- 在工程评估中加入证据充分性与对象缺失拒绝指标，避免仅以答案准确率衡量系统可靠性。
+- 落地时优先保证高分辨率文档的细粒度解析质量，轻量像素解码器可能成为精度瓶颈。
+- 检索与生成之间应引入预算约束参数，按延迟与成本预算动态调整解析粒度与证据管理策略。
 
 ## 七、优先关注论文
 
-- **A Task-Centric Survey of Long-Document Visual Question Answering: Taxonomy, Evolution, and Future Directions**：提供长文档VQA的任务级拆解框架与组件瓶颈定位，可作为系统架构选型和评测体系设计的参考基线；其证据充分性与预算权衡方向值得跟进后续量化工作。
-- **WeVisOne-VL: Unified Visual Perception from Objects to Pixels**：统一VLM内做OCR、分割与抠图的路径若在文档高分辨率场景可扩展，将直接影响文档处理链路的模型选型；需关注其OCR字符级指标与像素解码器扩展性数据。
-- **Overview of CHIP 2026 Shared Task 1: Patient-Specific Phenotype Concept Recognition in Full-Text Biomedical Literature**：0.7389的最佳得分表明长全文实体识别与患者归属仍有明显提升空间，其任务定义、数据与双阶段榜单可作为长文档实体—主体绑定评测的参考模板。
+- **A Task-Centric Survey of Long-Document Visual Question Answering: Taxonomy, Evolution, and Future Directions**：提供组件化任务分解与时间演化视角，可作为长文档VQA系统设计与评估体系搭建的参考框架，但需注意其分类体系的主观性且无原始实验验证。
+- **WeVisOne-VL: Unified Visual Perception from Objects to Pixels**：统一对象级与像素级感知并纳入OCR，工程复用价值高，但需关注轻量像素解码器在高分辨率文档上的精度上限、混合任务RL的训练稳定性以及复杂文档OCR性能是否单独验证。
 
 ## 八、论文逐篇解析
 
@@ -68,42 +61,34 @@
 - 发布时间: 2026-10-22T14:52:47Z
 - 分类: cs.CV, cs.CL, cs.IR
 - 相关性评分: 12
-- 主题标签: 长文档视觉问答、文档解析、证据检索、视觉文档理解、综述、评估体系
+- 主题标签: 长文档视觉问答、文档解析、证据检索、综述、评估体系
 
 **中文摘要**
 
-> 本文是一篇以任务为中心的长文档视觉问答（VQA）综述，将长文档VQA拆解为文档解析、证据组织与检索、生成器组织与学习、评估四个组成部分，并针对每一部分建立细粒度分类体系，梳理其动机、技术应对与跨组件联系。综述以显式检索为重点，同时涵盖直接阅读范式，并通过时间线分析揭示研究重点从多模态内容理解向充分、高保真证据获取及持续证据管理的扩展。
+> 本文是一篇以任务为中心的长文档视觉问答（VQA）综述，将长文档VQA分解为文档解析、证据组织与检索、生成器组织与学习、评估四个组件，并为每个组件建立细粒度分类体系，梳理其动机、技术响应及跨组件联系。重点讨论显式检索并涵盖直接阅读，通过时间分析追踪研究重点从多模态内容理解向充分高保真证据获取与持续证据管理的扩展，最后提出证据充分性、可验证与可纠正理解、预算感知协调等未来方向，并展望持续文档理解。
 
 **核心创新概述**
 
-> 提出以任务瓶颈而非架构或技术路线为主线的长文档VQA综述框架，将文档解析、证据检索、生成器学习与评估置于统一任务分解下进行关联分析，并引入时间维度刻画研究重心的迁移。
+> 提出以任务瓶颈为中心的综述视角，将长文档VQA系统分解为四个组件并建立细粒度分类，强调跨组件连接与时间演化分析，而非单纯罗列架构或技术。
 
 **创新点拆解**
 
-- 以任务为中心的细粒度分类体系，覆盖文档解析、证据组织与检索、生成器组织与学习、评估四个组件
-- 显式检索与直接阅读两种范式的对照分析框架
-- 跨组件的动机—技术响应—关联关系追踪方法
-- 基于时间分析的研究优先级演化刻画，从内容理解转向证据充分性与持续管理
+- 任务中心分解框架：将长文档VQA拆解为文档解析、证据组织与检索、生成器组织与学习、评估四个组件，建立细粒度分类体系。
+- 跨组件关联分析：追踪各组件间的技术响应与依赖关系，揭示任务瓶颈如何影响技术选择。
+- 时间演化视角：梳理研究重点从多模态内容理解向证据充分性、高保真获取与持续管理的迁移路径。
+- 未来方向定义：提出证据充分性、可验证与可纠正理解、预算感知协调等具体研究方向。
 
 **当前局限**
 
-> 作为综述文章，未提出新的模型或实验验证；对具体方法的性能对比可能受限于已有文献报告口径；对直接阅读范式的覆盖相对显式检索较少；未来方向多为方向性论述，缺乏可操作的量化指标。
-
-**后续可改进方向**
-
-- 建立长文档VQA中证据充分性的可量化评价基准，区分证据缺失与证据冗余两类失败模式
-- 针对检索证据的可验证性与可纠正性设计评测协议，支持对错误证据链的定位与修正
-- 研究预算感知的协调机制，在解析粒度、检索深度与生成成本之间建立显式权衡模型
-- 补充直接阅读范式与显式检索范式在同等预算下的系统性对比实验
-- 探索持续文档理解场景下的证据管理与更新机制评测
+> 作为综述文章，不包含原始实验验证；分类体系可能受作者主观选择影响；对非显式检索方法的覆盖相对有限；未定量比较各技术路线的性能差异。
 
 **工程启发**
 
-> 为长文档视觉问答系统的模块化设计提供任务级拆解视角，有助于工程团队在文档解析、检索与生成之间进行组件选型与瓶颈定位，并对证据充分性与预算约束等部署关键问题给出方向性指引。
+> 为长文档VQA系统设计提供组件化参考框架，有助于工程团队定位瓶颈、选择技术路线，并指导评估体系与检索-生成协调策略的落地。
 
 **为什么值得关注**
 
-> 该综述直接覆盖文档解析与视觉文档理解任务，与OCR及文档智能研究的技术选型和评估体系密切相关，可作为长文档OCR下游任务的路线参考。
+> 该综述直接聚焦文档解析与长文档视觉问答，与OCR及文档智能领域高度相关，其任务分解和未来方向对OCR研究具有路线参考价值。
 
 **原始摘要**
 
@@ -129,43 +114,34 @@ understanding, and budget-aware coordination, with an outlook on continual docum
 - 发布时间: 2026-10-22T14:19:50Z
 - 分类: cs.CV
 - 相关性评分: 9
-- 主题标签: 视觉语言模型、OCR、统一视觉感知、像素级分割、强化学习、多任务学习
+- 主题标签: 视觉语言模型、统一感知、OCR、像素级分割、多任务学习
 
 **中文摘要**
 
-> 本文提出WeVisOne-VL，一个通过结构化下一词预测统一对象级与像素级感知的视觉语言模型，支持目标检测、指代定位、计数、OCR、分割与抠图等任务，可在点、框、掩码与alpha matte等任意用户指定粒度上实现定位。架构上通过特殊<OBJ>令牌将轻量像素解码器接入VLM以生成实例级像素输出，训练采用三阶段课程式SFT加混合任务强化学习，在30余个基准上于对象级与像素级任务均表现领先，并保持对目标缺失查询的稳健拒识能力。
+> 本文提出WeVisOne-VL，一个统一的视觉语言模型，通过结构化下一词预测统一对象级与像素级感知，支持目标检测、指代定位、计数、OCR、分割和抠图等任务，实现从点、框到掩码和alpha遮罩的任意粒度定位。架构上通过特殊<OBJ>令牌将轻量像素解码器集成到VLM中生成实例级像素输出，训练采用三阶段课程式SFT加混合任务RL。在30多个基准上，对象级和像素级任务均表现领先，并对对象缺失查询保持稳健拒绝。
 
 **核心创新概述**
 
-> 以结构化下一词预测为统一接口，将对象级定位与像素级输出整合进同一视觉语言模型，并通过<OBJ>令牌与轻量像素解码器实现实例级像素生成，而非依赖外接分割模型。
+> 通过结构化下一词预测和特殊<OBJ>令牌将轻量像素解码器融入VLM，统一对象级与像素级感知，实现任意粒度定位，并采用三阶段课程SFT加混合任务RL训练。
 
 **创新点拆解**
 
-- 统一对象级与像素级感知的结构化下一词预测范式
-- 通过特殊<OBJ>令牌连接轻量像素解码器，在VLM内部生成实例级像素输出
-- 支持点、框、掩码、alpha matte等多粒度用户指定定位的任务定义
-- 三阶段课程式SFT加混合任务RL的训练范式
-- 覆盖OCR、分割、抠图等多任务并保持目标缺失拒识能力
+- 统一感知架构：以<OBJ>令牌连接VLM与轻量像素解码器，在同一框架内支持检测、定位、计数、OCR、分割和抠图。
+- 任意粒度定位：支持从点、框到掩码和alpha遮罩的用户指定粒度输出。
+- 训练范式：三阶段课程式SFT结合混合任务强化学习，提升多任务协同与拒绝能力。
+- 任务定义扩展：将OCR纳入统一视觉感知任务体系，并与像素级输出对齐。
 
 **当前局限**
 
-> 摘要未给出各任务的具体指标与消融结果，OCR与分割等子任务的相对增益不明确；像素解码器接入方式可能受限于固定分辨率或实例数量；混合任务RL的稳定性与训练成本未量化；拒识能力仅作定性表述。
-
-**后续可改进方向**
-
-- 针对OCR任务单独报告字符级与版面级精度，分析统一感知对细粒度文本识别的增益与干扰
-- 研究像素解码器在高分辨率文档与大实例数场景下的扩展性与内存开销
-- 量化混合任务强化学习中任务采样比例对OCR与分割性能的权衡
-- 将拒识机制扩展为可校准的置信度估计，用于目标缺失与低质量输入的联合判定
-- 探索统一感知框架在文档版面元素（表格、公式、印章）上的实例级输出能力
+> 像素解码器为轻量设计，可能限制高分辨率细粒度分割精度；混合任务RL的训练稳定性和超参数敏感性未充分讨论；对对象缺失查询的拒绝机制可能影响召回；OCR任务在复杂文档场景下的性能未单独深入分析。
 
 **工程启发**
 
-> 提供了一种将OCR、检测、分割与抠图统一到单一VLM的工程路径，减少多模型串联带来的误差累积与部署复杂度，对需要多粒度视觉输出的文档处理与内容编辑系统具有直接集成价值。
+> 提供统一多任务视觉感知的开源模型方案，可降低检测、分割、OCR等多任务部署的工程复杂度，适用于需要任意粒度定位的实际场景。
 
 **为什么值得关注**
 
-> 该模型显式支持OCR并与检测、分割统一，属于OCR与视觉文档理解交叉方向的重要系统工作，对OCR研究中的多任务统一建模与像素级输出具有参考意义。
+> 该模型统一支持OCR与像素级感知，直接涉及文档视觉理解中的文字定位与识别，对OCR多任务集成和统一架构设计有参考意义。
 
 **原始摘要**
 
@@ -180,72 +156,5 @@ followed by mixed-task RL. Across over 30 benchmarks, WeVisOne-VL demonstrates l
 on both object-level and pixel-level tasks, while maintaining robust rejection for object-absent
 queries. By releasing WeVisOne-VL to the open-source community, we hope to advance VLMs from broad
 visual understanding toward truly reliable perception systems for real-world deployment.
-
----
-
-### 3. Overview of CHIP 2026 Shared Task 1: Patient-Specific Phenotype Concept Recognition in Full-Text Biomedical Literature
-
-- arXiv: [2610.29606v2](https://arxiv.org/abs/2610.29606v2)
-- PDF: [下载链接](https://arxiv.org/pdf/2610.29606v2)
-- 作者: Xuanlyu Zhu, Feng Tian, Yang Zhong, Pengqi Zheng, Xiwen Bi, Ling Luo, Yuanyuan Sun, Jian Wang, Hongfei Lin
-- 发布时间: 2026-10-21T11:45:35Z
-- 分类: cs.CL, cs.AI
-- 相关性评分: 6
-- 主题标签: 生物医学文献、表型概念识别、患者归属、信息抽取、共享任务评测、大语言模型
-
-**中文摘要**
-
-> 本文介绍CHIP 2026共享任务1，聚焦全文生物医学文献中患者特异的表型概念识别，包含全文表型概念识别与患者—表型关联两个子任务。评测使用PatientPheX数据集中200篇标注全文文献，含506名患者、15193个表型提及与5656条患者—表型关联；共455支队伍注册，Phase A与Phase B分别收到189与103份有效提交，最佳系统在最终测试集上总体得分0.7389，较基线高8.37个百分点。参赛队伍主要结合生物医学语言模型、大语言模型与集成策略。
-
-**核心创新概述**
-
-> 构建并开放了面向全文生物医学文献的患者特异表型识别共享评测任务与数据集，将表型概念识别与患者归属关联合并为统一评测框架。
-
-**创新点拆解**
-
-- 任务定义将全文表型概念识别与患者—表型关联划分为两个前后衔接的子任务
-- 基于PatientPheX的200篇全文标注数据，含多患者与复杂临床描述场景
-- 大规模参赛规模与双阶段榜单设置，形成可比较的评测基线
-- 参赛方案呈现生物医学语言模型、LLM与集成策略的组合范式
-
-**当前局限**
-
-> 最佳系统总体得分0.7389，患者归属与表型归一化仍是主要错误来源；数据规模仅200篇文献，覆盖病种与写作风格有限；任务聚焦英文生物医学全文，向其他语言与临床文书迁移性未知；摘要未给出各子任务的分项误差分析。
-
-**后续可改进方向**
-
-- 针对患者归属设计显式的跨段落指代与共指建模方法，降低多患者文献中的归属错误
-- 研究表型提及的标准化与本体映射联合建模，将归一化纳入端到端训练目标
-- 扩展数据规模与病种覆盖，并构建跨语言、跨文体的迁移评测
-- 分析LLM与生物医学专用模型在长全文输入下的分工策略与集成权重选择
-- 引入文档结构与章节信息作为表型识别与患者关联的显式特征
-
-**工程启发**
-
-> 为生物医学文献信息抽取系统提供了可复用的任务定义、数据与基线，对需要从长文档中抽取实体并绑定到特定主体的工程场景（如临床文献审编、罕见病辅助诊断）具有直接参考价值。
-
-**为什么值得关注**
-
-> 该任务涉及全文文档的实体识别与归属关联，与OCR/文档解析后的长文档信息抽取流程紧密相关，可作为文档级实体识别与结构理解的下游评测参考。
-
-**原始摘要**
-
-Automatic phenotype information extraction plays an important role in rare disease diagnosis,
-genotype-phenotype analysis, and precision medicine. However, accurately identifying phenotype
-concepts and determining their associations with specific patients remain challenging, particularly
-in full-text biomedical articles involving multiple patients and complex clinical descriptions. This
-paper presents an overview of CHIP 2026 Shared Task 1, which aims to promote the development of
-methods for patient-specific phenotype concept recognition from full-text biomedical literature. The
-task consists of two subtasks: full-text phenotype concept recognition and patient-specific
-phenotype association. For this evaluation, we used 200 annotated full-text biomedical articles from
-the PatientPheX dataset, containing 506 patients, 15,193 phenotype mentions, and 5,656 patient-
-phenotype associations. A total of 455 teams registered for the competition, with 189 and 103 valid
-submissions received on the Phase A and Phase B leaderboards, respectively. The best-performing
-system achieved an overall score of 0.7389 on the final test set, outperforming the baseline by 8.37
-percentage points. The top-performing teams explored diverse approaches combining biomedical
-language models, large language models (LLMs), and ensemble strategies. The evaluation results
-highlight both the potential of these approaches and the remaining challenges in patient attribution
-and phenotype normalization from full-text biomedical literature. The post-evaluation phase remains
-open at https://tianchi.aliyun.com/competition/entrance/532512.
 
 ---
