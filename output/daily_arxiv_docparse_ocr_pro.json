@@ -1,30 +1,43 @@
 {
   "meta": {
-    "report_date": "2026-11-01",
-    "generated_at_utc": "2026-11-01 07:29:28",
+    "report_date": "2026-11-02",
+    "generated_at_utc": "2026-11-02 07:38:39",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
     "count": 0
   },
   "synthesis": {
-    "executive_summary": "今日无新增论文情报，无法形成基于具体论文的结论；建议维持既有研究跟踪节奏，待下一批论文入库后再更新日报。",
-    "trend_summary": "无新论文输入，暂无法识别当日趋势变化。",
+    "executive_summary": "今日无新增论文情报，无法形成具体研究进展判断。建议维持既有技术路线跟踪，待下一批论文更新后再做趋势归纳。",
+    "trend_summary": "本次输入为空，未观察到可归纳的新趋势；近期方向仍以版面感知建模、多模态端到端解析和复杂文档鲁棒性为主。",
     "common_innovations": [
-      "今日无新论文，未观察到可归纳的共同创新点。"
+      "无新增论文可提炼共同创新点，暂不形成结论。"
     ],
     "future_directions": [
-      "待论文入库后，优先梳理文档版面分析与多模态大模型结合的路线差异。",
-      "关注评测协议是否从单页识别转向多页/长文档端到端解析。",
-      "补充对复杂表格、公式与手写混合场景的鲁棒性验证方向。"
+      "建立文档解析的统一评测基准，覆盖扫描件、表格、公式和手写混合版面，便于跨模型横向比较。",
+      "推进版面结构与文本内容的联合预训练目标，减少对独立OCR后处理的依赖。",
+      "针对低质量扫描与拍照文档，研究退化感知的数据增强与鲁棒训练策略。",
+      "探索端到端文档解析中的表格结构恢复与单元格内容对齐的一体化建模。",
+      "研究多页文档的跨页指代与时序布局建模，提升长文档理解一致性。",
+      "构建面向真实业务文档的增量学习流程，降低新模板和新版式适配成本。"
     ],
     "engineering_takeaways": [
-      "今日无新结论，工程侧继续沿用既有 OCR 解析基线，不做策略调整。"
+      "在无新论文输入时，不建议调整现有OCR/文档解析流水线配置。",
+      "优先保障现有表格与公式解析模块的回归测试覆盖，避免模型升级引入静默退化。",
+      "维护按文档类型分桶的评测集，以便新论文方法落地时快速做A/B对比。"
     ],
     "watchlist": [
       {
-        "title": "待跟踪：下一批 OCR/文档解析论文",
-        "watch_reason": "当前清单为空，无法判断方法、评测或部署层面的新动向。"
+        "title": "文档解析统一评测基准",
+        "watch_reason": "缺乏统一基准时，新方法的收益难以横向验证，需关注相关评测集发布。"
+      },
+      {
+        "title": "端到端表格结构恢复",
+        "watch_reason": "表格解析是业务落地高价值环节，端到端方案可能减少级联误差。"
+      },
+      {
+        "title": "退化文档鲁棒性训练",
+        "watch_reason": "真实场景扫描与拍照质量参差，鲁棒性策略直接影响线上准确率。"
       }
     ]
   },
