@@ -1,10 +1,321 @@
-# OCR / 文档解析研究日报（2026-11-02）
+# OCR / 文档解析研究日报（2026-11-03）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-11-02 07:38:39`
+- 生成时间（UTC）：`2026-11-03 07:53:48`
 - 大模型综合分析：`开启`
 
-今天没有筛到符合条件的新论文。
+## 一、今日执行摘要
+
+> 今日四篇论文共同指向文档解析从“先OCR转文本再处理”向“多模态端到端+工具增强”的范式迁移。DR Pixel用页面图像直接作为检索与推理单元，在106万页上验证了绕过OCR的可行性；ArabGeoText和RxnMiner分别在地图文本与化学反应图场景中采用检测/LoRA识别与专家流程+工具箱的解耦架构，说明通用VLM尚不足以单模型完成复杂文档任务；法律判决抽取则揭示指令迭代与一致性诊断在开放属性场景中的必要性。整体来看，工程重心正从版面还原与表格重建，转向页面级多模态索引、工具编排与可信度评估。
+
+## 二、今日趋势判断
+
+四个方向值得关注：一是页面原生检索与推理开始替代OCR文本管道，并配套出现多模态基准；二是VLM与专用检测器/领域工具箱组合的工具增强框架成为处理密集、专业文档的默认架构；三是智能体训练从轨迹模仿转向反事实信用重加权等细粒度信用分配；四是文档抽取评估从单一准确率扩展到自一致性、标注者间分歧与来源可追溯性。
+
+## 三、今日论文概览
+
+1. **DR Pixel: Page-Native Deep Research with Vision-Language Models** | 标签：页面原生检索、多模态深度研究、视觉语言模型、文档图像推理、智能体训练、基准构建
+2. **ArabGeoText: Tool-Augmented Vision-Language Models for Arabic Geospatial Text Spotting** | 标签：地理空间文本定位、阿拉伯语OCR、场景文本识别、视觉语言模型、LoRA适配、基准数据集
+3. **Unlocking Criminal Court Decisions: Flexible Information Extraction for Empirical Legal Research** | 标签：法律文档信息抽取、大模型抽取流水线、标注指令迭代、一致性评估、结构化数据集
+4. **RxnMiner: A Multimodal Agent for Structured Reaction Data Extraction from Chemistry Figures** | 标签：化学文献抽取、多模态智能体、反应数据基准、分子结构识别、科学图表理解、银语料构建
+
+## 四、今天 OCR / 文档解析论文里的主要创新点
+
+- 以页面图像或多模态证据作为检索与推理单元，保留表格、图表、公式的版面与视觉信息，减少OCR文本管道的信息损失。
+- 将通用视觉语言模型与专用检测器或领域工具箱组合成工具增强流水线，由检测端定位、VLM或专用模块识别与结构化。
+- 构建面向复杂推理的文档基准，要求跨文本、图表、公式或跨共享模板进行证据关联，而非单字段抽取。
+- 引入细粒度信用分配或指令迭代机制，用反事实贡献加权或专家修订指令来提升智能体步骤质量与抽取可靠性。
+- 系统分析模型自一致性、标注者间分歧与金标注正确性之间的偏离，把分歧作为流程诊断信号而非仅报告准确率。
+
+## 五、后续 OCR 领域值得推进的改进方向
+
+- 研究页面图像检索的粒度设计，系统比较页面级、区域级与图块级索引在跨页引用和公式定位任务上的精度与效率。
+- 将反事实信用重加权从单轮轨迹扩展到多轮工具调用与失败恢复轨迹，验证其对步骤级错误定位和训练开销的影响。
+- 设计页面原生视觉证据与OCR文本通道的混合融合策略，按查询类型（表格数值、公式、正文叙述）路由到不同证据源。
+- 在页面原生基准中补充跨页引用、公式编号、图表标题与脚注的细粒度定位任务，并报告分辨率与长文档截断的消融。
+- 研究定位与识别解耦框架中的误差传播问题，探索可微联合优化或带置信度回溯的级联方案，用于地图与化学图等密集文本场景。
+- 将化学图抽取从图内证据扩展到图注、正文与补充材料的跨模态融合，并评估银语料噪声对下游反应预测训练的影响。
+- 在法律等开放属性抽取中，将指令修订与不确定性估计结合，自动推荐需澄清属性，并用多模型分歧仲裁提升金标注质量。
+- 建立跨法院、跨年份、跨语言的时间与区域划分评估协议，检验文档抽取规则对文书风格漂移和域差异的适应性。
+
+## 六、工程落地启发
+
+- 对科研文献问答系统，可优先试点页面原生多模态检索以跳过版面还原与表格结构重建环节，但需先评估页面图像分辨率与长文档截断策略。
+- 复杂文档任务当前不宜依赖单一VLM端到端完成，检测/定位与识别解耦、再叠加领域工具箱的编排架构更可控，需在流水线中显式处理定位错误向识别阶段的传播。
+- 智能体训练数据构建可引入反事实信用重加权，对教师轨迹中的冗余与失败步骤降权，但需评估反事实评估的计算开销是否可接受。
+- 法律等规则持续演化的抽取场景，应把标注指令版本化并保留专家修订记录，同时把模型自一致性与人工分歧作为指令质量监控指标而非正确性代理。
+- 化学等专业图抽取可复用专家流程加化学工具箱的智能体方案生成银语料，但银语料入库前需抽样评估分子识别误差带来的噪声水平。
+- 地图类地理标签提取可复用OSM渲染图与遥感叠加的配对视图构造方式低成本扩充训练数据，同时需用真实截图与低分辨率瓦片检验合成到真实的迁移差距。
+
+## 七、优先关注论文
+
+- **DR Pixel: Page-Native Deep Research with Vision-Language Models**：直接挑战OCR文本管道作为文档研究默认入口，开源智能体与基准可复用，需跟踪其分辨率处理、跨页推理与向非科学文档泛化的后续工作。
+- **RxnMiner: A Multimodal Agent for Structured Reaction Data Extraction from Chemistry Figures**：展示了专家流程加领域工具箱的智能体在专业图抽取上大幅超越直接预测，其银语料噪声控制与误差传播处理对其它科学文档抽取有直接参考价值。
+- **ArabGeoText: Tool-Augmented Vision-Language Models for Arabic Geospatial Text Spotting**：提供定位识别解耦与配对视图数据构造的可复用范式，需关注其从合成叠加视图到真实地图截图的迁移结果及多语言扩展。
+- **Unlocking Criminal Court Decisions: Flexible Information Extraction for Empirical Legal Research**：把自一致性与标注者分歧作为指令质量诊断信号，对开放属性抽取流程设计有方法论价值，需跟踪其跨罪名、跨年份的稳定性验证。
+
+## 八、论文逐篇解析
+
+### 1. DR Pixel: Page-Native Deep Research with Vision-Language Models
+
+- arXiv: [2611.03097v1](https://arxiv.org/abs/2611.03097v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.03097v1)
+- 作者: Tiansheng Hu, Yichuan Wang, James V. Talwar, Nicholas Tomlin, Chen Zhao, Sewon Min
+- 发布时间: 2026-11-02T13:13:42Z
+- 分类: cs.CV, cs.CL, cs.IR
+- 相关性评分: 16
+- 主题标签: 页面原生检索、多模态深度研究、视觉语言模型、文档图像推理、智能体训练、基准构建
+
+**中文摘要**
+
+> 论文探讨视觉语言模型能否支撑“页面原生”深度研究，即直接对渲染后的文档页面图像进行检索与推理，而非先做OCR转文本。作者提出DR Pixel，一个开源端到端多模态深度研究智能体，以页面图像作为唯一检索与推理单元，覆盖106万页语料，并构建DRPixelBench基准，要求对科学论文中的文本、图表、表格和公式进行推理。实验显示，无训练条件下页面原生深度研究已优于基于OCR的基线，且工具调用更少。针对教师轨迹含冗余与失败步骤的问题，提出反事实信用重加权，对推理与动作步骤按对最终答案的反事实贡献加权，训练后检索召回提升约15点、最终准确率提升超10点。
+
+**核心创新概述**
+
+> 首次提出并系统评估“页面原生”多模态深度研究范式，用页面图像取代OCR文本作为检索与推理单元，并配套构建多模态科学论文推理基准及反事实信用重加权的智能体训练方法。
+
+**创新点拆解**
+
+- 任务定义：将深度研究智能体的检索与推理单元从OCR文本改为渲染页面图像，保留表格、图形与公式的版面与视觉信息
+- 基准构建：DRPixelBench要求跨文本、图、表、公式进行推理，覆盖科学论文多模态证据
+- 训练范式：提出反事实信用重加权，对教师轨迹中单步推理与动作按对最终答案的反事实贡献进行细粒度信用分配
+- 系统实现：开源端到端多模态深度研究智能体，在106万页规模语料上运行
+
+**当前局限**
+
+> 摘要未给出对页面图像分辨率、长文档截断及多页跨页推理的处理细节；反事实信用重加权依赖教师轨迹与反事实评估，计算开销与可扩展性未说明；基准集中于科学论文，向其他文档类型泛化性待验证。
+
+**后续可改进方向**
+
+- 研究页面图像检索的粒度与索引策略，如页面级、区域级与图块级检索的精度与效率权衡
+- 将反事实信用重加权扩展到多轮工具调用与失败恢复轨迹，分析其对步骤级错误定位的作用
+- 探索页面原生范式与OCR文本的混合证据融合，明确视觉与文本通道各自适用的查询类型
+- 在基准中补充跨页引用、公式编号与图表标题等细粒度定位任务，以更严格评估页面原生推理
+
+**工程启发**
+
+> 为文档智能体提供绕过OCR的端到端路径，减少版面还原与表格结构重建的工程环节；开源智能体与基准可直接用于构建面向科研文献的多模态检索问答系统。
+
+**为什么值得关注**
+
+> 该工作直接挑战OCR文本抽取作为文档理解前置步骤的默认假设，证明页面图像可直接作为检索与推理单元，对OCR研究的下游定位与价值评估具有参照意义。
+
+**原始摘要**
+
+Complex documents such as scientific papers contain rich information in tables, figures, and
+equations; however, existing deep research (DR) agents typically reduce papers to OCR-extracted
+text. We instead ask whether vision-language models (VLMs) can enable page-native deep research:
+directly retrieving and reasoning over rendered document page images. We introduce DR Pixel, the
+first open-source end-to-end multimodal DR agent that uses rendered page images as its sole
+retrieval and reasoning unit, operating over a corpus of 1.06M pages. To evaluate this setting, we
+construct DRPixelBench, a benchmark on scientific papers requiring reasoning over text, figures,
+tables, and equations. Surprisingly, page-native DR already works well without training,
+outperforming OCR-based baselines across state-of-the-art models like GPT-5.4, Gemini-3.5-Flash, and
+Qwen3.6-27B, while requiring fewer tool calls. We next turn to DR training. A key challenge is that
+teacher trajectories for agentic supervised finetuning are noisy, mixing critical reasoning and
+action steps with redundant or failed attempts. To address this, we introduce counterfactual credit
+reweighting, a fine-grained credit assignment method that weights individual reasoning and action
+steps by their counterfactual contribution to the final answer. Our training improves retrieval
+recall by about 15 points and final accuracy by over 10 points on DRPixelBench, and likewise
+outperforms the untrained baseline on four existing benchmarks. On out-of-distribution ViDoRe-V3, DR
+Pixel comes within 1.8 points of an oracle that is given the gold pages directly. Our results
+suggest that the conventional OCR-then-retrieve pipeline is not only unnecessary but suboptimal:
+directly retrieving and reasoning over visual document pages makes complex DR both more effective
+and more efficient.
+
+---
+
+### 2. ArabGeoText: Tool-Augmented Vision-Language Models for Arabic Geospatial Text Spotting
+
+- arXiv: [2611.03339v1](https://arxiv.org/abs/2611.03339v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.03339v1)
+- 作者: Yakoub Bazi, Sarah Alsaleh, Mohamad M. Al Rahhal, Mohamed A. Mekhtiche, Mansour Zuair
+- 发布时间: 2026-11-02T15:58:02Z
+- 分类: cs.CV
+- 相关性评分: 12
+- 主题标签: 地理空间文本定位、阿拉伯语OCR、场景文本识别、视觉语言模型、LoRA适配、基准数据集
+
+**中文摘要**
+
+> 论文针对栅格地图中的地理空间文本定位，即定位并转录道路名、区域名与地标等地理标签，指出阿拉伯语地理空间文本定位研究不足。作者构建ARABGEOTEXT基准，覆盖利雅得与吉达970个地理位置，每种视图类型含17,875个人工标注文本实例，配对OSM渲染图与叠加遥感影像的合成图，并划分城市内与跨城市评估。直接使用Qwen3.5-4B定位难以恢复瓦片内全部标签，故提出工具增强框架：YOLO26负责定位与裁剪矫正，经LoRA适配的Qwen3.5-4B负责识别，在两种视图与两个测试城市上均优于直接LoRA微调。
+
+**核心创新概述**
+
+> 构建首个以阿拉伯语地理空间标签为中心的配对视图基准，并提出定位与识别解耦的工具增强视觉语言框架，将通用VLM识别器与专用检测器组合。
+
+**创新点拆解**
+
+- 数据构建：OSM渲染与遥感影像叠加的配对视图保持标签内容与像素几何一致，支持跨背景评估
+- 任务与评估：按地理分区实现城市内与跨城市检测、识别及端到端定位评估
+- 方法设计：YOLO26定位加裁剪矫正，配合LoRA适配的Qwen3.5-4B识别，形成工具增强流水线
+- 实证发现：固定定位后，识别器适配相较零样本读取器带来识别提升
+
+**当前局限**
+
+> 仅覆盖两座沙特城市与阿拉伯语，语言与区域泛化性有限；配对视图为合成叠加，与真实地图产品存在域差异；检测与识别解耦，定位错误会直接传播至识别阶段。
+
+**后续可改进方向**
+
+- 扩展至多语言与多城市，评估脚本方向、字体与标注风格差异对识别的影响
+- 研究端到端可微的定位-识别联合优化，减少裁剪矫正误差传播
+- 针对小、密、任意朝向文本，比较旋转框检测与基于VLM的指代定位方案
+- 引入真实地图截图与低分辨率瓦片，检验合成叠加视图到真实场景的迁移
+
+**工程启发**
+
+> 为地图产品中的地理标签自动提取提供可复用的检测加识别流水线，配对视图构造方式可用于低成本扩充训练数据。
+
+**为什么值得关注**
+
+> 该文属于场景文本定位与识别的专门化应用，涉及小目标、密集排列与任意朝向文本，与OCR中的检测识别协同设计及VLM识别器适配直接相关。
+
+**原始摘要**
+
+Geospatial text spotting involves locating and transcribing geographic labels, such as road names,
+district names, and landmarks, in raster maps. These labels are often small, densely arranged, and
+arbitrarily oriented. Although Arabic text recognition has been studied extensively in documents and
+natural scenes, Arabic geospatial text spotting remains underexplored. We introduce ARABGEOTEXT, an
+Arabic-centric benchmark covering 970 geographic locations in Riyadh and Jeddah, with 17,875
+manually annotated text instances per view type. For each location, we pair an OpenStreetMap (OSM)
+rendering with a composite created by overlaying that rendering on the corresponding remote sensing
+(RS) imagery. The paired views preserve label content and pixel geometry, allowing evaluation across
+different backgrounds. Geographic partitions support in-city and city-disjoint evaluation of
+detection, recognition, and end-to-end spotting. Experiments with direct Qwen3.5-4B spotting show
+difficulties in recovering all labels within a tile. We therefore propose a tool-augmented vision-
+language framework that combines YOLO26 localization and crop rectification with Qwen3.5-4B
+recognition adapted through low-rank adaptation (LoRA). The framework outperforms direct LoRA-
+adapted Qwen3.5-4B spotting across both image views and test cities. With localization held fixed,
+reader adaptation further improves recognition over the pretrained zero-shot reader. The dataset and
+code will be made publicly available at https://github.com/yakoubbazi/ArabGeoText.
+
+---
+
+### 3. Unlocking Criminal Court Decisions: Flexible Information Extraction for Empirical Legal Research
+
+- arXiv: [2611.03051v1](https://arxiv.org/abs/2611.03051v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.03051v1)
+- 作者: Tomáš Knap, Ivana Kvapilíková, Jan Černý, Klára Bendová, Jaromír Šavelka, Vojtěch Pour, Jakub Drápal
+- 发布时间: 2026-11-02T12:46:53Z
+- 分类: cs.CL, cs.AI
+- 相关性评分: 6
+- 主题标签: 法律文档信息抽取、大模型抽取流水线、标注指令迭代、一致性评估、结构化数据集
+
+**中文摘要**
+
+> 论文面向刑事判决书的结构化，指出犯罪行为的属性与抽取规则难以事先完全确定。作者提出基于大模型的信息抽取流程，通过属性探索、文本片段抽取与取值归一化构建结构化数据集，并由法律专家迭代修订标注指令。在酒驾与禁驾两类交通犯罪上评估：酒驾任务中修订指令使正确抽取比例由52%升至70%，并提高人工标注者间一致性；同一模型重复运行的一致性高于与金标注的一致性，说明输出稳定不等于正确，而标注者间与模型间分歧有助于发现不清晰指令；禁驾任务因类别与输出格式固定，多数属性一致性较高。
+
+**核心创新概述**
+
+> 将信息抽取流程设计为可由领域专家迭代修订指令的属性探索闭环，并系统分析模型自一致性与正确性之间的偏离，以及分歧作为指令质量诊断信号的作用。
+
+**创新点拆解**
+
+- 流程设计：属性探索、文本片段抽取、取值归一化三阶段，由专家可修订的标注指令驱动
+- 评估视角：区分模型重复运行的自一致性与对金标注的正确性，揭示一致性不等于正确性
+- 诊断机制：利用标注者间与模型间分歧定位不清晰或不可操作的指令
+- 任务设置：在属性未预先完全确定的开放抽取场景中评估抽取可靠性
+
+**当前局限**
+
+> 仅评估两类交通犯罪，领域与文书类型覆盖有限；抽取准确率仍为70%左右，距实际法律实证研究可用性有差距；未报告跨法院、跨年份文书分布漂移下的稳定性。
+
+**后续可改进方向**
+
+- 将指令修订与抽取结果的不确定性估计结合，自动推荐需澄清的属性与规则
+- 在更多罪名与文书结构上验证属性探索流程，评估模式可迁移性
+- 研究多模型分歧的聚合与仲裁机制，以提升金标注质量与抽取鲁棒性
+- 引入跨法院、跨年份的时间划分评估，检验抽取规则对文书风格变化的适应性
+
+**工程启发**
+
+> 为法律文书结构化提供人机协同的指令迭代范式，可迁移至需要专家定义属性且规则持续演化的文档抽取场景。
+
+**为什么值得关注**
+
+> 该文涉及从非结构化文书抽取文本片段并归一化，属于文档信息抽取范畴，其对一致性、正确性与指令诊断的分析对OCR后处理与结构化抽取系统设计有参考价值。
+
+**原始摘要**
+
+Criminal verdicts contain descriptions of criminal behavior that can support quantitative legal
+research, but structuring them requires attributes and extraction rules that cannot always be fully
+specified in advance. We present an LLM-based pipeline that builds a structured dataset through
+attribute exploration, text span extraction, and value normalization, guided by annotation
+instructions that legal experts can refine. We evaluate it on two traffic offenses: driving under
+the influence (DUI) and driving despite a ban (DDB). For DUI, revising the instructions was
+associated with higher extraction accuracy (from 52% to 70% of correctly extracted values) and
+higher agreement between human annotators. Repeated runs of the same model agreed with each other
+more than with the gold annotations, showing that consistent output is not necessarily correct,
+while disagreement between annotators and between models helped reveal unclear instructions. For
+DDB, where the instructions defined fixed categories and output formats, agreement was high for most
+attributes.
+
+---
+
+### 4. RxnMiner: A Multimodal Agent for Structured Reaction Data Extraction from Chemistry Figures
+
+- arXiv: [2611.02826v1](https://arxiv.org/abs/2611.02826v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.02826v1)
+- 作者: Jinbo Hu, Songren Zhang, Chuanxun Fu, Jinrui Huang, Zhen Hao Wong, Dongxu Cui, Haoran Fan, Muhao Ge, Zhen Jian, Jian Zhou, Chengxiang Luo, Han Lyu, Haoyi Tao, Chaozheng Huang, Hanzheng Li, ZiChen Wang, Hengtian Ma, Jinyang Dai, Nan Wang, Yanhui Hong, Xi Fang, Guolin Ke
+- 发布时间: 2026-11-02T09:24:55Z
+- 分类: cs.AI
+- 相关性评分: 6
+- 主题标签: 化学文献抽取、多模态智能体、反应数据基准、分子结构识别、科学图表理解、银语料构建
+
+**中文摘要**
+
+> 论文针对化学文献图中反应数据抽取，指出图中常通过共享模板、取代基表与产物网格编码多组实验，需识别分子结构、将证据关联到具体实验条目并重建间接指定的参与者。作者提出RxnMiner多模态智能体，结合专家抽取流程与化学工具箱，读取分子结构、解析共享与条目特定证据、从模板实例化参与者，生成带来源链接的反应记录。同时构建ChemRxn-Bench，含603张反应图与8,547条人工标注并复核的反应记录，按分子精确匹配与反应物-产物配对评估。以Qwen3.8-Flash-Next为骨干，立体化学感知反应宏F1由直接预测的21.0%提升至71.0%，最强现有抽取系统为25.0%；五种骨干下较无流程与工具箱的同基座智能体提升9.4至25.5点；无人工干预处理10,107张图，产出88,202条银语料记录。
+
+**核心创新概述**
+
+> 将化学图反应抽取建模为需跨共享模板与表格进行证据关联和参与者重建的多模态智能体任务，并配套发布带精确分子匹配与配对协议的基准及大规模银语料。
+
+**创新点拆解**
+
+- 任务定义：从含共享模板、取代基表与产物网格的化学图中重建具体反应记录，要求证据关联与参与者实例化
+- 系统架构：专家抽取流程与化学工具箱协同的多模态智能体，支持分子识别与模板实例化
+- 基准构建：ChemRxn-Bench提供8,547条人工标注复核记录，按精确分子身份与反应物-产物配对统一评估
+- 训练与提示范式：在五种骨干模型上验证抽取流程与工具箱的增益，并展示无人工干预的大规模银语料生成
+
+**当前局限**
+
+> 依赖化学工具箱与骨干模型能力，抽取质量受分子结构识别误差影响；银语料未经完全人工复核，噪声水平与下游可用性需进一步评估；基准集中于反应图，对连续文本与补充材料的联合抽取覆盖不足。
+
+**后续可改进方向**
+
+- 研究分子结构识别错误向反应记录的错误传播机制，并设计可验证的置信度与回溯策略
+- 将抽取从图扩展到图注、正文与补充材料的跨模态证据融合，检验参与者重建的完整性
+- 评估银语料用于反应预测与逆合成模型训练时的噪声敏感性与清洗策略
+- 在基准中引入复杂立体化学、多步反应与条件表格的细粒度评估子集
+
+**工程启发**
+
+> 为化学文献数据规模化结构化提供可部署智能体方案，银语料生成流程可支撑反应预测与逆合成训练数据构建，降低人工标注成本。
+
+**为什么值得关注**
+
+> 该文属于科学文档中图形与表格的复杂信息抽取，涉及分子结构识别、共享模板解析与证据关联，与OCR面向图表的结构化抽取及多模态智能体设计密切相关。
+
+**原始摘要**
+
+Reaction data underpin machine learning for reaction prediction, condition recommendation, and
+retrosynthetic planning, yet extracting these data from literature figures still requires
+substantial manual effort. Many figures encode multiple experiments through shared templates,
+substituent tables, and product grids. Recovering concrete reaction records therefore requires
+molecular recognition, association of evidence with individual experimental entries, and
+reconstruction of indirectly specified participants. We present RxnMiner, a multimodal agent system
+that combines an expert-informed extraction procedure with a chemistry toolbox to coordinate these
+operations. The agent reads molecular structures, resolves shared and entry-specific evidence, and
+instantiates participants from templates to assemble source-linked reaction records. We also
+introduce ChemRxn-Bench, a benchmark of 603 reaction figures with 8,547 manually annotated and
+reviewed reaction records, evaluated under a common protocol for exact molecular identity and
+reactant-product pairing. On this benchmark, with Qwen3.8-Flash-Next as the backbone, RxnMiner
+raises stereochemistry-aware reaction macro-F1 from 21.0% under direct prediction to 71.0%, compared
+with 25.0% for the strongest existing extraction system. Across five backbones, it also outperforms
+the same base agent without the extraction procedure and chemistry toolbox by 9.4 to 25.5 points.
+Applied without human intervention to 10,107 literature figures, RxnMiner produces a silver corpus
+of 88,202 source-linked reaction records.
+
+---
