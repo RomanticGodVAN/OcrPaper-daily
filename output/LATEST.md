@@ -1,127 +1,622 @@
-# OCR / 文档解析研究日报（2026-11-06）
+# OCR / 文档解析研究日报（2026-11-07）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-11-06 07:54:06`
+- 生成时间（UTC）：`2026-11-07 07:05:07`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 本期四篇论文分别覆盖文档解析输出表示与评测（AmbiHTMLBench）、医疗多语种信息抽取（CardioLM）、低资源历史手写识别（ATHAAR）与图检索智能体（ArcRAG）。其中最值得关注的是 AmbiHTMLBench：它把文档解析的输出从 Markdown 转向可执行 HTML，并首次系统构建双协议评测，发现客观自动指标与人类感知保真度排序不一致。其余工作分别提示：领域预训练对严格跨度指标收益有限、历史手写场景现有 VLM 仍明显不足、检索流程与图构建解耦可行但绝对精度受图质量制约。整体看，OCR/文档解析的瓶颈正从"能否识别文字"转向"结构保真度如何度量"与"低资源复杂书写如何迁移"。
+> 今日两篇论文分别聚焦临床领域多语言NER与中世纪阿拉伯语手稿HTR。CardioLM通过机器翻译+标注投影构建7语种心脏病学病例报告语料并发布多语NER套件，发现领域继续预训练对困惑度收益大但严格span F1提升有限（≤0.04），多语言联合训练优于单语系统，残差错误集中在实体边界；ATHAAR则填补科学阿拉伯语手稿HTR数据空白，提出校勘学转写标注指南，并揭示当前视觉语言模型在跨文字、跨章节、跨专著迁移上的明显局限。两者共同说明领域数据与标注规范是当前文档解析性能的关键约束，模型架构并非主要瓶颈。
 
 ## 二、今日趋势判断
 
-文档解析研究正在从纯文本转录转向可编辑、结构敏感的输出表示，并配套可复现的评测协议；同时医疗、历史手稿等垂直领域的低资源结构化抽取持续受到关注，评测开始引入临床医生、LLM 评判等主观锚定与多语言、跨构建等鲁棒性维度。
+研究正从通用OCR/HTR基准转向高价值垂直领域（临床病例、历史科学手稿）的数据与标注体系建设；低资源语言与历史文字通过翻译投影、校勘学规范等方式扩展标注；视觉语言模型被用于手写历史文档转写，但跨域泛化仍不稳定；对领域预训练收益的评估趋于严格，强调严格span F1与人工临床评分等下游可用性指标。
 
 ## 三、今日论文概览
 
-1. **AmbiHTMLBench: A Benchmark for HTML-based Visually Rich Document parsing** | 标签：文档解析、HTML重建、基准评测、视觉丰富文档、多模态大模型
-2. **CardioLM: A multilingual suite of small language models for the cardiology domain** | 标签：临床NLP、多语种命名实体识别、领域预训练、心脏病学、医疗文档结构化
-3. **ATHAAR: A Medieval Scientific Arabic Manuscript Dataset for Handwritten Text Recognition** | 标签：手写文本识别、历史手稿、低资源OCR、视觉语言模型、阿拉伯语
-4. **ArcRAG: Agentic Compositional Retrieval over Knowledge Graphs** | 标签：GraphRAG、知识图谱检索、智能体、跨构建可移植性、多跳问答
+1. **CardioLM: A multilingual suite of small language models for the cardiology domain** | 标签：临床NER、多语言、心脏病学、标注投影、领域预训练、小语言模型、病例报告
+2. **ATHAAR: A Medieval Scientific Arabic Manuscript Dataset for Handwritten Text Recognition** | 标签：手写文本识别、阿拉伯语手稿、历史文档数字化、视觉语言模型、数据集构建、标注指南、跨域迁移
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 将评测从单一准确率扩展为客观指标与人类感知/临床评分相结合的双轨或多轨体系。
-- 通过任务特定微调或继续预训练让中小参数专家模型在垂直场景（文档到HTML、心脏病学NER）达到可用水平。
-- 构建带结构化标注的领域专用数据集（HTML页面、多语病例报告、阿拉伯语手稿），并公开标注规范。
-- 在评测中显式引入跨领域/跨构建/跨字体的迁移与鲁棒性设定，而非仅在同分布测试集上报告。
+- 以领域专家参与的标注规范或审核流程提升数据质量，而非单纯堆叠通用数据。
+- 系统评估领域继续预训练与多语言/跨域联合训练的实际收益边界。
+- 将残差错误分析细化到实体边界或字形/变音符号等具体层面。
+- 构建覆盖多种语言、书法风格或文本见证版本的可迁移性评测设置。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 针对 HTML 重建任务设计更贴近人类感知的客观度量，重点校准表格保真度与二维布局一致性指标与人类偏好的排序相关性。
-- 将 AmbiHTMLBench 扩展到公式、多栏排版及非英语文档，并增加 HTML 合法性与可渲染性校验作为硬约束指标。
-- 研究文档解析中结构重建的边界检测与后处理解码，解决 NER 与 HTR 中普遍存在的实体/字符边界错误。
-- 面向连写合字与变音符号设计视觉编码或语言先验约束，并在阿拉伯语手稿上验证跨字体、跨抄本的迁移效果。
-- 探索以抄本间对齐与校勘信息作为弱监督信号，降低历史手写数据的人工标注成本。
-- 系统比较小参数专家模型与通用多模态大模型在结构重建上的能力边界，给出按文档类型选型的量化依据。
-- 把跨构建可移植性评测从多跳问答扩展到文档级结构化抽取与表格检索任务，检验检索智能体的通用性。
+- 针
+- 对
+- O
+- C
+- R
+- /
+- H
+- T
+- R
+- 中
+- 实
+- 体
+- 边
+- 界
+- 与
+- 字
+- 符
+- 边
+- 界
+- 错
+- 误
+- ，
+- 设
+- 计
+- 边
+- 界
+- 感
+- 知
+- 解
+- 码
+- 或
+- 跨
+- 度
+- 修
+- 正
+- 模
+- 块
+- ，
+- 并
+- 在
+- 药
+- 物
+- 实
+- 体
+- 和
+- 阿
+- 拉
+- 伯
+- 语
+- 连
+- 字
+- 变
+- 音
+- 符
+- 号
+- 上
+- 做
+- 专
+- 项
+- 验
+- 证
+- ；
+- 在
+- 标
+- 注
+- 投
+- 影
+- 流
+- 程
+- 中
+- 引
+- 入
+- 主
+- 动
+- 学
+- 习
+- 与
+- 人
+- 工
+- 复
+- 核
+- 优
+- 先
+- 级
+- 排
+- 序
+- ，
+- 量
+- 化
+- 翻
+- 译
+- 质
+- 量
+- 对
+- 下
+- 游
+- N
+- E
+- R
+- F
+- 1
+- 的
+- 敏
+- 感
+- 性
+- ；
+- 将
+- 多
+- 语
+- 言
+- 联
+- 合
+- 训
+- 练
+- 与
+- 语
+- 言
+- 特
+- 定
+- 继
+- 续
+- 预
+- 训
+- 练
+- 结
+- 合
+- 为
+- 两
+- 阶
+- 段
+- 策
+- 略
+- ，
+- 在
+- 低
+- 资
+- 源
+- 语
+- 言
+- 收
+- 益
+- 与
+- 高
+- 资
+- 源
+- 语
+- 言
+- 精
+- 度
+- 之
+- 间
+- 做
+- 消
+- 融
+- ；
+- 为
+- 阿
+- 拉
+- 伯
+- 语
+- 手
+- 稿
+- 设
+- 计
+- 连
+- 写
+- 与
+- 变
+- 音
+- 符
+- 号
+- 感
+- 知
+- 的
+- 视
+- 觉
+- 编
+- 码
+- 或
+- 字
+- 符
+- 级
+- 对
+- 齐
+- 预
+- 训
+- 练
+- 目
+- 标
+- ，
+- 并
+- 测
+- 试
+- 风
+- 格
+- 归
+- 一
+- 化
+- 与
+- 手
+- 稿
+- 特
+- 定
+- 微
+- 调
+- ；
+- 建
+- 立
+- 跨
+- 书
+- 法
+- 风
+- 格
+- 、
+- 跨
+- 专
+- 著
+- 、
+- 跨
+- 文
+- 本
+- 见
+- 证
+- 版
+- 本
+- 的
+- 统
+- 一
+- 迁
+- 移
+- 评
+- 估
+- 协
+- 议
+- ，
+- 报
+- 告
+- 细
+- 粒
+- 度
+- 错
+- 误
+- 类
+- 型
+- 分
+- 布
+- ；
+- 扩
+- 展
+- 临
+- 床
+- 实
+- 体
+- 到
+- 剂
+- 量
+- 、
+- 检
+- 验
+- 值
+- 、
+- 时
+- 间
+- 表
+- 达
+- 式
+- 与
+- 关
+- 系
+- 标
+- 注
+- ，
+- 评
+- 估
+- 跨
+- 语
+- 言
+- 迁
+- 移
+- 一
+- 致
+- 性
+- ；
+- 开
+- 发
+- 与
+- 历
+- 史
+- 文
+- 本
+- 校
+- 勘
+- 流
+- 程
+- 衔
+- 接
+- 的
+- 转
+- 写
+- 后
+- 处
+- 理
+- 工
+- 具
+- 链
+- ，
+- 并
+- 公
+- 开
+- 可
+- 复
+- 现
+- 的
+- 错
+- 误
+- 分
+- 析
+- 与
+- 标
+- 注
+- 指
+- 南
+- 。
 
 ## 六、工程落地启发
 
-- 文档解析产品应优先支持 HTML 等可编辑、可检查的结构化输出，并将渲染一致性与表格几何纳入回归测试。
-- 在医疗多语种抽取落地时，不要默认领域预训练必然提升严格 F1，应同时准备联合多语训练骨干作为对照。
-- 历史手写或复杂书写数字化项目应预留边界纠错与人工校勘环节，当前 VLM 在该场景尚不能直接替代人工。
-- 构建 GraphRAG 或知识图谱检索系统时可采用查询时接口归纳降低对图模式的耦合，但需为图构建质量变化保留精度余量。
-- 评测体系应同时报告客观指标与主观/人工评分，避免仅凭自动分数做模型选型。
+- 临
+- 床
+- 自
+- 由
+- 文
+- 本
+- 结
+- 构
+- 化
+- 优
+- 先
+- 选
+- 用
+- 多
+- 语
+- 言
+- 联
+- 合
+- 训
+- 练
+- 的
+- 编
+- 码
+- 器
+- （
+- 如
+- X
+- L
+- M
+- -
+- R
+- -
+- l
+- a
+- r
+- g
+- e
+- 多
+- 语
+- 微
+- 调
+- ）
+- ，
+- 其
+- 严
+- 格
+- F
+- 1
+- 可
+- 高
+- 于
+- 最
+- 强
+- 单
+- 语
+- 系
+- 统
+- 0
+- .
+- 1
+- 3
+- ；
+- 领
+- 域
+- 继
+- 续
+- 预
+- 训
+- 练
+- 可
+- 降
+- 低
+- 困
+- 惑
+- 度
+- 但
+- 不
+- 应
+- 单
+- 独
+- 作
+- 为
+- N
+- E
+- R
+- 性
+- 能
+- 提
+- 升
+- 依
+- 据
+- ，
+- 需
+- 以
+- 严
+- 格
+- s
+- p
+- a
+- n
+- F
+- 1
+- 和
+- 临
+- 床
+- 医
+- 生
+- 评
+- 分
+- 验
+- 收
+- ；
+- 部
+- 署
+- 时
+- 预
+- 留
+- 松
+- 弛
+- 匹
+- 配
+- 评
+- 估
+- ，
+- 疾
+- 病
+- /
+- 操
+- 作
+- /
+- 症
+- 状
+- 可
+- 恢
+- 复
+- 0
+- .
+- 1
+- 0
+- –
+- 0
+- .
+- 2
+- 3
+- F
+- 1
+- ，
+- 但
+- 药
+- 物
+- 实
+- 体
+- 边
+- 界
+- 问
+- 题
+- 严
+- 重
+- ，
+- 需
+- 专
+- 门
+- 后
+- 处
+- 理
+- ；
+- 古
+- 籍
+- 阿
+- 拉
+- 伯
+- 语
+- H
+- T
+- R
+- 项
+- 目
+- 应
+- 直
+- 接
+- 采
+- 用
+- 校
+- 勘
+- 学
+- 转
+- 写
+- 标
+- 注
+- 指
+- 南
+- ，
+- 并
+- 对
+- 跨
+- 风
+- 格
+- 、
+- 跨
+- 专
+- 著
+- 迁
+- 移
+- 做
+- 单
+- 独
+- 评
+- 测
+- ，
+- 不
+- 能
+- 假
+- 设
+- 通
+- 用
+- 视
+- 觉
+- 语
+- 言
+- 模
+- 型
+- 可
+- 直
+- 接
+- 迁
+- 移
+- ；
+- 标
+- 注
+- 扩
+- 展
+- 流
+- 程
+- 需
+- 记
+- 录
+- 翻
+- 译
+- 投
+- 影
+- 噪
+- 声
+- 并
+- 设
+- 置
+- 人
+- 工
+- 复
+- 核
+- 优
+- 先
+- 级
+- 。
 
 ## 七、优先关注论文
 
-- **AmbiHTMLBench: A Benchmark for HTML-based Visually Rich Document parsing**：首次系统提出以 HTML 作为文档解析输出表示并配套双协议评测，直接关系文档解析产品的输出格式与回归测试设计。
-- **ATHAAR: A Medieval Scientific Arabic Manuscript Dataset for Handwritten Text Recognition**：揭示现有视觉语言模型在连写合字与变音符号场景下的明显不足，是低资源历史手写 OCR 的关键验证基准。
-- **CardioLM: A multilingual suite of small language models for the cardiology domain**：量化了领域预训练收益有限而多语联合训练更优的结论，对医疗文档结构化选型有直接参考价值。
-- **ArcRAG: Agentic Compositional Retrieval over Knowledge Graphs**：提出跨图构建可移植性这一新评测维度，若扩展到文档结构化检索可降低系统对图模式的耦合成本。
+- **CardioLM: A multilingual suite of small language models for the cardiology domain**：提供可直接部署的7语种心脏病学NER模型与CardioCCC语料，其多语言联合训练优于单语的结论对临床NLP选型有直接参考价值，且边界错误分析明确了后续优化点。
+- **ATHAAR: A Medieval Scientific Arabic Manuscript Dataset for Handwritten Text Recognition**：首个科学阿拉伯语手稿HTR标注指南与数据集，跨文字、跨章节、跨专著迁移实验揭示了当前视觉语言模型在历史手写文档上的泛化短板，是古籍数字化方向的关键基准。
 
 ## 八、论文逐篇解析
 
-### 1. AmbiHTMLBench: A Benchmark for HTML-based Visually Rich Document parsing
-
-- arXiv: [2611.06449v1](https://arxiv.org/abs/2611.06449v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.06449v1)
-- 作者: Boyu Niu, Yingjie Xiong, Shurui Li, Linhan Pang, Yuntong Zhang, Han Wang, Hao Wu, Kai Zuo, Xu Tang, Xuanhe Zhou, Fan Wu
-- 发布时间: 2026-11-04T12:51:26Z
-- 分类: cs.AI
-- 相关性评分: 19
-- 主题标签: 文档解析、HTML重建、基准评测、视觉丰富文档、多模态大模型
-
-**中文摘要**
-
-> 该论文指出传统文档解析以Markdown为输出表示，虽适合线性文本但难以完整保留细粒度空间结构、表格几何、视觉层级与渲染语义，因而提出以HTML作为异构、版式敏感文档的可编辑、可检查、可复用输出表示，并构建AmbiHTMLBench基准。该基准包含1,115个多样化页面及结构化标注，采用两种评测协议：客观协议对齐真值与预测渲染块，度量表格保真度、页面级文本错误和二维布局一致性；互补的参考锚定协议通过LLM评判对齐人类偏好来衡量感知保真度。实验显示十个主流多模态系统中最佳客观得分0.8092，而主观获胜者与客观最优不一致，表明自动分解与人类感知保真度具有互补性；进一步微调小参数专家模型在文档到HTML重建任务上取得良好表现。
-
-**核心创新概述**
-
-> 将文档解析的输出表示从Markdown转向可执行HTML，并系统性构建配套基准与双协议评测体系，是该设定下的首个系统研究。
-
-**创新点拆解**
-
-- 提出以可执行HTML作为视觉丰富文档解析的输出表示，保留结构、组织与视觉外观
-- 构建AmbiHTMLBench基准，含1,115个多样化页面与结构化标注
-- 设计客观协议（表格保真度、页面级文本错误、二维布局一致性）与参考锚定的主观协议（LLM评判对齐人类偏好）双轨评测
-- 验证小参数专家模型经任务特定微调可在文档到HTML重建上取得良好表现
-
-**当前局限**
-
-> 客观指标与人类感知保真度排序不一致，说明现有自动度量尚不能完全替代主观评价；基准规模为千级页面，覆盖多样性有限；HTML输出本身的合法性与可渲染性校验细节未充分展开。
-
-**后续可改进方向**
-
-- 研究更贴近人类感知的客观保真度指标，缩小与主观评判的差距
-- 扩展基准到更多文档类型、语言与复杂表格/公式场景
-- 探索HTML输出中渲染语义与可编辑性的联合约束建模
-- 分析小模型专家化与通用大模型在结构重建上的能力边界与互补性
-
-**工程启发**
-
-> 为文档解析系统提供可编辑、可检查的HTML输出范式与配套评测工具，可直接用于版面还原、表格重建类产品的选型与回归测试。
-
-**为什么值得关注**
-
-> 该论文直接研究视觉丰富文档解析的输出表示与评测基准，是OCR与文档解析方向的核心参考。
-
-**原始摘要**
-
-Traditional document parsing systems use Markdown as their output representation, which is effective
-for linear text but does not fully preserve fine-grained spatial structure, table geometry, visual
-hierarchy, or rendering semantics. We show that HTML is advantageous for heterogeneous and layout-
-sensitive documents whose representations must remain editable, inspectable, and reusable, and
-introduce AmbiHTMLBench to systematically study this setting. In this benchmark, given a real-world
-document, a model must recover executable HTML that preserves its content, organization, and visual
-appearance. The benchmark contains 1,115 diverse pages with structured annotations and evaluates
-predictions in two different ways: The objective protocol aligns ground-truth and predicted rendered
-blocks and measures table fidelity, page-level text error, and a two-dimensional layout consistency;
-a complementary reference-anchored protocol measures perceived fidelity by aligning LLM judges with
-human preferences. Across ten primary multimodal systems, the best objective score is 0.8092, while
-the subjective winner is different, demonstrating that automatic decomposition and human-perceived
-fidelity capture complementary properties. We further fine-tune a small-parameter expert model and
-find that task-specific adaptation yields good performance on document-to-HTML reconstruction task.
-These results position AmbiHTMLBench as a diagnostic testbed for building smarter and more logical
-document parsing systems.
-
----
-
-### 2. CardioLM: A multilingual suite of small language models for the cardiology domain
+### 1. CardioLM: A multilingual suite of small language models for the cardiology domain
 
 - arXiv: [2611.07940v1](https://arxiv.org/abs/2611.07940v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2611.07940v1)
@@ -129,41 +624,43 @@ document parsing systems.
 - 发布时间: 2026-11-05T12:41:19Z
 - 分类: cs.CL, cs.AI
 - 相关性评分: 10
-- 主题标签: 临床NLP、多语种命名实体识别、领域预训练、心脏病学、医疗文档结构化
+- 主题标签: 临床NER、多语言、心脏病学、标注投影、领域预训练、小语言模型、病例报告
 
 **中文摘要**
 
-> 该文针对心血管领域临床自由文本多为本地语言、NLP资源集中于英语且缺乏心脏病学专用多语种基准的问题，提出CardioCCC语料与CardioLM模型套件。CardioCCC含508篇原以西班牙语发表的心脏病病例报告，经机器翻译、标注投影与临床医生审核扩展至捷克语、荷兰语、英语、意大利语、罗马尼亚语和瑞典语，标注覆盖疾病、症状、操作与药物。CardioLM包括在心脏病学与生物医学语料上继续预训练得到的各语言CardioBERTa编码器，以及在CardioCCC上微调的CardioNER命名实体识别模型。结果显示心脏病学特定预训练使伪困惑度最多降低八倍，但严格跨度级F1变化不超过0.04，收益集中于骨干缺乏生物医学覆盖的语言；联合训练的多语种XLM-RoBERTa-large在几乎所有语言与实体类型上取得最佳严格F1，最高超过最强单语系统0.13；残余错误多与边界检测有关，宽松匹配对疾病、操作、症状可恢复0.10–0.23 F1，对药物仅0.01–0.07；临床医生对CardioNER评分显著高于规则与词典基线。
+> 该文提出两个资源：CardioCCC（508篇西班牙语心脏病学病例报告，经机器翻译、标注投影与临床医生审核扩展到捷克语、荷兰语、英语、意大利语、罗马尼亚语和瑞典语，标注疾病、症状、操作和药物四类实体）和CardioLM（含基于心脏病学与生物医学语料继续预训练的语言特定编码器CardioBERTa，以及在CardioCCC上微调的NER模型CardioNER）。实验显示，领域继续预训练可将伪困惑度降低至多8倍，但严格span级F1变化不超过0.04，收益集中在缺乏生物医学覆盖的骨干语言上；联合训练的多语言XLM-RoBERTa-large在几乎所有语言和实体类型上取得最佳严格F1，最高超过最强单语系统0.13。残差错误多与边界检测有关，松弛匹配可为疾病、操作和症状恢复0.10–0.23 F1，而药物仅恢复0.01–0.07。临床医生对CardioNER的评分显著高于规则和词典基线。
 
 **核心创新概述**
 
-> 构建首个心脏病学专用、多语种且实体覆盖较广的基准与模型套件，并系统评估领域预训练与多语联合训练的实际收益。
+> 构建了心脏病学专用、多语言、实体覆盖较广的病例报告语料与配套小模型套件，并以机器翻译加标注投影和临床医生审核的方式扩展低资源语言标注；同时系统比较了领域继续预训练与多语言联合训练在临床NER上的实际收益。
 
 **创新点拆解**
 
-- 构建CardioCCC多语种心脏病学病例报告语料，采用机器翻译、标注投影与临床医生审核相结合的标注流程
-- 提出CardioBERTa语言特定编码器，在心脏病学与生物医学语料上继续预训练
-- 发布CardioNER命名实体识别模型集，覆盖疾病、症状、操作与药物四类实体
-- 系统对比单语与联合多语训练，并引入临床医生主观评分验证
+- 提出CardioCCC多语言心脏病学病例报告语料，覆盖7种语言和疾病、症状、操作、药物四类实体
+- 采用机器翻译、标注投影与临床医生审核相结合的低资源语言标注扩展流程
+- 构建CardioBERTa语言特定编码器，在心脏病学与生物医学语料上继续预训练
+- 发布CardioNER多语言NER模型套件，并系统评估领域预训练与多语言联合训练的相对贡献
+- 引入临床医生人工评分，与规则和词典基线进行可用性对比
 
 **当前局限**
 
-> 领域预训练对严格跨度F1提升有限，收益依赖骨干原有生物医学覆盖；药物实体的边界错误难以通过宽松匹配缓解；语料规模仅508篇且经机器翻译扩展，翻译质量与标注投影误差可能影响结论。
+> 领域继续预训练虽大幅降低伪困惑度，但对严格span级F1提升有限（不超过0.04），说明语言模型适配与实体识别性能之间并不直接对应；标注扩展依赖机器翻译与投影，可能引入翻译偏差；残差错误集中在实体边界检测，松弛匹配下药物类提升很小，表明药物实体识别仍较困难；语料规模相对有限（508篇源报告）。
 
 **后续可改进方向**
 
-- 针对实体边界检测设计专门解码或后处理策略，尤其改善药物实体
-- 扩大原语种人工标注规模，减少对机器翻译与标注投影的依赖
-- 探索跨语言迁移与领域预训练的联合优化，而非简单继续预训练
-- 引入结构化临床信息抽取与文档级解析任务以扩展评测维度
+- 针对实体边界问题设计边界感知的解码或跨度修正模块，重点改善药物类实体的边界与修饰语归属
+- 在标注投影流程中引入主动学习或人工复核优先级排序，降低机器翻译投影带来的标注噪声
+- 探索将多语言联合训练与语言特定继续预训练结合的两阶段策略，以兼顾低资源语言收益与高资源语言精度
+- 扩展实体类型与关系标注（如剂量、检验值、时间表达式），并评估跨语言迁移的一致性
+- 在更大规模心脏病学文本上验证领域预训练的收益边界，并报告翻译质量对NER性能的敏感性分析
 
 **工程启发**
 
-> 为医疗多语种信息抽取提供可直接复用的语料、编码器与NER模型，并给出领域预训练收益的量化参考，便于临床文档结构化落地。
+> 提供了可直接用于心脏病学临床文本处理的多语言NER模型与标注语料，适合作为临床自由文本结构化、病例报告实体抽取和跨语言临床NLP系统的基础组件；其多语言联合训练优于单语系统的结论对实际部署中的模型选型有参考价值。
 
 **为什么值得关注**
 
-> 该文涉及临床文档的文本抽取与多语种NER，与OCR后的文档理解与信息结构化环节相关。
+> 该工作面向临床文档的命名实体识别，涉及多语言语料构建、标注投影、领域预训练和边界错误分析，与OCR/文档解析后接的临床文本结构化环节直接相关，其边界检测发现对OCR输出噪声下的实体抽取亦有借鉴意义。
 
 **原始摘要**
 
@@ -190,7 +687,7 @@ deployment path for multi-country clinical information extraction.
 
 ---
 
-### 3. ATHAAR: A Medieval Scientific Arabic Manuscript Dataset for Handwritten Text Recognition
+### 2. ATHAAR: A Medieval Scientific Arabic Manuscript Dataset for Handwritten Text Recognition
 
 - arXiv: [2611.08091v1](https://arxiv.org/abs/2611.08091v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2611.08091v1)
@@ -198,40 +695,42 @@ deployment path for multi-country clinical information extraction.
 - 发布时间: 2026-11-05T14:36:16Z
 - 分类: cs.CV, cs.CL
 - 相关性评分: 7
-- 主题标签: 手写文本识别、历史手稿、低资源OCR、视觉语言模型、阿拉伯语
+- 主题标签: 手写文本识别、阿拉伯语手稿、历史文档数字化、视觉语言模型、数据集构建、标注指南、跨域迁移
 
 **中文摘要**
 
-> 该文指出中世纪阿拉伯语科学手稿因连写合字、变音符号多变且缺乏训练数据，仍是当前视觉语言模型手写文本识别（HTR）的开放难题。为此作者提出首个面向科学阿拉伯语手稿转写的标注指南，其思路受文本校勘学启发，随后据此人工标注构建ATHAAR数据集。与既有资源不同，ATHAAR在同一文本的不同抄本、书法风格与内容（含文本与数字）上均有变化。作者基于先进视觉语言模型设计实验，研究模型跨字体、跨章节与跨论著的迁移能力，结果凸显现有系统面对古代科学文本特殊性时的局限。
+> 针对中世纪阿拉伯语科学手稿因连写连字、变音符号多变且缺乏训练数据而难以被当前视觉语言模型识别的问题，该文提出首个面向科学阿拉伯语手稿转写的标注指南（借鉴校勘学），并据此人工标注构建数据集ATHAAR。该数据集在文本见证版本、书法风格和内容（文本与数字）上均有变化，区别于既有资源。作者基于先进视觉语言模型设计实验，研究模型跨文字、跨章节和跨专著的迁移，发现当前系统在古科学文本特性面前存在明显局限。
 
 **核心创新概述**
 
-> 首次为科学阿拉伯语手稿转写制定受文本校勘学启发的标注规范，并构建覆盖多抄本、多书法风格与数字内容的ATHAAR数据集。
+> 首次将校勘学思想引入科学阿拉伯语手稿转写标注指南，并构建同时覆盖同一文本不同见证、不同书法风格以及文本与数字内容的 medieval 科学阿拉伯语手稿数据集。
 
 **创新点拆解**
 
-- 提出面向科学阿拉伯语手稿转写的标注指南，借鉴文本校勘学方法
-- 构建ATHAAR数据集，覆盖同一文本的不同抄本、书法风格与内容类型（文本与数字）
-- 基于先进视觉语言模型设计跨字体、跨章节、跨论著的迁移实验
+- 提出面向科学阿拉伯语手稿转写的标注指南，借鉴文本校勘学方法规范转写
+- 构建ATHAAR数据集，同时覆盖同一文本的不同见证版本、多种书法风格以及文本和数字内容
+- 基于先进视觉语言模型开展跨文字、跨章节、跨专著的迁移实验，系统刻画古科学文本识别难点
+- 填补中世纪阿拉伯语科学手稿HTR训练数据缺失的空白
 
 **当前局限**
 
-> 数据集规模与语言范围有限（仅阿拉伯语）；转写标注规范虽经设计但一致性度量未充分报告；实验表明现有VLM在该场景下仍有明显不足，尚未给出有效改进方案。
+> 数据集规模未在摘要中给出，可能受人工标注成本限制；实验表明当前视觉语言模型在古科学文本上仍表现有限，跨文字、跨章节和跨专著迁移存在明显退化；摘要未报告具体识别指标与错误类型分布，难以判断瓶颈主要来自字形、变音符号还是版式。
 
 **后续可改进方向**
 
-- 针对连写合字与变音符号设计专门的视觉编码或语言先验约束
-- 扩展多语种历史科学手稿数据与跨手稿联合训练范式
-- 引入抄本间对齐与校勘信息作为弱监督信号
-- 建立标注一致性评估与可复现的转写评测协议
+- 扩大标注规模并公开细粒度错误分析，区分连字、变音符号、数字和版式因素对识别错误的影响
+- 针对阿拉伯语连写与变音符号设计专门的视觉编码或字符级对齐预训练目标
+- 探索校勘学标注指南与弱监督/半监督结合，利用未标注手稿扩充训练数据
+- 研究跨书法风格和跨专著的领域自适应方法，如风格归一化或手稿特定微调
+- 建立与历史文本编辑流程衔接的转写后处理与校勘辅助工具链
 
 **工程启发**
 
-> 为历史手写文档数字化提供标注规范与评测数据集，可作为古籍OCR/HTR系统在低资源、复杂书写场景下的验证基准。
+> 为阿拉伯语历史科学手稿的数字化与全文转写提供了标注规范和基准数据，可用于训练和评估古籍OCR/HTR系统；其跨风格、跨文本迁移实验为实际馆藏数字化项目中的模型泛化评估提供了参考框架。
 
 **为什么值得关注**
 
-> 该文直接研究手写文本识别与历史文档转写，属OCR核心方向。
+> 该文直接面向手写文本识别（HTR）与古文献数字化，涉及标注规范、数据集构建和视觉语言模型迁移评估，属于OCR/文档解析在历史手稿场景的核心问题，对多文字、变音符号和书法多样性的处理具有直接借鉴意义。
 
 **原始摘要**
 
@@ -246,71 +745,5 @@ and content to deal with texts but also numerals. Relying on state-of-the-art VL
 design a set of experiments to study models transfer across scripts, chapters, and treatises. Our
 findings highlight the limitations of current systems when faced with the specificities of ancient
 scientific texts.
-
----
-
-### 4. ArcRAG: Agentic Compositional Retrieval over Knowledge Graphs
-
-- arXiv: [2611.06481v1](https://arxiv.org/abs/2611.06481v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.06481v1)
-- 作者: Jyotin Goel, Abhinav Arun, Tejas Prakash Agarwal, Bhaskarjit Sarmah, Stefano Pasquali
-- 发布时间: 2026-11-04T13:20:51Z
-- 分类: cs.CL, cs.AI, cs.IR
-- 相关性评分: 3
-- 主题标签: GraphRAG、知识图谱检索、智能体、跨构建可移植性、多跳问答
-
-**中文摘要**
-
-> 该文研究图检索增强生成（GraphRAG）的跨构建可移植性问题，即检索流程在不使用构建特定模式、关系名或重新调参时，能否在知识图构建方式改变后仍然有效。作者提出ArcRAG，在推理时归纳查询局部图接口（问题所指实体可达的节点标签、关系描述与属性键），据此规划多跳遍历，并以Cypher执行与修复。作者将MuSiQue、HotpotQA、TriviaQA各构建为模式引导图（类型化节点、封闭关系集、来源溯源）与开放信息抽取图（无类型节点、自由文本关系）两种形态，检索器配置固定。实验与构建无关的Direct-Cypher智能体对比，在不同重试与轮次预算下消融各阶段，并与既有GraphRAG系统报告结果比较。结果表明检索无需与图构建协同设计：查询时接口归纳使构建无关的检索器在构建变化时保持有效，但构建方式仍影响绝对准确率。
-
-**核心创新概述**
-
-> 提出跨图构建的可移植性研究问题，并给出在推理时归纳查询局部接口的构建无关检索智能体ArcRAG。
-
-**创新点拆解**
-
-- 定义GraphRAG的跨构建可移植性评测设定，同一检索配置应用于两种图构建
-- 在推理时归纳查询局部图接口（节点标签、关系描述、属性键），不依赖构建特定模式
-- 以Cypher进行多跳遍历规划、执行与自动修复
-- 构建模式引导图与开放信息抽取图两类图族并做分阶段消融
-
-**当前局限**
-
-> 构建方式仍显著影响绝对准确率，说明检索器对图质量存在隐性依赖；依赖Cypher与图数据库执行，跨图引擎泛化未验证；评测集中于三个问答语料，领域覆盖有限。
-
-**后续可改进方向**
-
-- 研究图构建质量与检索策略的联合优化，而非仅追求构建无关性
-- 扩展接口归纳到更多图查询语言与图存储后端
-- 将跨构建可移植性评测扩展至多跳推理之外的结构化抽取任务
-- 分析重试与轮次预算对修复成功率与成本的影响并给出调度策略
-
-**工程启发**
-
-> 为知识图谱问答与检索系统提供构建无关的检索智能体设计，可降低图模式变更带来的系统重构成本。
-
-**为什么值得关注**
-
-> 该文涉及文档语料上的检索与结构化知识组织，与OCR后文档知识抽取和检索应用间接相关。
-
-**原始摘要**
-
-Graph-based retrieval-augmented generation (GraphRAG) answers questions by retrieving over a
-knowledge graph built from a corpus. Yet retrieval strategies are designed around the structure
-their own construction pipeline produces, and whether they survive a change of construction is
-rarely tested. We study this cross-construction portability: whether one retrieval procedure, with
-no construction-specific schema, relation names, or retuning, stays effective when the graph is
-built differently. We introduce ArcRAG, which induces a query-local graph interface at inference
-time (the node labels, relation descriptors, and property keys reachable from the entities a
-question names), plans multi-hop traversals against it, and executes and repairs them as Cypher. We
-build each of the MuSiQue, HotpotQA, and TriviaQA corpora as a schema-guided graph (typed nodes, a
-closed relation set, source provenance) and as an open-information-extraction graph (untyped nodes,
-free-text relations), with the retriever's configuration fixed across them. We compare against a
-construction-agnostic Direct-Cypher agent, ablate each stage across retry and pass budgets on both
-graph families, and compare with results reported for prior GraphRAG systems, most of which design
-retrieval together with their own graph construction. Across the two constructions, we find that
-retrieval need not be co-designed with the graph: query-time interface induction keeps a
-construction-agnostic retriever effective when the construction changes, although construction still
-shapes absolute accuracy.
 
 ---
