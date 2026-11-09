@@ -1,25 +1,26 @@
 {
   "meta": {
-    "report_date": "2026-11-08",
-    "generated_at_utc": "2026-11-08 07:17:00",
+    "report_date": "2026-11-09",
+    "generated_at_utc": "2026-11-09 07:54:57",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
     "count": 0
   },
   "synthesis": {
-    "executive_summary": "今日无新增论文情报，无法形成基于具体论文的结论。",
-    "trend_summary": "由于输入论文清单为空，今日无趋势判断；建议待有新增文献后再做归纳。",
+    "executive_summary": "今日无新增论文情报，无法形成基于具体论文的结论；建议维持既有技术跟踪节奏，并等待下一批论文更新后再输出针对性分析。",
+    "trend_summary": "由于论文清单为空，无法识别当日趋势变化；OCR/文档解析领域近期关注点仍集中在复杂版面理解、端到端多模态解析和低资源场景鲁棒性，但今日无新证据支撑。",
     "common_innovations": [],
     "future_directions": [
-      "在数据层面补充复杂版式（多栏、表格、公式、图表混排）文档的细粒度标注，以支撑版面分析与阅读顺序还原的联合建模。",
-      "针对扫描件低质量场景，探索超分辨率与文档矫正的端到端联合训练，减少预处理与识别之间的误差累积。",
-      "推进表格结构识别与单元格内容识别的统一建模，重点解决跨页表格和嵌套表格的结构还原。",
-      "构建面向文档解析的评测基准，覆盖阅读顺序、表格结构、公式识别与键值抽取等子任务的端到端评估。",
-      "探索轻量化文档解析模型在边缘设备上的部署方案，平衡精度与推理延迟。",
-      "研究多语言与混合语言文档的识别与版面理解，特别是中英混排与低资源语言的联合建模。"
+      "在复杂版面文档上构建端到端解析评测集，统一衡量文本识别、表格结构还原与阅读顺序预测的联合误差。",
+      "研究多模态大模型在低质量扫描件上的自适应预处理与解析联合优化方法，减少人工规则依赖。",
+      "面向长文档开发可增量更新的解析流水线，使新版面样式无需全量重训即可适配。",
+      "探索文档解析结果的置信度校准与拒识机制，为下游人工复核提供可靠触发信号。"
     ],
-    "engineering_takeaways": [],
+    "engineering_takeaways": [
+      "今日无新增论文，建议维持现有OCR/文档解析流水线版本，暂不引入未经验证的新模块。",
+      "可优先检查现有系统在低质量扫描件和复杂表格上的失败案例，为下一轮论文筛选设定明确评估维度。"
+    ],
     "watchlist": []
   },
   "papers": []
