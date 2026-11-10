@@ -1,27 +1,83 @@
 {
   "meta": {
-    "report_date": "2026-11-09",
-    "generated_at_utc": "2026-11-09 07:54:57",
+    "report_date": "2026-11-10",
+    "generated_at_utc": "2026-11-10 08:22:58",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 0
+    "count": 1
   },
   "synthesis": {
-    "executive_summary": "今日无新增论文情报，无法形成基于具体论文的结论；建议维持既有技术跟踪节奏，并等待下一批论文更新后再输出针对性分析。",
-    "trend_summary": "由于论文清单为空，无法识别当日趋势变化；OCR/文档解析领域近期关注点仍集中在复杂版面理解、端到端多模态解析和低资源场景鲁棒性，但今日无新证据支撑。",
-    "common_innovations": [],
+    "executive_summary": "今日日报涵盖一篇关于奥斯曼诗歌自动韵律扫描的论文，其核心贡献在于将韵律识别与音节对齐统一为隐马尔可夫模型（HMM）的格解码问题，并利用印刷韵律信息作为弱监督通过EM训练，无需逐音节扫描标签。该方法在500行测试集上达到77.6%的完全正确扫描率，显著优于规则扫描器（26.8%）、同等监督下的神经标注器（55.0%）以及Claude Opus 5.5少样本方法（63.6%）。研究还构建了按诗人划分的52,000行语料和基于真实网络与OCR偏差率的鲁棒性基准，开源了工具与代码。该工作为低资源、需结构化对齐的文档解析任务提供了弱监督与格解码结合的实用范式，尤其对OCR后处理中的序列对齐与鲁棒性评估具有参考价值。",
+    "trend_summary": "当前OCR与文档解析研究的一个趋势是：针对低资源语言或特殊文体，利用弱监督信号（如印刷标注的元信息）和结构化解码（如HMM格解码）来降低对细粒度标注的依赖，同时重视真实OCR误差下的鲁棒性评估。该论文体现了从通用OCR向领域自适应、从强监督向弱监督/半监督、从独立任务向联合对齐解码的转变。",
+    "common_innovations": [
+      "将韵律识别与音节权重对齐统一为HMM在全部候选路径构成的格上的单次解码问题。",
+      "以印刷标注的韵律信息作为弱监督，通过EM算法从无扫描标签数据中训练模型。",
+      "构建了按诗人划分的52,000行语料、500行扫描标注测试集，以及基于真实网络与OCR副本偏差率合成的鲁棒性基准。",
+      "明确针对缺少特殊变音符号的现代土耳其语拼写输入，定义韵律识别与扫描对齐两项任务并标注失律与自由处理。"
+    ],
     "future_directions": [
-      "在复杂版面文档上构建端到端解析评测集，统一衡量文本识别、表格结构还原与阅读顺序预测的联合误差。",
-      "研究多模态大模型在低质量扫描件上的自适应预处理与解析联合优化方法，减少人工规则依赖。",
-      "面向长文档开发可增量更新的解析流水线，使新版面样式无需全量重训即可适配。",
-      "探索文档解析结果的置信度校准与拒识机制，为下游人工复核提供可靠触发信号。"
+      "在更多诗人、时期与手抄/印刷来源上扩展扫描标注，系统评估跨诗人与跨时期的泛化能力。",
+      "将EM弱监督与少量扫描标签结合，或引入半监督/自训练方法，以提升对失律与自由处理的细粒度识别精度。",
+      "将鲁棒性基准从合成偏差扩展到真实OCR输出，分析字符级与变音符号级错误对格解码路径的具体影响。",
+      "探索HMM与神经序列模型（如CTC、Transformer）在格解码框架下的融合，比较不同监督强度下的性能与标注需求。",
+      "将弱监督格解码范式推广到其他具有结构化对齐需求的文档解析任务，如表格结构识别、公式布局分析或古籍版面还原。"
     ],
     "engineering_takeaways": [
-      "今日无新增论文，建议维持现有OCR/文档解析流水线版本，暂不引入未经验证的新模块。",
-      "可优先检查现有系统在低质量扫描件和复杂表格上的失败案例，为下一轮论文筛选设定明确评估维度。"
+      "在OCR后处理中，可利用弱监督信号（如版面元信息、字典约束）结合结构化解码（如HMM、CRF）来提升序列对齐任务的鲁棒性，减少对逐token标注的依赖。",
+      "构建鲁棒性基准时，应基于真实OCR错误分布（字符级、变音符号级）合成测试数据，而非仅使用随机噪声，以更准确评估模型在实际场景中的表现。",
+      "对于低资源语言或特殊文体的文档解析，可优先考虑开源、可复现的轻量级模型（如HMM）作为基线，再逐步引入神经模型，以平衡标注成本与性能。",
+      "在工程落地中，将任务定义为联合解码问题（如韵律识别+对齐）往往比分离式流水线更高效，可减少错误传播并简化部署。"
     ],
-    "watchlist": []
+    "watchlist": [
+      {
+        "title": "A Lattice-Based HMM Approach to Aruz Scansion of Ottoman Poetry",
+        "watch_reason": "该工作展示了弱监督HMM格解码在低资源结构化对齐任务上的有效性，其开源工具与鲁棒性基准可直接用于OCR后处理校验，且方法可迁移至其他文档解析任务，值得关注后续扩展与真实OCR场景下的验证。"
+      }
+    ]
   },
-  "papers": []
+  "papers": [
+    {
+      "title": "A Lattice-Based HMM Approach to Aruz Scansion of Ottoman Poetry",
+      "summary": "Ottoman Divan poetry is composed in aruz, a quantitative meter based on the weights of syllables. The meter is sensitive to specific characters recorded in the original writing in the Arabic script. This work is concerned with automatic meter finding and scansion alignment for Ottoman Divan poetry, especially on modern Turkish spelling without the special diacritics that scholarly transliterations of Ottoman preserve. We define two tasks on this input, first identifying the meter used in the poem, and second aligning the meter's weights with the syllabification of the poem, identifying the flaws and freedoms the poet has taken along the way. We build a corpus of 52,000 lines split by poet, with scansion annotations for 500 test lines, and a robustness benchmark generated at the deviation rates measured on real web and OCR copies. Our model is a hidden Markov model over the positions of each meter, decoded over a lattice of every candidate path, and trained by EM from the printed meter, without scansion labels. On a held-out set it scans 77.6% of the test lines fully correctly, against 26.8% for the available rule-based scanner, 55.0% for a neural tagger trained with the same supervision and 63.6% for Claude Opus 5.5 few-shot. The code is open-sourced and the tool is released on the web.",
+      "link": "https://arxiv.org/abs/2611.12691v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12691v1",
+      "authors": [
+        "Mehmet Emre Tiryaki"
+      ],
+      "published": "2026-11-09T16:51:42Z",
+      "updated": "2026-11-09T16:51:42Z",
+      "categories": [
+        "cs.CL"
+      ],
+      "arxiv_id": "2611.12691v1",
+      "score": 6,
+      "topic_tags": [
+        "OCR鲁棒性",
+        "隐马尔可夫模型",
+        "弱监督学习",
+        "序列对齐",
+        "韵律扫描",
+        "低资源语言",
+        "数字人文"
+      ],
+      "zh_summary": "针对奥斯曼迪万诗歌的韵律（aruz）自动识别与扫描对齐问题，该文定义了两个任务：识别诗作所用韵律，并将韵律的音节权重与诗句切分对齐，同时标注诗人的失律与自由处理。研究聚焦于缺少奥斯曼转写特殊变音符号的现代土耳其语拼写输入。作者构建了按诗人划分的52,000行语料，含500行测试集的扫描标注，并按真实网络与OCR副本中测得的偏差率生成鲁棒性基准。模型为对每种韵律各位置建模的隐马尔可夫模型，在全部候选路径构成的格上解码，以印刷标注的韵律信息通过EM训练，无需扫描标签。在留出集上，77.6%的测试行可完全正确扫描，对比规则扫描器的26.8%、同等监督下神经标注器的55.0%以及Claude Opus 5.5少样本的63.6%。代码开源，工具已上线。",
+      "novelty": "将韵律扫描建模为隐马尔可夫模型在各韵律位置上的格解码问题，并以印刷韵律信息为弱监督、通过EM训练，无需逐音节扫描标签；同时构建了按诗人划分的语料、扫描标注测试集与基于真实网络/OCR偏差率的鲁棒性基准。",
+      "innovation_points": [
+        "以HMM对各韵律位置建模，在全部候选路径构成的格上解码，将韵律识别与音节权重对齐统一为一条解码路径",
+        "以印刷标注的韵律作为弱监督，通过EM从无扫描标签数据训练，规避逐音节扫描标注成本",
+        "构建52,000行按诗人划分的语料、500行扫描标注测试集，以及按真实网络与OCR副本偏差率生成的鲁棒性基准",
+        "明确针对缺少特殊变音符号的现代土耳其语拼写输入，定义韵律识别与扫描对齐两项任务并标注失律与自由处理"
+      ],
+      "limitations": "仅在单一语言与诗体（奥斯曼迪万诗歌）上验证；评测规模为500行测试集，标注覆盖有限；依赖印刷韵律作为训练监督，若印刷信息缺失或错误可能影响训练；鲁棒性基准按测得偏差率合成，未必覆盖真实OCR错误的全部形态。",
+      "improvement_directions": [
+        "在更多诗人、时期与手抄/印刷来源上扩展扫描标注，检验跨诗人与跨时期的泛化",
+        "将EM弱监督与少量扫描标签结合，或引入半监督/自训练以提升对失律与自由处理的细粒度识别",
+        "把鲁棒性基准从合成偏差扩展到真实OCR输出，分析字符级与变音符号级错误对格解码的具体影响",
+        "探索HMM与神经序列模型在格解码框架下的结合，比较不同监督强度下的性能与标注需求"
+      ],
+      "engineering_value": "提供了开源工具与可复现基准，可直接用于奥斯曼诗歌的韵律检索、数字化整理与OCR后处理校验；其弱监督格解码思路对低资源、需结构化对齐的文档解析任务有借鉴意义。",
+      "why_relevant": "论文涉及OCR副本的鲁棒性评测与文本结构化对齐，与OCR/文档解析在噪声文本上的鲁棒性评估及结构化标注任务相关，可作为OCR下游结构化解析的参考案例。"
+    }
+  ]
 }
