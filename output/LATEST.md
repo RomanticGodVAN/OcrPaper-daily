@@ -1,83 +1,55 @@
-# OCR / 文档解析研究日报（2026-11-11）
+# OCR / 文档解析研究日报（2026-11-12）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-11-11 07:43:54`
-- 大模型综合分析：`关闭`
-- 备注：DeepSeek 处理失败：Expecting ':' delimiter: line 1 column 828 (char 827)
+- 生成时间（UTC）：`2026-11-12 08:17:03`
+- 大模型综合分析：`开启`
+
+## 一、今日执行摘要
+
+> 今日日报聚焦于OCR后处理中的词级对齐问题，特别是阅读顺序置换下的对齐鲁棒性。论文重新审视了2019年提出的分区问题，提出了一套评测协议，并比较了多种对齐方法。结果表明，局部跟踪在大位移后易失效，基于锚点的方法在唯一锚点稀缺时崩溃，而多区域对齐器虽能缓解但计算成本二次增长。该工作为OCR纠错流水线提供了可复现的评测基准，但需进一步解决锚点稀缺和缩放成本问题。
+
+## 二、今日趋势判断
+
+OCR后处理中的词级对齐正从简单的单调对齐转向关注阅读顺序置换等复杂版面错误，评测协议趋向于构造词级真值并引入置换扰动，方法上探索位置感知、重锚定和多区域锚点混合策略，但鲁棒性与效率仍是瓶颈。
 
 ## 三、今日论文概览
 
-1. **Post-OCR Correction of Mixed-Script Uzbek Text: Byte-Level ByT5 with an Empirical Homoglyph Noise Matrix** | 标签：OCR后处理、同形异码、多文种混排、字节级模型、噪声建模、受限解码
-2. **Word-Level Alignment of OCR and Ground Truth under Zoning and Reading-Order Errors** | 标签：词级对齐、阅读顺序、区域切分错误、OCR后处理、评测协议、序列对齐
-3. **A Lattice-Based HMM Approach to Aruz Scansion of Ottoman Poetry** | 标签：格律扫描、隐马尔可夫模型、弱监督、格网解码、历史文献、OCR鲁棒性
-4. **Repository-Context-Guided Image Understanding for Agentic Software Development** | 标签：多模态编码智能体、图像退化、OCR错误传播、源文件定位、仓库上下文、基准构建
+1. **Word-Level Alignment of OCR and Ground Truth under Zoning and Reading-Order Errors** | 标签：OCR后处理、词级对齐、阅读顺序错误、分区问题、文档解析、评测协议
+
+## 四、今天 OCR / 文档解析论文里的主要创新点
+
+- 提出阅读顺序置换下的词级对齐评测协议，强调构造时词级真值与正确匹配F1等指标。
+- 设计重锚定扩展以应对大位移后的重新定位。
+- 构建多区域对齐器，结合唯一词与唯一n-gram锚点及块到窗口分配策略。
+- 采用多源评测设置，涵盖合成字符噪声、历史报纸置换和几何派生真值。
+
+## 五、后续 OCR 领域值得推进的改进方向
+
+- 设计混合锚点与局部跟踪的策略，在唯一锚点稀缺时利用词形、位置先验和语言模型约束补足锚点。
+- 将多区域对齐的二次缩放成本优化为近线性或分块增量分配，以支持长文档和高置换场景。
+- 开发弱监督或自动构造词级真值的方法，减少对近似真值和文章顺序约定的依赖。
+- 针对列交织、段落交换等典型分区错误建立标准基准和细粒度错误分类指标。
+- 探索基于图匹配或全局优化的对齐方法，以处理非单调阅读顺序和复杂版面结构。
+- 研究跨语言和跨文档类型的对齐泛化能力，特别是在历史报纸和多栏文档中的适应性。
+
+## 六、工程落地启发
+
+- 在OCR后处理流水线中，词级对齐模块需考虑阅读顺序置换的鲁棒性，避免单调对齐假设。
+- 基于锚点的方法在唯一锚点稀少时不可靠，应结合局部跟踪和语言模型约束作为后备。
+- 多区域对齐器当前计算成本较高，工程部署需评估文档长度和置换频率，必要时采用分块策略。
+- 评测词级对齐时应使用构造时词级真值和置换扰动协议，而非仅依赖近似真值。
+- 历史报纸等复杂版面文档的OCR纠错应优先处理阅读顺序错误，再考虑字符级纠错。
+
+## 七、优先关注论文
+
+- **Word-Level Alignment of OCR and Ground Truth under Zoning and Reading-Order Errors**：该论文提供了词级对齐在阅读顺序错误下的评测协议和多方法对比，对OCR后处理纠错流水线的鲁棒性设计有直接参考价值，但需关注其锚点稀缺和缩放成本问题。
 
 ## 八、论文逐篇解析
 
-### 1. Post-OCR Correction of Mixed-Script Uzbek Text: Byte-Level ByT5 with an Empirical Homoglyph Noise Matrix
-
-- arXiv: [2611.13609v1](https://arxiv.org/abs/2611.13609v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.13609v1)
-- 作者: Mannon Ochilov, Oybek Narzullayev, Bahodir Zaripov
-- 发布时间: 2026-11-10T05:35:53Z
-- 分类: cs.CL, cs.CV, cs.LG
-- 相关性评分: 10
-- 主题标签: OCR后处理、同形异码、多文种混排、字节级模型、噪声建模、受限解码
-
-**中文摘要**
-
-> 针对乌兹别克语官方与技术文档中拉丁字母与西里尔字母混排导致的同形异码字错误（混排页密度约为单文种文本的五倍），在数据不可离线的本地硬件条件下，提出字节级ByT5纠错模型，配合权重由359个人工标注错误事件估计的同形噪声生成器，以及Levenshtein约束的保守解码规则。在5,204行对的金标准集上，字符错误率由0.0578降至0.0369，同形字恢复率91.3%，仅引入84个新错误。
-
-**核心创新概述**
-
-> 将同形异码噪声的实测分布显式建模为可采样噪声矩阵，并与字节级序列到序列纠错及受限解码结合，形成面向混排文种的OCR后处理流水线；全部流程在本地环境完成，面向数据不可外流场景。
-
-**创新点拆解**
-
-- 以359个人工分类的错误事件估计同形异码噪声矩阵的采样权重，使合成噪声分布贴近真实错误
-- 采用字节级ByT5建模，规避混排文种下字符表膨胀与未登录字符问题
-- 引入Levenshtein距离上界的保守解码规则，以约束纠错改动幅度、抑制过纠正
-- 任务设定明确针对同一页面甚至同一句子内西里尔与拉丁混排的OCR后处理
-
-**当前局限**
-
-> 噪声矩阵规模有限（359个标注事件），对低频同形组合的覆盖可能不足；仅在工程地质与ICT报告的私有语料与5,204行对金标准集上验证，跨领域与跨文种泛化性未知；保守解码以字符错误率为主要优化目标，未报告词级或下游任务指标；未与通用拼写纠错或多语言预训练模型做充分对比。
-
-**后续可改进方向**
-
-- 扩大同形噪声标注规模并引入跨文种（如塞尔维亚语、阿塞拜疆语）迁移验证，检验噪声矩阵的可移植性
-- 将字符级同形先验与词级语言模型或词典约束联合解码，降低保守解码带来的漏纠
-- 报告词级准确率、命名实体与数值字段等下游指标，评估纠错对结构化抽取的实际收益
-- 探索在图像侧引入字形相似度约束，使噪声建模与视觉证据联动而非仅依赖文本侧统计
-
-**工程启发**
-
-> 系统全程可在本地硬件运行，契合文档不可外流的机构需求；字符错误率相对下降约36%且新增错误极少，可直接嵌入现有OCR流水线作为后处理模块，对混排文种文档的数字化归档与检索质量有明显提升。
-
-**为什么值得关注**
-
-> 该工作直接处理OCR后处理中的文种混排与同形字错误，属于文档解析中错误纠正环节的典型问题，其噪声建模与受限解码思路可迁移至其他多文种文档场景。
-
-**原始摘要**
-
-In Uzbek official and technical documents, a large share of OCR errors is caused not by poor image
-quality but by characters that are visually identical across the two alphabets in use. Because the
-script transition is still under way, Cyrillic and Latin appear on the same page and often within a
-single sentence, and in our measurements the density of homoglyph errors on such pages is close to
-five times higher than in single-script text. We study this problem in a setting where the corpus of
-engineering-geological and ICT infrastructure reports may not leave the organisation, so every stage
-was executed on local hardware. The proposed system combines a byte-level ByT5 model with a noise
-generator whose sampling weights are estimated from 359 manually classified error events, together
-with a Levenshtein-bounded conservative decoding rule. On a Gold set of 5,204 line pairs it lowers
-the character error rate from 0.0578 to 0.0369, restores 91.3% of the homoglyphs and introduces only
-84 new errors.
-
----
-
-### 2. Word-Level Alignment of OCR and Ground Truth under Zoning and Reading-Order Errors
+### 1. Word-Level Alignment of OCR and Ground Truth under Zoning and Reading-Order Errors
 
 - arXiv: [2611.13752v1](https://arxiv.org/abs/2611.13752v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2611.13752v1)
@@ -85,41 +57,41 @@ the character error rate from 0.0578 to 0.0369, restores 91.3% of the homoglyphs
 - 发布时间: 2026-11-10T08:52:20Z
 - 分类: cs.CL, cs.CV
 - 相关性评分: 9
-- 主题标签: 词级对齐、阅读顺序、区域切分错误、OCR后处理、评测协议、序列对齐
+- 主题标签: OCR后处理、词级对齐、阅读顺序错误、分区问题、文档解析、评测协议
 
 **中文摘要**
 
-> 针对OCR后处理所需的OCR文本与真值词级对齐问题，重新审视此前提出的Zoning Problem，即区域切分错误导致阅读顺序置换时单调对齐器失位的问题。作者构造可施加阅读顺序置换的评测协议，比较2019年位置感知对齐器、其重锚定扩展、RETAS-lite基线、结合唯一词与唯一n-gram锚点及块到窗口分配的多区域对齐器、genalog的RETAS与原版Java RETAS，并在合成字符噪声加块移动、段落交换、列交错、历史报纸阅读顺序置换、Tesseract几何真值等设定下评估正确匹配F1、级联长度与恢复能力。
+> 该论文重新审视2019年提出的“分区问题”（Zoning Problem）：OCR后处理需要将OCR文本与真值逐词对齐，但数据集通常缺乏该映射，且当分区错误导致阅读顺序置换时，单调对齐器容易丢失位置。作者提出一套在阅读顺序置换下测试正确性的协议，通过构造时词级真值并施加OCR端阅读顺序置换，评估正确匹配F1、级联长度与恢复能力。实验比较了2019位置感知对齐器、其重锚定扩展、RETAS-lite基线、结合唯一词与唯一n-gram锚点及块到窗口分配的多区域对齐器、genalog的RETAS与原始Java RETAS。数据涵盖合成字符噪声（块移动、段落交换、列交织）、历史报纸阅读顺序置换、Tesseract OCR的几何派生真值以及小规模词框集。结果表明：局部跟踪在大位移后易失效，唯一锚点稀缺时基于锚点的方法会崩溃；在合成模板页上2019方法F1最高；历史报纸与几何派生评估受近似真值与文章顺序约定限制；首个多区域版本具有二次缩放成本。
 
 **核心创新概述**
 
-> 将阅读顺序置换显式纳入词级对齐的评测协议，系统比较局部跟踪、重锚定与多区域锚点三类方法在位移与锚点稀缺条件下的失效模式。
+> 提出一套针对分区/阅读顺序置换场景的词级对齐评测协议，并系统比较位置感知、重锚定、RETAS风格及多区域锚点对齐方法在该协议下的表现。
 
 **创新点拆解**
 
-- 设计与构造时词级真值配套的阅读顺序置换评测协议，量化对齐器在大位移后的失位与恢复行为
-- 提出多区域对齐器，组合唯一词与唯一n-gram锚点并配合块到窗口分配处理区域置换
-- 引入重锚定机制扩展原位置感知对齐器，并与RETAS系列实现做统一对比
-- 使用几何推导真值与词框小样本集，补充历史报纸等真实阅读顺序场景的评估
+- 定义并实现阅读顺序置换下的词级对齐评测协议，强调构造时词级真值与正确匹配F1、级联长度、恢复等指标
+- 提出2019位置感知对齐器的重锚定扩展，用于大位移后重新定位
+- 设计多区域对齐器，结合唯一词与唯一n-gram锚点及块到窗口分配策略
+- 构建多源评测设置：合成字符噪声含块移动/段落交换/列交织、历史报纸阅读顺序置换、几何派生真值与小词框集
 
 **当前局限**
 
-> 历史报纸与几何真值评估受近似真值与文章顺序约定所限；多区域对齐器首版具有二次方扩展成本；局部跟踪在大幅阅读顺序变化下仍脆弱，锚点稀缺时基于锚点的方法同样失效；评估以合成噪声与传统OCR为主，未覆盖现代文档解析模型的输出分布。
+> ['局部跟踪在大阅读顺序变化下仍脆弱', '基于锚点的方法在唯一锚点稀缺时失效', '历史报纸与几何派生评估依赖近似真值及文章顺序约定，存在评估偏差', '首个多区域版本具有二次缩放成本，难以扩展']
 
 **后续可改进方向**
 
-- 将多区域对齐的二次方成本降至近线性，例如通过候选窗口剪枝或分块索引
-- 设计锚点稀缺时的回退策略，如利用版面几何与语言模型打分替代唯一锚点
-- 构建含真实区域切分错误与阅读顺序错误的大规模词级对齐基准，减少对近似真值的依赖
-- 将对齐方法扩展至现代文档解析流水线的输出，包括段落级重排与表格结构还原结果
+- 设计在唯一锚点稀缺时仍可鲁棒的混合锚点/局部跟踪策略，例如利用词形、位置先验与语言模型约束补足锚点
+- 将多区域对齐的二次缩放成本优化为近线性或分块增量分配，以支持长文档与高置换场景
+- 引入更可靠的弱监督或自动构造词级真值方法，降低对近似真值与文章顺序约定的依赖
+- 针对列交织、段落交换等典型分区错误建立标准基准与更细粒度错误分类指标
 
 **工程启发**
 
-> 为OCR后处理中的数据构造与对齐质量评估提供可复现协议与多种实现对比，可直接用于训练数据自动标注与错误分析工具链，帮助定位区域切分与阅读顺序错误引发的下游对齐失败。
+> 为OCR后处理中的词级对齐与阅读顺序纠错提供可复现的评测协议与多方法对比基线，对历史报纸数字化、版面复杂文档的OCR纠错流水线有直接参考价值，但需注意锚点稀缺与计算成本问题。
 
 **为什么值得关注**
 
-> 词级对齐是OCR纠错、评测与训练数据构建的基础环节，阅读顺序与区域切分错误是文档解析中的常见失败源，该工作的方法比较与失效分析对构建稳健的后处理流程具有直接参考价值。
+> 该论文直接研究OCR文本与真值的词级对齐及阅读顺序置换错误，属于OCR后处理与文档解析中的关键对齐问题，与OCR/文档解析学术情报主题高度相关。
 
 **原始摘要**
 
@@ -141,135 +113,5 @@ has a quadratic scaling cost. Local tracking remains fragile under large reading
 tested anchor-based methods handle many of those cases but fail when unique anchors are scarce.
 Approximate gold, the article-order convention, missing residual annotation, and the lack of modern
 multi-column word-level ground truth remain limitations.
-
----
-
-### 3. A Lattice-Based HMM Approach to Aruz Scansion of Ottoman Poetry
-
-- arXiv: [2611.12691v1](https://arxiv.org/abs/2611.12691v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.12691v1)
-- 作者: Mehmet Emre Tiryaki
-- 发布时间: 2026-11-09T16:51:42Z
-- 分类: cs.CL
-- 相关性评分: 6
-- 主题标签: 格律扫描、隐马尔可夫模型、弱监督、格网解码、历史文献、OCR鲁棒性
-
-**中文摘要**
-
-> 面向奥斯曼迪万诗歌的aruz（基于音节轻重的定量格律）自动识别与格律对齐，输入为缺失特殊变音符号的现代土耳其语拼写。作者定义格律识别与格律—音节切分对齐两个任务，构建按诗人划分的52,000行语料，为500行测试集提供格律标注，并按真实网络与OCR副本测得的偏差率生成鲁棒性基准。模型为定义在每种格律位置上的隐马尔可夫模型，在全部候选路径构成的格网上解码，仅用印刷格律名以EM训练，无需格律标注。留出集上77.6%的测试行完全正确，规则扫描器为26.8%，同等监督的神经序列标注器为55.0%，Claude Opus 5.5少样本为63.6%。
-
-**核心创新概述**
-
-> 将格律扫描建模为格网上的HMM解码问题，仅以印刷格律名作弱监督，通过EM训练，在缺失变音符号的现代拼写输入上显著优于规则方法与神经基线。
-
-**创新点拆解**
-
-- 在候选路径格网上定义HMM解码，把格律识别与音节权重对齐统一为序列推断任务
-- 仅使用每首诗的印刷格律名作为弱监督，通过EM估计模型参数，避免逐音节标注
-- 构建按诗人划分的5.2万行语料与500行标注测试集，并按实测偏差率生成面向网络与OCR噪声的鲁棒性基准
-- 显式建模诗人沿格律的瑕疵与自由度，同时输出格律对齐与偏差位置
-
-**当前局限**
-
-> 聚焦奥斯曼迪万诗歌这一特定文种与格律体系，方法向其他定量格律传统的迁移性未验证；鲁棒性基准按实测偏差率合成，与真实OCR错误分布仍有差距；77.6%的整行完全正确率意味着约两成行仍存在扫描错误；未报告对齐位置的细粒度错误分析。
-
-**后续可改进方向**
-
-- 将HMM与字符级或子词级神经声学式模型结合，改进变音符号缺失条件下的音节权重推断
-- 在真实OCR输出而非合成偏差上评估并迭代噪声模型，检验对历史印刷体识别错误的稳健性
-- 扩展至其他定量格律传统（如波斯、阿拉伯诗歌），检验格网HMM框架的通用性
-- 引入格律约束辅助历史OCR后处理，例如以格律合法性作为纠错候选的过滤信号
-
-**工程启发**
-
-> 提供开源工具与网页服务，可作为奥斯曼诗歌数字化项目的格律校验与标注辅助组件；其以格律合法性约束文本的思路也可为历史文献OCR的纠错与验证提供额外信号。
-
-**为什么值得关注**
-
-> 论文涉及OCR副本噪声下的鲁棒性评估，并将结构化格律约束用于文本验证，与文档解析中的历史文献识别及后处理校验相关，但其核心任务为格律扫描而非OCR本身。
-
-**原始摘要**
-
-Ottoman Divan poetry is composed in aruz, a quantitative meter based on the weights of syllables.
-The meter is sensitive to specific characters recorded in the original writing in the Arabic script.
-This work is concerned with automatic meter finding and scansion alignment for Ottoman Divan poetry,
-especially on modern Turkish spelling without the special diacritics that scholarly transliterations
-of Ottoman preserve. We define two tasks on this input, first identifying the meter used in the
-poem, and second aligning the meter's weights with the syllabification of the poem, identifying the
-flaws and freedoms the poet has taken along the way. We build a corpus of 52,000 lines split by
-poet, with scansion annotations for 500 test lines, and a robustness benchmark generated at the
-deviation rates measured on real web and OCR copies. Our model is a hidden Markov model over the
-positions of each meter, decoded over a lattice of every candidate path, and trained by EM from the
-printed meter, without scansion labels. On a held-out set it scans 77.6% of the test lines fully
-correctly, against 26.8% for the available rule-based scanner, 55.0% for a neural tagger trained
-with the same supervision and 63.6% for Claude Opus 5.5 few-shot. The code is open-sourced and the
-tool is released on the web.
-
----
-
-### 4. Repository-Context-Guided Image Understanding for Agentic Software Development
-
-- arXiv: [2611.13026v1](https://arxiv.org/abs/2611.13026v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.13026v1)
-- 作者: Fumiki Yohena, Toshiaki Sota, Shota Suzuki, Tomoko Okamoto, Michiaki Tatsubori
-- 发布时间: 2026-11-09T08:33:52Z
-- 分类: cs.SE, cs.AI, cs.CL
-- 相关性评分: 6
-- 主题标签: 多模态编码智能体、图像退化、OCR错误传播、源文件定位、仓库上下文、基准构建
-
-**中文摘要**
-
-> 针对编码智能体在缺陷报告中接收UI截图时因低分辨率、压缩失真或小字号渲染导致图像质量下降、难以定位相关UI元素与源文件的问题，提出以仓库渲染的参考图像增强编码智能体：从待修改的同一代码库自动生成清晰截图，保留当前可能有缺陷的实现状态而无需已知无缺陷版本。在基于SWE-bench Multimodal构造的受控基准上注入视觉UI缺陷，变化截图退化程度与参考图像提供情况，测量金标源文件定位命中率。结果显示参考图像在图像退化条件下显著提升文件定位，在四倍下采样并JPEG压缩时提升尤为明显。
-
-**核心创新概述**
-
-> 用仓库自动渲染的参考截图作为视觉证据补充，替代或弥补退化查询截图与OCR识别文本，使编码智能体在图像质量恶化时仍能完成UI元素与源文件定位。
-
-**创新点拆解**
-
-- 提出由仓库上下文自动渲染参考图像的增强范式，无需人工标注或已知无缺陷版本即可获得清晰视觉证据
-- 构造基于SWE-bench Multimodal的受控基准，通过注入视觉UI缺陷并系统变化图像退化程度来评估定位能力
-- 分析OCR辅助路径在退化输入下的错误传播问题，并给出以参考图像规避该传播的替代方案
-- 在四倍下采样与JPEG压缩条件下量化金标文件命中率的提升
-
-**当前局限**
-
-> 依赖可自动构建与渲染的Web应用，对难以复现运行环境或非Web界面的项目适用性受限；参考图像与缺陷截图之间可能存在状态不一致；评估以文件级定位为主，未充分覆盖修复正确性与端到端任务成功率；基准由合成注入缺陷构造，与真实缺陷报告分布存在差距。
-
-**后续可改进方向**
-
-- 将OCR识别文本与仓库渲染参考图像融合，设计对识别错误鲁棒的多模态证据聚合机制
-- 扩展到移动端、桌面端与非Web界面，并处理参考渲染与用户截图间的状态差异
-- 从文件级定位推进到行级与元素级定位，并评估对最终修复成功率的影响
-- 在真实缺陷报告而非注入缺陷上验证，检验参考图像增强的实际收益与构建成本
-
-**工程启发**
-
-> 为编码智能体处理含截图的缺陷报告提供可自动化的工程方案，参考图像生成流程可集成进CI或开发环境；在图像质量差的现实场景下改善源文件定位，降低对高质量截图的依赖。
-
-**为什么值得关注**
-
-> 该工作讨论了退化图像下OCR辅助方法的错误传播，并提出以渲染参考图像替代视觉证据，与文档解析中图像质量退化、OCR错误传播及多模态证据融合的问题直接相关。
-
-**原始摘要**
-
-Coding agents increasingly receive UI screenshots as part of bug reports, yet degraded image quality
-- caused by low resolution, compression artifacts, or small rendered text - can prevent them from
-identifying the relevant UI elements and source files. Vision-language models become less reliable
-as image quality deteriorates, while OCR-assisted approaches may propagate recognition errors from
-degraded inputs. Both approaches are limited when the visual evidence required for localization is
-no longer clearly observable in the query screenshot. We propose augmenting coding agents with
-repository-rendered reference images: crisp screenshots generated from the same codebase that the
-agent is tasked with modifying. These references provide readable visual evidence of the
-application's UI while preserving the current, potentially bug-containing implementation state.
-Because they are generated from the available repository rather than requiring a known bug-free
-version, they can be produced automatically for reproducible application states without manual image
-annotation. We evaluate the approach on a controlled benchmark derived from SWE-bench Multimodal by
-injecting visual UI bugs into a real web application. We vary screenshot degradation and reference-
-image provision and measure whether the coding agent identifies the correct source file. The results
-show that reference images improve file localization especially for degraded image quality,
-increasing the gold file match rate under fourfold downsampling with JPEG compression. We confirmed
-with further analysis that the proposed approach recognizes text approximately 12 percentage points
-better than language biased OCR under the same degradation.
 
 ---
