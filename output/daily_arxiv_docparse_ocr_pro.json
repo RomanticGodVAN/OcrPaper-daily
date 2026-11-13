@@ -1,86 +1,90 @@
 {
   "meta": {
-    "report_date": "2026-11-12",
-    "generated_at_utc": "2026-11-12 08:17:03",
+    "report_date": "2026-11-13",
+    "generated_at_utc": "2026-11-13 07:53:30",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
     "count": 1
   },
   "synthesis": {
-    "executive_summary": "今日日报聚焦于OCR后处理中的词级对齐问题，特别是阅读顺序置换下的对齐鲁棒性。论文重新审视了2019年提出的分区问题，提出了一套评测协议，并比较了多种对齐方法。结果表明，局部跟踪在大位移后易失效，基于锚点的方法在唯一锚点稀缺时崩溃，而多区域对齐器虽能缓解但计算成本二次增长。该工作为OCR纠错流水线提供了可复现的评测基准，但需进一步解决锚点稀缺和缩放成本问题。",
-    "trend_summary": "OCR后处理中的词级对齐正从简单的单调对齐转向关注阅读顺序置换等复杂版面错误，评测协议趋向于构造词级真值并引入置换扰动，方法上探索位置感知、重锚定和多区域锚点混合策略，但鲁棒性与效率仍是瓶颈。",
+    "executive_summary": "今日情报仅一篇论文：在 ECCV 2026 EventBench 通用理解赛道上，作者用完全免训练的 RGB 预训练冻结视觉语言模型（Qwen3.5 9B）加类别专用提示词，处理事件相机理解任务，总体准确率 62.28%（9/27），动作识别与因果推理较强（80.27%、77.22%），事件 OCR 仅 34.57%，是明确短板。核心结论是：免训练冻结模型在事件通用理解上可用但远未饱和，事件 OCR 的主要瓶颈是表示与分辨率，而非语言模型本身。",
+    "trend_summary": "该工作反映两个动向：一是免训练、零样本的冻结视觉语言模型被直接用于新模态（事件相机）做上限探测，并通过按任务分配不同后端实现工程折中；二是研究重点从“换更大模型”转向“事件表示与输入分辨率如何影响下游理解”，并强调可视化模型真实输入、赛后错误归因等可复现评估协议。",
     "common_innovations": [
-      "提出阅读顺序置换下的词级对齐评测协议，强调构造时词级真值与正确匹配F1等指标。",
-      "设计重锚定扩展以应对大位移后的重新定位。",
-      "构建多区域对齐器，结合唯一词与唯一n-gram锚点及块到窗口分配策略。",
-      "采用多源评测设置，涵盖合成字符噪声、历史报纸置换和几何派生真值。"
+      "将事件 bin 渲染为红/ON、蓝/OFF 双色帧，按类别选取部分 bin 拼接成网格图并配合类别专用提示词，全程不训练。",
+      "按任务差异化分配后端：四个理解类别用冻结 Qwen3.5 9B，动作识别直接调用 EventGPT-Plus-2B。",
+      "在官方评测服务器上对六种事件表示做对照实验，并可视化每类样本的模型真实输入图像。",
+      "通过赛后诊断定位“表示-分辨率”瓶颈与答案选项位置偏置，给出细粒度失效归因。"
     ],
     "future_directions": [
-      "设计混合锚点与局部跟踪的策略，在唯一锚点稀缺时利用词形、位置先验和语言模型约束补足锚点。",
-      "将多区域对齐的二次缩放成本优化为近线性或分块增量分配，以支持长文档和高置换场景。",
-      "开发弱监督或自动构造词级真值的方法，减少对近似真值和文章顺序约定的依赖。",
-      "针对列交织、段落交换等典型分区错误建立标准基准和细粒度错误分类指标。",
-      "探索基于图匹配或全局优化的对齐方法，以处理非单调阅读顺序和复杂版面结构。",
-      "研究跨语言和跨文档类型的对齐泛化能力，特别是在历史报纸和多栏文档中的适应性。"
+      "改进事件区域定位：用事件密度或运动显著性驱动的自适应裁剪替代现有边界框，确保事件文本以足够横向分辨率输入模型。",
+      "提升事件 OCR 表示分辨率：采用分块高分辨率网格、多尺度 bin 拼接或对文本区域单独放大渲染，并定量验证分辨率与 OCR 准确率的关系。",
+      "设计去偏解码或提示策略：对选项顺序随机化、做选项级打分或概率校准，降低细节理解对前两个选项的位置偏好。",
+      "把免训练方法扩展到表示选择层：根据任务或样本特征自动选择 ON/OFF 渲染、时间 bin 数量与网格布局，形成轻量自适应流水线。",
+      "在更多冻结视觉语言模型上复现事件表示敏感性实验，厘清模型规模、预训练数据与事件理解性能之间的关系。",
+      "把事件 OCR 作为独立基准子任务，建立不同分辨率与 bin 拼接策略下的对照表，明确可用的输入分辨率下限。",
+      "探索事件区域定位与渲染的联合优化：先定位文本或目标区域再决定 bin 数量与放大倍率，避免全局网格带来的分辨率摊薄。"
     ],
     "engineering_takeaways": [
-      "在OCR后处理流水线中，词级对齐模块需考虑阅读顺序置换的鲁棒性，避免单调对齐假设。",
-      "基于锚点的方法在唯一锚点稀少时不可靠，应结合局部跟踪和语言模型约束作为后备。",
-      "多区域对齐器当前计算成本较高，工程部署需评估文档长度和置换频率，必要时采用分块策略。",
-      "评测词级对齐时应使用构造时词级真值和置换扰动协议，而非仅依赖近似真值。",
-      "历史报纸等复杂版面文档的OCR纠错应优先处理阅读顺序错误，再考虑字符级纠错。"
+      "免训练 ON/OFF 双色渲染加网格拼接加类别提示词可直接作为事件相机视觉语言应用的快速部署基线与上限参照。",
+      "事件 OCR 部署前必须核算文本区域到达模型时的横向像素；仅约五分之一分辨率时准确率会显著下滑。",
+      "现有边界框裁剪在事件数据上几乎不收紧内容，工程上应改用事件密度或运动显著性驱动的裁剪。",
+      "细节理解类任务存在选项位置偏置，评测与上线时应对选项顺序随机化或做选项级校准。",
+      "按任务难度与模态适配选择后端的差异化架构（理解类用冻结通用模型、动作类用专用模型）是低成本可行的工程折中。"
     ],
     "watchlist": [
       {
-        "title": "Word-Level Alignment of OCR and Ground Truth under Zoning and Reading-Order Errors",
-        "watch_reason": "该论文提供了词级对齐在阅读顺序错误下的评测协议和多方法对比，对OCR后处理纠错流水线的鲁棒性设计有直接参考价值，但需关注其锚点稀缺和缩放成本问题。"
+        "title": "How Far Can Frozen Vision-Language Models Go on Event Data? A Training-Free Study on EventBench",
+        "watch_reason": "提供可复用的免训练事件理解基线与公开的赛后错误分析，事件 OCR 分辨率瓶颈和答案位置偏置对后续事件文档解析系统调参有直接参考价值。"
       }
     ]
   },
   "papers": [
     {
-      "title": "Word-Level Alignment of OCR and Ground Truth under Zoning and Reading-Order Errors",
-      "summary": "OCR post-processing needs OCR text aligned word by word with its ground truth. Data sets rarely provide that mapping, and a monotone aligner can lose its place when zoning errors permute the reading order. We revisit this problem, the Zoning Problem of our 2019 paper, with a protocol that tests correctness under such permutations. We apply OCR-side reading-order permutations with construction-time word-level gold and score correct-match F1, cascade length and recovery. We compare the 2019 location-aware aligner, a re-anchoring extension of it, a RETAS-style baseline (RETAS-lite), a multi-region aligner that combines unique-word and unique n-gram anchors with chunk-to-window assignment, genalog's RETAS and the original Java RETAS. Experiments use synthetic character noise with block moves, paragraph swaps and column interleaving, historical newspaper reading-order permutations, geometry-derived gold for Tesseract OCR, and a small word-box set. Synthetic tests show where local tracking fails after large displacements and where unique-anchor methods collapse when unique anchors are scarce. On our synthetic boilerplate page the 2019 method had the highest F1 among those tested. Historical newspaper and geometry-derived evaluations carry the limitations of approximate gold and the article-order convention. The first multi-region version has a quadratic scaling cost. Local tracking remains fragile under large reading-order changes; the tested anchor-based methods handle many of those cases but fail when unique anchors are scarce. Approximate gold, the article-order convention, missing residual annotation, and the lack of modern multi-column word-level ground truth remain limitations.",
-      "link": "https://arxiv.org/abs/2611.13752v1",
-      "pdf_url": "https://arxiv.org/pdf/2611.13752v1",
+      "title": "How Far Can Frozen Vision-Language Models Go on Event Data? A Training-Free Study on EventBench",
+      "summary": "We present a training-free system for the EBMV @ ECCV 2026 challenge \"Event Stream Understanding with EventBench\" (General Understanding track), which evaluates vision-language models on five event-camera understanding tasks. We use none of the challenge's training data: our goal is to measure how far off-the-shelf, RGB-pretrained models can go on event data through representation and prompting alone. For four of the five categories (gesture recognition, detailed understanding, causal reasoning, and event OCR) we render event bins as red/ON, blue/OFF frames, select a category-specific subset of bins, stitch them into a single grid image, and query the same frozen Qwen3.5 9B vision-language model with a category-specific prompt for all four tasks. The fifth category, action recognition, feeds every bin directly into the organizers' EventGPT-Plus-2B. The system reaches 62.28% overall accuracy across 2,084 test questions (rank 9/27), led by action recognition and causal reasoning (80.27%, 77.22%) and limited most by gesture recognition and event OCR (54.70%, 34.57%). We visualize test samples from every category together with the exact images the model receives, score six alternative representations against the evaluation server, and analyze the full test set post hoc. That analysis shows that our bounding-box crop almost never tightened around content, so event OCR text reached the model at roughly one fifth of its horizontal resolution, and that detailed-understanding predictions are skewed toward the first two answer options.",
+      "link": "https://arxiv.org/abs/2611.15756v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.15756v1",
       "authors": [
-        "Fonseca Cacho",
-        "Jorge Ramón"
+        "Md Kamrujjaman Mobin",
+        "Md Salman Shamil",
+        "Md Adnan Arefeen"
       ],
-      "published": "2026-11-10T08:52:20Z",
-      "updated": "2026-11-10T08:52:20Z",
+      "published": "2026-11-11T17:35:05Z",
+      "updated": "2026-11-11T17:35:05Z",
       "categories": [
-        "cs.CL",
         "cs.CV"
       ],
-      "arxiv_id": "2611.13752v1",
-      "score": 9,
+      "arxiv_id": "2611.15756v1",
+      "score": 6,
       "topic_tags": [
-        "OCR后处理",
-        "词级对齐",
-        "阅读顺序错误",
-        "分区问题",
-        "文档解析",
-        "评测协议"
+        "事件相机",
+        "免训练视觉语言模型",
+        "EventBench",
+        "事件OCR",
+        "事件表示",
+        "提示词工程",
+        "冻结模型评估",
+        "错误分析"
       ],
-      "zh_summary": "该论文重新审视2019年提出的“分区问题”（Zoning Problem）：OCR后处理需要将OCR文本与真值逐词对齐，但数据集通常缺乏该映射，且当分区错误导致阅读顺序置换时，单调对齐器容易丢失位置。作者提出一套在阅读顺序置换下测试正确性的协议，通过构造时词级真值并施加OCR端阅读顺序置换，评估正确匹配F1、级联长度与恢复能力。实验比较了2019位置感知对齐器、其重锚定扩展、RETAS-lite基线、结合唯一词与唯一n-gram锚点及块到窗口分配的多区域对齐器、genalog的RETAS与原始Java RETAS。数据涵盖合成字符噪声（块移动、段落交换、列交织）、历史报纸阅读顺序置换、Tesseract OCR的几何派生真值以及小规模词框集。结果表明：局部跟踪在大位移后易失效，唯一锚点稀缺时基于锚点的方法会崩溃；在合成模板页上2019方法F1最高；历史报纸与几何派生评估受近似真值与文章顺序约定限制；首个多区域版本具有二次缩放成本。",
-      "novelty": "提出一套针对分区/阅读顺序置换场景的词级对齐评测协议，并系统比较位置感知、重锚定、RETAS风格及多区域锚点对齐方法在该协议下的表现。",
+      "zh_summary": "该文面向ECCV 2026 EBMV挑战赛的EventBench通用理解赛道，提出一个完全免训练的事件相机视觉语言理解系统，使用RGB预训练的冻结Qwen3.5 9B模型处理五类事件理解任务。对其中四类（手势识别、细节理解、因果推理、事件OCR），将事件帧堆叠渲染为红/ON、蓝/OFF图像，按类别选取部分bin拼接成网格图并配合类别专用提示词，以同一冻结模型推理；动作识别类别则直接调用主办方提供的EventGPT-Plus-2B。系统在2084道测试题上总体准确率62.28%（排名9/27），动作识别与因果推理最高（80.27%、77.22%），手势识别与事件OCR最低（54.70%、34.57%）。作者还对比了六种事件表示、可视化模型实际输入图像并做了赛后分析，指出边界框裁剪几乎未收紧内容，事件OCR文本到达模型时横向分辨率仅约五分之一，细节理解预测偏向最前两个选项。",
+      "novelty": "以完全免训练、不使用挑战赛训练数据的方式，系统评估现成RGB预训练视觉语言模型在事件数据上的可达上限，并公开各阶段实际输入表示与赛后错误分析。",
       "innovation_points": [
-        "定义并实现阅读顺序置换下的词级对齐评测协议，强调构造时词级真值与正确匹配F1、级联长度、恢复等指标",
-        "提出2019位置感知对齐器的重锚定扩展，用于大位移后重新定位",
-        "设计多区域对齐器，结合唯一词与唯一n-gram锚点及块到窗口分配策略",
-        "构建多源评测设置：合成字符噪声含块移动/段落交换/列交织、历史报纸阅读顺序置换、几何派生真值与小词框集"
+        "提出免训练的事件视觉语言流水线：事件bin渲染为ON/OFF双色帧、类别相关bin子集选取、多bin拼成网格图、类别专用提示词，四类任务共享同一冻结模型",
+        "任务级差异化架构分配：四个理解类别走冻结Qwen3.5 9B，动作识别单独交由EventGPT-Plus-2B，体现按任务难度与模态适配选择后端",
+        "对六种事件表示在官方评测服务器上做对照实验，并可视化每类测试样本与模型真实输入图像，形成可复现的表示评估协议",
+        "赛后诊断分析揭示表示-分辨率瓶颈（OCR文本横向分辨率不足）与答案位置偏置，为免训练事件理解提供细粒度失效归因"
       ],
-      "limitations": "['局部跟踪在大阅读顺序变化下仍脆弱', '基于锚点的方法在唯一锚点稀缺时失效', '历史报纸与几何派生评估依赖近似真值及文章顺序约定，存在评估偏差', '首个多区域版本具有二次缩放成本，难以扩展']",
+      "limitations": "整体依赖RGB预训练模型与固定提示词，未做任何事件域适配；边界框裁剪策略基本失效，OCR输入分辨率显著受损；细节理解存在明显的答案选项位置偏置；事件OCR准确率仅34.57%，构成主要短板；仅使用单一冻结模型与单一后端组合，未系统探索多模型集成或自适应表示选择。",
       "improvement_directions": [
-        "设计在唯一锚点稀缺时仍可鲁棒的混合锚点/局部跟踪策略，例如利用词形、位置先验与语言模型约束补足锚点",
-        "将多区域对齐的二次缩放成本优化为近线性或分块增量分配，以支持长文档与高置换场景",
-        "引入更可靠的弱监督或自动构造词级真值方法，降低对近似真值与文章顺序约定的依赖",
-        "针对列交织、段落交换等典型分区错误建立标准基准与更细粒度错误分类指标"
+        "改进事件区域定位与裁剪：用事件密度或运动显著性驱动的自适应裁剪替代现有边界框，使高分辨率事件文本能以足够横向分辨率输入模型",
+        "提升事件OCR表示分辨率：采用分块高分辨率网格、多尺度bin拼接或文本区域单独放大渲染，并验证分辨率与OCR准确率的定量关系",
+        "设计去偏的解码或提示策略：针对选项位置偏置引入选项顺序随机化、选项级打分或校准，降低细节理解对前两个选项的偏好",
+        "将免训练方法扩展到表示选择层：根据任务或样本特征自动选择ON/OFF渲染、时间bin数量与网格布局，形成轻量自适应免训练流水线",
+        "在更多冻结视觉语言模型上复现并比较事件表示敏感性，明确模型规模、预训练数据与事件理解性能之间的关系"
       ],
-      "engineering_value": "为OCR后处理中的词级对齐与阅读顺序纠错提供可复现的评测协议与多方法对比基线，对历史报纸数字化、版面复杂文档的OCR纠错流水线有直接参考价值，但需注意锚点稀缺与计算成本问题。",
-      "why_relevant": "该论文直接研究OCR文本与真值的词级对齐及阅读顺序置换错误，属于OCR后处理与文档解析中的关键对齐问题，与OCR/文档解析学术情报主题高度相关。"
+      "engineering_value": "提供了一套可直接复用的免训练事件理解基线：ON/OFF双色渲染、网格拼接与类别提示词均无需训练成本，适合作为事件相机视觉语言应用的快速部署方案与上限参照；赛后分析指出的分辨率瓶颈和答案偏置对实际系统调参具有直接指导意义。",
+      "why_relevant": "该文涉及事件OCR任务，并定量暴露了事件表示与输入分辨率对OCR性能的限制，为OCR研究中事件相机文本识别与免训练视觉语言解析提供可操作的失效分析与改进方向。"
     }
   ]
 }
