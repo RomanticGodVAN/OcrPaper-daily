@@ -1,90 +1,30 @@
 {
   "meta": {
-    "report_date": "2026-11-13",
-    "generated_at_utc": "2026-11-13 07:53:30",
+    "report_date": "2026-11-14",
+    "generated_at_utc": "2026-11-14 07:34:58",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 1
+    "count": 0
   },
   "synthesis": {
-    "executive_summary": "今日情报仅一篇论文：在 ECCV 2026 EventBench 通用理解赛道上，作者用完全免训练的 RGB 预训练冻结视觉语言模型（Qwen3.5 9B）加类别专用提示词，处理事件相机理解任务，总体准确率 62.28%（9/27），动作识别与因果推理较强（80.27%、77.22%），事件 OCR 仅 34.57%，是明确短板。核心结论是：免训练冻结模型在事件通用理解上可用但远未饱和，事件 OCR 的主要瓶颈是表示与分辨率，而非语言模型本身。",
-    "trend_summary": "该工作反映两个动向：一是免训练、零样本的冻结视觉语言模型被直接用于新模态（事件相机）做上限探测，并通过按任务分配不同后端实现工程折中；二是研究重点从“换更大模型”转向“事件表示与输入分辨率如何影响下游理解”，并强调可视化模型真实输入、赛后错误归因等可复现评估协议。",
+    "executive_summary": "今日无新增论文数据，无法生成实质性研究结论；建议检查数据源或补充论文清单后重新生成。",
+    "trend_summary": "无可用论文情报，无法进行趋势判断。",
     "common_innovations": [
-      "将事件 bin 渲染为红/ON、蓝/OFF 双色帧，按类别选取部分 bin 拼接成网格图并配合类别专用提示词，全程不训练。",
-      "按任务差异化分配后端：四个理解类别用冻结 Qwen3.5 9B，动作识别直接调用 EventGPT-Plus-2B。",
-      "在官方评测服务器上对六种事件表示做对照实验，并可视化每类样本的模型真实输入图像。",
-      "通过赛后诊断定位“表示-分辨率”瓶颈与答案选项位置偏置，给出细粒度失效归因。"
+      "无数据，无法归纳共性创新点。"
     ],
     "future_directions": [
-      "改进事件区域定位：用事件密度或运动显著性驱动的自适应裁剪替代现有边界框，确保事件文本以足够横向分辨率输入模型。",
-      "提升事件 OCR 表示分辨率：采用分块高分辨率网格、多尺度 bin 拼接或对文本区域单独放大渲染，并定量验证分辨率与 OCR 准确率的关系。",
-      "设计去偏解码或提示策略：对选项顺序随机化、做选项级打分或概率校准，降低细节理解对前两个选项的位置偏好。",
-      "把免训练方法扩展到表示选择层：根据任务或样本特征自动选择 ON/OFF 渲染、时间 bin 数量与网格布局，形成轻量自适应流水线。",
-      "在更多冻结视觉语言模型上复现事件表示敏感性实验，厘清模型规模、预训练数据与事件理解性能之间的关系。",
-      "把事件 OCR 作为独立基准子任务，建立不同分辨率与 bin 拼接策略下的对照表，明确可用的输入分辨率下限。",
-      "探索事件区域定位与渲染的联合优化：先定位文本或目标区域再决定 bin 数量与放大倍率，避免全局网格带来的分辨率摊薄。"
+      "无数据，无法提出具体研究方向；建议优先补充近两周OCR与文档解析论文清单。"
     ],
     "engineering_takeaways": [
-      "免训练 ON/OFF 双色渲染加网格拼接加类别提示词可直接作为事件相机视觉语言应用的快速部署基线与上限参照。",
-      "事件 OCR 部署前必须核算文本区域到达模型时的横向像素；仅约五分之一分辨率时准确率会显著下滑。",
-      "现有边界框裁剪在事件数据上几乎不收紧内容，工程上应改用事件密度或运动显著性驱动的裁剪。",
-      "细节理解类任务存在选项位置偏置，评测与上线时应对选项顺序随机化或做选项级校准。",
-      "按任务难度与模态适配选择后端的差异化架构（理解类用冻结通用模型、动作类用专用模型）是低成本可行的工程折中。"
+      "无数据，暂无工程落地建议。"
     ],
     "watchlist": [
       {
-        "title": "How Far Can Frozen Vision-Language Models Go on Event Data? A Training-Free Study on EventBench",
-        "watch_reason": "提供可复用的免训练事件理解基线与公开的赛后错误分析，事件 OCR 分辨率瓶颈和答案位置偏置对后续事件文档解析系统调参有直接参考价值。"
+        "title": "无数据",
+        "watch_reason": "今日论文清单为空，请补充数据后重新生成日报。"
       }
     ]
   },
-  "papers": [
-    {
-      "title": "How Far Can Frozen Vision-Language Models Go on Event Data? A Training-Free Study on EventBench",
-      "summary": "We present a training-free system for the EBMV @ ECCV 2026 challenge \"Event Stream Understanding with EventBench\" (General Understanding track), which evaluates vision-language models on five event-camera understanding tasks. We use none of the challenge's training data: our goal is to measure how far off-the-shelf, RGB-pretrained models can go on event data through representation and prompting alone. For four of the five categories (gesture recognition, detailed understanding, causal reasoning, and event OCR) we render event bins as red/ON, blue/OFF frames, select a category-specific subset of bins, stitch them into a single grid image, and query the same frozen Qwen3.5 9B vision-language model with a category-specific prompt for all four tasks. The fifth category, action recognition, feeds every bin directly into the organizers' EventGPT-Plus-2B. The system reaches 62.28% overall accuracy across 2,084 test questions (rank 9/27), led by action recognition and causal reasoning (80.27%, 77.22%) and limited most by gesture recognition and event OCR (54.70%, 34.57%). We visualize test samples from every category together with the exact images the model receives, score six alternative representations against the evaluation server, and analyze the full test set post hoc. That analysis shows that our bounding-box crop almost never tightened around content, so event OCR text reached the model at roughly one fifth of its horizontal resolution, and that detailed-understanding predictions are skewed toward the first two answer options.",
-      "link": "https://arxiv.org/abs/2611.15756v1",
-      "pdf_url": "https://arxiv.org/pdf/2611.15756v1",
-      "authors": [
-        "Md Kamrujjaman Mobin",
-        "Md Salman Shamil",
-        "Md Adnan Arefeen"
-      ],
-      "published": "2026-11-11T17:35:05Z",
-      "updated": "2026-11-11T17:35:05Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "arxiv_id": "2611.15756v1",
-      "score": 6,
-      "topic_tags": [
-        "事件相机",
-        "免训练视觉语言模型",
-        "EventBench",
-        "事件OCR",
-        "事件表示",
-        "提示词工程",
-        "冻结模型评估",
-        "错误分析"
-      ],
-      "zh_summary": "该文面向ECCV 2026 EBMV挑战赛的EventBench通用理解赛道，提出一个完全免训练的事件相机视觉语言理解系统，使用RGB预训练的冻结Qwen3.5 9B模型处理五类事件理解任务。对其中四类（手势识别、细节理解、因果推理、事件OCR），将事件帧堆叠渲染为红/ON、蓝/OFF图像，按类别选取部分bin拼接成网格图并配合类别专用提示词，以同一冻结模型推理；动作识别类别则直接调用主办方提供的EventGPT-Plus-2B。系统在2084道测试题上总体准确率62.28%（排名9/27），动作识别与因果推理最高（80.27%、77.22%），手势识别与事件OCR最低（54.70%、34.57%）。作者还对比了六种事件表示、可视化模型实际输入图像并做了赛后分析，指出边界框裁剪几乎未收紧内容，事件OCR文本到达模型时横向分辨率仅约五分之一，细节理解预测偏向最前两个选项。",
-      "novelty": "以完全免训练、不使用挑战赛训练数据的方式，系统评估现成RGB预训练视觉语言模型在事件数据上的可达上限，并公开各阶段实际输入表示与赛后错误分析。",
-      "innovation_points": [
-        "提出免训练的事件视觉语言流水线：事件bin渲染为ON/OFF双色帧、类别相关bin子集选取、多bin拼成网格图、类别专用提示词，四类任务共享同一冻结模型",
-        "任务级差异化架构分配：四个理解类别走冻结Qwen3.5 9B，动作识别单独交由EventGPT-Plus-2B，体现按任务难度与模态适配选择后端",
-        "对六种事件表示在官方评测服务器上做对照实验，并可视化每类测试样本与模型真实输入图像，形成可复现的表示评估协议",
-        "赛后诊断分析揭示表示-分辨率瓶颈（OCR文本横向分辨率不足）与答案位置偏置，为免训练事件理解提供细粒度失效归因"
-      ],
-      "limitations": "整体依赖RGB预训练模型与固定提示词，未做任何事件域适配；边界框裁剪策略基本失效，OCR输入分辨率显著受损；细节理解存在明显的答案选项位置偏置；事件OCR准确率仅34.57%，构成主要短板；仅使用单一冻结模型与单一后端组合，未系统探索多模型集成或自适应表示选择。",
-      "improvement_directions": [
-        "改进事件区域定位与裁剪：用事件密度或运动显著性驱动的自适应裁剪替代现有边界框，使高分辨率事件文本能以足够横向分辨率输入模型",
-        "提升事件OCR表示分辨率：采用分块高分辨率网格、多尺度bin拼接或文本区域单独放大渲染，并验证分辨率与OCR准确率的定量关系",
-        "设计去偏的解码或提示策略：针对选项位置偏置引入选项顺序随机化、选项级打分或校准，降低细节理解对前两个选项的偏好",
-        "将免训练方法扩展到表示选择层：根据任务或样本特征自动选择ON/OFF渲染、时间bin数量与网格布局，形成轻量自适应免训练流水线",
-        "在更多冻结视觉语言模型上复现并比较事件表示敏感性，明确模型规模、预训练数据与事件理解性能之间的关系"
-      ],
-      "engineering_value": "提供了一套可直接复用的免训练事件理解基线：ON/OFF双色渲染、网格拼接与类别提示词均无需训练成本，适合作为事件相机视觉语言应用的快速部署方案与上限参照；赛后分析指出的分辨率瓶颈和答案偏置对实际系统调参具有直接指导意义。",
-      "why_relevant": "该文涉及事件OCR任务，并定量暴露了事件表示与输入分辨率对OCR性能的限制，为OCR研究中事件相机文本识别与免训练视觉语言解析提供可操作的失效分析与改进方向。"
-    }
-  ]
+  "papers": []
 }
