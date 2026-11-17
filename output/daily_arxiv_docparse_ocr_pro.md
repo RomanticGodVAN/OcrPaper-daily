@@ -1,10 +1,302 @@
-# OCR / 文档解析研究日报（2026-11-16）
+# OCR / 文档解析研究日报（2026-11-17）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-11-16 07:56:49`
+- 生成时间（UTC）：`2026-11-17 09:10:30`
 - 大模型综合分析：`开启`
 
-今天没有筛到符合条件的新论文。
+## 一、今日执行摘要
+
+> 今日情报显示，OCR/文档解析领域在评测方法与数据压缩方面有值得关注的实证进展：藏文OCR首次建立音节级与词级评测体系，为无词边界语言提供了可替代分词器依赖的指标；PDF转Markdown评测揭示数字评分受输出记法污染的陷阱，提醒工程团队在评分前需清洗记法；手写文本识别数据蒸馏的否定性结果提示现有蒸馏方法在行级HTR上并不优于随机采样，工程投入需谨慎。整体而言，今日工作偏向评测与实证，而非新模型架构。
+
+## 二、今日趋势判断
+
+1) 评测指标精细化：从单一CER向音节、词级及下游任务保真度扩展；2) 评测流程规范化：强调预注册、记法清洗与事后分析透明化；3) 数据效率探索：数据集蒸馏在HTR任务上遭遇瓶颈，负面结果公开化有助避免重复投入。
+
+## 三、今日论文概览
+
+1. **Syllable- and Word-Level Evaluation of Tibetan OCR** | 标签：藏文OCR、评测指标、音节错误率、词错误率、下游任务评测
+2. **Digits in Notation Are Not Numbers: A Scoring Pitfall in PDF-to-Markdown Conversion of Japanese Technical Documents (Preliminary Evaluation)** | 标签：PDF转Markdown、OCR评测、数字评分、后处理流水线、日文文档
+3. **Dataset Distillation for Handwritten Text Recognition: An Empirical Study** | 标签：手写文本识别、数据集蒸馏、CTC、CRNN、数据压缩
+4. **MemEmo: Evaluating Emotion in Memory Systems** | 标签：记忆系统、情感计算、评测基准、大语言模型
+
+## 四、今天 OCR / 文档解析论文里的主要创新点
+
+- 藏文OCR引入无需分词器的音节错误率(SER)，并系统比较其与CER、SWER的排序一致性。
+- PDF转Markdown评测中识别并量化输出记法数字对评分的影响，提出去除记法后的修正评分协议。
+- 手写文本识别首次尝试数据集蒸馏，以字符n-gram聚类定义文本伪类并适配CTC训练。
+
+## 五、后续 OCR 领域值得推进的改进方向
+
+- 在更大规模、多风格与真实噪声条件下验证SER作为藏文OCR主指标的稳健性，并探索面向藏文的轻量分词或无分词方案。
+- 建立区分文本内容数字与版面记法数字的标准化PDF解析评分流程，并设计针对共享漏检型数字错误的检测信号。
+- 将下游任务保真度纳入OCR模型选择或训练目标，而非仅作为事后评测。
+- 探索超越像素优化与伪类构造的手写文本识别数据蒸馏范式，例如基于序列级对齐或合成文本渲染的样本生成。
+- 建立HTR数据压缩的标准化评测协议，避免以分类任务指标替代识别指标。
+
+## 六、工程落地启发
+
+- 藏文OCR产品选型可优先采用SER作为主指标，减少对分词器质量的依赖。
+- PDF转Markdown评测前必须清洗图像链接、HTML属性等记法中的数字，避免评分伪影。
+- 双OCR引擎分歧检查对共享漏检型数字错误检测能力有限，需补充其他检测信号。
+- 手写文本识别训练数据压缩时，随机子采样可能已接近现有蒸馏方法效果，应避免无效投入。
+- 后处理流水线需按文档类型评估收益，警惕标题结构损伤与公式修复模块未触发的问题。
+
+## 七、优先关注论文
+
+- **Syllable- and Word-Level Evaluation of Tibetan OCR**：为无词边界语言提供可替代分词器依赖的评测指标，并关联下游任务保真度，对多语言OCR评测有参考价值。
+- **Digits in Notation Are Not Numbers: A Scoring Pitfall in PDF-to-Markdown Conversion of Japanese Technical Documents**：揭示评测中易被忽视的记法污染问题，推动评分协议标准化，直接影响工程评测流程设计。
+- **Dataset Distillation for Handwritten Text Recognition: An Empirical Study**：提供负面结果与评估准则，避免工程团队在HTR数据压缩上重复无效投入，并提示标准化评测协议的必要性。
+
+## 八、论文逐篇解析
+
+### 1. Syllable- and Word-Level Evaluation of Tibetan OCR
+
+- arXiv: [2611.21303v1](https://arxiv.org/abs/2611.21303v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.21303v1)
+- 作者: Jacob Moore, Paula Lauren
+- 发布时间: 2026-11-16T16:03:52Z
+- 分类: cs.CL
+- 相关性评分: 15
+- 主题标签: 藏文OCR、评测指标、音节错误率、词错误率、下游任务评测
+
+**中文摘要**
+
+> 该研究针对藏文OCR评测以字符错误率(CER)为主、但藏文不标记词边界导致词级评测需依赖分词器的问题，在排印体、木刻体和两种手写体上评测了9种识别器配置（CTC模型、带/不带训练后量化的TrOCR编解码器、视觉语言模型），首次报告藏文OCR的音节错误率(SER)与分词词错误率(SWER)。结果显示CER与高层级错误率排序高度一致(Kendall τ≥0.833)，SER无需分词器且在两种分词器下与SWER排序一致(τ≥0.889)；作者还将各配置输出用于词性标注、命名实体标注与机器翻译，给出错误率与下游任务保真度的经验阈值。
+
+**核心创新概述**
+
+> 首次为藏文OCR建立音节级与词级错误率评测体系，并将OCR错误率与词性、命名实体、机器翻译等下游任务表现建立定量关联。
+
+**创新点拆解**
+
+- 在藏文OCR中引入音节错误率(SER)这一无需分词器的评测指标，并系统比较其与CER、三种分词器下SWER的排序一致性
+- 覆盖排印体、木刻体与两种手写体的多风格、多架构（CTC、TrOCR、VLM、量化）联合评测
+- 将识别输出接入词性标注、命名实体识别与机器翻译，给出错误率与下游任务保真度的经验阈值
+
+**当前局限**
+
+> 评测规模有限（9种配置、四类字体风格），分词器选择对SWER仍有影响；下游任务阈值仅为粗略经验值，且命名实体保真度无法用单一错误率区分。
+
+**后续可改进方向**
+
+- 在更大规模、更多书写风格与真实扫描噪声条件下验证SER作为藏文OCR主指标的稳健性
+- 研究面向藏文的无分词或轻量分词方案，降低SWER对分词器质量的依赖
+- 将下游任务保真度纳入训练目标或模型选择准则，而非仅作为事后评测
+
+**工程启发**
+
+> 为藏文OCR产品提供可落地的评测规范：SER可替代依赖分词器的词级指标用于模型选型，并为识别精度与下游NLP/翻译质量之间的取舍提供量化参考。
+
+**为什么值得关注**
+
+> 直接讨论OCR评测指标设计与多架构识别器对比，属于OCR文档解析评测方法学范畴。
+
+**原始摘要**
+
+Optical character recognition (OCR) for Tibetan is evaluated predominantly by character error rate
+(CER). Tibetan marks syllable boundaries but does not mark word boundaries, so a word error rate
+requires a segmenter. This study evaluates nine recognizer configurations on typeset, woodblock and
+two handwritten script styles, alone and in combination, and reports syllable- and word-level error
+rates, to our knowledge the first for Tibetan OCR. The configurations span CTC models, TrOCR
+encoder-decoders with and without post-training quantization, and a vision-language model, and each
+is scored under CER, the syllable error rate (SER) and three segmented word error rates (SWER). CER
+ranks systems largely as the higher-level rates do (Kendall $τ\geq 0.833$), with one pair ordered
+oppositely. On the effect of joint training, CER and SER record significant changes of opposite sign
+in 7 of 64 comparisons. SER needs no segmenter and ranks systems as SWER does under two of the three
+segmenters ($τ\geq 0.889$). The output of each configuration is also tagged for part of speech,
+annotated for named entities and machine translated, and each result is compared with that obtained
+on the reference text. As rough guidance, translation chrF of 60 is reached at SER of 0.047 or below
+and part-of-speech preservation of 0.8 at 0.078 or below, while no error rate separates the systems
+that reach entity preservation of 0.6 from those that do not.
+
+---
+
+### 2. Digits in Notation Are Not Numbers: A Scoring Pitfall in PDF-to-Markdown Conversion of Japanese Technical Documents (Preliminary Evaluation)
+
+- arXiv: [2611.20993v1](https://arxiv.org/abs/2611.20993v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.20993v1)
+- 作者: Mitsumasa Wada
+- 发布时间: 2026-11-16T12:22:03Z
+- 分类: cs.CV
+- 相关性评分: 15
+- 主题标签: PDF转Markdown、OCR评测、数字评分、后处理流水线、日文文档
+
+**中文摘要**
+
+> 论文指出PDF转Markdown流程中数字评分易受表示法干扰的陷阱：在48页公开日文技术文档上评测MinerU、纯文本OCR基线NDLOCR-Lite及一套确定性后处理流水线（锚点插入、脚注重排、相似字符修正、双OCR伙伴门控公式修复、标题重建）。预先设定的数字与单位F1看似偏向OCR基线(0.575 vs 0.397)，但经事后检查发现评分器把转换器输出中的图像链接路径、HTML属性等记法中的数字计入；去除记法后两者F1持平(0.575 vs 0.594)，双引擎分歧检查仅能标记13%的数字错误。OCR基线正文CER更低(0.012 vs 0.053)，后处理提升了页码类额外数字召回但降低了标题级一致性。
+
+**核心创新概述**
+
+> 揭示并量化了PDF转Markdown评测中因输出记法差异导致的数字评分伪影，指出双OCR分歧检查对共享漏检型错误基本失效。
+
+**创新点拆解**
+
+- 系统识别并验证“记法中数字”污染评分的问题，提出去除记法后再评分的修正协议
+- 设计包含锚点插入、脚注重排、相似字符修正、双OCR门控公式修复与标题重建的确定性后处理流水线
+- 用双引擎分歧检查与人工精度门控(0.929)对后处理假设进行预注册式验证
+
+**当前局限**
+
+> 样本仅3篇文档48页，统计功效有限；后处理流水线在标题一致性与公式修复上未达预期，公式修复模块从未触发；部分结论依赖事后(post-hoc)分析。
+
+**后续可改进方向**
+
+- 建立区分文本内容数字与版面记法数字的标准化评分流程，并推广到多语言PDF解析评测
+- 针对共享漏检型数字错误设计更有效的检测信号，而非依赖双引擎分歧
+- 改进公式检测与修复的触发机制与标题重建策略，并在更大规模文档集上做预注册验证
+
+**工程启发**
+
+> 为PDF转Markdown流水线的评测与后处理设计提供直接警示：评分前需清洗输出记法，后处理需按文档类型评估收益与标题结构损伤的权衡。
+
+**为什么值得关注**
+
+> 聚焦PDF文档解析/OCR流水线的评测方法学与后处理工程，与OCR文档解析直接相关。
+
+**原始摘要**
+
+Converting PDFs to Markdown is now routine preprocessing for search and language models, yet scoring
+the numbers in the output is easy to get wrong. We evaluate MinerU, a plain-text OCR baseline
+(NDLOCR-Lite), and a deterministic post-processing pipeline (anchor insertion, footnote reordering,
+fixes of look-alike characters in fixed contexts, gated formula repair using two independent OCR
+partners, and heading reconstruction) on 48 public Japanese pages (three documents), text-layer and
+rasterized. Our pre-specified number-and-unit F1 favored the OCR baseline (0.575 vs 0.397), and a
+disagreement check between the two engines seemed to flag about half of the converter's number
+errors (54.6%). Both were artifacts. The scorer counted digits in the converter's notation (image-
+link paths, HTML attributes), which plain text lacks. With the notation removed (a post-hoc check),
+the F1 scores tie (0.575 vs 0.594), and the check flags only 13% of number errors, because most
+errors are misses that both engines share. What remains: the OCR baseline has a lower body character
+error rate (0.012 vs 0.053 rasterized). The pipeline raises extra-number recall at page level
+(+0.145; the document-level interval touches 0), mostly by restoring page numbers, but lowers
+heading-level agreement (0.133 to 0.061) and leaves spurious formulas unchanged; its formula repair
+never fires. A pre-specified precision gate for its flags (0.80, human-judged) is met at 0.929, yet
+the post-processing hypothesis fails on its improvement items. We recommend scoring numbers after
+removing notation and checking critical figures against the source. By the pre-specified criteria,
+the study stays a technical report.
+
+---
+
+### 3. Dataset Distillation for Handwritten Text Recognition: An Empirical Study
+
+- arXiv: [2611.21054v1](https://arxiv.org/abs/2611.21054v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.21054v1)
+- 作者: Félix Fuentes-Hurtado, Aric Ayllón, Juan C. Alfaro
+- 发布时间: 2026-11-16T13:05:34Z
+- 分类: cs.CV
+- 相关性评分: 10
+- 主题标签: 手写文本识别、数据集蒸馏、CTC、CRNN、数据压缩
+
+**中文摘要**
+
+> 论文首次将数据集蒸馏(DD)引入行级手写文本识别(HTR)：由于HTR标签是近乎无限输出空间中的未对齐序列，作者以字符n-gram聚类转录文本定义“文本伪类”，并将梯度匹配(GM)、分布匹配(DM)与轨迹匹配(MTT)适配到CTC训练的CRNN上，合成行图像仅优化真实起始行（随机选取或文本中心点）的像素而保持转录固定。在IAM、George Washington、READ 2016、LAM四个数据集和1–10%预算下，没有任何蒸馏集优于其真实初始化行；随机行优于中心点，进一步优化反而降低识别效果；DM目标下降但无收益。
+
+**核心创新概述**
+
+> 首次系统研究面向行级手写文本识别的数据集蒸馏，提出基于字符n-gram聚类构造文本伪类以适配分类式DD方法。
+
+**创新点拆解**
+
+- 将分类任务中的GM、DM、MTT蒸馏方法适配到CTC训练的CRNN与未对齐序列标签场景
+- 以字符n-gram聚类转录文本定义文本伪类，并以真实行像素初始化的方式生成合成行图像
+- 跨四个HTR数据集与三个压缩预算给出否定性结论与评估准则
+
+**当前局限**
+
+> 所适配的三种蒸馏方法均未带来增益，甚至随机采样的真实行即为最优；实验限于行级CRNN+CTC架构与四个英文/多语手写数据集。
+
+**后续可改进方向**
+
+- 探索超越像素优化与伪类构造的蒸馏范式，例如基于序列级对齐或合成文本渲染的样本生成
+- 将蒸馏扩展到Transformer/编码器-解码器HTR架构与更细粒度（词、字符）压缩单元
+- 建立HTR数据压缩的标准化评测协议，避免以分类任务指标替代识别指标
+
+**工程启发**
+
+> 为手写文本识别训练数据压缩提供负面证据与评估建议，提示工程实践中随机子采样可能已接近现有蒸馏方法的效果，避免无效投入。
+
+**为什么值得关注**
+
+> 涉及手写文本识别与CTC/CRNN训练范式，属于OCR识别模型训练与数据效率研究。
+
+**原始摘要**
+
+Dataset distillation (DD) replaces large training datasets with smaller synthetic ones to reduce
+computational costs. While traditionally used for classification, we present, to our knowledge, the
+first DD study for line-level handwritten text recognition (HTR). Unlike classification tasks, which
+use discrete labels, HTR employs unaligned sequences from a virtually infinite output space as
+labels. To adapt classification-based DD methods to this scenario, we define text pseudo-classes by
+clustering transcriptions based on character n-grams. We adapt gradient matching (GM), distribution
+matching (DM) and trajectory matching (MTT) to a Convolutional Recurrent Neural Network (CRNN)
+trained with Connectionist Temporal Classification (CTC). In this process, synthetic line images are
+generated by optimising only the pixels of real starting lines (either randomly chosen or selected
+as text medoids), while keeping their original transcriptions fixed. Across four datasets (IAM,
+George Washington, READ\,2016, LAM) and three budgets (1--10\,\% of the training lines), no
+distilled set outperforms its real initialisation lines. Random lines prove better than medoids, and
+further optimisation only degrades recognition. Methodologically, DM lowers its objective without
+benefit, while GM and MTT barely move theirs. We turn these findings into guidelines for evaluating
+data compression in HTR.
+
+---
+
+### 4. MemEmo: Evaluating Emotion in Memory Systems
+
+- arXiv: [2611.20733v1](https://arxiv.org/abs/2611.20733v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.20733v1)
+- 作者: Peng Liu, Zhen Tao, Jihao Zhao, Ding Chen, Yansong Zhang, Cuiping Li, Zhiyu Li, Hong Chen
+- 发布时间: 2026-11-16T08:39:09Z
+- 分类: cs.CL, cs.AI
+- 相关性评分: 6
+- 主题标签: 记忆系统、情感计算、评测基准、大语言模型
+
+**中文摘要**
+
+> 论文针对记忆系统在处理情感信息方面缺乏评测的问题，提出MemEmo基准，从情感信息抽取、情感记忆更新、情感记忆问答与情感冲突检测四个维度评估记忆系统的情感推理与追踪能力，并构建HLME数据集。在HLME上评测5种代表性记忆系统、报告11项指标，结果显示各系统聚合得分最高仅约45%，远低于100%，暴露记忆系统与情感智能之间的显著差距。
+
+**核心创新概述**
+
+> 首次系统构建面向记忆系统情感能力的评测基准与数据集，将情感维度纳入长程交互记忆评测。
+
+**创新点拆解**
+
+- 提出覆盖情感抽取、更新、问答与冲突检测四维度的MemEmo评测框架
+- 构建HLME人类式记忆情感数据集并提供11项细粒度指标
+- 对主流与前沿记忆系统进行统一评测并量化其情感能力上限
+
+**当前局限**
+
+> 与OCR/文档解析无直接关联；评测对象为5种记忆系统，数据集规模与情感类别覆盖范围在摘要中未充分说明。
+
+**后续可改进方向**
+
+- 与OCR无直接改进关联；若需延伸，可考虑将文档/多模态输入中的情感信息纳入记忆评测
+- 扩展情感类别、跨语言与文化差异的覆盖，并引入更细粒度的错误分析
+
+**工程启发**
+
+> 对OCR/文档解析工程无直接价值，主要服务于对话系统与个性化服务的记忆模块评估。
+
+**为什么值得关注**
+
+> 与OCR、文档解析、手写识别等任务无关，仅作为同批次论文列出，相关性低。
+
+**原始摘要**
+
+Memory systems address the challenge of context loss in Large Language Models during prolonged
+interactions. However, as an essential tool for warm companionship and personalized services, the
+effectiveness of memory systems in processing affective information remains underexamined. To bridge
+this gap, we propose an emotion-enhanced memory evaluation benchmark to assess the performance of
+mainstream and state-of-the-art memory systems in integrating and harnessing emotional information.
+First, we design a benchmark called \textbf{MemEmo} to assess the affective reasoning and tracking
+capabilities of memory systems across four dimensions: emotional information extraction, emotional
+memory updating, emotional memory question-answering, and emotional conflict detection. Second, we
+construct the \textbf{H}uman-\textbf{L}ike \textbf{M}emory \textbf{E}motion (\textbf{HLME}) dataset
+to provide an empirical foundation for scrutinizing memory systems. Finally, We evaluate five
+representative memory systems on the HLME dataset, reporting 11 performance metrics across four
+dimensions. Experimental results reveal that aggregating scores for all tested memory systems is up
+to 45\%, far below 100\% scale, exposing a profound disparity between memory system and affective
+intelligence.
+
+---
