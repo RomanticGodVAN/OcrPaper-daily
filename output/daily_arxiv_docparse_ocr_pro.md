@@ -1,54 +1,61 @@
-# OCR / 文档解析研究日报（2026-11-17）
+# OCR / 文档解析研究日报（2026-11-18）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-11-17 09:10:30`
+- 生成时间（UTC）：`2026-11-18 08:30:13`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日情报显示，OCR/文档解析领域在评测方法与数据压缩方面有值得关注的实证进展：藏文OCR首次建立音节级与词级评测体系，为无词边界语言提供了可替代分词器依赖的指标；PDF转Markdown评测揭示数字评分受输出记法污染的陷阱，提醒工程团队在评分前需清洗记法；手写文本识别数据蒸馏的否定性结果提示现有蒸馏方法在行级HTR上并不优于随机采样，工程投入需谨慎。整体而言，今日工作偏向评测与实证，而非新模型架构。
+> 今日清单包含六项工作，其中三项直接关系 OCR/文档解析：藏文 OCR 首次引入音节级与词级评价并关联下游 NLP 任务；PDF 转 Markdown 评测揭示数字计分被记号污染的陷阱；手写文本识别的数据集蒸馏给出否定性实证。另有一项临床表单多模态 LLM 抽取系统展示人工在环的成本-精度权衡，一项犊牛行为视频数据集报告了用 OCR 读取画面时钟做时间对齐的工程做法，一项记忆系统情感评测与 OCR 无直接关系。整体看，评价方法的粒度与协议严谨性是今日最集中的关注点，而非识别架构本身。
 
 ## 二、今日趋势判断
 
-1) 评测指标精细化：从单一CER向音节、词级及下游任务保真度扩展；2) 评测流程规范化：强调预注册、记法清洗与事后分析透明化；3) 数据效率探索：数据集蒸馏在HTR任务上遭遇瓶颈，负面结果公开化有助避免重复投入。
+OCR 研究正从单一字符错误率转向多粒度、任务相关的评价：藏文工作用音节错误率和分词词级错误率替代 CER，PDF 转 Markdown 工作则暴露了现有数字指标在记号污染下的失真。与此同时，序列识别任务上的数据效率方法（数据集蒸馏）遭遇负面结果，说明分类任务的合成数据思路不能直接迁移。下游任务驱动的抽取系统（临床表单）更关注人工在环的成本-精度平衡，而非纯端到端精度。
 
 ## 三、今日论文概览
 
-1. **Syllable- and Word-Level Evaluation of Tibetan OCR** | 标签：藏文OCR、评测指标、音节错误率、词错误率、下游任务评测
-2. **Digits in Notation Are Not Numbers: A Scoring Pitfall in PDF-to-Markdown Conversion of Japanese Technical Documents (Preliminary Evaluation)** | 标签：PDF转Markdown、OCR评测、数字评分、后处理流水线、日文文档
-3. **Dataset Distillation for Handwritten Text Recognition: An Empirical Study** | 标签：手写文本识别、数据集蒸馏、CTC、CRNN、数据压缩
-4. **MemEmo: Evaluating Emotion in Memory Systems** | 标签：记忆系统、情感计算、评测基准、大语言模型
+1. **Syllable- and Word-Level Evaluation of Tibetan OCR** | 标签：Tibetan OCR、OCR evaluation、syllable error rate、word error rate、TrOCR、downstream NLP
+2. **Digits in Notation Are Not Numbers: A Scoring Pitfall in PDF-to-Markdown Conversion of Japanese Technical Documents (Preliminary Evaluation)** | 标签：PDF-to-Markdown、OCR evaluation pitfalls、number scoring、Japanese documents、post-processing pipeline、MinerU
+3. **Dataset Distillation for Handwritten Text Recognition: An Empirical Study** | 标签：dataset distillation、handwritten text recognition、CTC、CRNN、data compression、negative results
+4. **A Visual Information Extraction System Using Multimodal Large Language Models for Scanned Cognitive and Behavioral Assessments** | 标签：multimodal LLM、information extraction、clinical forms、human-in-the-loop、document understanding、handwriting
+5. **Video recordings and play behaviour annotations of group-housed dairy calves on two Dutch farms** | 标签：calf behavior dataset、video annotation、OCR timestamp extraction、animal welfare、instance tracking
+6. **MemEmo: Evaluating Emotion in Memory Systems** | 标签：memory systems、emotion evaluation benchmark、LLM personalization、dataset construction、affective reasoning
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 藏文OCR引入无需分词器的音节错误率(SER)，并系统比较其与CER、SWER的排序一致性。
-- PDF转Markdown评测中识别并量化输出记法数字对评分的影响，提出去除记法后的修正评分协议。
-- 手写文本识别首次尝试数据集蒸馏，以字符n-gram聚类定义文本伪类并适配CTC训练。
+- 将评价粒度从字符级扩展到音节级、词级或下游任务指标，并检验不同粒度下系统排序是否一致。
+- 在评测前显式剥离转换器生成的记号（链接路径、HTML 属性），避免评分伪影。
+- 用双模型或双引擎分歧触发选择性人工复核，以较低成本检测错误。
+- 将分类任务的数据集蒸馏方法适配到 CTC 序列识别，并用真实初始化行作为受控基线。
+- 利用 OCR 读取画面烧录时钟实现视频帧与标注时间的自动对齐。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 在更大规模、多风格与真实噪声条件下验证SER作为藏文OCR主指标的稳健性，并探索面向藏文的轻量分词或无分词方案。
-- 建立区分文本内容数字与版面记法数字的标准化PDF解析评分流程，并设计针对共享漏检型数字错误的检测信号。
-- 将下游任务保真度纳入OCR模型选择或训练目标，而非仅作为事后评测。
-- 探索超越像素优化与伪类构造的手写文本识别数据蒸馏范式，例如基于序列级对齐或合成文本渲染的样本生成。
-- 建立HTR数据压缩的标准化评测协议，避免以分类任务指标替代识别指标。
+- 为藏文等无空格文字建立不依赖分词器的词级代理指标，并在多书写风格与退化图像上验证其与分词词级错误率排序的一致性。
+- 制定 PDF 转 Markdown 的数字与单位评测协议，规定记号剥离、漏检与错检分开统计，并引入第三引擎或专用数字检测器以提升分歧检查对共享漏检的召回。
+- 将音节错误率或词级错误率作为训练辅助损失微调 OCR 模型，并在下游词性、实体与翻译任务上验证增益。
+- 探索面向 CTC 对齐层面的序列识别蒸馏目标，替代基于字符 n-gram 伪类聚类的分类式蒸馏，并在 Transformer 识别器上复验。
+- 针对手绘与钟表绘制等歧义图形，引入专用视觉推理或不确定性校准模块，减少临床表单抽取中的定性错误。
+- 在更多牧场与季节跨度上检验 OCR 时钟对齐误差对行为时序建模的影响，并将该对齐做法推广到其他视频标注流水线。
 
 ## 六、工程落地启发
 
-- 藏文OCR产品选型可优先采用SER作为主指标，减少对分词器质量的依赖。
-- PDF转Markdown评测前必须清洗图像链接、HTML属性等记法中的数字，避免评分伪影。
-- 双OCR引擎分歧检查对共享漏检型数字错误检测能力有限，需补充其他检测信号。
-- 手写文本识别训练数据压缩时，随机子采样可能已接近现有蒸馏方法效果，应避免无效投入。
-- 后处理流水线需按文档类型评估收益，警惕标题结构损伤与公式修复模块未触发的问题。
+- 藏文 OCR 部署前可用音节错误率做低成本快速评估，无需依赖分词器；但词级指标仍需报告分词器版本。
+- PDF 转 Markdown 流水线在计算数字或单位 F1 前必须先剥离图片链接路径与 HTML 属性中的数字，否则会误判基线优劣。
+- 双引擎分歧检查对数字错误的召回有限（本研究中约 13%），不能单独作为数字正确性的验收手段，需补充抽样人工核查。
+- 在手写文本识别中不要直接套用分类任务的数据集蒸馏方法，受控实验显示其蒸馏集不如随机选取的真实起始行。
+- 临床表单抽取采用表单分类器加评分类抽取器的模块化架构，并用双模型分歧触发人工复核，可在准确率与人工量之间取得可量化的平衡。
+- 视频标注流水线可用 OCR 读取画面烧录时钟来自动对齐帧与标注时间，但需评估时间戳误差对时序建模的影响。
 
 ## 七、优先关注论文
 
-- **Syllable- and Word-Level Evaluation of Tibetan OCR**：为无词边界语言提供可替代分词器依赖的评测指标，并关联下游任务保真度，对多语言OCR评测有参考价值。
-- **Digits in Notation Are Not Numbers: A Scoring Pitfall in PDF-to-Markdown Conversion of Japanese Technical Documents**：揭示评测中易被忽视的记法污染问题，推动评分协议标准化，直接影响工程评测流程设计。
-- **Dataset Distillation for Handwritten Text Recognition: An Empirical Study**：提供负面结果与评估准则，避免工程团队在HTR数据压缩上重复无效投入，并提示标准化评测协议的必要性。
+- **Syllable- and Word-Level Evaluation of Tibetan OCR**：首次建立藏文 OCR 的音节级与词级评价体系并关联下游任务，其排序一致性结论可能影响其他无空格文字的评测设计。
+- **Digits in Notation Are Not Numbers: A Scoring Pitfall in PDF-to-Markdown Conversion of Japanese Technical Documents**：揭示的记号污染问题可能广泛存在于现有 PDF 转 Markdown 评测中，修正后的评分协议值得纳入团队评测规范。
+- **Dataset Distillation for Handwritten Text Recognition: An Empirical Study**：负面结果明确，可避免团队在 HTR 数据压缩上重复投入；其评估指南对后续序列识别数据效率研究有参考价值。
+- **A Visual Information Extraction System Using Multimodal Large Language Models for Scanned Cognitive and Behavioral Assessments**：模块化抽取加双模型人工在环的范式与成本-精度数据可直接借鉴到票据、表单类文档抽取系统。
 
 ## 八、论文逐篇解析
 
@@ -60,39 +67,39 @@
 - 发布时间: 2026-11-16T16:03:52Z
 - 分类: cs.CL
 - 相关性评分: 15
-- 主题标签: 藏文OCR、评测指标、音节错误率、词错误率、下游任务评测
+- 主题标签: Tibetan OCR、OCR evaluation、syllable error rate、word error rate、TrOCR、downstream NLP
 
 **中文摘要**
 
-> 该研究针对藏文OCR评测以字符错误率(CER)为主、但藏文不标记词边界导致词级评测需依赖分词器的问题，在排印体、木刻体和两种手写体上评测了9种识别器配置（CTC模型、带/不带训练后量化的TrOCR编解码器、视觉语言模型），首次报告藏文OCR的音节错误率(SER)与分词词错误率(SWER)。结果显示CER与高层级错误率排序高度一致(Kendall τ≥0.833)，SER无需分词器且在两种分词器下与SWER排序一致(τ≥0.889)；作者还将各配置输出用于词性标注、命名实体标注与机器翻译，给出错误率与下游任务保真度的经验阈值。
+> 该研究针对藏文OCR长期仅以字符错误率(CER)评价的问题，在排版、木刻和两种手写体及组合条件下评估了九种识别器配置（CTC模型、带/不带训练后量化的TrOCR编解码器、一个视觉语言模型），首次系统报告藏文OCR的音节级和词级错误率，并分析下游词性标注、命名实体和机器翻译质量与错误率的关系。
 
 **核心创新概述**
 
-> 首次为藏文OCR建立音节级与词级错误率评测体系，并将OCR错误率与词性、命名实体、机器翻译等下游任务表现建立定量关联。
+> 首次为藏文OCR建立音节级(SER)与分词词级(SWER)评价体系，并系统关联下游NLP任务表现。
 
 **创新点拆解**
 
-- 在藏文OCR中引入音节错误率(SER)这一无需分词器的评测指标，并系统比较其与CER、三种分词器下SWER的排序一致性
-- 覆盖排印体、木刻体与两种手写体的多风格、多架构（CTC、TrOCR、VLM、量化）联合评测
-- 将识别输出接入词性标注、命名实体识别与机器翻译，给出错误率与下游任务保真度的经验阈值
+- 提出无需分词器的音节错误率(SER)作为藏文OCR的替代评价指标，并验证其与三种分词器下SWER的排序一致性
+- 构建跨排版、木刻、手写多字体的九配置评测矩阵，涵盖CTC、TrOCR和VLM三类范式
+- 将OCR错误率与词性保持、命名实体保持、翻译chrF等下游任务指标建立定量阈值关系
 
 **当前局限**
 
-> 评测规模有限（9种配置、四类字体风格），分词器选择对SWER仍有影响；下游任务阈值仅为粗略经验值，且命名实体保真度无法用单一错误率区分。
+> 样本仅涉及九种配置和特定数据来源，SWER依赖分词器且三种分词器间存在差异；下游阈值仅为粗略指导，实体保持率与错误率之间未找到可分离系统的阈值。
 
 **后续可改进方向**
 
-- 在更大规模、更多书写风格与真实扫描噪声条件下验证SER作为藏文OCR主指标的稳健性
-- 研究面向藏文的无分词或轻量分词方案，降低SWER对分词器质量的依赖
-- 将下游任务保真度纳入训练目标或模型选择准则，而非仅作为事后评测
+- 扩展至更多藏文书写风格与真实场景退化图像，验证SER与SWER排序一致性的稳健性
+- 研究藏文专用分词器对SWER评价稳定性的影响，或设计不依赖分词器的词级代理指标
+- 探索以SER为训练目标或辅助损失的识别模型微调，检验下游任务增益
 
 **工程启发**
 
-> 为藏文OCR产品提供可落地的评测规范：SER可替代依赖分词器的词级指标用于模型选型，并为识别精度与下游NLP/翻译质量之间的取舍提供量化参考。
+> 为藏文OCR系统选型提供多粒度评价依据，尤其SER可在无分词器条件下低成本反映系统质量，适合作为藏文OCR部署前的快速评估指标。
 
 **为什么值得关注**
 
-> 直接讨论OCR评测指标设计与多架构识别器对比，属于OCR文档解析评测方法学范畴。
+> 直接涉及OCR评价指标设计（CER/SER/SWER）及OCR输出对下游NLP任务的影响，是OCR文档解析评价方法学的重要参考。
 
 **原始摘要**
 
@@ -122,39 +129,39 @@ that reach entity preservation of 0.6 from those that do not.
 - 发布时间: 2026-11-16T12:22:03Z
 - 分类: cs.CV
 - 相关性评分: 15
-- 主题标签: PDF转Markdown、OCR评测、数字评分、后处理流水线、日文文档
+- 主题标签: PDF-to-Markdown、OCR evaluation pitfalls、number scoring、Japanese documents、post-processing pipeline、MinerU
 
 **中文摘要**
 
-> 论文指出PDF转Markdown流程中数字评分易受表示法干扰的陷阱：在48页公开日文技术文档上评测MinerU、纯文本OCR基线NDLOCR-Lite及一套确定性后处理流水线（锚点插入、脚注重排、相似字符修正、双OCR伙伴门控公式修复、标题重建）。预先设定的数字与单位F1看似偏向OCR基线(0.575 vs 0.397)，但经事后检查发现评分器把转换器输出中的图像链接路径、HTML属性等记法中的数字计入；去除记法后两者F1持平(0.575 vs 0.594)，双引擎分歧检查仅能标记13%的数字错误。OCR基线正文CER更低(0.012 vs 0.053)，后处理提升了页码类额外数字召回但降低了标题级一致性。
+> 论文评估MinerU、纯文本OCR基线(NDLOCR-Lite)及确定性后处理流水线在48页日文技术文档PDF转Markdown任务上的表现，发现预先设定的数字与单位F1评分因把转换器记号（图片链接路径、HTML属性）中的数字计入而失真；去除记号后F1基本持平，双引擎分歧检查仅能标记13%的数字错误，因为多数错误是两引擎共同的漏检。
 
 **核心创新概述**
 
-> 揭示并量化了PDF转Markdown评测中因输出记法差异导致的数字评分伪影，指出双OCR分歧检查对共享漏检型错误基本失效。
+> 揭示PDF转Markdown评测中数字计分受记号污染的陷阱，并通过消融证明多数数字错误为共享漏检。
 
 **创新点拆解**
 
-- 系统识别并验证“记法中数字”污染评分的问题，提出去除记法后再评分的修正协议
-- 设计包含锚点插入、脚注重排、相似字符修正、双OCR门控公式修复与标题重建的确定性后处理流水线
-- 用双引擎分歧检查与人工精度门控(0.929)对后处理假设进行预注册式验证
+- 指出并量化了数字评分中记号（链接路径、HTML属性）导致的评分伪影，提出评分前去除记号的修正流程
+- 设计双引擎分歧检查用于数字错误检测，并分析其低召回原因（共享漏检）
+- 构建包含锚点插入、脚注重排、形近字修复、门控公式修复与标题重建的确定性后处理流水线并进行预注册假设检验
 
 **当前局限**
 
-> 样本仅3篇文档48页，统计功效有限；后处理流水线在标题一致性与公式修复上未达预期，公式修复模块从未触发；部分结论依赖事后(post-hoc)分析。
+> 仅48页、三份文档，样本量小；后处理假设在改进项上未成立，公式修复从未触发，标题级一致性反而下降；文档级区间触及零。
 
 **后续可改进方向**
 
-- 建立区分文本内容数字与版面记法数字的标准化评分流程，并推广到多语言PDF解析评测
-- 针对共享漏检型数字错误设计更有效的检测信号，而非依赖双引擎分歧
-- 改进公式检测与修复的触发机制与标题重建策略，并在更大规模文档集上做预注册验证
+- 建立更规范的PDF转Markdown数字与单位评测协议，明确记号剥离、漏检与错检的分离统计
+- 针对两引擎共享漏检问题，引入第三引擎或针对性数字检测模块以提升分歧检查召回
+- 改进公式修复的门控触发条件与标题重建策略，避免标题一致性下降
 
 **工程启发**
 
-> 为PDF转Markdown流水线的评测与后处理设计提供直接警示：评分前需清洗输出记法，后处理需按文档类型评估收益与标题结构损伤的权衡。
+> 为PDF转Markdown流水线的评测设计提供可直接采纳的评分修正建议，避免因记号污染误判基线优劣，对文档解析系统质量评估有直接工程指导意义。
 
 **为什么值得关注**
 
-> 聚焦PDF文档解析/OCR流水线的评测方法学与后处理工程，与OCR文档解析直接相关。
+> 聚焦OCR/文档转换输出（数字、公式、标题）的评测方法学，与OCR文档解析评价直接相关。
 
 **原始摘要**
 
@@ -181,45 +188,45 @@ the study stays a technical report.
 
 ### 3. Dataset Distillation for Handwritten Text Recognition: An Empirical Study
 
-- arXiv: [2611.21054v1](https://arxiv.org/abs/2611.21054v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.21054v1)
+- arXiv: [2611.21054v2](https://arxiv.org/abs/2611.21054v2)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.21054v2)
 - 作者: Félix Fuentes-Hurtado, Aric Ayllón, Juan C. Alfaro
 - 发布时间: 2026-11-16T13:05:34Z
 - 分类: cs.CV
 - 相关性评分: 10
-- 主题标签: 手写文本识别、数据集蒸馏、CTC、CRNN、数据压缩
+- 主题标签: dataset distillation、handwritten text recognition、CTC、CRNN、data compression、negative results
 
 **中文摘要**
 
-> 论文首次将数据集蒸馏(DD)引入行级手写文本识别(HTR)：由于HTR标签是近乎无限输出空间中的未对齐序列，作者以字符n-gram聚类转录文本定义“文本伪类”，并将梯度匹配(GM)、分布匹配(DM)与轨迹匹配(MTT)适配到CTC训练的CRNN上，合成行图像仅优化真实起始行（随机选取或文本中心点）的像素而保持转录固定。在IAM、George Washington、READ 2016、LAM四个数据集和1–10%预算下，没有任何蒸馏集优于其真实初始化行；随机行优于中心点，进一步优化反而降低识别效果；DM目标下降但无收益。
+> 论文首次将数据集蒸馏(DD)引入行级手写文本识别(HTR)，通过字符n-gram聚类转录文本构造伪类，将梯度匹配、分布匹配和轨迹匹配适配到CTC训练的CRNN上，在四个数据集和1%–10%预算下实验发现蒸馏集均不如其真实初始化行，随机行优于文本中位样本，进一步优化只会降低识别性能。
 
 **核心创新概述**
 
-> 首次系统研究面向行级手写文本识别的数据集蒸馏，提出基于字符n-gram聚类构造文本伪类以适配分类式DD方法。
+> 首次系统研究行级HTR的数据集蒸馏，并给出否定性实证结论与评估指南。
 
 **创新点拆解**
 
-- 将分类任务中的GM、DM、MTT蒸馏方法适配到CTC训练的CRNN与未对齐序列标签场景
-- 以字符n-gram聚类转录文本定义文本伪类，并以真实行像素初始化的方式生成合成行图像
-- 跨四个HTR数据集与三个压缩预算给出否定性结论与评估准则
+- 利用转录文本的字符n-gram聚类定义伪类，将面向分类的DD方法迁移到无限输出空间的序列识别任务
+- 将GM、DM、MTT三种蒸馏方法适配到CTC+CRNN框架，并仅在真实起始行像素上优化而固定转录标签
+- 在四个HTR数据集与三档压缩预算下建立受控对比，揭示随机初始化行优于中位样本的现象
 
 **当前局限**
 
-> 所适配的三种蒸馏方法均未带来增益，甚至随机采样的真实行即为最优；实验限于行级CRNN+CTC架构与四个英文/多语手写数据集。
+> 未能在任何设置下超越真实起始行，方法适配后目标函数下降但不带来识别收益；仅覆盖CRNN+CTC架构，未验证其他序列识别模型。
 
 **后续可改进方向**
 
-- 探索超越像素优化与伪类构造的蒸馏范式，例如基于序列级对齐或合成文本渲染的样本生成
-- 将蒸馏扩展到Transformer/编码器-解码器HTR架构与更细粒度（词、字符）压缩单元
-- 建立HTR数据压缩的标准化评测协议，避免以分类任务指标替代识别指标
+- 探索面向序列标签的蒸馏目标（如CTC对齐层面的匹配）而非依赖伪类聚类
+- 在Transformer/TrOCR等非CTC架构上验证蒸馏可行性
+- 研究蒸馏集与真实数据混合训练或课程式采样以发挥合成数据价值
 
 **工程启发**
 
-> 为手写文本识别训练数据压缩提供负面证据与评估建议，提示工程实践中随机子采样可能已接近现有蒸馏方法的效果，避免无效投入。
+> 为HTR数据压缩与合成数据使用提供负面证据与评估规范，避免工程上盲目采用分类式蒸馏方法造成算力浪费。
 
 **为什么值得关注**
 
-> 涉及手写文本识别与CTC/CRNN训练范式，属于OCR识别模型训练与数据效率研究。
+> 涉及手写文本识别（OCR核心任务）的训练数据范式与CTC框架，对OCR模型训练方法研究有参考价值。
 
 **原始摘要**
 
@@ -241,7 +248,130 @@ data compression in HTR.
 
 ---
 
-### 4. MemEmo: Evaluating Emotion in Memory Systems
+### 4. A Visual Information Extraction System Using Multimodal Large Language Models for Scanned Cognitive and Behavioral Assessments
+
+- arXiv: [2611.22252v1](https://arxiv.org/abs/2611.22252v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.22252v1)
+- 作者: Enshuo Hsu, Linh Nguyen, Sunyang Fu, Heath Goodrum, Sandra Stansberry, Kirk Roberts, Hongfang Liu, Yen-Chi L. Le
+- 发布时间: 2026-11-17T05:56:48Z
+- 分类: cs.AI
+- 相关性评分: 8
+- 主题标签: multimodal LLM、information extraction、clinical forms、human-in-the-loop、document understanding、handwriting
+
+**中文摘要**
+
+> 研究提出模块化多模态LLM系统，用于扫描的纸质认知评估(MMSE、MoCA、Mini-Cog)和NICHQ Vanderbilt量表的信息抽取：先由表单分类器识别页面类型，再由对应评分抽取器将字段与分数写入schema，并采用双模型验证的人工在环机制。认知评估端到端准确率88%，Vanderbilt达97.5%，人工在环将认知评估提升至97.5%并减少63.8%人工量。
+
+**核心创新概述**
+
+> 将多模态LLM与双模型分歧触发的人工在环机制结合，用于临床认知与行为评估扫描表单的结构化抽取。
+
+**创新点拆解**
+
+- 模块化表单分类器+评分类抽取器的两阶段架构，便于扩展到新表单类型
+- 双LLM验证驱动的选择性人工复核机制，仅在模型分歧时引入标注员，兼顾准确率与人工成本
+- 对Mini-Cog钟表绘制等手绘任务进行定性错误分析，识别歧义绘图为主要错误来源
+
+**当前局限**
+
+> 认知评估端到端准确率未达100%，抽取错误中62.3%源于绘图歧义；样本与表单类型有限，仅在特定量表上验证。
+
+**后续可改进方向**
+
+- 针对手绘/钟表绘制的歧义问题引入专用视觉推理或不确定性校准模块
+- 扩展至更多临床表单与跨机构扫描条件，检验模块化架构的泛化性
+- 探索无需双模型全量推理的高效分歧检测以进一步降低计算成本
+
+**工程启发**
+
+> 提供可复用的临床表单OCR+LLM抽取系统范式与人工在环成本-精度权衡数据，处理时间缩短10–20倍、成本降低12倍以上，具备落地价值。
+
+**为什么值得关注**
+
+> 涉及扫描文档的字段级信息抽取与多模态LLM应用，属于OCR向文档理解延伸的工程实践。
+
+**原始摘要**
+
+Objective. Paper-based assessments are common in patient care, but handwriting and scanning
+artifacts make these forms difficult to process at scale. This study proposes a modular, multimodal
+LLM-based system with human oversight for extracting fields and scores. We conducted a qualitative
+analysis of the use of LLMs for hand-drawing analysis. Materials and Methods. The system processes
+cognitive assessments (i.e., MMSE, MoCA, Mini-Cog) and the NICHQ Vanderbilt Assessment using two
+modules: 1) a form classifier that assigns a scanned page to a form type, followed by a
+corresponding 2) score extractor that extracts fields and scores into a schema. A human-in-the-loop
+design utilizing dual-model validation engages human annotators when two LLMs disagree, limiting
+manual review to challenging pages only. Results. End-to-end accuracy for cognitive assessments was
+88%, with most form types exceeding 90%. For the NICHQ Vanderbilt, overall accuracy reached 97.5%,
+with all form types above 96%. The human-in-the-loop design further improved cognitive assessment
+accuracy to 97.5% while reducing manual work by 63.8%. In the Mini-Cog Clock Drawing task,
+qualitative analysis showed that 62.3% of all extraction errors stemmed from ambiguous drawing, in
+which cases the LLM provided reasonable readings. Discussion. Compared to current manual data
+extraction, our LLM-based system reduces processing time by 10 to 20 times and costs by over 12
+times. The modular design allows seamless expansion to additional form types. Conclusion. Our system
+provides an accurate, scalable, and cost-efficient solution for structuring data trapped in
+handwritten paper forms for clinical decision support.
+
+---
+
+### 5. Video recordings and play behaviour annotations of group-housed dairy calves on two Dutch farms
+
+- arXiv: [2611.21706v1](https://arxiv.org/abs/2611.21706v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.21706v1)
+- 作者: Haiyu Yang, Heidi Lesscher, Enhong Liu, Miel Hostens
+- 发布时间: 2026-11-16T16:20:23Z
+- 分类: cs.CV, cs.LG
+- 相关性评分: 7
+- 主题标签: calf behavior dataset、video annotation、OCR timestamp extraction、animal welfare、instance tracking
+
+**中文摘要**
+
+> 该数据集论文公开了荷兰两个牧场群养奶犊牛的四组摄像头视频，共1,173个文件、651小时，其中8个观察日由训练观察员以18项行为谱连续编码104小时（90小时覆盖栏内全部犊牛），并发布110万解码帧、逐帧OCR读取的摄像头时钟时间戳、逐犊牛分割轨迹及帧级玩耍标签。
+
+**核心创新概述**
+
+> 提供带个体级行为标注与OCR时间戳的群养犊牛视频公开数据集，填补此类资源稀缺。
+
+**创新点拆解**
+
+- 以OCR从画面上烧录的摄像头时钟读取逐帧时间戳，实现视频帧与标注时间的对齐
+- 提供逐犊牛分割轨迹与帧级玩耍行为标签，支持自动化行为识别训练与评测
+- 跨研究牧场与商业牧场多摄像头部署，覆盖不同养殖环境
+
+**当前局限**
+
+> 仅两个牧场、四组部署，观察日仅8天；部分视频（14小时）未对全部犊牛编码；商业牧场数据仅2024年一组。
+
+**后续可改进方向**
+
+- 扩展牧场数量与季节跨度以提升行为识别模型的域泛化评估
+- 利用OCR时钟对齐质量分析时间戳误差对行为时序建模的影响
+- 将逐犊牛轨迹与玩耍标签用于弱监督或多目标跟踪联合识别研究
+
+**工程启发**
+
+> 为动物行为自动识别提供带时间戳与个体轨迹的基准数据，OCR读取画面时钟的做法可推广到其他视频标注流水线的时间对齐环节。
+
+**为什么值得关注**
+
+> OCR被用作视频帧时间戳提取的关键组件，体现OCR在非传统文档场景中的工程应用。
+
+**原始摘要**
+
+Play is used as an indicator of positive welfare in dairy calves, but openly available video of
+group-housed calves with individual behaviour annotations is scarce. We describe video from four
+camera deployments of about one week each in group pens of dairy calves on two farms in the
+Netherlands: a research and teaching dairy farm (2024 and 2025) and a commercial dairy farm (2024).
+The recordings comprise 1,173 video files spanning 651 h. For eight observation days, trained
+observers coded calf behaviour continuously in Noldus The Observer XT with an 18-item ethogram of
+play and other behaviours, covering 104 h of video, 90 h of which have every calf in the pen coded.
+The release also contains 1.1 million decoded frames from seven annotated sessions, a per-frame
+timestamp read by optical character recognition from the camera clock burned into each frame, per-
+calf segmentation tracks and per-calf frame-level play labels. The data support studies of calf
+behaviour and welfare and the development and evaluation of automated behaviour recognition.
+
+---
+
+### 6. MemEmo: Evaluating Emotion in Memory Systems
 
 - arXiv: [2611.20733v1](https://arxiv.org/abs/2611.20733v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2611.20733v1)
@@ -249,38 +379,39 @@ data compression in HTR.
 - 发布时间: 2026-11-16T08:39:09Z
 - 分类: cs.CL, cs.AI
 - 相关性评分: 6
-- 主题标签: 记忆系统、情感计算、评测基准、大语言模型
+- 主题标签: memory systems、emotion evaluation benchmark、LLM personalization、dataset construction、affective reasoning
 
 **中文摘要**
 
-> 论文针对记忆系统在处理情感信息方面缺乏评测的问题，提出MemEmo基准，从情感信息抽取、情感记忆更新、情感记忆问答与情感冲突检测四个维度评估记忆系统的情感推理与追踪能力，并构建HLME数据集。在HLME上评测5种代表性记忆系统、报告11项指标，结果显示各系统聚合得分最高仅约45%，远低于100%，暴露记忆系统与情感智能之间的显著差距。
+> 论文提出MemEmo情感增强记忆评测基准与HLME数据集，从情感信息抽取、情感记忆更新、情感记忆问答和情感冲突检测四个维度评估五种主流记忆系统，报告11项指标，结果显示各系统综合得分最高仅约45%，暴露记忆系统与情感智能之间的显著差距。
 
 **核心创新概述**
 
-> 首次系统构建面向记忆系统情感能力的评测基准与数据集，将情感维度纳入长程交互记忆评测。
+> 首次系统评测记忆系统处理情感信息的能力，并构建对应基准与人类式记忆情感数据集。
 
 **创新点拆解**
 
-- 提出覆盖情感抽取、更新、问答与冲突检测四维度的MemEmo评测框架
-- 构建HLME人类式记忆情感数据集并提供11项细粒度指标
-- 对主流与前沿记忆系统进行统一评测并量化其情感能力上限
+- 定义情感记忆评测的四维框架：抽取、更新、问答与冲突检测
+- 构建HLME数据集为记忆系统情感能力提供实证基础
+- 在五种代表性记忆系统上以11项指标开展多维评测并给出聚合得分
 
 **当前局限**
 
-> 与OCR/文档解析无直接关联；评测对象为5种记忆系统，数据集规模与情感类别覆盖范围在摘要中未充分说明。
+> 评测系统数量有限（五种），数据集规模与情感场景覆盖可能受限；未针对情感记忆缺陷提出具体改进方法。
 
 **后续可改进方向**
 
-- 与OCR无直接改进关联；若需延伸，可考虑将文档/多模态输入中的情感信息纳入记忆评测
-- 扩展情感类别、跨语言与文化差异的覆盖，并引入更细粒度的错误分析
+- 设计针对情感信息抽取与冲突检测的专门记忆架构或检索策略
+- 扩展数据集至多轮长程对话与跨语言情感场景，提升评测覆盖
+- 将情感记忆指标与下游个性化服务效果关联验证其预测效度
 
 **工程启发**
 
-> 对OCR/文档解析工程无直接价值，主要服务于对话系统与个性化服务的记忆模块评估。
+> 为对话记忆系统的情感能力提供可量化评测工具，指导个性化服务中记忆模块的设计取舍。
 
 **为什么值得关注**
 
-> 与OCR、文档解析、手写识别等任务无关，仅作为同批次论文列出，相关性低。
+> 虽不直接涉及OCR，但涉及文档/对话信息抽取与记忆系统的评测方法，属广义信息处理评测参考。
 
 **原始摘要**
 
