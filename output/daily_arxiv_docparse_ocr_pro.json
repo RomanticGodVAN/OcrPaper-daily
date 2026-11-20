@@ -1,57 +1,105 @@
 {
   "meta": {
-    "report_date": "2026-11-19",
-    "generated_at_utc": "2026-11-19 08:45:13",
+    "report_date": "2026-11-20",
+    "generated_at_utc": "2026-11-20 08:30:06",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
-    "count": 3
+    "count": 5
   },
   "synthesis": {
-    "executive_summary": "今日三篇论文分别覆盖科学文档图文矛盾诊断、免训练VLM细节感知增强和低资源OCR词典约束解码。核心结论是：多模态模型在全文自主核查图文矛盾上能力仍弱（绝对诊断率3.3%），但明确目标图可显著提升；推理侧通过自提区域放大重看可低成本提升小目标与密集文本细节；低资源OCR应优先保证词典内精度并配合置信度回退，而非盲目扩大词表。三篇均强调‘定位/覆盖’是准确率的关键瓶颈，且都给出了可操作的评测或集成信号，适合工程团队评估后落地。",
-    "trend_summary": "当前OCR与文档解析研究正从‘给定输入做识别’转向‘自主定位证据与动态决定是否干预’：科学文档侧要求模型在全文PDF中自主发现图文矛盾；VLM推理侧用置信度触发二次观察，免训练增强细节；低资源OCR侧用覆盖率-精度分解指导词典扩展与回退。共同趋势是承认外部强约束（硬词典、直接给定图）有收益但需代价控制，强调可信度校准与条件化干预。",
+    "executive_summary": "今日5篇论文中，与OCR/文档解析直接相关的有3篇：Carry the Fine Print提出文档OCR视觉token两阶段压缩框架，在保留一半视觉token时达到未压缩模型95.42/96.09分，并显著降低延迟；When Figures Disagree with Text定义了在完整论文中自主定位图表-文本矛盾的验证任务，揭示“决定验证什么”是主要瓶颈；SEAF将OCR文本作为语义分支输入用于社交媒体多图像讽刺检测。另两篇（扩散Transformer RL后训练、个性化Agent记忆）与OCR/文档解析仅有间接关联，前者涉及文本渲染（OCR）质量，后者与文档解析任务无关。",
+    "trend_summary": "文档OCR研究正从“提升识别精度”转向“在固定视觉token预算下保持转录保真度”，压缩策略强调选择与补偿解耦而非单纯剪枝。同时，视觉证据验证从给定图表的一致性判断，转向在完整文档中自主决定验证对象，检索与验证的耦合成为新瓶颈。OCR文本的角色也在扩展：从纯转录输出变为下游多模态推理（如讽刺检测）的语义补充信号。",
     "common_innovations": [
-      "将准确率瓶颈显式归因于证据定位或词典覆盖，而非直接堆模型规模。",
-      "采用置信度触发的条件化流程：低置信度才二次观察或回退，避免全局开销。",
-      "评测设计区分能力层级（如提及问题图 vs 诊断矛盾），避免单一指标掩盖短板。",
-      "免训练或轻量工程改造即可集成到现有文档问答与OCR流水线中。"
+      "将视觉信息筛选与信息补偿/融合分离为两个阶段或分支，避免单一压缩或加权策略的信息损失",
+      "在冻结主干模型的前提下进行轻量适配（token压缩、steering向量、分支融合），降低部署成本",
+      "利用OCR文本或文本锚点作为跨模态对齐与加权依据，替代纯视觉相似度",
+      "强调在完整文档/多图场景中自主定位关键证据，而非依赖人工指定输入",
+      "通过输入无关或低参数量的机制（固定steering向量、事件边图）复现复杂训练或记忆效果"
     ],
     "future_directions": [
-      "设计多级细粒度评分标准，将科学文档图文核查拆为定位图、关联声明、识别矛盾三级，分别报告诊断率。",
-      "研究基于图-文引用关系与图注-正文语义对齐的核查对象排序策略，替代仅按中心性排序的基线。",
-      "探索渲染图与文本的联合推理架构，使模型能在矛盾仅在图像渲染后可见时仍能诊断。",
-      "将VLM自提区域与轻量OCR文本检测信号融合，在文本密集文档中提升数字与字段级识别。",
-      "研究多轮迭代再观察与不确定性校准，降低高置信度错误漏检，并扩展到表格与图表解析。",
-      "在低资源OCR中引入按置信度分段启用不同规模词典或软约束解码，动态平衡覆盖率与词典内精度。",
-      "用神经语言模型或子词级语言模型替代硬词典约束，缓解形态扩展带来的词典内精度损失。",
-      "将形态扩展与视觉特征联合建模，探索端到端注意力解码在黏着语OCR中的词典融合方式。",
-      "扩展科学文档核查评测到更多学科、更多模型，并引入多轮审稿交互或表格解析、图注抽取等外部工具。",
-      "建立统一评测协议，在同一文档集上同时比较免训练推理增强、词典约束解码与外部OCR工具组合的收益与成本。"
+      "研究文档OCR中按页面内容复杂度（表格密度、公式数量、小字号区域）动态分配视觉token预算的策略，替代固定保留率",
+      "将token压缩的选择阶段与布局分析结合，对表格单元格、公式符号、脚注等结构区域设置差异化保留优先级",
+      "构建更大规模（数百篇以上）的完整论文图表-文本矛盾评测集，并开发基于OCR提取图表内文字与视觉特征的矛盾检测基线",
+      "研究模型自主选择待验证图表的检索策略：利用图表标题、正文引用上下文和OCR文本做多模态检索排序，替代中心性基线",
+      "探索在文档解析流水线中引入条件化轻量适配（如输入依赖的小参数量steering），用于文本渲染质量与版面保真度的快速校正",
+      "将OCR文本与视觉token压缩联合优化：在压缩后的视觉表示上保留与OCR文本对齐的锚点token，验证对下游信息抽取任务的影响",
+      "在低资源语言和手写文档上评估两阶段token压缩的鲁棒性，并测试补偿机制在复杂表格与多栏版面上的结构保持能力"
     ],
     "engineering_takeaways": [
-      "科学出版审稿辅助工具应优先提供‘命名/高亮目标图’的交互，而非假设模型能自主发现图文矛盾。",
-      "免训练VLM细节增强（SEE）无需额外检测器或OCR引擎，可直接集成到现有多模态文档问答系统，但需先验证复杂版面下的区域提议召回。",
-      "低资源OCR词典构建应优先保证词典内精度，配合置信度回退，避免全量形态扩展导致整体token准确率下降。",
-      "对图文一致性自动检查，文本-only审阅在矛盾仅见于渲染图时完全失效，工程管线必须保留图像渲染分支。",
-      "评测指标应分层报告（定位、关联、诊断），避免将‘提及问题图’误当作‘诊断矛盾’。",
-      "置信度触发的条件化流程（低置信度才二次观察或回退）是低开销提升细节与稳健性的通用工程模式。"
+      "Carry the Fine Print的两阶段压缩可直接用于大规模文档数字化：50% token预算下批量完成时间快35-40%，且输出长度失控显著减少（3个 vs 30-34个）。",
+      "文档OCR压缩应优先保留锚点token并做邻域位置补偿，而非全局重要性剪枝，避免小符号和重复条目丢失。",
+      "SEAF表明OCR文本与帖子文本拼接后可作为语义分支输入，在社交媒体多图内容审核中提升讽刺识别，工程上可先做OCR-文本融合基线。",
+      "When Figures Disagree with Text的结论提示：论文核查工具中，先让模型命名/定位图表再判断一致性，接受率可从4.3%提升至20.4%，应把“选图”作为独立模块设计。",
+      "扩散Transformer的steering向量方法用0.29M参数恢复90%以上RL奖励增益，文本渲染场景可优先尝试零初始化在线训练steering向量而非全量RL或大LoRA。"
     ],
     "watchlist": [
       {
+        "title": "Carry the Fine Print: Budget-Aware Visual Token Compression for Document OCR",
+        "watch_reason": "直接解决文档OCR视觉token冗余问题，在冻结骨干下实现显著延迟下降且精度损失小，工程落地路径清晰，需关注其在手写、复杂表格上的泛化表现。"
+      },
+      {
         "title": "When Figures Disagree with Text: Evaluating Autonomous Visual Evidence Verification in Scientific Papers",
-        "watch_reason": "定义了全文自主图文核查任务并暴露当前模型3.3%绝对诊断率的短板，其多级评分与输入条件实验可指导审稿辅助工具设计。"
+        "watch_reason": "定义了文档级自主视觉证据验证任务并暴露“选图”瓶颈，评测规模虽小但问题定义对文档解析与审阅工具设计有直接影响，值得跟踪后续数据集扩展。"
       },
       {
-        "title": "SEE: Unlocking the Hidden Perception of Frozen VLMs",
-        "watch_reason": "免训练、无需外部检测器或OCR的推理侧增强方案，工程集成成本低，但需验证在复杂版面文档与表格解析中的泛化性。"
+        "title": "SEAF: Selective Semantic Enrichment and Visual Evidence Fusion for Multimodal Sarcasm Detection",
+        "watch_reason": "OCR文本作为语义分支输入的融合方式可迁移到其他文档-图像联合推理任务，其TASA加权机制对多图文档场景有参考价值，但需关注MLLM生成噪声的影响。"
       },
       {
-        "title": "Coverage Governs Accuracy: When to Expand the Lexicon and When to Fall Back in Low-Resource Manchu OCR",
-        "watch_reason": "给出覆盖率-词典内精度分解与置信度回退策略，对低资源OCR词典构建有量化指导，但结论目前限于满文与CRNN/Transformer识别器。"
+        "title": "RL Post-Training in Diffusion Transformers Is Activation Steering",
+        "watch_reason": "与OCR/文档解析直接关联较弱，但其在文本渲染（OCR）上的增益和极低参数量值得关注，若后续出现条件化steering或文档图像生成方向的工作可纳入评估。"
       }
     ]
   },
   "papers": [
+    {
+      "title": "SEAF: Selective Semantic Enrichment and Visual Evidence Fusion for Multimodal Sarcasm Detection",
+      "summary": "Multimodal sarcasm detection requires textual, visual, and contextual evidence, particularly when multiple images provide complementary cues. Multimodal large language models (MLLMs) can generate auxiliary information from a post's text and images, but their outputs may mix useful background knowledge with redundant visual descriptions. We propose SEAF, a dual-branch framework for selective semantic enrichment and visual evidence fusion. SEAF assigns generated fields to distinct roles: entity background enriches semantic input, while image descriptions supply alignment statistics. The semantic branch combines the original post text, background from a frozen MLLM, and optical character recognition (OCR) text. The aligned visual branch combines global and local visual features with statistics of cross-modal and inter-image similarity. Text-Anchored Smoothed Aggregation (TASA) weights images by their similarity to the original post text while preserving contributions from images with low literal similarity. Summing the branch classification scores integrates contextual semantics with visual evidence. Experiments on the multi-image MMSD3.0 benchmark show that SEAF outperforms all compared methods.",
+      "link": "https://arxiv.org/abs/2611.25672v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25672v1",
+      "authors": [
+        "Faxian Wan",
+        "Xiaocui Yang",
+        "Yifan Cao",
+        "Shi Feng",
+        "Daling Wang",
+        "Yifei Zhang"
+      ],
+      "published": "2026-11-19T07:49:34Z",
+      "updated": "2026-11-19T07:49:34Z",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "arxiv_id": "2611.25672v1",
+      "score": 16,
+      "topic_tags": [
+        "多模态讽刺检测",
+        "OCR文本融合",
+        "视觉证据融合",
+        "MLLM",
+        "双分支框架"
+      ],
+      "zh_summary": "该论文提出SEAF，一个用于多模态讽刺检测的双分支框架。SEAF利用冻结的多模态大语言模型生成实体背景知识和图像描述，并将OCR文本与原始帖子文本结合作为语义分支输入；视觉分支则融合全局和局部视觉特征以及跨模态和图像间相似度统计。通过文本锚定的平滑聚合（TASA）方法，根据图像与原始文本的相似度对图像进行加权，同时保留低字面相似度图像的贡献。最终通过求和两个分支的分类分数来整合上下文语义和视觉证据。在MMSD3.0多图像基准测试上，SEAF优于所有对比方法。",
+      "novelty": "提出选择性语义丰富和视觉证据融合的双分支框架，利用MLLM生成的信息的不同角色（实体背景用于语义增强，图像描述提供对齐统计），并设计TASA机制动态加权多图像贡献。",
+      "innovation_points": [
+        "双分支架构分别处理语义增强和视觉证据对齐，并融合分类分数",
+        "利用冻结MLLM生成实体背景和图像描述，并赋予不同角色以过滤冗余信息",
+        "设计文本锚定的平滑聚合（TASA）机制，根据图像与文本的相似度加权，同时保留低相似度图像的信息",
+        "结合OCR文本作为语义分支的补充输入，增强多模态讽刺检测的文本证据"
+      ],
+      "limitations": "依赖冻结MLLM生成的质量，可能引入噪声或偏差；仅在MMSD3.0基准上验证，泛化性未知；未与其他多图像融合策略进行充分消融；TASA的超参数可能需针对不同数据集调整。",
+      "improvement_directions": [
+        "探索更鲁棒的MLLM生成信息筛选机制，减少噪声影响",
+        "在更多多模态讽刺检测数据集上验证方法有效性",
+        "研究动态调整TASA中相似度权重的自适应方法",
+        "结合更细粒度的跨模态对齐（如区域-文本对齐）提升视觉证据融合",
+        "考虑引入外部知识图谱增强实体背景的准确性"
+      ],
+      "engineering_value": "为多模态讽刺检测提供了一种可落地的双分支融合方案，尤其适用于社交媒体多图像场景，可集成到内容审核系统中提升讽刺识别准确率。",
+      "why_relevant": "论文涉及OCR文本作为语义分支输入，并利用MLLM生成图像描述，与OCR和文档解析中的多模态信息融合相关，对多图像场景下的文本-视觉证据整合有参考价值。"
+    },
     {
       "title": "When Figures Disagree with Text: Evaluating Autonomous Visual Evidence Verification in Scientific Papers",
       "summary": "Scientific figures carry evidence for the claims that cite them, so reviewing a paper means checking that a figure agrees with the text, and not only describing what the figure shows. Benchmarks of figure-text verification typically hand the model the figure, the claim, or the knowledge that an inconsistency exists, which leaves untested whether a model can find the figure worth checking in a complete paper, relate a visual element to the claim it conflicts with, and recognize the conflict. We study this autonomous setting on 31 full manuscripts, each carrying a reviewer-documented figure-text inconsistency from PRISMM-Bench that is hidden from the model. Six multimodal models review each PDF under a neutral prompt, and we then add one input at a time to the same manuscripts. Of 1,445 open-ended reviews, 60.6% mention the flawed figure, yet a grading rubric accepts only 3.3% as diagnosing its contradiction; a blind audit finds the rubric lenient, so we read these as rubric-accepted rates and compare conditions rather than absolute values. In a separate controlled run, naming the figure, without stating that it is flawed, raises rubric-accepted diagnosis from 4.3% to 20.4%, while a consistency instruction and coarse visual cues do not. When the contradiction is visible only in the rendered figure, text-only review yields no accepted diagnosis, while review of the rendered pages with the figure named reaches 15.8%. A baseline that lets the model choose which figures to check, ranked by centrality, stays at 4.8%. Deciding what to verify is thus a large part of the difficulty, and the selection rule we tested does not resolve it. Multimodal document understanding should be evaluated on whether a model can propose what to verify, not only answer questions about a figure it is handed.",
@@ -80,119 +128,166 @@
       "arxiv_id": "2611.24353v1",
       "score": 11,
       "topic_tags": [
-        "图文一致性验证",
-        "科学文档理解",
-        "多模态大模型评测",
-        "全文审稿",
-        "基准构建"
+        "视觉证据验证",
+        "图表-文本一致性",
+        "科学论文审阅",
+        "多模态理解",
+        "自主验证"
       ],
-      "zh_summary": "该研究考察多模态模型在完整科学论文中自主发现并诊断图文矛盾的能力。作者使用31篇带有审稿人记录图文不一致的PRISMM-Bench全文PDF，要求六个多模态模型以中性提示进行开放式审稿，并逐步添加图像名称、一致性指令、粗粒度视觉线索等输入进行对比。结果显示，多数模型能提及问题图，但仅极少数被评分标准认定为诊断出矛盾；命名目标图可显著提升诊断率，而仅文本审阅在图像渲染后才可见矛盾时完全失效。",
-      "novelty": "提出并系统评测“自主视觉证据验证”任务，即在全文PDF中让模型自行寻找值得核查的图、关联冲突声明并识别矛盾，而非由基准直接给定图或声明。",
+      "zh_summary": "该论文研究自主视觉证据验证任务：在完整科学论文中，模型需自主找到与文本主张矛盾的图表并识别矛盾。基于31篇完整手稿（每篇包含PRISMM-Bench中记录的图表-文本不一致），测试了六个多模态模型在 neutral prompt 下的表现。结果显示，60.6%的开放式评审提及了有缺陷的图表，但仅3.3%被评分标准接受为诊断出矛盾。在控制实验中，仅指明图表（不告知有缺陷）可将接受率从4.3%提升至20.4%，而一致性指令和粗粒度视觉线索无效。当矛盾仅存在于渲染图表中时，纯文本评审无法诊断，而命名图表的渲染页面评审达到15.8%。基于中心性排序的图表选择基线仅4.8%。表明“决定验证什么”是困难的重要部分。",
+      "novelty": "首次在完整论文PDF上研究自主视觉证据验证，要求模型自行定位图表、关联矛盾并识别冲突，而非提供图表或告知不一致存在。",
       "innovation_points": [
-        "任务定义：将图文一致性验证从给定图-声明配对扩展为全文自主审稿，要求模型自行定位证据图。",
-        "评测设计：在31篇真实手稿上隐藏审稿人记录的不一致，采用中性提示与逐步添加输入的条件对比。",
-        "发现输入条件的影响：命名目标图可提升诊断率，一致性指令与粗粒度视觉线索无效，文本-only 审阅在矛盾仅见于渲染图时失败。",
-        "引入盲审校评分偏差分析，区分“提及问题图”与“诊断矛盾”两个层级。"
+        "定义了自主视觉证据验证任务：在完整论文中自主发现与文本矛盾的图表",
+        "构建了基于31篇完整手稿的评测集，每篇包含隐藏的图表-文本不一致",
+        "系统评估了多种输入增强（命名图表、一致性指令、视觉线索）对诊断率的影响",
+        "揭示了“决定验证什么”是自主验证的主要瓶颈，图表选择基线表现低下"
       ],
-      "limitations": "评分标准被盲审认定为偏宽松，绝对诊断率低（3.3%），结果更多用于条件间相对比较而非绝对能力评估；样本仅31篇，模型与提示条件有限，未覆盖多轮交互或工具调用。",
+      "limitations": "评测规模较小（31篇），评分标准可能偏宽松（经盲审确认）；仅测试了六个多模态模型，未涵盖最新架构；任务局限于科学论文领域，泛化性有限。",
       "improvement_directions": [
-        "设计更严格的细粒度评分标准，区分“定位图”“关联声明”“识别矛盾”多级能力。",
-        "研究让模型自主选择核查对象的策略，例如基于图-文引用关系、图注与正文语义对齐的排序方法，以替代当前仅按中心性排序的基线。",
-        "探索渲染图与文本的联合推理架构，提升矛盾仅在图像渲染中可见时的诊断能力。",
-        "扩展到更多学科与更多模型，并引入多轮审稿交互或外部工具（表格解析、图注抽取）以增强全文证据核查。"
+        "扩大评测数据集规模，覆盖更多学科和论文类型",
+        "开发更精确的自动评分方法，减少人工评分偏差",
+        "研究模型自主选择待验证图表的策略，如基于图表标题、引用上下文的多模态检索",
+        "探索结合OCR提取的图表内文字与视觉特征提升矛盾检测能力",
+        "设计交互式验证框架，允许模型主动请求局部放大或文本上下文"
       ],
-      "engineering_value": "对科学出版审稿辅助、论文图文一致性自动检查工具有直接参考价值，明确了当前多模态模型在全文自主核查中的能力短板与输入设计要点。",
-      "why_relevant": "该文直接研究OCR/文档解析下游的图文一致性验证，强调全文文档中视觉证据定位与矛盾识别，与文档智能审稿场景高度相关。"
+      "engineering_value": "为科学论文审阅自动化提供了评估框架和基线，可推动开发辅助审稿工具，帮助检测图表与文本的不一致，提升论文质量核查效率。",
+      "why_relevant": "论文涉及从PDF中提取图表和文本并进行跨模态验证，需要文档解析（包括OCR和布局分析）来定位图表和关联文本，与OCR文档解析中的多模态证据验证直接相关。"
     },
     {
-      "title": "SEE: Unlocking the Hidden Perception of Frozen VLMs",
-      "summary": "Vision-language models (VLMs) grasp the overall content of an image but often miss the fine details a question hinges on, such as a small object in a large photo or a number in a dense infographic. Yet even when their answer is wrong, the region they point to often contains the evidence. We introduce Self-Elicited Evidence (SEE), a training-free method that lets a frozen VLM look again where it points. When the initial answer has low confidence, SEE prompts the model to propose regions where the details may appear, answers the question on these enlarged crops, and aggregates the answers with the original prediction through confidence-weighted voting. The model also answers with its own transcript, which helps on text-rich images. SEE needs no detector or OCR engine. Across five backbones, SEE improves every small-object benchmark by 2.3-13.1 points and outperforms five training-free baselines on small objects. With SEE, Qwen3.5-4B surpasses the direct answer of Qwen3.5-9B and matches the 6 times larger Qwen3.5-27B.",
-      "link": "https://arxiv.org/abs/2611.23962v1",
-      "pdf_url": "https://arxiv.org/pdf/2611.23962v1",
+      "title": "Carry the Fine Print: Budget-Aware Visual Token Compression for Document OCR",
+      "summary": "Visual token compression often treats salience or similarity as a proxy for transcription importance. Complete document OCR breaks this assumption: small symbols and repeated entries can be indispensable to the transcript despite being visually inconspicuous. We present Select and Compensate, a two-stage framework built on a simple idea: choosing where to retain a token need not determine all the evidence it carries. Selection combines adaptive encoding resolution with global importance and local contrast to choose which tokens to retain as anchors. Compensation enriches these anchors with nearby discarded content and its relative position, without adding tokens. The OCR backbone remains frozen, and native coordinates and structural tokens are preserved. We evaluate complete page transcription across five backbones on OmniDocBench and document reconstruction on MPDocBench. With half the original visual tokens, our input-adapted configuration reaches 95.42 OmniDocBench Overall on Ovis versus 96.09 for the uncompressed model, and paired evaluations show gains over simply reducing the input resolution on both benchmarks. With the original input grid, our method stays within 0.17 points of the uncompressed model at 75% retention and exceeds a learned global selector by 4.70 points at 25%. On a fixed 200-page Ovis workload at the same 50% visual-token budget, only 3 of its outputs hit the length limit, versus 30-34 for the evaluated RTPrune, DivPrune, and HiPrune adaptations, and it finishes the batch 35-40% sooner. Code will be made publicly available.",
+      "link": "https://arxiv.org/abs/2611.25506v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25506v1",
       "authors": [
-        "Alin-Ionut Popa",
-        "Tuo Zhang",
-        "Dimitrios Dimitriadis"
+        "Yixuan Huang",
+        "ShengFan Zhang",
+        "Jiawei Chen"
       ],
-      "published": "2026-11-18T06:53:22Z",
-      "updated": "2026-11-18T06:53:22Z",
+      "published": "2026-11-19T04:54:47Z",
+      "updated": "2026-11-19T04:54:47Z",
       "categories": [
-        "cs.CV",
-        "cs.AI"
-      ],
-      "arxiv_id": "2611.23962v1",
-      "score": 9,
-      "topic_tags": [
-        "免训练推理",
-        "视觉证据定位",
-        "小物体识别",
-        "文本密集图像",
-        "置信度加权投票"
-      ],
-      "zh_summary": "针对视觉语言模型在图像整体理解尚可但细节（小物体、密集信息图中的数字）易漏的问题，提出免训练方法SEE：当初始答案置信度低时，让冻结的VLM自行提出可能包含证据的区域，在放大裁剪图上重新作答，并通过置信度加权投票与原预测聚合；模型还输出自身转写文本以辅助文本密集图像。无需检测器或OCR引擎，在五个骨干模型上小物体基准提升2.3-13.1分。",
-      "novelty": "提出“自我引出证据”的免训练推理范式，利用模型自身指向区域作为再观察线索，而非依赖外部检测器或OCR。",
-      "innovation_points": [
-        "训练范式：完全免训练、冻结VLM，通过置信度触发的二次观察流程实现细节感知增强。",
-        "方法设计：模型自提候选区域、放大裁剪重答、置信度加权投票聚合，形成自洽的证据回路。",
-        "数据利用：模型输出自身转写文本，辅助文本密集图像中的数字与文字细节识别。",
-        "无需外部检测器或OCR引擎，降低部署依赖。"
-      ],
-      "limitations": "依赖模型自提区域的质量；仅在低置信度时触发，可能遗漏高置信度错误；加权投票机制对多区域冲突的鲁棒性未充分说明；主要评测小物体基准，对复杂版面文档的泛化性待验证。",
-      "improvement_directions": [
-        "改进区域提议策略，结合图文版面结构或注意力图提升候选区域的召回与定位精度。",
-        "将自提区域与轻量OCR/文本检测信号融合，在文本密集文档中提升数字与字段级识别。",
-        "研究多轮迭代再观察与不确定性校准，降低高置信度错误漏检。",
-        "扩展评测到文档图像、图表与表格解析任务，验证方法在版面复杂场景中的有效性。"
-      ],
-      "engineering_value": "提供一种无需额外模型与OCR组件的推理侧增强方案，可直接集成到现有多模态文档问答与图表理解系统中，提升小目标与密集文本细节识别。",
-      "why_relevant": "该方法涉及文本密集图像中的数字与文字细节识别及自转写，与OCR/文档解析中的细粒度文本感知和视觉证据放大策略相关。"
-    },
-    {
-      "title": "Coverage Governs Accuracy: When to Expand the Lexicon and When to Fall Back in Low-Resource Manchu OCR",
-      "summary": "Character-level OCR for low-resource Manchu often produces near-miss spelling errors. Lexicon-constrained decoding can correct such errors with lexical knowledge, but a fixed dictionary cannot cover the many unseen word forms produced by agglutinative word formation. We study whether morphological expansion alleviates this limitation, and how the expansion size and confidence fallback affect recognition. We segment the training transcriptions with a dictionary-based stem list, extract roots and suffix chains from them, generate about 510k candidates, select the expansion size through frequency ranking on the validation set, and decompose accuracy under hard lexicon constraints into the product of coverage and in-lexicon precision. Across three CRNN training seeds, adding 250k candidates to a base dictionary of about 29k words raises the type accuracy on unseen combinations of seen roots from 63.6% to 86.3%, and overall token accuracy from 82.4% to 84.2%. Adding all candidates lowers overall token accuracy to 81.5%, showing that the coverage gain comes with a loss of in-lexicon precision. A further comparison shows that the base dictionary with confidence fallback performs best overall among the CRNN systems tested, reaching 76.1% type and 85.5% token accuracy and outperforming the expanded lexicon both with and without fallback. A Transformer recognizer shows similar trends. These results indicate that morphological expansion relieves the constraint of a fixed dictionary, but a larger lexicon does not guarantee better recognition; in the present low-resource Manchu OCR setting, a selective combination of reliable lexical constraints and open recognition is more effective.",
-      "link": "https://arxiv.org/abs/2611.23900v1",
-      "pdf_url": "https://arxiv.org/pdf/2611.23900v1",
-      "authors": [
-        "Ruixin Yu",
-        "Zifan Wang",
-        "Mingxin Ding",
-        "Xiaoxin Sun",
-        "Dongjie Wang",
-        "Suhua Wang",
-        "Minghao Yin"
-      ],
-      "published": "2026-11-18T05:52:53Z",
-      "updated": "2026-11-18T05:52:53Z",
-      "categories": [
-        "cs.CL",
         "cs.CV"
       ],
-      "arxiv_id": "2611.23900v1",
+      "arxiv_id": "2611.25506v1",
+      "score": 10,
+      "topic_tags": [
+        "文档OCR",
+        "视觉token压缩",
+        "两阶段框架",
+        "视觉语言模型",
+        "效率优化"
+      ],
+      "zh_summary": "该论文提出Select and Compensate两阶段框架，用于文档OCR中的视觉token压缩。选择阶段结合自适应编码分辨率、全局重要性和局部对比度选择保留的锚点token；补偿阶段用附近被丢弃的内容及其相对位置丰富锚点，而不增加token数量。OCR骨干网络保持冻结，保留原生坐标和结构token。在OmniDocBench和MPDocBench上评估，使用一半视觉token时，输入自适应配置达到95.42分（Ovis），未压缩模型为96.09；在原始输入网格下，75%保留率时与未压缩模型差距在0.17分内，25%保留率时超过学习式全局选择器4.70分。在固定200页Ovis工作负载下，50% token预算时仅3个输出达到长度限制（对比方法为30-34个），批量完成时间快35-40%。",
+      "novelty": "针对文档OCR中视觉token压缩的“显著性≠转录重要性”问题，提出选择与补偿分离的两阶段框架，在不增加token的情况下通过邻域补偿保留关键细节。",
+      "innovation_points": [
+        "提出两阶段框架：选择锚点token与补偿邻域信息解耦，避免因压缩丢失小符号或重复条目",
+        "选择阶段结合自适应编码分辨率、全局重要性和局部对比度，提升关键token召回",
+        "补偿阶段将被丢弃token的内容和相对位置编码到锚点，保持结构完整性",
+        "在冻结OCR骨干下实现，保留原生坐标和结构token，兼容现有模型"
+      ],
+      "limitations": "未在更多样化的文档类型（如手写、复杂表格）上验证；补偿机制可能引入额外计算开销；依赖预定义的分辨率自适应策略，可能需针对不同文档调整。",
+      "improvement_directions": [
+        "探索端到端学习的选择与补偿策略，替代手工设计的启发式规则",
+        "将方法扩展到多页文档和流式OCR场景",
+        "研究动态token预算分配，根据文档内容复杂度自适应调整保留率",
+        "结合布局分析信息优化锚点选择，提升表格和公式的转录准确性",
+        "在低资源语言文档上评估压缩方法的鲁棒性"
+      ],
+      "engineering_value": "为文档OCR系统提供高效的视觉token压缩方案，显著降低计算和延迟，适用于大规模文档数字化和实时OCR应用，具有直接部署价值。",
+      "why_relevant": "论文直接针对文档OCR的视觉token压缩，涉及保留小符号和结构信息，与OCR文档解析中的效率与精度平衡问题高度相关。"
+    },
+    {
+      "title": "RL Post-Training in Diffusion Transformers Is Activation Steering",
+      "summary": "Reinforcement learning (RL) post-training substantially improves the visual quality, text rendering, and compositional accuracy of diffusion transformers. Because capabilities such as rendering requested text or composing multiple objects are inherently prompt-dependent, a natural hypothesis is that improving them requires learning complex, input-dependent transformations. To isolate how much of these gains an input-independent shift explains, we probe each RL-tuned model with a deliberately simple parameterization: a fixed set of steering vectors added to the block outputs of the frozen base model. On SD3.5-M, these vectors hold 65x fewer parameters than the RL-tuned LoRA (0.29M against 18.8M). We fit them to match the velocity predictions of public RL-tuned checkpoints, with no reward in the objective. Although the vectors are identical for every prompt, token, and sampling seed, they recover 90.0-96.3% of the reward gains of six RL-tuned image models, and 89.8% and 111.9% on two RL-tuned video models. Initialized at zero and trained with online RL, the vectors alone exceed the reward gains of weight-based RL on text rendering (OCR) and human preference (PickScore) on SD3.5-M. A constant shift thus suffices for most of the gain of policy-gradient RL post-training: without new input-dependent transformations, it steers the pretrained generator toward what it can already compute.",
+      "link": "https://arxiv.org/abs/2611.26627v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26627v1",
+      "authors": [
+        "Tuna Han Salih Meral",
+        "Kaan Oktay",
+        "Alec Helbling",
+        "Atakan Kara",
+        "Duen Horng Chau",
+        "Pinar Yanardag"
+      ],
+      "published": "2026-11-19T18:59:53Z",
+      "updated": "2026-11-19T18:59:53Z",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "arxiv_id": "2611.26627v1",
       "score": 9,
       "topic_tags": [
-        "低资源OCR",
-        "词典约束解码",
-        "形态扩展",
-        "置信度回退",
-        "满文识别"
+        "扩散Transformer",
+        "强化学习后训练",
+        "激活引导",
+        "文本渲染",
+        "参数高效"
       ],
-      "zh_summary": "研究低资源满文OCR中词典约束解码的覆盖与精度权衡。通过词干与后缀链形态扩展生成约51万候选词，按验证集频率选择扩展规模，并将硬词典约束下的准确率分解为覆盖率与词典内精度的乘积。实验表明，向约2.9万基础词典加入25万候选可将未见词根组合的类型准确率从63.6%提升至86.3%，但全部加入会降低整体token准确率；基础词典配合置信度回退在CRNN系统上综合表现最佳。",
-      "novelty": "将低资源OCR词典约束解码的准确率显式分解为覆盖率与词典内精度的乘积，并系统评估形态扩展规模与置信度回退的交互影响。",
+      "zh_summary": "该论文探究扩散Transformer中强化学习后训练的增益来源。通过用一组固定的、与输入无关的steering向量（添加到冻结基础模型的块输出）来匹配公开RL调优检查点的速度预测，发现这些向量参数量比RL调优的LoRA少65倍（0.29M vs 18.8M），却能恢复六个图像模型90.0-96.3%的奖励增益，两个视频模型上为89.8%和111.9%。在SD3.5-M上，零初始化并经在线RL训练的向量在文本渲染（OCR）和人类偏好（PickScore）上超过基于权重的RL。表明恒定偏移足以解释大部分策略梯度RL后训练的增益，无需学习复杂的输入依赖变换。",
+      "novelty": "揭示扩散Transformer的RL后训练增益主要可通过输入无关的恒定激活偏移（steering向量）复现，挑战了需要学习复杂输入依赖变换的假设。",
       "innovation_points": [
-        "方法设计：基于词典词干表切分训练转写，提取词根与后缀链生成大规模形态候选，按验证集频率排序选择扩展规模。",
-        "分析框架：将硬词典约束下的识别准确率分解为覆盖率和词典内精度，解释扩展词典的收益与代价。",
-        "训练/解码范式：比较扩展词典与置信度回退策略，发现基础词典加回退在CRNN与Transformer上均表现更稳。",
-        "任务与数据：面向黏着语满文的低资源字符级OCR，给出可复现的形态扩展流程。"
+        "用固定steering向量参数化RL后训练效果，参数量极少却恢复大部分奖励增益",
+        "证明恒定偏移在文本渲染（OCR）和人类偏好任务上可超越基于权重的RL",
+        "提出零初始化在线RL训练steering向量的方法，无需奖励目标即可拟合",
+        "在图像和视频扩散模型上验证了结论的普适性"
       ],
-      "limitations": "扩展词典提升覆盖率但降低词典内精度，全量扩展反而降低整体token准确率；实验限于满文与CRNN/Transformer识别器，未验证更复杂语言模型或端到端注意力解码；置信度回退的阈值选择与校准细节有限。",
+      "limitations": "仅测试了公开RL调优检查点和少数模型，未涵盖所有RL算法；steering向量与输入无关，可能无法处理需要细粒度输入条件的任务；未分析向量在不同提示下的语义含义。",
       "improvement_directions": [
-        "研究覆盖率与词典内精度的动态平衡机制，如按置信度分段启用不同规模词典或软约束解码。",
-        "引入神经语言模型或子词级语言模型替代硬词典约束，缓解形态扩展带来的精度损失。",
-        "改进置信度校准与回退阈值自适应策略，提升低资源场景下的稳健性。",
-        "将形态扩展与视觉特征联合建模，探索端到端注意力解码在黏着语OCR中的词典融合方式。"
+        "探索条件化steering向量（轻量输入依赖）以处理更复杂的组合任务",
+        "将方法扩展到更多扩散架构和RL算法（如DPO）",
+        "分析steering向量在OCR文本渲染中的具体作用机制，提升文字生成质量",
+        "研究steering向量与LoRA等微调方法的结合，平衡效率与表达能力",
+        "在视频生成中进一步验证恒定偏移的局限性，特别是时序一致性任务"
       ],
-      "engineering_value": "为低资源、黏着语种OCR系统的词典构建与解码策略提供可量化指导：优先保证词典内精度并配合置信度回退，而非盲目扩大词表。",
-      "why_relevant": "该文聚焦OCR词典约束解码与低资源文字识别，属于OCR识别后处理与语言知识融合方向，对文档解析中的文本纠错有参考意义。"
+      "engineering_value": "为扩散模型的高效后训练提供新思路，可用极少参数实现RL调优的大部分效果，降低计算成本，尤其有利于文本渲染（OCR）和偏好对齐的快速适配。",
+      "why_relevant": "论文涉及扩散模型在文本渲染（OCR）上的改进，并发现恒定steering向量即可提升OCR质量，对OCR生成和文档图像合成有潜在影响。"
+    },
+    {
+      "title": "STARK: Moving towards Personalized Agents That Truly Learn and Remember",
+      "summary": "Long-term memory is essential for personalized agentic systems that interact with users over long time periods, yet current architectures only capture what happened while leaving the reasoning of why it happened to be derived later by underlying LLMs.%, and silo knowledge within individual users. These events can, however, convey not only what a user experienced but also how that experience shaped their behavioral patterns. We introduce STARK, a dual-graph memory architecture which treats these events not just as nodes but also as edges between behavioral insights. STARK maintains an Episodic Graph which records interactions as temporally, causally, and semantically linked episodes; and an Insight Graph which represents LLM-extracted behavioral signals scored by how many events support them, connected by the very events that led to them. At inference, behavioral knowledge is retrieved directly from insight nodes grounded by event-as-edges, eliminating repeated episodic traversal. The event-as-edge structure also naturally enables projecting the knowledge graph into a relational embedding space where cross-user transfer becomes possible under shared contextual circumstances, allowing the system to infer missing insights for cold-start users. Evaluations show that STARK improves by 1.48 judge score on LongMemEval information extraction and 0.93 on LoCoMo open domain questions over state of the art. On the public LongLaMP abstract-generation benchmark, cross-user transfer improves open-ended judge scores by 0.7 points and ROUGE-L by 3 at 5% graph sparsity.",
+      "link": "https://arxiv.org/abs/2611.25705v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25705v1",
+      "authors": [
+        "Aryan Jain",
+        "Abhishek Jha",
+        "Anish Nediyanchath",
+        "Promod Yenigalla"
+      ],
+      "published": "2026-11-19T08:19:28Z",
+      "updated": "2026-11-19T08:19:28Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.IR"
+      ],
+      "arxiv_id": "2611.25705v1",
+      "score": 6,
+      "topic_tags": [
+        "长期记忆",
+        "个性化智能体",
+        "双图架构",
+        "跨用户迁移",
+        "行为洞察"
+      ],
+      "zh_summary": "该论文提出STARK，一种用于个性化智能体的双图记忆架构。STARK将交互事件视为行为洞察之间的边，维护一个情景图（记录时间、因果和语义链接的交互）和一个洞察图（LLM提取的行为信号，按支持事件数评分，并由导致它们的事件连接）。推理时直接从洞察节点检索行为知识，以事件为边进行 grounding，避免重复遍历情景图。事件为边的结构还支持将知识图谱投影到关系嵌入空间，实现跨用户迁移，为冷启动用户推断缺失洞察。在LongMemEval信息提取上提升1.48个judge分数，LoCoMo开放域问题上提升0.93；在LongLaMP摘要生成基准上，5%图稀疏度时跨用户迁移提升开放域judge分数0.7和ROUGE-L 3分。",
+      "novelty": "提出事件作为边的双图记忆架构，将交互事件同时作为行为洞察之间的连接，支持直接检索行为知识并实现跨用户迁移。",
+      "innovation_points": [
+        "双图架构：情景图记录交互，洞察图存储行为信号并由事件边连接",
+        "事件作为边的设计，使行为知识检索无需遍历情景图，提升效率",
+        "通过关系嵌入空间实现跨用户知识迁移，解决冷启动问题",
+        "在多个长期记忆基准上验证了信息提取和开放域问答的改进"
+      ],
+      "limitations": "依赖LLM提取行为信号的质量；跨用户迁移可能引发隐私问题；仅在有限基准上评估，未在真实长期交互中验证；图稀疏度对性能的影响需进一步研究。",
+      "improvement_directions": [
+        "研究更鲁棒的行为信号提取方法，减少LLM幻觉",
+        "设计隐私保护机制，支持跨用户迁移时的匿名化",
+        "在真实个性化助手场景中进行长期部署评估",
+        "探索动态图更新策略，适应行为模式变化",
+        "结合多模态交互数据（如语音、图像）丰富记忆内容"
+      ],
+      "engineering_value": "为个性化智能体提供可扩展的长期记忆架构，支持高效行为知识检索和跨用户冷启动，可应用于对话系统、推荐系统等需要长期用户建模的场景。",
+      "why_relevant": "论文涉及长期记忆架构，其中可能包含多模态交互数据，但未直接涉及OCR或文档解析；与OCR领域关联较弱，但记忆机制对文档理解中的长期上下文建模有间接参考价值。"
     }
   ]
 }
