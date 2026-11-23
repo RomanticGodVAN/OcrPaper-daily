@@ -1,26 +1,18 @@
 {
   "meta": {
-    "report_date": "2026-11-22",
-    "generated_at_utc": "2026-11-22 07:58:00",
+    "report_date": "2026-11-23",
+    "generated_at_utc": "2026-11-23 08:58:18",
     "query": "(all:\"document parsing\" OR all:\"document understanding\" OR all:\"optical character recognition\" OR all:OCR OR all:\"layout analysis\" OR all:\"document layout analysis\" OR all:\"text recognition\" OR all:\"table recognition\" OR all:\"form understanding\" OR all:\"document intelligence\" OR all:\"page understanding\" OR all:\"scene text recognition\" OR all:\"handwritten text recognition\" OR all:\"information extraction\") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)",
     "llm_enabled": true,
     "llm_note": null,
     "count": 0
   },
   "synthesis": {
-    "executive_summary": "今日无新增论文情报，无法给出基于具体论文的综合结论；建议按既有流程维持对 OCR/文档解析方向的定期扫描与基线跟踪。",
-    "trend_summary": "因输入论文清单为空，无法归纳当日趋势；OCR/文档解析领域仍需持续关注多模态大模型在版面理解、表格结构恢复与低质量图像鲁棒性上的进展。",
+    "executive_summary": "今日无新增论文输入，无法形成基于具体论文的结论性判断；建议维持既有技术路线监控，待有新增文献后再更新日报。",
+    "trend_summary": "由于清单为空，无法识别当日趋势变化；不给出无数据支撑的趋势判断。",
     "common_innovations": [],
-    "future_directions": [
-      "在无当日新论文时，优先复现并评测近期版面理解模型在真实扫描件上的表格结构恢复指标（TEDS、mAP）。",
-      "建立低质量、倾斜、低分辨率文档的固定评测集，用于横向比较不同 OCR 后端的鲁棒性。",
-      "对 OCR 输出与文档解析结果做端到端一致性校验，减少版面分析与文本识别之间的错误传播。",
-      "探索将文档解析结果结构化后直接接入下游检索或问答流水线，并度量解析误差对最终任务的影响。"
-    ],
-    "engineering_takeaways": [
-      "今日无新增证据，工程侧不宜基于当日情报调整模型选型或流水线架构。",
-      "维持现有 OCR 基线与回归测试集，等待新论文情报后再做增量评估。"
-    ],
+    "future_directions": [],
+    "engineering_takeaways": [],
     "watchlist": []
   },
   "papers": []
