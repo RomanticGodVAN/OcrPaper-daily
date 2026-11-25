@@ -1,71 +1,201 @@
-# OCR / 文档解析研究日报（2026-11-24）
+# OCR / 文档解析研究日报（2026-11-25）
 
 ## 报告说明
 
 - 检索源：arXiv API
 - 检索查询：`(all:"document parsing" OR all:"document understanding" OR all:"optical character recognition" OR all:OCR OR all:"layout analysis" OR all:"document layout analysis" OR all:"text recognition" OR all:"table recognition" OR all:"form understanding" OR all:"document intelligence" OR all:"page understanding" OR all:"scene text recognition" OR all:"handwritten text recognition" OR all:"information extraction") AND (cat:cs.CV OR cat:cs.AI OR cat:cs.CL OR cat:eess.IV)`
-- 生成时间（UTC）：`2026-11-24 10:54:00`
+- 生成时间（UTC）：`2026-11-25 09:49:43`
 - 大模型综合分析：`开启`
 
 ## 一、今日执行摘要
 
-> 今日论文覆盖了OCR与文档解析的多个层面：应用端出现面向低资源文字、历史文献和领域文档的开源工具与高质量专用模型；方法端针对视觉语言模型在关键信息抽取和视觉定位中的解码效率瓶颈提出非自回归和并行解码方案；分析端则关注光学上下文压缩在推理VLM中的真实成本以及小模型推理的适用条件。整体趋势是从单纯追求精度转向兼顾效率、成本与可验证性，并越来越重视低资源场景的数据构建与人机协同。
+> 今日论文呈现三条主线：一是紧凑视觉语言识别器通过数据引擎与并行解码实现高精度高通量文档解析，在表格、公式任务上超过大规模通用模型；二是OCR任务边界向意图消解、科学图表数值恢复、退化图像增强等场景延伸，强调对真实世界噪声与人工批注的语义理解；三是多模态MoE可解释性研究表明视觉专属专家并非必要，OCR是唯一依赖图像位置专家的能力，对模型压缩与路由设计有直接提示。低资源文字与手写场景仍受限于专用符号与标注成本。
 
 ## 二、今日趋势判断
 
-今日研究显示三个并行趋势：一是专用OCR模型在特定字体/手写场景仍能显著优于通用VLM，且小模型经微调和量化后可低成本部署；二是文档信息抽取正从自回归序列生成转向利用模式结构先验的并行/非自回归解码，以固定前向次数换取吞吐；三是VLM推理成本分析开始区分预填充与解码开销，推动按工作负载动态选择图像或文本表示。
+文档解析正从通用文本识别转向面向真实场景的任务细分：意图感知、图表数值重建、混合退化增强和低资源铭文数字化并行推进。小型专用模型配合可靠监督数据与无损并行解码，在特定基准上已可比肩大规模通用模型，部署性价比成为关注点。同时，多模态MoE损伤实验提示参数效率不等于能力必要性，为模型压缩提供新证据。
 
 ## 三、今日论文概览
 
-1. **Trallie: from Free-Form Text to Structured Data with LLMs** | 标签：信息抽取、大语言模型、零样本学习、少样本学习、文档解析、模式归纳、开源框架
-2. **Towards an Armenian Epigraphic Corpus** | 标签：OCR、版面检测、视觉语言模型、文化遗产数字化、低资源语言、人机协同、语料库构建
-3. **PinGround: Pinning Queries to Points for Parallel Grounding in Vision-Language Models** | 标签：视觉语言模型、并行解码、目标定位、OCR、版面分析、强化学习、前缀树
-4. **When Does Optical Context Compression Pay Off? A Decode-Aware Cost Analysis of Reasoning VLMs** | 标签：视觉语言模型、光学上下文压缩、推理成本、解码税、OCR、文档理解、成本分析
-5. **DictaRashi: A State-of-the-Art OCR Model For Rashi Script** | 标签：OCR、Tesseract、希伯来语、Rashi字体、历史文献、低资源文字、基准数据集
-6. **Meddies-PII: A Multilingual Framework for Personally Identifiable Information Extraction in Clinical De-identification** | 标签：PII抽取、临床文本、多语言、去标识化、合成数据、序列标注、信息抽取
-7. **Fill in the Blanks: Non-Autoregressive Schema-Parallel Key Information Extraction with CTC Decoding** | 标签：关键信息抽取、非自回归解码、CTC、视觉语言模型、投机解码、文档理解
-8. **Escriba-OCR: A 1B Vision-Language Model for Error-Preserving Transcription of Handwritten Portuguese Essays** | 标签：手写文本识别、错误保留、视觉语言模型、教育技术、基准构建、模型量化
-9. **When Does Reasoning Help Entity Disambiguation? Small LLMs In-Domain and Under Shift** | 标签：实体消歧、小语言模型、推理、域偏移、零样本、信息抽取
-10. **What Quality Engineers Need to Know About Generative AI: Structured Data Extraction** | 标签：结构化数据抽取、LLM应用、质量工程、人工验证、开源工具
+1. **VenusOCR2.0: Towards Efficient and Effective Document Parsing** | 标签：文档解析、视觉语言模型、表格识别、公式识别、并行解码、推理加速、数据引擎
+2. **When Ink Meets Pixel: Intent-Aware OCR with VLMs for Human-Corrected Financial Documents When Ink Meets Pixel: Intent-Aware OCR with VLMs for Human-Corrected Financial Documents** | 标签：意图感知OCR、文档理解、视觉语言模型、金融文档、数据集与基准、人机回路
+3. **Trallie: from Free-Form Text to Structured Data with LLMs** | 标签：信息抽取、大语言模型、零样本/少样本、模式归纳、文档结构化
+4. **Towards an Armenian Epigraphic Corpus** | 标签：古籍数字化、版面检测、OCR、视觉语言模型、低资源文字、专家校对
+5. **ArEssays: Towards Robust Arabic Handwritten Text Understanding in Educational Settings** | 标签：阿拉伯语OCR、手写识别、教育NLP、数据集与基准、视觉语言模型
+6. **SciFig2Data: A Workflow for Recovering Structured Data from Scientific Figures** | 标签：科学图表解析、OCR、多模态大模型、版面分析、文献数据挖掘、信息抽取
+7. **DocPristine: Content-Aware Document Appearance Enhancement under Real-World Mixed Degradations** | 标签：文档增强、混合退化、内容感知、文档解析、预训练视觉编码器
+8. **Lit Up but Not Needed: Scoped Lesions Show Where Multimodal Mixture-of-Experts Depend on Their Experts** | 标签：混合专家、多模态大模型、损伤实验、模型可解释性、OCR依赖
+9. **Interactive Neural Computers** | 标签：世界模型、交互式生成、屏幕文本OCR、记忆网络、神经图灵机
+10. **DexOPD: Dual-Extrapolation On-Policy Distillation for Diffusion Models** | 标签：扩散模型、在线策略蒸馏、多教师蒸馏、OCR生成、模型融合
+11. **What Quality Engineers Need to Know About Generative AI: Structured Data Extraction** | 标签：结构化数据提取、视觉语言模型、质量工程、文档信息抽取、人工验证
 
 ## 四、今天 OCR / 文档解析论文里的主要创新点
 
-- 利用结构先验（模式或空间锚点）将无序集合或结构化输出转化为可并行解码的形式，减少自回归步数。
-- 构建低资源或领域特定的高质量数据集与基准，并公开生成流水线或人工校正数据以支持复现。
-- 引入人机协同校验流程，将专家校对作为数字化流水线的必要环节而非事后修补。
-- 关注小模型和量化部署，在精度与推理成本之间寻找可落地的平衡点。
-- 从测量系统或成本核算视角评估抽取与压缩方案，强调人工验证和价格加权指标。
+- 以冻结预训练视觉编码器提供内容或弱点引导信号，降低对人工标注的依赖。
+- 将OCR与视觉语言模型串联为多阶段流水线，并通过专家校对或人工核验形成闭环。
+- 针对特定领域构建配套数据集与基准，覆盖真实退化、手写变体或人工批注等噪声条件。
+- 采用轻量并行解码或残差渲染模块，在保持输出等价的前提下提升推理吞吐。
 
 ## 五、后续 OCR 领域值得推进的改进方向
 
-- 将非自回归CTC解码与模式并行抽取扩展到更复杂的嵌套模式、自由文本值和多页文档，并在更多布局和领域上验证零样本鲁棒性。
-- 研究生成前可预测的解码税信号，例如基于输入压缩比、任务类型和模型族特征训练轻量回归器，用于动态路由图像或文本输入。
-- 把并行空间锚定定位（PinGround）与OCR流水线中的文本行检测、表格区域定位结合，评估锚点生成策略对密集版面任务F1和延迟的联合影响。
-- 针对低资源文字和铭文，开发编辑符号与特殊标记的专门识别模块，并在人机协同校对平台中引入主动学习以减少专家校正量。
-- 探索错误保留转录的通用框架，将编辑标记识别从手写作文扩展到表格修改、批注文档和校对稿，并建立跨语言错误保留基准。
-- 研究小模型在信息抽取不同子任务（实体消歧、关系抽取、字段抽取）中推理收益的边界条件，并利用不确定性信号实现按样本动态路由。
-- 将光学上下文压缩的成本核算从推理VLM扩展到文档解析专用模型，量化图像化输入对版面理解、表格还原和OCR后处理的影响。
+- 在意图感知OCR中引入重叠与冲突批注的置信度估计，并将意图消解与阅读顺序联合建模。
+- 将无损并行草稿解码机制移植到其他自回归文档解析模型，验证跨架构加速的通用性与等价性。
+- 针对编辑符号、数学表达式和分类字段等高频错误类型构建符号级后处理与专用识别模型。
+- 建立科学图表数值重建的定量评测协议，并用OCR与多模态大模型结果交叉验证降低抽取错误。
+- 把文档增强作为OCR前置模块，与版面分析和解析器联合优化，量化增强对下游任务的实际增益。
+- 基于MoE损伤实验结论设计专家剪枝与路由策略，优先保护文本位置的双用途专家和图像文本阅读能力。
+- 在低资源语言、手写与扫描文档上系统评估递归自我改进数据引擎的可迁移性和标注成本。
 
 ## 六、工程落地启发
 
-- 在批量文档KIE场景可优先评估非自回归模式并行解码，以固定前向次数规划资源并降低延迟。
-- 部署VLM文档理解时应将输出token成本纳入核算，对高压缩比输入可尝试图像优先策略并设置回退文本的阈值。
-- 特定字体或手写场景下，微调小专用OCR模型（1B级+量化）可在CPU上运行，适合本地化或隐私敏感部署。
-- 构建文档抽取流水线时应把人工验证环节设计为可度量的测量系统，字段级准确率比整体主观评价更能暴露薄弱环节。
-- 低资源文字数字化可采用版面检测+OCR+VLM结构化+专家校对的组合流水线，并将校对结果回流为银数据。
-- 密集实例定位任务可关注并行解码加速方案，但需先评估锚点质量对召回的影响，避免为速度牺牲过多F1。
+- 1B级专用文档解析模型配合单卡vLLM部署可实现约3倍单请求加速和2.36倍批量吞吐，适合高吞吐流水线优先选型。
+- 自动模式归纳的零样本信息抽取框架需前置OCR与版面解析模块，才能覆盖扫描文档和复杂表格。
+- 结构化抽取落地必须保留人工核验环节，实测字段级准确率虽高，但分类字段和数学表达式仍易出错。
+- 简单按路由频率剪枝多模态MoE专家可能无效，应关注文本位置双用途专家和图像文本阅读路径。
+- 文档增强方法可复用冻结文档视觉编码器的多层特征作为引导，降低对退化输入视觉线索的依赖。
 
 ## 七、优先关注论文
 
-- **Fill in the Blanks: Non-Autoregressive Schema-Parallel Key Information Extraction with CTC Decoding**：非自回归KIE与投机解码草稿模型的结合可能直接改变文档抽取的推理成本结构，需关注其向复杂模式和自由文本值的扩展。
-- **When Does Optical Context Compression Pay Off? A Decode-Aware Cost Analysis of Reasoning VLMs**：解码税和汇率条件为文档理解中输入表示选择提供了可操作的量化框架，后续若出现生成前预测信号将影响流水线设计。
-- **PinGround: Pinning Queries to Points for Parallel Grounding in Vision-Language Models**：并行空间锚定在密集OCR和版面定位任务上加速显著，锚点生成策略的鲁棒性是其落地关键。
-- **Escriba-OCR: A 1B Vision-Language Model for Error-Preserving Transcription of Handwritten Portuguese Essays**：错误保留转录揭示了通用VLM的系统性规范化偏差，其基准和量化部署方案对教育及校对类产品有参考价值。
-- **DictaRashi: A State-of-the-Art OCR Model For Rashi Script**：专用Tesseract模型在特定字体上显著优于前沿LLM，提示低资源文字场景中专用模型仍具成本与精度优势。
+- **VenusOCR2.0: Towards Efficient and Effective Document Parsing**：紧凑模型在公式与表格基准上超过大规模通用模型且解码无损加速，其RSI数据引擎与PTPv2并行草稿机制值得跟踪复现。
+- **When Ink Meets Pixel: Intent-Aware OCR with VLMs for Human-Corrected Financial Documents**：意图感知OCR定义了新任务边界，DocIntent数据集与IntentBench可检验小模型在批注消解上的上限。
+- **Lit Up but Not Needed: Scoped Lesions Show Where Multimodal Mixture-of-Experts Depend on Their Experts**：损伤实验结论直接挑战按激活频率剪枝的直觉，OCR是唯一跨模型依赖图像位置专家的能力，对MoE压缩有指导意义。
+- **DocPristine: Content-Aware Document Appearance Enhancement under Real-World Mixed Degradations**：提供带解析标注的真实混合退化测试集与内容感知增强框架，可作为移动扫描OCR前处理的评估基准。
+- **SciFig2Data: A Workflow for Recovering Structured Data from Scientific Figures**：模块化流水线便于替换组件，但缺少重建精度报告，需跟踪其定量评测与人工校验协议的补充。
 
 ## 八、论文逐篇解析
 
-### 1. Trallie: from Free-Form Text to Structured Data with LLMs
+### 1. VenusOCR2.0: Towards Efficient and Effective Document Parsing
+
+- arXiv: [2611.32617v1](https://arxiv.org/abs/2611.32617v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.32617v1)
+- 作者: Lei Li, Zheng Wei, Yi Yuan, Qingbin Liu, Jiang Bian, Zang Li
+- 发布时间: 2026-11-24T13:46:00Z
+- 分类: cs.CV
+- 相关性评分: 21
+- 主题标签: 文档解析、视觉语言模型、表格识别、公式识别、并行解码、推理加速、数据引擎
+
+**中文摘要**
+
+> 该文提出VenusOCR2.0，一个1B参数的紧凑视觉语言识别器，面向文本、表格与公式的高精度、高通量文档解析。为在避免自训练崩溃的前提下持续提升识别质量，构建了有界递归自我改进（RSI）数据引擎，模型仅作为弱点探测工具，由外部多专家medoid共识、VLM视觉核验与因子化合成提供可靠监督，覆盖预训练、精调SFT与RLVR。模型采用动态分辨率SigLIP2编码器、2x2空间token合并与Qwen3-0.6B解码器，并使用紧凑原子OTSL token缩短表格序列。为消除自回归解码瓶颈，引入PTPv2轻量解耦并行草稿模块（约67M），结合冻结多层验证器条件、独立学习掩码与块因果全位置预测。在OmniDocBenchv1.6上总分96.45，公式CDM达98.57，超过Gemini-3-Pro与Qwen3-VL-235B；单张H20部署vLLM，单请求加速2.96倍、批量吞吐提升至2.36倍，且与标准自回归解码逐token无损等价。
+
+**核心创新概述**
+
+> 将弱点探测式递归自我改进数据引擎与轻量解耦并行草稿解码结合，在紧凑参数规模下实现高精度文档解析并保持解码无损加速。
+
+**创新点拆解**
+
+- 有界递归自我改进数据引擎：模型仅作弱点探测器，由多专家medoid共识、VLM视觉核验与因子化合成构成可靠监督闭环
+- 紧凑原子OTSL表格token表示，显著缩短表格序列并降低结构错误
+- PTPv2解耦并行草稿模块：冻结多层验证器条件、独立学习掩码与块因果全位置下一token预测，实现无损并行解码
+- 动态分辨率SigLIP2编码器与2x2空间token合并的紧凑VLM架构
+
+**当前局限**
+
+> 摘要未报告除OmniDocBench外的多场景泛化评测，也未说明RSI数据引擎对多专家标注与VLM核验的依赖成本及在低资源语言文档上的表现。
+
+**后续可改进方向**
+
+- 在更多语言、手写与低质量扫描文档上验证RSI数据引擎与OTSL表示的泛化性
+- 量化多专家共识与VLM核验的标注成本，探索更低成本的可信监督替代方案
+- 将PTPv2并行草稿机制扩展到其他自回归文档解析模型，评估无损加速的通用性
+- 结合版面结构与阅读顺序建模，进一步降低复杂多栏、跨页表格的结构错误
+
+**工程启发**
+
+> 1B参数模型在单张H20上实现约3倍单请求加速与2.36倍批量吞吐且无损等价，具备较高部署性价比，适合高吞吐文档解析流水线落地。
+
+**为什么值得关注**
+
+> 直接面向OCR文档解析的效率与精度权衡，涵盖表格/公式结构化输出与推理加速，是OCR日报核心方向的代表性工作。
+
+**原始摘要**
+
+We present VenusOCR2.0, a compact 1B-parameter vision-language recognizer designed for both high-
+accuracy and high-throughput document parsing across text, tables, and formulas. To continuously
+improve recognition quality without self-training collapse, we build a bounded recursive self-
+improvement (RSI) data engine where the model acts strictly as a weakness probe, while external
+multi-expert medoid consensus, VLM visual verification, and factorized synthesis supply reliable
+supervision across pretraining, curated SFT, and RLVR. VenusOCR2.0 couples a dynamic-resolution
+SigLIP2 encoder and 2x2 spatial token merging with a Qwen3-0.6B decoder, adopting compact atomic
+OTSL tokens to shorten table sequences and reduce structural errors. To further eliminate the
+autoregressive decoding bottleneck, we introduce PTPv2, a lightweight ($\sim$67M) decoupled parallel
+draft module that combines frozen multi-layer verifier conditioning, a standalone learned mask, and
+block-causal all-position next-token prediction. On OmniDocBenchv1.6, VenusOCR2.0 achieves an
+overall score of 96.45 and a state-of-the-art 98.57 formula CDM, substantially outperforming massive
+general-purpose VLMs such as Gemini-3-Pro (92.91) and Qwen3-VL-235B (89.78). Deployed in vLLM on a
+single H20 GPU, PTPv2 delivers a 2.96x single-request speedup and up to 2.36x higher batched
+throughput while guaranteeing lossless, token-for-token equivalence with standard autoregressive
+decoding.
+
+---
+
+### 2. When Ink Meets Pixel: Intent-Aware OCR with VLMs for Human-Corrected Financial Documents When Ink Meets Pixel: Intent-Aware OCR with VLMs for Human-Corrected Financial Documents
+
+- arXiv: [2611.32446v1](https://arxiv.org/abs/2611.32446v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.32446v1)
+- 作者: Akshata A Bhat, Daman Deep Singh, Niyati Chhaya
+- 发布时间: 2026-11-24T11:43:26Z
+- 分类: cs.CL
+- 相关性评分: 19
+- 主题标签: 意图感知OCR、文档理解、视觉语言模型、金融文档、数据集与基准、人机回路
+
+**中文摘要**
+
+> 该文提出意图感知OCR新任务：在文档原始内容基础上联合推理手写或数字标注所表达的编辑意图（箭头、插入符、删除线、插入文字等），生成经修正的转写结果。现有OCR与文档理解系统将这些标注视为视觉噪声。作者构建DocIntent数据集，含1600份金融文档、5700余处视觉意图标注及版面感知的意图消解OCR目标，并发布216文档的IntentBench基准。基于DocIntent微调3B与7B的DocIntentOCR模型，在IntentBench上F1分别为0.81和0.83，显著优于GPT-4.1（0.626）与LLaMA-3.2-Vision-90B（0.50）。
+
+**核心创新概述**
+
+> 首次将人工批注定义为一类需要消解的语义编辑操作，提出意图感知OCR任务及配套数据、基准与模型。
+
+**创新点拆解**
+
+- 任务定义创新：意图感知OCR，将视觉标注建模为编辑意图而非噪声
+- 构建DocIntent多模态金融文档数据集，含版面感知的意图消解转写目标
+- 发布IntentBench基准，覆盖多样真实批注条件
+- 通过直接意图监督微调，使小参数模型在特定任务上超越大规模通用模型
+
+**当前局限**
+
+> 数据集中于金融文档领域，规模有限（1600份文档），意图类型与语言覆盖可能不足以代表通用文档场景；评测以F1为主，未充分讨论复杂重叠批注与意图歧义情形。
+
+**后续可改进方向**
+
+- 扩展到非金融领域与多语言文档，检验意图感知监督的迁移性
+- 研究重叠、冲突或多轮批注的意图消解与置信度估计
+- 探索众包或多模态大模型自动生成意图标注以降低数据构建成本
+- 将意图消解与版面分析、阅读顺序联合建模，提升复杂版式下的修正准确性
+
+**工程启发**
+
+> 面向金融单据人工批改场景，提供可复现的数据、基准与模型，对表单修正、人工复核流程自动化有直接工程参考价值。
+
+**为什么值得关注**
+
+> 拓展OCR任务边界至人机回路的意图理解，属于文档理解与交互式处理的新方向，与OCR日报主题高度相关。
+
+**原始摘要**
+
+Human annotations on documents (such as arrows, carets, strikethroughs, and insertions) express
+corrective intent yet existing OCR and document understanding systems treat these marks as visual
+noise rather than semantic edit operations. We introduce intent-aware OCR, the task of generating
+corrected transcriptions by jointly reasoning over original document content and visual intent cues
+(handwritten or digital) that convey edit intent. To support this setting, we present DocIntent, a
+multimodal dataset of 1,600 financial documents with over 5,700 annotated visual intent cues, each
+paired with layout-aware, intent-resolved OCR targets. We further introduce IntentBench, a
+216-document benchmark designed to evaluate model robustness under diverse real-world annotation
+conditions. Leveraging DocIntent, we fine-tune DocIntentOCR, a suite of 3B and 7B parameter vision-
+language models, under direct intent supervision on corrected transcriptions. On IntentBench, the
+fine-tuned 3B and 7B models achieve F1-scores of 0.81 and 0.83, respectively, substantially
+outperforming commercial closed-source (e.g., GPT-4.1 (0.626)), and open-source models (e.g.,
+LLaMA-3.2-Vision-90B (0.50)) demonstrating that intent-aware supervision enables compact domain-
+specific models to outperform substantially larger general-purpose systems on this task. This work
+establishes intent-aware OCR as a novel human-in-the-loop document understanding task and provides
+foundational resources (dataset, benchmark, models) to advance research in interactive document
+processing.
+
+---
+
+### 3. Trallie: from Free-Form Text to Structured Data with LLMs
 
 - arXiv: [2611.30773v1](https://arxiv.org/abs/2611.30773v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2611.30773v1)
@@ -73,34 +203,40 @@
 - 发布时间: 2026-11-23T14:41:32Z
 - 分类: cs.CL, cs.DB, cs.IR
 - 相关性评分: 17
-- 主题标签: 信息抽取、大语言模型、零样本学习、少样本学习、文档解析、模式归纳、开源框架
+- 主题标签: 信息抽取、大语言模型、零样本/少样本、模式归纳、文档结构化
 
 **中文摘要**
 
-> Trallie 是一个开源框架，利用大语言模型（LLM）从自然语言源中进行信息抽取（IE），支持有或无用户指导。与依赖大量标注数据集或领域特定训练的传统方法不同，Trallie 能以极少或无需代表性示例将非结构化数据转换为结构化格式。该框架有三个关键目标：(i) 通过基于提示的零样本和少样本能力减少人工标注；(ii) 灵活解析多种文档格式（HTML、PDF、TXT 和 JSON）；(iii) 通过从文档集合自动归纳模式提高非专家用户的可访问性。作者在 FDA 510(k) 文档以及 SWDE 的电影和大学网站上用开放权重 LLM 评估 Trallie，在提供目标属性进行文本抽取时优于先前报告的系统，在必须自动发现模式属性时具有竞争力。
+> Trallie是开源框架，利用大语言模型从自然语言来源中抽取信息，支持有或无用户指导的场景。其目标包括：借助提示式零样本/少样本降低人工标注、灵活解析HTML/PDF/TXT/JSON等格式、自动从文档集合归纳模式以降低非专家使用门槛。在FDA 510(k)文档与SWDE电影及大学网站数据上，使用开放权重LLM进行评估，在给定目标属性时优于此前系统，在需自动发现属性时具竞争力。
 
 **核心创新概述**
 
-> 提出一个开源、端到端的信息抽取框架 Trallie，整合 LLM 零样本/少样本提示、多格式文档解析和自动模式归纳，降低对标注数据和领域训练的依赖。
+> 以零/少样本提示替代领域训练，并将模式自动归纳与多格式解析整合为面向非专家的端到端信息抽取框架。
 
 **创新点拆解**
 
-- 基于提示的零样本和少样本信息抽取范式，减少人工标注需求。
-- 支持 HTML、PDF、TXT 和 JSON 多种文档格式的统一解析流程。
-- 自动从文档集合中归纳抽取模式（schema），并允许用户细化，提升非专家可用性。
-- 开源框架设计，便于复现和扩展。
+- 无需大量标注或领域训练的信息抽取流程，依赖LLM提示式零样本与少样本能力
+- 自动从文档集合归纳抽取模式并支持人工细化
+- 统一支持HTML、PDF、TXT、JSON多格式输入
 
 **当前局限**
 
-> 在自动发现模式属性时性能仅具竞争力，未超越现有系统；评估主要基于开放权重 LLM 和有限数据集（FDA 510(k)、SWDE），泛化性需进一步验证。
+> 依赖LLM的推理质量，自动模式归纳在属性发现场景仅具竞争力而非领先；未报告对扫描图像类PDF版面与表格复杂结构的处理能力。
+
+**后续可改进方向**
+
+- 将OCR与版面解析前置模块纳入框架，以覆盖扫描文档与复杂表格
+- 研究模式归纳的自动评估与迭代精炼机制，提升属性发现阶段的稳定性
+- 引入抽取置信度与人工核验回路，降低LLM幻觉对结构化输出的影响
+- 在更多领域与多语言文档上系统评估零样本与少样本设置的边界
 
 **工程启发**
 
-> 为快速构建文档信息抽取流水线提供开源工具，降低标注和领域适配成本，适用于监管文档、网页结构化等场景。
+> 开源、易集成，适合作为非专家用户的结构化信息抽取基线，但需依赖外部文档解析能力。
 
 **为什么值得关注**
 
-> 该工作直接涉及 OCR/文档解析后的结构化信息抽取，利用 LLM 实现端到端文本到结构化数据的转换，与文档智能和 OCR 应用密切相关。
+> 涉及PDF等文档到结构化数据的转换，与OCR下游信息抽取环节衔接紧密。
 
 **原始摘要**
 
@@ -120,7 +256,7 @@ https://github.com/PiSchool/trallie
 
 ---
 
-### 2. Towards an Armenian Epigraphic Corpus
+### 4. Towards an Armenian Epigraphic Corpus
 
 - arXiv: [2611.30603v1](https://arxiv.org/abs/2611.30603v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2611.30603v1)
@@ -128,33 +264,38 @@ https://github.com/PiSchool/trallie
 - 发布时间: 2026-11-23T12:40:28Z
 - 分类: cs.CV
 - 相关性评分: 17
-- 主题标签: OCR、版面检测、视觉语言模型、文化遗产数字化、低资源语言、人机协同、语料库构建
+- 主题标签: 古籍数字化、版面检测、OCR、视觉语言模型、低资源文字、专家校对
 
 **中文摘要**
 
-> 本文介绍 Corpus Inscriptionum Armenicarum Electronicum，将十卷亚美尼亚铭文印刷目录 Divan hay vimagrut'yan（1960-2017，近7600条记录）转化为开放数字语料库。流程包括版面检测、OCR 和视觉语言模型生成每条记录的首个结构化读取结果，随后专家在校对平台上检查。初步校正表明字母识别可靠，残余错误集中在编辑符号。该语料库旨在成为记录亚美尼亚铭文的持久平台，并为语言模型和计算语言学提供古典和中古亚美尼亚语的银数据。
+> 亚美尼亚铭文缺乏类似希腊、拉丁、格鲁吉亚文的数字资源。该文构建Corpus Inscriptionum Armenicarum Electronicum，将十卷本Divan hay vimagrut'yan（约7600条记录）转为开放数字语料。流程包括版面检测、OCR与视觉语言模型生成初读结构，再由专家在校对平台核验。初步修正显示字母识别可靠，残余错误集中在编辑符号上。语料定位为长期铭文记录平台及古典与中古亚美尼亚语银数据来源。
 
 **核心创新概述**
 
-> 构建首个亚美尼亚铭文开放数字语料库，结合版面检测、OCR 和视觉语言模型实现结构化读取，并引入专家校对平台。
+> 针对濒危、仅存于印刷本的亚美尼亚铭文，建立结合版面检测、OCR、VLM与专家校对的开放数字语料及流程。
 
 **创新点拆解**
 
-- 针对亚美尼亚铭文这一低资源文字遗产，设计端到端数字化流水线：版面检测、OCR、视觉语言模型结构化。
-- 引入专家校对平台，形成人机协同的数据校验流程。
-- 将语料库设计为可复用的银数据源，服务于语言模型和计算语言学研究。
+- 面向亚美尼亚铭文的端到端数字化流水线：版面检测、OCR、VLM初读与专家校对平台
+- 将印刷铭文语料转为结构化开放数字资源，并作为古典/中古亚美尼亚语模型银数据
 
 **当前局限**
 
-> 残余错误集中在编辑符号，说明对特殊符号和版面复杂结构的处理仍不完善；仅以初步校正结果报告，未给出完整定量评估；语料库规模有限（约7600条记录）。
+> 错误集中在编辑符号识别，说明专用符号与标注语义仍是瓶颈；专家校对环节人力依赖明显，摘要未报告整体识别精度与校对吞吐数据。
+
+**后续可改进方向**
+
+- 针对编辑符号与特有用字构建专用识别模型或符号级后处理
+- 研究专家校对反馈的主动学习闭环，降低人工核验成本
+- 将铭文元数据与语言资源对齐，提升银数据对语言模型训练的可利用性
 
 **工程启发**
 
-> 为文化遗产数字化提供可复用的 OCR+视觉语言模型流水线及专家校对平台，适用于其他低资源文字和铭文文献。
+> 提供低资源古籍/铭文数字化可复用流程，对文化遗产文档结构化具有参考价值。
 
 **为什么值得关注**
 
-> 涉及 OCR、版面检测和视觉语言模型在历史文献数字化中的集成应用，与文档解析和文化遗产 OCR 直接相关。
+> 属于版面检测、OCR与VLM结合的文献数字化实践，体现低资源文字OCR的真实落地难点。
 
 **原始摘要**
 
@@ -171,406 +312,365 @@ and Middle Armenian for language models and computational linguistics.
 
 ---
 
-### 3. PinGround: Pinning Queries to Points for Parallel Grounding in Vision-Language Models
+### 5. ArEssays: Towards Robust Arabic Handwritten Text Understanding in Educational Settings
 
-- arXiv: [2611.30304v1](https://arxiv.org/abs/2611.30304v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.30304v1)
-- 作者: Shuxuan Li, Jialiang Kang, Yanghao Zhou, Ziye Zhu, Zhilin Zhao, Xiao Yang
-- 发布时间: 2026-11-23T08:55:01Z
+- arXiv: [2611.32211v1](https://arxiv.org/abs/2611.32211v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.32211v1)
+- 作者: Hamdy Mubarak, Anas Madkoor, Ehsaneddin Asgari, Majd Hawasly
+- 发布时间: 2026-11-24T08:55:56Z
+- 分类: cs.CL, cs.CV
+- 相关性评分: 15
+- 主题标签: 阿拉伯语OCR、手写识别、教育NLP、数据集与基准、视觉语言模型
+
+**中文摘要**
+
+> 该文提出ArEssays，面向埃及小学至中学学生的真实阿拉伯语手写作文数据集，同时提供逐字转写与语言修正版本。作者基准测试34个视觉语言与OCR模型（含微调系统），发现真实学生手写上的性能差距显著，并开放数据、训练流程与结果，以推动阿拉伯语OCR、文档理解与教育NLP研究。
+
+**核心创新概述**
+
+> 构建覆盖低龄学生真实手写、同时提供逐字与规范化双转写的大规模阿拉伯语教育场景数据集，并系统基准评测34个模型。
+
+**创新点拆解**
+
+- 面向学生手写的高变异性阿拉伯语大规模真实数据集
+- 逐字转写与语言修正双版本标注，支持不同下游任务
+- 34个VLM/OCR模型的系统基准与微调流程公开
+
+**当前局限**
+
+> 摘要未披露数据集规模与标注一致性细节，评测集中于教育作文，未覆盖表格、公式等其他文档类型，也未讨论模型轻量化部署。
+
+**后续可改进方向**
+
+- 针对儿童手写变异性引入书写者自适应或个性化校准方法
+- 结合语言模型纠错与逐字转写的联合建模，提升规范化输出质量
+- 扩展至多方言、多学科手写材料并补充标注一致性分析
+- 探索小参数模型在教育场景的可部署化微调策略
+
+**工程启发**
+
+> 为阿拉伯语手写教育场景提供数据与评测基线，可用于教育类文档理解系统的模型选型。
+
+**为什么值得关注**
+
+> 属于手写OCR与文档理解的基准与数据集建设，覆盖低资源语言真实场景。
+
+**原始摘要**
+
+Automated understanding of handwritten Arabic student essays remains challenging due to script
+complexity and high variability in children's writing. We introduce ArEssays, a large-scale dataset
+of authentic essays from primary to secondary students across Egypt, with both verbatim
+transcriptions and linguistically corrected versions. We benchmark 34 vision-language and OCR
+models, including fine-tuned systems, and find large performance gaps on real student handwriting.
+We release the dataset, training pipelines, and results to support research in Arabic OCR, document
+understanding, and educational NLP.
+
+---
+
+### 6. SciFig2Data: A Workflow for Recovering Structured Data from Scientific Figures
+
+- arXiv: [2611.31787v1](https://arxiv.org/abs/2611.31787v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.31787v1)
+- 作者: Xinhe Wu, Yicheng Ye, Yadong Jin
+- 发布时间: 2026-11-24T01:41:00Z
+- 分类: cs.AI
+- 相关性评分: 15
+- 主题标签: 科学图表解析、OCR、多模态大模型、版面分析、文献数据挖掘、信息抽取
+
+**中文摘要**
+
+> 该文提出SciFig2Data自动化高吞吐工作流，从科学PDF中恢复图表内嵌的测量数据。流程整合多尺度文档元素检测、自适应复合图分解、两阶段基于OCR的语义过滤、Swin图表分类与指令引导的多模态大模型重建，并支持目录级批处理、缓存与结构化日志。在两个生物医学语料（605篇毒理学与药理学文章、551篇脂质纳米颗粒文章）上分别重建468与242个表格化输出，并将重建测量与图注元数据关联，服务AI4Science下游应用。
+
+**核心创新概述**
+
+> 将图表定位、面板分解、OCR语义过滤、图表分类与MLLM数值重建串成文献规模的数据采集工作流，并关联实验上下文。
+
+**创新点拆解**
+
+- 端到端多阶段科学图表数据恢复流水线，支持目录级批处理与缓存
+- 两阶段OCR语义过滤与Swin图表分类结合，控制无效图表处理成本
+- 利用指令引导MLLM重建数值，并将测量与图注实验元数据对齐
+
+**当前局限**
+
+> 重建输出数量相对语料规模偏低，未报告重建精度与人工核验比例；对复杂多元图表与重叠面板的鲁棒性缺乏量化评估。
+
+**后续可改进方向**
+
+- 建立图表数值重建的定量评测指标与人工校验协议
+- 增强复合图分解与多系列图表、误差棒等复杂元素的解析能力
+- 将OCR与MLLM重建结果进行一致性交叉验证，降低数值抽取错误
+- 扩展至更多学科与图类型，并评估流水线吞吐与失败的分类归因
+
+**工程启发**
+
+> 适合大规模科学文献图表数据挖掘的工程化流水线，模块划分清晰，便于增量替换与部署。
+
+**为什么值得关注**
+
+> 融合OCR、版面检测与多模态模型进行科学图表结构化抽取，属OCR下游高价值应用方向。
+
+**原始摘要**
+
+Scientific measurements reported in scholarly articles are often embedded in compound figures rather
+than available as machine-readable data. Recovering these measurements at literature scale requires
+an integrated workflow for figure localization, panel decomposition, chart identification, numerical
+reconstruction, and experimental context association. We present \textit{SciFig2Data}, an automated,
+high-throughput workflow for harvesting structured experimental data from scientific PDF
+repositories. The system integrates multi-scale document element detection, adaptive compound figure
+decomposition, two-stage OCR-based semantic filtering, Swin-based chart classification, and
+instruction-guided multimodal large language model (MLLM) reconstruction. It further incorporates
+directory-level batch execution, caching, and structured logging to support large-scale processing.
+We demonstrate the workflow on two biomedical literature corpora comprising 605 toxicology and
+pharmacology articles and 551 lipid nanoparticle (LNP) articles. The pipeline successfully
+reconstructed 468 and 242 tabular outputs from the respective corpora, illustrating its practical
+applicability to literature-scale scientific data harvesting. By associating reconstructed
+measurements with caption-derived experimental metadata, SciFig2Data provides a workflow for
+transforming graphical evidence in scholarly publications into structured, context-enriched data
+records for downstream AI4Science applications.
+
+---
+
+### 7. DocPristine: Content-Aware Document Appearance Enhancement under Real-World Mixed Degradations
+
+- arXiv: [2611.32176v1](https://arxiv.org/abs/2611.32176v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.32176v1)
+- 作者: Zihan Huang, Junle Liu, Zhonghao Ye, Yuyi Zhang, Peirong Zhang, Hanlin Li, Yongxin Shi, Lianwen Jin
+- 发布时间: 2026-11-24T08:29:21Z
+- 分类: cs.CV, cs.AI
+- 相关性评分: 9
+- 主题标签: 文档增强、混合退化、内容感知、文档解析、预训练视觉编码器
+
+**中文摘要**
+
+> 针对摄像头拍摄文档常出现的混合退化（高光、阴影、模糊）问题，论文提出DocPristine方法。该方法发现预训练文档视觉编码器在退化文档上仍能关注文本区域，提供内容感知引导。为此，DocPristine自适应融合冻结文档视觉编码器的多层特征，并将其注入像素恢复网络，结合自适应多层特征融合（AMFF）、分层门控条件化（HGC）和移位窗口交叉注意力（SWCA）来恢复细粒度文本细节。同时发布了DocACE数据集，包含合成混合退化训练集和真实世界测试集（含人工修复的真值图像和解析标注）。在三个基准上的实验表明，该方法在视觉增强质量和下游文档解析任务上均达到最先进水平。
+
+**核心创新概述**
+
+> 首次利用预训练文档视觉编码器在退化文档上的内容感知注意力作为引导信号，并设计多模块融合机制将多层特征注入像素恢复网络，同时构建了包含真实世界混合退化测试集的新基准。
+
+**创新点拆解**
+
+- 利用冻结的预训练文档视觉编码器的多层特征作为内容感知引导，避免了依赖不可靠的输入视觉线索或缺乏空间指导的LLM诊断。
+- 提出自适应多层特征融合（AMFF）与分层门控条件化（HGC），实现编码器特征与像素恢复网络的高效融合。
+- 设计移位窗口交叉注意力（SWCA），利用跨窗口边界的结构线索恢复细粒度文本细节。
+- 构建DocACE数据集，包含合成混合退化训练集和带人工修复真值与解析标注的真实世界测试集。
+
+**当前局限**
+
+> 方法依赖预训练文档视觉编码器的质量，在极端退化下编码器注意力可能失效；合成训练集与真实退化的分布差异可能影响泛化；未讨论计算开销和实时性。
+
+**工程启发**
+
+> 为摄像头文档增强提供了可落地的内容感知引导框架和公开数据集，有助于提升移动扫描、文档数字化等场景下的OCR前处理质量。
+
+**为什么值得关注**
+
+> 论文直接针对文档外观增强，并明确验证了对下游文档解析（OCR）的提升，与OCR研究高度相关。
+
+**原始摘要**
+
+Camera-captured documents often exhibit mixed degradations, such as highlights, shadows, and blur,
+that distort backgrounds and obscure text details. Document appearance enhancement (DAE) aims to
+mitigate these degradations and improve readability. Existing document appearance enhancement
+methods rely either on input-derived visual cues that can become unreliable under severe degradation
+or on LLM-based degradation diagnosis that lacks spatial guidance. Notably, we find that pretrained
+document visual encoders continue to attend to text regions in degraded documents, providing
+content-aware guidance. Based on this insight, we propose DocPristine, which adaptively fuses multi-
+layer features from a frozen document visual encoder and injects them into a pixel restoration
+network. To integrate these features into a pixel restoration network, DocPristine combines Adaptive
+Multi-Layer Feature Fusion (AMFF), Hierarchical Gated Conditioning (HGC), and Shifted-Window Cross-
+Attention (SWCA). Specifically, SWCA draws on structural cues from neighboring locations across
+window boundaries to recover fine text details.We also introduce DocACE, with a synthetic mixed-
+degradation training set (DocACE-Synthetic) and a real-world test set (DocACE-Real) containing
+manually restored ground-truth images and document parsing annotations. Comprehensive experiments
+across three benchmarks demonstrate that DocPristine achieves state-of-the-art appearance
+enhancement quality and consistently improves downstream document parsing. Code, models, and data
+will be publicly available.
+
+---
+
+### 8. Lit Up but Not Needed: Scoped Lesions Show Where Multimodal Mixture-of-Experts Depend on Their Experts
+
+- arXiv: [2611.31576v1](https://arxiv.org/abs/2611.31576v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.31576v1)
+- 作者: Zhixuan Ge, Anqi Li, Kexin Geng, Wei Qiu
+- 发布时间: 2026-11-23T21:16:44Z
 - 分类: cs.CV
-- 相关性评分: 13
-- 主题标签: 视觉语言模型、并行解码、目标定位、OCR、版面分析、强化学习、前缀树
+- 相关性评分: 9
+- 主题标签: 混合专家、多模态大模型、损伤实验、模型可解释性、OCR依赖
 
 **中文摘要**
 
-> 视觉语言模型（VLM）通过文本接口进行定位，以单一序列逐个写出边界框，但查询实例是无序集合，解码步数随实例数增长，密集场景成本最高。并行解码可避免增长，但互不可见的流会重复或遗漏实例。本文提出 PinGround，在查询中写入单个点作为空间锚点，要求模型在局部半径内返回最近匹配实例或 none。给定图像，锚定查询相互独立，可作为前缀树的叶子并行解码，模型在同一树上训练。粗到细锚点仅细化发现实例的区域，重复抑制保持每实例一框，集合级强化学习优化集合 F1。仅改变提示和注意力掩码，不改变架构。在三种 VLM 和 12 个基准（检测、OCR、布局和指代）上，PinGround 最多比同数据训练的序列解码低 5.5 F1，加速随实例密度增长，密集场景达 21.9 倍。
+> 论文借鉴认知神经科学中“激活图不等于必要性地图”的观点，通过“损伤”实验探究多模态混合专家（MoE）视觉语言模型对专家的依赖。在Qwen3-VL-30B-A3B、Kimi-VL-A3B和Gemma-4-26B-A4B中，发现3%至12%的专家为视觉专属（图像token路由至其的频率高达均匀率的五倍，文本token几乎不路由）。在Qwen3-VL中，这些专家接收四分之一图像token路由，但损伤全部视觉专属专家在八个感知基准和自由形式OCR上平均损失不到1个百分点，与损伤同规模随机专家集相当。局部损伤（仅在图像位置或文本位置移除专家集）显示，模型对专家的依赖主要位于文本位置的双用途专家；图像侧依赖在Qwen3-VL和Kimi-VL中为2至3点，在Gemma-4中为26点。图像中的文本阅读是唯一在每个模型中都需要图像位置专家的能力。视觉专属专家接收信息丰富的图像块，输出规模正常，且在感觉剥夺下保持惰性。
 
 **核心创新概述**
 
-> 提出 PinGround，将查询锚定为空间点，实现并行解码实例集合，在不改变模型架构的前提下大幅提升密集场景下的定位效率。
+> 首次将损伤实验范式系统性地引入多模态MoE模型分析，区分了专家激活与必要性，揭示了视觉专属专家并非关键、而文本位置双用途专家才是依赖核心的反直觉结论。
 
 **创新点拆解**
 
-- 查询锚定机制：在查询中写入空间点作为锚点，将无序集合解码转化为独立并行解码。
-- 前缀树并行解码：利用共享图像和查询的前缀树结构，实现叶子级并行生成。
-- 粗到细锚点细化与重复抑制：仅细化包含实例的区域，保持每实例一个框。
-- 集合级强化学习：直接优化集合 F1 指标，适配无序集合预测。
+- 提出“局部损伤”方法，仅在图像或文本位置移除专家集，以定位模态特异性依赖。
+- 发现视觉专属专家虽然激活频繁，但损伤后性能损失与随机损伤相当，表明其非必要性。
+- 揭示图像侧依赖主要来自文本位置的双用途专家，且OCR是唯一在所有模型中都需要图像位置专家的能力。
+- 系统评估三个主流多模态MoE模型，提供跨模型比较证据。
 
 **当前局限**
 
-> 相比序列解码仍存在最多 5.5 F1 的性能差距；方法依赖锚点质量，对锚点生成策略敏感；仅在三种 VLM 上验证，泛化性需进一步测试。
+> 损伤实验仅覆盖有限模型和基准，结论的普适性需进一步验证；未深入分析视觉专属专家的功能角色；局部损伤可能引入分布偏移。
 
 **工程启发**
 
-> 显著提升密集场景下的定位解码速度（21.9 倍），对 OCR 中的文本行检测、版面区域定位等高密度实例任务具有直接工程价值。
+> 为多模态MoE模型的专家剪枝、路由优化和高效推理提供实证依据，指出简单依据路由频率剪枝可能无效，需关注文本位置的双用途专家。
 
 **为什么值得关注**
 
-> 该工作针对视觉语言模型在 OCR、布局和指代定位中的解码效率问题，提出并行定位方法，与 OCR 和文档解析中的文本行/区域检测高度相关。
+> 论文涉及OCR任务（自由形式OCR）作为评估基准，并揭示OCR对图像位置专家的特殊依赖，对OCR模型设计与压缩有参考价值。
 
 **原始摘要**
 
-Vision-language models (VLMs) can localize through their text interface, grounding open-vocabulary
-objects, complex referring expressions, text lines and layout regions with strong semantic
-understanding. They write the boxes one after another as a single sequence, although the instances
-of a query, unlike the words of a sentence, form an unordered set with no sequential dependence. The
-number of decoding steps therefore grows with the number of instances, which makes dense scenes the
-most expensive. Decoding the instances in parallel avoids this growth, but streams that cannot see
-each other duplicate some instances and miss others. We propose \method, which writes a single point
-into each query as a spatial anchor and asks for the matching instance nearest to that point within
-a local radius, or \none. Given the image, the anchored queries are independent, so they are decoded
-in parallel as leaves of a prefix tree that shares the image and the query, and the model is trained
-on the same tree. Coarse-to-fine anchors refine only the regions where instances are found,
-duplicate suppression keeps one box per instance, and set-level reinforcement learning optimizes the
-set F1. Only the prompt and the attention mask change, not the architecture. On three different VLMs
-and 12 benchmarks covering detection, OCR, layout and referring, \method is at most 5.5 F1 below
-sequential decoding trained on the same data, while its speedup grows with instance density and
-reaches 21.9$\times$ on dense scenes.
+Cognitive neuroscience learned that an activation map is not a map of necessity. Regions that light
+up during a task are not always needed for it, and only lesions reveal which ones are. Mixture-of-
+experts (MoE) vision-language models come with an activation map for free, since the router records
+which experts respond to image and text tokens, and recent work reads modality-specialized experts
+off this map. We bring the lesion. In Qwen3-VL-30B-A3B, Kimi-VL-A3B and Gemma-4-26B-A4B, 3 to 12% of
+the experts are vision-exclusive: image tokens route to them at up to five times the uniform rate
+and text tokens almost never. In Qwen3-VL they receive a quarter of all image-token routing, and
+lesioning all of them costs less than one percentage point on average over eight perception
+benchmarks and free-form OCR, no more than lesioning a random set of the same size. In Kimi-VL and
+Gemma-4 the lesion also costs no more than a random set. Scoped lesions, which remove an expert set
+only at image positions or only at text positions, then show where the models do depend on their
+experts. In Qwen3-VL, silencing every expert at every image position costs 3 points, against 45 at
+text positions, where the dependence sits in dual-use experts that text-only tasks need as well.
+Across models the image-side dependence is 2 to 3 points in Qwen3-VL and Kimi-VL and 26 in Gemma-4.
+Reading text in images is the one ability that needs image-position experts in every model. The
+exclusive experts receive informative patches, produce outputs of ordinary size, and stay inert
+under sensory deprivation: text-only training recruits them only when load balancing forces it. In
+Kimi-VL the balancing bias itself manufactures most of them. Load balancing draws the modality map
+in the part of the computation the models depend on least. Expert selection, pruning and skipping
+should follow the lesion, not the map.
 
 ---
 
-### 4. When Does Optical Context Compression Pay Off? A Decode-Aware Cost Analysis of Reasoning VLMs
-
-- arXiv: [2611.30130v1](https://arxiv.org/abs/2611.30130v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.30130v1)
-- 作者: Ziqing Ge
-- 发布时间: 2026-11-23T06:40:44Z
-- 分类: cs.AI, cs.CL
-- 相关性评分: 13
-- 主题标签: 视觉语言模型、光学上下文压缩、推理成本、解码税、OCR、文档理解、成本分析
-
-**中文摘要**
-
-> 将长文本渲染为图像可让视觉语言模型（VLM）用更少输入 token 阅读文档，评估常主要计算这些预填充 token。本文表明对推理模型而言这种核算不完整。在五个模型和两个长上下文基准上，阅读渲染文档使模型思考更久：四个通用 VLM 的解码长度增长 1.5-3.5 倍，在典型输出定价下，该解码税使两个模型在 QuALITY 上图像输入比文本更贵。中等压缩下不可恢复信息损失不足以解释该税：Qwen 对同图像 OCR 恢复 98.7% 单词，将 Kimi-K3 自己的转录作为文本输入可恢复文本模式推理长度和准确率。压缩是否划算归结为汇率 (1-1/c)/(r-1) 是否超过工作负载的价格加权输出输入 token 比；该核算分解解释了 Kimi-K3 和 DeepSeek-V4.1-Flash 可受益而 Qwen 和 GLM 不能。无训练免费信号能在生成前预测该税。作为实用启发式，图像优先策略仅将每输入压缩比至少 1.6 的输入发送为图像，一旦图像模式推理成本等于输入预填充节省则回退文本，在 Kimi-K3 和 DeepSeek-V4.1-Flash 上账单降低 6-14%，准确率代价 0.3-1.2 点；在 QuALITY 上，两条路径均要求推理预算更强。
-
-**核心创新概述**
-
-> 揭示推理 VLM 中光学上下文压缩的“解码税”现象，提出基于汇率条件的成本分析框架，并给出图像优先的实用启发式策略。
-
-**创新点拆解**
-
-- 提出解码感知的成本分析，将输出 token 增长纳入光学压缩的经济性评估。
-- 推导压缩划算的汇率条件 (1-1/c)/(r-1)，解释不同模型受益差异。
-- 设计图像优先启发式策略，基于每输入压缩比动态选择图像或文本路径。
-- 通过 OCR 转录恢复实验分离信息损失与解码税的影响。
-
-**当前局限**
-
-> 启发式策略仅在两个模型上验证账单降低，准确率仍有 0.3-1.2 点损失；未找到生成前预测解码税的无训练信号；结论依赖特定定价假设。
-
-**工程启发**
-
-> 为文档理解系统中图像输入与文本输入的成本权衡提供量化框架和实用策略，有助于在 OCR 流水线中动态选择表示形式以降低推理成本。
-
-**为什么值得关注**
-
-> 该工作分析 OCR/文档图像输入对 VLM 推理成本的影响，直接关联 OCR 在文档理解中的经济性部署决策。
-
-**原始摘要**
-
-Rendering long text as images lets a vision-language model (VLM) read a document with fewer input
-tokens, and evaluations often count mainly these prefill tokens. We show that for reasoning models
-this accounting is incomplete. Across five models and two long-context benchmarks, reading the
-rendered document makes the model think longer: decode length grows by 1.5-3.5x on the four general-
-purpose VLMs tested, and under typical output pricing this decode tax makes image input more
-expensive than text for two of the five models on QuALITY. Unrecoverable information loss is not
-sufficient to explain the tax at moderate compression: Qwen's OCR of the same images recovers 98.7%
-of words, and feeding Kimi-K3 its own transcription as text restores text-mode reasoning length and
-accuracy. Whether compression pays off reduces to an exchange rate, (1-1/c)/(r-1), that must exceed
-the workload's price-weighted ratio of output to input tokens; this accounting decomposition shows
-why Kimi-K3 and DeepSeek-V4.1-Flash can benefit and Qwen and GLM cannot. None of the training-free
-signals we test predicts the tax before generation. As a practical heuristic, an image-first policy
-that sends only inputs with a per-input compression ratio of at least 1.6 to images and falls back
-to text once image-mode reasoning costs as much as the input's prefill saving cuts the bill by 6-14%
-on Kimi-K3 and DeepSeek-V4.1-Flash at an accuracy cost of 0.3-1.2 points; on QuALITY, asking for a
-reasoning budget on both paths is a stronger lever.
-
----
-
-### 5. DictaRashi: A State-of-the-Art OCR Model For Rashi Script
-
-- arXiv: [2611.29760v1](https://arxiv.org/abs/2611.29760v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.29760v1)
-- 作者: Ometz Shmidman, Yonah Taurog, Aryeh Sanders, Shlomo Bluth, Moshe Koppel, Joshua Geudalia, Avi Shmidman
-- 发布时间: 2026-11-22T20:49:18Z
-- 分类: cs.CV
-- 相关性评分: 13
-- 主题标签: OCR、Tesseract、希伯来语、Rashi字体、历史文献、低资源文字、基准数据集
-
-**中文摘要**
-
-> 本文发布 DictaRashi，一个用于扫描希伯来语书籍中所谓“Rashi”字体的 Tesseract OCR 模型。训练数据超过一百万条人工校正文本行，来自100多本拉比和后拉比文学书籍。在1,120条人工转录的 Rashi 字体扫描页保留集上，DictaRashi 达到字符错误率（CER）0.86% 和词错误率（WER）3.38%，为公开 Tesseract 模型的新最优。与31个其他公开希伯来语 Tesseract 模型比较，最佳者 CER 2.98%、WER 11.86%。进一步证明 DictaRashi 在该 OCR 任务上优于当前前沿 LLM。发布测试集作为基准，模型和测试集以 CC BY NC 4.0 许可发布。
-
-**核心创新概述**
-
-> 针对 Rashi 字体希伯来语书籍，发布大规模人工校正训练的高性能 Tesseract OCR 模型，并建立公开基准。
-
-**创新点拆解**
-
-- 构建超过一百万条人工校正文本行的 Rashi 字体训练集，覆盖100多本书籍。
-- 发布首个公开的 Rashi 字体 Tesseract OCR 模型，CER 0.86%、WER 3.38%，显著优于31个现有模型。
-- 证明专用 OCR 模型在特定字体任务上优于前沿 LLM。
-- 公开测试集和模型，建立可复现基准。
-
-**当前局限**
-
-> 仅针对 Rashi 字体，未覆盖其他希伯来语字体或更广泛的历史文献；基于 Tesseract 传统架构，可能难以处理复杂版面或低质量扫描；测试集规模有限（1,120行）。
-
-**工程启发**
-
-> 为历史希伯来语文献数字化提供可直接部署的高精度 OCR 模型和基准，降低拉比文学数字化的门槛。
-
-**为什么值得关注**
-
-> 该工作直接发布针对特定字体的 OCR 模型和基准，属于 OCR 核心领域，对低资源文字识别有参考价值。
-
-**原始摘要**
-
-We release DictaRashi, a Tesseract OCR model for scanned Hebrew books printed in the so-called
-"Rashi" font. We trained DictaRashi on over one million manually corrected lines of text from over
-100 different books of Rabbinic and post-Rabbinic literature. On a held-out set of 1,120 manually
-transcribed lines from scanned Rashi-script pages, DictaRashi reaches a character error rate (CER)
-of 0.86% and a word error rate (WER) of 3.38%, setting a new state-of-the-art for publicly-available
-Tesseract models. We provide a full comparison of our results to those of the 31 other publicly
-available Hebrew Tesseract models; the best of those models achieves a 2.98% CER and 11.86% WER. We
-further demonstrate that DictaRashi outperforms the current frontier LLMs on this OCR task. We
-release the test set of Rashi-script documents so that it may be used as a benchmark for future work
-in this area. We are pleased to release the model and test set to the community under a CC BY NC 4.0
-license.
-
----
-
-### 6. Meddies-PII: A Multilingual Framework for Personally Identifiable Information Extraction in Clinical De-identification
-
-- arXiv: [2611.29491v1](https://arxiv.org/abs/2611.29491v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.29491v1)
-- 作者: Le Linh Uyen, Christian Hoang, Ho Dinh Tri, Huy Hoang Ha
-- 发布时间: 2026-11-22T13:59:37Z
-- 分类: cs.CL
-- 相关性评分: 10
-- 主题标签: PII抽取、临床文本、多语言、去标识化、合成数据、序列标注、信息抽取
-
-**中文摘要**
-
-> 临床文本中的多语言个人可识别信息（PII）抽取受限于稀缺的受治理数据和构建记录稀少的合成语料库。本文提出 Meddies-PII，一个覆盖17种语言（包括7种东南亚语言）和9个PII标签的大型多语言数据集，并详细记录生成流水线，发布完整提示、目录、检查和标签映射。一个紧凑的350M参数 BIOES 标记分类器在该资源上训练，在全部15个公开基准上取得最高分，其中14个显著领先四个公开系统中最强者的平均精确匹配 F1 为0.827对0.672。未经适配在多语言基准上测试，包括两个人工标注的德语和西班牙语临床风格语料库，在标注约定对齐后与最佳公开系统竞争，并在 MultiGraSCCo 十种语言中的四种上最佳。分析发现几乎无近重复，训练与任何评估集无文本重叠。数据集、基准、模型、生成框架和评估代码计划在录用后公开。
-
-**核心创新概述**
-
-> 构建覆盖17种语言的大规模多语言临床 PII 数据集，并提供可复现的合成数据生成流水线和紧凑高效模型。
-
-**创新点拆解**
-
-- 17种语言（含7种东南亚语言）和9个PII标签的大规模多语言临床数据集。
-- 完整公开的合成数据生成流水线（提示、目录、检查、标签映射），提升可复现性。
-- 350M 紧凑 BIOES 标记分类器在15个公开基准上取得最高分，显著优于公开系统。
-- 验证跨语言迁移能力，在德语和西班牙语人工标注语料库上具有竞争力。
-
-**当前局限**
-
-> 依赖合成数据生成，虽无近重复但真实临床文本的分布差异仍需验证；模型为350M参数，可能受限于更复杂的临床实体；部分基准上仅与最佳系统竞争而非全面领先；数据尚未公开。
-
-**工程启发**
-
-> 为临床文本去标识化提供多语言数据资源和高效紧凑模型，可直接用于隐私保护流水线，降低多语言部署成本。
-
-**为什么值得关注**
-
-> 涉及从临床文本中抽取结构化PII信息，与文档解析和信息抽取相关，且OCR后的临床文档处理常需去标识化。
-
-**原始摘要**
-
-Multilingual PII extraction in clinical text is limited by scarce governed data and by synthetic
-corpora whose construction is thinly documented. We present a large multilingual dataset covering
-seventeen languages, including seven Southeast Asian languages, and nine PII labels. We also
-document a detailed generation pipeline and release the complete prompts, catalogues, checks and
-label maps. A compact 350M-parameter BIOES token classifier trained on the resource achieves the
-highest score on all fifteen public benchmarks, significantly ahead of the strongest of four public
-systems on fourteen of them, with a mean exact-match F1 of 0.827 against 0.672 for the strongest
-system. We also tested it, without adaptation, on multilingual benchmarks, including two human-
-annotated German and Spanish clinical-style corpora, where it is competitive with the best public
-systems once annotation conventions are aligned, and is best in four of ten MultiGraSCCo languages;
-the results show that performance transfers across public benchmarks. We also analyse the data and
-find almost no near-duplicates and no text overlap between training and any evaluation set. The
-dataset, benchmark, model, generation framework and evaluation code are planned for public release
-upon acceptance.
-
----
-
-### 7. Fill in the Blanks: Non-Autoregressive Schema-Parallel Key Information Extraction with CTC Decoding
-
-- arXiv: [2611.29460v1](https://arxiv.org/abs/2611.29460v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.29460v1)
-- 作者: Shaked Perek, Avihu Dekel, Ben Wiesel, Sivan Harary, Eli Schwartz
-- 发布时间: 2026-11-22T13:01:05Z
-- 分类: cs.CV
-- 相关性评分: 10
-- 主题标签: 关键信息抽取、非自回归解码、CTC、视觉语言模型、投机解码、文档理解
-
-**中文摘要**
-
-> 针对视觉语言模型在关键信息抽取（KIE）中自回归生成JSON导致解码步数随答案长度增长的问题，提出非自回归提取器。利用模式已知的结构信息直接写入结构，通过计数遍确定列表长度，并行预测所有值，每个值用CTC在独立槽位块中解码以避免长度预测，固定前向次数不随文档增长。在VAREX、CORD、FUNSD零样本实验中，4B模型比扩散VLM平均快3.5倍（最高5.6倍）且更准确，每文档仅需4-6次前向。该方法还可作为投机解码的草稿模型，比自回归解码快8.3倍（最高10.4倍）且精度差距在0.4点内，比投机扩散解码快3.3倍且准确率高13.0点。
-
-**核心创新概述**
-
-> 首次将非自回归CTC解码与模式驱动的结构生成结合用于KIE，利用模式先验消除序列长度依赖，并扩展为投机解码草稿模型。
-
-**创新点拆解**
-
-- 提出模式并行非自回归KIE框架，直接根据模式写入键、嵌套和列表结构，仅并行预测值。
-- 采用计数遍确定每个列表的长度，避免自回归逐步生成列表元素。
-- 为每个值分配独立CTC解码槽位块，无需预测值长度，块内未闭合值自动获得更大令牌预算。
-- 将提取器同时作为自回归基模型的投机解码草稿，实现加速且保持精度。
-
-**当前局限**
-
-> 零样本评估仅在三个数据集（VAREX、CORD、FUNSD）上验证，未涵盖更复杂的文档布局或模式；CTC解码对值内部顺序敏感，可能限制对自由文本值的建模；模型规模4B，未探索更小模型可行性；未与更多非自回归KIE方法对比。
-
-**工程启发**
-
-> 为文档KIE提供高吞吐、低延迟的推理方案，适合批量处理场景；投机解码加速可降低部署成本；固定前向次数有利于资源规划；开源模型和代码促进工业落地。
-
-**为什么值得关注**
-
-> 直接针对OCR下游关键信息抽取任务，提出非自回归并行解码方法，显著提升推理效率并保持精度，与文档解析中的结构化输出需求高度相关。
-
-**原始摘要**
-
-Vision-language models (VLMs) extract structured data from documents by generating the requested
-JSON one token at a time, so their sequential steps grow with the length of the answer. Yet in key
-information extraction (KIE) the schema already fixes the answer's structure: keys, nesting and
-lists are known before decoding, and only the values are unknown. We exploit this with a non-
-autoregressive extractor that writes the structure from the schema, sizes every list with a count
-pass, and predicts all values in parallel, in a fixed number of passes that does not grow with the
-document. Each value is decoded with connectionist temporal classification (CTC) in its own block of
-slots, so its length never has to be predicted, and a value that is still open after its block gets
-a larger token budget. Zero-shot on VAREX, CORD and FUNSD, our 4B extractor is 3.5$\times$ faster
-than the diffusion-VLM competition on average (up to 5.6$\times$) and more accurate, with 4--6
-forward passes per document where block diffusion needs 12--74. The same extractor also drafts for
-speculative decoding with its own autoregressive base: it runs 8.3$\times$ faster than
-autoregressive decoding (up to 10.4$\times$) within 0.4 points of its accuracy, and 3.3$\times$
-faster than speculative diffusion decoding while 13.0 points more accurate. We release the model and
-code.
-
----
-
-### 8. Escriba-OCR: A 1B Vision-Language Model for Error-Preserving Transcription of Handwritten Portuguese Essays
-
-- arXiv: [2611.29874v1](https://arxiv.org/abs/2611.29874v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.29874v1)
-- 作者: Tardelli Ronan Coelho Stekel
-- 发布时间: 2026-11-23T01:08:48Z
-- 分类: cs.CL, cs.CV, cs.CY
-- 相关性评分: 8
-- 主题标签: 手写文本识别、错误保留、视觉语言模型、教育技术、基准构建、模型量化
-
-**中文摘要**
-
-> 针对手写作文转录需要保留学生原始错误（拼写错误、划掉、插入等）的需求，指出现有视觉语言模型倾向于将手写内容改写为正确语言。在BRESSAY的1000篇巴西葡萄牙语手写作文上建立基准，除CER外增加错误保留、虚构错误、编辑标记精确率/召回率和行结构指标。评估22个开源基线，最佳Qwen3-VL 235B-A22B达到5.6% CER但无一可靠复现编辑标记，所有模型将39-78%的非词典词替换为词典词。在单GPU上85分钟微调LightOnOCR-3-1B得到Escriba-OCR-1B，CER降至2.06%，比最佳基线低3.5点，ICDAR 2024指标下CER为2.1%，恢复67%插入和77%不可辨认删除，97%页面行结构正确，但仍规范化60%可能拼写错误。4比特量化后普通CPU约一分钟每页。
-
-**核心创新概述**
-
-> 首次系统评估并解决VLM在手写作文转录中的错误规范化问题，提出错误保留基准和微调的小型专用模型。
-
-**创新点拆解**
-
-- 构建BRESSAY错误保留基准，在CER外引入错误保留率、虚构错误、编辑标记精确率/召回率和行结构等指标。
-- 揭示所有开源VLM普遍将非词典词替换为词典词的系统性偏差。
-- 通过单GPU微调1B模型实现错误保留转录，显著降低CER并部分恢复编辑标记。
-- 模型可4比特量化在CPU运行，满足学校本地部署需求。
-
-**当前局限**
-
-> 仍规范化60%的可能拼写错误，错误保留能力不完整；仅针对巴西葡萄牙语手写作文，语言和场景单一；编辑标记恢复率有限（插入67%、删除77%）；未探索更大规模或更多样化的手写数据。
-
-**工程启发**
-
-> 为教育反馈工具提供可本地部署的小型错误保留转录模型，量化后CPU可运行，降低学校硬件门槛；基准和指标可指导后续产品评估。
-
-**为什么值得关注**
-
-> OCR在手写教育场景中的应用，强调错误保留而非规范化，与文档解析中忠实转录的需求直接相关，且模型轻量化具有工程参考价值。
-
-**原始摘要**
-
-Feedback tools and research on learner writing need transcriptions of handwritten essays that keep
-exactly what the student wrote: misspellings, line breaks, struck-through words and insertions.
-Vision-language models (VLMs) read handwriting well, but they also tend to rewrite it into correct
-language. We measure this on BRESSAY, 1,000 handwritten Brazilian Portuguese essays, with a
-benchmark that adds error preservation, invented errors, edit-markup precision and recall and line
-structure to the character error rate (CER) and uses paired bootstrap confidence intervals. We
-restrict the study to open-weight models that schools can run on their own hardware. Of 22 open
-baselines, the best, Qwen3-VL 235B-A22B, reaches 5.6% CER on the 199 test pages; none reproduces the
-edit markup reliably, and every VLM replaces 39-78% of the words absent from a Portuguese dictionary
-with dictionary words. We fine-tune LightOnOCR-3-1B on the 647 training pages in 85 minutes on one
-GPU. The resulting Escriba-OCR-1B reaches 2.06% CER, 3.5 points below the best baseline (95% CI
-[-4.2, -2.9]); under the ICDAR 2024 competition metric it reaches 2.1% CER, below the best published
-page-level results (2.2-2.4%). It recovers 67% of insertions and 77% of illegible deletions, and
-reproduces the line structure of 97% of the pages, but still normalises 60% of likely misspellings.
-Three seeds agree within 0.04 CER points, and quantised to 4 bits the model runs on an ordinary CPU
-at about one minute per page. On 40 letters of another corpus it matches its base model (without
-that model's appended comments) but misreads unseen words more often; weight interpolation recovers
-half the gap. A teacher's review finds that 45% of the judgeable apparent corrections are errors in
-the BRESSAY ground truth, so dictionary-based scores likely understate preservation. We release the
-model, the benchmark code and the review data.
-
----
-
-### 9. When Does Reasoning Help Entity Disambiguation? Small LLMs In-Domain and Under Shift
-
-- arXiv: [2611.30334v1](https://arxiv.org/abs/2611.30334v1)
-- PDF: [下载链接](https://arxiv.org/pdf/2611.30334v1)
-- 作者: Samy Haffoudhi, Fabian M Suchanek, Nils Holzenberger
-- 发布时间: 2026-11-23T09:11:54Z
-- 分类: cs.CL
+### 9. Interactive Neural Computers
+
+- arXiv: [2611.32811v1](https://arxiv.org/abs/2611.32811v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.32811v1)
+- 作者: Ross Murphy, Marcel Hedman, Gabriel Brostow
+- 发布时间: 2026-11-24T15:30:05Z
+- 分类: cs.AI, cs.NE, cs.SC
 - 相关性评分: 6
-- 主题标签: 实体消歧、小语言模型、推理、域偏移、零样本、信息抽取
+- 主题标签: 世界模型、交互式生成、屏幕文本OCR、记忆网络、神经图灵机
 
 **中文摘要**
 
-> 研究小规模LLM在实体消歧（ED）中推理何时有益。在经典粗到细ED流程中比较逐点、列表和基于推理的候选选择组件，覆盖经典、少样本和真零样本设置，推理范式采用蒸馏和强化学习训练。发现推理收益随域偏移增大：域内可忽略，真零样本下决定性。两个因素起作用：重排器对候选的不确定性定位范式分歧点，域偏移决定分歧时哪方正确。
+> 论文提出“交互式神经计算机”（Interactive Neural Computer），将桌面环境视为交互式世界模型，通过生成模型根据历史屏幕和用户鼠标键盘动作预测下一屏幕。为解决无相机位姿下的记忆、精确算术和界面小文本可读性问题，模型采用类神经图灵机结构，包含三个端到端模块：由MEMORY-JEPA监督的惊喜门控槽记忆存储屏幕外内容；探索性查询桥引入预训练VLM的推理；残差渲染器仅预测帧间的潜在变化。在长闭环滚动中，模型以64.2%的召回率回忆被遮挡文件（随机为33.3%），优于循环和滑动窗口基线（最高56.0%），并将终端文本OCR准确率从1.3%提升至50.1%。
 
 **核心创新概述**
 
-> 系统分析小规模LLM在实体消歧中推理范式的收益条件，揭示域偏移与重排器不确定性的交互机制。
+> 将桌面计算环境建模为可交互的生成式世界模型，而非训练智能体操作现有计算机，并针对无几何线索的记忆、精确文本渲染和交互帧率等挑战提出结构化解决方案。
 
 **创新点拆解**
 
-- 在统一粗到细ED管道中对比逐点、列表和推理候选选择，覆盖三种监督设置。
-- 采用蒸馏和强化学习训练小规模推理ED模型。
-- 提出重排器不确定性定位范式分歧、域偏移决定正确性的分析框架。
+- 提出交互式神经计算机范式，用生成模型直接预测屏幕演化，替代传统智能体操作固定界面。
+- 设计惊喜门控槽记忆（MEMORY-JEPA监督），在无相机位姿下存储屏幕外内容。
+- 引入探索性查询桥，融合预训练VLM的推理能力。
+- 采用残差渲染器仅预测潜在变化，提升交互帧率下的文本可读性。
 
 **当前局限**
 
-> 仅研究实体消歧任务，未推广至其他信息抽取任务；小模型规模未明确；推理成本分析可能不全面；未探索推理与检索增强的结合。
+> 模型在复杂界面和精确算术任务上可能仍有误差；长时程记忆召回率（64.2%）仍有限；计算成本较高，交互帧率下的实时性未充分讨论。
 
 **工程启发**
 
-> 为小模型部署ED提供成本-收益指导：域内可用轻量重排，域外切换推理；不确定性信号可用于动态路由。
+> 为无障碍交互、自动化测试和新型人机接口提供了可生成、可定制的计算机界面范式，其中提升小文本OCR可读性的方法对屏幕内容识别有借鉴意义。
 
 **为什么值得关注**
 
-> 实体消歧是信息抽取的基础步骤，与OCR后的文档理解与知识图谱构建相关；小模型推理成本分析对实际部署有参考意义。
+> 论文涉及界面小文本的OCR准确率提升（从1.3%到50.1%），与OCR在交互式环境中的应用直接相关。
 
 **原始摘要**
 
-Entity disambiguation (mapping ambiguous mentions in text to entities in a knowledge base) is a
-foundational step in tasks such as knowledge graph construction, question answering, and information
-extraction. Recent work has applied LLMs to this problem, achieving stateof-the-art performance.
-Notably, reasoning LLMs have been shown to perform entity disambiguation in a true zero-shot
-fashion, generalizing across knowledge bases and domains. However, it is unclear whether this
-capability survives, or remains competitive, with smaller LLMs, where entity disambiguation has
-typically relied on reranking rather than reasoning. We ask when reasoning is worth its cost at
-small scale. We compare pointwise, listwise, and reasoning-based candidate-selection components
-within a classical coarse-to-fine entity disambiguation pipeline, across the classical, few-shot and
-true zero-shot settings. The reasoning paradigm is trained with distillation and reinforcement
-learning recipes. The benefit of reasoning grows with domain shift: negligible in-domain, decisive
-in the true zero-shot setting. We show that two distinct factors are at work: the reranker's
-uncertainty over the candidates locates where the paradigms disagree, while shift governs which is
-right when they do.
+Computers and their interfaces are usually treated as fixed, so a person, or increasingly an AI
+agent, must adapt to whatever the operating system presents. This is limiting when someone needs a
+different workflow, or an interface suited to hands-free use or a disability. We explore an
+overlooked alternative. Rather than training an agent to operate an existing computer, we train a
+generative model to be the computer, predicting each next screen from past screens and the user's
+mouse and keyboard actions. Treating a desktop as an interactive world model raises problems that
+natural-video world models largely avoid. Without a camera pose to index memory, the model must
+remember content that has left the screen without any geometric cues. Arithmetic in a terminal has
+to be exactly right, not merely plausible. Small interface text must also stay legible at
+interactive frame rates. Our Interactive Neural Computer is structured like a Neural Turing Machine
+and starts to address these problems with three modules trained end to end from pixels and actions.
+A surprise-gated slot memory, supervised by latent next-frame prediction (MEMORY-JEPA), stores what
+is off screen. An exploratory query bridge brings in the reasoning of a pretrained VLM, and a
+residual renderer predicts only the latent changes between frames. In long closed-loop rollouts, our
+model recalls occluded files in 64.2% of trials (chance is 33.3%), compared with at most 56.0% for
+recurrent and sliding-window baselines. It also raises terminal-text OCR accuracy from 1.3% to
+50.1%. Finally, because the memory is explicit, it can be transplanted at test time to causally
+change what the model renders.
 
 ---
 
-### 10. What Quality Engineers Need to Know About Generative AI: Structured Data Extraction
+### 10. DexOPD: Dual-Extrapolation On-Policy Distillation for Diffusion Models
+
+- arXiv: [2611.31969v1](https://arxiv.org/abs/2611.31969v1)
+- PDF: [下载链接](https://arxiv.org/pdf/2611.31969v1)
+- 作者: Yunchao Ke, Yanzhe Hu, Yi Yang, Jiachun Jin, Zhihong Liu, Zhijie Deng
+- 发布时间: 2026-11-24T05:19:50Z
+- 分类: cs.AI
+- 相关性评分: 6
+- 主题标签: 扩散模型、在线策略蒸馏、多教师蒸馏、OCR生成、模型融合
+
+**中文摘要**
+
+> 论文提出DexOPD，一种用于扩散模型的双外推在线策略蒸馏方法。现有多教师在线策略蒸馏通过教师外推构建更强代理教师，但外推方向仅由冻结教师和参考模型定义，未利用学生自身训练进展。DexOPD在保留外推教师监督的同时，利用滞后的历史学生作为参考进行学生自外推，通过共享初始噪声的多自外推增益采样扩大探索，并将任务奖励转化为归一化辅助回归方向。在GenEval、OCR和DrawBench上，统一学生模型SD3.5-Medium分别达到0.9736、0.9515和6.4875的美学分数，超越专家教师及所有评估的OPD和多任务强化学习基线，同时保持单模型推理。
+
+**核心创新概述**
+
+> 首次将学生自身历史模型引入外推参考，形成教师侧与学生侧的双外推机制，使蒸馏过程能利用学生训练轨迹的动态信息。
+
+**创新点拆解**
+
+- 提出双外推在线策略蒸馏框架，同时进行教师外推和学生自外推。
+- 利用滞后历史学生作为自外推参考，并基于共享初始噪声采样多个增益以扩大探索。
+- 将任务奖励转化为归一化辅助回归方向，指导候选质量差异的学习。
+- 在OCR等任务上验证统一学生模型可超越专家教师。
+
+**当前局限**
+
+> 方法依赖多教师专家模型的存在；自外推的参考更新策略和增益选择需调参；在更复杂或低资源任务上的泛化性未充分验证。
+
+**工程启发**
+
+> 为扩散模型的多任务能力融合提供了高效蒸馏方案，可应用于需要统一模型同时处理生成和OCR相关任务的场景，降低部署多个专家模型的成本。
+
+**为什么值得关注**
+
+> 论文在OCR基准上评估蒸馏后模型的性能，表明方法对OCR相关生成任务有效，与OCR研究中的模型压缩和多任务学习相关。
+
+**原始摘要**
+
+Flow-based diffusion models have become a mainstream paradigm for text-to-image generation, where
+task-specific post-training produces specialist models with complementary strengths. Multi-teacher
+on-policy distillation (OPD) offers an efficient way to consolidate these specialists into a single
+unified student. Recent methods strengthen supervision through teacher extrapolation, constructing
+stronger proxy teachers that allow distilled students to surpass the original specialists. However,
+their extrapolation directions remain defined solely by frozen teacher and reference models, leaving
+the student's own training progress unexploited. To address this limitation, we introduce DexOPD, a
+dual-extrapolation on-policy distillation method for diffusion models. DexOPD retains extrapolated
+teacher supervision while leveraging a lagging historical student as the reference for student self-
+extrapolation. Sampling across multiple self-extrapolation gains from shared initial noise broadens
+exploration along the student's evolving trajectory, and task rewards convert pairwise differences
+in candidate quality into a normalized auxiliary regression direction. Empirically, we evaluate
+DexOPD on GenEval, OCR, and DrawBench. The resulting unified SD3.5-Medium student achieves a GenEval
+reward of 0.9736, an OCR score of 0.9515, and a DrawBench Aesthetic score of 6.4875, surpassing the
+corresponding specialist teachers as well as all evaluated OPD and multi-task reinforcement learning
+baselines across these three benchmarks while preserving standard single-model inference.
+
+---
+
+### 11. What Quality Engineers Need to Know About Generative AI: Structured Data Extraction
 
 - arXiv: [2611.30778v1](https://arxiv.org/abs/2611.30778v1)
 - PDF: [下载链接](https://arxiv.org/pdf/2611.30778v1)
@@ -578,33 +678,33 @@ right when they do.
 - 发布时间: 2026-11-23T14:44:59Z
 - 分类: cs.CE, cs.CL
 - 相关性评分: 3
-- 主题标签: 结构化数据抽取、LLM应用、质量工程、人工验证、开源工具
+- 主题标签: 结构化数据提取、视觉语言模型、质量工程、文档信息抽取、人工验证
 
 **中文摘要**
 
-> 面向质量工程师的说明性论文，介绍如何使用LLM和VLM进行结构化数据抽取。从测量系统视角讨论结构化抽取，提供R和Python实现，并展示两个免费Web应用：从汽车召回通知中抽取信息、监控arXiv上质量工程研究。人工评估验证：第一个应用4名评审对30份召回通知的720个字段级评分中98.6%完全正确；第二个应用21名作者评估45篇论文的抽取摘要，所有摘要被评为大部分正确或正确，但分类字段和数学表达式存在问题。强调实际潜力与验证必要性，公开应用和源码。
+> 这是一篇面向质量工程师的说明性论文，介绍如何利用大语言模型（LLM）和视觉语言模型（VLM）进行结构化数据提取。论文从测量系统视角讨论结构化提取，并给出R和Python实现，同时展示两个免费网络应用：从汽车召回通知中提取信息，以及监控arXiv上的质量工程研究。人工评估验证了提取准确性：第一个应用中，四位评审者对30份召回通知的720个字段级评分中98.6%完全正确；第二个应用中，21位作者评估了45篇论文的提取信息，摘要大多被评为基本正确或正确，但分类字段和数学表达式存在一些问题。论文强调验证提取信息的必要性，并公开应用和源代码。
 
 **核心创新概述**
 
-> 从质量工程测量系统视角系统阐述LLM/VLM结构化抽取的实施与验证流程，提供可复用的开源应用。
+> 从质量工程的测量系统视角系统阐述LLM/VLM结构化数据提取，并提供可复用的开源应用和人工验证结果，强调验证环节的重要性。
 
 **创新点拆解**
 
-- 将结构化抽取视为测量系统，强调准确度验证与人工评估。
-- 提供R和Python双语言实现及两个领域专用Web应用。
-- 通过领域专家人工评估量化抽取可靠性，揭示分类和数学表达式等薄弱环节。
+- 将结构化数据提取视为测量系统，引入质量工程中的验证理念。
+- 提供两个可公开访问的Web应用及R/Python实现，便于领域人员适配。
+- 通过人工评估量化提取准确性，并识别分类字段和数学表达式等薄弱环节。
 
 **当前局限**
 
-> 属于说明性/应用性论文，未提出新模型或算法；评估规模有限（30份通知、45篇论文）；仅涉及两个应用领域；对数学表达式等复杂内容抽取效果不佳。
+> 评估规模有限（30份通知、45篇论文），未覆盖多样文档类型；数学表达式和分类字段的提取问题未给出针对性解决方案；主要面向质量工程领域。
 
 **工程启发**
 
-> 为工业质量工程场景提供可落地的LLM/VLM结构化抽取方案和开源代码，降低实施门槛；强调人工验证流程，对生产部署有指导意义。
+> 为质量工程及更广泛领域的结构化信息提取提供了可操作的工具和验证框架，降低了LLM/VLM应用门槛，并强调人工验证在工程落地中的必要性。
 
 **为什么值得关注**
 
-> 直接涉及文档结构化抽取（召回通知、论文元数据），与OCR后的信息抽取应用相关，且提供工程实践视角。
+> 论文涉及使用VLM进行文档信息提取（如召回通知和论文），与OCR后的结构化信息抽取任务直接相关，并讨论了提取准确性问题。
 
 **原始摘要**
 
